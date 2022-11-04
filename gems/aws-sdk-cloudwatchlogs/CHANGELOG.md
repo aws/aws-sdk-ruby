@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-11-04)
+------------------
+
+* Feature - Doc-only update for bug fixes and support of export to buckets encrypted with SSE-KMS
+
+1.55.0 (2022-10-31)
+------------------
+
+* Feature - SDK release to support tagging for destinations and log groups with TagResource. Also supports tag on create with PutDestination.
+
+1.54.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.53.0 (2022-05-20)
 ------------------
 

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-workdocs/types'
 require_relative 'aws-sdk-workdocs/client_api'
+require_relative 'aws-sdk-workdocs/plugins/endpoints.rb'
 require_relative 'aws-sdk-workdocs/client'
 require_relative 'aws-sdk-workdocs/errors'
 require_relative 'aws-sdk-workdocs/resource'
+require_relative 'aws-sdk-workdocs/endpoint_parameters'
+require_relative 'aws-sdk-workdocs/endpoint_provider'
+require_relative 'aws-sdk-workdocs/endpoints'
 require_relative 'aws-sdk-workdocs/customizations'
 
 # This module provides support for Amazon WorkDocs. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-workdocs/customizations'
 # @!group service
 module Aws::WorkDocs
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

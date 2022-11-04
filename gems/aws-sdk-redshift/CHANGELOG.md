@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-10-27)
+------------------
+
+* Feature - This release clarifies use for the ElasticIp parameter of the CreateCluster and RestoreFromClusterSnapshot APIs.
+
+1.86.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2022-09-09)
 ------------------
 

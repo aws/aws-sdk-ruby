@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ecrpublic/types'
 require_relative 'aws-sdk-ecrpublic/client_api'
+require_relative 'aws-sdk-ecrpublic/plugins/endpoints.rb'
 require_relative 'aws-sdk-ecrpublic/client'
 require_relative 'aws-sdk-ecrpublic/errors'
 require_relative 'aws-sdk-ecrpublic/resource'
+require_relative 'aws-sdk-ecrpublic/endpoint_parameters'
+require_relative 'aws-sdk-ecrpublic/endpoint_provider'
+require_relative 'aws-sdk-ecrpublic/endpoints'
 require_relative 'aws-sdk-ecrpublic/customizations'
 
 # This module provides support for Amazon Elastic Container Registry Public. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-ecrpublic/customizations'
 # @!group service
 module Aws::ECRPublic
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2022-11-03)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on ml.trn1 instance types.
+
+1.151.0 (2022-11-02)
+------------------
+
+* Feature - This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.
+
+1.150.0 (2022-10-27)
+------------------
+
+* Feature - This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.
+
+1.149.0 (2022-10-26)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now supports specifying Grid Search strategy for tuning jobs, which evaluates all hyperparameter combinations exhaustively based on the categorical hyperparameters provided.
+
+1.148.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2022-10-24)
+------------------
+
+* Feature - SageMaker Inference Recommender now supports a new API ListInferenceRecommendationJobSteps to return the details of all the benchmark we create for an inference recommendation job.
+
+1.146.0 (2022-10-21)
+------------------
+
+* Feature - CreateInferenceRecommenderjob API now supports passing endpoint details directly, that will help customers to identify the max invocation and max latency they can achieve for their model and the associated endpoint along with getting recommendations on other instances.
+
 1.145.0 (2022-10-18)
 ------------------
 

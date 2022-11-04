@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-migrationhubrefactorspaces/types'
 require_relative 'aws-sdk-migrationhubrefactorspaces/client_api'
+require_relative 'aws-sdk-migrationhubrefactorspaces/plugins/endpoints.rb'
 require_relative 'aws-sdk-migrationhubrefactorspaces/client'
 require_relative 'aws-sdk-migrationhubrefactorspaces/errors'
 require_relative 'aws-sdk-migrationhubrefactorspaces/resource'
+require_relative 'aws-sdk-migrationhubrefactorspaces/endpoint_parameters'
+require_relative 'aws-sdk-migrationhubrefactorspaces/endpoint_provider'
+require_relative 'aws-sdk-migrationhubrefactorspaces/endpoints'
 require_relative 'aws-sdk-migrationhubrefactorspaces/customizations'
 
 # This module provides support for AWS Migration Hub Refactor Spaces. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-migrationhubrefactorspaces/customizations'
 # @!group service
 module Aws::MigrationHubRefactorSpaces
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

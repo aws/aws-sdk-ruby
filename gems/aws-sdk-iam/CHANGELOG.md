@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-10-26)
+------------------
+
+* Feature - Doc only update that corrects instances of CLI not using an entity.
+
+1.72.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.71.0 (2022-10-13)
 ------------------
 

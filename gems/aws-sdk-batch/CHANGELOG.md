@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2022-10-24)
+------------------
+
+* Feature - This release adds support for AWS Batch on Amazon EKS.
+
 1.62.0 (2022-05-18)
 ------------------
 

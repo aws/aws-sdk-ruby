@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iotdataplane/types'
 require_relative 'aws-sdk-iotdataplane/client_api'
+require_relative 'aws-sdk-iotdataplane/plugins/endpoints.rb'
 require_relative 'aws-sdk-iotdataplane/client'
 require_relative 'aws-sdk-iotdataplane/errors'
 require_relative 'aws-sdk-iotdataplane/resource'
+require_relative 'aws-sdk-iotdataplane/endpoint_parameters'
+require_relative 'aws-sdk-iotdataplane/endpoint_provider'
+require_relative 'aws-sdk-iotdataplane/endpoints'
 require_relative 'aws-sdk-iotdataplane/customizations'
 
 # This module provides support for AWS IoT Data Plane. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-iotdataplane/customizations'
 # @!group service
 module Aws::IoTDataPlane
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

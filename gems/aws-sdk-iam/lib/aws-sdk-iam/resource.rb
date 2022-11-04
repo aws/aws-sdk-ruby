@@ -490,7 +490,7 @@ module Aws::IAM
     #   default value of one hour is applied. This setting can have a value
     #   from 1 hour to 12 hours.
     #
-    #   Anyone who assumes the role from the or API can use the
+    #   Anyone who assumes the role from the CLI or API can use the
     #   `DurationSeconds` API parameter or the `duration-seconds` CLI
     #   parameter to request a longer session. The `MaxSessionDuration`
     #   setting determines the maximum duration that can be requested using

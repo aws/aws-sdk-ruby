@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-neptune/plugins/cross_region_copying.rb'
 
@@ -80,9 +80,10 @@ module Aws::Neptune
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::Neptune::Plugins::CrossRegionCopying)
+    add_plugin(Aws::Neptune::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -289,6 +290,19 @@ module Aws::Neptune
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -301,6 +315,9 @@ module Aws::Neptune
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::Neptune::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Neptune::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -1027,6 +1044,16 @@ module Aws::Neptune
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is enabled.
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in the
+    #   *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
     # @option params [String] :global_cluster_identifier
     #   The ID of the Neptune global database to which this new DB cluster
     #   should be added.
@@ -1072,6 +1099,10 @@ module Aws::Neptune
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #     global_cluster_identifier: "GlobalClusterIdentifier",
     #     source_region: "String",
     #   })
@@ -1132,6 +1163,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2296,6 +2329,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -3361,6 +3396,8 @@ module Aws::Neptune
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].cross_account_clone #=> Boolean
     #   resp.db_clusters[0].automatic_restart_time #=> Time
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -4329,6 +4366,8 @@ module Aws::Neptune
     #   * {Types::GlobalClustersMessage#marker #marker} => String
     #   * {Types::GlobalClustersMessage#global_clusters #global_clusters} => Array&lt;Types::GlobalCluster&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_clusters({
@@ -4684,6 +4723,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4973,6 +5014,16 @@ module Aws::Neptune
     #   *If set to `true`, tags are copied to any snapshot of the DB cluster
     #   that is created.*
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in the
+    #   *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5001,6 +5052,10 @@ module Aws::Neptune
     #     db_instance_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5059,6 +5114,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -6107,6 +6164,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -6695,6 +6754,16 @@ module Aws::Neptune
     #   *If set to `true`, tags are copied to any snapshot of the restored DB
     #   cluster that is created.*
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in the
+    #   *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6724,6 +6793,10 @@ module Aws::Neptune
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -6782,6 +6855,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -6947,6 +7022,16 @@ module Aws::Neptune
     #   enabled. The database can't be deleted when deletion protection is
     #   enabled. By default, deletion protection is disabled.
     #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in the
+    #   *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6974,6 +7059,10 @@ module Aws::Neptune
     #     enable_cloudwatch_logs_exports: ["String"],
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #     },
     #   })
     #
     # @example Response structure
@@ -7032,6 +7121,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -7116,6 +7207,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -7203,6 +7296,8 @@ module Aws::Neptune
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
     #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -7226,7 +7321,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

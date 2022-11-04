@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
 require 'aws-sdk-ec2/plugins/region_validation.rb'
@@ -81,10 +81,11 @@ module Aws::EC2
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
     add_plugin(Aws::EC2::Plugins::RegionValidation)
+    add_plugin(Aws::EC2::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -291,6 +292,19 @@ module Aws::EC2
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -303,6 +317,9 @@ module Aws::EC2
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::EC2::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::EC2::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -354,6 +371,70 @@ module Aws::EC2
     end
 
     # @!group API Operations
+
+    # Accepts an Elastic IP address transfer. For more information, see
+    # [Accept a transferred Elastic IP address][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#using-instance-addressing-eips-transfer-accept
+    #
+    # @option params [required, String] :address
+    #   The Elastic IP address you are accepting for transfer.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   the resource. Use the tag key in the filter name and the tag value as
+    #   the filter value. For example, to find all resources that have a tag
+    #   with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+    #   the filter name and `TeamA` for the filter value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AcceptAddressTransferResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptAddressTransferResult#address_transfer #address_transfer} => Types::AddressTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_address_transfer({
+    #     address: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, vpn-connection-device-type
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfer.public_ip #=> String
+    #   resp.address_transfer.allocation_id #=> String
+    #   resp.address_transfer.transfer_account_id #=> String
+    #   resp.address_transfer.transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfer.transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfer.address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptAddressTransfer AWS API Documentation
+    #
+    # @overload accept_address_transfer(params = {})
+    # @param [Hash] params ({})
+    def accept_address_transfer(params = {}, options = {})
+      req = build_request(:accept_address_transfer, params)
+      req.send_request(options)
+    end
 
     # Accepts the Convertible Reserved Instance exchange quote described in
     # the GetReservedInstancesExchangeQuote call.
@@ -3554,6 +3635,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def cancel_export_task(params = {}, options = {})
       req = build_request(:cancel_export_task, params)
+      req.send_request(options)
+    end
+
+    # Removes your Amazon Web Services account from the launch permissions
+    # for the specified AMI. For more information, see [Cancel sharing an
+    # AMI with your Amazon Web Services account][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI that was shared with your Amazon Web Services
+    #   account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CancelImageLaunchPermissionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelImageLaunchPermissionResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_image_launch_permission({
+    #     image_id: "ImageId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImageLaunchPermission AWS API Documentation
+    #
+    # @overload cancel_image_launch_permission(params = {})
+    # @param [Hash] params ({})
+    def cancel_image_launch_permission(params = {}, options = {})
+      req = build_request(:cancel_image_launch_permission, params)
       req.send_request(options)
     end
 
@@ -9760,9 +9884,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a root volume replacement task for an Amazon EC2 instance. The
-    # root volume can either be restored to its initial launch state, or it
-    # can be restored using a specific snapshot.
+    # Replaces the EBS-backed root volume for a `running` instance with a
+    # new volume that is restored to the original root volume's launch
+    # state, that is restored to a specific snapshot taken from the original
+    # root volume, or that is restored from an AMI that has the same key
+    # characteristics as that of the instance.
     #
     # For more information, see [Replace a root volume][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
@@ -9776,8 +9902,12 @@ module Aws::EC2
     #
     # @option params [String] :snapshot_id
     #   The ID of the snapshot from which to restore the replacement root
-    #   volume. If you want to restore the volume to the initial launch state,
-    #   omit this parameter.
+    #   volume. The specified snapshot must be a snapshot that you previously
+    #   created from the original root volume.
+    #
+    #   If you want to restore the replacement root volume to the initial
+    #   launch state, or if you want to restore the replacement root volume
+    #   from an AMI, omit this parameter.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
@@ -9801,6 +9931,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the root volume replacement task.
     #
+    # @option params [String] :image_id
+    #   The ID of the AMI to use to restore the root volume. The specified AMI
+    #   must have the same product code, billing information, architecture
+    #   type, and virtualization type as that of the instance.
+    #
+    #   If you want to restore the replacement volume from a specific
+    #   snapshot, or if you want to restore it to its launch state, omit this
+    #   parameter.
+    #
+    # @option params [Boolean] :delete_replaced_root_volume
+    #   Indicates whether to automatically delete the original root volume
+    #   after the root volume replacement task completes. To delete the
+    #   original root volume, specify `true`. If you choose to keep the
+    #   original root volume after the replacement task completes, you must
+    #   manually delete it when you no longer need it.
+    #
     # @return [Types::CreateReplaceRootVolumeTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplaceRootVolumeTaskResult#replace_root_volume_task #replace_root_volume_task} => Types::ReplaceRootVolumeTask
@@ -9823,6 +9969,8 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     image_id: "ImageId",
+    #     delete_replaced_root_volume: false,
     #   })
     #
     # @example Response structure
@@ -9835,6 +9983,9 @@ module Aws::EC2
     #   resp.replace_root_volume_task.tags #=> Array
     #   resp.replace_root_volume_task.tags[0].key #=> String
     #   resp.replace_root_volume_task.tags[0].value #=> String
+    #   resp.replace_root_volume_task.image_id #=> String
+    #   resp.replace_root_volume_task.snapshot_id #=> String
+    #   resp.replace_root_volume_task.delete_replaced_root_volume #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTask AWS API Documentation
     #
@@ -17491,6 +17642,67 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_account_attributes(params = {}, options = {})
       req = build_request(:describe_account_attributes, params)
+      req.send_request(options)
+    end
+
+    # Describes an Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @option params [Array<String>] :allocation_ids
+    #   The allocation IDs of Elastic IP addresses.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of address transfers to return in one page of
+    #   results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeAddressTransfersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAddressTransfersResult#address_transfers #address_transfers} => Array&lt;Types::AddressTransfer&gt;
+    #   * {Types::DescribeAddressTransfersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_address_transfers({
+    #     allocation_ids: ["AllocationId"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfers #=> Array
+    #   resp.address_transfers[0].public_ip #=> String
+    #   resp.address_transfers[0].allocation_id #=> String
+    #   resp.address_transfers[0].transfer_account_id #=> String
+    #   resp.address_transfers[0].transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfers[0].transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfers[0].address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressTransfers AWS API Documentation
+    #
+    # @overload describe_address_transfers(params = {})
+    # @param [Hash] params ({})
+    def describe_address_transfers(params = {}, options = {})
+      req = build_request(:describe_address_transfers, params)
       req.send_request(options)
     end
 
@@ -27161,6 +27373,9 @@ module Aws::EC2
     #   resp.replace_root_volume_tasks[0].tags #=> Array
     #   resp.replace_root_volume_tasks[0].tags[0].key #=> String
     #   resp.replace_root_volume_tasks[0].tags[0].value #=> String
+    #   resp.replace_root_volume_tasks[0].image_id #=> String
+    #   resp.replace_root_volume_tasks[0].snapshot_id #=> String
+    #   resp.replace_root_volume_tasks[0].delete_replaced_root_volume #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReplaceRootVolumeTasks AWS API Documentation
@@ -34163,6 +34378,52 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Disables Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @option params [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableAddressTransferResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableAddressTransferResult#address_transfer #address_transfer} => Types::AddressTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_address_transfer({
+    #     allocation_id: "AllocationId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfer.public_ip #=> String
+    #   resp.address_transfer.allocation_id #=> String
+    #   resp.address_transfer.transfer_account_id #=> String
+    #   resp.address_transfer.transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfer.transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfer.address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAddressTransfer AWS API Documentation
+    #
+    # @overload disable_address_transfer(params = {})
+    # @param [Hash] params ({})
+    def disable_address_transfer(params = {}, options = {})
+      req = build_request(:disable_address_transfer, params)
+      req.send_request(options)
+    end
+
     # Disables EBS encryption by default for your account in the current
     # Region.
     #
@@ -35269,6 +35530,57 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Enables Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @option params [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #
+    # @option params [required, String] :transfer_account_id
+    #   The ID of the account that you want to transfer the Elastic IP address
+    #   to.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableAddressTransferResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableAddressTransferResult#address_transfer #address_transfer} => Types::AddressTransfer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_address_transfer({
+    #     allocation_id: "AllocationId", # required
+    #     transfer_account_id: "String", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_transfer.public_ip #=> String
+    #   resp.address_transfer.allocation_id #=> String
+    #   resp.address_transfer.transfer_account_id #=> String
+    #   resp.address_transfer.transfer_offer_expiration_timestamp #=> Time
+    #   resp.address_transfer.transfer_offer_accepted_timestamp #=> Time
+    #   resp.address_transfer.address_transfer_status #=> String, one of "pending", "disabled", "accepted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAddressTransfer AWS API Documentation
+    #
+    # @overload enable_address_transfer(params = {})
+    # @param [Hash] params ({})
+    def enable_address_transfer(params = {}, options = {})
+      req = build_request(:enable_address_transfer, params)
+      req.send_request(options)
+    end
+
     # Enables EBS encryption by default for your account in the current
     # Region.
     #
@@ -35505,7 +35817,8 @@ module Aws::EC2
     #   seconds, Amazon EC2 rounds the seconds to the nearest minute.
     #
     #   You can’t specify a date in the past. The upper limit for
-    #   `DeprecateAt` is 10 years from now.
+    #   `DeprecateAt` is 10 years from now, except for public AMIs, where the
+    #   upper limit is 2 years from the creation date.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37230,7 +37543,7 @@ module Aws::EC2
     #   The resource type.
     #
     # @option params [Types::RequestIpamResourceTag] :resource_tag
-    #   A tag on an IPAM resource.
+    #   The resource tag.
     #
     # @option params [String] :resource_owner
     #   The ID of the Amazon Web Services account that owns the resource.
@@ -52164,7 +52477,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.341.0'
+      context[:gem_version] = '1.345.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

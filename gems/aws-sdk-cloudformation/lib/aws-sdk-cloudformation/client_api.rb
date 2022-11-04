@@ -237,6 +237,10 @@ module Aws::CloudFormation
     OperationIdAlreadyExistsException = Shapes::StructureShape.new(name: 'OperationIdAlreadyExistsException')
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
     OperationNotFoundException = Shapes::StructureShape.new(name: 'OperationNotFoundException')
+    OperationResultFilter = Shapes::StructureShape.new(name: 'OperationResultFilter')
+    OperationResultFilterName = Shapes::StringShape.new(name: 'OperationResultFilterName')
+    OperationResultFilterValues = Shapes::StringShape.new(name: 'OperationResultFilterValues')
+    OperationResultFilters = Shapes::ListShape.new(name: 'OperationResultFilters')
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationStatusCheckFailedException = Shapes::StructureShape.new(name: 'OperationStatusCheckFailedException')
     OptionalSecureUrl = Shapes::StringShape.new(name: 'OptionalSecureUrl')
@@ -393,6 +397,7 @@ module Aws::CloudFormation
     StackSetOperationResultSummaries = Shapes::ListShape.new(name: 'StackSetOperationResultSummaries')
     StackSetOperationResultSummary = Shapes::StructureShape.new(name: 'StackSetOperationResultSummary')
     StackSetOperationStatus = Shapes::StringShape.new(name: 'StackSetOperationStatus')
+    StackSetOperationStatusDetails = Shapes::StructureShape.new(name: 'StackSetOperationStatusDetails')
     StackSetOperationStatusReason = Shapes::StringShape.new(name: 'StackSetOperationStatusReason')
     StackSetOperationSummaries = Shapes::ListShape.new(name: 'StackSetOperationSummaries')
     StackSetOperationSummary = Shapes::StructureShape.new(name: 'StackSetOperationSummary')
@@ -1049,6 +1054,7 @@ module Aws::CloudFormation
     ListStackSetOperationResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackSetOperationResultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListStackSetOperationResultsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    ListStackSetOperationResultsInput.add_member(:filters, Shapes::ShapeRef.new(shape: OperationResultFilters, location_name: "Filters"))
     ListStackSetOperationResultsInput.struct_class = Types::ListStackSetOperationResultsInput
 
     ListStackSetOperationResultsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackSetOperationResultSummaries, location_name: "Summaries"))
@@ -1143,6 +1149,12 @@ module Aws::CloudFormation
     OperationInProgressException.struct_class = Types::OperationInProgressException
 
     OperationNotFoundException.struct_class = Types::OperationNotFoundException
+
+    OperationResultFilter.add_member(:name, Shapes::ShapeRef.new(shape: OperationResultFilterName, location_name: "Name"))
+    OperationResultFilter.add_member(:values, Shapes::ShapeRef.new(shape: OperationResultFilterValues, location_name: "Values"))
+    OperationResultFilter.struct_class = Types::OperationResultFilter
+
+    OperationResultFilters.member = Shapes::ShapeRef.new(shape: OperationResultFilter)
 
     OperationStatusCheckFailedException.struct_class = Types::OperationStatusCheckFailedException
 
@@ -1404,6 +1416,7 @@ module Aws::CloudFormation
     StackInstance.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackInstance.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstance.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
+    StackInstance.add_member(:last_operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "LastOperationId"))
     StackInstance.struct_class = Types::StackInstance
 
     StackInstanceComprehensiveStatus.add_member(:detailed_status, Shapes::ShapeRef.new(shape: StackInstanceDetailedStatus, location_name: "DetailedStatus"))
@@ -1429,6 +1442,7 @@ module Aws::CloudFormation
     StackInstanceSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackInstanceSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstanceSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
+    StackInstanceSummary.add_member(:last_operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "LastOperationId"))
     StackInstanceSummary.struct_class = Types::StackInstanceSummary
 
     StackNotFoundException.struct_class = Types::StackNotFoundException
@@ -1544,6 +1558,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
     StackSetOperation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
+    StackSetOperation.add_member(:status_details, Shapes::ShapeRef.new(shape: StackSetOperationStatusDetails, location_name: "StatusDetails"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
     StackSetOperationPreferences.add_member(:region_concurrency_type, Shapes::ShapeRef.new(shape: RegionConcurrencyType, location_name: "RegionConcurrencyType"))
@@ -1564,6 +1579,9 @@ module Aws::CloudFormation
     StackSetOperationResultSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackSetOperationResultSummary.struct_class = Types::StackSetOperationResultSummary
 
+    StackSetOperationStatusDetails.add_member(:failed_stack_instances_count, Shapes::ShapeRef.new(shape: FailedStackInstancesCount, location_name: "FailedStackInstancesCount"))
+    StackSetOperationStatusDetails.struct_class = Types::StackSetOperationStatusDetails
+
     StackSetOperationSummaries.member = Shapes::ShapeRef.new(shape: StackSetOperationSummary)
 
     StackSetOperationSummary.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
@@ -1572,6 +1590,8 @@ module Aws::CloudFormation
     StackSetOperationSummary.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperationSummary.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     StackSetOperationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
+    StackSetOperationSummary.add_member(:status_details, Shapes::ShapeRef.new(shape: StackSetOperationStatusDetails, location_name: "StatusDetails"))
+    StackSetOperationSummary.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     StackSetOperationSummary.struct_class = Types::StackSetOperationSummary
 
     StackSetSummaries.member = Shapes::ShapeRef.new(shape: StackSetSummary)

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-cloudwatchrum/types'
 require_relative 'aws-sdk-cloudwatchrum/client_api'
+require_relative 'aws-sdk-cloudwatchrum/plugins/endpoints.rb'
 require_relative 'aws-sdk-cloudwatchrum/client'
 require_relative 'aws-sdk-cloudwatchrum/errors'
 require_relative 'aws-sdk-cloudwatchrum/resource'
+require_relative 'aws-sdk-cloudwatchrum/endpoint_parameters'
+require_relative 'aws-sdk-cloudwatchrum/endpoint_provider'
+require_relative 'aws-sdk-cloudwatchrum/endpoints'
 require_relative 'aws-sdk-cloudwatchrum/customizations'
 
 # This module provides support for CloudWatch RUM. This module is available in the
@@ -28,7 +32,7 @@ require_relative 'aws-sdk-cloudwatchrum/customizations'
 # structure.
 #
 #     cloud_watch_rum = Aws::CloudWatchRUM::Client.new
-#     resp = cloud_watch_rum.create_app_monitor(params)
+#     resp = cloud_watch_rum.batch_create_rum_metric_definitions(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-cloudwatchrum/customizations'
 # @!group service
 module Aws::CloudWatchRUM
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.6.0'
 
 end

@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-mediaconnect/types'
 require_relative 'aws-sdk-mediaconnect/client_api'
+require_relative 'aws-sdk-mediaconnect/plugins/endpoints.rb'
 require_relative 'aws-sdk-mediaconnect/client'
 require_relative 'aws-sdk-mediaconnect/errors'
 require_relative 'aws-sdk-mediaconnect/waiters'
 require_relative 'aws-sdk-mediaconnect/resource'
+require_relative 'aws-sdk-mediaconnect/endpoint_parameters'
+require_relative 'aws-sdk-mediaconnect/endpoint_provider'
+require_relative 'aws-sdk-mediaconnect/endpoints'
 require_relative 'aws-sdk-mediaconnect/customizations'
 
 # This module provides support for AWS MediaConnect. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-mediaconnect/customizations'
 # @!group service
 module Aws::MediaConnect
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end

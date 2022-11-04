@@ -62,12 +62,17 @@ module Aws::AppRunner
     #   A description of the domain name that's being associated.
     #   @return [Types::CustomDomain]
     #
+    # @!attribute [rw] vpc_dns_targets
+    #   DNS Target records for the custom domains of this Amazon VPC.
+    #   @return [Array<Types::VpcDNSTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/AssociateCustomDomainResponse AWS API Documentation
     #
     class AssociateCustomDomainResponse < Struct.new(
       :dns_target,
       :service_arn,
-      :custom_domain)
+      :custom_domain,
+      :vpc_dns_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -279,7 +284,7 @@ module Aws::AppRunner
     #       {
     #         configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #         code_configuration_values: {
-    #           runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16
+    #           runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
     #           build_command: "BuildCommand",
     #           start_command: "StartCommand",
     #           port: "String",
@@ -327,7 +332,7 @@ module Aws::AppRunner
     #   data as a hash:
     #
     #       {
-    #         runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16
+    #         runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
     #         build_command: "BuildCommand",
     #         start_command: "StartCommand",
     #         port: "String",
@@ -387,7 +392,7 @@ module Aws::AppRunner
     #         code_configuration: {
     #           configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #           code_configuration_values: {
-    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16
+    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
     #             build_command: "BuildCommand",
     #             start_command: "StartCommand",
     #             port: "String",
@@ -730,7 +735,7 @@ module Aws::AppRunner
     #             code_configuration: {
     #               configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #               code_configuration_values: {
-    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16
+    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
     #                 build_command: "BuildCommand",
     #                 start_command: "StartCommand",
     #                 port: "String",
@@ -784,6 +789,9 @@ module Aws::AppRunner
     #           egress_configuration: {
     #             egress_type: "DEFAULT", # accepts DEFAULT, VPC
     #             vpc_connector_arn: "AppRunnerResourceArn",
+    #           },
+    #           ingress_configuration: {
+    #             is_publicly_accessible: false,
     #           },
     #         },
     #         observability_configuration: {
@@ -950,6 +958,70 @@ module Aws::AppRunner
     #
     class CreateVpcConnectorResponse < Struct.new(
       :vpc_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVpcIngressConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_arn: "AppRunnerResourceArn", # required
+    #         vpc_ingress_connection_name: "VpcIngressConnectionName", # required
+    #         ingress_vpc_configuration: { # required
+    #           vpc_id: "String",
+    #           vpc_endpoint_id: "String",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) for this App Runner service that is
+    #   used to create the VPC Ingress Connection resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_ingress_connection_name
+    #   A name for the VPC Ingress Connection resource. It must be unique
+    #   across all the active VPC Ingress Connections in your Amazon Web
+    #   Services account in the Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_vpc_configuration
+    #   Specifications for the customer’s Amazon VPC and the related Amazon
+    #   Web Services PrivateLink VPC endpoint that are used to create the
+    #   VPC Ingress Connection resource.
+    #   @return [Types::IngressVpcConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   An optional list of metadata items that you can associate with the
+    #   VPC Ingress Connection resource. A tag is a key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateVpcIngressConnectionRequest AWS API Documentation
+    #
+    class CreateVpcIngressConnectionRequest < Struct.new(
+      :service_arn,
+      :vpc_ingress_connection_name,
+      :ingress_vpc_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_ingress_connection
+    #   A description of the App Runner VPC Ingress Connection resource
+    #   that's created by this request.
+    #   @return [Types::VpcIngressConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateVpcIngressConnectionResponse AWS API Documentation
+    #
+    class CreateVpcIngressConnectionResponse < Struct.new(
+      :vpc_ingress_connection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1171,6 +1243,39 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVpcIngressConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC Ingress
+    #   Connection that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteVpcIngressConnectionRequest AWS API Documentation
+    #
+    class DeleteVpcIngressConnectionRequest < Struct.new(
+      :vpc_ingress_connection_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_ingress_connection
+    #   A description of the App Runner VPC Ingress Connection that this
+    #   request just deleted.
+    #   @return [Types::VpcIngressConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteVpcIngressConnectionResponse AWS API Documentation
+    #
+    class DeleteVpcIngressConnectionResponse < Struct.new(
+      :vpc_ingress_connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAutoScalingConfigurationRequest
     #   data as a hash:
     #
@@ -1266,6 +1371,10 @@ module Aws::AppRunner
     #   `MaxResults` records per call.
     #   @return [Array<Types::CustomDomain>]
     #
+    # @!attribute [rw] vpc_dns_targets
+    #   DNS Target records for the custom domains of this Amazon VPC.
+    #   @return [Array<Types::VpcDNSTarget>]
+    #
     # @!attribute [rw] next_token
     #   The token that you can pass in a subsequent request to get the next
     #   result page. It's returned in a paginated request.
@@ -1277,6 +1386,7 @@ module Aws::AppRunner
       :dns_target,
       :service_arn,
       :custom_domains,
+      :vpc_dns_targets,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1387,6 +1497,39 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeVpcIngressConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC Ingress
+    #   Connection that you want a description for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeVpcIngressConnectionRequest AWS API Documentation
+    #
+    class DescribeVpcIngressConnectionRequest < Struct.new(
+      :vpc_ingress_connection_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_ingress_connection
+    #   A description of the App Runner VPC Ingress Connection that you
+    #   specified in this request.
+    #   @return [Types::VpcIngressConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeVpcIngressConnectionResponse AWS API Documentation
+    #
+    class DescribeVpcIngressConnectionResponse < Struct.new(
+      :vpc_ingress_connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateCustomDomainRequest
     #   data as a hash:
     #
@@ -1428,12 +1571,17 @@ module Aws::AppRunner
     #   A description of the domain name that's being disassociated.
     #   @return [Types::CustomDomain]
     #
+    # @!attribute [rw] vpc_dns_targets
+    #   DNS Target records for the custom domains of this Amazon VPC.
+    #   @return [Array<Types::VpcDNSTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DisassociateCustomDomainResponse AWS API Documentation
     #
     class DisassociateCustomDomainResponse < Struct.new(
       :dns_target,
       :service_arn,
-      :custom_domain)
+      :custom_domain,
+      :vpc_dns_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1654,6 +1802,59 @@ module Aws::AppRunner
       :image_identifier,
       :image_configuration,
       :image_repository_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Network configuration settings for inbound network traffic.
+    #
+    # @note When making an API call, you may pass IngressConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         is_publicly_accessible: false,
+    #       }
+    #
+    # @!attribute [rw] is_publicly_accessible
+    #   Specifies whether your App Runner service is publicly accessible. To
+    #   make the service publicly accessible set it to `True`. To make the
+    #   service privately accessible, from only within an Amazon VPC set it
+    #   to `False`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/IngressConfiguration AWS API Documentation
+    #
+    class IngressConfiguration < Struct.new(
+      :is_publicly_accessible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of your VPC and the associated VPC endpoint. The VPC
+    # endpoint is an Amazon Web Services PrivateLink resource that allows
+    # access to your App Runner services from within an Amazon VPC.
+    #
+    # @note When making an API call, you may pass IngressVpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "String",
+    #         vpc_endpoint_id: "String",
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that is used for the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint that your App Runner service connects to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/IngressVpcConfiguration AWS API Documentation
+    #
+    class IngressVpcConfiguration < Struct.new(
+      :vpc_id,
+      :vpc_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2162,6 +2363,100 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # Returns a list of VPC Ingress Connections based on the filter
+    # provided. It can return either `ServiceArn` or `VpcEndpointId`, or
+    # both.
+    #
+    # @note When making an API call, you may pass ListVpcIngressConnectionsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         service_arn: "AppRunnerResourceArn",
+    #         vpc_endpoint_id: "String",
+    #       }
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of a service to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of a VPC Endpoint to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcIngressConnectionsFilter AWS API Documentation
+    #
+    class ListVpcIngressConnectionsFilter < Struct.new(
+      :service_arn,
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListVpcIngressConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           service_arn: "AppRunnerResourceArn",
+    #           vpc_endpoint_id: "String",
+    #         },
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   The VPC Ingress Connections to be listed based on either the Service
+    #   Arn or Vpc Endpoint Id, or both.
+    #   @return [Types::ListVpcIngressConnectionsFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones that are specified in
+    #   the initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcIngressConnectionsRequest AWS API Documentation
+    #
+    class ListVpcIngressConnectionsRequest < Struct.new(
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_ingress_connection_summary_list
+    #   A list of summary information records for VPC Ingress Connections.
+    #   In a paginated request, the request returns up to `MaxResults`
+    #   records for each call.
+    #   @return [Array<Types::VpcIngressConnectionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can pass in a subsequent request to get the next
+    #   result page. It's returned in a paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcIngressConnectionsResponse AWS API Documentation
+    #
+    class ListVpcIngressConnectionsResponse < Struct.new(
+      :vpc_ingress_connection_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes configuration settings related to network traffic of an App
     # Runner service. Consists of embedded objects for each configurable
     # network feature.
@@ -2174,16 +2469,24 @@ module Aws::AppRunner
     #           egress_type: "DEFAULT", # accepts DEFAULT, VPC
     #           vpc_connector_arn: "AppRunnerResourceArn",
     #         },
+    #         ingress_configuration: {
+    #           is_publicly_accessible: false,
+    #         },
     #       }
     #
     # @!attribute [rw] egress_configuration
     #   Network configuration settings for outbound message traffic.
     #   @return [Types::EgressConfiguration]
     #
+    # @!attribute [rw] ingress_configuration
+    #   Network configuration settings for inbound message traffic.
+    #   @return [Types::IngressConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/NetworkConfiguration AWS API Documentation
     #
     class NetworkConfiguration < Struct.new(
-      :egress_configuration)
+      :egress_configuration,
+      :ingress_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2750,7 +3053,7 @@ module Aws::AppRunner
     #           code_configuration: {
     #             configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #             code_configuration_values: {
-    #               runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16
+    #               runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
     #               build_command: "BuildCommand",
     #               start_command: "StartCommand",
     #               port: "String",
@@ -2993,7 +3296,7 @@ module Aws::AppRunner
     #             code_configuration: {
     #               configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #               code_configuration_values: {
-    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16
+    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11, NODEJS_16, GO_1, DOTNET_6, PHP_81, RUBY_31
     #                 build_command: "BuildCommand",
     #                 start_command: "StartCommand",
     #                 port: "String",
@@ -3038,6 +3341,9 @@ module Aws::AppRunner
     #           egress_configuration: {
     #             egress_type: "DEFAULT", # accepts DEFAULT, VPC
     #             vpc_connector_arn: "AppRunnerResourceArn",
+    #           },
+    #           ingress_configuration: {
+    #             is_publicly_accessible: false,
     #           },
     #         },
     #         observability_configuration: {
@@ -3124,6 +3430,50 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateVpcIngressConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_ingress_connection_arn: "AppRunnerResourceArn", # required
+    #         ingress_vpc_configuration: { # required
+    #           vpc_id: "String",
+    #           vpc_endpoint_id: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vpc_ingress_connection_arn
+    #   The Amazon Resource Name (Arn) for the App Runner VPC Ingress
+    #   Connection resource that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_vpc_configuration
+    #   Specifications for the customer’s Amazon VPC and the related Amazon
+    #   Web Services PrivateLink VPC endpoint that are used to update the
+    #   VPC Ingress Connection resource.
+    #   @return [Types::IngressVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateVpcIngressConnectionRequest AWS API Documentation
+    #
+    class UpdateVpcIngressConnectionRequest < Struct.new(
+      :vpc_ingress_connection_arn,
+      :ingress_vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_ingress_connection
+    #   A description of the App Runner VPC Ingress Connection resource
+    #   that's updated by this request.
+    #   @return [Types::VpcIngressConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateVpcIngressConnectionResponse AWS API Documentation
+    #
+    class UpdateVpcIngressConnectionResponse < Struct.new(
+      :vpc_ingress_connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an App Runner VPC connector resource. A VPC connector
     # describes the Amazon Virtual Private Cloud (Amazon VPC) that an App
     # Runner service is associated with, and the subnets and security group
@@ -3193,6 +3543,130 @@ module Aws::AppRunner
       :status,
       :created_at,
       :deleted_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # DNS Target record for a custom domain of this Amazon VPC.
+    #
+    # @!attribute [rw] vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC Ingress Connection that is
+    #   associated with your service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC that is associated with the custom domain
+    #   name of the target DNS.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name of your target DNS that is associated with the
+    #   Amazon VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/VpcDNSTarget AWS API Documentation
+    #
+    class VpcDNSTarget < Struct.new(
+      :vpc_ingress_connection_arn,
+      :vpc_id,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The App Runner resource that specifies an App Runner endpoint for
+    # incoming traffic. It establishes a connection between a VPC interface
+    # endpoint and a App Runner service, to make your App Runner service
+    # accessible from only within an Amazon VPC.
+    #
+    # @!attribute [rw] vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC Ingress Connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_ingress_connection_name
+    #   The customer-provided VPC Ingress Connection name.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the service associated with the
+    #   VPC Ingress Connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VPC Ingress Connection. The VPC Ingress
+    #   Connection displays one of the following statuses: `AVAILABLE`,
+    #   `PENDING_CREATION`, `PENDING_UPDATE`,
+    #   `PENDING_DELETION`,`FAILED_CREATION`, `FAILED_UPDATE`,
+    #   `FAILED_DELETION`, and `DELETED`..
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Account Id you use to create the VPC Ingress Connection
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name associated with the VPC Ingress Connection resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingress_vpc_configuration
+    #   Specifications for the customer’s VPC and related PrivateLink VPC
+    #   endpoint that are used to associate with the VPC Ingress Connection
+    #   resource.
+    #   @return [Types::IngressVpcConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the VPC Ingress Connection was created. It's in the
+    #   Unix time stamp format.
+    #
+    #   * Type: Timestamp
+    #
+    #   * Required: Yes
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted_at
+    #   The time when the App Runner service was deleted. It's in the Unix
+    #   time stamp format.
+    #
+    #   * Type: Timestamp
+    #
+    #   * Required: No
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/VpcIngressConnection AWS API Documentation
+    #
+    class VpcIngressConnection < Struct.new(
+      :vpc_ingress_connection_arn,
+      :vpc_ingress_connection_name,
+      :service_arn,
+      :status,
+      :account_id,
+      :domain_name,
+      :ingress_vpc_configuration,
+      :created_at,
+      :deleted_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an VPC Ingress Connection, which
+    # includes its VPC Ingress Connection ARN and its associated Service
+    # ARN.
+    #
+    # @!attribute [rw] vpc_ingress_connection_arn
+    #   The Amazon Resource Name (ARN) of the VPC Ingress Connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The Amazon Resource Name (ARN) of the service associated with the
+    #   VPC Ingress Connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/VpcIngressConnectionSummary AWS API Documentation
+    #
+    class VpcIngressConnectionSummary < Struct.new(
+      :vpc_ingress_connection_arn,
+      :service_arn)
       SENSITIVE = []
       include Aws::Structure
     end

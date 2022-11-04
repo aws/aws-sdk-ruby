@@ -768,6 +768,8 @@ module Aws::IoT
     ListV2LoggingLevelsResponse = Shapes::StructureShape.new(name: 'ListV2LoggingLevelsResponse')
     ListViolationEventsRequest = Shapes::StructureShape.new(name: 'ListViolationEventsRequest')
     ListViolationEventsResponse = Shapes::StructureShape.new(name: 'ListViolationEventsResponse')
+    LocationAction = Shapes::StructureShape.new(name: 'LocationAction')
+    LocationTimestamp = Shapes::StructureShape.new(name: 'LocationTimestamp')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogTarget = Shapes::StructureShape.new(name: 'LogTarget')
@@ -1305,6 +1307,7 @@ module Aws::IoT
     Action.add_member(:http, Shapes::ShapeRef.new(shape: HttpAction, location_name: "http"))
     Action.add_member(:kafka, Shapes::ShapeRef.new(shape: KafkaAction, location_name: "kafka"))
     Action.add_member(:open_search, Shapes::ShapeRef.new(shape: OpenSearchAction, location_name: "openSearch"))
+    Action.add_member(:location, Shapes::ShapeRef.new(shape: LocationAction, location_name: "location"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -3687,6 +3690,18 @@ module Aws::IoT
     ListViolationEventsResponse.add_member(:violation_events, Shapes::ShapeRef.new(shape: ViolationEvents, location_name: "violationEvents"))
     ListViolationEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListViolationEventsResponse.struct_class = Types::ListViolationEventsResponse
+
+    LocationAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    LocationAction.add_member(:tracker_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "trackerName"))
+    LocationAction.add_member(:device_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deviceId"))
+    LocationAction.add_member(:timestamp, Shapes::ShapeRef.new(shape: LocationTimestamp, location_name: "timestamp"))
+    LocationAction.add_member(:latitude, Shapes::ShapeRef.new(shape: String, required: true, location_name: "latitude"))
+    LocationAction.add_member(:longitude, Shapes::ShapeRef.new(shape: String, required: true, location_name: "longitude"))
+    LocationAction.struct_class = Types::LocationAction
+
+    LocationTimestamp.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    LocationTimestamp.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
+    LocationTimestamp.struct_class = Types::LocationTimestamp
 
     LogTarget.add_member(:target_type, Shapes::ShapeRef.new(shape: LogTargetType, required: true, location_name: "targetType"))
     LogTarget.add_member(:target_name, Shapes::ShapeRef.new(shape: LogTargetName, location_name: "targetName"))

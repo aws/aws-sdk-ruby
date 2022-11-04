@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cloudformation)
@@ -79,8 +79,9 @@ module Aws::CloudFormation
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::CloudFormation::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::CloudFormation
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::CloudFormation
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::CloudFormation::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudFormation::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -2615,6 +2632,7 @@ module Aws::CloudFormation
     #   resp.stack_instance.organizational_unit_id #=> String
     #   resp.stack_instance.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.stack_instance.last_drift_check_timestamp #=> Time
+    #   resp.stack_instance.last_operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstance AWS API Documentation
     #
@@ -3038,6 +3056,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
     #   resp.stack_set_operation.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
     #   resp.stack_set_operation.status_reason #=> String
+    #   resp.stack_set_operation.status_details.failed_stack_instances_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation AWS API Documentation
     #
@@ -4189,7 +4208,7 @@ module Aws::CloudFormation
     #   request parameter to get the next set of results.
     #
     # @option params [Array<Types::StackInstanceFilter>] :filters
-    #   The status that stack instances are filtered by.
+    #   The filter to apply to stack instances
     #
     # @option params [String] :stack_instance_account
     #   The name of the Amazon Web Services account that you want to list
@@ -4235,7 +4254,7 @@ module Aws::CloudFormation
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS
+    #         name: "DETAILED_STATUS", # accepts DETAILED_STATUS, LAST_OPERATION_ID
     #         values: "StackInstanceFilterValues",
     #       },
     #     ],
@@ -4257,6 +4276,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].organizational_unit_id #=> String
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
+    #   resp.summaries[0].last_operation_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstances AWS API Documentation
@@ -4372,6 +4392,9 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
     #
+    # @option params [Array<Types::OperationResultFilter>] :filters
+    #   The filter to apply to operation results.
+    #
     # @return [Types::ListStackSetOperationResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListStackSetOperationResultsOutput#summaries #summaries} => Array&lt;Types::StackSetOperationResultSummary&gt;
@@ -4387,6 +4410,12 @@ module Aws::CloudFormation
     #     next_token: "NextToken",
     #     max_results: 1,
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #     filters: [
+    #       {
+    #         name: "OPERATION_RESULT_STATUS", # accepts OPERATION_RESULT_STATUS
+    #         values: "OperationResultFilterValues",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4478,6 +4507,14 @@ module Aws::CloudFormation
     #   resp.summaries[0].creation_timestamp #=> Time
     #   resp.summaries[0].end_timestamp #=> Time
     #   resp.summaries[0].status_reason #=> String
+    #   resp.summaries[0].status_details.failed_stack_instances_count #=> Integer
+    #   resp.summaries[0].operation_preferences.region_concurrency_type #=> String, one of "SEQUENTIAL", "PARALLEL"
+    #   resp.summaries[0].operation_preferences.region_order #=> Array
+    #   resp.summaries[0].operation_preferences.region_order[0] #=> String
+    #   resp.summaries[0].operation_preferences.failure_tolerance_count #=> Integer
+    #   resp.summaries[0].operation_preferences.failure_tolerance_percentage #=> Integer
+    #   resp.summaries[0].operation_preferences.max_concurrent_count #=> Integer
+    #   resp.summaries[0].operation_preferences.max_concurrent_percentage #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperations AWS API Documentation
@@ -5668,8 +5705,9 @@ module Aws::CloudFormation
     # [RegisterType](AWSCloudFormation/latest/APIReference/API_RegisterType.html).
     #
     # Once you've initiated testing on an extension using `TestType`, you
-    # can use [DescribeType][2] to monitor the current test status and test
-    # status description for the extension.
+    # can pass the returned `TypeVersionArn` into [DescribeType][2] to
+    # monitor the current test status and test status description for the
+    # extension.
     #
     # An extension must have a test status of `PASSED` before it can be
     # published. For more information, see [Publishing extensions to make
@@ -6785,7 +6823,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

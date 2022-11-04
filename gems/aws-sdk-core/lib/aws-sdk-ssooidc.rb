@@ -15,9 +15,13 @@ end
 
 require_relative 'aws-sdk-ssooidc/types'
 require_relative 'aws-sdk-ssooidc/client_api'
+require_relative 'aws-sdk-ssooidc/plugins/endpoints.rb'
 require_relative 'aws-sdk-ssooidc/client'
 require_relative 'aws-sdk-ssooidc/errors'
 require_relative 'aws-sdk-ssooidc/resource'
+require_relative 'aws-sdk-ssooidc/endpoint_parameters'
+require_relative 'aws-sdk-ssooidc/endpoint_provider'
+require_relative 'aws-sdk-ssooidc/endpoints'
 require_relative 'aws-sdk-ssooidc/customizations'
 
 # This module provides support for AWS SSO OIDC. This module is available in the
@@ -50,6 +54,6 @@ require_relative 'aws-sdk-ssooidc/customizations'
 # @!group service
 module Aws::SSOOIDC
 
-  GEM_VERSION = '3.161.0'
+  GEM_VERSION = '3.166.0'
 
 end

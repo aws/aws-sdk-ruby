@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-10-31)
+------------------
+
+* Feature - This release adds support for private App Runner services. Services may now be configured to be made private and only accessible from a VPC. The changes include a new VpcIngressConnection resource and several new and modified APIs.
+
+1.17.0 (2022-10-28)
+------------------
+
+* Feature - AWS App Runner adds .NET 6, Go 1, PHP 8.1 and Ruby 3.1 runtimes.
+
+1.16.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.15.0 (2022-09-23)
 ------------------
 

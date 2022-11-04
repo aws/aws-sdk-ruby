@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2022-10-20)
+------------------
+
+* Feature - This release adds information about the resources DevOps Guru is analyzing.
+
 1.25.0 (2022-09-30)
 ------------------
 

@@ -72,7 +72,11 @@ the background every 60 secs (default). Defaults to `false`.
               context,
               Aws::Util.str_2_bool(discovery_cfg["required"])
             )
-            context.http_request.endpoint = _valid_uri(endpoint.address) if endpoint
+            if endpoint
+              context.http_request.endpoint = _valid_uri(endpoint.address)
+              # Skips dynamic endpoint usage, use this endpoint instead
+              context[:discovered_endpoint] = true
+            end
             if endpoint || context.config.endpoint_discovery
               _apply_endpoint_discovery_user_agent(context)
             end
@@ -100,7 +104,7 @@ the background every 60 secs (default). Defaults to `false`.
         end
 
         def _discover_endpoint(ctx, required)
-          cache = ctx.config.endpoint_cache 
+          cache = ctx.config.endpoint_cache
           key = cache.extract_key(ctx)
 
           if required

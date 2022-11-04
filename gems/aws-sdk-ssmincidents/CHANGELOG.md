@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-11-02)
+------------------
+
+* Feature - Adds support for tagging replication-set on creation.
+
+1.17.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.16.0 (2022-10-13)
 ------------------
 

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-snowdevicemanagement/types'
 require_relative 'aws-sdk-snowdevicemanagement/client_api'
+require_relative 'aws-sdk-snowdevicemanagement/plugins/endpoints.rb'
 require_relative 'aws-sdk-snowdevicemanagement/client'
 require_relative 'aws-sdk-snowdevicemanagement/errors'
 require_relative 'aws-sdk-snowdevicemanagement/resource'
+require_relative 'aws-sdk-snowdevicemanagement/endpoint_parameters'
+require_relative 'aws-sdk-snowdevicemanagement/endpoint_provider'
+require_relative 'aws-sdk-snowdevicemanagement/endpoints'
 require_relative 'aws-sdk-snowdevicemanagement/customizations'
 
 # This module provides support for AWS Snow Device Management. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-snowdevicemanagement/customizations'
 # @!group service
 module Aws::SnowDeviceManagement
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

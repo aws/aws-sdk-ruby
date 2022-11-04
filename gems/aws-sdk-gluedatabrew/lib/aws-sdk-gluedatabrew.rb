@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-gluedatabrew/types'
 require_relative 'aws-sdk-gluedatabrew/client_api'
+require_relative 'aws-sdk-gluedatabrew/plugins/endpoints.rb'
 require_relative 'aws-sdk-gluedatabrew/client'
 require_relative 'aws-sdk-gluedatabrew/errors'
 require_relative 'aws-sdk-gluedatabrew/resource'
+require_relative 'aws-sdk-gluedatabrew/endpoint_parameters'
+require_relative 'aws-sdk-gluedatabrew/endpoint_provider'
+require_relative 'aws-sdk-gluedatabrew/endpoints'
 require_relative 'aws-sdk-gluedatabrew/customizations'
 
 # This module provides support for AWS Glue DataBrew. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-gluedatabrew/customizations'
 # @!group service
 module Aws::GlueDataBrew
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end

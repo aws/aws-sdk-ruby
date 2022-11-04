@@ -331,6 +331,16 @@ module Aws::MemoryDB
     #   engine version upgrades after launch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_tiering
+    #   Enables data tiering. Data tiering is only supported for clusters
+    #   using the r6gd node type. This parameter must be set when using r6gd
+    #   nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -358,7 +368,8 @@ module Aws::MemoryDB
       :maintenance_window,
       :snapshot_window,
       :acl_name,
-      :auto_minor_version_upgrade)
+      :auto_minor_version_upgrade,
+      :data_tiering)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -633,6 +644,7 @@ module Aws::MemoryDB
     #         acl_name: "ACLName", # required
     #         engine_version: "String",
     #         auto_minor_version_upgrade: false,
+    #         data_tiering: false,
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -673,8 +685,26 @@ module Aws::MemoryDB
     # @!attribute [rw] maintenance_window
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
-    #   `ddd:hh24:mi-ddd:hh24:mi` (24H Clock UTC). The minimum maintenance
+    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period.
+    #
+    #   Valid values for `ddd` are:
+    #
+    #   * `sun`
+    #
+    #   * `mon`
+    #
+    #   * `tue`
+    #
+    #   * `wed`
+    #
+    #   * `thu`
+    #
+    #   * `fri`
+    #
+    #   * `sat`
+    #
+    #   Example: `sun:23:00-mon:01:30`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -744,6 +774,16 @@ module Aws::MemoryDB
     #   engine version upgrades after launch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] data_tiering
+    #   Enables data tiering. Data tiering is only supported for clusters
+    #   using the r6gd node type. This parameter must be set when using r6gd
+    #   nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -767,7 +807,8 @@ module Aws::MemoryDB
       :snapshot_window,
       :acl_name,
       :engine_version,
-      :auto_minor_version_upgrade)
+      :auto_minor_version_upgrade,
+      :data_tiering)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2735,6 +2776,16 @@ module Aws::MemoryDB
     #   The configuration of the cluster from which the snapshot was taken
     #   @return [Types::ClusterConfiguration]
     #
+    # @!attribute [rw] data_tiering
+    #   Enables data tiering. Data tiering is only supported for clusters
+    #   using the r6gd node type. This parameter must be set when using r6gd
+    #   nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/memorydb-2021-01-01/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -2743,7 +2794,8 @@ module Aws::MemoryDB
       :source,
       :kms_key_id,
       :arn,
-      :cluster_configuration)
+      :cluster_configuration,
+      :data_tiering)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3087,7 +3139,28 @@ module Aws::MemoryDB
     #   @return [Array<String>]
     #
     # @!attribute [rw] maintenance_window
-    #   The maintenance window to update
+    #   Specifies the weekly time range during which maintenance on the
+    #   cluster is performed. It is specified as a range in the format
+    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+    #   window is a 60 minute period.
+    #
+    #   Valid values for `ddd` are:
+    #
+    #   * `sun`
+    #
+    #   * `mon`
+    #
+    #   * `tue`
+    #
+    #   * `wed`
+    #
+    #   * `thu`
+    #
+    #   * `fri`
+    #
+    #   * `sat`
+    #
+    #   Example: `sun:23:00-mon:01:30`
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_arn

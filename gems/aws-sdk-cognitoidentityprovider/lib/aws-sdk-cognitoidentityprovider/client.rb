@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cognitoidentityprovider)
@@ -79,8 +79,9 @@ module Aws::CognitoIdentityProvider
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::CognitoIdentityProvider::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::CognitoIdentityProvider
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::CognitoIdentityProvider
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::CognitoIdentityProvider::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CognitoIdentityProvider::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -873,9 +890,12 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Disables the specified user.
+    # Deactivates a user and revokes all access tokens for the user. A
+    # deactivated user can't sign in, but still appears in the responses to
+    # `GetUser` and `ListUsers` API requests.
     #
-    # Calling this action requires developer credentials.
+    # You must make this API request with Amazon Web Services credentials
+    # that have `cognito-idp:AdminDisableUser` permissions.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to disable the user.
@@ -1500,7 +1520,9 @@ module Aws::CognitoIdentityProvider
     #   The user pool username or an alias.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of authentication events to return.
+    #   The maximum number of authentication events to return. Returns 60
+    #   events if you set `MaxResults` to 0, or if you don't include a
+    #   `MaxResults` parameter.
     #
     # @option params [String] :next_token
     #   A pagination token.
@@ -2970,6 +2992,17 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::UserPoolPolicyType] :policies
     #   The policies associated with the new user pool.
     #
+    # @option params [String] :deletion_protection
+    #   When active, `DeletionProtection` prevents accidental deletion of your
+    #   user pool. Before you can delete a user pool that you have protected
+    #   against deletion, you must deactivate this feature.
+    #
+    #   When you try to delete a protected user pool in a `DeleteUserPool` API
+    #   request, Amazon Cognito returns an `InvalidParameterException` error.
+    #   To delete a protected user pool, send a new `DeleteUserPool` request
+    #   after you deactivate deletion protection in an `UpdateUserPool` API
+    #   request.
+    #
     # @option params [Types::LambdaConfigType] :lambda_config
     #   The Lambda trigger configuration information for the new user pool.
     #
@@ -3128,6 +3161,7 @@ module Aws::CognitoIdentityProvider
     #         temporary_password_validity_days: 1,
     #       },
     #     },
+    #     deletion_protection: "ACTIVE", # accepts ACTIVE, INACTIVE
     #     lambda_config: {
     #       pre_sign_up: "ArnType",
     #       custom_message: "ArnType",
@@ -3239,6 +3273,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.require_numbers #=> Boolean
     #   resp.user_pool.policies.password_policy.require_symbols #=> Boolean
     #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
+    #   resp.user_pool.deletion_protection #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
     #   resp.user_pool.lambda_config.custom_message #=> String
     #   resp.user_pool.lambda_config.post_confirmation #=> String
@@ -3360,6 +3395,9 @@ module Aws::CognitoIdentityProvider
     #   Cognito overrides the value with the default value of 30 days. *Valid
     #   range* is displayed below in seconds.
     #
+    #   If you don't specify otherwise in the configuration of your app
+    #   client, your refresh tokens are valid for 30 days.
+    #
     # @option params [Integer] :access_token_validity
     #   The access token time limit. After this limit expires, your user
     #   can't use their access token. To specify the time unit for
@@ -3373,6 +3411,9 @@ module Aws::CognitoIdentityProvider
     #   The default time unit for `AccessTokenValidity` in an API request is
     #   hours. *Valid range* is displayed below in seconds.
     #
+    #   If you don't specify otherwise in the configuration of your app
+    #   client, your access tokens are valid for one hour.
+    #
     # @option params [Integer] :id_token_validity
     #   The ID token time limit. After this limit expires, your user can't
     #   use their ID token. To specify the time unit for `IdTokenValidity` as
@@ -3385,6 +3426,9 @@ module Aws::CognitoIdentityProvider
     #
     #   The default time unit for `AccessTokenValidity` in an API request is
     #   hours. *Valid range* is displayed below in seconds.
+    #
+    #   If you don't specify otherwise in the configuration of your app
+    #   client, your ID tokens are valid for one hour.
     #
     # @option params [Types::TokenValidityUnitsType] :token_validity_units
     #   The units in which the validity times are represented. The default
@@ -3410,45 +3454,43 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #
     # @option params [Array<String>] :explicit_auth_flows
-    #   The authentication flows that are supported by the user pool clients.
-    #   Flow names without the `ALLOW_` prefix are no longer supported, in
-    #   favor of new names with the `ALLOW_` prefix.
+    #   The authentication flows that you want your user pool client to
+    #   support. For each app client in your user pool, you can sign in your
+    #   users with any combination of one or more flows, including with a user
+    #   name and Secure Remote Password (SRP), a user name and password, or a
+    #   custom authentication process that you define with Lambda functions.
     #
-    #   <note markdown="1"> Values with `ALLOW_` prefix must be used only along with the `ALLOW_`
-    #   prefix.
+    #   <note markdown="1"> If you don't specify a value for `ExplicitAuthFlows`, your user
+    #   client supports `ALLOW_REFRESH_TOKEN_AUTH`, `ALLOW_USER_SRP_AUTH`, and
+    #   `ALLOW_CUSTOM_AUTH`.
     #
     #    </note>
     #
     #   Valid values include:
     #
-    #   ALLOW\_ADMIN\_USER\_PASSWORD\_AUTH
+    #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
+    #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
+    #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
+    #     flow, your app passes a user name and password to Amazon Cognito in
+    #     the request, instead of using the Secure Remote Password (SRP)
+    #     protocol to securely transmit the password.
     #
-    #   : Enable admin based user password authentication flow
-    #     `ADMIN_USER_PASSWORD_AUTH`. This setting replaces the
-    #     `ADMIN_NO_SRP_AUTH` setting. With this authentication flow, Amazon
-    #     Cognito receives the password in the request instead of using the
-    #     Secure Remote Password (SRP) protocol to verify passwords.
+    #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
     #
-    #   ALLOW\_CUSTOM\_AUTH
+    #   * `ALLOW_USER_PASSWORD_AUTH`\: Enable user password-based
+    #     authentication. In this flow, Amazon Cognito receives the password
+    #     in the request instead of using the SRP protocol to verify
+    #     passwords.
     #
-    #   : Enable Lambda trigger based authentication.
+    #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP-based authentication.
     #
-    #   ALLOW\_USER\_PASSWORD\_AUTH
+    #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
     #
-    #   : Enable user password-based authentication. In this flow, Amazon
-    #     Cognito receives the password in the request instead of using the
-    #     SRP protocol to verify passwords.
-    #
-    #   ALLOW\_USER\_SRP\_AUTH
-    #
-    #   : Enable SRP-based authentication.
-    #
-    #   ALLOW\_REFRESH\_TOKEN\_AUTH
-    #
-    #   : Enable the authflow that refreshes tokens.
-    #
-    #   If you don't specify a value for `ExplicitAuthFlows`, your user
-    #   client supports `ALLOW_USER_SRP_AUTH` and `ALLOW_CUSTOM_AUTH`.
+    #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
+    #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
+    #   these legacy `ExplicitAuthFlows` values to user pool clients at the
+    #   same time as values that begin with `ALLOW_`, like
+    #   `ALLOW_USER_SRP_AUTH`.
     #
     # @option params [Array<String>] :supported_identity_providers
     #   A list of provider names for the identity providers (IdPs) that are
@@ -4158,6 +4200,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.policies.password_policy.require_numbers #=> Boolean
     #   resp.user_pool.policies.password_policy.require_symbols #=> Boolean
     #   resp.user_pool.policies.password_policy.temporary_password_validity_days #=> Integer
+    #   resp.user_pool.deletion_protection #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.user_pool.lambda_config.pre_sign_up #=> String
     #   resp.user_pool.lambda_config.custom_message #=> String
     #   resp.user_pool.lambda_config.post_confirmation #=> String
@@ -4668,6 +4711,12 @@ module Aws::CognitoIdentityProvider
     end
 
     # This method takes a user pool ID, and returns the signing certificate.
+    # The issued certificate is valid for 10 years from the date of issue.
+    #
+    # Amazon Cognito issues and assigns a new signing certificate annually.
+    # This process returns a new value in the response to
+    # `GetSigningCertificate`, but doesn't invalidate the original
+    # certificate.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
@@ -4920,11 +4969,9 @@ module Aws::CognitoIdentityProvider
     end
 
     # Signs out users from all devices. It also invalidates all refresh
-    # tokens that Amazon Cognito has issued to a user. The user's current
-    # access and ID tokens remain valid until their expiry. By default,
-    # access and ID tokens expire one hour after Amazon Cognito issues them.
-    # A user can still use a hosted UI cookie to retrieve new tokens for the
-    # duration of the cookie validity period of 1 hour.
+    # tokens that Amazon Cognito has issued to a user. A user can still use
+    # a hosted UI cookie to retrieve new tokens for the duration of the
+    # 1-hour cookie validity period.
     #
     # @option params [required, String] :access_token
     #   A valid access token that Amazon Cognito issued to the user who you
@@ -6049,9 +6096,10 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Revokes all of the access tokens generated by the specified refresh
-    # token. After the token is revoked, you can't use the revoked token to
-    # access Amazon Cognito authenticated APIs.
+    # Revokes all of the access tokens generated by, and at the same time
+    # as, the specified refresh token. After a token is revoked, you can't
+    # use the revoked token to access Amazon Cognito user APIs, or to
+    # authorize access to your resource server.
     #
     # @option params [required, String] :token
     #   The refresh token that you want to revoke.
@@ -6354,8 +6402,7 @@ module Aws::CognitoIdentityProvider
     # @option params [String] :mfa_configuration
     #   The MFA configuration. If you set the MfaConfiguration value to ‘ON’,
     #   only users who have set up an MFA factor can sign in. To learn more,
-    #   see [Adding Multi-Factor Authentication (MFA) to a user
-    #   pool](cognito/latest/developerguide/user-pool-settings-mfa.html).
+    #   see [Adding Multi-Factor Authentication (MFA) to a user pool][1].
     #   Valid values include:
     #
     #   * `OFF` MFA won't be used for any users.
@@ -6364,6 +6411,10 @@ module Aws::CognitoIdentityProvider
     #
     #   * `OPTIONAL` MFA will be required only for individual users who have
     #     an MFA factor activated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html
     #
     # @return [Types::SetUserPoolMfaConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7163,6 +7214,17 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::UserPoolPolicyType] :policies
     #   A container with the policies you want to update in a user pool.
     #
+    # @option params [String] :deletion_protection
+    #   When active, `DeletionProtection` prevents accidental deletion of your
+    #   user pool. Before you can delete a user pool that you have protected
+    #   against deletion, you must deactivate this feature.
+    #
+    #   When you try to delete a protected user pool in a `DeleteUserPool` API
+    #   request, Amazon Cognito returns an `InvalidParameterException` error.
+    #   To delete a protected user pool, send a new `DeleteUserPool` request
+    #   after you deactivate deletion protection in an `UpdateUserPool` API
+    #   request.
+    #
     # @option params [Types::LambdaConfigType] :lambda_config
     #   The Lambda configuration information from the request to update the
     #   user pool.
@@ -7293,6 +7355,7 @@ module Aws::CognitoIdentityProvider
     #         temporary_password_validity_days: 1,
     #       },
     #     },
+    #     deletion_protection: "ACTIVE", # accepts ACTIVE, INACTIVE
     #     lambda_config: {
     #       pre_sign_up: "ArnType",
     #       custom_message: "ArnType",
@@ -7422,6 +7485,9 @@ module Aws::CognitoIdentityProvider
     #   Cognito overrides the value with the default value of 30 days. *Valid
     #   range* is displayed below in seconds.
     #
+    #   If you don't specify otherwise in the configuration of your app
+    #   client, your refresh tokens are valid for 30 days.
+    #
     # @option params [Integer] :access_token_validity
     #   The access token time limit. After this limit expires, your user
     #   can't use their access token. To specify the time unit for
@@ -7434,6 +7500,9 @@ module Aws::CognitoIdentityProvider
     #
     #   The default time unit for `AccessTokenValidity` in an API request is
     #   hours. *Valid range* is displayed below in seconds.
+    #
+    #   If you don't specify otherwise in the configuration of your app
+    #   client, your access tokens are valid for one hour.
     #
     # @option params [Integer] :id_token_validity
     #   The ID token time limit. After this limit expires, your user can't
@@ -7448,6 +7517,9 @@ module Aws::CognitoIdentityProvider
     #   The default time unit for `AccessTokenValidity` in an API request is
     #   hours. *Valid range* is displayed below in seconds.
     #
+    #   If you don't specify otherwise in the configuration of your app
+    #   client, your ID tokens are valid for one hour.
+    #
     # @option params [Types::TokenValidityUnitsType] :token_validity_units
     #   The units in which the validity times are represented. The default
     #   unit for RefreshToken is days, and the default for ID and access
@@ -7460,19 +7532,26 @@ module Aws::CognitoIdentityProvider
     #   The writeable attributes of the user pool.
     #
     # @option params [Array<String>] :explicit_auth_flows
-    #   The authentication flows that are supported by the user pool clients.
-    #   Flow names without the `ALLOW_` prefix are no longer supported in
-    #   favor of new names with the `ALLOW_` prefix. Note that values with
-    #   `ALLOW_` prefix must be used only along with values with the `ALLOW_`
-    #   prefix.
+    #   The authentication flows that you want your user pool client to
+    #   support. For each app client in your user pool, you can sign in your
+    #   users with any combination of one or more flows, including with a user
+    #   name and Secure Remote Password (SRP), a user name and password, or a
+    #   custom authentication process that you define with Lambda functions.
+    #
+    #   <note markdown="1"> If you don't specify a value for `ExplicitAuthFlows`, your user
+    #   client supports `ALLOW_REFRESH_TOKEN_AUTH`, `ALLOW_USER_SRP_AUTH`, and
+    #   `ALLOW_CUSTOM_AUTH`.
+    #
+    #    </note>
     #
     #   Valid values include:
     #
     #   * `ALLOW_ADMIN_USER_PASSWORD_AUTH`\: Enable admin based user password
     #     authentication flow `ADMIN_USER_PASSWORD_AUTH`. This setting
     #     replaces the `ADMIN_NO_SRP_AUTH` setting. With this authentication
-    #     flow, Amazon Cognito receives the password in the request instead of
-    #     using the Secure Remote Password (SRP) protocol to verify passwords.
+    #     flow, your app passes a user name and password to Amazon Cognito in
+    #     the request, instead of using the Secure Remote Password (SRP)
+    #     protocol to securely transmit the password.
     #
     #   * `ALLOW_CUSTOM_AUTH`\: Enable Lambda trigger based authentication.
     #
@@ -7484,6 +7563,12 @@ module Aws::CognitoIdentityProvider
     #   * `ALLOW_USER_SRP_AUTH`\: Enable SRP-based authentication.
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`\: Enable authflow to refresh tokens.
+    #
+    #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
+    #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
+    #   these legacy `ExplicitAuthFlows` values to user pool clients at the
+    #   same time as values that begin with `ALLOW_`, like
+    #   `ALLOW_USER_SRP_AUTH`.
     #
     # @option params [Array<String>] :supported_identity_providers
     #   A list of provider names for the IdPs that this client supports. The
@@ -7902,7 +7987,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

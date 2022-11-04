@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:acmpca)
@@ -79,8 +79,9 @@ module Aws::ACMPCA
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::ACMPCA::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::ACMPCA
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::ACMPCA
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::ACMPCA::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ACMPCA::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -450,6 +467,14 @@ module Aws::ACMPCA
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
+    # @option params [String] :usage_mode
+    #   Specifies whether the CA issues general-purpose certificates that
+    #   typically require a revocation mechanism, or short-lived certificates
+    #   that may optionally omit revocation because they expire quickly.
+    #   Short-lived certificate validity is limited to seven days.
+    #
+    #   The default value is GENERAL\_PURPOSE.
+    #
     # @return [Types::CreateCertificateAuthorityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCertificateAuthorityResponse#certificate_authority_arn #certificate_authority_arn} => String
@@ -563,6 +588,7 @@ module Aws::ACMPCA
     #         value: "TagValue",
     #       },
     #     ],
+    #     usage_mode: "GENERAL_PURPOSE", # accepts GENERAL_PURPOSE, SHORT_LIVED_CERTIFICATE
     #   })
     #
     # @example Response structure
@@ -1065,6 +1091,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authority.restorable_until #=> Time
     #   resp.certificate_authority.key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
+    #   resp.certificate_authority.usage_mode #=> String, one of "GENERAL_PURPOSE", "SHORT_LIVED_CERTIFICATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthority AWS API Documentation
     #
@@ -1904,6 +1931,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authorities[0].restorable_until #=> Time
     #   resp.certificate_authorities[0].key_storage_security_standard #=> String, one of "FIPS_140_2_LEVEL_2_OR_HIGHER", "FIPS_140_2_LEVEL_3_OR_HIGHER"
+    #   resp.certificate_authorities[0].usage_mode #=> String, one of "GENERAL_PURPOSE", "SHORT_LIVED_CERTIFICATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ListCertificateAuthorities AWS API Documentation
@@ -2472,7 +2500,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

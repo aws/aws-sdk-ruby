@@ -12,7 +12,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           bucket = 'bucketname'
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.list_objects(bucket: bucket)
           host = 'bucketname.beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -26,7 +26,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           bucket = 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint'
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.list_objects(bucket: bucket)
           host = 'myendpoint-123456789012.beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -40,7 +40,7 @@ module Aws
             endpoint: 'https://beta.example.com'
           )
           bucket = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect_sigv4_service('s3-outposts')
+          expect_auth({ 'signingName' => 's3-outposts' })
           resp = client.list_objects(bucket: bucket)
           host = 'myaccesspoint-123456789012.op-01234567890123456.beta.example.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -52,7 +52,7 @@ module Aws
             region: 'us-west-2',
             endpoint: 'https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           )
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.list_buckets
           host = 'bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -66,7 +66,7 @@ module Aws
             endpoint: 'https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           )
           bucket = 'bucketname'
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.list_objects(bucket: bucket)
           host = 'bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -79,7 +79,7 @@ module Aws
             endpoint: 'https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           )
           bucket = 'bucketname'
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.list_objects(bucket: bucket)
           host = 'bucketname.bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)
@@ -92,7 +92,7 @@ module Aws
             endpoint: 'https://accesspoint.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           )
           bucket = 'arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint'
-          expect_sigv4_service('s3')
+          expect_auth({ 'signingName' => 's3' })
           resp = client.list_objects(bucket: bucket)
           host = 'myendpoint-123456789012.accesspoint.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com'
           expect(resp.context.http_request.endpoint.host).to eq(host)

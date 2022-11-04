@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-redshift/types'
 require_relative 'aws-sdk-redshift/client_api'
+require_relative 'aws-sdk-redshift/plugins/endpoints.rb'
 require_relative 'aws-sdk-redshift/client'
 require_relative 'aws-sdk-redshift/errors'
 require_relative 'aws-sdk-redshift/waiters'
 require_relative 'aws-sdk-redshift/resource'
+require_relative 'aws-sdk-redshift/endpoint_parameters'
+require_relative 'aws-sdk-redshift/endpoint_provider'
+require_relative 'aws-sdk-redshift/endpoints'
 require_relative 'aws-sdk-redshift/customizations'
 
 # This module provides support for Amazon Redshift. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-redshift/customizations'
 # @!group service
 module Aws::Redshift
 
-  GEM_VERSION = '1.85.0'
+  GEM_VERSION = '1.87.0'
 
 end

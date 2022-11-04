@@ -662,9 +662,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid `Iops` values, see [Amazon RDS Provisioned
-    #   IOPS storage to improve performance][1] in the *Amazon RDS User
-    #   Guide*.
+    #   For information about valid IOPS values, see [Amazon RDS Provisioned
+    #   IOPS storage][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -993,6 +992,7 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1139,8 +1139,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 40 to
-    #     65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40
+    #     to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #     Server.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 40 to 65536
@@ -1151,8 +1151,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1164,8 +1164,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1177,8 +1177,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1190,8 +1190,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -1203,7 +1203,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2):
+    #   * General Purpose (SSD) storage (gp2, gp3):
     #
     #     * Enterprise and Standard editions: Must be an integer from 20 to
     #       16384.
@@ -1593,8 +1593,8 @@ module Aws::RDS
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid `Iops` values, see [Amazon RDS Provisioned IOPS storage to
-    #   improve performance][1] in the *Amazon RDS User Guide*.
+    #   valid IOPS values, see [Amazon RDS DB instance storage][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances,
     #   must be a multiple between .5 and 50 of the storage amount for the DB
@@ -1607,7 +1607,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html
     # @option options [String] :option_group_name
     #   A value that indicates that the DB instance should be associated with
     #   the specified option group.
@@ -1680,10 +1680,10 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -2042,6 +2042,10 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)
@@ -2551,9 +2555,10 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_cluster_identifier
-    #   The user-supplied DB cluster identifier. If this parameter is
-    #   specified, information from only the specific DB cluster is returned.
-    #   This parameter isn't case-sensitive.
+    #   The user-supplied DB cluster identifier or the Amazon Resource Name
+    #   (ARN) of the DB cluster. If this parameter is specified, information
+    #   from only the specific DB cluster is returned. This parameter isn't
+    #   case-sensitive.
     #
     #   Constraints:
     #
@@ -2794,9 +2799,10 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_instance_identifier
-    #   The user-supplied instance identifier. If this parameter is specified,
-    #   information from only the specific DB instance is returned. This
-    #   parameter isn't case-sensitive.
+    #   The user-supplied instance identifier or the Amazon Resource Name
+    #   (ARN) of the DB instance. If this parameter is specified, information
+    #   from only the specific DB instance is returned. This parameter isn't
+    #   case-sensitive.
     #
     #   Constraints:
     #

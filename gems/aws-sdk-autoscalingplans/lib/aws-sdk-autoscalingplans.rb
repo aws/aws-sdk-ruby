@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-autoscalingplans/types'
 require_relative 'aws-sdk-autoscalingplans/client_api'
+require_relative 'aws-sdk-autoscalingplans/plugins/endpoints.rb'
 require_relative 'aws-sdk-autoscalingplans/client'
 require_relative 'aws-sdk-autoscalingplans/errors'
 require_relative 'aws-sdk-autoscalingplans/resource'
+require_relative 'aws-sdk-autoscalingplans/endpoint_parameters'
+require_relative 'aws-sdk-autoscalingplans/endpoint_provider'
+require_relative 'aws-sdk-autoscalingplans/endpoints'
 require_relative 'aws-sdk-autoscalingplans/customizations'
 
 # This module provides support for AWS Auto Scaling Plans. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-autoscalingplans/customizations'
 # @!group service
 module Aws::AutoScalingPlans
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end

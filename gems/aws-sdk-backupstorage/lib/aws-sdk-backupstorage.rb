@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-backupstorage/types'
 require_relative 'aws-sdk-backupstorage/client_api'
+require_relative 'aws-sdk-backupstorage/plugins/endpoints.rb'
 require_relative 'aws-sdk-backupstorage/client'
 require_relative 'aws-sdk-backupstorage/errors'
 require_relative 'aws-sdk-backupstorage/resource'
+require_relative 'aws-sdk-backupstorage/endpoint_parameters'
+require_relative 'aws-sdk-backupstorage/endpoint_provider'
+require_relative 'aws-sdk-backupstorage/endpoints'
 require_relative 'aws-sdk-backupstorage/customizations'
 
 # This module provides support for AWS Backup Storage. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-backupstorage/customizations'
 # @!group service
 module Aws::BackupStorage
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

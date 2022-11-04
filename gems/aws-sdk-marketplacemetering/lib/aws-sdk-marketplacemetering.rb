@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-marketplacemetering/types'
 require_relative 'aws-sdk-marketplacemetering/client_api'
+require_relative 'aws-sdk-marketplacemetering/plugins/endpoints.rb'
 require_relative 'aws-sdk-marketplacemetering/client'
 require_relative 'aws-sdk-marketplacemetering/errors'
 require_relative 'aws-sdk-marketplacemetering/resource'
+require_relative 'aws-sdk-marketplacemetering/endpoint_parameters'
+require_relative 'aws-sdk-marketplacemetering/endpoint_provider'
+require_relative 'aws-sdk-marketplacemetering/endpoints'
 require_relative 'aws-sdk-marketplacemetering/customizations'
 
 # This module provides support for AWSMarketplace Metering. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-marketplacemetering/customizations'
 # @!group service
 module Aws::MarketplaceMetering
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end

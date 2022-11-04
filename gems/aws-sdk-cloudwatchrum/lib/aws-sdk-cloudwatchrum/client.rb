@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cloudwatchrum)
@@ -79,8 +79,9 @@ module Aws::CloudWatchRUM
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::CloudWatchRUM::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::CloudWatchRUM
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::CloudWatchRUM
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::CloudWatchRUM::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudWatchRUM::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -350,6 +367,244 @@ module Aws::CloudWatchRUM
     end
 
     # @!group API Operations
+
+    # Specifies the extended metrics that you want a CloudWatch RUM app
+    # monitor to send to a destination. Valid destinations include
+    # CloudWatch and Evidently.
+    #
+    # By default, RUM app monitors send some metrics to CloudWatch. These
+    # default metrics are listed in [CloudWatch metrics that you can collect
+    # with CloudWatch RUM][1].
+    #
+    # If you also send extended metrics, you can send metrics to Evidently
+    # as well as CloudWatch, and you can also optionally send the metrics
+    # with additional dimensions. The valid dimension names for the
+    # additional dimensions are `BrowserName`, `CountryCode`, `DeviceType`,
+    # `FileType`, `OSName`, and `PageId`. For more information, see [
+    # Extended metrics that you can send to CloudWatch and CloudWatch
+    # Evidently][2].
+    #
+    # The maximum number of metric definitions that you can specify in one
+    # `BatchCreateRumMetricDefinitions` operation is 200.
+    #
+    #      <p>The maximum number of metric definitions that one destination can contain is 2000.</p> <p>Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>You must have already created a destination for the metrics before you send them. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p> <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the CloudWatch RUM app monitor that is to send the
+    #   metrics.
+    #
+    # @option params [required, String] :destination
+    #   The destination to send the metrics to. Valid values are `CloudWatch`
+    #   and `Evidently`. If you specify `Evidently`, you must also specify the
+    #   ARN of the CloudWatchEvidently experiment that will receive the
+    #   metrics and an IAM role that has permission to write to the
+    #   experiment.
+    #
+    # @option params [String] :destination_arn
+    #   This parameter is required if `Destination` is `Evidently`. If
+    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #
+    #   This parameter specifies the ARN of the Evidently experiment that is
+    #   to receive the metrics. You must have already defined this experiment
+    #   as a valid destination. For more information, see
+    #   [PutRumMetricsDestination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html
+    #
+    # @option params [required, Array<Types::MetricDefinitionRequest>] :metric_definitions
+    #   An array of structures which define the metrics that you want to send.
+    #
+    # @return [Types::BatchCreateRumMetricDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateRumMetricDefinitionsResponse#errors #errors} => Array&lt;Types::BatchCreateRumMetricDefinitionsError&gt;
+    #   * {Types::BatchCreateRumMetricDefinitionsResponse#metric_definitions #metric_definitions} => Array&lt;Types::MetricDefinition&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_rum_metric_definitions({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     destination: "CloudWatch", # required, accepts CloudWatch, Evidently
+    #     destination_arn: "DestinationArn",
+    #     metric_definitions: [ # required
+    #       {
+    #         dimension_keys: {
+    #           "DimensionKey" => "DimensionName",
+    #         },
+    #         event_pattern: "EventPattern",
+    #         name: "MetricName", # required
+    #         unit_label: "UnitLabel",
+    #         value_key: "ValueKey",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].metric_definition.dimension_keys #=> Hash
+    #   resp.errors[0].metric_definition.dimension_keys["DimensionKey"] #=> String
+    #   resp.errors[0].metric_definition.event_pattern #=> String
+    #   resp.errors[0].metric_definition.name #=> String
+    #   resp.errors[0].metric_definition.unit_label #=> String
+    #   resp.errors[0].metric_definition.value_key #=> String
+    #   resp.metric_definitions #=> Array
+    #   resp.metric_definitions[0].dimension_keys #=> Hash
+    #   resp.metric_definitions[0].dimension_keys["DimensionKey"] #=> String
+    #   resp.metric_definitions[0].event_pattern #=> String
+    #   resp.metric_definitions[0].metric_definition_id #=> String
+    #   resp.metric_definitions[0].name #=> String
+    #   resp.metric_definitions[0].unit_label #=> String
+    #   resp.metric_definitions[0].value_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/BatchCreateRumMetricDefinitions AWS API Documentation
+    #
+    # @overload batch_create_rum_metric_definitions(params = {})
+    # @param [Hash] params ({})
+    def batch_create_rum_metric_definitions(params = {}, options = {})
+      req = build_request(:batch_create_rum_metric_definitions, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified metrics from being sent to an extended metrics
+    # destination.
+    #
+    # If some metric definition IDs specified in a
+    # `BatchDeleteRumMetricDefinitions` operations are not valid, those
+    # metric definitions fail and return errors, but all valid metric
+    # definition IDs in the same operation are still deleted.
+    #
+    # The maximum number of metric definitions that you can specify in one
+    # `BatchDeleteRumMetricDefinitions` operation is 200.
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the CloudWatch RUM app monitor that is sending these
+    #   metrics.
+    #
+    # @option params [required, String] :destination
+    #   Defines the destination where you want to stop sending the specified
+    #   metrics. Valid values are `CloudWatch` and `Evidently`. If you specify
+    #   `Evidently`, you must also specify the ARN of the CloudWatchEvidently
+    #   experiment that is to be the destination and an IAM role that has
+    #   permission to write to the experiment.
+    #
+    # @option params [String] :destination_arn
+    #   This parameter is required if `Destination` is `Evidently`. If
+    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #
+    #   This parameter specifies the ARN of the Evidently experiment that was
+    #   receiving the metrics that are being deleted.
+    #
+    # @option params [required, Array<String>] :metric_definition_ids
+    #   An array of structures which define the metrics that you want to stop
+    #   sending.
+    #
+    # @return [Types::BatchDeleteRumMetricDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteRumMetricDefinitionsResponse#errors #errors} => Array&lt;Types::BatchDeleteRumMetricDefinitionsError&gt;
+    #   * {Types::BatchDeleteRumMetricDefinitionsResponse#metric_definition_ids #metric_definition_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_rum_metric_definitions({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     destination: "CloudWatch", # required, accepts CloudWatch, Evidently
+    #     destination_arn: "DestinationArn",
+    #     metric_definition_ids: ["MetricDefinitionId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].metric_definition_id #=> String
+    #   resp.metric_definition_ids #=> Array
+    #   resp.metric_definition_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/BatchDeleteRumMetricDefinitions AWS API Documentation
+    #
+    # @overload batch_delete_rum_metric_definitions(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_rum_metric_definitions(params = {}, options = {})
+      req = build_request(:batch_delete_rum_metric_definitions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the list of metrics and dimensions that a RUM app monitor is
+    # sending to a single destination.
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the CloudWatch RUM app monitor that is sending the
+    #   metrics.
+    #
+    # @option params [required, String] :destination
+    #   The type of destination that you want to view metrics for. Valid
+    #   values are `CloudWatch` and `Evidently`.
+    #
+    # @option params [String] :destination_arn
+    #   This parameter is required if `Destination` is `Evidently`. If
+    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #
+    #   This parameter specifies the ARN of the Evidently experiment that
+    #   corresponds to the destination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one operation. The default
+    #   is 50. The maximum that you can specify is 100.
+    #
+    #   To retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   Use the token returned by the previous operation to request the next
+    #   page of results.
+    #
+    # @return [Types::BatchGetRumMetricDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetRumMetricDefinitionsResponse#metric_definitions #metric_definitions} => Array&lt;Types::MetricDefinition&gt;
+    #   * {Types::BatchGetRumMetricDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_rum_metric_definitions({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     destination: "CloudWatch", # required, accepts CloudWatch, Evidently
+    #     destination_arn: "DestinationArn",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_definitions #=> Array
+    #   resp.metric_definitions[0].dimension_keys #=> Hash
+    #   resp.metric_definitions[0].dimension_keys["DimensionKey"] #=> String
+    #   resp.metric_definitions[0].event_pattern #=> String
+    #   resp.metric_definitions[0].metric_definition_id #=> String
+    #   resp.metric_definitions[0].name #=> String
+    #   resp.metric_definitions[0].unit_label #=> String
+    #   resp.metric_definitions[0].value_key #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/BatchGetRumMetricDefinitions AWS API Documentation
+    #
+    # @overload batch_get_rum_metric_definitions(params = {})
+    # @param [Hash] params ({})
+    def batch_get_rum_metric_definitions(params = {}, options = {})
+      req = build_request(:batch_get_rum_metric_definitions, params)
+      req.send_request(options)
+    end
 
     # Creates a Amazon CloudWatch RUM app monitor, which collects telemetry
     # data from your application and sends that data to RUM. The data
@@ -475,6 +730,43 @@ module Aws::CloudWatchRUM
       req.send_request(options)
     end
 
+    # Deletes a destination for CloudWatch RUM extended metrics, so that the
+    # specified app monitor stops sending extended metrics to that
+    # destination.
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the app monitor that is sending metrics to the destination
+    #   that you want to delete.
+    #
+    # @option params [required, String] :destination
+    #   The type of destination to delete. Valid values are `CloudWatch` and
+    #   `Evidently`.
+    #
+    # @option params [String] :destination_arn
+    #   This parameter is required if `Destination` is `Evidently`. If
+    #   `Destination` is `CloudWatch`, do not use this parameter. This
+    #   parameter specifies the ARN of the Evidently experiment that
+    #   corresponds to the destination to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rum_metrics_destination({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     destination: "CloudWatch", # required, accepts CloudWatch, Evidently
+    #     destination_arn: "DestinationArn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/DeleteRumMetricsDestination AWS API Documentation
+    #
+    # @overload delete_rum_metrics_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_rum_metrics_destination(params = {}, options = {})
+      req = build_request(:delete_rum_metrics_destination, params)
+      req.send_request(options)
+    end
+
     # Retrieves the complete configuration information for one app monitor.
     #
     # @option params [required, String] :name
@@ -592,7 +884,8 @@ module Aws::CloudWatchRUM
     # account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in one operation.
+    #   The maximum number of results to return in one operation. The default
+    #   is 50. The maximum that you can specify is 100.
     #
     # @option params [String] :next_token
     #   Use the token returned by the previous operation to request the next
@@ -628,6 +921,62 @@ module Aws::CloudWatchRUM
     # @param [Hash] params ({})
     def list_app_monitors(params = {}, options = {})
       req = build_request(:list_app_monitors, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of destinations that you have created to receive RUM
+    # extended metrics, for the specified app monitor.
+    #
+    # For more information about extended metrics, see [AddRumMetrics][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the app monitor associated with the destinations that you
+    #   want to retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one operation. The default
+    #   is 50. The maximum that you can specify is 100.
+    #
+    #   To retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   Use the token returned by the previous operation to request the next
+    #   page of results.
+    #
+    # @return [Types::ListRumMetricsDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRumMetricsDestinationsResponse#destinations #destinations} => Array&lt;Types::MetricDestinationSummary&gt;
+    #   * {Types::ListRumMetricsDestinationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rum_metrics_destinations({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].destination #=> String, one of "CloudWatch", "Evidently"
+    #   resp.destinations[0].destination_arn #=> String
+    #   resp.destinations[0].iam_role_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/ListRumMetricsDestinations AWS API Documentation
+    #
+    # @overload list_rum_metrics_destinations(params = {})
+    # @param [Hash] params ({})
+    def list_rum_metrics_destinations(params = {}, options = {})
+      req = build_request(:list_rum_metrics_destinations, params)
       req.send_request(options)
     end
 
@@ -720,6 +1069,59 @@ module Aws::CloudWatchRUM
     # @param [Hash] params ({})
     def put_rum_events(params = {}, options = {})
       req = build_request(:put_rum_events, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a destination to receive extended metrics from
+    # CloudWatch RUM. You can send extended metrics to CloudWatch or to a
+    # CloudWatch Evidently experiment.
+    #
+    # For more information about extended metrics, see [AddRumMetrics][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrics.html
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the CloudWatch RUM app monitor that will send the metrics.
+    #
+    # @option params [required, String] :destination
+    #   Defines the destination to send the metrics to. Valid values are
+    #   `CloudWatch` and `Evidently`. If you specify `Evidently`, you must
+    #   also specify the ARN of the CloudWatchEvidently experiment that is to
+    #   be the destination and an IAM role that has permission to write to the
+    #   experiment.
+    #
+    # @option params [String] :destination_arn
+    #   Use this parameter only if `Destination` is `Evidently`. This
+    #   parameter specifies the ARN of the Evidently experiment that will
+    #   receive the extended metrics.
+    #
+    # @option params [String] :iam_role_arn
+    #   This parameter is required if `Destination` is `Evidently`. If
+    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #
+    #   This parameter specifies the ARN of an IAM role that RUM will assume
+    #   to write to the Evidently experiment that you are sending metrics to.
+    #   This role must have permission to write to that experiment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_rum_metrics_destination({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     destination: "CloudWatch", # required, accepts CloudWatch, Evidently
+    #     destination_arn: "DestinationArn",
+    #     iam_role_arn: "IamRoleArn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumMetricsDestination AWS API Documentation
+    #
+    # @overload put_rum_metrics_destination(params = {})
+    # @param [Hash] params ({})
+    def put_rum_metrics_destination(params = {}, options = {})
+      req = build_request(:put_rum_metrics_destination, params)
       req.send_request(options)
     end
 
@@ -880,6 +1282,73 @@ module Aws::CloudWatchRUM
       req.send_request(options)
     end
 
+    # Modifies one existing metric definition for CloudWatch RUM extended
+    # metrics. For more information about extended metrics, see
+    # [BatchCreateRumMetricsDefinitions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html
+    #
+    # @option params [required, String] :app_monitor_name
+    #   The name of the CloudWatch RUM app monitor that sends these metrics.
+    #
+    # @option params [required, String] :destination
+    #   The destination to send the metrics to. Valid values are `CloudWatch`
+    #   and `Evidently`. If you specify `Evidently`, you must also specify the
+    #   ARN of the CloudWatchEvidently experiment that will receive the
+    #   metrics and an IAM role that has permission to write to the
+    #   experiment.
+    #
+    # @option params [String] :destination_arn
+    #   This parameter is required if `Destination` is `Evidently`. If
+    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #
+    #   This parameter specifies the ARN of the Evidently experiment that is
+    #   to receive the metrics. You must have already defined this experiment
+    #   as a valid destination. For more information, see
+    #   [PutRumMetricsDestination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html
+    #
+    # @option params [required, Types::MetricDefinitionRequest] :metric_definition
+    #   A structure that contains the new definition that you want to use for
+    #   this metric.
+    #
+    # @option params [required, String] :metric_definition_id
+    #   The ID of the metric definition to update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_rum_metric_definition({
+    #     app_monitor_name: "AppMonitorName", # required
+    #     destination: "CloudWatch", # required, accepts CloudWatch, Evidently
+    #     destination_arn: "DestinationArn",
+    #     metric_definition: { # required
+    #       dimension_keys: {
+    #         "DimensionKey" => "DimensionName",
+    #       },
+    #       event_pattern: "EventPattern",
+    #       name: "MetricName", # required
+    #       unit_label: "UnitLabel",
+    #       value_key: "ValueKey",
+    #     },
+    #     metric_definition_id: "MetricDefinitionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/UpdateRumMetricDefinition AWS API Documentation
+    #
+    # @overload update_rum_metric_definition(params = {})
+    # @param [Hash] params ({})
+    def update_rum_metric_definition(params = {}, options = {})
+      req = build_request(:update_rum_metric_definition, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -893,7 +1362,7 @@ module Aws::CloudWatchRUM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

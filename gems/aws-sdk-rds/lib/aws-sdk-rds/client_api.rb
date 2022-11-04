@@ -332,6 +332,7 @@ module Aws::RDS
     EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     EventSubscriptionsMessage = Shapes::StructureShape.new(name: 'EventSubscriptionsMessage')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    ExportSourceType = Shapes::StringShape.new(name: 'ExportSourceType')
     ExportTask = Shapes::StructureShape.new(name: 'ExportTask')
     ExportTaskAlreadyExistsFault = Shapes::StructureShape.new(name: 'ExportTaskAlreadyExistsFault')
     ExportTaskNotFoundFault = Shapes::StructureShape.new(name: 'ExportTaskNotFoundFault')
@@ -931,6 +932,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     CreateDBInstanceMessage.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     CreateDBInstanceMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    CreateDBInstanceMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -967,6 +969,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     CreateDBInstanceReadReplicaMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     CreateDBInstanceReadReplicaMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    CreateDBInstanceReadReplicaMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1410,6 +1413,7 @@ module Aws::RDS
     DBInstance.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     DBInstance.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     DBInstance.add_member(:activity_stream_policy_status, Shapes::ShapeRef.new(shape: ActivityStreamPolicyStatus, location_name: "ActivityStreamPolicyStatus"))
+    DBInstance.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1441,6 +1445,7 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceAutomatedBackupsArn"))
     DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
     DBInstanceAutomatedBackup.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
+    DBInstanceAutomatedBackup.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBInstanceAutomatedBackup.struct_class = Types::DBInstanceAutomatedBackup
 
     DBInstanceAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup")
@@ -1655,6 +1660,7 @@ module Aws::RDS
     DBSnapshot.add_member(:original_snapshot_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "OriginalSnapshotCreateTime"))
     DBSnapshot.add_member(:snapshot_database_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotDatabaseTime"))
     DBSnapshot.add_member(:snapshot_target, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotTarget"))
+    DBSnapshot.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
     DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault
@@ -2029,6 +2035,7 @@ module Aws::RDS
     DescribeExportTasksMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeExportTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeExportTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeExportTasksMessage.add_member(:source_type, Shapes::ShapeRef.new(shape: ExportSourceType, location_name: "SourceType"))
     DescribeExportTasksMessage.struct_class = Types::DescribeExportTasksMessage
 
     DescribeGlobalClustersMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
@@ -2212,6 +2219,7 @@ module Aws::RDS
     ExportTask.add_member(:total_extracted_data_in_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalExtractedDataInGB"))
     ExportTask.add_member(:failure_cause, Shapes::ShapeRef.new(shape: String, location_name: "FailureCause"))
     ExportTask.add_member(:warning_message, Shapes::ShapeRef.new(shape: String, location_name: "WarningMessage"))
+    ExportTask.add_member(:source_type, Shapes::ShapeRef.new(shape: ExportSourceType, location_name: "SourceType"))
     ExportTask.struct_class = Types::ExportTask
 
     ExportTaskAlreadyExistsFault.struct_class = Types::ExportTaskAlreadyExistsFault
@@ -2511,6 +2519,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
     ModifyDBInstanceMessage.add_member(:resume_full_automation_mode_minutes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ResumeFullAutomationModeMinutes"))
     ModifyDBInstanceMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    ModifyDBInstanceMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2750,6 +2759,11 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsGlobalDatabases"))
     OrderableDBInstanceOption.add_member(:supports_clusters, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsClusters"))
     OrderableDBInstanceOption.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
+    OrderableDBInstanceOption.add_member(:supports_storage_throughput, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsStorageThroughput"))
+    OrderableDBInstanceOption.add_member(:min_storage_throughput_per_db_instance, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinStorageThroughputPerDbInstance"))
+    OrderableDBInstanceOption.add_member(:max_storage_throughput_per_db_instance, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxStorageThroughputPerDbInstance"))
+    OrderableDBInstanceOption.add_member(:min_storage_throughput_per_iops, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinStorageThroughputPerIops"))
+    OrderableDBInstanceOption.add_member(:max_storage_throughput_per_iops, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxStorageThroughputPerIops"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")
@@ -2814,6 +2828,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IAMDatabaseAuthenticationEnabled"))
     PendingModifiedValues.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
     PendingModifiedValues.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
+    PendingModifiedValues.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
@@ -3121,6 +3136,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3171,6 +3187,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBInstanceFromS3Message.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     RestoreDBInstanceFromS3Message.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    RestoreDBInstanceFromS3Message.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3213,6 +3230,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3449,6 +3467,8 @@ module Aws::RDS
     ValidStorageOptions.add_member(:provisioned_iops, Shapes::ShapeRef.new(shape: RangeList, location_name: "ProvisionedIops"))
     ValidStorageOptions.add_member(:iops_to_storage_ratio, Shapes::ShapeRef.new(shape: DoubleRangeList, location_name: "IopsToStorageRatio"))
     ValidStorageOptions.add_member(:supports_storage_autoscaling, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsStorageAutoscaling"))
+    ValidStorageOptions.add_member(:provisioned_storage_throughput, Shapes::ShapeRef.new(shape: RangeList, location_name: "ProvisionedStorageThroughput"))
+    ValidStorageOptions.add_member(:storage_throughput_to_iops_ratio, Shapes::ShapeRef.new(shape: DoubleRangeList, location_name: "StorageThroughputToIopsRatio"))
     ValidStorageOptions.struct_class = Types::ValidStorageOptions
 
     ValidStorageOptionsList.member = Shapes::ShapeRef.new(shape: ValidStorageOptions, location_name: "ValidStorageOptions")
@@ -5254,6 +5274,7 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: ExportTask)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ExportTaskAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
         o.errors << Shapes::ShapeRef.new(shape: IamRoleNotFoundFault)

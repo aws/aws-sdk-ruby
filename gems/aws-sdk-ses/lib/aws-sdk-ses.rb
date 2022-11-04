@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ses/types'
 require_relative 'aws-sdk-ses/client_api'
+require_relative 'aws-sdk-ses/plugins/endpoints.rb'
 require_relative 'aws-sdk-ses/client'
 require_relative 'aws-sdk-ses/errors'
 require_relative 'aws-sdk-ses/waiters'
 require_relative 'aws-sdk-ses/resource'
+require_relative 'aws-sdk-ses/endpoint_parameters'
+require_relative 'aws-sdk-ses/endpoint_provider'
+require_relative 'aws-sdk-ses/endpoints'
 require_relative 'aws-sdk-ses/customizations'
 
 # This module provides support for Amazon Simple Email Service. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-ses/customizations'
 # @!group service
 module Aws::SES
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

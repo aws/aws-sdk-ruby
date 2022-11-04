@@ -3,7 +3,12 @@
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
+{{#included_in_core}}
+require_relative '../../shared_spec_helper'
+{{/included_in_core}}
+{{^included_in_core}}
 require_relative '../../aws-sdk-core/spec/shared_spec_helper'
+{{/included_in_core}}
 
 $:.unshift(File.expand_path('../../lib', __FILE__))
 {{#gem_dependencies}}

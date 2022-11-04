@@ -13,10 +13,14 @@ require 'aws-sdk-core'
 
 require_relative 'aws-sdk-ec2/types'
 require_relative 'aws-sdk-ec2/client_api'
+require_relative 'aws-sdk-ec2/plugins/endpoints.rb'
 require_relative 'aws-sdk-ec2/client'
 require_relative 'aws-sdk-ec2/errors'
 require_relative 'aws-sdk-ec2/waiters'
 require_relative 'aws-sdk-ec2/resource'
+require_relative 'aws-sdk-ec2/endpoint_parameters'
+require_relative 'aws-sdk-ec2/endpoint_provider'
+require_relative 'aws-sdk-ec2/endpoints'
 require_relative 'aws-sdk-ec2/classic_address'
 require_relative 'aws-sdk-ec2/dhcp_options'
 require_relative 'aws-sdk-ec2/image'
@@ -52,7 +56,7 @@ require_relative 'aws-sdk-ec2/customizations'
 # structure.
 #
 #     ec2 = Aws::EC2::Client.new
-#     resp = ec2.accept_reserved_instances_exchange_quote(params)
+#     resp = ec2.accept_address_transfer(params)
 #
 # See {Client} for more information.
 #
@@ -72,6 +76,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @!group service
 module Aws::EC2
 
-  GEM_VERSION = '1.341.0'
+  GEM_VERSION = '1.345.0'
 
 end

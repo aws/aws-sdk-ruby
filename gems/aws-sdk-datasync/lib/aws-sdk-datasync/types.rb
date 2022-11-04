@@ -50,7 +50,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] task_execution_arn
-    #   The Amazon Resource Name (ARN) of the task execution to cancel.
+    #   The Amazon Resource Name (ARN) of the task execution to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CancelTaskExecutionRequest AWS API Documentation
@@ -927,6 +927,7 @@ module Aws::DataSync
     #             value: "TagValue",
     #           },
     #         ],
+    #         server_certificate: "data",
     #       }
     #
     # @!attribute [rw] server_hostname
@@ -979,6 +980,16 @@ module Aws::DataSync
     #   location.
     #   @return [Array<Types::TagListEntry>]
     #
+    # @!attribute [rw] server_certificate
+    #   Specifies a certificate to authenticate with an object storage
+    #   system that uses a private or self-signed certificate authority
+    #   (CA). You must specify a Base64-encoded `.pem` file (for example,
+    #   `file:///home/user/.ssh/storage_sys_certificate.pem`). The
+    #   certificate can be up to 32768 bytes (before Base64 encoding).
+    #
+    #   To use this parameter, configure `ServerProtocol` to `HTTPS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationObjectStorageRequest AWS API Documentation
     #
     class CreateLocationObjectStorageRequest < Struct.new(
@@ -990,7 +1001,8 @@ module Aws::DataSync
       :access_key,
       :secret_key,
       :agent_arns,
-      :tags)
+      :tags,
+      :server_certificate)
       SENSITIVE = [:secret_key]
       include Aws::Structure
     end
@@ -2021,7 +2033,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] access_key
     #   The access key (for example, a user name) required to authenticate
-    #   with the object storage server.
+    #   with the object storage system.
     #   @return [String]
     #
     # @!attribute [rw] server_port
@@ -2030,7 +2042,7 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] server_protocol
-    #   The protocol that your object storage server uses to communicate.
+    #   The protocol that your object storage system uses to communicate.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
@@ -2042,6 +2054,11 @@ module Aws::DataSync
     #   The time that the location was created.
     #   @return [Time]
     #
+    # @!attribute [rw] server_certificate
+    #   The self-signed certificate that DataSync uses to securely
+    #   authenticate with your object storage system.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageResponse AWS API Documentation
     #
     class DescribeLocationObjectStorageResponse < Struct.new(
@@ -2051,7 +2068,8 @@ module Aws::DataSync
       :server_port,
       :server_protocol,
       :agent_arns,
-      :creation_time)
+      :creation_time,
+      :server_certificate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2327,6 +2345,12 @@ module Aws::DataSync
     #   The result of the task execution.
     #   @return [Types::TaskExecutionResultDetail]
     #
+    # @!attribute [rw] bytes_compressed
+    #   The physical number of bytes transferred over the network after
+    #   compression was applied. In most cases, this number is less than
+    #   `BytesTransferred`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecutionResponse AWS API Documentation
     #
     class DescribeTaskExecutionResponse < Struct.new(
@@ -2341,7 +2365,8 @@ module Aws::DataSync
       :files_transferred,
       :bytes_written,
       :bytes_transferred,
-      :result)
+      :result,
+      :bytes_compressed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4339,50 +4364,58 @@ module Aws::DataSync
     #         access_key: "ObjectStorageAccessKey",
     #         secret_key: "ObjectStorageSecretKey",
     #         agent_arns: ["AgentArn"],
+    #         server_certificate: "data",
     #       }
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the self-managed object storage
-    #   server location to be updated.
+    #   Specifies the ARN of the object storage system location that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] server_port
-    #   The port that your self-managed object storage server accepts
-    #   inbound network traffic on. The server port is set by default to TCP
-    #   80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your
-    #   self-managed object storage server requires one.
+    #   Specifies the port that your object storage server accepts inbound
+    #   network traffic on (for example, port 443).
     #   @return [Integer]
     #
     # @!attribute [rw] server_protocol
-    #   The protocol that the object storage server uses to communicate.
-    #   Valid values are `HTTP` or `HTTPS`.
+    #   Specifies the protocol that your object storage server uses to
+    #   communicate.
     #   @return [String]
     #
     # @!attribute [rw] subdirectory
-    #   The subdirectory in the self-managed object storage server that is
-    #   used to read data from.
+    #   Specifies the object prefix for your object storage server. If this
+    #   is a source location, DataSync only copies objects with this prefix.
+    #   If this is a destination location, DataSync writes all objects with
+    #   this prefix.
     #   @return [String]
     #
     # @!attribute [rw] access_key
-    #   Optional. The access key is used if credentials are required to
-    #   access the self-managed object storage server. If your object
-    #   storage requires a user name and password to authenticate, use
-    #   `AccessKey` and `SecretKey` to provide the user name and password,
-    #   respectively.
+    #   Specifies the access key (for example, a user name) if credentials
+    #   are required to authenticate with the object storage server.
     #   @return [String]
     #
     # @!attribute [rw] secret_key
-    #   Optional. The secret key is used if credentials are required to
-    #   access the self-managed object storage server. If your object
-    #   storage requires a user name and password to authenticate, use
-    #   `AccessKey` and `SecretKey` to provide the user name and password,
-    #   respectively.
+    #   Specifies the secret key (for example, a password) if credentials
+    #   are required to authenticate with the object storage server.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Name (ARN) of the agents associated with the
-    #   self-managed object storage server location.
+    #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents
+    #   that can securely connect with your location.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] server_certificate
+    #   Specifies a certificate to authenticate with an object storage
+    #   system that uses a private or self-signed certificate authority
+    #   (CA). You must specify a Base64-encoded `.pem` file (for example,
+    #   `file:///home/user/.ssh/storage_sys_certificate.pem`). The
+    #   certificate can be up to 32768 bytes (before Base64 encoding).
+    #
+    #   To use this parameter, configure `ServerProtocol` to `HTTPS`.
+    #
+    #   Updating the certificate doesn't interfere with tasks that you have
+    #   in progress.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationObjectStorageRequest AWS API Documentation
     #
@@ -4393,7 +4426,8 @@ module Aws::DataSync
       :subdirectory,
       :access_key,
       :secret_key,
-      :agent_arns)
+      :agent_arns,
+      :server_certificate)
       SENSITIVE = [:secret_key]
       include Aws::Structure
     end

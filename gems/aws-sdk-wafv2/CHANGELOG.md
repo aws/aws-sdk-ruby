@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-10-27)
+------------------
+
+* Feature - This release adds the following: Challenge rule action, to silently verify client browsers; rule group rule action override to any valid rule action, not just Count; token sharing between protected applications for challenge/CAPTCHA token; targeted rules option for Bot Control managed rule group.
+
+1.43.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.42.0 (2022-09-23)
 ------------------
 

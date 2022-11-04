@@ -27,7 +27,7 @@ require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/invocation_id.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
@@ -59,9 +59,10 @@ module Aws::Kinesis
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::InvocationId)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
+    add_plugin(Aws::Kinesis::Plugins::Endpoints)
 
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
@@ -242,6 +243,19 @@ module Aws::Kinesis
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -254,6 +268,9 @@ module Aws::Kinesis
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::Kinesis::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Kinesis::EndpointParameters`
     #
     def initialize(*args)
       unless Kernel.const_defined?("HTTP2")
@@ -559,7 +576,7 @@ module Aws::Kinesis
       req = build_request(:subscribe_to_shard, params)
 
       req.context[:output_event_stream_handler] = output_event_stream_handler
-      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 55)
 
       req.send_request(options)
     end
@@ -578,7 +595,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

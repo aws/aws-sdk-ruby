@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-kinesisvideo/types'
 require_relative 'aws-sdk-kinesisvideo/client_api'
+require_relative 'aws-sdk-kinesisvideo/plugins/endpoints.rb'
 require_relative 'aws-sdk-kinesisvideo/client'
 require_relative 'aws-sdk-kinesisvideo/errors'
 require_relative 'aws-sdk-kinesisvideo/resource'
+require_relative 'aws-sdk-kinesisvideo/endpoint_parameters'
+require_relative 'aws-sdk-kinesisvideo/endpoint_provider'
+require_relative 'aws-sdk-kinesisvideo/endpoints'
 require_relative 'aws-sdk-kinesisvideo/customizations'
 
 # This module provides support for Amazon Kinesis Video Streams. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-kinesisvideo/customizations'
 # @!group service
 module Aws::KinesisVideo
 
-  GEM_VERSION = '1.42.0'
+  GEM_VERSION = '1.43.0'
 
 end

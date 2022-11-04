@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-lookoutmetrics/types'
 require_relative 'aws-sdk-lookoutmetrics/client_api'
+require_relative 'aws-sdk-lookoutmetrics/plugins/endpoints.rb'
 require_relative 'aws-sdk-lookoutmetrics/client'
 require_relative 'aws-sdk-lookoutmetrics/errors'
 require_relative 'aws-sdk-lookoutmetrics/resource'
+require_relative 'aws-sdk-lookoutmetrics/endpoint_parameters'
+require_relative 'aws-sdk-lookoutmetrics/endpoint_provider'
+require_relative 'aws-sdk-lookoutmetrics/endpoints'
 require_relative 'aws-sdk-lookoutmetrics/customizations'
 
 # This module provides support for Amazon Lookout for Metrics. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-lookoutmetrics/customizations'
 # @!group service
 module Aws::LookoutMetrics
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end

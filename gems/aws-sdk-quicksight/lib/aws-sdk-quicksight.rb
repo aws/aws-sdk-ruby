@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-quicksight/types'
 require_relative 'aws-sdk-quicksight/client_api'
+require_relative 'aws-sdk-quicksight/plugins/endpoints.rb'
 require_relative 'aws-sdk-quicksight/client'
 require_relative 'aws-sdk-quicksight/errors'
 require_relative 'aws-sdk-quicksight/resource'
+require_relative 'aws-sdk-quicksight/endpoint_parameters'
+require_relative 'aws-sdk-quicksight/endpoint_provider'
+require_relative 'aws-sdk-quicksight/endpoints'
 require_relative 'aws-sdk-quicksight/customizations'
 
 # This module provides support for Amazon QuickSight. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-quicksight/customizations'
 # @!group service
 module Aws::QuickSight
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end

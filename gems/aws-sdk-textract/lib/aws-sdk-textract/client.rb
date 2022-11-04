@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:textract)
@@ -79,8 +79,9 @@ module Aws::Textract
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Textract::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::Textract
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::Textract
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::Textract::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Textract::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -380,10 +397,12 @@ module Aws::Textract
     #   document are returned (including text that doesn't have a
     #   relationship with the value of `FeatureTypes`).
     #
-    # * Queries.A QUERIES\_RESULT Block object contains the answer to the
-    #   query, the alias associated and an ID that connect it to the query
-    #   asked. This Block also contains a location and attached confidence
-    #   score.
+    # * Query. A QUERY Block object contains the query text, alias and link
+    #   to the associated Query results block object.
+    #
+    # * Query Result. A QUERY\_RESULT Block object contains the answer to
+    #   the query and an ID that connects it to the query asked. This Block
+    #   also contains a confidence score.
     #
     # Selection elements such as check boxes and option buttons (radio
     # buttons) can be detected in form data and in tables. A
@@ -518,7 +537,7 @@ module Aws::Textract
     # financially related relationships between text.
     #
     # Information is returned as `ExpenseDocuments` and seperated as
-    # follows.
+    # follows:
     #
     # * `LineItemGroups`- A data set containing `LineItems` which store
     #   information about the lines of text, such as an item purchased and
@@ -597,6 +616,12 @@ module Aws::Textract
     #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon[0].y #=> Float
     #   resp.expense_documents[0].summary_fields[0].value_detection.confidence #=> Float
     #   resp.expense_documents[0].summary_fields[0].page_number #=> Integer
+    #   resp.expense_documents[0].summary_fields[0].currency.code #=> String
+    #   resp.expense_documents[0].summary_fields[0].currency.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].group_properties #=> Array
+    #   resp.expense_documents[0].summary_fields[0].group_properties[0].types #=> Array
+    #   resp.expense_documents[0].summary_fields[0].group_properties[0].types[0] #=> String
+    #   resp.expense_documents[0].summary_fields[0].group_properties[0].id #=> String
     #   resp.expense_documents[0].line_item_groups #=> Array
     #   resp.expense_documents[0].line_item_groups[0].line_item_group_index #=> Integer
     #   resp.expense_documents[0].line_item_groups[0].line_items #=> Array
@@ -622,6 +647,41 @@ module Aws::Textract
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon[0].y #=> Float
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.confidence #=> Float
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].page_number #=> Integer
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].currency.code #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].currency.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].types #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].types[0] #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].id #=> String
+    #   resp.expense_documents[0].blocks #=> Array
+    #   resp.expense_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.expense_documents[0].blocks[0].confidence #=> Float
+    #   resp.expense_documents[0].blocks[0].text #=> String
+    #   resp.expense_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
+    #   resp.expense_documents[0].blocks[0].row_index #=> Integer
+    #   resp.expense_documents[0].blocks[0].column_index #=> Integer
+    #   resp.expense_documents[0].blocks[0].row_span #=> Integer
+    #   resp.expense_documents[0].blocks[0].column_span #=> Integer
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.polygon #=> Array
+    #   resp.expense_documents[0].blocks[0].geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].blocks[0].id #=> String
+    #   resp.expense_documents[0].blocks[0].relationships #=> Array
+    #   resp.expense_documents[0].blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
+    #   resp.expense_documents[0].blocks[0].relationships[0].ids #=> Array
+    #   resp.expense_documents[0].blocks[0].relationships[0].ids[0] #=> String
+    #   resp.expense_documents[0].blocks[0].entity_types #=> Array
+    #   resp.expense_documents[0].blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
+    #   resp.expense_documents[0].blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
+    #   resp.expense_documents[0].blocks[0].page #=> Integer
+    #   resp.expense_documents[0].blocks[0].query.text #=> String
+    #   resp.expense_documents[0].blocks[0].query.alias #=> String
+    #   resp.expense_documents[0].blocks[0].query.pages #=> Array
+    #   resp.expense_documents[0].blocks[0].query.pages[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeExpense AWS API Documentation
     #
@@ -675,6 +735,35 @@ module Aws::Textract
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value #=> String
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value_type #=> String, one of "DATE"
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.confidence #=> Float
+    #   resp.identity_documents[0].blocks #=> Array
+    #   resp.identity_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.identity_documents[0].blocks[0].confidence #=> Float
+    #   resp.identity_documents[0].blocks[0].text #=> String
+    #   resp.identity_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
+    #   resp.identity_documents[0].blocks[0].row_index #=> Integer
+    #   resp.identity_documents[0].blocks[0].column_index #=> Integer
+    #   resp.identity_documents[0].blocks[0].row_span #=> Integer
+    #   resp.identity_documents[0].blocks[0].column_span #=> Integer
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.width #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.height #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.left #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.bounding_box.top #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.polygon #=> Array
+    #   resp.identity_documents[0].blocks[0].geometry.polygon[0].x #=> Float
+    #   resp.identity_documents[0].blocks[0].geometry.polygon[0].y #=> Float
+    #   resp.identity_documents[0].blocks[0].id #=> String
+    #   resp.identity_documents[0].blocks[0].relationships #=> Array
+    #   resp.identity_documents[0].blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
+    #   resp.identity_documents[0].blocks[0].relationships[0].ids #=> Array
+    #   resp.identity_documents[0].blocks[0].relationships[0].ids[0] #=> String
+    #   resp.identity_documents[0].blocks[0].entity_types #=> Array
+    #   resp.identity_documents[0].blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
+    #   resp.identity_documents[0].blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
+    #   resp.identity_documents[0].blocks[0].page #=> Integer
+    #   resp.identity_documents[0].blocks[0].query.text #=> String
+    #   resp.identity_documents[0].blocks[0].query.alias #=> String
+    #   resp.identity_documents[0].blocks[0].query.pages #=> Array
+    #   resp.identity_documents[0].blocks[0].query.pages[0] #=> String
     #   resp.document_metadata.pages #=> Integer
     #   resp.analyze_id_model_version #=> String
     #
@@ -689,9 +778,9 @@ module Aws::Textract
 
     # Detects text in the input document. Amazon Textract can detect lines
     # of text and the words that make up a line of text. The input document
-    # must be an image in JPEG, PNG, PDF, or TIFF format.
-    # `DetectDocumentText` returns the detected text in an array of Block
-    # objects.
+    # must be in one of the following image formats: JPEG, PNG, PDF, or
+    # TIFF. `DetectDocumentText` returns the detected text in an array of
+    # Block objects.
     #
     # Each document page has as an associated `Block` of type PAGE. Each
     # PAGE `Block` object is the parent of LINE `Block` objects that
@@ -811,10 +900,19 @@ module Aws::Textract
     #   relationship with the value of the `StartDocumentAnalysis`
     #   `FeatureTypes` input parameter).
     #
-    # * Queries. A QUERIES\_RESULT Block object contains the answer to the
-    #   query, the alias associated and an ID that connect it to the query
-    #   asked. This Block also contains a location and attached confidence
-    #   score
+    # * Query. A QUERY Block object contains the query text, alias and link
+    #   to the associated Query results block object.
+    #
+    # * Query Results. A QUERY\_RESULT Block object contains the answer to
+    #   the query and an ID that connects it to the query asked. This Block
+    #   also contains a confidence score.
+    #
+    # <note markdown="1"> While processing a document with queries, look out for
+    # `INVALID_REQUEST_PARAMETERS` output. This indicates that either the
+    # per page query limit has been exceeded or that the operation is trying
+    # to query a page in the document which doesn’t exist.
+    #
+    #  </note>
     #
     # Selection elements such as check boxes and option buttons (radio
     # buttons) can be detected in form data and in tables. A
@@ -1135,6 +1233,12 @@ module Aws::Textract
     #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon[0].y #=> Float
     #   resp.expense_documents[0].summary_fields[0].value_detection.confidence #=> Float
     #   resp.expense_documents[0].summary_fields[0].page_number #=> Integer
+    #   resp.expense_documents[0].summary_fields[0].currency.code #=> String
+    #   resp.expense_documents[0].summary_fields[0].currency.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].group_properties #=> Array
+    #   resp.expense_documents[0].summary_fields[0].group_properties[0].types #=> Array
+    #   resp.expense_documents[0].summary_fields[0].group_properties[0].types[0] #=> String
+    #   resp.expense_documents[0].summary_fields[0].group_properties[0].id #=> String
     #   resp.expense_documents[0].line_item_groups #=> Array
     #   resp.expense_documents[0].line_item_groups[0].line_item_group_index #=> Integer
     #   resp.expense_documents[0].line_item_groups[0].line_items #=> Array
@@ -1160,6 +1264,41 @@ module Aws::Textract
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon[0].y #=> Float
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.confidence #=> Float
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].page_number #=> Integer
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].currency.code #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].currency.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].types #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].types[0] #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].id #=> String
+    #   resp.expense_documents[0].blocks #=> Array
+    #   resp.expense_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.expense_documents[0].blocks[0].confidence #=> Float
+    #   resp.expense_documents[0].blocks[0].text #=> String
+    #   resp.expense_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
+    #   resp.expense_documents[0].blocks[0].row_index #=> Integer
+    #   resp.expense_documents[0].blocks[0].column_index #=> Integer
+    #   resp.expense_documents[0].blocks[0].row_span #=> Integer
+    #   resp.expense_documents[0].blocks[0].column_span #=> Integer
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.polygon #=> Array
+    #   resp.expense_documents[0].blocks[0].geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].blocks[0].geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].blocks[0].id #=> String
+    #   resp.expense_documents[0].blocks[0].relationships #=> Array
+    #   resp.expense_documents[0].blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE", "ANSWER"
+    #   resp.expense_documents[0].blocks[0].relationships[0].ids #=> Array
+    #   resp.expense_documents[0].blocks[0].relationships[0].ids[0] #=> String
+    #   resp.expense_documents[0].blocks[0].entity_types #=> Array
+    #   resp.expense_documents[0].blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
+    #   resp.expense_documents[0].blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
+    #   resp.expense_documents[0].blocks[0].page #=> Integer
+    #   resp.expense_documents[0].blocks[0].query.text #=> String
+    #   resp.expense_documents[0].blocks[0].query.alias #=> String
+    #   resp.expense_documents[0].blocks[0].query.pages #=> Array
+    #   resp.expense_documents[0].blocks[0].query.pages[0] #=> String
     #   resp.warnings #=> Array
     #   resp.warnings[0].error_code #=> String
     #   resp.warnings[0].pages #=> Array
@@ -1514,7 +1653,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

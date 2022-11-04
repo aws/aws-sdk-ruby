@@ -233,10 +233,13 @@ module Aws::SSMIncidents
     #             sse_kms_key_id: "SseKmsKey",
     #           },
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token ensuring that the operation is called only once with the
+    #   A token that ensures that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -248,11 +251,16 @@ module Aws::SSMIncidents
     #   have up to three Regions in your replication set.
     #   @return [Hash<String,Types::RegionMapInputValue>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the replication set.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CreateReplicationSetInput AWS API Documentation
     #
     class CreateReplicationSetInput < Struct.new(
       :client_token,
-      :regions)
+      :regions,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -342,8 +350,8 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] engagements
-    #   The contacts and escalation plans that the response plan engages
-    #   during an incident.
+    #   The Amazon Resource Name (ARN) for the contacts and escalation plans
+    #   that the response plan engages during an incident.
     #   @return [Array<String>]
     #
     # @!attribute [rw] incident_template
@@ -782,7 +790,7 @@ module Aws::SSMIncidents
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of resource policies to display per page of
+    #   The maximum number of resource policies to display for each page of
     #   results.
     #   @return [Integer]
     #
@@ -859,8 +867,8 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] engagements
-    #   The contacts and escalation plans that the response plan engages
-    #   during an incident.
+    #   The Amazon Resource Name (ARN) for the contacts and escalation plans
+    #   that the response plan engages during an incident.
     #   @return [Array<String>]
     #
     # @!attribute [rw] incident_template
@@ -1119,8 +1127,9 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] incident_tags
-    #   Tags to apply to an incident when calling the `StartIncident` API
-    #   action.
+    #   Tags to assign to the template. When the `StartIncident` API action
+    #   is called, Incident Manager assigns the tags specified in the
+    #   template to the incident.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] notification_targets
@@ -1609,8 +1618,8 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the response plan you're adding
-    #   the resource policy to.
+    #   The Amazon Resource Name (ARN) of the response plan to add the
+    #   resource policy to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/PutResourcePolicyInput AWS API Documentation
@@ -2094,7 +2103,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags that you are adding to the response plan.
+    #   A list of tags to add to the response plan.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/TagResourceRequest AWS API Documentation
@@ -2234,7 +2243,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The name of the tag you're removing from the response plan.
+    #   The name of the tag to remove from the response plan.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UntagResourceRequest AWS API Documentation
@@ -2260,12 +2269,11 @@ module Aws::SSMIncidents
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the replication set you're
-    #   updating.
+    #   The Amazon Resource Name (ARN) of the replication set to update.
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A token ensuring that the operation is called only once with the
+    #   A token that ensures that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -2273,7 +2281,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] deletion_protected
-    #   Details if deletion protection is enabled or disabled in your
+    #   Specifies if deletion protection is turned on or off in your
     #   account.
     #   @return [Boolean]
     #
@@ -2509,7 +2517,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A token ensuring that the operation is called only once with the
+    #   A token that ensures that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -2605,8 +2613,8 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] engagements
-    #   The contacts and escalation plans that Incident Manager engages at
-    #   the start of the incident.
+    #   The Amazon Resource Name (ARN) for the contacts and escalation plans
+    #   that the response plan engages during an incident.
     #   @return [Array<String>]
     #
     # @!attribute [rw] incident_template_dedupe_string
@@ -2642,9 +2650,11 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] incident_template_tags
-    #   Tags to apply to an incident when calling the `StartIncident` API
-    #   action. To call this action, you must also have permission to call
-    #   the `TagResource` API action for the incident record resource.
+    #   Tags to assign to the template. When the `StartIncident` API action
+    #   is called, Incident Manager assigns the tags specified in the
+    #   template to the incident. To call this action, you must also have
+    #   permission to call the `TagResource` API action for the incident
+    #   record resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] incident_template_title

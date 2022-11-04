@@ -10,18 +10,53 @@
 module Aws::WAFV2
   module Types
 
+    # Details for your use of the Bot Control managed rule group, used in
+    # `ManagedRuleGroupConfig`.
+    #
+    # @note When making an API call, you may pass AWSManagedRulesBotControlRuleSet
+    #   data as a hash:
+    #
+    #       {
+    #         inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #       }
+    #
+    # @!attribute [rw] inspection_level
+    #   The inspection level to use for the Bot Control rule group. The
+    #   common level is the least expensive. The targeted level includes all
+    #   common level rules and adds rules with more advanced inspection
+    #   criteria. For details, see [WAF Bot Control rule group][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesBotControlRuleSet AWS API Documentation
+    #
+    class AWSManagedRulesBotControlRuleSet < Struct.new(
+      :inspection_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single action condition for a Condition in a logging filter.
     #
     # @note When making an API call, you may pass ActionCondition
     #   data as a hash:
     #
     #       {
-    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #       }
     #
     # @!attribute [rw] action
     #   The action setting that a log record must contain in order to meet
-    #   the condition.
+    #   the condition. This is the action that WAF applied to the web
+    #   request.
+    #
+    #   For rule groups, this is either the configured rule action setting,
+    #   or if you've applied a rule action override to the rule, it's the
+    #   override action. The value `EXCLUDED_AS_COUNT` matches on excluded
+    #   rules and also on rules that have a rule action override of Count.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ActionCondition AWS API Documentation
@@ -358,6 +393,65 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             ip_set_reference_statement: {
     #               arn: "ResourceArn", # required
@@ -472,6 +566,68 @@ module Aws::WAFV2
     #                   },
     #                   password_field: {
     #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   aws_managed_rules_bot_control_rule_set: {
+    #                     inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   },
+    #                 },
+    #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
     #                   },
     #                 },
     #               ],
@@ -864,11 +1020,12 @@ module Aws::WAFV2
     # Specifies that WAF should run a `CAPTCHA` check against the request:
     #
     # * If the request includes a valid, unexpired `CAPTCHA` token, WAF
-    #   allows the web request inspection to proceed to the next rule,
-    #   similar to a `CountAction`.
+    #   applies any custom request handling and labels that you've
+    #   configured and then allows the web request inspection to proceed to
+    #   the next rule, similar to a `CountAction`.
     #
-    # * If the request doesn't include a valid, unexpired `CAPTCHA` token,
-    #   WAF discontinues the web ACL evaluation of the request and blocks it
+    # * If the request doesn't include a valid, unexpired token, WAF
+    #   discontinues the web ACL evaluation of the request and blocks it
     #   from going to its intended destination.
     #
     #   WAF generates a response that it sends back to the client, which
@@ -879,7 +1036,8 @@ module Aws::WAFV2
     #   * The HTTP status code `405 Method Not Allowed`.
     #
     #   * If the request contains an `Accept` header with a value of
-    #     `text/html`, the response includes a `CAPTCHA` challenge.
+    #     `text/html`, the response includes a `CAPTCHA` JavaScript page
+    #     interstitial.
     #
     # You can configure the expiration time in the `CaptchaConfig`
     # `ImmunityTimeProperty` setting at the rule and web ACL level. The rule
@@ -903,7 +1061,9 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] custom_request_handling
-    #   Defines custom handling for the web request.
+    #   Defines custom handling for the web request, used when the `CAPTCHA`
+    #   inspection determines that the request's token is valid and
+    #   unexpired.
     #
     #   For information about customizing web requests and responses, see
     #   [Customizing web requests and responses in WAF][1] in the [WAF
@@ -936,8 +1096,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] immunity_time_property
-    #   Determines how long a `CAPTCHA` token remains valid after the client
-    #   successfully solves a `CAPTCHA` puzzle.
+    #   Determines how long a `CAPTCHA` timestamp in the token remains valid
+    #   after the client successfully solves a `CAPTCHA` puzzle.
     #   @return [Types::ImmunityTimeProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CaptchaConfig AWS API Documentation
@@ -958,8 +1118,7 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] solve_timestamp
-    #   The time that the `CAPTCHA` puzzle was solved for the supplied
-    #   token.
+    #   The time that the `CAPTCHA` was last solved for the supplied token.
     #   @return [Integer]
     #
     # @!attribute [rw] failure_reason
@@ -970,6 +1129,138 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CaptchaResponse AWS API Documentation
     #
     class CaptchaResponse < Struct.new(
+      :response_code,
+      :solve_timestamp,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies that WAF should run a `Challenge` check against the request
+    # to verify that the request is coming from a legitimate client session:
+    #
+    # * If the request includes a valid, unexpired challenge token, WAF
+    #   applies any custom request handling and labels that you've
+    #   configured and then allows the web request inspection to proceed to
+    #   the next rule, similar to a `CountAction`.
+    #
+    # * If the request doesn't include a valid, unexpired challenge token,
+    #   WAF discontinues the web ACL evaluation of the request and blocks it
+    #   from going to its intended destination.
+    #
+    #   WAF then generates a challenge response that it sends back to the
+    #   client, which includes the following:
+    #
+    #   * The header `x-amzn-waf-action` with a value of `challenge`.
+    #
+    #   * The HTTP status code `202 Request Accepted`.
+    #
+    #   * If the request contains an `Accept` header with a value of
+    #     `text/html`, the response includes a JavaScript page interstitial
+    #     with a challenge script.
+    #
+    #   Challenges run silent browser interrogations in the background, and
+    #   don't generally affect the end user experience.
+    #
+    #   A challenge enforces token acquisition using an interstitial
+    #   JavaScript challenge that inspects the client session for legitimate
+    #   behavior. The challenge blocks bots or at least increases the cost
+    #   of operating sophisticated bots.
+    #
+    #   After the client session successfully responds to the challenge, it
+    #   receives a new token from WAF, which the challenge script uses to
+    #   resubmit the original request.
+    #
+    # You can configure the expiration time in the `ChallengeConfig`
+    # `ImmunityTimeProperty` setting at the rule and web ACL level. The rule
+    # setting overrides the web ACL setting.
+    #
+    # This action option is available for rules. It isn't available for web
+    # ACL default actions.
+    #
+    # @note When making an API call, you may pass ChallengeAction
+    #   data as a hash:
+    #
+    #       {
+    #         custom_request_handling: {
+    #           insert_headers: [ # required
+    #             {
+    #               name: "CustomHTTPHeaderName", # required
+    #               value: "CustomHTTPHeaderValue", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request, used when the challenge
+    #   inspection determines that the request's token is valid and
+    #   unexpired.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::CustomRequestHandling]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ChallengeAction AWS API Documentation
+    #
+    class ChallengeAction < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how WAF should handle `Challenge` evaluations. This is
+    # available at the web ACL level and in each rule.
+    #
+    # @note When making an API call, you may pass ChallengeConfig
+    #   data as a hash:
+    #
+    #       {
+    #         immunity_time_property: {
+    #           immunity_time: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] immunity_time_property
+    #   Determines how long a challenge timestamp in the token remains valid
+    #   after the client successfully responds to a challenge.
+    #   @return [Types::ImmunityTimeProperty]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ChallengeConfig AWS API Documentation
+    #
+    class ChallengeConfig < Struct.new(
+      :immunity_time_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result from the inspection of the web request for a valid
+    # challenge token.
+    #
+    # @!attribute [rw] response_code
+    #   The HTTP response code indicating the status of the challenge token
+    #   in the web request. If the token is missing, invalid, or expired,
+    #   this code is `202 Request Accepted`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] solve_timestamp
+    #   The time that the challenge was last solved for the supplied token.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure, populated when the evaluation of the token
+    #   fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ChallengeResponse AWS API Documentation
+    #
+    class ChallengeResponse < Struct.new(
       :response_code,
       :solve_timestamp,
       :failure_reason)
@@ -1234,6 +1525,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -1353,6 +1703,68 @@ module Aws::WAFV2
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
     #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -1462,6 +1874,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -1488,6 +1910,11 @@ module Aws::WAFV2
     #               metric_name: "MetricName", # required
     #             },
     #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
+    #             challenge_config: {
     #               immunity_time_property: {
     #                 immunity_time: 1, # required
     #               },
@@ -1544,7 +1971,7 @@ module Aws::WAFV2
     #
     #       {
     #         action_condition: {
-    #           action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #           action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #         },
     #         label_name_condition: {
     #           label_name: "LabelName", # required
@@ -2189,6 +2616,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -2308,6 +2794,68 @@ module Aws::WAFV2
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
     #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -2417,6 +2965,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -2443,6 +3001,11 @@ module Aws::WAFV2
     #               metric_name: "MetricName", # required
     #             },
     #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
+    #             challenge_config: {
     #               immunity_time_property: {
     #                 immunity_time: 1, # required
     #               },
@@ -2861,6 +3424,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -2980,6 +3602,68 @@ module Aws::WAFV2
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
     #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -3089,6 +3773,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -3119,6 +3813,11 @@ module Aws::WAFV2
     #                 immunity_time: 1, # required
     #               },
     #             },
+    #             challenge_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
     #           },
     #         ],
     #         visibility_config: { # required
@@ -3143,6 +3842,12 @@ module Aws::WAFV2
     #             immunity_time: 1, # required
     #           },
     #         },
+    #         challenge_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
+    #         token_domains: ["TokenDomain"],
     #       }
     #
     # @!attribute [rw] name
@@ -3217,6 +3922,26 @@ module Aws::WAFV2
     #   specify this, WAF uses its default settings for `CaptchaConfig`.
     #   @return [Types::CaptchaConfig]
     #
+    # @!attribute [rw] challenge_config
+    #   Specifies how WAF should handle challenge evaluations for rules that
+    #   don't have their own `ChallengeConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `ChallengeConfig`.
+    #   @return [Types::ChallengeConfig]
+    #
+    # @!attribute [rw] token_domains
+    #   Specifies the domains that WAF should accept in a web request token.
+    #   This enables the use of tokens across multiple protected websites.
+    #   When WAF provides a token, it uses the domain of the Amazon Web
+    #   Services resource that the web ACL is protecting. If you don't
+    #   specify a list of token domains, WAF accepts tokens only for the
+    #   domain of the protected resource. With a token domain list, WAF
+    #   accepts the resource's host domain plus all domains in the token
+    #   domain list, including their prefixed subdomains.
+    #
+    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
+    #   "myotherwebsite.com" \}`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
@@ -3228,7 +3953,9 @@ module Aws::WAFV2
       :visibility_config,
       :tags,
       :custom_response_bodies,
-      :captcha_config)
+      :captcha_config,
+      :challenge_config,
+      :token_domains)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3283,8 +4010,9 @@ module Aws::WAFV2
     end
 
     # Custom request handling behavior that inserts custom headers into a
-    # web request. You can add custom request handling for the rule actions
-    # allow and count.
+    # web request. You can add custom request handling for WAF to use when
+    # the rule action doesn't block the request. For example,
+    # `CaptchaAction` for requests with valid t okens, and `AllowAction`.
     #
     # For information about customizing web requests and responses, see
     # [Customizing web requests and responses in WAF][1] in the [WAF
@@ -4015,10 +4743,12 @@ module Aws::WAFV2
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
 
     # Specifies a single rule in a rule group whose action you want to
-    # override to `Count`. When you exclude a rule, WAF evaluates it exactly
-    # as it would if the rule action setting were `Count`. This is a useful
-    # option for testing the rules in a rule group without modifying how
-    # they handle your web traffic.
+    # override to `Count`.
+    #
+    # <note markdown="1"> Instead of this option, use `RuleActionOverrides`. It accepts any
+    # valid action setting, including `Count`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass ExcludedRule
     #   data as a hash:
@@ -4223,7 +4953,7 @@ module Aws::WAFV2
     #         conditions: [ # required
     #           {
     #             action_condition: {
-    #               action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #               action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #             },
     #             label_name_condition: {
     #               label_name: "LabelName", # required
@@ -4290,8 +5020,9 @@ module Aws::WAFV2
     #
     #   <note markdown="1"> This option is usually set to none. It does not affect how the rules
     #   in the rule group are evaluated. If you want the rules in the rule
-    #   group to only count matches, do not use this and instead exclude
-    #   those rules in your rule group reference statement settings.
+    #   group to only count matches, do not use this and instead use the
+    #   rule action override option, with `Count` action, in your rule group
+    #   reference statement settings.
     #
     #    </note>
     #   @return [Types::OverrideAction]
@@ -5671,8 +6402,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Determines how long a `CAPTCHA` token remains valid after the client
-    # successfully solves a `CAPTCHA` puzzle.
+    # Used for CAPTCHA and challenge token settings. Determines how long a
+    # `CAPTCHA` or challenge timestamp remains valid after WAF updates it
+    # for a successful `CAPTCHA` or challenge response.
     #
     # @note When making an API call, you may pass ImmunityTimeProperty
     #   data as a hash:
@@ -5682,8 +6414,10 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] immunity_time
-    #   The amount of time, in seconds, that a `CAPTCHA` token is valid. The
-    #   default setting is 300.
+    #   The amount of time, in seconds, that a `CAPTCHA` or challenge
+    #   timestamp is considered valid by WAF. The default setting is 300.
+    #
+    #   For the Challenge action, the minimum setting is 300.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ImmunityTimeProperty AWS API Documentation
@@ -6819,7 +7553,7 @@ module Aws::WAFV2
     #               conditions: [ # required
     #                 {
     #                   action_condition: {
-    #                     action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #                     action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #                   },
     #                   label_name_condition: {
     #                     label_name: "LabelName", # required
@@ -6899,7 +7633,7 @@ module Aws::WAFV2
     #             conditions: [ # required
     #               {
     #                 action_condition: {
-    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #                 },
     #                 label_name_condition: {
     #                   label_name: "LabelName", # required
@@ -6929,19 +7663,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Additional information that's used by a managed rule group. Most
+    # Additional information that's used by a managed rule group. Many
     # managed rule groups don't require this.
     #
-    # Use this for the account takeover prevention managed rule group
-    # `AWSManagedRulesATPRuleSet`, to provide information about the sign-in
-    # page of your application.
-    #
-    # You can provide multiple individual `ManagedRuleGroupConfig` objects
-    # for any rule group configuration, for example `UsernameField` and
-    # `PasswordField`. The configuration that you provide depends on the
-    # needs of the managed rule group. For the ATP managed rule group, you
-    # provide the following individual configuration objects: `LoginPath`,
-    # `PasswordField`, `PayloadType` and `UsernameField`.
+    # Use the `AWSManagedRulesBotControlRuleSet` configuration object to
+    # configure the protection level that you want the Bot Control rule
+    # group to use.
     #
     # For example specifications, see the examples section of CreateWebACL.
     #
@@ -6956,6 +7683,9 @@ module Aws::WAFV2
     #         },
     #         password_field: {
     #           identifier: "FieldIdentifier", # required
+    #         },
+    #         aws_managed_rules_bot_control_rule_set: {
+    #           inspection_level: "COMMON", # required, accepts COMMON, TARGETED
     #         },
     #       }
     #
@@ -6978,13 +7708,27 @@ module Aws::WAFV2
     #   Details about your login page password field.
     #   @return [Types::PasswordField]
     #
+    # @!attribute [rw] aws_managed_rules_bot_control_rule_set
+    #   Additional configuration for using the Bot Control managed rule
+    #   group. Use this to specify the inspection level that you want to
+    #   use. For information about using the Bot Control managed rule group,
+    #   see [WAF Bot Control rule group][1] and [WAF Bot Control][2] in the
+    #   *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-bot-control.html
+    #   @return [Types::AWSManagedRulesBotControlRuleSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupConfig AWS API Documentation
     #
     class ManagedRuleGroupConfig < Struct.new(
       :login_path,
       :payload_type,
       :username_field,
-      :password_field)
+      :password_field,
+      :aws_managed_rules_bot_control_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7270,6 +8014,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -7389,6 +8192,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -7465,6 +8330,68 @@ module Aws::WAFV2
     #             password_field: {
     #               identifier: "FieldIdentifier", # required
     #             },
+    #             aws_managed_rules_bot_control_rule_set: {
+    #               inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #             },
+    #           },
+    #         ],
+    #         rule_action_overrides: [
+    #           {
+    #             name: "EntityName", # required
+    #             action_to_use: { # required
+    #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -7488,11 +8415,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] excluded_rules
-    #   The rules in the referenced rule group whose actions are set to
-    #   `Count`. When you exclude a rule, WAF evaluates it exactly as it
-    #   would if the rule action setting were `Count`. This is a useful
-    #   option for testing the rules in a rule group without modifying how
-    #   they handle your web traffic.
+    #   Rules in the referenced rule group whose actions are set to `Count`.
+    #
+    #   <note markdown="1"> Instead of this option, use `RuleActionOverrides`. It accepts any
+    #   valid action setting, including `Count`.
+    #
+    #    </note>
     #   @return [Array<Types::ExcludedRule>]
     #
     # @!attribute [rw] scope_down_statement
@@ -7505,20 +8433,25 @@ module Aws::WAFV2
     #   @return [Types::Statement]
     #
     # @!attribute [rw] managed_rule_group_configs
-    #   Additional information that's used by a managed rule group. Most
+    #   Additional information that's used by a managed rule group. Many
     #   managed rule groups don't require this.
     #
-    #   Use this for the account takeover prevention managed rule group
-    #   `AWSManagedRulesATPRuleSet`, to provide information about the
-    #   sign-in page of your application.
-    #
-    #   You can provide multiple individual `ManagedRuleGroupConfig` objects
-    #   for any rule group configuration, for example `UsernameField` and
-    #   `PasswordField`. The configuration that you provide depends on the
-    #   needs of the managed rule group. For the ATP managed rule group, you
-    #   provide the following individual configuration objects: `LoginPath`,
-    #   `PasswordField`, `PayloadType` and `UsernameField`.
+    #   Use the `AWSManagedRulesBotControlRuleSet` configuration object to
+    #   configure the protection level that you want the Bot Control rule
+    #   group to use.
     #   @return [Array<Types::ManagedRuleGroupConfig>]
+    #
+    # @!attribute [rw] rule_action_overrides
+    #   Action settings to use in the place of the rule actions that are
+    #   configured inside the rule group. You specify one override for each
+    #   rule whose action you want to change.
+    #
+    #   You can use overrides for testing, for example you can override all
+    #   of rule actions to `Count` and then monitor the resulting count
+    #   metrics to understand how the rule group would handle your web
+    #   traffic. You can also permanently override some or all actions, to
+    #   modify how the rule group manages your web traffic.
+    #   @return [Array<Types::RuleActionOverride>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupStatement AWS API Documentation
     #
@@ -7528,7 +8461,8 @@ module Aws::WAFV2
       :version,
       :excluded_rules,
       :scope_down_statement,
-      :managed_rule_group_configs)
+      :managed_rule_group_configs,
+      :rule_action_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7842,10 +8776,10 @@ module Aws::WAFV2
     # and tags.
     #
     # The mobile SDK is not generally available. Customers who have access
-    # to the mobile SDK can use it to establish and manage Security Token
-    # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF. For more information, see [WAF client
-    # application integration][1] in the *WAF Developer Guide*.
+    # to the mobile SDK can use it to establish and manage WAF tokens for
+    # use in HTTP(S) requests from a mobile device to WAF. For more
+    # information, see [WAF client application integration][1] in the *WAF
+    # Developer Guide*.
     #
     #
     #
@@ -8148,6 +9082,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -8266,6 +9259,68 @@ module Aws::WAFV2
     #                 },
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
     #                 },
     #               },
     #             ],
@@ -8604,6 +9659,65 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             ip_set_reference_statement: {
     #               arn: "ResourceArn", # required
@@ -8719,6 +9833,68 @@ module Aws::WAFV2
     #                   password_field: {
     #                     identifier: "FieldIdentifier", # required
     #                   },
+    #                   aws_managed_rules_bot_control_rule_set: {
+    #                     inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   },
+    #                 },
+    #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -8811,8 +9987,9 @@ module Aws::WAFV2
     #
     # <note markdown="1"> This option is usually set to none. It does not affect how the rules
     # in the rule group are evaluated. If you want the rules in the rule
-    # group to only count matches, do not use this and instead exclude those
-    # rules in your rule group reference statement settings.
+    # group to only count matches, do not use this and instead use the rule
+    # action override option, with `Count` action, in your rule group
+    # reference statement settings.
     #
     #  </note>
     #
@@ -8839,8 +10016,9 @@ module Aws::WAFV2
     #
     #   <note markdown="1"> This option is usually set to none. It does not affect how the rules
     #   in the rule group are evaluated. If you want the rules in the rule
-    #   group to only count matches, do not use this and instead exclude
-    #   those rules in your rule group reference statement settings.
+    #   group to only count matches, do not use this and instead use the
+    #   rule action override option, with `Count` action, in your rule group
+    #   reference statement settings.
     #
     #    </note>
     #   @return [Types::CountAction]
@@ -8948,7 +10126,7 @@ module Aws::WAFV2
     #                 conditions: [ # required
     #                   {
     #                     action_condition: {
-    #                       action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #                       action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #                     },
     #                     label_name_condition: {
     #                       label_name: "LabelName", # required
@@ -9448,6 +10626,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -9566,6 +10803,68 @@ module Aws::WAFV2
     #                 },
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
     #                 },
     #               },
     #             ],
@@ -10294,6 +11593,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -10413,6 +11771,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -10522,6 +11942,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -10548,6 +11978,11 @@ module Aws::WAFV2
     #           metric_name: "MetricName", # required
     #         },
     #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
+    #         challenge_config: {
     #           immunity_time_property: {
     #             immunity_time: 1, # required
     #           },
@@ -10603,8 +12038,9 @@ module Aws::WAFV2
     #
     #   <note markdown="1"> This option is usually set to none. It does not affect how the rules
     #   in the rule group are evaluated. If you want the rules in the rule
-    #   group to only count matches, do not use this and instead exclude
-    #   those rules in your rule group reference statement settings.
+    #   group to only count matches, do not use this and instead use the
+    #   rule action override option, with `Count` action, in your rule group
+    #   reference statement settings.
     #
     #    </note>
     #   @return [Types::OverrideAction]
@@ -10646,6 +12082,12 @@ module Aws::WAFV2
     #   for the web ACL.
     #   @return [Types::CaptchaConfig]
     #
+    # @!attribute [rw] challenge_config
+    #   Specifies how WAF should handle `Challenge` evaluations. If you
+    #   don't specify this, WAF uses the challenge configuration that's
+    #   defined for the web ACL.
+    #   @return [Types::ChallengeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Rule AWS API Documentation
     #
     class Rule < Struct.new(
@@ -10656,7 +12098,8 @@ module Aws::WAFV2
       :override_action,
       :rule_labels,
       :visibility_config,
-      :captcha_config)
+      :captcha_config,
+      :challenge_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10711,6 +12154,16 @@ module Aws::WAFV2
     #             ],
     #           },
     #         },
+    #         challenge: {
+    #           custom_request_handling: {
+    #             insert_headers: [ # required
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] block
@@ -10730,13 +12183,107 @@ module Aws::WAFV2
     #   Instructs WAF to run a `CAPTCHA` check against the web request.
     #   @return [Types::CaptchaAction]
     #
+    # @!attribute [rw] challenge
+    #   Instructs WAF to run a `Challenge` check against the web request.
+    #   @return [Types::ChallengeAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleAction AWS API Documentation
     #
     class RuleAction < Struct.new(
       :block,
       :allow,
       :count,
-      :captcha)
+      :captcha,
+      :challenge)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Action setting to use in the place of a rule action that is configured
+    # inside the rule group. You specify one override for each rule whose
+    # action you want to change.
+    #
+    # You can use overrides for testing, for example you can override all of
+    # rule actions to `Count` and then monitor the resulting count metrics
+    # to understand how the rule group would handle your web traffic. You
+    # can also permanently override some or all actions, to modify how the
+    # rule group manages your web traffic.
+    #
+    # @note When making an API call, you may pass RuleActionOverride
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EntityName", # required
+    #         action_to_use: { # required
+    #           block: {
+    #             custom_response: {
+    #               response_code: 1, # required
+    #               custom_response_body_key: "EntityName",
+    #               response_headers: [
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           allow: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           count: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the rule to override.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_to_use
+    #   The override action to use, in place of the configured action of the
+    #   rule in the rule group.
+    #   @return [Types::RuleAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleActionOverride AWS API Documentation
+    #
+    class RuleActionOverride < Struct.new(
+      :name,
+      :action_to_use)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10883,6 +12430,65 @@ module Aws::WAFV2
     #             name: "EntityName", # required
     #           },
     #         ],
+    #         rule_action_overrides: [
+    #           {
+    #             name: "EntityName", # required
+    #             action_to_use: { # required
+    #               block: {
+    #                 custom_response: {
+    #                   response_code: 1, # required
+    #                   custom_response_body_key: "EntityName",
+    #                   response_headers: [
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               allow: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               count: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] arn
@@ -10890,18 +12496,32 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] excluded_rules
-    #   The rules in the referenced rule group whose actions are set to
-    #   `Count`. When you exclude a rule, WAF evaluates it exactly as it
-    #   would if the rule action setting were `Count`. This is a useful
-    #   option for testing the rules in a rule group without modifying how
-    #   they handle your web traffic.
+    #   Rules in the referenced rule group whose actions are set to `Count`.
+    #
+    #   <note markdown="1"> Instead of this option, use `RuleActionOverrides`. It accepts any
+    #   valid action setting, including `Count`.
+    #
+    #    </note>
     #   @return [Array<Types::ExcludedRule>]
+    #
+    # @!attribute [rw] rule_action_overrides
+    #   Action settings to use in the place of the rule actions that are
+    #   configured inside the rule group. You specify one override for each
+    #   rule whose action you want to change.
+    #
+    #   You can use overrides for testing, for example you can override all
+    #   of rule actions to `Count` and then monitor the resulting count
+    #   metrics to understand how the rule group would handle your web
+    #   traffic. You can also permanently override some or all actions, to
+    #   modify how the rule group manages your web traffic.
+    #   @return [Array<Types::RuleActionOverride>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleGroupReferenceStatement AWS API Documentation
     #
     class RuleGroupReferenceStatement < Struct.new(
       :arn,
-      :excluded_rules)
+      :excluded_rules,
+      :rule_action_overrides)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11003,8 +12623,7 @@ module Aws::WAFV2
     #   @return [Time]
     #
     # @!attribute [rw] action
-    #   The action for the `Rule` that the request matched: `Allow`,
-    #   `Block`, or `Count`.
+    #   The action that WAF applied to the request.
     #   @return [String]
     #
     # @!attribute [rw] rule_name_within_rule_group
@@ -11039,6 +12658,17 @@ module Aws::WAFV2
     #   The `CAPTCHA` response for the request.
     #   @return [Types::CaptchaResponse]
     #
+    # @!attribute [rw] challenge_response
+    #   The `Challenge` response for the request.
+    #   @return [Types::ChallengeResponse]
+    #
+    # @!attribute [rw] overridden_action
+    #   Used only for rule group rules that have a rule action override in
+    #   place in the web ACL. This is the action that the rule group rule is
+    #   configured for, and not the action that was applied to the request.
+    #   The action that WAF applied is the `Action` value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SampledHTTPRequest AWS API Documentation
     #
     class SampledHTTPRequest < Struct.new(
@@ -11050,7 +12680,9 @@ module Aws::WAFV2
       :request_headers_inserted,
       :response_code_sent,
       :labels,
-      :captcha_response)
+      :captcha_response,
+      :challenge_response,
+      :overridden_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11588,6 +13220,65 @@ module Aws::WAFV2
     #               name: "EntityName", # required
     #             },
     #           ],
+    #           rule_action_overrides: [
+    #             {
+    #               name: "EntityName", # required
+    #               action_to_use: { # required
+    #                 block: {
+    #                   custom_response: {
+    #                     response_code: 1, # required
+    #                     custom_response_body_key: "EntityName",
+    #                     response_headers: [
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 allow: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 count: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 captcha: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 challenge: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           ],
     #         },
     #         ip_set_reference_statement: {
     #           arn: "ResourceArn", # required
@@ -11906,6 +13597,65 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             ip_set_reference_statement: {
     #               arn: "ResourceArn", # required
@@ -12016,6 +13766,68 @@ module Aws::WAFV2
     #                   },
     #                   password_field: {
     #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   aws_managed_rules_bot_control_rule_set: {
+    #                     inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   },
+    #                 },
+    #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
     #                   },
     #                 },
     #               ],
@@ -12338,6 +14150,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -12450,6 +14321,68 @@ module Aws::WAFV2
     #                     },
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -12769,6 +14702,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -12881,6 +14873,68 @@ module Aws::WAFV2
     #                     },
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -13199,6 +15253,65 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             ip_set_reference_statement: {
     #               arn: "ResourceArn", # required
@@ -13315,6 +15428,68 @@ module Aws::WAFV2
     #                   },
     #                   password_field: {
     #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   aws_managed_rules_bot_control_rule_set: {
+    #                     inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                   },
+    #                 },
+    #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
     #                   },
     #                 },
     #               ],
@@ -13640,6 +15815,65 @@ module Aws::WAFV2
     #                   name: "EntityName", # required
     #                 },
     #               ],
+    #               rule_action_overrides: [
+    #                 {
+    #                   name: "EntityName", # required
+    #                   action_to_use: { # required
+    #                     block: {
+    #                       custom_response: {
+    #                         response_code: 1, # required
+    #                         custom_response_body_key: "EntityName",
+    #                         response_headers: [
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     allow: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     count: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     captcha: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     challenge: {
+    #                       custom_request_handling: {
+    #                         insert_headers: [ # required
+    #                           {
+    #                             name: "CustomHTTPHeaderName", # required
+    #                             value: "CustomHTTPHeaderValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             ip_set_reference_statement: {
     #               arn: "ResourceArn", # required
@@ -13812,6 +16046,68 @@ module Aws::WAFV2
     #               },
     #               password_field: {
     #                 identifier: "FieldIdentifier", # required
+    #               },
+    #               aws_managed_rules_bot_control_rule_set: {
+    #                 inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #               },
+    #             },
+    #           ],
+    #           rule_action_overrides: [
+    #             {
+    #               name: "EntityName", # required
+    #               action_to_use: { # required
+    #                 block: {
+    #                   custom_response: {
+    #                     response_code: 1, # required
+    #                     custom_response_body_key: "EntityName",
+    #                     response_headers: [
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 allow: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 count: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 captcha: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 challenge: {
+    #                   custom_request_handling: {
+    #                     insert_headers: [ # required
+    #                       {
+    #                         name: "CustomHTTPHeaderName", # required
+    #                         value: "CustomHTTPHeaderValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
     #               },
     #             },
     #           ],
@@ -15020,6 +17316,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -15139,6 +17494,68 @@ module Aws::WAFV2
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
     #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -15248,6 +17665,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -15274,6 +17701,11 @@ module Aws::WAFV2
     #               metric_name: "MetricName", # required
     #             },
     #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
+    #             challenge_config: {
     #               immunity_time_property: {
     #                 immunity_time: 1, # required
     #               },
@@ -15682,6 +18114,65 @@ module Aws::WAFV2
     #                     name: "EntityName", # required
     #                   },
     #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               ip_set_reference_statement: {
     #                 arn: "ResourceArn", # required
@@ -15801,6 +18292,68 @@ module Aws::WAFV2
     #                     password_field: {
     #                       identifier: "FieldIdentifier", # required
     #                     },
+    #                     aws_managed_rules_bot_control_rule_set: {
+    #                       inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                     },
+    #                   },
+    #                 ],
+    #                 rule_action_overrides: [
+    #                   {
+    #                     name: "EntityName", # required
+    #                     action_to_use: { # required
+    #                       block: {
+    #                         custom_response: {
+    #                           response_code: 1, # required
+    #                           custom_response_body_key: "EntityName",
+    #                           response_headers: [
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       allow: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       count: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       captcha: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       challenge: {
+    #                         custom_request_handling: {
+    #                           insert_headers: [ # required
+    #                             {
+    #                               name: "CustomHTTPHeaderName", # required
+    #                               value: "CustomHTTPHeaderValue", # required
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -15910,6 +18463,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               challenge: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -15940,6 +18503,11 @@ module Aws::WAFV2
     #                 immunity_time: 1, # required
     #               },
     #             },
+    #             challenge_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
     #           },
     #         ],
     #         visibility_config: { # required
@@ -15959,6 +18527,12 @@ module Aws::WAFV2
     #             immunity_time: 1, # required
     #           },
     #         },
+    #         challenge_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
+    #         token_domains: ["TokenDomain"],
     #       }
     #
     # @!attribute [rw] name
@@ -16047,6 +18621,26 @@ module Aws::WAFV2
     #   specify this, WAF uses its default settings for `CaptchaConfig`.
     #   @return [Types::CaptchaConfig]
     #
+    # @!attribute [rw] challenge_config
+    #   Specifies how WAF should handle challenge evaluations for rules that
+    #   don't have their own `ChallengeConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `ChallengeConfig`.
+    #   @return [Types::ChallengeConfig]
+    #
+    # @!attribute [rw] token_domains
+    #   Specifies the domains that WAF should accept in a web request token.
+    #   This enables the use of tokens across multiple protected websites.
+    #   When WAF provides a token, it uses the domain of the Amazon Web
+    #   Services resource that the web ACL is protecting. If you don't
+    #   specify a list of token domains, WAF accepts tokens only for the
+    #   domain of the protected resource. With a token domain list, WAF
+    #   accepts the resource's host domain plus all domains in the token
+    #   domain list, including their prefixed subdomains.
+    #
+    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
+    #   "myotherwebsite.com" \}`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLRequest AWS API Documentation
     #
     class UpdateWebACLRequest < Struct.new(
@@ -16059,7 +18653,9 @@ module Aws::WAFV2
       :visibility_config,
       :lock_token,
       :custom_response_bodies,
-      :captcha_config)
+      :captcha_config,
+      :challenge_config,
+      :token_domains)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16678,6 +19274,23 @@ module Aws::WAFV2
     #   specify this, WAF uses its default settings for `CaptchaConfig`.
     #   @return [Types::CaptchaConfig]
     #
+    # @!attribute [rw] challenge_config
+    #   Specifies how WAF should handle challenge evaluations for rules that
+    #   don't have their own `ChallengeConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `ChallengeConfig`.
+    #   @return [Types::ChallengeConfig]
+    #
+    # @!attribute [rw] token_domains
+    #   Specifies the domains that WAF should accept in a web request token.
+    #   This enables the use of tokens across multiple protected websites.
+    #   When WAF provides a token, it uses the domain of the Amazon Web
+    #   Services resource that the web ACL is protecting. If you don't
+    #   specify a list of token domains, WAF accepts tokens only for the
+    #   domain of the protected resource. With a token domain list, WAF
+    #   accepts the resource's host domain plus all domains in the token
+    #   domain list, including their prefixed subdomains.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -16694,7 +19307,9 @@ module Aws::WAFV2
       :managed_by_firewall_manager,
       :label_namespace,
       :custom_response_bodies,
-      :captcha_config)
+      :captcha_config,
+      :challenge_config,
+      :token_domains)
       SENSITIVE = []
       include Aws::Structure
     end

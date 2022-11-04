@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.7.0 (2022-10-20)
+------------------
+
+* Feature - In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity.
+
 1.6.0 (2022-10-06)
 ------------------
 

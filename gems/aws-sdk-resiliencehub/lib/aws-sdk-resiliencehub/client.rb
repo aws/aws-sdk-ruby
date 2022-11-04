@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:resiliencehub)
@@ -79,8 +79,9 @@ module Aws::ResilienceHub
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::ResilienceHub::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::ResilienceHub
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::ResilienceHub
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::ResilienceHub::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ResilienceHub::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -1560,7 +1577,7 @@ module Aws::ResilienceHub
     #   resp.component_recommendations[0].config_recommendations[0].description #=> String
     #   resp.component_recommendations[0].config_recommendations[0].ha_architecture #=> String, one of "MultiSite", "WarmStandby", "PilotLight", "BackupAndRestore", "NoRecoveryPlan"
     #   resp.component_recommendations[0].config_recommendations[0].name #=> String
-    #   resp.component_recommendations[0].config_recommendations[0].optimization_type #=> String, one of "LeastCost", "LeastChange", "BestAZRecovery", "LeastErrors", "BestAttainable"
+    #   resp.component_recommendations[0].config_recommendations[0].optimization_type #=> String, one of "LeastCost", "LeastChange", "BestAZRecovery", "LeastErrors", "BestAttainable", "BestRegionRecovery"
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance #=> Hash
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_compliance_status #=> String, one of "PolicyBreached", "PolicyMet"
     #   resp.component_recommendations[0].config_recommendations[0].recommendation_compliance["DisruptionType"].expected_rpo_description #=> String
@@ -1830,6 +1847,7 @@ module Aws::ResilienceHub
     #   resp.app_summaries[0].description #=> String
     #   resp.app_summaries[0].name #=> String
     #   resp.app_summaries[0].resiliency_score #=> Float
+    #   resp.app_summaries[0].status #=> String, one of "Active", "Deleting"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehub-2020-04-30/ListApps AWS API Documentation
@@ -2705,11 +2723,6 @@ module Aws::ResilienceHub
     #   The type of resiliency policy to be created, including the recovery
     #   time objective (RTO) and recovery point objective (RPO) in seconds.
     #
-    #   <note markdown="1"> If you do not want to specify regional targets for a regional policy,
-    #   you must set the values of `rpoInSecs` and `rtoInSecs` to `-1`.
-    #
-    #    </note>
-    #
     # @option params [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the resiliency policy. The format
     #   for this ARN is:
@@ -2788,7 +2801,7 @@ module Aws::ResilienceHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resiliencehub'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

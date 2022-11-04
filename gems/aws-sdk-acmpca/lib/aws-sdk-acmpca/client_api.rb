@@ -35,6 +35,7 @@ module Aws::ACMPCA
     CertificateAuthorityConfiguration = Shapes::StructureShape.new(name: 'CertificateAuthorityConfiguration')
     CertificateAuthorityStatus = Shapes::StringShape.new(name: 'CertificateAuthorityStatus')
     CertificateAuthorityType = Shapes::StringShape.new(name: 'CertificateAuthorityType')
+    CertificateAuthorityUsageMode = Shapes::StringShape.new(name: 'CertificateAuthorityUsageMode')
     CertificateBody = Shapes::StringShape.new(name: 'CertificateBody')
     CertificateBodyBlob = Shapes::BlobShape.new(name: 'CertificateBodyBlob')
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
@@ -207,6 +208,7 @@ module Aws::ACMPCA
     CertificateAuthority.add_member(:revocation_configuration, Shapes::ShapeRef.new(shape: RevocationConfiguration, location_name: "RevocationConfiguration"))
     CertificateAuthority.add_member(:restorable_until, Shapes::ShapeRef.new(shape: TStamp, location_name: "RestorableUntil"))
     CertificateAuthority.add_member(:key_storage_security_standard, Shapes::ShapeRef.new(shape: KeyStorageSecurityStandard, location_name: "KeyStorageSecurityStandard"))
+    CertificateAuthority.add_member(:usage_mode, Shapes::ShapeRef.new(shape: CertificateAuthorityUsageMode, location_name: "UsageMode"))
     CertificateAuthority.struct_class = Types::CertificateAuthority
 
     CertificateAuthorityConfiguration.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, required: true, location_name: "KeyAlgorithm"))
@@ -238,6 +240,7 @@ module Aws::ACMPCA
     CreateCertificateAuthorityRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     CreateCertificateAuthorityRequest.add_member(:key_storage_security_standard, Shapes::ShapeRef.new(shape: KeyStorageSecurityStandard, location_name: "KeyStorageSecurityStandard"))
     CreateCertificateAuthorityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateCertificateAuthorityRequest.add_member(:usage_mode, Shapes::ShapeRef.new(shape: CertificateAuthorityUsageMode, location_name: "UsageMode"))
     CreateCertificateAuthorityRequest.struct_class = Types::CreateCertificateAuthorityRequest
 
     CreateCertificateAuthorityResponse.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))

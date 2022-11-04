@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2022-10-20)
+------------------
+
+* Feature - Global Accelerator now supports AddEndpoints and RemoveEndpoints operations for standard endpoint groups.
+
 1.40.0 (2022-07-27)
 ------------------
 

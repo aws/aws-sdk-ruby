@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-fsx/types'
 require_relative 'aws-sdk-fsx/client_api'
+require_relative 'aws-sdk-fsx/plugins/endpoints.rb'
 require_relative 'aws-sdk-fsx/client'
 require_relative 'aws-sdk-fsx/errors'
 require_relative 'aws-sdk-fsx/resource'
+require_relative 'aws-sdk-fsx/endpoint_parameters'
+require_relative 'aws-sdk-fsx/endpoint_provider'
+require_relative 'aws-sdk-fsx/endpoints'
 require_relative 'aws-sdk-fsx/customizations'
 
 # This module provides support for Amazon FSx. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-fsx/customizations'
 # @!group service
 module Aws::FSx
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end

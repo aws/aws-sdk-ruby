@@ -372,7 +372,7 @@ module Aws::AppStream
     #           {
     #             stack_name: "String", # required
     #             user_name: "Username", # required
-    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #             send_email_notification: false,
     #           },
     #         ],
@@ -410,7 +410,7 @@ module Aws::AppStream
     #           {
     #             stack_name: "String", # required
     #             user_name: "Username", # required
-    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #             authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #             send_email_notification: false,
     #           },
     #         ],
@@ -436,6 +436,42 @@ module Aws::AppStream
     #
     class BatchDisassociateUserStackResult < Struct.new(
       :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The certificate-based authentication properties used to authenticate
+    # SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    # domain-joined streaming instances. Fallback is turned on by default
+    # when certificate-based authentication is **Enabled** . Fallback allows
+    # users to log in using their AD domain password if certificate-based
+    # authentication is unsuccessful, or to unlock a desktop lock screen.
+    # **Enabled\_no\_directory\_login\_fallback** enables certificate-based
+    # authentication, but does not allow users to log in using their AD
+    # domain password. Users will be disconnected to re-authenticate using
+    # certificates.
+    #
+    # @note When making an API call, you may pass CertificateBasedAuthProperties
+    #   data as a hash:
+    #
+    #       {
+    #         status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+    #         certificate_authority_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate-based authentication properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The ARN of the AWS Certificate Manager Private CA resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CertificateBasedAuthProperties AWS API Documentation
+    #
+    class CertificateBasedAuthProperties < Struct.new(
+      :status,
+      :certificate_authority_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -744,6 +780,10 @@ module Aws::AppStream
     #           account_name: "AccountName", # required
     #           account_password: "AccountPassword", # required
     #         },
+    #         certificate_based_auth_properties: {
+    #           status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+    #           certificate_authority_arn: "Arn",
+    #         },
     #       }
     #
     # @!attribute [rw] directory_name
@@ -761,12 +801,26 @@ module Aws::AppStream
     #   builder to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
+    # @!attribute [rw] certificate_based_auth_properties
+    #   The certificate-based authentication properties used to authenticate
+    #   SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    #   domain-joined streaming instances. Fallback is turned on by default
+    #   when certificate-based authentication is **Enabled** . Fallback
+    #   allows users to log in using their AD domain password if
+    #   certificate-based authentication is unsuccessful, or to unlock a
+    #   desktop lock screen. **Enabled\_no\_directory\_login\_fallback**
+    #   enables certificate-based authentication, but does not allow users
+    #   to log in using their AD domain password. Users will be disconnected
+    #   to re-authenticate using certificates.
+    #   @return [Types::CertificateBasedAuthProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigRequest AWS API Documentation
     #
     class CreateDirectoryConfigRequest < Struct.new(
       :directory_name,
       :organizational_unit_distinguished_names,
-      :service_account_credentials)
+      :service_account_credentials,
+      :certificate_based_auth_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -905,6 +959,10 @@ module Aws::AppStream
     #
     #   * stream.standard.large
     #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
+    #
     #   * stream.compute.large
     #
     #   * stream.compute.xlarge
@@ -970,6 +1028,12 @@ module Aws::AppStream
     #   * stream.standard.small
     #
     #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
@@ -1798,7 +1862,7 @@ module Aws::AppStream
     #         message_action: "SUPPRESS", # accepts SUPPRESS, RESEND
     #         first_name: "UserAttributeValue",
     #         last_name: "UserAttributeValue",
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #       }
     #
     # @!attribute [rw] user_name
@@ -2105,7 +2169,7 @@ module Aws::AppStream
     #
     #       {
     #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #       }
     #
     # @!attribute [rw] user_name
@@ -2625,7 +2689,7 @@ module Aws::AppStream
     #         user_id: "UserId",
     #         next_token: "String",
     #         limit: 1,
-    #         authentication_type: "API", # accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
     #       }
     #
     # @!attribute [rw] stack_name
@@ -2782,7 +2846,7 @@ module Aws::AppStream
     #       {
     #         stack_name: "String",
     #         user_name: "Username",
-    #         authentication_type: "API", # accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
     #         max_results: 1,
     #         next_token: "String",
     #       }
@@ -2847,7 +2911,7 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #         max_results: 1,
     #         next_token: "String",
     #       }
@@ -2916,13 +2980,27 @@ module Aws::AppStream
     #   The time the directory configuration was created.
     #   @return [Time]
     #
+    # @!attribute [rw] certificate_based_auth_properties
+    #   The certificate-based authentication properties used to authenticate
+    #   SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    #   domain-joined streaming instances. Fallback is turned on by default
+    #   when certificate-based authentication is **Enabled** . Fallback
+    #   allows users to log in using their AD domain password if
+    #   certificate-based authentication is unsuccessful, or to unlock a
+    #   desktop lock screen. **Enabled\_no\_directory\_login\_fallback**
+    #   enables certificate-based authentication, but does not allow users
+    #   to log in using their AD domain password. Users will be disconnected
+    #   to re-authenticate using certificates.
+    #   @return [Types::CertificateBasedAuthProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DirectoryConfig AWS API Documentation
     #
     class DirectoryConfig < Struct.new(
       :directory_name,
       :organizational_unit_distinguished_names,
       :service_account_credentials,
-      :created_time)
+      :created_time,
+      :certificate_based_auth_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2932,7 +3010,7 @@ module Aws::AppStream
     #
     #       {
     #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #       }
     #
     # @!attribute [rw] user_name
@@ -3088,7 +3166,7 @@ module Aws::AppStream
     #
     #       {
     #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #       }
     #
     # @!attribute [rw] user_name
@@ -4957,6 +5035,10 @@ module Aws::AppStream
     #           account_name: "AccountName", # required
     #           account_password: "AccountPassword", # required
     #         },
+    #         certificate_based_auth_properties: {
+    #           status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+    #           certificate_authority_arn: "Arn",
+    #         },
     #       }
     #
     # @!attribute [rw] directory_name
@@ -4973,12 +5055,26 @@ module Aws::AppStream
     #   builder to connect to the directory.
     #   @return [Types::ServiceAccountCredentials]
     #
+    # @!attribute [rw] certificate_based_auth_properties
+    #   The certificate-based authentication properties used to authenticate
+    #   SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    #   domain-joined streaming instances. Fallback is turned on by default
+    #   when certificate-based authentication is **Enabled** . Fallback
+    #   allows users to log in using their AD domain password if
+    #   certificate-based authentication is unsuccessful, or to unlock a
+    #   desktop lock screen. **Enabled\_no\_directory\_login\_fallback**
+    #   enables certificate-based authentication, but does not allow users
+    #   to log in using their AD domain password. Users will be disconnected
+    #   to re-authenticate using certificates.
+    #   @return [Types::CertificateBasedAuthProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigRequest AWS API Documentation
     #
     class UpdateDirectoryConfigRequest < Struct.new(
       :directory_name,
       :organizational_unit_distinguished_names,
-      :service_account_credentials)
+      :service_account_credentials,
+      :certificate_based_auth_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5115,6 +5211,10 @@ module Aws::AppStream
     #
     #   * stream.standard.large
     #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
+    #
     #   * stream.compute.large
     #
     #   * stream.compute.xlarge
@@ -5180,6 +5280,12 @@ module Aws::AppStream
     #   * stream.standard.small
     #
     #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
@@ -5673,7 +5779,7 @@ module Aws::AppStream
     #       {
     #         stack_name: "String", # required
     #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #         send_email_notification: false,
     #       }
     #

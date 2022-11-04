@@ -16,7 +16,8 @@ module Aws
 
           def call(context)
             body = context.http_request.body
-            if body.respond_to?(:size) && body.size > 0
+            if body.respond_to?(:size) && body.size > 0 &&
+               !context[:use_accelerate_endpoint]
               context.http_request.headers['expect'] = '100-continue'
             end
             @handler.call(context)

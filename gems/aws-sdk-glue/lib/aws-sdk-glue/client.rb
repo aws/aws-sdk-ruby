@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:glue)
@@ -79,8 +79,9 @@ module Aws::Glue
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Glue::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::Glue
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::Glue
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::Glue::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Glue::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -2171,6 +2188,8 @@ module Aws::Glue
     #       header: ["NameString"],
     #       disable_value_trimming: false,
     #       allow_single_column: false,
+    #       custom_datatype_configured: false,
+    #       custom_datatypes: ["NameString"],
     #     },
     #   })
     #
@@ -5762,6 +5781,9 @@ module Aws::Glue
     #   resp.classifier.csv_classifier.header[0] #=> String
     #   resp.classifier.csv_classifier.disable_value_trimming #=> Boolean
     #   resp.classifier.csv_classifier.allow_single_column #=> Boolean
+    #   resp.classifier.csv_classifier.custom_datatype_configured #=> Boolean
+    #   resp.classifier.csv_classifier.custom_datatypes #=> Array
+    #   resp.classifier.csv_classifier.custom_datatypes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier AWS API Documentation
     #
@@ -5826,6 +5848,9 @@ module Aws::Glue
     #   resp.classifiers[0].csv_classifier.header[0] #=> String
     #   resp.classifiers[0].csv_classifier.disable_value_trimming #=> Boolean
     #   resp.classifiers[0].csv_classifier.allow_single_column #=> Boolean
+    #   resp.classifiers[0].csv_classifier.custom_datatype_configured #=> Boolean
+    #   resp.classifiers[0].csv_classifier.custom_datatypes #=> Array
+    #   resp.classifiers[0].csv_classifier.custom_datatypes[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers AWS API Documentation
@@ -13158,6 +13183,8 @@ module Aws::Glue
     #       header: ["NameString"],
     #       disable_value_trimming: false,
     #       allow_single_column: false,
+    #       custom_datatype_configured: false,
+    #       custom_datatypes: ["NameString"],
     #     },
     #   })
     #
@@ -15334,7 +15361,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

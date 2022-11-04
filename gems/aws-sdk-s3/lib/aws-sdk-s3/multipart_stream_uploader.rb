@@ -26,6 +26,10 @@ module Aws
       UPLOAD_PART_OPTIONS =
         Set.new(Client.api.operation(:upload_part).input.shape.member_names)
 
+      # @api private
+      COMPLETE_UPLOAD_OPTIONS =
+        Set.new(Client.api.operation(:complete_multipart_upload).input.shape.member_names)
+
       # @option options [Client] :client
       def initialize(options = {})
         @client = options[:client] || Client.new
@@ -39,7 +43,7 @@ module Aws
 
       # @option options [required,String] :bucket
       # @option options [required,String] :key
-      # @return [void]
+      # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
       def upload(options = {}, &block)
         upload_id = initiate_upload(options)
         parts = upload_parts(upload_id, options, &block)
@@ -54,10 +58,11 @@ module Aws
 
       def complete_upload(upload_id, parts, options)
         @client.complete_multipart_upload(
-          bucket: options[:bucket],
-          key: options[:key],
-          upload_id: upload_id,
-          multipart_upload: { parts: parts })
+          **complete_opts(options).merge(
+            upload_id: upload_id,
+            multipart_upload: { parts: parts }
+          )
+        )
       end
 
       def upload_parts(upload_id, options, &block)
@@ -113,6 +118,13 @@ module Aws
         end
       end
 
+      def complete_opts(options)
+        COMPLETE_UPLOAD_OPTIONS.inject({}) do |hash, key|
+          hash[key] = options[key] if options.key?(key)
+          hash
+        end
+      end
+
       def read_to_part_body(read_pipe)
         return if read_pipe.closed?
         temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new(String.new)
@@ -147,7 +159,14 @@ module Aws
                     part_number: thread_part_number,
                   )
                   resp = @client.upload_part(part)
-                  completed << {etag: resp.etag, part_number: part[:part_number]}
+                  completed_part = {etag: resp.etag, part_number: part[:part_number]}
+
+                  # get the requested checksum from the response
+                  if part[:checksum_algorithm]
+                    k = "checksum_#{part[:checksum_algorithm].downcase}".to_sym
+                    completed_part[k] = resp[k]
+                  end
+                  completed.push(completed_part)
                 ensure
                   if Tempfile === body
                     body.close

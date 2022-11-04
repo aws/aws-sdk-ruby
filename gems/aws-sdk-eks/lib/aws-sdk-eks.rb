@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-eks/types'
 require_relative 'aws-sdk-eks/client_api'
+require_relative 'aws-sdk-eks/plugins/endpoints.rb'
 require_relative 'aws-sdk-eks/client'
 require_relative 'aws-sdk-eks/errors'
 require_relative 'aws-sdk-eks/waiters'
 require_relative 'aws-sdk-eks/resource'
+require_relative 'aws-sdk-eks/endpoint_parameters'
+require_relative 'aws-sdk-eks/endpoint_provider'
+require_relative 'aws-sdk-eks/endpoints'
 require_relative 'aws-sdk-eks/customizations'
 
 # This module provides support for Amazon Elastic Kubernetes Service. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-eks/customizations'
 # @!group service
 module Aws::EKS
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end

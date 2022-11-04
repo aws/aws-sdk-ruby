@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-efs/types'
 require_relative 'aws-sdk-efs/client_api'
+require_relative 'aws-sdk-efs/plugins/endpoints.rb'
 require_relative 'aws-sdk-efs/client'
 require_relative 'aws-sdk-efs/errors'
 require_relative 'aws-sdk-efs/resource'
+require_relative 'aws-sdk-efs/endpoint_parameters'
+require_relative 'aws-sdk-efs/endpoint_provider'
+require_relative 'aws-sdk-efs/endpoints'
 require_relative 'aws-sdk-efs/customizations'
 
 # This module provides support for Amazon Elastic File System. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-efs/customizations'
 # @!group service
 module Aws::EFS
 
-  GEM_VERSION = '1.54.0'
+  GEM_VERSION = '1.55.0'
 
 end

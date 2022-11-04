@@ -1,0 +1,33 @@
+{
+  "version": "1.1",
+  "partitions": [
+    {
+      "id": "test",
+      "regionRegex": "^(us|eu|ap|sa|ca|me|af)-\\w+-\\d+$",
+      "regions": {
+        "us-peccy-1": {}
+      },
+      "outputs": {
+        "name": "test",
+        "dnsSuffix": "test.com",
+        "dualStackDnsSuffix": "test.aws",
+        "supportsFIPS": true,
+        "supportsDualStack": true
+      }
+    },
+    {
+      "id": "aws",
+      "regionRegex": "^(us|eu|ap|sa|ca|me|af)-\\w+-\\d+$",
+      "regions": {
+        "new-region": {}
+      },
+      "outputs": {
+        "name": "aws",
+        "dnsSuffix": "amazonaws.com",
+        "dualStackDnsSuffix": "api.aws",
+        "supportsFIPS": true,
+        "supportsDualStack": true
+      }
+    }
+  ]
+}

@@ -4604,6 +4604,8 @@ module Aws::Glue
     #           header: ["NameString"],
     #           disable_value_trimming: false,
     #           allow_single_column: false,
+    #           custom_datatype_configured: false,
+    #           custom_datatypes: ["NameString"],
     #         },
     #       }
     #
@@ -4895,6 +4897,8 @@ module Aws::Glue
     #         header: ["NameString"],
     #         disable_value_trimming: false,
     #         allow_single_column: false,
+    #         custom_datatype_configured: false,
+    #         custom_datatypes: ["NameString"],
     #       }
     #
     # @!attribute [rw] name
@@ -4928,6 +4932,14 @@ module Aws::Glue
     #   Enables the processing of files that contain only one column.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_datatype_configured
+    #   Enables the configuration of custom datatypes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_datatypes
+    #   Creates a list of supported custom datatypes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCsvClassifierRequest AWS API Documentation
     #
     class CreateCsvClassifierRequest < Struct.new(
@@ -4937,7 +4949,9 @@ module Aws::Glue
       :contains_header,
       :header,
       :disable_value_trimming,
-      :allow_single_column)
+      :allow_single_column,
+      :custom_datatype_configured,
+      :custom_datatypes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7768,6 +7782,16 @@ module Aws::Glue
     #   Enables the processing of files that contain only one column.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_datatype_configured
+    #   Enables the custom datatype to be configured.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_datatypes
+    #   A list of custom datatypes including "BINARY", "BOOLEAN",
+    #   "DATE", "DECIMAL", "DOUBLE", "FLOAT", "INT", "LONG",
+    #   "SHORT", "STRING", "TIMESTAMP".
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CsvClassifier AWS API Documentation
     #
     class CsvClassifier < Struct.new(
@@ -7780,7 +7804,9 @@ module Aws::Glue
       :contains_header,
       :header,
       :disable_value_trimming,
-      :allow_single_column)
+      :allow_single_column,
+      :custom_datatype_configured,
+      :custom_datatypes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24098,6 +24124,8 @@ module Aws::Glue
     #           header: ["NameString"],
     #           disable_value_trimming: false,
     #           allow_single_column: false,
+    #           custom_datatype_configured: false,
+    #           custom_datatypes: ["NameString"],
     #         },
     #       }
     #
@@ -24627,6 +24655,8 @@ module Aws::Glue
     #         header: ["NameString"],
     #         disable_value_trimming: false,
     #         allow_single_column: false,
+    #         custom_datatype_configured: false,
+    #         custom_datatypes: ["NameString"],
     #       }
     #
     # @!attribute [rw] name
@@ -24660,6 +24690,14 @@ module Aws::Glue
     #   Enables the processing of files that contain only one column.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_datatype_configured
+    #   Specifies the configuration of custom datatypes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_datatypes
+    #   Specifies a list of supported custom datatypes.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCsvClassifierRequest AWS API Documentation
     #
     class UpdateCsvClassifierRequest < Struct.new(
@@ -24669,7 +24707,9 @@ module Aws::Glue
       :contains_header,
       :header,
       :disable_value_trimming,
-      :allow_single_column)
+      :allow_single_column,
+      :custom_datatype_configured,
+      :custom_datatypes)
       SENSITIVE = []
       include Aws::Structure
     end

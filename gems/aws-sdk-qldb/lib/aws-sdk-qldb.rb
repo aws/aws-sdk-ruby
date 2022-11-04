@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-qldb/types'
 require_relative 'aws-sdk-qldb/client_api'
+require_relative 'aws-sdk-qldb/plugins/endpoints.rb'
 require_relative 'aws-sdk-qldb/client'
 require_relative 'aws-sdk-qldb/errors'
 require_relative 'aws-sdk-qldb/resource'
+require_relative 'aws-sdk-qldb/endpoint_parameters'
+require_relative 'aws-sdk-qldb/endpoint_provider'
+require_relative 'aws-sdk-qldb/endpoints'
 require_relative 'aws-sdk-qldb/customizations'
 
 # This module provides support for Amazon QLDB. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-qldb/customizations'
 # @!group service
 module Aws::QLDB
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

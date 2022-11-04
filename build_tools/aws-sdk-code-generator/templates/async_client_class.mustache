@@ -66,11 +66,11 @@ module {{module_name}}
 
       {{#eventstream_input}}
       req.context[:input_event_stream_handler] = input_event_stream_handler
-      req.handlers.add(Aws::Binary::EncodeHandler, priority: 95)
+      req.handlers.add(Aws::Binary::EncodeHandler, priority: 55)
       {{/eventstream_input}}
       {{#eventstream_output}}
       req.context[:output_event_stream_handler] = output_event_stream_handler
-      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 55)
       {{/eventstream_output}}
 
       req.send_request(options{{{block_option}}})

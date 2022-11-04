@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appintegrationsservice/types'
 require_relative 'aws-sdk-appintegrationsservice/client_api'
+require_relative 'aws-sdk-appintegrationsservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-appintegrationsservice/client'
 require_relative 'aws-sdk-appintegrationsservice/errors'
 require_relative 'aws-sdk-appintegrationsservice/resource'
+require_relative 'aws-sdk-appintegrationsservice/endpoint_parameters'
+require_relative 'aws-sdk-appintegrationsservice/endpoint_provider'
+require_relative 'aws-sdk-appintegrationsservice/endpoints'
 require_relative 'aws-sdk-appintegrationsservice/customizations'
 
 # This module provides support for Amazon AppIntegrations Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-appintegrationsservice/customizations'
 # @!group service
 module Aws::AppIntegrationsService
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end

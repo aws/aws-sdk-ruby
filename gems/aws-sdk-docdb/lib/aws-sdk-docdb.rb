@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-docdb/types'
 require_relative 'aws-sdk-docdb/client_api'
+require_relative 'aws-sdk-docdb/plugins/endpoints.rb'
 require_relative 'aws-sdk-docdb/client'
 require_relative 'aws-sdk-docdb/errors'
 require_relative 'aws-sdk-docdb/waiters'
 require_relative 'aws-sdk-docdb/resource'
+require_relative 'aws-sdk-docdb/endpoint_parameters'
+require_relative 'aws-sdk-docdb/endpoint_provider'
+require_relative 'aws-sdk-docdb/endpoints'
 require_relative 'aws-sdk-docdb/customizations'
 
 # This module provides support for Amazon DocumentDB with MongoDB compatibility. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-docdb/customizations'
 # @!group service
 module Aws::DocDB
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end

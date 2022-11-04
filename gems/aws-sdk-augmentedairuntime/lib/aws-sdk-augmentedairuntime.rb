@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-augmentedairuntime/types'
 require_relative 'aws-sdk-augmentedairuntime/client_api'
+require_relative 'aws-sdk-augmentedairuntime/plugins/endpoints.rb'
 require_relative 'aws-sdk-augmentedairuntime/client'
 require_relative 'aws-sdk-augmentedairuntime/errors'
 require_relative 'aws-sdk-augmentedairuntime/resource'
+require_relative 'aws-sdk-augmentedairuntime/endpoint_parameters'
+require_relative 'aws-sdk-augmentedairuntime/endpoint_provider'
+require_relative 'aws-sdk-augmentedairuntime/endpoints'
 require_relative 'aws-sdk-augmentedairuntime/customizations'
 
 # This module provides support for Amazon Augmented AI Runtime. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-augmentedairuntime/customizations'
 # @!group service
 module Aws::AugmentedAIRuntime
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end

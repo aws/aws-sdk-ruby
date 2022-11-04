@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-ecs/types'
 require_relative 'aws-sdk-ecs/client_api'
+require_relative 'aws-sdk-ecs/plugins/endpoints.rb'
 require_relative 'aws-sdk-ecs/client'
 require_relative 'aws-sdk-ecs/errors'
 require_relative 'aws-sdk-ecs/waiters'
 require_relative 'aws-sdk-ecs/resource'
+require_relative 'aws-sdk-ecs/endpoint_parameters'
+require_relative 'aws-sdk-ecs/endpoint_provider'
+require_relative 'aws-sdk-ecs/endpoints'
 require_relative 'aws-sdk-ecs/customizations'
 
 # This module provides support for Amazon EC2 Container Service. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-ecs/customizations'
 # @!group service
 module Aws::ECS
 
-  GEM_VERSION = '1.103.0'
+  GEM_VERSION = '1.104.0'
 
 end

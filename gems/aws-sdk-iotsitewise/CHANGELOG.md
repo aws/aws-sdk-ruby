@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-11-02)
+------------------
+
+* Feature - This release adds the ListAssetModelProperties and ListAssetProperties APIs. You can list all properties that belong to a single asset model or asset using these two new APIs.
+
+1.46.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2022-09-07)
 ------------------
 

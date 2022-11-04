@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-iam/types'
 require_relative 'aws-sdk-iam/client_api'
+require_relative 'aws-sdk-iam/plugins/endpoints.rb'
 require_relative 'aws-sdk-iam/client'
 require_relative 'aws-sdk-iam/errors'
 require_relative 'aws-sdk-iam/waiters'
 require_relative 'aws-sdk-iam/resource'
+require_relative 'aws-sdk-iam/endpoint_parameters'
+require_relative 'aws-sdk-iam/endpoint_provider'
+require_relative 'aws-sdk-iam/endpoints'
 require_relative 'aws-sdk-iam/access_key'
 require_relative 'aws-sdk-iam/access_key_pair'
 require_relative 'aws-sdk-iam/account_password_policy'
@@ -70,6 +74,6 @@ require_relative 'aws-sdk-iam/customizations'
 # @!group service
 module Aws::IAM
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.73.0'
 
 end

@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codedeploy/types'
 require_relative 'aws-sdk-codedeploy/client_api'
+require_relative 'aws-sdk-codedeploy/plugins/endpoints.rb'
 require_relative 'aws-sdk-codedeploy/client'
 require_relative 'aws-sdk-codedeploy/errors'
 require_relative 'aws-sdk-codedeploy/waiters'
 require_relative 'aws-sdk-codedeploy/resource'
+require_relative 'aws-sdk-codedeploy/endpoint_parameters'
+require_relative 'aws-sdk-codedeploy/endpoint_provider'
+require_relative 'aws-sdk-codedeploy/endpoints'
 require_relative 'aws-sdk-codedeploy/customizations'
 
 # This module provides support for AWS CodeDeploy. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-codedeploy/customizations'
 # @!group service
 module Aws::CodeDeploy
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.51.0'
 
 end

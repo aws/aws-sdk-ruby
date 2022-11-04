@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:appstream)
@@ -79,8 +79,9 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::AppStream::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::AppStream
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::AppStream
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::AppStream::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::AppStream::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -469,7 +486,7 @@ module Aws::AppStream
     #       {
     #         stack_name: "String", # required
     #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #         send_email_notification: false,
     #       },
     #     ],
@@ -480,7 +497,7 @@ module Aws::AppStream
     #   resp.errors #=> Array
     #   resp.errors[0].user_stack_association.stack_name #=> String
     #   resp.errors[0].user_stack_association.user_name #=> String
-    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
     #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INTERNAL_ERROR"
     #   resp.errors[0].error_message #=> String
@@ -510,7 +527,7 @@ module Aws::AppStream
     #       {
     #         stack_name: "String", # required
     #         user_name: "Username", # required
-    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #         authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #         send_email_notification: false,
     #       },
     #     ],
@@ -521,7 +538,7 @@ module Aws::AppStream
     #   resp.errors #=> Array
     #   resp.errors[0].user_stack_association.stack_name #=> String
     #   resp.errors[0].user_stack_association.user_name #=> String
-    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.errors[0].user_stack_association.authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.errors[0].user_stack_association.send_email_notification #=> Boolean
     #   resp.errors[0].error_code #=> String, one of "STACK_NOT_FOUND", "USER_NAME_NOT_FOUND", "DIRECTORY_NOT_FOUND", "INTERNAL_ERROR"
     #   resp.errors[0].error_message #=> String
@@ -782,6 +799,18 @@ module Aws::AppStream
     #   The credentials for the service account used by the fleet or image
     #   builder to connect to the directory.
     #
+    # @option params [Types::CertificateBasedAuthProperties] :certificate_based_auth_properties
+    #   The certificate-based authentication properties used to authenticate
+    #   SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    #   domain-joined streaming instances. Fallback is turned on by default
+    #   when certificate-based authentication is **Enabled** . Fallback allows
+    #   users to log in using their AD domain password if certificate-based
+    #   authentication is unsuccessful, or to unlock a desktop lock screen.
+    #   **Enabled\_no\_directory\_login\_fallback** enables certificate-based
+    #   authentication, but does not allow users to log in using their AD
+    #   domain password. Users will be disconnected to re-authenticate using
+    #   certificates.
+    #
     # @return [Types::CreateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDirectoryConfigResult#directory_config #directory_config} => Types::DirectoryConfig
@@ -795,6 +824,10 @@ module Aws::AppStream
     #       account_name: "AccountName", # required
     #       account_password: "AccountPassword", # required
     #     },
+    #     certificate_based_auth_properties: {
+    #       status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+    #       certificate_authority_arn: "Arn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -805,6 +838,8 @@ module Aws::AppStream
     #   resp.directory_config.service_account_credentials.account_name #=> String
     #   resp.directory_config.service_account_credentials.account_password #=> String
     #   resp.directory_config.created_time #=> Time
+    #   resp.directory_config.certificate_based_auth_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"
+    #   resp.directory_config.certificate_based_auth_properties.certificate_authority_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfig AWS API Documentation
     #
@@ -878,8 +913,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a fleet. A fleet consists of streaming instances that run a
-    # specified image when using Always-On or On-Demand.
+    # Creates a fleet. A fleet consists of streaming instances that your
+    # users access for their applications and desktops.
     #
     # @option params [required, String] :name
     #   A unique name for the fleet.
@@ -899,6 +934,10 @@ module Aws::AppStream
     #   * stream.standard.medium
     #
     #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
     #
     #   * stream.compute.large
     #
@@ -965,6 +1004,12 @@ module Aws::AppStream
     #   * stream.standard.small
     #
     #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
     #
     # @option params [String] :fleet_type
     #   The fleet type.
@@ -1861,7 +1906,7 @@ module Aws::AppStream
     #     message_action: "SUPPRESS", # accepts SUPPRESS, RESEND
     #     first_name: "UserAttributeValue",
     #     last_name: "UserAttributeValue",
-    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUser AWS API Documentation
@@ -2200,7 +2245,7 @@ module Aws::AppStream
     #
     #   resp = client.delete_user({
     #     user_name: "Username", # required
-    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUser AWS API Documentation
@@ -2409,6 +2454,8 @@ module Aws::AppStream
     #   resp.directory_configs[0].service_account_credentials.account_name #=> String
     #   resp.directory_configs[0].service_account_credentials.account_password #=> String
     #   resp.directory_configs[0].created_time #=> Time
+    #   resp.directory_configs[0].certificate_based_auth_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"
+    #   resp.directory_configs[0].certificate_based_auth_properties.certificate_authority_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigs AWS API Documentation
@@ -2807,7 +2854,7 @@ module Aws::AppStream
     #     user_id: "UserId",
     #     next_token: "String",
     #     limit: 1,
-    #     authentication_type: "API", # accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
     #   })
     #
     # @example Response structure
@@ -2821,7 +2868,7 @@ module Aws::AppStream
     #   resp.sessions[0].connection_state #=> String, one of "CONNECTED", "NOT_CONNECTED"
     #   resp.sessions[0].start_time #=> Time
     #   resp.sessions[0].max_expiration_time #=> Time
-    #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
     #   resp.sessions[0].network_access_configuration.eni_id #=> String
     #   resp.next_token #=> String
@@ -2980,7 +3027,7 @@ module Aws::AppStream
     #   resp = client.describe_user_stack_associations({
     #     stack_name: "String",
     #     user_name: "Username",
-    #     authentication_type: "API", # accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -2990,7 +3037,7 @@ module Aws::AppStream
     #   resp.user_stack_associations #=> Array
     #   resp.user_stack_associations[0].stack_name #=> String
     #   resp.user_stack_associations[0].user_name #=> String
-    #   resp.user_stack_associations[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.user_stack_associations[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.user_stack_associations[0].send_email_notification #=> Boolean
     #   resp.next_token #=> String
     #
@@ -3025,7 +3072,7 @@ module Aws::AppStream
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_users({
-    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -3040,7 +3087,7 @@ module Aws::AppStream
     #   resp.users[0].first_name #=> String
     #   resp.users[0].last_name #=> String
     #   resp.users[0].created_time #=> Time
-    #   resp.users[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.users[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsers AWS API Documentation
@@ -3072,7 +3119,7 @@ module Aws::AppStream
     #
     #   resp = client.disable_user({
     #     user_name: "Username", # required
-    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUser AWS API Documentation
@@ -3189,7 +3236,7 @@ module Aws::AppStream
     #
     #   resp = client.enable_user({
     #     user_name: "Username", # required
-    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL
+    #     authentication_type: "API", # required, accepts API, SAML, USERPOOL, AWS_AD
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUser AWS API Documentation
@@ -3726,6 +3773,18 @@ module Aws::AppStream
     #   The credentials for the service account used by the fleet or image
     #   builder to connect to the directory.
     #
+    # @option params [Types::CertificateBasedAuthProperties] :certificate_based_auth_properties
+    #   The certificate-based authentication properties used to authenticate
+    #   SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    #   domain-joined streaming instances. Fallback is turned on by default
+    #   when certificate-based authentication is **Enabled** . Fallback allows
+    #   users to log in using their AD domain password if certificate-based
+    #   authentication is unsuccessful, or to unlock a desktop lock screen.
+    #   **Enabled\_no\_directory\_login\_fallback** enables certificate-based
+    #   authentication, but does not allow users to log in using their AD
+    #   domain password. Users will be disconnected to re-authenticate using
+    #   certificates.
+    #
     # @return [Types::UpdateDirectoryConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDirectoryConfigResult#directory_config #directory_config} => Types::DirectoryConfig
@@ -3739,6 +3798,10 @@ module Aws::AppStream
     #       account_name: "AccountName", # required
     #       account_password: "AccountPassword", # required
     #     },
+    #     certificate_based_auth_properties: {
+    #       status: "DISABLED", # accepts DISABLED, ENABLED, ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+    #       certificate_authority_arn: "Arn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3749,6 +3812,8 @@ module Aws::AppStream
     #   resp.directory_config.service_account_credentials.account_name #=> String
     #   resp.directory_config.service_account_credentials.account_password #=> String
     #   resp.directory_config.created_time #=> Time
+    #   resp.directory_config.certificate_based_auth_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"
+    #   resp.directory_config.certificate_based_auth_properties.certificate_authority_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfig AWS API Documentation
     #
@@ -3858,6 +3923,10 @@ module Aws::AppStream
     #
     #   * stream.standard.large
     #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
+    #
     #   * stream.compute.large
     #
     #   * stream.compute.xlarge
@@ -3923,6 +3992,12 @@ module Aws::AppStream
     #   * stream.standard.small
     #
     #   * stream.standard.medium
+    #
+    #   * stream.standard.large
+    #
+    #   * stream.standard.xlarge
+    #
+    #   * stream.standard.2xlarge
     #
     # @option params [Types::ComputeCapacity] :compute_capacity
     #   The desired capacity for the fleet. This is not allowed for Elastic
@@ -4309,7 +4384,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -458,6 +458,10 @@ module Aws::Kafka
     #   port.
     #   @return [String]
     #
+    # @!attribute [rw] storage_mode
+    #   This controls storage mode for supported storage tiers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterInfo AWS API Documentation
     #
     class ClusterInfo < Struct.new(
@@ -478,7 +482,8 @@ module Aws::Kafka
       :state_info,
       :tags,
       :zookeeper_connect_string,
-      :zookeeper_connect_string_tls)
+      :zookeeper_connect_string_tls,
+      :storage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -826,6 +831,7 @@ module Aws::Kafka
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         storage_mode: "LOCAL", # accepts LOCAL, TIERED
     #       }
     #
     # @!attribute [rw] broker_node_group_info
@@ -875,6 +881,10 @@ module Aws::Kafka
     #   Create tags when creating the cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] storage_mode
+    #   This controls storage mode for supported storage tiers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -888,7 +898,8 @@ module Aws::Kafka
       :logging_info,
       :number_of_broker_nodes,
       :open_monitoring,
-      :tags)
+      :tags,
+      :storage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1879,6 +1890,7 @@ module Aws::Kafka
     #             },
     #           },
     #           number_of_broker_nodes: 1, # required
+    #           storage_mode: "LOCAL", # accepts LOCAL, TIERED
     #         },
     #         serverless: {
     #           vpc_configs: [ # required
@@ -2145,6 +2157,7 @@ module Aws::Kafka
     #           },
     #         },
     #         number_of_broker_nodes: 1, # required
+    #         storage_mode: "LOCAL", # accepts LOCAL, TIERED
     #       }
     #
     # @!attribute [rw] broker_node_group_info
@@ -2186,6 +2199,10 @@ module Aws::Kafka
     #   The number of brokers in the cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] storage_mode
+    #   This controls storage mode for supported storage tiers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ProvisionedRequest AWS API Documentation
     #
     class ProvisionedRequest < Struct.new(
@@ -2197,7 +2214,8 @@ module Aws::Kafka
       :open_monitoring,
       :kafka_version,
       :logging_info,
-      :number_of_broker_nodes)
+      :number_of_broker_nodes,
+      :storage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2257,6 +2275,10 @@ module Aws::Kafka
     #   cluster on a TLS port.
     #   @return [String]
     #
+    # @!attribute [rw] storage_mode
+    #   This controls storage mode for supported storage tiers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Provisioned AWS API Documentation
     #
     class Provisioned < Struct.new(
@@ -2269,7 +2291,8 @@ module Aws::Kafka
       :logging_info,
       :number_of_broker_nodes,
       :zookeeper_connect_string,
-      :zookeeper_connect_string_tls)
+      :zookeeper_connect_string_tls,
+      :storage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2809,6 +2832,10 @@ module Aws::Kafka
     #   Information about the broker access configuration.
     #   @return [Types::ConnectivityInfo]
     #
+    # @!attribute [rw] storage_mode
+    #   This controls storage mode for supported storage tiers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -2822,7 +2849,8 @@ module Aws::Kafka
       :instance_type,
       :client_authentication,
       :encryption_info,
-      :connectivity_info)
+      :connectivity_info,
+      :storage_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3726,6 +3754,73 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateSecurityResponse AWS API Documentation
     #
     class UpdateSecurityResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request object for UpdateStorageApi.
+    #
+    # @note When making an API call, you may pass UpdateStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         current_version: "__string", # required
+    #         provisioned_throughput: {
+    #           enabled: false,
+    #           volume_throughput: 1,
+    #         },
+    #         storage_mode: "LOCAL", # accepts LOCAL, TIERED
+    #         volume_size_gb: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The version of cluster to update from. A successful operation will
+    #   then generate a new version.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   EBS volume provisioned throughput information.
+    #   @return [Types::ProvisionedThroughput]
+    #
+    # @!attribute [rw] storage_mode
+    #   Controls storage mode for supported storage tiers.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size_gb
+    #   size of the EBS volume to update.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateStorageRequest AWS API Documentation
+    #
+    class UpdateStorageRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :provisioned_throughput,
+      :storage_mode,
+      :volume_size_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateStorageResponse Api.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateStorageResponse AWS API Documentation
+    #
+    class UpdateStorageResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
       SENSITIVE = []

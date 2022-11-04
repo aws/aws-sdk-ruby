@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appregistry/types'
 require_relative 'aws-sdk-appregistry/client_api'
+require_relative 'aws-sdk-appregistry/plugins/endpoints.rb'
 require_relative 'aws-sdk-appregistry/client'
 require_relative 'aws-sdk-appregistry/errors'
 require_relative 'aws-sdk-appregistry/resource'
+require_relative 'aws-sdk-appregistry/endpoint_parameters'
+require_relative 'aws-sdk-appregistry/endpoint_provider'
+require_relative 'aws-sdk-appregistry/endpoints'
 require_relative 'aws-sdk-appregistry/customizations'
 
 # This module provides support for AWS Service Catalog App Registry. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-appregistry/customizations'
 # @!group service
 module Aws::AppRegistry
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.17.0'
 
 end

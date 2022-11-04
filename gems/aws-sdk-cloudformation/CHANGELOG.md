@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-10-28)
+------------------
+
+* Feature - This release adds more fields to improves visibility of AWS CloudFormation StackSets information in following APIs: ListStackInstances, DescribeStackInstance, ListStackSetOperationResults, ListStackSetOperations, DescribeStackSetOperation.
+
+1.71.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.70.0 (2022-07-06)
 ------------------
 

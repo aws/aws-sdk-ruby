@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appconfig/types'
 require_relative 'aws-sdk-appconfig/client_api'
+require_relative 'aws-sdk-appconfig/plugins/endpoints.rb'
 require_relative 'aws-sdk-appconfig/client'
 require_relative 'aws-sdk-appconfig/errors'
 require_relative 'aws-sdk-appconfig/resource'
+require_relative 'aws-sdk-appconfig/endpoint_parameters'
+require_relative 'aws-sdk-appconfig/endpoint_provider'
+require_relative 'aws-sdk-appconfig/endpoints'
 require_relative 'aws-sdk-appconfig/customizations'
 
 # This module provides support for Amazon AppConfig. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-appconfig/customizations'
 # @!group service
 module Aws::AppConfig
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

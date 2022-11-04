@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-account/types'
 require_relative 'aws-sdk-account/client_api'
+require_relative 'aws-sdk-account/plugins/endpoints.rb'
 require_relative 'aws-sdk-account/client'
 require_relative 'aws-sdk-account/errors'
 require_relative 'aws-sdk-account/resource'
+require_relative 'aws-sdk-account/endpoint_parameters'
+require_relative 'aws-sdk-account/endpoint_provider'
+require_relative 'aws-sdk-account/endpoints'
 require_relative 'aws-sdk-account/customizations'
 
 # This module provides support for AWS Account. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-account/customizations'
 # @!group service
 module Aws::Account
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

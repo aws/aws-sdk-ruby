@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2022-10-24)
+------------------
+
+* Feature - Added support for self-signed certificates when using object storage locations; added BytesCompressed to the TaskExecution response.
+
 1.49.0 (2022-07-15)
 ------------------
 

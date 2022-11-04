@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-codeartifact/types'
 require_relative 'aws-sdk-codeartifact/client_api'
+require_relative 'aws-sdk-codeartifact/plugins/endpoints.rb'
 require_relative 'aws-sdk-codeartifact/client'
 require_relative 'aws-sdk-codeartifact/errors'
 require_relative 'aws-sdk-codeartifact/resource'
+require_relative 'aws-sdk-codeartifact/endpoint_parameters'
+require_relative 'aws-sdk-codeartifact/endpoint_provider'
+require_relative 'aws-sdk-codeartifact/endpoints'
 require_relative 'aws-sdk-codeartifact/customizations'
 
 # This module provides support for CodeArtifact. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-codeartifact/customizations'
 # @!group service
 module Aws::CodeArtifact
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-10-27)
+------------------
+
+* Feature - Add support NetworkFirewall Managed Rule Group Override flag in GetViolationDetails API
+
+1.51.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2022-07-14)
 ------------------
 

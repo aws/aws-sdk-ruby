@@ -240,6 +240,7 @@ module Aws::SSMIncidents
 
     CreateReplicationSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateReplicationSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionMapInput, required: true, location_name: "regions"))
+    CreateReplicationSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateReplicationSetInput.struct_class = Types::CreateReplicationSetInput
 
     CreateReplicationSetOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-appmesh/types'
 require_relative 'aws-sdk-appmesh/client_api'
+require_relative 'aws-sdk-appmesh/plugins/endpoints.rb'
 require_relative 'aws-sdk-appmesh/client'
 require_relative 'aws-sdk-appmesh/errors'
 require_relative 'aws-sdk-appmesh/resource'
+require_relative 'aws-sdk-appmesh/endpoint_parameters'
+require_relative 'aws-sdk-appmesh/endpoint_provider'
+require_relative 'aws-sdk-appmesh/endpoints'
 require_relative 'aws-sdk-appmesh/customizations'
 
 # This module provides support for AWS App Mesh. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-appmesh/customizations'
 # @!group service
 module Aws::AppMesh
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-10-26)
+------------------
+
+* Feature - This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.
+
+1.51.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2022-06-20)
 ------------------
 

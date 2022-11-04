@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-10-26)
+------------------
+
+* Feature - Added a new cluster-level attribute to set the capacity range for Neptune Serverless instances.
+
+1.47.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2022-06-08)
 ------------------
 

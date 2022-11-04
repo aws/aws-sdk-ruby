@@ -745,6 +745,10 @@ module Aws::Neptune
     #         enable_iam_database_authentication: false,
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #         global_cluster_identifier: "GlobalClusterIdentifier",
     #         source_region: "String",
     #       }
@@ -965,6 +969,18 @@ module Aws::Neptune
     #   protection is enabled. By default, deletion protection is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in
+    #   the *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @!attribute [rw] global_cluster_identifier
     #   The ID of the Neptune global database to which this new DB cluster
     #   should be added.
@@ -1003,6 +1019,7 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
+      :serverless_v2_scaling_configuration,
       :global_cluster_identifier,
       :source_region)
       SENSITIVE = []
@@ -2131,6 +2148,17 @@ module Aws::Neptune
     #   Time at which the DB cluster will be automatically restarted.
     #   @return [Time]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Shows the scaling configuration for a Neptune Serverless DB cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in
+    #   the *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #   @return [Types::ServerlessV2ScalingConfigurationInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -2173,7 +2201,8 @@ module Aws::Neptune
       :enabled_cloudwatch_logs_exports,
       :deletion_protection,
       :cross_account_clone,
-      :automatic_restart_time)
+      :automatic_restart_time,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6231,6 +6260,10 @@ module Aws::Neptune
     #         db_instance_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -6417,6 +6450,18 @@ module Aws::Neptune
     #   that is created.*
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in
+    #   the *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -6437,7 +6482,8 @@ module Aws::Neptune
       :allow_major_version_upgrade,
       :db_instance_parameter_group_name,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8136,6 +8182,10 @@ module Aws::Neptune
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -8276,6 +8326,18 @@ module Aws::Neptune
     #   DB cluster that is created.*
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in
+    #   the *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -8295,7 +8357,8 @@ module Aws::Neptune
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8339,6 +8402,10 @@ module Aws::Neptune
     #         enable_cloudwatch_logs_exports: ["String"],
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8495,6 +8562,18 @@ module Aws::Neptune
     #   protection is enabled. By default, deletion protection is disabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of a Neptune Serverless DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in
+    #   the *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -8512,7 +8591,8 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
-      :deletion_protection)
+      :deletion_protection,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8549,6 +8629,74 @@ module Aws::Neptune
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
     #
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # Contains the scaling configuration of a Neptune Serverless DB cluster.
+    #
+    # For more information, see [Using Amazon Neptune Serverless][1] in the
+    # *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
+    # @note When making an API call, you may pass ServerlessV2ScalingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         min_capacity: 1.0,
+    #         max_capacity: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Neptune capacity units (NCUs) for a DB
+    #   instance in a Neptune Serverless cluster. You can specify NCU values
+    #   in half-step increments, such as 8, 8.5, 9, and so on.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Neptune capacity units (NCUs) for a DB
+    #   instance in a Neptune Serverless cluster. You can specify NCU values
+    #   in half-step increments, such as 40, 40.5, 41, and so on.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ServerlessV2ScalingConfiguration AWS API Documentation
+    #
+    class ServerlessV2ScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shows the scaling configuration for a Neptune Serverless DB cluster.
+    #
+    # For more information, see [Using Amazon Neptune Serverless][1] in the
+    # *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Neptune capacity units (NCUs) for a DB
+    #   instance in a Neptune Serverless cluster. You can specify NCU values
+    #   in half-step increments, such as 8, 8.5, 9, and so on.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Neptune capacity units (NCUs) for a DB
+    #   instance in a Neptune Serverless cluster. You can specify NCU values
+    #   in half-step increments, such as 40, 40.5, 41, and so on.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ServerlessV2ScalingConfigurationInfo AWS API Documentation
+    #
+    class ServerlessV2ScalingConfigurationInfo < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # You have exceeded the maximum number of accounts that you can share a
     # manual DB snapshot with.

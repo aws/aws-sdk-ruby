@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:globalaccelerator)
@@ -79,8 +79,9 @@ module Aws::GlobalAccelerator
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::GlobalAccelerator::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::GlobalAccelerator
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::GlobalAccelerator
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::GlobalAccelerator::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::GlobalAccelerator::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -418,6 +435,69 @@ module Aws::GlobalAccelerator
     # @param [Hash] params ({})
     def add_custom_routing_endpoints(params = {}, options = {})
       req = build_request(:add_custom_routing_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Add endpoints to an endpoint group. The `AddEndpoints` API operation
+    # is the recommended option for adding endpoints. The alternative
+    # options are to add endpoints when you create an endpoint group (with
+    # the [CreateEndpointGroup][1] API) or when you update an endpoint group
+    # (with the [UpdateEndpointGroup][2] API).
+    #
+    # There are two advantages to using `AddEndpoints` to add endpoints:
+    #
+    # * It's faster, because Global Accelerator only has to resolve the new
+    #   endpoints that you're adding.
+    #
+    # * It's more convenient, because you don't need to specify all of the
+    #   current endpoints that are already in the endpoint group in addition
+    #   to the new endpoints that you want to add.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_CreateEndpointGroup.html
+    # [2]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
+    #
+    # @option params [required, Array<Types::EndpointConfiguration>] :endpoint_configurations
+    #   The list of endpoint objects.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #
+    # @return [Types::AddEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddEndpointsResponse#endpoint_descriptions #endpoint_descriptions} => Array&lt;Types::EndpointDescription&gt;
+    #   * {Types::AddEndpointsResponse#endpoint_group_arn #endpoint_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_endpoints({
+    #     endpoint_configurations: [ # required
+    #       {
+    #         endpoint_id: "GenericString",
+    #         weight: 1,
+    #         client_ip_preservation_enabled: false,
+    #       },
+    #     ],
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_descriptions #=> Array
+    #   resp.endpoint_descriptions[0].endpoint_id #=> String
+    #   resp.endpoint_descriptions[0].weight #=> Integer
+    #   resp.endpoint_descriptions[0].health_state #=> String, one of "INITIAL", "HEALTHY", "UNHEALTHY"
+    #   resp.endpoint_descriptions[0].health_reason #=> String
+    #   resp.endpoint_descriptions[0].client_ip_preservation_enabled #=> Boolean
+    #   resp.endpoint_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddEndpoints AWS API Documentation
+    #
+    # @overload add_endpoints(params = {})
+    # @param [Hash] params ({})
+    def add_endpoints(params = {}, options = {})
+      req = build_request(:add_endpoints, params)
       req.send_request(options)
     end
 
@@ -2325,6 +2405,57 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Remove endpoints from an endpoint group.
+    #
+    # The `RemoveEndpoints` API operation is the recommended option for
+    # removing endpoints. The alternative is to remove endpoints by updating
+    # an endpoint group by using the [UpdateEndpointGroup][1] API operation.
+    # There are two advantages to using `AddEndpoints` to remove endpoints
+    # instead:
+    #
+    # * It's more convenient, because you only need to specify the
+    #   endpoints that you want to remove. With the `UpdateEndpointGroup`
+    #   API operation, you must specify all of the endpoints in the endpoint
+    #   group except the ones that you want to remove from the group.
+    #
+    # * It's faster, because Global Accelerator doesn't need to resolve
+    #   any endpoints. With the `UpdateEndpointGroup` API operation, Global
+    #   Accelerator must resolve all of the endpoints that remain in the
+    #   group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
+    #
+    # @option params [required, Array<Types::EndpointIdentifier>] :endpoint_identifiers
+    #   The identifiers of the endpoints that you want to remove.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_endpoints({
+    #     endpoint_identifiers: [ # required
+    #       {
+    #         endpoint_id: "GenericString", # required
+    #         client_ip_preservation_enabled: false,
+    #       },
+    #     ],
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/RemoveEndpoints AWS API Documentation
+    #
+    # @overload remove_endpoints(params = {})
+    # @param [Hash] params ({})
+    def remove_endpoints(params = {}, options = {})
+      req = build_request(:remove_endpoints, params)
+      req.send_request(options)
+    end
+
     # Add tags to an accelerator resource.
     #
     # For more information, see [Tagging in Global Accelerator][1] in the
@@ -2953,7 +3084,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

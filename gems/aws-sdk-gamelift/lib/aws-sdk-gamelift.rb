@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-gamelift/types'
 require_relative 'aws-sdk-gamelift/client_api'
+require_relative 'aws-sdk-gamelift/plugins/endpoints.rb'
 require_relative 'aws-sdk-gamelift/client'
 require_relative 'aws-sdk-gamelift/errors'
 require_relative 'aws-sdk-gamelift/resource'
+require_relative 'aws-sdk-gamelift/endpoint_parameters'
+require_relative 'aws-sdk-gamelift/endpoint_provider'
+require_relative 'aws-sdk-gamelift/endpoints'
 require_relative 'aws-sdk-gamelift/customizations'
 
 # This module provides support for Amazon GameLift. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-gamelift/customizations'
 # @!group service
 module Aws::GameLift
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end

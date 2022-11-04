@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:devopsguru)
@@ -79,8 +79,9 @@ module Aws::DevOpsGuru
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::DevOpsGuru::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::DevOpsGuru
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::DevOpsGuru
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::DevOpsGuru::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DevOpsGuru::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -449,6 +466,7 @@ module Aws::DevOpsGuru
     #   * {Types::DescribeAccountHealthResponse#open_proactive_insights #open_proactive_insights} => Integer
     #   * {Types::DescribeAccountHealthResponse#metrics_analyzed #metrics_analyzed} => Integer
     #   * {Types::DescribeAccountHealthResponse#resource_hours #resource_hours} => Integer
+    #   * {Types::DescribeAccountHealthResponse#analyzed_resource_count #analyzed_resource_count} => Integer
     #
     # @example Response structure
     #
@@ -456,6 +474,7 @@ module Aws::DevOpsGuru
     #   resp.open_proactive_insights #=> Integer
     #   resp.metrics_analyzed #=> Integer
     #   resp.resource_hours #=> Integer
+    #   resp.analyzed_resource_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealth AWS API Documentation
     #
@@ -924,10 +943,12 @@ module Aws::DevOpsGuru
     #   resp.cloud_formation[0].insight.open_proactive_insights #=> Integer
     #   resp.cloud_formation[0].insight.open_reactive_insights #=> Integer
     #   resp.cloud_formation[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
+    #   resp.cloud_formation[0].analyzed_resource_count #=> Integer
     #   resp.service #=> Array
     #   resp.service[0].service_name #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.service[0].insight.open_proactive_insights #=> Integer
     #   resp.service[0].insight.open_reactive_insights #=> Integer
+    #   resp.service[0].analyzed_resource_count #=> Integer
     #   resp.account #=> Array
     #   resp.account[0].account_id #=> String
     #   resp.account[0].insight.open_proactive_insights #=> Integer
@@ -939,6 +960,7 @@ module Aws::DevOpsGuru
     #   resp.tags[0].insight.open_proactive_insights #=> Integer
     #   resp.tags[0].insight.open_reactive_insights #=> Integer
     #   resp.tags[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
+    #   resp.tags[0].analyzed_resource_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationResourceCollectionHealth AWS API Documentation
     #
@@ -997,10 +1019,12 @@ module Aws::DevOpsGuru
     #   resp.cloud_formation[0].insight.open_proactive_insights #=> Integer
     #   resp.cloud_formation[0].insight.open_reactive_insights #=> Integer
     #   resp.cloud_formation[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
+    #   resp.cloud_formation[0].analyzed_resource_count #=> Integer
     #   resp.service #=> Array
     #   resp.service[0].service_name #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.service[0].insight.open_proactive_insights #=> Integer
     #   resp.service[0].insight.open_reactive_insights #=> Integer
+    #   resp.service[0].analyzed_resource_count #=> Integer
     #   resp.next_token #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].app_boundary_key #=> String
@@ -1008,6 +1032,7 @@ module Aws::DevOpsGuru
     #   resp.tags[0].insight.open_proactive_insights #=> Integer
     #   resp.tags[0].insight.open_reactive_insights #=> Integer
     #   resp.tags[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
+    #   resp.tags[0].analyzed_resource_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealth AWS API Documentation
     #
@@ -1579,7 +1604,7 @@ module Aws::DevOpsGuru
     # Returns the list of all log groups that are being monitored and tagged
     # by DevOps Guru.
     #
-    # @option params [required, Types::ListMonitoredResourcesFilters] :filters
+    # @option params [Types::ListMonitoredResourcesFilters] :filters
     #   Filters to determine which monitored resources you want to retrieve.
     #   You can filter by resource type or resource permission status.
     #
@@ -1602,9 +1627,9 @@ module Aws::DevOpsGuru
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_monitored_resources({
-    #     filters: { # required
+    #     filters: {
     #       resource_permission: "FULL_PERMISSION", # required, accepts FULL_PERMISSION, MISSING_PERMISSION
-    #       resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS
+    #       resource_type_filters: ["LOG_GROUPS"], # required, accepts LOG_GROUPS, CLOUDFRONT_DISTRIBUTION, DYNAMODB_TABLE, EC2_NAT_GATEWAY, ECS_CLUSTER, ECS_SERVICE, EKS_CLUSTER, ELASTIC_BEANSTALK_ENVIRONMENT, ELASTIC_LOAD_BALANCER_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER, ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP, ELASTICACHE_CACHE_CLUSTER, ELASTICSEARCH_DOMAIN, KINESIS_STREAM, LAMBDA_FUNCTION, OPEN_SEARCH_SERVICE_DOMAIN, RDS_DB_INSTANCE, RDS_DB_CLUSTER, REDSHIFT_CLUSTER, ROUTE53_HOSTED_ZONE, ROUTE53_HEALTH_CHECK, S3_BUCKET, SAGEMAKER_ENDPOINT, SNS_TOPIC, SQS_QUEUE, STEP_FUNCTIONS_ACTIVITY, STEP_FUNCTIONS_STATE_MACHINE
     #     },
     #     max_results: 1,
     #     next_token: "UuidNextToken",
@@ -1616,6 +1641,13 @@ module Aws::DevOpsGuru
     #   resp.monitored_resource_identifiers[0].monitored_resource_name #=> String
     #   resp.monitored_resource_identifiers[0].type #=> String
     #   resp.monitored_resource_identifiers[0].resource_permission #=> String, one of "FULL_PERMISSION", "MISSING_PERMISSION"
+    #   resp.monitored_resource_identifiers[0].last_updated #=> Time
+    #   resp.monitored_resource_identifiers[0].resource_collection.cloud_formation.stack_names #=> Array
+    #   resp.monitored_resource_identifiers[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.monitored_resource_identifiers[0].resource_collection.tags #=> Array
+    #   resp.monitored_resource_identifiers[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.monitored_resource_identifiers[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.monitored_resource_identifiers[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListMonitoredResources AWS API Documentation
@@ -1893,9 +1925,8 @@ module Aws::DevOpsGuru
 
     # Returns a list of insights in your Amazon Web Services account. You
     # can specify which insights are returned by their start time, one or
-    # more statuses (`ONGOING`, `CLOSED`, and `CLOSED`), one or more
-    # severities (`LOW`, `MEDIUM`, and `HIGH`), and type (`REACTIVE` or
-    # `PROACTIVE`).
+    # more statuses (`ONGOING` or `CLOSED`), one or more severities (`LOW`,
+    # `MEDIUM`, and `HIGH`), and type (`REACTIVE` or `PROACTIVE`).
     #
     # Use the `Filters` parameter to specify status and severity search
     # parameters. Use the `Type` parameter to specify `REACTIVE` or
@@ -2293,7 +2324,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

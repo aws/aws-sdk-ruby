@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cloud9)
@@ -79,8 +79,9 @@ module Aws::Cloud9
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Cloud9::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::Cloud9
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::Cloud9
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::Cloud9::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Cloud9::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -399,10 +416,13 @@ module Aws::Cloud9
     #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
     #   path.
     #
-    #   The default AMI is used if the parameter isn't explicitly assigned a
-    #   value in the request. Because Amazon Linux AMI has ended standard
-    #   support as of December 31, 2020, we recommend you choose Amazon Linux
-    #   2, which includes long term support through 2023.
+    #   The default Amazon Linux AMI is currently used if the parameter isn't
+    #   explicitly assigned a value in the request.
+    #
+    #   In the future the parameter for Amazon Linux will no longer be
+    #   available when you specify an AMI for your instance. Amazon Linux 2
+    #   will then become the default AMI, which is used to launch your
+    #   instance if no parameter is explicitly defined.
     #
     #   <b>AMI aliases </b>
     #
@@ -610,7 +630,7 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Deletes an environment member from an Cloud9 development environment.
+    # Deletes an environment member from a development environment.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to delete the environment member from.
@@ -1211,7 +1231,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

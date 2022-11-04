@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:ssmincidents)
@@ -79,8 +79,9 @@ module Aws::SSMIncidents
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::SSMIncidents::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::SSMIncidents
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::SSMIncidents
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::SSMIncidents::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SSMIncidents::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -355,7 +372,7 @@ module Aws::SSMIncidents
     # Regions with the provided KMS key.
     #
     # @option params [String] :client_token
-    #   A token ensuring that the operation is called only once with the
+    #   A token that ensures that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -364,6 +381,9 @@ module Aws::SSMIncidents
     # @option params [required, Hash<String,Types::RegionMapInputValue>] :regions
     #   The Regions that Incident Manager replicates your data to. You can
     #   have up to three Regions in your replication set.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags to add to the replication set.
     #
     # @return [Types::CreateReplicationSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -377,6 +397,9 @@ module Aws::SSMIncidents
     #       "RegionName" => {
     #         sse_kms_key_id: "SseKmsKey",
     #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -416,8 +439,8 @@ module Aws::SSMIncidents
     #   spaces.
     #
     # @option params [Array<String>] :engagements
-    #   The contacts and escalation plans that the response plan engages
-    #   during an incident.
+    #   The Amazon Resource Name (ARN) for the contacts and escalation plans
+    #   that the response plan engages during an incident.
     #
     # @option params [required, Types::IncidentTemplate] :incident_template
     #   Details used to create an incident when using this response plan.
@@ -774,7 +797,7 @@ module Aws::SSMIncidents
     # plan.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of resource policies to display per page of
+    #   The maximum number of resource policies to display for each page of
     #   results.
     #
     # @option params [String] :next_token
@@ -1238,17 +1261,17 @@ module Aws::SSMIncidents
     # Adds a resource policy to the specified response plan. The resource
     # policy is used to share the response plan using Resource Access
     # Manager (RAM). For more information about cross-account sharing, see
-    # [Setting up cross-account functionality][1].
+    # [Cross-Region and cross-account incident management][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html
+    # [1]: https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-manager-cross-account-cross-region.html
     #
     # @option params [required, String] :policy
     #   Details of the resource policy.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the response plan you're adding the
+    #   The Amazon Resource Name (ARN) of the response plan to add the
     #   resource policy to.
     #
     # @return [Types::PutResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1375,7 +1398,7 @@ module Aws::SSMIncidents
     #   tags to.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A list of tags that you are adding to the response plan.
+    #   A list of tags to add to the response plan.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1404,7 +1427,7 @@ module Aws::SSMIncidents
     #   tag from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The name of the tag you're removing from the response plan.
+    #   The name of the tag to remove from the response plan.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1428,18 +1451,17 @@ module Aws::SSMIncidents
     # final Region in a replication set.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the replication set you're
-    #   updating.
+    #   The Amazon Resource Name (ARN) of the replication set to update.
     #
     # @option params [String] :client_token
-    #   A token ensuring that the operation is called only once with the
+    #   A token that ensures that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, Boolean] :deletion_protected
-    #   Details if deletion protection is enabled or disabled in your account.
+    #   Specifies if deletion protection is turned on or off in your account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1618,7 +1640,7 @@ module Aws::SSMIncidents
     #   updating.
     #
     # @option params [String] :client_token
-    #   A token ensuring that the operation is called only once with the
+    #   A token that ensures that the operation is called only once with the
     #   specified details.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1680,8 +1702,8 @@ module Aws::SSMIncidents
     #   contain spaces.
     #
     # @option params [Array<String>] :engagements
-    #   The contacts and escalation plans that Incident Manager engages at the
-    #   start of the incident.
+    #   The Amazon Resource Name (ARN) for the contacts and escalation plans
+    #   that the response plan engages during an incident.
     #
     # @option params [String] :incident_template_dedupe_string
     #   The string Incident Manager uses to prevent duplicate incidents from
@@ -1712,9 +1734,10 @@ module Aws::SSMIncidents
     #   happened, what's currently happening, and next steps.
     #
     # @option params [Hash<String,String>] :incident_template_tags
-    #   Tags to apply to an incident when calling the `StartIncident` API
-    #   action. To call this action, you must also have permission to call the
-    #   `TagResource` API action for the incident record resource.
+    #   Tags to assign to the template. When the `StartIncident` API action is
+    #   called, Incident Manager assigns the tags specified in the template to
+    #   the incident. To call this action, you must also have permission to
+    #   call the `TagResource` API action for the incident record resource.
     #
     # @option params [String] :incident_template_title
     #   The short format name of the incident. The title can't contain
@@ -1837,7 +1860,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

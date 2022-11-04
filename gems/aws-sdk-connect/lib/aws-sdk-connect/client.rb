@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:connect)
@@ -79,8 +79,9 @@ module Aws::Connect
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Connect::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::Connect
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::Connect
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::Connect::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Connect::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -3518,6 +3535,44 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_security_key(params = {}, options = {})
       req = build_request(:disassociate_security_key, params)
+      req.send_request(options)
+    end
+
+    # Dismisses contacts from an agent’s CCP and returns the agent to an
+    # available state, which allows the agent to receive a new routed
+    # contact. Contacts can only be dismissed if they are in a `MISSED`,
+    # `ERROR`, `ENDED`, or `REJECTED` state in the [Agent Event Stream][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.dismiss_user_contact({
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DismissUserContact AWS API Documentation
+    #
+    # @overload dismiss_user_contact(params = {})
+    # @param [Hash] params ({})
+    def dismiss_user_contact(params = {}, options = {})
+      req = build_request(:dismiss_user_contact, params)
       req.send_request(options)
     end
 
@@ -8778,9 +8833,11 @@ module Aws::Connect
     end
 
     # Updates the traffic distribution for a given traffic distribution
-    # group. For more information about updating a traffic distribution
-    # group see [Update telephony traffic distribution across Amazon Web
-    # Services Regions ][1] in the *Amazon Connect Administrator Guide*.
+    # group.
+    #
+    # For more information about updating a traffic distribution group, see
+    # [Update telephony traffic distribution across Amazon Web Services
+    # Regions ][1] in the *Amazon Connect Administrator Guide*.
     #
     #
     #
@@ -9086,7 +9143,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,15 +45,6 @@
     "S3RegionalEndpoint": "legacy"
   },
   {
-    "Bucket": "BucketName",
-    "ConfiguredAddressingStyle": "default",
-    "ExpectedUri": "https://s3.amazonaws.com/BucketName",
-    "Region": "us-east-1",
-    "UseDualstack": false,
-    "UseS3Accelerate": false,
-    "S3RegionalEndpoint": "legacy"
-  },
-  {
     "Bucket": "bucket_name",
     "ConfiguredAddressingStyle": "default",
     "ExpectedUri": "https://s3.us-west-1.amazonaws.com/bucket_name",
@@ -173,7 +164,7 @@
   {
     "Bucket": "bucket-name",
     "ConfiguredAddressingStyle": "path",
-    "ExpectedUri": "https://bucket-name.s3-accelerate.amazonaws.com",
+    "ExpectedUri": "Error",
     "Region": "us-east-1",
     "UseDualstack": false,
     "UseS3Accelerate": true,
@@ -191,7 +182,7 @@
   {
     "Bucket": "bucket-name",
     "ConfiguredAddressingStyle": "path",
-    "ExpectedUri": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com",
+    "ExpectedUri": "Error",
     "Region": "us-east-1",
     "UseDualstack": true,
     "UseS3Accelerate": true,
@@ -199,23 +190,14 @@
   },
   {
     "Bucket": "bucket-name",
-    "ConfiguredAddressingStyle": "path",
-    "ExpectedUri": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com",
-    "Region": "us-east-1",
-    "UseDualstack": true,
-    "UseS3Accelerate": true,
-    "S3RegionalEndpoint": "legacy"
- },
- {
-    "Bucket": "bucket-name",
     "ConfiguredAddressingStyle": "default",
     "ExpectedUri": "https://bucket-name.s3.us-east-1.amazonaws.com",
     "Region": "us-east-1",
     "UseDualstack": false,
     "UseS3Accelerate": false,
     "S3RegionalEndpoint": "regional"
- },
- {
+  },
+  {
     "Bucket": "bucket-name",
     "ConfiguredAddressingStyle": "default",
     "ExpectedUri": "https://bucket-name.s3.dualstack.us-east-1.amazonaws.com",
@@ -223,8 +205,8 @@
     "UseDualstack": true,
     "UseS3Accelerate": false,
     "S3RegionalEndpoint": "regional"
- },
- {
+  },
+  {
     "Bucket": "bucket-name",
     "ConfiguredAddressingStyle": "default",
     "ExpectedUri": "https://bucket-name.s3-accelerate.amazonaws.com",
@@ -232,8 +214,8 @@
     "UseDualstack": false,
     "UseS3Accelerate": true,
     "S3RegionalEndpoint": "regional"
- },
- {
+  },
+  {
     "Bucket": "bucket-name",
     "ConfiguredAddressingStyle": "default",
     "ExpectedUri": "https://bucket-name.s3-accelerate.dualstack.amazonaws.com",
@@ -241,5 +223,5 @@
     "UseDualstack": true,
     "UseS3Accelerate": true,
     "S3RegionalEndpoint": "regional"
- }
+  }
 ]

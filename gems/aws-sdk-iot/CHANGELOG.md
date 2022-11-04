@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2022-10-31)
+------------------
+
+* Feature - This release adds the Amazon Location action to IoT Rules Engine.
+
+1.95.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.94.0 (2022-08-04)
 ------------------
 

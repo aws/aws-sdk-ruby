@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-privatenetworks/types'
 require_relative 'aws-sdk-privatenetworks/client_api'
+require_relative 'aws-sdk-privatenetworks/plugins/endpoints.rb'
 require_relative 'aws-sdk-privatenetworks/client'
 require_relative 'aws-sdk-privatenetworks/errors'
 require_relative 'aws-sdk-privatenetworks/resource'
+require_relative 'aws-sdk-privatenetworks/endpoint_parameters'
+require_relative 'aws-sdk-privatenetworks/endpoint_provider'
+require_relative 'aws-sdk-privatenetworks/endpoints'
 require_relative 'aws-sdk-privatenetworks/customizations'
 
 # This module provides support for AWS Private 5G. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-privatenetworks/customizations'
 # @!group service
 module Aws::PrivateNetworks
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.2.0'
 
 end

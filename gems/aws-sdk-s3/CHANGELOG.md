@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+1.117.1 (2022-10-26)
+------------------
+
+* Issue - Fix custom endpoint and port regression with `presigned_url` (#2776).
+
+1.117.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Apply checksums to MultipartStreamUploader (#2769).
+
+1.116.0 (2022-10-21)
+------------------
+
+* Feature - S3 on Outposts launches support for automatic bucket-style alias. You can use the automatic access point alias instead of an access point ARN for any object-level operation in an Outposts bucket.
+
 1.115.0 (2022-10-19)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-10-28)
+------------------
+
+* Feature - Update to the documentation section of the Cloud9 API Reference guide.
+
+1.46.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2022-02-24)
 ------------------
 

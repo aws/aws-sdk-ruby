@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-11-01)
+------------------
+
+* Feature - Add ocr results in AnalyzeIDResponse as blocks
+
+1.40.0 (2022-10-31)
+------------------
+
+* Feature - This release introduces additional support for 30+ normalized fields such as vendor address and currency. It also includes OCR output in the response and accuracy improvements for the already supported fields in previous version
+
+1.39.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.38.0 (2022-04-19)
 ------------------
 

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-healthlake/types'
 require_relative 'aws-sdk-healthlake/client_api'
+require_relative 'aws-sdk-healthlake/plugins/endpoints.rb'
 require_relative 'aws-sdk-healthlake/client'
 require_relative 'aws-sdk-healthlake/errors'
 require_relative 'aws-sdk-healthlake/resource'
+require_relative 'aws-sdk-healthlake/endpoint_parameters'
+require_relative 'aws-sdk-healthlake/endpoint_provider'
+require_relative 'aws-sdk-healthlake/endpoints'
 require_relative 'aws-sdk-healthlake/customizations'
 
 # This module provides support for Amazon HealthLake. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-healthlake/customizations'
 # @!group service
 module Aws::HealthLake
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end

@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-opensearchservice/types'
 require_relative 'aws-sdk-opensearchservice/client_api'
+require_relative 'aws-sdk-opensearchservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-opensearchservice/client'
 require_relative 'aws-sdk-opensearchservice/errors'
 require_relative 'aws-sdk-opensearchservice/resource'
+require_relative 'aws-sdk-opensearchservice/endpoint_parameters'
+require_relative 'aws-sdk-opensearchservice/endpoint_provider'
+require_relative 'aws-sdk-opensearchservice/endpoints'
 require_relative 'aws-sdk-opensearchservice/customizations'
 
 # This module provides support for Amazon OpenSearch Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-opensearchservice/customizations'
 # @!group service
 module Aws::OpenSearchService
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

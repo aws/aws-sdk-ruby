@@ -1,6 +1,48 @@
 Unreleased Changes
 ------------------
 
+1.656.0 (2022-11-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.655.0 (2022-11-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.654.0 (2022-10-31)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.653.0 (2022-10-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.652.0 (2022-10-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.651.0 (2022-10-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+* Feature - Add a metadata method to `Partition` to supplement endpoint generation in service gems.
+
+1.650.0 (2022-10-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.649.0 (2022-10-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.648.0 (2022-10-19)
 ------------------
 

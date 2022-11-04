@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-10-28)
+------------------
+
+* Feature - This release includes CertificateBasedAuthProperties in CreateDirectoryConfig and UpdateDirectoryConfig.
+
+1.67.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.66.0 (2022-06-29)
 ------------------
 

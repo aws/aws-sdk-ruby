@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.5.0 (2022-10-20)
+------------------
+
+* Feature - CloudWatch RUM now supports Extended CloudWatch Metrics with Additional Dimensions
+
 1.4.0 (2022-02-24)
 ------------------
 

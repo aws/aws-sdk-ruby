@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-marketplacecommerceanalytics/types'
 require_relative 'aws-sdk-marketplacecommerceanalytics/client_api'
+require_relative 'aws-sdk-marketplacecommerceanalytics/plugins/endpoints.rb'
 require_relative 'aws-sdk-marketplacecommerceanalytics/client'
 require_relative 'aws-sdk-marketplacecommerceanalytics/errors'
 require_relative 'aws-sdk-marketplacecommerceanalytics/resource'
+require_relative 'aws-sdk-marketplacecommerceanalytics/endpoint_parameters'
+require_relative 'aws-sdk-marketplacecommerceanalytics/endpoint_provider'
+require_relative 'aws-sdk-marketplacecommerceanalytics/endpoints'
 require_relative 'aws-sdk-marketplacecommerceanalytics/customizations'
 
 # This module provides support for AWS Marketplace Commerce Analytics. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-marketplacecommerceanalytics/customizations'
 # @!group service
 module Aws::MarketplaceCommerceAnalytics
 
-  GEM_VERSION = '1.41.0'
+  GEM_VERSION = '1.42.0'
 
 end

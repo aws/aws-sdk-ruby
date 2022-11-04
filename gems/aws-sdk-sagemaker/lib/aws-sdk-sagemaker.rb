@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-sagemaker/types'
 require_relative 'aws-sdk-sagemaker/client_api'
+require_relative 'aws-sdk-sagemaker/plugins/endpoints.rb'
 require_relative 'aws-sdk-sagemaker/client'
 require_relative 'aws-sdk-sagemaker/errors'
 require_relative 'aws-sdk-sagemaker/waiters'
 require_relative 'aws-sdk-sagemaker/resource'
+require_relative 'aws-sdk-sagemaker/endpoint_parameters'
+require_relative 'aws-sdk-sagemaker/endpoint_provider'
+require_relative 'aws-sdk-sagemaker/endpoints'
 require_relative 'aws-sdk-sagemaker/customizations'
 
 # This module provides support for Amazon SageMaker Service. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-sagemaker/customizations'
 # @!group service
 module Aws::SageMaker
 
-  GEM_VERSION = '1.145.0'
+  GEM_VERSION = '1.152.0'
 
 end

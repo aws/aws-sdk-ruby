@@ -645,16 +645,20 @@ module Aws::SageMaker
     EndpointConfigSortKey = Shapes::StringShape.new(name: 'EndpointConfigSortKey')
     EndpointConfigSummary = Shapes::StructureShape.new(name: 'EndpointConfigSummary')
     EndpointConfigSummaryList = Shapes::ListShape.new(name: 'EndpointConfigSummaryList')
+    EndpointInfo = Shapes::StructureShape.new(name: 'EndpointInfo')
     EndpointInput = Shapes::StructureShape.new(name: 'EndpointInput')
     EndpointInputConfiguration = Shapes::StructureShape.new(name: 'EndpointInputConfiguration')
     EndpointInputConfigurations = Shapes::ListShape.new(name: 'EndpointInputConfigurations')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     EndpointNameContains = Shapes::StringShape.new(name: 'EndpointNameContains')
     EndpointOutputConfiguration = Shapes::StructureShape.new(name: 'EndpointOutputConfiguration')
+    EndpointPerformance = Shapes::StructureShape.new(name: 'EndpointPerformance')
+    EndpointPerformances = Shapes::ListShape.new(name: 'EndpointPerformances')
     EndpointSortKey = Shapes::StringShape.new(name: 'EndpointSortKey')
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
     EndpointSummary = Shapes::StructureShape.new(name: 'EndpointSummary')
     EndpointSummaryList = Shapes::ListShape.new(name: 'EndpointSummaryList')
+    Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
     EnvironmentKey = Shapes::StringShape.new(name: 'EnvironmentKey')
@@ -825,9 +829,12 @@ module Aws::SageMaker
     InferenceExecutionConfig = Shapes::StructureShape.new(name: 'InferenceExecutionConfig')
     InferenceExecutionMode = Shapes::StringShape.new(name: 'InferenceExecutionMode')
     InferenceImage = Shapes::StringShape.new(name: 'InferenceImage')
+    InferenceMetrics = Shapes::StructureShape.new(name: 'InferenceMetrics')
     InferenceRecommendation = Shapes::StructureShape.new(name: 'InferenceRecommendation')
     InferenceRecommendations = Shapes::ListShape.new(name: 'InferenceRecommendations')
     InferenceRecommendationsJob = Shapes::StructureShape.new(name: 'InferenceRecommendationsJob')
+    InferenceRecommendationsJobStep = Shapes::StructureShape.new(name: 'InferenceRecommendationsJobStep')
+    InferenceRecommendationsJobSteps = Shapes::ListShape.new(name: 'InferenceRecommendationsJobSteps')
     InferenceRecommendationsJobs = Shapes::ListShape.new(name: 'InferenceRecommendationsJobs')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
     InferenceSpecificationName = Shapes::StringShape.new(name: 'InferenceSpecificationName')
@@ -958,6 +965,8 @@ module Aws::SageMaker
     ListImageVersionsResponse = Shapes::StructureShape.new(name: 'ListImageVersionsResponse')
     ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
     ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
+    ListInferenceRecommendationsJobStepsRequest = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobStepsRequest')
+    ListInferenceRecommendationsJobStepsResponse = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobStepsResponse')
     ListInferenceRecommendationsJobsRequest = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobsRequest')
     ListInferenceRecommendationsJobsResponse = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobsResponse')
     ListInferenceRecommendationsJobsSortBy = Shapes::StringShape.new(name: 'ListInferenceRecommendationsJobsSortBy')
@@ -1102,6 +1111,7 @@ module Aws::SageMaker
     ModelPackageArnList = Shapes::ListShape.new(name: 'ModelPackageArnList')
     ModelPackageContainerDefinition = Shapes::StructureShape.new(name: 'ModelPackageContainerDefinition')
     ModelPackageContainerDefinitionList = Shapes::ListShape.new(name: 'ModelPackageContainerDefinitionList')
+    ModelPackageFrameworkVersion = Shapes::StringShape.new(name: 'ModelPackageFrameworkVersion')
     ModelPackageGroup = Shapes::StructureShape.new(name: 'ModelPackageGroup')
     ModelPackageGroupArn = Shapes::StringShape.new(name: 'ModelPackageGroupArn')
     ModelPackageGroupSortBy = Shapes::StringShape.new(name: 'ModelPackageGroupSortBy')
@@ -1374,10 +1384,12 @@ module Aws::SageMaker
     RStudioServerProDomainSettingsForUpdate = Shapes::StructureShape.new(name: 'RStudioServerProDomainSettingsForUpdate')
     RStudioServerProUserGroup = Shapes::StringShape.new(name: 'RStudioServerProUserGroup')
     RealtimeInferenceInstanceTypes = Shapes::ListShape.new(name: 'RealtimeInferenceInstanceTypes')
+    RecommendationFailureReason = Shapes::StringShape.new(name: 'RecommendationFailureReason')
     RecommendationJobArn = Shapes::StringShape.new(name: 'RecommendationJobArn')
     RecommendationJobCompiledOutputConfig = Shapes::StructureShape.new(name: 'RecommendationJobCompiledOutputConfig')
     RecommendationJobContainerConfig = Shapes::StructureShape.new(name: 'RecommendationJobContainerConfig')
     RecommendationJobDescription = Shapes::StringShape.new(name: 'RecommendationJobDescription')
+    RecommendationJobInferenceBenchmark = Shapes::StructureShape.new(name: 'RecommendationJobInferenceBenchmark')
     RecommendationJobInputConfig = Shapes::StructureShape.new(name: 'RecommendationJobInputConfig')
     RecommendationJobName = Shapes::StringShape.new(name: 'RecommendationJobName')
     RecommendationJobOutputConfig = Shapes::StructureShape.new(name: 'RecommendationJobOutputConfig')
@@ -1389,6 +1401,7 @@ module Aws::SageMaker
     RecommendationJobSupportedInstanceTypes = Shapes::ListShape.new(name: 'RecommendationJobSupportedInstanceTypes')
     RecommendationJobType = Shapes::StringShape.new(name: 'RecommendationJobType')
     RecommendationMetrics = Shapes::StructureShape.new(name: 'RecommendationMetrics')
+    RecommendationStepType = Shapes::StringShape.new(name: 'RecommendationStepType')
     RecordWrapper = Shapes::StringShape.new(name: 'RecordWrapper')
     RedshiftClusterId = Shapes::StringShape.new(name: 'RedshiftClusterId')
     RedshiftDatabase = Shapes::StringShape.new(name: 'RedshiftDatabase')
@@ -1579,6 +1592,10 @@ module Aws::SageMaker
     TrafficRoutingConfig = Shapes::StructureShape.new(name: 'TrafficRoutingConfig')
     TrafficRoutingConfigType = Shapes::StringShape.new(name: 'TrafficRoutingConfigType')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
+    TrainingContainerArgument = Shapes::StringShape.new(name: 'TrainingContainerArgument')
+    TrainingContainerArguments = Shapes::ListShape.new(name: 'TrainingContainerArguments')
+    TrainingContainerEntrypoint = Shapes::ListShape.new(name: 'TrainingContainerEntrypoint')
+    TrainingContainerEntrypointString = Shapes::StringShape.new(name: 'TrainingContainerEntrypointString')
     TrainingEnvironmentKey = Shapes::StringShape.new(name: 'TrainingEnvironmentKey')
     TrainingEnvironmentMap = Shapes::MapShape.new(name: 'TrainingEnvironmentMap')
     TrainingEnvironmentValue = Shapes::StringShape.new(name: 'TrainingEnvironmentValue')
@@ -1811,6 +1828,8 @@ module Aws::SageMaker
     AlgorithmSpecification.add_member(:training_input_mode, Shapes::ShapeRef.new(shape: TrainingInputMode, required: true, location_name: "TrainingInputMode"))
     AlgorithmSpecification.add_member(:metric_definitions, Shapes::ShapeRef.new(shape: MetricDefinitionList, location_name: "MetricDefinitions"))
     AlgorithmSpecification.add_member(:enable_sage_maker_metrics_time_series, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableSageMakerMetricsTimeSeries"))
+    AlgorithmSpecification.add_member(:container_entrypoint, Shapes::ShapeRef.new(shape: TrainingContainerEntrypoint, location_name: "ContainerEntrypoint"))
+    AlgorithmSpecification.add_member(:container_arguments, Shapes::ShapeRef.new(shape: TrainingContainerArguments, location_name: "ContainerArguments"))
     AlgorithmSpecification.struct_class = Types::AlgorithmSpecification
 
     AlgorithmStatusDetails.add_member(:validation_statuses, Shapes::ShapeRef.new(shape: AlgorithmStatusItemList, location_name: "ValidationStatuses"))
@@ -3625,6 +3644,7 @@ module Aws::SageMaker
     DescribeInferenceRecommendationsJobResponse.add_member(:input_config, Shapes::ShapeRef.new(shape: RecommendationJobInputConfig, required: true, location_name: "InputConfig"))
     DescribeInferenceRecommendationsJobResponse.add_member(:stopping_conditions, Shapes::ShapeRef.new(shape: RecommendationJobStoppingConditions, location_name: "StoppingConditions"))
     DescribeInferenceRecommendationsJobResponse.add_member(:inference_recommendations, Shapes::ShapeRef.new(shape: InferenceRecommendations, location_name: "InferenceRecommendations"))
+    DescribeInferenceRecommendationsJobResponse.add_member(:endpoint_performances, Shapes::ShapeRef.new(shape: EndpointPerformances, location_name: "EndpointPerformances"))
     DescribeInferenceRecommendationsJobResponse.struct_class = Types::DescribeInferenceRecommendationsJobResponse
 
     DescribeLabelingJobRequest.add_member(:labeling_job_name, Shapes::ShapeRef.new(shape: LabelingJobName, required: true, location_name: "LabelingJobName"))
@@ -4291,6 +4311,9 @@ module Aws::SageMaker
 
     EndpointConfigSummaryList.member = Shapes::ShapeRef.new(shape: EndpointConfigSummary)
 
+    EndpointInfo.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
+    EndpointInfo.struct_class = Types::EndpointInfo
+
     EndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     EndpointInput.add_member(:local_path, Shapes::ShapeRef.new(shape: ProcessingLocalPath, required: true, location_name: "LocalPath"))
     EndpointInput.add_member(:s3_input_mode, Shapes::ShapeRef.new(shape: ProcessingS3InputMode, location_name: "S3InputMode"))
@@ -4316,6 +4339,12 @@ module Aws::SageMaker
     EndpointOutputConfiguration.add_member(:initial_instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InitialInstanceCount"))
     EndpointOutputConfiguration.struct_class = Types::EndpointOutputConfiguration
 
+    EndpointPerformance.add_member(:metrics, Shapes::ShapeRef.new(shape: InferenceMetrics, required: true, location_name: "Metrics"))
+    EndpointPerformance.add_member(:endpoint_info, Shapes::ShapeRef.new(shape: EndpointInfo, required: true, location_name: "EndpointInfo"))
+    EndpointPerformance.struct_class = Types::EndpointPerformance
+
+    EndpointPerformances.member = Shapes::ShapeRef.new(shape: EndpointPerformance)
+
     EndpointSummary.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     EndpointSummary.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, required: true, location_name: "EndpointArn"))
     EndpointSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
@@ -4324,6 +4353,8 @@ module Aws::SageMaker
     EndpointSummary.struct_class = Types::EndpointSummary
 
     EndpointSummaryList.member = Shapes::ShapeRef.new(shape: EndpointSummary)
+
+    Endpoints.member = Shapes::ShapeRef.new(shape: EndpointInfo)
 
     EnvironmentMap.key = Shapes::ShapeRef.new(shape: EnvironmentKey)
     EnvironmentMap.value = Shapes::ShapeRef.new(shape: EnvironmentValue)
@@ -4737,6 +4768,10 @@ module Aws::SageMaker
     InferenceExecutionConfig.add_member(:mode, Shapes::ShapeRef.new(shape: InferenceExecutionMode, required: true, location_name: "Mode"))
     InferenceExecutionConfig.struct_class = Types::InferenceExecutionConfig
 
+    InferenceMetrics.add_member(:max_invocations, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaxInvocations"))
+    InferenceMetrics.add_member(:model_latency, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ModelLatency"))
+    InferenceMetrics.struct_class = Types::InferenceMetrics
+
     InferenceRecommendation.add_member(:metrics, Shapes::ShapeRef.new(shape: RecommendationMetrics, required: true, location_name: "Metrics"))
     InferenceRecommendation.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointOutputConfiguration, required: true, location_name: "EndpointConfiguration"))
     InferenceRecommendation.add_member(:model_configuration, Shapes::ShapeRef.new(shape: ModelConfiguration, required: true, location_name: "ModelConfiguration"))
@@ -4755,6 +4790,14 @@ module Aws::SageMaker
     InferenceRecommendationsJob.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, required: true, location_name: "LastModifiedTime"))
     InferenceRecommendationsJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     InferenceRecommendationsJob.struct_class = Types::InferenceRecommendationsJob
+
+    InferenceRecommendationsJobStep.add_member(:step_type, Shapes::ShapeRef.new(shape: RecommendationStepType, required: true, location_name: "StepType"))
+    InferenceRecommendationsJobStep.add_member(:job_name, Shapes::ShapeRef.new(shape: RecommendationJobName, required: true, location_name: "JobName"))
+    InferenceRecommendationsJobStep.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationJobStatus, required: true, location_name: "Status"))
+    InferenceRecommendationsJobStep.add_member(:inference_benchmark, Shapes::ShapeRef.new(shape: RecommendationJobInferenceBenchmark, location_name: "InferenceBenchmark"))
+    InferenceRecommendationsJobStep.struct_class = Types::InferenceRecommendationsJobStep
+
+    InferenceRecommendationsJobSteps.member = Shapes::ShapeRef.new(shape: InferenceRecommendationsJobStep)
 
     InferenceRecommendationsJobs.member = Shapes::ShapeRef.new(shape: InferenceRecommendationsJob)
 
@@ -5282,6 +5325,17 @@ module Aws::SageMaker
     ListImagesResponse.add_member(:images, Shapes::ShapeRef.new(shape: Images, location_name: "Images"))
     ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListImagesResponse.struct_class = Types::ListImagesResponse
+
+    ListInferenceRecommendationsJobStepsRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: RecommendationJobName, required: true, location_name: "JobName"))
+    ListInferenceRecommendationsJobStepsRequest.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationJobStatus, location_name: "Status"))
+    ListInferenceRecommendationsJobStepsRequest.add_member(:step_type, Shapes::ShapeRef.new(shape: RecommendationStepType, location_name: "StepType"))
+    ListInferenceRecommendationsJobStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInferenceRecommendationsJobStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInferenceRecommendationsJobStepsRequest.struct_class = Types::ListInferenceRecommendationsJobStepsRequest
+
+    ListInferenceRecommendationsJobStepsResponse.add_member(:steps, Shapes::ShapeRef.new(shape: InferenceRecommendationsJobSteps, location_name: "Steps"))
+    ListInferenceRecommendationsJobStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInferenceRecommendationsJobStepsResponse.struct_class = Types::ListInferenceRecommendationsJobStepsResponse
 
     ListInferenceRecommendationsJobsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTimeAfter"))
     ListInferenceRecommendationsJobsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTimeBefore"))
@@ -5898,7 +5952,7 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ModelPackageContainerDefinition.add_member(:model_input, Shapes::ShapeRef.new(shape: ModelInput, location_name: "ModelInput"))
     ModelPackageContainerDefinition.add_member(:framework, Shapes::ShapeRef.new(shape: String, location_name: "Framework"))
-    ModelPackageContainerDefinition.add_member(:framework_version, Shapes::ShapeRef.new(shape: FrameworkVersion, location_name: "FrameworkVersion"))
+    ModelPackageContainerDefinition.add_member(:framework_version, Shapes::ShapeRef.new(shape: ModelPackageFrameworkVersion, location_name: "FrameworkVersion"))
     ModelPackageContainerDefinition.add_member(:nearest_model_name, Shapes::ShapeRef.new(shape: String, location_name: "NearestModelName"))
     ModelPackageContainerDefinition.struct_class = Types::ModelPackageContainerDefinition
 
@@ -6688,6 +6742,12 @@ module Aws::SageMaker
     RecommendationJobContainerConfig.add_member(:supported_instance_types, Shapes::ShapeRef.new(shape: RecommendationJobSupportedInstanceTypes, location_name: "SupportedInstanceTypes"))
     RecommendationJobContainerConfig.struct_class = Types::RecommendationJobContainerConfig
 
+    RecommendationJobInferenceBenchmark.add_member(:metrics, Shapes::ShapeRef.new(shape: RecommendationMetrics, location_name: "Metrics"))
+    RecommendationJobInferenceBenchmark.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointOutputConfiguration, location_name: "EndpointConfiguration"))
+    RecommendationJobInferenceBenchmark.add_member(:model_configuration, Shapes::ShapeRef.new(shape: ModelConfiguration, required: true, location_name: "ModelConfiguration"))
+    RecommendationJobInferenceBenchmark.add_member(:failure_reason, Shapes::ShapeRef.new(shape: RecommendationFailureReason, location_name: "FailureReason"))
+    RecommendationJobInferenceBenchmark.struct_class = Types::RecommendationJobInferenceBenchmark
+
     RecommendationJobInputConfig.add_member(:model_package_version_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageVersionArn"))
     RecommendationJobInputConfig.add_member(:job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDurationInSeconds, location_name: "JobDurationInSeconds"))
     RecommendationJobInputConfig.add_member(:traffic_pattern, Shapes::ShapeRef.new(shape: TrafficPattern, location_name: "TrafficPattern"))
@@ -6695,6 +6755,7 @@ module Aws::SageMaker
     RecommendationJobInputConfig.add_member(:endpoint_configurations, Shapes::ShapeRef.new(shape: EndpointInputConfigurations, location_name: "EndpointConfigurations"))
     RecommendationJobInputConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     RecommendationJobInputConfig.add_member(:container_config, Shapes::ShapeRef.new(shape: RecommendationJobContainerConfig, location_name: "ContainerConfig"))
+    RecommendationJobInputConfig.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
     RecommendationJobInputConfig.struct_class = Types::RecommendationJobInputConfig
 
     RecommendationJobOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -6786,7 +6847,7 @@ module Aws::SageMaker
     ResourceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     ResourceLimitExceeded.struct_class = Types::ResourceLimitExceeded
 
-    ResourceLimits.add_member(:max_number_of_training_jobs, Shapes::ShapeRef.new(shape: MaxNumberOfTrainingJobs, required: true, location_name: "MaxNumberOfTrainingJobs"))
+    ResourceLimits.add_member(:max_number_of_training_jobs, Shapes::ShapeRef.new(shape: MaxNumberOfTrainingJobs, location_name: "MaxNumberOfTrainingJobs"))
     ResourceLimits.add_member(:max_parallel_training_jobs, Shapes::ShapeRef.new(shape: MaxParallelTrainingJobs, required: true, location_name: "MaxParallelTrainingJobs"))
     ResourceLimits.struct_class = Types::ResourceLimits
 
@@ -7057,6 +7118,10 @@ module Aws::SageMaker
     TrafficRoutingConfig.add_member(:canary_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "CanarySize"))
     TrafficRoutingConfig.add_member(:linear_step_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "LinearStepSize"))
     TrafficRoutingConfig.struct_class = Types::TrafficRoutingConfig
+
+    TrainingContainerArguments.member = Shapes::ShapeRef.new(shape: TrainingContainerArgument)
+
+    TrainingContainerEntrypoint.member = Shapes::ShapeRef.new(shape: TrainingContainerEntrypointString)
 
     TrainingEnvironmentMap.key = Shapes::ShapeRef.new(shape: TrainingEnvironmentKey)
     TrainingEnvironmentMap.value = Shapes::ShapeRef.new(shape: TrainingEnvironmentValue)
@@ -9440,6 +9505,20 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListImagesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListImagesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_inference_recommendations_job_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInferenceRecommendationsJobSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInferenceRecommendationsJobStepsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInferenceRecommendationsJobStepsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

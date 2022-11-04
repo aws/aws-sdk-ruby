@@ -130,6 +130,66 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AcceptAddressTransferRequest
+    #   data as a hash:
+    #
+    #       {
+    #         address: "String", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, vpn-connection-device-type
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The Elastic IP address you are accepting for transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #   the resource. Use the tag key in the filter name and the tag value
+    #   as the filter value. For example, to find all resources that have a
+    #   tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #   for the filter name and `TeamA` for the filter value.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptAddressTransferRequest AWS API Documentation
+    #
+    class AcceptAddressTransferRequest < Struct.new(
+      :address,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_transfer
+    #   An Elastic IP address transfer.
+    #   @return [Types::AddressTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptAddressTransferResult AWS API Documentation
+    #
+    class AcceptAddressTransferResult < Struct.new(
+      :address_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for accepting the quote.
     #
     # @note When making an API call, you may pass AcceptReservedInstancesExchangeQuoteRequest
@@ -814,6 +874,55 @@ module Aws::EC2
       :allocation_id,
       :ptr_record,
       :ptr_record_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details on the Elastic IP address transfer. For more information, see
+    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro
+    #
+    # @!attribute [rw] public_ip
+    #   The Elastic IP address being transferred.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_account_id
+    #   The ID of the account that you want to transfer the Elastic IP
+    #   address to.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_offer_expiration_timestamp
+    #   The timestamp when the Elastic IP address transfer expired. When the
+    #   source account starts the transfer, the transfer account has seven
+    #   hours to allocate the Elastic IP address to complete the transfer,
+    #   or the Elastic IP address will return to its original owner.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transfer_offer_accepted_timestamp
+    #   The timestamp when the Elastic IP address transfer was accepted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] address_transfer_status
+    #   The Elastic IP address transfer status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AddressTransfer AWS API Documentation
+    #
+    class AddressTransfer < Struct.new(
+      :public_ip,
+      :allocation_id,
+      :transfer_account_id,
+      :transfer_offer_expiration_timestamp,
+      :transfer_offer_accepted_timestamp,
+      :address_transfer_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4125,6 +4234,48 @@ module Aws::EC2
     #
     class CancelExportTaskRequest < Struct.new(
       :export_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelImageLaunchPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI that was shared with your Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImageLaunchPermissionRequest AWS API Documentation
+    #
+    class CancelImageLaunchPermissionRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImageLaunchPermissionResult AWS API Documentation
+    #
+    class CancelImageLaunchPermissionResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11326,6 +11477,8 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         image_id: "ImageId",
+    #         delete_replaced_root_volume: false,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -11334,8 +11487,12 @@ module Aws::EC2
     #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot from which to restore the replacement root
-    #   volume. If you want to restore the volume to the initial launch
-    #   state, omit this parameter.
+    #   volume. The specified snapshot must be a snapshot that you
+    #   previously created from the original root volume.
+    #
+    #   If you want to restore the replacement root volume to the initial
+    #   launch state, or if you want to restore the replacement root volume
+    #   from an AMI, omit this parameter.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -11363,6 +11520,24 @@ module Aws::EC2
     #   The tags to apply to the root volume replacement task.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI to use to restore the root volume. The specified
+    #   AMI must have the same product code, billing information,
+    #   architecture type, and virtualization type as that of the instance.
+    #
+    #   If you want to restore the replacement volume from a specific
+    #   snapshot, or if you want to restore it to its launch state, omit
+    #   this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_replaced_root_volume
+    #   Indicates whether to automatically delete the original root volume
+    #   after the root volume replacement task completes. To delete the
+    #   original root volume, specify `true`. If you choose to keep the
+    #   original root volume after the replacement task completes, you must
+    #   manually delete it when you no longer need it.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReplaceRootVolumeTaskRequest AWS API Documentation
     #
     class CreateReplaceRootVolumeTaskRequest < Struct.new(
@@ -11370,7 +11545,9 @@ module Aws::EC2
       :snapshot_id,
       :client_token,
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :image_id,
+      :delete_replaced_root_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18133,6 +18310,66 @@ module Aws::EC2
     #
     class DescribeAccountAttributesResult < Struct.new(
       :account_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAddressTransfersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_ids: ["AllocationId"],
+    #         next_token: "String",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] allocation_ids
+    #   The allocation IDs of Elastic IP addresses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of address transfers to return in one page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressTransfersRequest AWS API Documentation
+    #
+    class DescribeAddressTransfersRequest < Struct.new(
+      :allocation_ids,
+      :next_token,
+      :max_results,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_transfers
+    #   The Elastic IP address transfer.
+    #   @return [Array<Types::AddressTransfer>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressTransfersResult AWS API Documentation
+    #
+    class DescribeAddressTransfersResult < Struct.new(
+      :address_transfers,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30972,6 +31209,46 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableAddressTransferRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_id: "AllocationId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAddressTransferRequest AWS API Documentation
+    #
+    class DisableAddressTransferRequest < Struct.new(
+      :allocation_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_transfer
+    #   An Elastic IP address transfer.
+    #   @return [Types::AddressTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAddressTransferResult AWS API Documentation
+    #
+    class DisableAddressTransferResult < Struct.new(
+      :address_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableEbsEncryptionByDefaultRequest
     #   data as a hash:
     #
@@ -32902,6 +33179,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass EnableAddressTransferRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_id: "AllocationId", # required
+    #         transfer_account_id: "String", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] allocation_id
+    #   The allocation ID of an Elastic IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_account_id
+    #   The ID of the account that you want to transfer the Elastic IP
+    #   address to.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAddressTransferRequest AWS API Documentation
+    #
+    class EnableAddressTransferRequest < Struct.new(
+      :allocation_id,
+      :transfer_account_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_transfer
+    #   An Elastic IP address transfer.
+    #   @return [Types::AddressTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAddressTransferResult AWS API Documentation
+    #
+    class EnableAddressTransferResult < Struct.new(
+      :address_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableEbsEncryptionByDefaultRequest
     #   data as a hash:
     #
@@ -33275,7 +33599,8 @@ module Aws::EC2
     #   for seconds, Amazon EC2 rounds the seconds to the nearest minute.
     #
     #   You can’t specify a date in the past. The upper limit for
-    #   `DeprecateAt` is 10 years from now.
+    #   `DeprecateAt` is 10 years from now, except for public AMIs, where
+    #   the upper limit is 2 years from the creation date.
     #   @return [Time]
     #
     # @!attribute [rw] dry_run
@@ -37147,7 +37472,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource_tag
-    #   A tag on an IPAM resource.
+    #   The resource tag.
     #   @return [Types::RequestIpamResourceTag]
     #
     # @!attribute [rw] resource_owner
@@ -50208,7 +50533,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ipam_resource_cidr
-    #   The CIDR for an IPAM resource.
+    #   The CIDR of the resource.
     #   @return [Types::IpamResourceCidr]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamResourceCidrResult AWS API Documentation
@@ -53103,9 +53428,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] byoip_cidr
-    #   Information about an address range that is provisioned for use with
-    #   your Amazon Web Services resources through bring your own IP
-    #   addresses (BYOIP).
+    #   The BYOIP CIDR.
     #   @return [Types::ByoipCidr]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveByoipCidrToIpamResult AWS API Documentation
@@ -55892,7 +56215,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] pool_address_range
-    #   Describes an address range of an IPv4 address pool.
+    #   Information about the address range of the public IPv4 pool.
     #   @return [Types::PublicIpv4PoolRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionPublicIpv4PoolCidrResult AWS API Documentation
@@ -57568,6 +57891,19 @@ module Aws::EC2
     #   The tags assigned to the task.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI used to create the replacement root volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot used to create the replacement root volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_replaced_root_volume
+    #   Indicates whether the original root volume is to be deleted after
+    #   the root volume replacement task completes.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRootVolumeTask AWS API Documentation
     #
     class ReplaceRootVolumeTask < Struct.new(
@@ -57576,7 +57912,10 @@ module Aws::EC2
       :task_state,
       :start_time,
       :complete_time,
-      :tags)
+      :tags,
+      :image_id,
+      :snapshot_id,
+      :delete_replaced_root_volume)
       SENSITIVE = []
       include Aws::Structure
     end

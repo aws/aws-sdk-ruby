@@ -10,7 +10,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.127.0"
+    MINIMUM_CORE_VERSION = "3.165.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
@@ -64,6 +64,9 @@ module BuildTools
         resources: model_path('resources-1.json', config['models']),
         examples: load_examples(svc_name, config['models']),
         smoke_tests: model_path('smoke.json', config['models']),
+        legacy_endpoints: config.fetch('legacyEndpoints', false),
+        endpoint_rules: model_path('endpoint-rule-set-1.json', config['models']),
+        endpoint_tests: model_path('endpoint-tests-1.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || []

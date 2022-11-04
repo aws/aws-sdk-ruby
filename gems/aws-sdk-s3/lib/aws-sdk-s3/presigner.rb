@@ -133,7 +133,7 @@ module Aws
         virtual_host = params.delete(:virtual_host)
         time = params.delete(:time)
         unsigned_headers = unsigned_headers(params)
-        scheme = http_scheme(params)
+        secure = params.delete(:secure) != false
         expires_in = expires_in(params)
 
         req = @client.build_request(method, params)
@@ -141,7 +141,7 @@ module Aws
         handle_presigned_url_context(req)
 
         x_amz_headers = sign_but_dont_send(
-          req, expires_in, scheme, time, unsigned_headers, hoist
+          req, expires_in, secure, time, unsigned_headers, hoist
         )
         [req.send_request.data, x_amz_headers]
       end
@@ -149,14 +149,6 @@ module Aws
       def unsigned_headers(params)
         whitelist_headers = params.delete(:whitelist_headers) || []
         BLACKLISTED_HEADERS - whitelist_headers
-      end
-
-      def http_scheme(params)
-        if params.delete(:secure) == false
-          'http'
-        else
-          @client.config.endpoint.scheme
-        end
       end
 
       def expires_in(params)
@@ -175,8 +167,7 @@ module Aws
       end
 
       def use_bucket_as_hostname(req)
-        req.handlers.remove(Plugins::BucketDns::Handler)
-        req.handle do |context|
+        req.handle(priority: 35) do |context|
           uri = context.http_request.endpoint
           uri.host = context.params[:bucket]
           uri.path.sub!("/#{context.params[:bucket]}", '')
@@ -197,22 +188,21 @@ module Aws
 
       # @param [Seahorse::Client::Request] req
       def sign_but_dont_send(
-        req, expires_in, scheme, time, unsigned_headers, hoist = true
+        req, expires_in, secure, time, unsigned_headers, hoist = true
       )
         x_amz_headers = {}
 
         http_req = req.context.http_request
 
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
-        req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
+        req.handlers.remove(Aws::Plugins::Sign::Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
         req.handle(step: :send) do |context|
-          if scheme != http_req.endpoint.scheme
-            endpoint = http_req.endpoint.dup
-            endpoint.scheme = scheme
-            endpoint.port = (scheme == 'http' ? 80 : 443)
-            http_req.endpoint = URI.parse(endpoint.to_s)
+          # if an endpoint was not provided, force secure or insecure
+          if context.config.regional_endpoint
+            http_req.endpoint.scheme = secure ? 'https' : 'http'
+            http_req.endpoint.port = secure ? 443 : 80
           end
 
           query = http_req.endpoint.query ? http_req.endpoint.query.split('&') : []
@@ -231,24 +221,21 @@ module Aws
           end
           http_req.endpoint.query = query.join('&') unless query.empty?
 
-          signing_algorithm = :sigv4
-
-          # If it's an ARN, get the resolved region and service
-          if (arn = context.metadata[:s3_arn])
-            region = arn[:resolved_region]
-            service = arn[:arn].service
-            region = arn[:arn].is_a?(MultiRegionAccessPointARN) ? '*': arn[:resolved_region]
-            signing_algorithm = arn[:arn].is_a?(MultiRegionAccessPointARN) ? :sigv4a : :sigv4
-          end
-
+          auth_scheme = context[:auth_scheme]
+          scheme_name = auth_scheme['name']
+          region = if scheme_name == 'sigv4a'
+                     auth_scheme['signingRegionSet'].first
+                   else
+                     auth_scheme['signingRegion']
+                   end
           signer = Aws::Sigv4::Signer.new(
-            service: service || 's3',
+            service: auth_scheme['signingName'] || 's3',
             region: region || context.config.region,
-            signing_algorithm: signing_algorithm,
             credentials_provider: context.config.credentials,
+            signing_algorithm: scheme_name.to_sym,
+            uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
             unsigned_headers: unsigned_headers,
-            apply_checksum_header: false,
-            uri_escape_path: false
+            apply_checksum_header: false
           )
 
           url = signer.presign_url(

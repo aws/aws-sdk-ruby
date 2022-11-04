@@ -1,6 +1,39 @@
 Unreleased Changes
 ------------------
 
+3.166.0 (2022-10-26)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+3.165.1 (2022-10-25)
+------------------
+
+* Issue - Require the SignatureV4 plugin to fix compatability with older `aws-sdk-s3` versions (#2774).
+
+3.165.0 (2022-10-25)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add support for service gems to dynamically determine their own endpoints via modeling. Service gems now generate a plugin called "Endpoints" that defines configuration for EndpointProvider, a new public type, and any client config related to endpoints. Endpoint providers will resolve values using another new public type, Endpoint Parameters, generated for each service. The plugin will use the endpoint provider to resolve an endpoint and then apply it to the request prior to serialization. Endpoint providers can be composed to change endpoint resolution logic, i.e. for testing. In addition to endpoints, the endpoint provider may also override the authentication scheme (auth scheme) which details how the request should be signed for the endpoint. A new "Sign" plugin in core replaces the SignatureV4 plugin that will generically sign any type of auth scheme that a service might have.
+
+3.164.0 (2022-10-21)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+3.163.0 (2022-10-20)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
 3.162.0 (2022-10-19)
 ------------------
 
@@ -142,6 +175,8 @@ Unreleased Changes
 ------------------
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
 
 3.135.0 (2022-08-24)
 ------------------

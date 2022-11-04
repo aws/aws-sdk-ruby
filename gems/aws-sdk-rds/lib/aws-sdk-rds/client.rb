@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-rds/plugins/cross_region_copying.rb'
 
@@ -80,9 +80,10 @@ module Aws::RDS
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
+    add_plugin(Aws::RDS::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -289,6 +290,19 @@ module Aws::RDS
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -301,6 +315,9 @@ module Aws::RDS
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::RDS::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::RDS::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -892,6 +909,7 @@ module Aws::RDS
     #   * {Types::ExportTask#total_extracted_data_in_gb #total_extracted_data_in_gb} => Integer
     #   * {Types::ExportTask#failure_cause #failure_cause} => String
     #   * {Types::ExportTask#warning_message #warning_message} => String
+    #   * {Types::ExportTask#source_type #source_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -917,6 +935,7 @@ module Aws::RDS
     #   resp.total_extracted_data_in_gb #=> Integer
     #   resp.failure_cause #=> String
     #   resp.warning_message #=> String
+    #   resp.source_type #=> String, one of "SNAPSHOT", "CLUSTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CancelExportTask AWS API Documentation
     #
@@ -1645,6 +1664,7 @@ module Aws::RDS
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2624,9 +2644,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid `Iops` values, see [Amazon RDS Provisioned
-    #   IOPS storage to improve performance][1] in the *Amazon RDS User
-    #   Guide*.
+    #   For information about valid IOPS values, see [Amazon RDS Provisioned
+    #   IOPS storage][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -3546,8 +3565,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 40 to
-    #     65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40
+    #     to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #     Server.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 40 to 65536
@@ -3558,8 +3577,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -3571,8 +3590,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -3584,8 +3603,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -3597,8 +3616,8 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-    #     65536.
+    #   * General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20
+    #     to 65536.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
     #     65536.
@@ -3610,7 +3629,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2):
+    #   * General Purpose (SSD) storage (gp2, gp3):
     #
     #     * Enterprise and Standard editions: Must be an integer from 20 to
     #       16384.
@@ -4018,8 +4037,8 @@ module Aws::RDS
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid `Iops` values, see [Amazon RDS Provisioned IOPS storage to
-    #   improve performance][1] in the *Amazon RDS User Guide*.
+    #   valid IOPS values, see [Amazon RDS DB instance storage][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances,
     #   must be a multiple between .5 and 50 of the storage amount for the DB
@@ -4032,7 +4051,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html
     #
     # @option params [String] :option_group_name
     #   A value that indicates that the DB instance should be associated with
@@ -4112,10 +4131,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -4498,6 +4517,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -4586,6 +4610,7 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -4650,6 +4675,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -4730,6 +4756,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4952,10 +4979,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the read replica.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -5294,6 +5321,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the read replica.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5376,6 +5408,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #     source_region: "String",
     #   })
     #
@@ -5441,6 +5474,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -5521,6 +5555,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -6095,6 +6130,7 @@ module Aws::RDS
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -7307,6 +7343,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -7387,6 +7424,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -7454,6 +7492,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
+    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -7736,6 +7775,7 @@ module Aws::RDS
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -8804,9 +8844,10 @@ module Aws::RDS
     # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
     #
     # @option params [String] :db_cluster_identifier
-    #   The user-supplied DB cluster identifier. If this parameter is
-    #   specified, information from only the specific DB cluster is returned.
-    #   This parameter isn't case-sensitive.
+    #   The user-supplied DB cluster identifier or the Amazon Resource Name
+    #   (ARN) of the DB cluster. If this parameter is specified, information
+    #   from only the specific DB cluster is returned. This parameter isn't
+    #   case-sensitive.
     #
     #   Constraints:
     #
@@ -9374,6 +9415,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backups[0].backup_target #=> String
+    #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -9393,9 +9435,10 @@ module Aws::RDS
     #  </note>
     #
     # @option params [String] :db_instance_identifier
-    #   The user-supplied instance identifier. If this parameter is specified,
-    #   information from only the specific DB instance is returned. This
-    #   parameter isn't case-sensitive.
+    #   The user-supplied instance identifier or the Amazon Resource Name
+    #   (ARN) of the DB instance. If this parameter is specified, information
+    #   from only the specific DB instance is returned. This parameter isn't
+    #   case-sensitive.
     #
     #   Constraints:
     #
@@ -9542,6 +9585,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instances[0].pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instances[0].pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -9622,6 +9666,7 @@ module Aws::RDS
     #   resp.db_instances[0].backup_target #=> String
     #   resp.db_instances[0].network_type #=> String
     #   resp.db_instances[0].activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instances[0].storage_throughput #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10597,6 +10642,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].original_snapshot_create_time #=> Time
     #   resp.db_snapshots[0].snapshot_database_time #=> Time
     #   resp.db_snapshots[0].snapshot_target #=> String
+    #   resp.db_snapshots[0].storage_throughput #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10820,6 +10866,10 @@ module Aws::RDS
     #
     #   * `aurora-postgresql13`
     #
+    #   * `aurora-postgresql14`
+    #
+    #   * `custom-oracle-ee-19`
+    #
     #   * `mariadb10.2`
     #
     #   * `mariadb10.3`
@@ -10833,6 +10883,18 @@ module Aws::RDS
     #   * `mysql5.7`
     #
     #   * `mysql8.0`
+    #
+    #   * `oracle-ee-19`
+    #
+    #   * `oracle-ee-cdb-19`
+    #
+    #   * `oracle-ee-cdb-21`
+    #
+    #   * `oracle-se2-19`
+    #
+    #   * `oracle-se2-cdb-19`
+    #
+    #   * `oracle-se2-cdb-21`
     #
     #   * `postgres10`
     #
@@ -11349,6 +11411,9 @@ module Aws::RDS
     #
     #   Constraints: Minimum 20, maximum 100.
     #
+    # @option params [String] :source_type
+    #   The type of source for the export.
+    #
     # @return [Types::ExportTasksMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExportTasksMessage#marker #marker} => String
@@ -11369,6 +11434,7 @@ module Aws::RDS
     #     ],
     #     marker: "String",
     #     max_records: 1,
+    #     source_type: "SNAPSHOT", # accepts SNAPSHOT, CLUSTER
     #   })
     #
     # @example Response structure
@@ -11391,6 +11457,7 @@ module Aws::RDS
     #   resp.export_tasks[0].total_extracted_data_in_gb #=> Integer
     #   resp.export_tasks[0].failure_cause #=> String
     #   resp.export_tasks[0].warning_message #=> String
+    #   resp.export_tasks[0].source_type #=> String, one of "SNAPSHOT", "CLUSTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasks AWS API Documentation
     #
@@ -11940,6 +12007,11 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
     #   resp.orderable_db_instance_options[0].supported_network_types #=> Array
     #   resp.orderable_db_instance_options[0].supported_network_types[0] #=> String
+    #   resp.orderable_db_instance_options[0].supports_storage_throughput #=> Boolean
+    #   resp.orderable_db_instance_options[0].min_storage_throughput_per_db_instance #=> Integer
+    #   resp.orderable_db_instance_options[0].max_storage_throughput_per_db_instance #=> Integer
+    #   resp.orderable_db_instance_options[0].min_storage_throughput_per_iops #=> Float
+    #   resp.orderable_db_instance_options[0].max_storage_throughput_per_iops #=> Float
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -12494,6 +12566,13 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].to #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].supports_storage_autoscaling #=> Boolean
+    #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput #=> Array
+    #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.storage[0].storage_throughput_to_iops_ratio #=> Array
+    #   resp.valid_db_instance_modifications_message.storage[0].storage_throughput_to_iops_ratio[0].from #=> Float
+    #   resp.valid_db_instance_modifications_message.storage[0].storage_throughput_to_iops_ratio[0].to #=> Float
     #   resp.valid_db_instance_modifications_message.valid_processor_features #=> Array
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
@@ -13750,9 +13829,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid Iops values, see [Amazon RDS Provisioned
-    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
-    #   Guide*.
+    #   For information about valid IOPS values, see [Amazon RDS Provisioned
+    #   IOPS storage][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between .5 and 50 of the storage
     #   amount for the DB cluster.
@@ -14812,7 +14890,7 @@ module Aws::RDS
     #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -15208,6 +15286,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -15293,6 +15376,7 @@ module Aws::RDS
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -15357,6 +15441,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -15437,6 +15522,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -15884,6 +15970,7 @@ module Aws::RDS
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
     #   resp.db_snapshot.snapshot_target #=> String
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -16588,6 +16675,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -16668,6 +16756,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -17187,6 +17276,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -17267,6 +17357,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -18665,9 +18756,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid Iops values, see [Amazon RDS Provisioned
-    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
-    #   Guide*.
+    #   For information about valid IOPS values, see [Amazon RDS Provisioned
+    #   IOPS storage][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between .5 and 50 of the storage
     #   amount for the DB instance.
@@ -19307,9 +19397,8 @@ module Aws::RDS
     #   be initially allocated for each DB instance in the Multi-AZ DB
     #   cluster.
     #
-    #   For information about valid `Iops` values, see [Amazon RDS Provisioned
-    #   IOPS storage to improve performance][1] in the *Amazon RDS User
-    #   Guide*.
+    #   For information about valid IOPS values, see [Amazon RDS Provisioned
+    #   IOPS storage][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: Must be a multiple between .5 and 50 of the storage
     #   amount for the DB instance.
@@ -19718,8 +19807,7 @@ module Aws::RDS
     #
     #   The provisioned IOPS value must follow the requirements for your
     #   database engine. For more information, see [Amazon RDS Provisioned
-    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
-    #   Guide.*
+    #   IOPS storage][1] in the *Amazon RDS User Guide.*
     #
     #   Constraints: Must be an integer greater than 1000.
     #
@@ -19748,10 +19836,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -19958,6 +20046,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -20102,6 +20195,7 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -20166,6 +20260,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -20246,6 +20341,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -20450,8 +20546,8 @@ module Aws::RDS
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   allocate initially for the DB instance. For information about valid
-    #   Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
-    #   Performance][1] in the *Amazon RDS User Guide.*
+    #   IOPS values, see [Amazon RDS Provisioned IOPS storage][1] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -20490,10 +20586,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard` \| `gp2` \| `io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified; otherwise `gp2`
     #
@@ -20688,6 +20784,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -20750,6 +20851,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -20814,6 +20916,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -20894,6 +20997,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -21123,10 +21227,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `gp2 | gp3 | io1 | standard`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you specify `io1` or `gp3`, you must also include a value for the
+    #   `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -21339,6 +21443,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -21489,6 +21598,7 @@ module Aws::RDS
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
     #     network_type: "String",
+    #     storage_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -21553,6 +21663,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21633,6 +21744,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -22053,6 +22165,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -22133,6 +22246,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -22250,6 +22364,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
+    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -22346,6 +22461,7 @@ module Aws::RDS
     #   * {Types::ExportTask#total_extracted_data_in_gb #total_extracted_data_in_gb} => Integer
     #   * {Types::ExportTask#failure_cause #failure_cause} => String
     #   * {Types::ExportTask#warning_message #warning_message} => String
+    #   * {Types::ExportTask#source_type #source_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -22377,6 +22493,7 @@ module Aws::RDS
     #   resp.total_extracted_data_in_gb #=> Integer
     #   resp.failure_cause #=> String
     #   resp.warning_message #=> String
+    #   resp.source_type #=> String, one of "SNAPSHOT", "CLUSTER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartExportTask AWS API Documentation
     #
@@ -22679,6 +22796,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -22759,6 +22877,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -22827,6 +22946,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
+    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -22924,6 +23044,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -23004,6 +23125,7 @@ module Aws::RDS
     #   resp.db_instance.backup_target #=> String
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
+    #   resp.db_instance.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -23027,7 +23149,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

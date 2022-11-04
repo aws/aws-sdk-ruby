@@ -14,10 +14,14 @@ require 'aws-sdk-core'
 
 require_relative 'aws-sdk-s3/types'
 require_relative 'aws-sdk-s3/client_api'
+require_relative 'aws-sdk-s3/plugins/endpoints.rb'
 require_relative 'aws-sdk-s3/client'
 require_relative 'aws-sdk-s3/errors'
 require_relative 'aws-sdk-s3/waiters'
 require_relative 'aws-sdk-s3/resource'
+require_relative 'aws-sdk-s3/endpoint_parameters'
+require_relative 'aws-sdk-s3/endpoint_provider'
+require_relative 'aws-sdk-s3/endpoints'
 require_relative 'aws-sdk-s3/bucket'
 require_relative 'aws-sdk-s3/bucket_acl'
 require_relative 'aws-sdk-s3/bucket_cors'
@@ -69,6 +73,6 @@ require_relative 'aws-sdk-s3/event_streams'
 # @!group service
 module Aws::S3
 
-  GEM_VERSION = '1.115.0'
+  GEM_VERSION = '1.117.1'
 
 end

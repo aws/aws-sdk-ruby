@@ -58,4 +58,6 @@ jobs:
         run: bundle exec rake build
 
       - name: Tests
+        env:
+          JRUBY_OPTS: -J-Xmx4g
         run: bundle exec rake test:spec

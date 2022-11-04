@@ -125,10 +125,12 @@ module Aws::FMS
     NetworkFirewallMissingExpectedRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingExpectedRoutesViolation')
     NetworkFirewallMissingFirewallViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingFirewallViolation')
     NetworkFirewallMissingSubnetViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingSubnetViolation')
+    NetworkFirewallOverrideAction = Shapes::StringShape.new(name: 'NetworkFirewallOverrideAction')
     NetworkFirewallPolicy = Shapes::StructureShape.new(name: 'NetworkFirewallPolicy')
     NetworkFirewallPolicyDescription = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyDescription')
     NetworkFirewallPolicyModifiedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyModifiedViolation')
     NetworkFirewallResourceName = Shapes::StringShape.new(name: 'NetworkFirewallResourceName')
+    NetworkFirewallStatefulRuleGroupOverride = Shapes::StructureShape.new(name: 'NetworkFirewallStatefulRuleGroupOverride')
     NetworkFirewallUnexpectedFirewallRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallUnexpectedFirewallRoutesViolation')
     NetworkFirewallUnexpectedGatewayRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallUnexpectedGatewayRoutesViolation')
     OrderedRemediationActions = Shapes::ListShape.new(name: 'OrderedRemediationActions')
@@ -647,6 +649,9 @@ module Aws::FMS
     NetworkFirewallPolicyModifiedViolation.add_member(:expected_policy_description, Shapes::ShapeRef.new(shape: NetworkFirewallPolicyDescription, location_name: "ExpectedPolicyDescription"))
     NetworkFirewallPolicyModifiedViolation.struct_class = Types::NetworkFirewallPolicyModifiedViolation
 
+    NetworkFirewallStatefulRuleGroupOverride.add_member(:action, Shapes::ShapeRef.new(shape: NetworkFirewallOverrideAction, location_name: "Action"))
+    NetworkFirewallStatefulRuleGroupOverride.struct_class = Types::NetworkFirewallStatefulRuleGroupOverride
+
     NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
     NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:violating_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ViolatingRoutes"))
     NetworkFirewallUnexpectedFirewallRoutesViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
@@ -885,6 +890,7 @@ module Aws::FMS
     StatefulRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))
     StatefulRuleGroup.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     StatefulRuleGroup.add_member(:priority, Shapes::ShapeRef.new(shape: PriorityNumber, location_name: "Priority"))
+    StatefulRuleGroup.add_member(:override, Shapes::ShapeRef.new(shape: NetworkFirewallStatefulRuleGroupOverride, location_name: "Override"))
     StatefulRuleGroup.struct_class = Types::StatefulRuleGroup
 
     StatefulRuleGroupList.member = Shapes::ShapeRef.new(shape: StatefulRuleGroup)

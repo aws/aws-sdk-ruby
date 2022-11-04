@@ -281,6 +281,8 @@ module Aws::Neptune
     SNSInvalidTopicFault = Shapes::StructureShape.new(name: 'SNSInvalidTopicFault')
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault')
     SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault')
+    ServerlessV2ScalingConfiguration = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfiguration')
+    ServerlessV2ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfigurationInfo')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault')
     SnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SnapshotQuotaExceededFault')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
@@ -437,6 +439,7 @@ module Aws::Neptune
     CreateDBClusterMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     CreateDBClusterMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     CreateDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    CreateDBClusterMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     CreateDBClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, location_name: "GlobalClusterIdentifier"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
@@ -590,6 +593,7 @@ module Aws::Neptune
     DBCluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     DBCluster.add_member(:cross_account_clone, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CrossAccountClone"))
     DBCluster.add_member(:automatic_restart_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "AutomaticRestartTime"))
+    DBCluster.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfigurationInfo, location_name: "ServerlessV2ScalingConfiguration"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -1290,6 +1294,7 @@ module Aws::Neptune
     ModifyDBClusterMessage.add_member(:db_instance_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceParameterGroupName"))
     ModifyDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     ModifyDBClusterMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
+    ModifyDBClusterMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -1555,6 +1560,7 @@ module Aws::Neptune
     RestoreDBClusterFromSnapshotMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterParameterGroupName"))
     RestoreDBClusterFromSnapshotMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBClusterFromSnapshotMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterFromSnapshotMessage.struct_class = Types::RestoreDBClusterFromSnapshotMessage
 
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -1575,6 +1581,7 @@ module Aws::Neptune
     RestoreDBClusterToPointInTimeMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     RestoreDBClusterToPointInTimeMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterParameterGroupName"))
     RestoreDBClusterToPointInTimeMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     RestoreDBClusterToPointInTimeMessage.struct_class = Types::RestoreDBClusterToPointInTimeMessage
 
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -1585,6 +1592,14 @@ module Aws::Neptune
     SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
 
     SNSTopicArnNotFoundFault.struct_class = Types::SNSTopicArnNotFoundFault
+
+    ServerlessV2ScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
+    ServerlessV2ScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
+    ServerlessV2ScalingConfiguration.struct_class = Types::ServerlessV2ScalingConfiguration
+
+    ServerlessV2ScalingConfigurationInfo.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
+    ServerlessV2ScalingConfigurationInfo.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
+    ServerlessV2ScalingConfigurationInfo.struct_class = Types::ServerlessV2ScalingConfigurationInfo
 
     SharedSnapshotQuotaExceededFault.struct_class = Types::SharedSnapshotQuotaExceededFault
 
@@ -2231,6 +2246,12 @@ module Aws::Neptune
         o.input = Shapes::ShapeRef.new(shape: DescribeGlobalClustersMessage)
         o.output = Shapes::ShapeRef.new(shape: GlobalClustersMessage)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_orderable_db_instance_options, Seahorse::Model::Operation.new.tap do |o|

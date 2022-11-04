@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-sms/types'
 require_relative 'aws-sdk-sms/client_api'
+require_relative 'aws-sdk-sms/plugins/endpoints.rb'
 require_relative 'aws-sdk-sms/client'
 require_relative 'aws-sdk-sms/errors'
 require_relative 'aws-sdk-sms/resource'
+require_relative 'aws-sdk-sms/endpoint_parameters'
+require_relative 'aws-sdk-sms/endpoint_provider'
+require_relative 'aws-sdk-sms/endpoints'
 require_relative 'aws-sdk-sms/customizations'
 
 # This module provides support for AWS Server Migration Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-sms/customizations'
 # @!group service
 module Aws::SMS
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end

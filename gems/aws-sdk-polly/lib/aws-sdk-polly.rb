@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-polly/types'
 require_relative 'aws-sdk-polly/client_api'
+require_relative 'aws-sdk-polly/plugins/endpoints.rb'
 require_relative 'aws-sdk-polly/client'
 require_relative 'aws-sdk-polly/errors'
 require_relative 'aws-sdk-polly/resource'
+require_relative 'aws-sdk-polly/endpoint_parameters'
+require_relative 'aws-sdk-polly/endpoint_provider'
+require_relative 'aws-sdk-polly/endpoints'
 require_relative 'aws-sdk-polly/customizations'
 
 # This module provides support for Amazon Polly. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-polly/customizations'
 # @!group service
 module Aws::Polly
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end

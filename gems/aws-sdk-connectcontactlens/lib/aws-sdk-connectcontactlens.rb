@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-connectcontactlens/types'
 require_relative 'aws-sdk-connectcontactlens/client_api'
+require_relative 'aws-sdk-connectcontactlens/plugins/endpoints.rb'
 require_relative 'aws-sdk-connectcontactlens/client'
 require_relative 'aws-sdk-connectcontactlens/errors'
 require_relative 'aws-sdk-connectcontactlens/resource'
+require_relative 'aws-sdk-connectcontactlens/endpoint_parameters'
+require_relative 'aws-sdk-connectcontactlens/endpoint_provider'
+require_relative 'aws-sdk-connectcontactlens/endpoints'
 require_relative 'aws-sdk-connectcontactlens/customizations'
 
 # This module provides support for Amazon Connect Contact Lens. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-connectcontactlens/customizations'
 # @!group service
 module Aws::ConnectContactLens
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

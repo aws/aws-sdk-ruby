@@ -23,6 +23,8 @@ module Aws::EC2
     AcceleratorTotalMemoryMiBRequest = Shapes::StructureShape.new(name: 'AcceleratorTotalMemoryMiBRequest')
     AcceleratorType = Shapes::StringShape.new(name: 'AcceleratorType')
     AcceleratorTypeSet = Shapes::ListShape.new(name: 'AcceleratorTypeSet')
+    AcceptAddressTransferRequest = Shapes::StructureShape.new(name: 'AcceptAddressTransferRequest')
+    AcceptAddressTransferResult = Shapes::StructureShape.new(name: 'AcceptAddressTransferResult')
     AcceptReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'AcceptReservedInstancesExchangeQuoteRequest')
     AcceptReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'AcceptReservedInstancesExchangeQuoteResult')
     AcceptTransitGatewayMulticastDomainAssociationsRequest = Shapes::StructureShape.new(name: 'AcceptTransitGatewayMulticastDomainAssociationsRequest')
@@ -65,6 +67,9 @@ module Aws::EC2
     AddressList = Shapes::ListShape.new(name: 'AddressList')
     AddressMaxResults = Shapes::IntegerShape.new(name: 'AddressMaxResults')
     AddressSet = Shapes::ListShape.new(name: 'AddressSet')
+    AddressTransfer = Shapes::StructureShape.new(name: 'AddressTransfer')
+    AddressTransferList = Shapes::ListShape.new(name: 'AddressTransferList')
+    AddressTransferStatus = Shapes::StringShape.new(name: 'AddressTransferStatus')
     AdvertiseByoipCidrRequest = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrRequest')
     AdvertiseByoipCidrResult = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrResult')
     Affinity = Shapes::StringShape.new(name: 'Affinity')
@@ -220,6 +225,8 @@ module Aws::EC2
     CancelCapacityReservationResult = Shapes::StructureShape.new(name: 'CancelCapacityReservationResult')
     CancelConversionRequest = Shapes::StructureShape.new(name: 'CancelConversionRequest')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
+    CancelImageLaunchPermissionRequest = Shapes::StructureShape.new(name: 'CancelImageLaunchPermissionRequest')
+    CancelImageLaunchPermissionResult = Shapes::StructureShape.new(name: 'CancelImageLaunchPermissionResult')
     CancelImportTaskRequest = Shapes::StructureShape.new(name: 'CancelImportTaskRequest')
     CancelImportTaskResult = Shapes::StructureShape.new(name: 'CancelImportTaskResult')
     CancelReservedInstancesListingRequest = Shapes::StructureShape.new(name: 'CancelReservedInstancesListingRequest')
@@ -676,6 +683,9 @@ module Aws::EC2
     DeregisterTransitGatewayMulticastGroupSourcesResult = Shapes::StructureShape.new(name: 'DeregisterTransitGatewayMulticastGroupSourcesResult')
     DescribeAccountAttributesRequest = Shapes::StructureShape.new(name: 'DescribeAccountAttributesRequest')
     DescribeAccountAttributesResult = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResult')
+    DescribeAddressTransfersMaxResults = Shapes::IntegerShape.new(name: 'DescribeAddressTransfersMaxResults')
+    DescribeAddressTransfersRequest = Shapes::StructureShape.new(name: 'DescribeAddressTransfersRequest')
+    DescribeAddressTransfersResult = Shapes::StructureShape.new(name: 'DescribeAddressTransfersResult')
     DescribeAddressesAttributeRequest = Shapes::StructureShape.new(name: 'DescribeAddressesAttributeRequest')
     DescribeAddressesAttributeResult = Shapes::StructureShape.new(name: 'DescribeAddressesAttributeResult')
     DescribeAddressesRequest = Shapes::StructureShape.new(name: 'DescribeAddressesRequest')
@@ -1014,6 +1024,8 @@ module Aws::EC2
     DhcpOptionsList = Shapes::ListShape.new(name: 'DhcpOptionsList')
     DirectoryServiceAuthentication = Shapes::StructureShape.new(name: 'DirectoryServiceAuthentication')
     DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
+    DisableAddressTransferRequest = Shapes::StructureShape.new(name: 'DisableAddressTransferRequest')
+    DisableAddressTransferResult = Shapes::StructureShape.new(name: 'DisableAddressTransferResult')
     DisableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultRequest')
     DisableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultResult')
     DisableFastLaunchRequest = Shapes::StructureShape.new(name: 'DisableFastLaunchRequest')
@@ -1120,6 +1132,8 @@ module Aws::EC2
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
     ElasticIpAssociationId = Shapes::StringShape.new(name: 'ElasticIpAssociationId')
     EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
+    EnableAddressTransferRequest = Shapes::StructureShape.new(name: 'EnableAddressTransferRequest')
+    EnableAddressTransferResult = Shapes::StructureShape.new(name: 'EnableAddressTransferResult')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
     EnableFastLaunchRequest = Shapes::StructureShape.new(name: 'EnableFastLaunchRequest')
@@ -2790,6 +2804,14 @@ module Aws::EC2
 
     AcceleratorTypeSet.member = Shapes::ShapeRef.new(shape: AcceleratorType, location_name: "item")
 
+    AcceptAddressTransferRequest.add_member(:address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Address"))
+    AcceptAddressTransferRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    AcceptAddressTransferRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AcceptAddressTransferRequest.struct_class = Types::AcceptAddressTransferRequest
+
+    AcceptAddressTransferResult.add_member(:address_transfer, Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "addressTransfer"))
+    AcceptAddressTransferResult.struct_class = Types::AcceptAddressTransferResult
+
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:reserved_instance_ids, Shapes::ShapeRef.new(shape: ReservedInstanceIdSet, required: true, location_name: "ReservedInstanceId"))
     AcceptReservedInstancesExchangeQuoteRequest.add_member(:target_configurations, Shapes::ShapeRef.new(shape: TargetConfigurationRequestSet, location_name: "TargetConfiguration"))
@@ -2929,6 +2951,16 @@ module Aws::EC2
     AddressList.member = Shapes::ShapeRef.new(shape: Address, location_name: "item")
 
     AddressSet.member = Shapes::ShapeRef.new(shape: AddressAttribute, location_name: "item")
+
+    AddressTransfer.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
+    AddressTransfer.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
+    AddressTransfer.add_member(:transfer_account_id, Shapes::ShapeRef.new(shape: String, location_name: "transferAccountId"))
+    AddressTransfer.add_member(:transfer_offer_expiration_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "transferOfferExpirationTimestamp"))
+    AddressTransfer.add_member(:transfer_offer_accepted_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "transferOfferAcceptedTimestamp"))
+    AddressTransfer.add_member(:address_transfer_status, Shapes::ShapeRef.new(shape: AddressTransferStatus, location_name: "addressTransferStatus"))
+    AddressTransfer.struct_class = Types::AddressTransfer
+
+    AddressTransferList.member = Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "item")
 
     AdvertiseByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     AdvertiseByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -3472,6 +3504,13 @@ module Aws::EC2
 
     CancelExportTaskRequest.add_member(:export_task_id, Shapes::ShapeRef.new(shape: ExportVmTaskId, required: true, location_name: "exportTaskId"))
     CancelExportTaskRequest.struct_class = Types::CancelExportTaskRequest
+
+    CancelImageLaunchPermissionRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    CancelImageLaunchPermissionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CancelImageLaunchPermissionRequest.struct_class = Types::CancelImageLaunchPermissionRequest
+
+    CancelImageLaunchPermissionResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    CancelImageLaunchPermissionResult.struct_class = Types::CancelImageLaunchPermissionResult
 
     CancelImportTaskRequest.add_member(:cancel_reason, Shapes::ShapeRef.new(shape: String, location_name: "CancelReason"))
     CancelImportTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4410,6 +4449,8 @@ module Aws::EC2
     CreateReplaceRootVolumeTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateReplaceRootVolumeTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateReplaceRootVolumeTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateReplaceRootVolumeTaskRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
+    CreateReplaceRootVolumeTaskRequest.add_member(:delete_replaced_root_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteReplacedRootVolume"))
     CreateReplaceRootVolumeTaskRequest.struct_class = Types::CreateReplaceRootVolumeTaskRequest
 
     CreateReplaceRootVolumeTaskResult.add_member(:replace_root_volume_task, Shapes::ShapeRef.new(shape: ReplaceRootVolumeTask, location_name: "replaceRootVolumeTask"))
@@ -5407,6 +5448,16 @@ module Aws::EC2
 
     DescribeAccountAttributesResult.add_member(:account_attributes, Shapes::ShapeRef.new(shape: AccountAttributeList, location_name: "accountAttributeSet"))
     DescribeAccountAttributesResult.struct_class = Types::DescribeAccountAttributesResult
+
+    DescribeAddressTransfersRequest.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIdList, location_name: "AllocationId"))
+    DescribeAddressTransfersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAddressTransfersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeAddressTransfersMaxResults, location_name: "MaxResults"))
+    DescribeAddressTransfersRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeAddressTransfersRequest.struct_class = Types::DescribeAddressTransfersRequest
+
+    DescribeAddressTransfersResult.add_member(:address_transfers, Shapes::ShapeRef.new(shape: AddressTransferList, location_name: "addressTransferSet"))
+    DescribeAddressTransfersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeAddressTransfersResult.struct_class = Types::DescribeAddressTransfersResult
 
     DescribeAddressesAttributeRequest.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIds, location_name: "AllocationId"))
     DescribeAddressesAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: AddressAttributeName, location_name: "Attribute"))
@@ -6944,6 +6995,13 @@ module Aws::EC2
     DirectoryServiceAuthenticationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: String, location_name: "DirectoryId"))
     DirectoryServiceAuthenticationRequest.struct_class = Types::DirectoryServiceAuthenticationRequest
 
+    DisableAddressTransferRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
+    DisableAddressTransferRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableAddressTransferRequest.struct_class = Types::DisableAddressTransferRequest
+
+    DisableAddressTransferResult.add_member(:address_transfer, Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "addressTransfer"))
+    DisableAddressTransferResult.struct_class = Types::DisableAddressTransferResult
+
     DisableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableEbsEncryptionByDefaultRequest.struct_class = Types::DisableEbsEncryptionByDefaultRequest
 
@@ -7283,6 +7341,14 @@ module Aws::EC2
     ElasticInferenceAcceleratorAssociationList.member = Shapes::ShapeRef.new(shape: ElasticInferenceAcceleratorAssociation, location_name: "item")
 
     ElasticInferenceAccelerators.member = Shapes::ShapeRef.new(shape: ElasticInferenceAccelerator, location_name: "item")
+
+    EnableAddressTransferRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
+    EnableAddressTransferRequest.add_member(:transfer_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransferAccountId"))
+    EnableAddressTransferRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableAddressTransferRequest.struct_class = Types::EnableAddressTransferRequest
+
+    EnableAddressTransferResult.add_member(:address_transfer, Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "addressTransfer"))
+    EnableAddressTransferResult.struct_class = Types::EnableAddressTransferResult
 
     EnableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableEbsEncryptionByDefaultRequest.struct_class = Types::EnableEbsEncryptionByDefaultRequest
@@ -11313,6 +11379,9 @@ module Aws::EC2
     ReplaceRootVolumeTask.add_member(:start_time, Shapes::ShapeRef.new(shape: String, location_name: "startTime"))
     ReplaceRootVolumeTask.add_member(:complete_time, Shapes::ShapeRef.new(shape: String, location_name: "completeTime"))
     ReplaceRootVolumeTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    ReplaceRootVolumeTask.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
+    ReplaceRootVolumeTask.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
+    ReplaceRootVolumeTask.add_member(:delete_replaced_root_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteReplacedRootVolume"))
     ReplaceRootVolumeTask.struct_class = Types::ReplaceRootVolumeTask
 
     ReplaceRootVolumeTaskIds.member = Shapes::ShapeRef.new(shape: ReplaceRootVolumeTaskId, location_name: "ReplaceRootVolumeTaskId")
@@ -13666,6 +13735,14 @@ module Aws::EC2
         "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-11-15",
       }
 
+      api.add_operation(:accept_address_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptAddressTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptAddressTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptAddressTransferResult)
+      end)
+
       api.add_operation(:accept_reserved_instances_exchange_quote, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AcceptReservedInstancesExchangeQuote"
         o.http_method = "POST"
@@ -13984,6 +14061,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CancelExportTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:cancel_image_launch_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelImageLaunchPermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelImageLaunchPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelImageLaunchPermissionResult)
       end)
 
       api.add_operation(:cancel_import_task, Seahorse::Model::Operation.new.tap do |o|
@@ -15264,6 +15349,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountAttributesResult)
+      end)
+
+      api.add_operation(:describe_address_transfers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAddressTransfers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAddressTransfersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAddressTransfersResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_addresses, Seahorse::Model::Operation.new.tap do |o|
@@ -16977,6 +17076,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:disable_address_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableAddressTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableAddressTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableAddressTransferResult)
+      end)
+
       api.add_operation(:disable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableEbsEncryptionByDefault"
         o.http_method = "POST"
@@ -17151,6 +17258,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateVpcCidrBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateVpcCidrBlockResult)
+      end)
+
+      api.add_operation(:enable_address_transfer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableAddressTransfer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableAddressTransferRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableAddressTransferResult)
       end)
 
       api.add_operation(:enable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|

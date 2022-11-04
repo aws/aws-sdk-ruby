@@ -14,6 +14,7 @@ module Aws::CloudWatchLogs
     include Seahorse::Model
 
     AccessPolicy = Shapes::StringShape.new(name: 'AccessPolicy')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
@@ -104,6 +105,8 @@ module Aws::CloudWatchLogs
     InvalidSequenceTokenException = Shapes::StructureShape.new(name: 'InvalidSequenceTokenException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTagsLogGroupRequest = Shapes::StructureShape.new(name: 'ListTagsLogGroupRequest')
     ListTagsLogGroupResponse = Shapes::StructureShape.new(name: 'ListTagsLogGroupResponse')
     LogEventIndex = Shapes::IntegerShape.new(name: 'LogEventIndex')
@@ -189,8 +192,10 @@ module Aws::CloudWatchLogs
     SubscriptionFilters = Shapes::ListShape.new(name: 'SubscriptionFilters')
     Success = Shapes::BooleanShape.new(name: 'Success')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagLogGroupRequest = Shapes::StructureShape.new(name: 'TagLogGroupRequest')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
@@ -199,8 +204,10 @@ module Aws::CloudWatchLogs
     TestMetricFilterResponse = Shapes::StructureShape.new(name: 'TestMetricFilterResponse')
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnrecognizedClientException = Shapes::StructureShape.new(name: 'UnrecognizedClientException')
     UntagLogGroupRequest = Shapes::StructureShape.new(name: 'UntagLogGroupRequest')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     Value = Shapes::StringShape.new(name: 'Value')
 
     AssociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
@@ -470,6 +477,12 @@ module Aws::CloudWatchLogs
 
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListTagsLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     ListTagsLogGroupRequest.struct_class = Types::ListTagsLogGroupRequest
 
@@ -556,6 +569,7 @@ module Aws::CloudWatchLogs
     PutDestinationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     PutDestinationRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "targetArn"))
     PutDestinationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    PutDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PutDestinationRequest.struct_class = Types::PutDestinationRequest
 
     PutDestinationResponse.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
@@ -696,11 +710,17 @@ module Aws::CloudWatchLogs
 
     SubscriptionFilters.member = Shapes::ShapeRef.new(shape: SubscriptionFilter)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
     TagList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     TagLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
     TagLogGroupRequest.struct_class = Types::TagLogGroupRequest
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
 
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
@@ -714,11 +734,19 @@ module Aws::CloudWatchLogs
     TestMetricFilterResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MetricFilterMatches, location_name: "matches"))
     TestMetricFilterResponse.struct_class = Types::TestMetricFilterResponse
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     UnrecognizedClientException.struct_class = Types::UnrecognizedClientException
 
     UntagLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     UntagLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     UntagLogGroupRequest.struct_class = Types::UntagLogGroupRequest
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
 
     # @api private
@@ -1100,10 +1128,22 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:list_tags_log_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsLogGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsLogGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsLogGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1235,10 +1275,23 @@ module Aws::CloudWatchLogs
         o.name = "TagLogGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagLogGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:test_metric_filter, Seahorse::Model::Operation.new.tap do |o|
@@ -1255,9 +1308,21 @@ module Aws::CloudWatchLogs
         o.name = "UntagLogGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagLogGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
     end
 

@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:wafv2)
@@ -79,8 +79,9 @@ module Aws::WAFV2
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::WAFV2::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -297,6 +298,19 @@ module Aws::WAFV2
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -309,6 +323,9 @@ module Aws::WAFV2
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::WAFV2::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WAFV2::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -721,6 +738,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -840,6 +916,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -949,6 +1087,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -975,6 +1123,11 @@ module Aws::WAFV2
     #           metric_name: "MetricName", # required
     #         },
     #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
+    #         challenge_config: {
     #           immunity_time_property: {
     #             immunity_time: 1, # required
     #           },
@@ -1520,6 +1673,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -1639,6 +1851,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -1748,6 +2022,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -1774,6 +2058,11 @@ module Aws::WAFV2
     #           metric_name: "MetricName", # required
     #         },
     #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
+    #         challenge_config: {
     #           immunity_time_property: {
     #             immunity_time: 1, # required
     #           },
@@ -1891,6 +2180,24 @@ module Aws::WAFV2
     #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
     #   don't have their own `CaptchaConfig` settings. If you don't specify
     #   this, WAF uses its default settings for `CaptchaConfig`.
+    #
+    # @option params [Types::ChallengeConfig] :challenge_config
+    #   Specifies how WAF should handle challenge evaluations for rules that
+    #   don't have their own `ChallengeConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `ChallengeConfig`.
+    #
+    # @option params [Array<String>] :token_domains
+    #   Specifies the domains that WAF should accept in a web request token.
+    #   This enables the use of tokens across multiple protected websites.
+    #   When WAF provides a token, it uses the domain of the Amazon Web
+    #   Services resource that the web ACL is protecting. If you don't
+    #   specify a list of token domains, WAF accepts tokens only for the
+    #   domain of the protected resource. With a token domain list, WAF
+    #   accepts the resource's host domain plus all domains in the token
+    #   domain list, including their prefixed subdomains.
+    #
+    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
+    #   "myotherwebsite.com" \}`
     #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2178,6 +2485,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -2297,6 +2663,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -2406,6 +2834,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -2436,6 +2874,11 @@ module Aws::WAFV2
     #             immunity_time: 1, # required
     #           },
     #         },
+    #         challenge_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     visibility_config: { # required
@@ -2460,6 +2903,12 @@ module Aws::WAFV2
     #         immunity_time: 1, # required
     #       },
     #     },
+    #     challenge_config: {
+    #       immunity_time_property: {
+    #         immunity_time: 1, # required
+    #       },
+    #     },
+    #     token_domains: ["TokenDomain"],
     #   })
     #
     # @example Response structure
@@ -2891,6 +3340,9 @@ module Aws::WAFV2
     #   resp.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
     #   resp.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
     #   resp.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rules[0].action.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.rules[0].action.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rules[0].action.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.label_namespace #=> String
     #   resp.available_labels #=> Array
     #   resp.available_labels[0].name #=> String
@@ -2961,10 +3413,10 @@ module Aws::WAFV2
     # mobile SDK.
     #
     # The mobile SDK is not generally available. Customers who have access
-    # to the mobile SDK can use it to establish and manage Security Token
-    # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF. For more information, see [WAF client
-    # application integration][1] in the *WAF Developer Guide*.
+    # to the mobile SDK can use it to establish and manage WAF tokens for
+    # use in HTTP(S) requests from a mobile device to WAF. For more
+    # information, see [WAF client application integration][1] in the *WAF
+    # Developer Guide*.
     #
     #
     #
@@ -3106,7 +3558,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configuration.logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
     #   resp.logging_configuration.logging_filter.filters[0].conditions #=> Array
-    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "EXCLUDED_AS_COUNT"
+    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #
@@ -3201,10 +3653,10 @@ module Aws::WAFV2
     # release notes and tags.
     #
     # The mobile SDK is not generally available. Customers who have access
-    # to the mobile SDK can use it to establish and manage Security Token
-    # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF. For more information, see [WAF client
-    # application integration][1] in the *WAF Developer Guide*.
+    # to the mobile SDK can use it to establish and manage WAF tokens for
+    # use in HTTP(S) requests from a mobile device to WAF. For more
+    # information, see [WAF client application integration][1] in the *WAF
+    # Developer Guide*.
     #
     #
     #
@@ -3576,6 +4028,25 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.arn #=> String
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.rule_group.rules[0].statement.ip_set_reference_statement.arn #=> String
     #   resp.rule_group.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.rule_group.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -3625,6 +4096,26 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.rule_group.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.rule_group.rules[0].statement.label_match_statement.key #=> String
     #   resp.rule_group.rules[0].statement.regex_match_statement.regex_string #=> String
@@ -3665,6 +4156,9 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
     #   resp.rule_group.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
     #   resp.rule_group.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].action.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].action.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].action.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.rule_group.rules[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.rule_group.rules[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.rule_group.rules[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -3674,6 +4168,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.rule_group.rules[0].visibility_config.metric_name #=> String
     #   resp.rule_group.rules[0].captcha_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.rule_group.rules[0].challenge_config.immunity_time_property.immunity_time #=> Integer
     #   resp.rule_group.visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.rule_group.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.rule_group.visibility_config.metric_name #=> String
@@ -3789,7 +4284,11 @@ module Aws::WAFV2
     #   resp.sampled_requests[0].labels[0].name #=> String
     #   resp.sampled_requests[0].captcha_response.response_code #=> Integer
     #   resp.sampled_requests[0].captcha_response.solve_timestamp #=> Integer
-    #   resp.sampled_requests[0].captcha_response.failure_reason #=> String, one of "TOKEN_MISSING", "TOKEN_EXPIRED"
+    #   resp.sampled_requests[0].captcha_response.failure_reason #=> String, one of "TOKEN_MISSING", "TOKEN_EXPIRED", "TOKEN_INVALID", "TOKEN_DOMAIN_MISMATCH"
+    #   resp.sampled_requests[0].challenge_response.response_code #=> Integer
+    #   resp.sampled_requests[0].challenge_response.solve_timestamp #=> Integer
+    #   resp.sampled_requests[0].challenge_response.failure_reason #=> String, one of "TOKEN_MISSING", "TOKEN_EXPIRED", "TOKEN_INVALID", "TOKEN_DOMAIN_MISMATCH"
+    #   resp.sampled_requests[0].overridden_action #=> String
     #   resp.population_size #=> Integer
     #   resp.time_window.start_time #=> Time
     #   resp.time_window.end_time #=> Time
@@ -3963,6 +4462,25 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -4012,6 +4530,26 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.rules[0].statement.label_match_statement.key #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
@@ -4052,6 +4590,9 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].action.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].action.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].action.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -4061,6 +4602,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.rules[0].visibility_config.metric_name #=> String
     #   resp.web_acl.rules[0].captcha_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.web_acl.rules[0].challenge_config.immunity_time_property.immunity_time #=> Integer
     #   resp.web_acl.visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.web_acl.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.visibility_config.metric_name #=> String
@@ -4177,6 +4719,25 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -4247,9 +4808,48 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -4368,6 +4968,25 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -4438,9 +5057,48 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -4453,6 +5111,9 @@ module Aws::WAFV2
     #   resp.web_acl.custom_response_bodies["EntityName"].content_type #=> String, one of "TEXT_PLAIN", "TEXT_HTML", "APPLICATION_JSON"
     #   resp.web_acl.custom_response_bodies["EntityName"].content #=> String
     #   resp.web_acl.captcha_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.web_acl.challenge_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.web_acl.token_domains #=> Array
+    #   resp.web_acl.token_domains[0] #=> String
     #   resp.lock_token #=> String
     #   resp.application_integration_url #=> String
     #
@@ -4617,6 +5278,25 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.web_acl.rules[0].statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -4666,6 +5346,26 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.rules[0].statement.label_match_statement.key #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
@@ -4706,6 +5406,9 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].action.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].action.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].action.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -4715,6 +5418,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.rules[0].visibility_config.metric_name #=> String
     #   resp.web_acl.rules[0].captcha_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.web_acl.rules[0].challenge_config.immunity_time_property.immunity_time #=> Integer
     #   resp.web_acl.visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.web_acl.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.visibility_config.metric_name #=> String
@@ -4831,6 +5535,25 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -4901,9 +5624,48 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -5022,6 +5784,25 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.header_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.ip_set_reference_statement.ip_set_forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
@@ -5092,9 +5873,48 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].aws_managed_rules_bot_control_rule_set.inspection_level #=> String, one of "COMMON", "TARGETED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_code #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.custom_response_body_key #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.block.custom_response.response_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.allow.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.captcha.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.rule_action_overrides[0].action_to_use.challenge.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -5107,6 +5927,9 @@ module Aws::WAFV2
     #   resp.web_acl.custom_response_bodies["EntityName"].content_type #=> String, one of "TEXT_PLAIN", "TEXT_HTML", "APPLICATION_JSON"
     #   resp.web_acl.custom_response_bodies["EntityName"].content #=> String
     #   resp.web_acl.captcha_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.web_acl.challenge_config.immunity_time_property.immunity_time #=> Integer
+    #   resp.web_acl.token_domains #=> Array
+    #   resp.web_acl.token_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResource AWS API Documentation
     #
@@ -5387,7 +6210,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configurations[0].logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions #=> Array
-    #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "EXCLUDED_AS_COUNT"
+    #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configurations[0].logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.next_marker #=> String
@@ -5478,10 +6301,10 @@ module Aws::WAFV2
     # specified device platform.
     #
     # The mobile SDK is not generally available. Customers who have access
-    # to the mobile SDK can use it to establish and manage Security Token
-    # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF. For more information, see [WAF client
-    # application integration][1] in the *WAF Developer Guide*.
+    # to the mobile SDK can use it to establish and manage WAF tokens for
+    # use in HTTP(S) requests from a mobile device to WAF. For more
+    # information, see [WAF client application integration][1] in the *WAF
+    # Developer Guide*.
     #
     #
     #
@@ -5936,7 +6759,7 @@ module Aws::WAFV2
     #             conditions: [ # required
     #               {
     #                 action_condition: {
-    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
+    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, CHALLENGE, EXCLUDED_AS_COUNT
     #                 },
     #                 label_name_condition: {
     #                   label_name: "LabelName", # required
@@ -5981,7 +6804,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configuration.logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
     #   resp.logging_configuration.logging_filter.filters[0].conditions #=> Array
-    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "EXCLUDED_AS_COUNT"
+    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #
@@ -6911,6 +7734,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -7030,6 +7912,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -7139,6 +8083,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -7165,6 +8119,11 @@ module Aws::WAFV2
     #           metric_name: "MetricName", # required
     #         },
     #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
+    #         challenge_config: {
     #           immunity_time_property: {
     #             immunity_time: 1, # required
     #           },
@@ -7309,6 +8268,24 @@ module Aws::WAFV2
     #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
     #   don't have their own `CaptchaConfig` settings. If you don't specify
     #   this, WAF uses its default settings for `CaptchaConfig`.
+    #
+    # @option params [Types::ChallengeConfig] :challenge_config
+    #   Specifies how WAF should handle challenge evaluations for rules that
+    #   don't have their own `ChallengeConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `ChallengeConfig`.
+    #
+    # @option params [Array<String>] :token_domains
+    #   Specifies the domains that WAF should accept in a web request token.
+    #   This enables the use of tokens across multiple protected websites.
+    #   When WAF provides a token, it uses the domain of the Amazon Web
+    #   Services resource that the web ACL is protecting. If you don't
+    #   specify a list of token domains, WAF accepts tokens only for the
+    #   domain of the protected resource. With a token domain list, WAF
+    #   accepts the resource's host domain plus all domains in the token
+    #   domain list, including their prefixed subdomains.
+    #
+    #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
+    #   "myotherwebsite.com" \}`
     #
     # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7597,6 +8574,65 @@ module Aws::WAFV2
     #                 name: "EntityName", # required
     #               },
     #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
     #           },
     #           ip_set_reference_statement: {
     #             arn: "ResourceArn", # required
@@ -7716,6 +8752,68 @@ module Aws::WAFV2
     #                 password_field: {
     #                   identifier: "FieldIdentifier", # required
     #                 },
+    #                 aws_managed_rules_bot_control_rule_set: {
+    #                   inspection_level: "COMMON", # required, accepts COMMON, TARGETED
+    #                 },
+    #               },
+    #             ],
+    #             rule_action_overrides: [
+    #               {
+    #                 name: "EntityName", # required
+    #                 action_to_use: { # required
+    #                   block: {
+    #                     custom_response: {
+    #                       response_code: 1, # required
+    #                       custom_response_body_key: "EntityName",
+    #                       response_headers: [
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   allow: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   count: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   captcha: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   challenge: {
+    #                     custom_request_handling: {
+    #                       insert_headers: [ # required
+    #                         {
+    #                           name: "CustomHTTPHeaderName", # required
+    #                           value: "CustomHTTPHeaderValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -7825,6 +8923,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           challenge: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -7855,6 +8963,11 @@ module Aws::WAFV2
     #             immunity_time: 1, # required
     #           },
     #         },
+    #         challenge_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     visibility_config: { # required
@@ -7874,6 +8987,12 @@ module Aws::WAFV2
     #         immunity_time: 1, # required
     #       },
     #     },
+    #     challenge_config: {
+    #       immunity_time_property: {
+    #         immunity_time: 1, # required
+    #       },
+    #     },
+    #     token_domains: ["TokenDomain"],
     #   })
     #
     # @example Response structure
@@ -7902,7 +9021,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

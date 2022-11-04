@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-keyspaces/types'
 require_relative 'aws-sdk-keyspaces/client_api'
+require_relative 'aws-sdk-keyspaces/plugins/endpoints.rb'
 require_relative 'aws-sdk-keyspaces/client'
 require_relative 'aws-sdk-keyspaces/errors'
 require_relative 'aws-sdk-keyspaces/waiters'
 require_relative 'aws-sdk-keyspaces/resource'
+require_relative 'aws-sdk-keyspaces/endpoint_parameters'
+require_relative 'aws-sdk-keyspaces/endpoint_provider'
+require_relative 'aws-sdk-keyspaces/endpoints'
 require_relative 'aws-sdk-keyspaces/customizations'
 
 # This module provides support for Amazon Keyspaces. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-keyspaces/customizations'
 # @!group service
 module Aws::Keyspaces
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end

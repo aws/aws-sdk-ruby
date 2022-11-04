@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2022-11-03)
+------------------
+
+* Feature - Adding support for r6gd instances for MemoryDB Redis with data tiering. In a cluster with data tiering enabled, when available memory capacity is exhausted, the least recently used data is automatically tiered to solid state drives for cost-effective capacity scaling with minimal performance impact.
+
+1.9.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2022-02-24)
 ------------------
 

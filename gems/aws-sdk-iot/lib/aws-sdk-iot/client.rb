@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:iot)
@@ -79,8 +79,9 @@ module Aws::IoT
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::IoT::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::IoT
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::IoT
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::IoT::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::IoT::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -2473,7 +2490,13 @@ module Aws::IoT
     #   This IoT role grants permission to provision a device.
     #
     # @option params [Types::ProvisioningHook] :pre_provisioning_hook
-    #   Creates a pre-provisioning hook template.
+    #   Creates a pre-provisioning hook template. Only supports template of
+    #   type `FLEET_PROVISIONING`. For more information about provisioning
+    #   template types, see [type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the provisioning template.
@@ -3317,6 +3340,17 @@ module Aws::IoT
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
     #           },
+    #           location: {
+    #             role_arn: "AwsArn", # required
+    #             tracker_name: "String", # required
+    #             device_id: "String", # required
+    #             timestamp: {
+    #               value: "String", # required
+    #               unit: "String",
+    #             },
+    #             latitude: "String", # required
+    #             longitude: "String", # required
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -3494,6 +3528,17 @@ module Aws::IoT
     #           index: "ElasticsearchIndex", # required
     #           type: "ElasticsearchType", # required
     #           id: "ElasticsearchId", # required
+    #         },
+    #         location: {
+    #           role_arn: "AwsArn", # required
+    #           tracker_name: "String", # required
+    #           device_id: "String", # required
+    #           timestamp: {
+    #             value: "String", # required
+    #             unit: "String",
+    #           },
+    #           latitude: "String", # required
+    #           longitude: "String", # required
     #         },
     #       },
     #     },
@@ -6492,7 +6537,7 @@ module Aws::IoT
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time. The default is
-    #   25.
+    #   10.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -7229,6 +7274,13 @@ module Aws::IoT
     #   resp.rule.actions[0].open_search.index #=> String
     #   resp.rule.actions[0].open_search.type #=> String
     #   resp.rule.actions[0].open_search.id #=> String
+    #   resp.rule.actions[0].location.role_arn #=> String
+    #   resp.rule.actions[0].location.tracker_name #=> String
+    #   resp.rule.actions[0].location.device_id #=> String
+    #   resp.rule.actions[0].location.timestamp.value #=> String
+    #   resp.rule.actions[0].location.timestamp.unit #=> String
+    #   resp.rule.actions[0].location.latitude #=> String
+    #   resp.rule.actions[0].location.longitude #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -7335,6 +7387,13 @@ module Aws::IoT
     #   resp.rule.error_action.open_search.index #=> String
     #   resp.rule.error_action.open_search.type #=> String
     #   resp.rule.error_action.open_search.id #=> String
+    #   resp.rule.error_action.location.role_arn #=> String
+    #   resp.rule.error_action.location.tracker_name #=> String
+    #   resp.rule.error_action.location.device_id #=> String
+    #   resp.rule.error_action.location.timestamp.value #=> String
+    #   resp.rule.error_action.location.timestamp.unit #=> String
+    #   resp.rule.error_action.location.latitude #=> String
+    #   resp.rule.error_action.location.longitude #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -11239,6 +11298,17 @@ module Aws::IoT
     #             type: "ElasticsearchType", # required
     #             id: "ElasticsearchId", # required
     #           },
+    #           location: {
+    #             role_arn: "AwsArn", # required
+    #             tracker_name: "String", # required
+    #             device_id: "String", # required
+    #             timestamp: {
+    #               value: "String", # required
+    #               unit: "String",
+    #             },
+    #             latitude: "String", # required
+    #             longitude: "String", # required
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -11416,6 +11486,17 @@ module Aws::IoT
     #           index: "ElasticsearchIndex", # required
     #           type: "ElasticsearchType", # required
     #           id: "ElasticsearchId", # required
+    #         },
+    #         location: {
+    #           role_arn: "AwsArn", # required
+    #           tracker_name: "String", # required
+    #           device_id: "String", # required
+    #           timestamp: {
+    #             value: "String", # required
+    #             unit: "String",
+    #           },
+    #           latitude: "String", # required
+    #           longitude: "String", # required
     #         },
     #       },
     #     },
@@ -13083,7 +13164,13 @@ module Aws::IoT
     #   IoT role grants permission to provision a device.
     #
     # @option params [Types::ProvisioningHook] :pre_provisioning_hook
-    #   Updates the pre-provisioning hook template.
+    #   Updates the pre-provisioning hook template. Only supports template of
+    #   type `FLEET_PROVISIONING`. For more information about provisioning
+    #   template types, see [type][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type
     #
     # @option params [Boolean] :remove_pre_provisioning_hook
     #   Removes pre-provisioning hook template.
@@ -13746,7 +13833,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

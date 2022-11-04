@@ -16,4 +16,4 @@ Feature: Managed multipart copies
     Given I create a bucket resource
     And I have a 10MB file
     And I upload the file to the "test object" object
-    Then I should be able to copy the object
+    Then I should be able to multipart copy the object

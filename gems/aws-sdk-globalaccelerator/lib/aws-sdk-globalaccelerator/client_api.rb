@@ -24,6 +24,8 @@ module Aws::GlobalAccelerator
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddCustomRoutingEndpointsRequest = Shapes::StructureShape.new(name: 'AddCustomRoutingEndpointsRequest')
     AddCustomRoutingEndpointsResponse = Shapes::StructureShape.new(name: 'AddCustomRoutingEndpointsResponse')
+    AddEndpointsRequest = Shapes::StructureShape.new(name: 'AddEndpointsRequest')
+    AddEndpointsResponse = Shapes::StructureShape.new(name: 'AddEndpointsResponse')
     AdvertiseByoipCidrRequest = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrRequest')
     AdvertiseByoipCidrResponse = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrResponse')
     AllowCustomRoutingTrafficRequest = Shapes::StructureShape.new(name: 'AllowCustomRoutingTrafficRequest')
@@ -107,6 +109,8 @@ module Aws::GlobalAccelerator
     EndpointGroupAlreadyExistsException = Shapes::StructureShape.new(name: 'EndpointGroupAlreadyExistsException')
     EndpointGroupNotFoundException = Shapes::StructureShape.new(name: 'EndpointGroupNotFoundException')
     EndpointGroups = Shapes::ListShape.new(name: 'EndpointGroups')
+    EndpointIdentifier = Shapes::StructureShape.new(name: 'EndpointIdentifier')
+    EndpointIdentifiers = Shapes::ListShape.new(name: 'EndpointIdentifiers')
     EndpointIds = Shapes::ListShape.new(name: 'EndpointIds')
     EndpointNotFoundException = Shapes::StructureShape.new(name: 'EndpointNotFoundException')
     EndpointWeight = Shapes::IntegerShape.new(name: 'EndpointWeight')
@@ -168,6 +172,7 @@ module Aws::GlobalAccelerator
     ProvisionByoipCidrRequest = Shapes::StructureShape.new(name: 'ProvisionByoipCidrRequest')
     ProvisionByoipCidrResponse = Shapes::StructureShape.new(name: 'ProvisionByoipCidrResponse')
     RemoveCustomRoutingEndpointsRequest = Shapes::StructureShape.new(name: 'RemoveCustomRoutingEndpointsRequest')
+    RemoveEndpointsRequest = Shapes::StructureShape.new(name: 'RemoveEndpointsRequest')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     SocketAddress = Shapes::StructureShape.new(name: 'SocketAddress')
     SocketAddresses = Shapes::ListShape.new(name: 'SocketAddresses')
@@ -181,6 +186,7 @@ module Aws::GlobalAccelerator
     ThresholdCount = Shapes::IntegerShape.new(name: 'ThresholdCount')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TrafficDialPercentage = Shapes::FloatShape.new(name: 'TrafficDialPercentage')
+    TransactionInProgressException = Shapes::StructureShape.new(name: 'TransactionInProgressException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAcceleratorAttributesRequest = Shapes::StructureShape.new(name: 'UpdateAcceleratorAttributesRequest')
@@ -242,6 +248,14 @@ module Aws::GlobalAccelerator
     AddCustomRoutingEndpointsResponse.add_member(:endpoint_descriptions, Shapes::ShapeRef.new(shape: CustomRoutingEndpointDescriptions, location_name: "EndpointDescriptions"))
     AddCustomRoutingEndpointsResponse.add_member(:endpoint_group_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointGroupArn"))
     AddCustomRoutingEndpointsResponse.struct_class = Types::AddCustomRoutingEndpointsResponse
+
+    AddEndpointsRequest.add_member(:endpoint_configurations, Shapes::ShapeRef.new(shape: EndpointConfigurations, required: true, location_name: "EndpointConfigurations"))
+    AddEndpointsRequest.add_member(:endpoint_group_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointGroupArn"))
+    AddEndpointsRequest.struct_class = Types::AddEndpointsRequest
+
+    AddEndpointsResponse.add_member(:endpoint_descriptions, Shapes::ShapeRef.new(shape: EndpointDescriptions, location_name: "EndpointDescriptions"))
+    AddEndpointsResponse.add_member(:endpoint_group_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "EndpointGroupArn"))
+    AddEndpointsResponse.struct_class = Types::AddEndpointsResponse
 
     AdvertiseByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Cidr"))
     AdvertiseByoipCidrRequest.struct_class = Types::AdvertiseByoipCidrRequest
@@ -542,6 +556,12 @@ module Aws::GlobalAccelerator
 
     EndpointGroups.member = Shapes::ShapeRef.new(shape: EndpointGroup)
 
+    EndpointIdentifier.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointId"))
+    EndpointIdentifier.add_member(:client_ip_preservation_enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "ClientIPPreservationEnabled"))
+    EndpointIdentifier.struct_class = Types::EndpointIdentifier
+
+    EndpointIdentifiers.member = Shapes::ShapeRef.new(shape: EndpointIdentifier)
+
     EndpointIds.member = Shapes::ShapeRef.new(shape: GenericString)
 
     EndpointNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -706,6 +726,10 @@ module Aws::GlobalAccelerator
     RemoveCustomRoutingEndpointsRequest.add_member(:endpoint_group_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointGroupArn"))
     RemoveCustomRoutingEndpointsRequest.struct_class = Types::RemoveCustomRoutingEndpointsRequest
 
+    RemoveEndpointsRequest.add_member(:endpoint_identifiers, Shapes::ShapeRef.new(shape: EndpointIdentifiers, required: true, location_name: "EndpointIdentifiers"))
+    RemoveEndpointsRequest.add_member(:endpoint_group_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointGroupArn"))
+    RemoveEndpointsRequest.struct_class = Types::RemoveEndpointsRequest
+
     SocketAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: GenericString, location_name: "IpAddress"))
     SocketAddress.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
     SocketAddress.struct_class = Types::SocketAddress
@@ -725,6 +749,9 @@ module Aws::GlobalAccelerator
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TransactionInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TransactionInProgressException.struct_class = Types::TransactionInProgressException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
@@ -836,6 +863,20 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:add_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:advertise_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|
@@ -1323,6 +1364,19 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:remove_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: EndpointGroupNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionInProgressException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

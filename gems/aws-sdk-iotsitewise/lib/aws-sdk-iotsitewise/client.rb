@@ -30,7 +30,7 @@ require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:iotsitewise)
@@ -79,8 +79,9 @@ module Aws::IoTSiteWise
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::IoTSiteWise::Plugins::Endpoints)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -287,6 +288,19 @@ module Aws::IoTSiteWise
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
     #   @option options [Boolean] :use_dualstack_endpoint
     #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
     #     will be used if available.
@@ -299,6 +313,9 @@ module Aws::IoTSiteWise
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [Aws::IoTSiteWise::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::IoTSiteWise::EndpointParameters`
     #
     #   @option options [URI::HTTP,String] :http_proxy A proxy to send
     #     requests through.  Formatted like 'http://proxy.com:123'.
@@ -846,14 +863,13 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Creates an access policy that grants the specified identity (Amazon
-    # Web Services SSO user, Amazon Web Services SSO group, or IAM user)
-    # access to the specified IoT SiteWise Monitor portal or project
-    # resource.
+    # Creates an access policy that grants the specified identity (IAM
+    # Identity Center user, IAM Identity Center group, or IAM user) access
+    # to the specified IoT SiteWise Monitor portal or project resource.
     #
     # @option params [required, Types::Identity] :access_policy_identity
-    #   The identity for this access policy. Choose an Amazon Web Services SSO
-    #   user, an Amazon Web Services SSO group, or an IAM user.
+    #   The identity for this access policy. Choose an IAM Identity Center
+    #   user, an IAM Identity Center group, or an IAM user.
     #
     # @option params [required, Types::Resource] :access_policy_resource
     #   The IoT SiteWise Monitor resource for this access policy. Choose
@@ -1437,7 +1453,7 @@ module Aws::IoTSiteWise
     end
 
     # Creates a portal, which can contain projects and dashboards. IoT
-    # SiteWise Monitor uses Amazon Web Services SSO or IAM to authenticate
+    # SiteWise Monitor uses IAM Identity Center or IAM to authenticate
     # portal users and manage user permissions.
     #
     # <note markdown="1"> Before you can sign in to a new portal, you must add at least one
@@ -1495,13 +1511,13 @@ module Aws::IoTSiteWise
     #   The service to use to authenticate users to the portal. Choose from
     #   the following options:
     #
-    #   * `SSO` – The portal uses Amazon Web Services Single Sign On to
-    #     authenticate users and manage user permissions. Before you can
-    #     create a portal that uses Amazon Web Services SSO, you must enable
-    #     Amazon Web Services SSO. For more information, see [Enabling Amazon
-    #     Web Services SSO][1] in the *IoT SiteWise User Guide*. This option
-    #     is only available in Amazon Web Services Regions other than the
-    #     China Regions.
+    #   * `SSO` – The portal uses IAM Identity Center (successor to Single
+    #     Sign-On) to authenticate users and manage user permissions. Before
+    #     you can create a portal that uses IAM Identity Center, you must
+    #     enable IAM Identity Center. For more information, see [Enabling IAM
+    #     Identity Center][1] in the *IoT SiteWise User Guide*. This option is
+    #     only available in Amazon Web Services Regions other than the China
+    #     Regions.
     #
     #   * `IAM` – The portal uses Identity and Access Management to
     #     authenticate users and manage user permissions.
@@ -1993,6 +2009,9 @@ module Aws::IoTSiteWise
     # @option params [required, String] :asset_id
     #   The ID of the asset.
     #
+    # @option params [Boolean] :exclude_properties
+    #   Whether or not to exclude asset properties from the response.
+    #
     # @return [Types::DescribeAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAssetResponse#asset_id #asset_id} => String
@@ -2011,6 +2030,7 @@ module Aws::IoTSiteWise
     #
     #   resp = client.describe_asset({
     #     asset_id: "ID", # required
+    #     exclude_properties: false,
     #   })
     #
     # @example Response structure
@@ -2044,6 +2064,7 @@ module Aws::IoTSiteWise
     #   resp.asset_composite_models[0].properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
     #   resp.asset_composite_models[0].properties[0].data_type_spec #=> String
     #   resp.asset_composite_models[0].properties[0].unit #=> String
+    #   resp.asset_composite_models[0].id #=> String
     #   resp.asset_creation_date #=> Time
     #   resp.asset_last_update_date #=> Time
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
@@ -2072,6 +2093,9 @@ module Aws::IoTSiteWise
     # @option params [required, String] :asset_model_id
     #   The ID of the asset model.
     #
+    # @option params [Boolean] :exclude_properties
+    #   Whether or not to exclude asset model properties from the response.
+    #
     # @return [Types::DescribeAssetModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAssetModelResponse#asset_model_id #asset_model_id} => String
@@ -2089,6 +2113,7 @@ module Aws::IoTSiteWise
     #
     #   resp = client.describe_asset_model({
     #     asset_model_id: "ID", # required
+    #     exclude_properties: false,
     #   })
     #
     # @example Response structure
@@ -2151,6 +2176,7 @@ module Aws::IoTSiteWise
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.interval #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.offset #=> String
     #   resp.asset_model_composite_models[0].properties[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_composite_models[0].id #=> String
     #   resp.asset_model_creation_date #=> Time
     #   resp.asset_model_last_update_date #=> Time
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
@@ -2265,6 +2291,7 @@ module Aws::IoTSiteWise
     #   resp.composite_model.asset_property.type.metric.window.tumbling.interval #=> String
     #   resp.composite_model.asset_property.type.metric.window.tumbling.offset #=> String
     #   resp.composite_model.asset_property.type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.composite_model.id #=> String
     #
     # @overload describe_asset_property(params = {})
     # @param [Hash] params ({})
@@ -3216,14 +3243,14 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
-    # Retrieves a paginated list of access policies for an identity (an
-    # Amazon Web Services SSO user, an Amazon Web Services SSO group, or an
-    # IAM user) or an IoT SiteWise Monitor resource (a portal or project).
+    # Retrieves a paginated list of access policies for an identity (an IAM
+    # Identity Center user, an IAM Identity Center group, or an IAM user) or
+    # an IoT SiteWise Monitor resource (a portal or project).
     #
     # @option params [String] :identity_type
-    #   The type of identity (Amazon Web Services SSO user, Amazon Web
-    #   Services SSO group, or IAM user). This parameter is required if you
-    #   specify `identityId`.
+    #   The type of identity (IAM Identity Center user, IAM Identity Center
+    #   group, or IAM user). This parameter is required if you specify
+    #   `identityId`.
     #
     # @option params [String] :identity_id
     #   The ID of the identity. This parameter is required if you specify
@@ -3295,6 +3322,83 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of properties associated with an asset
+    # model. If you update properties associated with the model before you
+    # finish listing all the properties, you need to start all over again.
+    #
+    # @option params [required, String] :asset_model_id
+    #   The ID of the asset model.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request. If
+    #   not specified, the default value is 50.
+    #
+    # @option params [String] :filter
+    #   Filters the requested list of asset model properties. You can choose
+    #   one of the following options:
+    #
+    #   * `ALL` – The list includes all asset model properties for a given
+    #     asset model ID.
+    #
+    #   * `BASE` – The list includes only base asset model properties for a
+    #     given asset model ID.
+    #
+    #   Default: `BASE`
+    #
+    # @return [Types::ListAssetModelPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetModelPropertiesResponse#asset_model_property_summaries #asset_model_property_summaries} => Array&lt;Types::AssetModelPropertySummary&gt;
+    #   * {Types::ListAssetModelPropertiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_model_properties({
+    #     asset_model_id: "ID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filter: "ALL", # accepts ALL, BASE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_model_property_summaries #=> Array
+    #   resp.asset_model_property_summaries[0].id #=> String
+    #   resp.asset_model_property_summaries[0].name #=> String
+    #   resp.asset_model_property_summaries[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_model_property_summaries[0].data_type_spec #=> String
+    #   resp.asset_model_property_summaries[0].unit #=> String
+    #   resp.asset_model_property_summaries[0].type.attribute.default_value #=> String
+    #   resp.asset_model_property_summaries[0].type.measurement.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.asset_model_property_summaries[0].type.transform.expression #=> String
+    #   resp.asset_model_property_summaries[0].type.transform.variables #=> Array
+    #   resp.asset_model_property_summaries[0].type.transform.variables[0].name #=> String
+    #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.property_id #=> String
+    #   resp.asset_model_property_summaries[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_property_summaries[0].type.transform.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_property_summaries[0].type.transform.processing_config.forwarding_config.state #=> String, one of "DISABLED", "ENABLED"
+    #   resp.asset_model_property_summaries[0].type.metric.expression #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.variables #=> Array
+    #   resp.asset_model_property_summaries[0].type.metric.variables[0].name #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.property_id #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.window.tumbling.interval #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.window.tumbling.offset #=> String
+    #   resp.asset_model_property_summaries[0].type.metric.processing_config.compute_location #=> String, one of "EDGE", "CLOUD"
+    #   resp.asset_model_property_summaries[0].asset_model_composite_model_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_asset_model_properties(params = {})
+    # @param [Hash] params ({})
+    def list_asset_model_properties(params = {}, options = {})
+      req = build_request(:list_asset_model_properties, params)
+      req.send_request(options)
+    end
+
     # Retrieves a paginated list of summaries of all asset models.
     #
     # @option params [String] :next_token
@@ -3340,6 +3444,66 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def list_asset_models(params = {}, options = {})
       req = build_request(:list_asset_models, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of properties associated with an asset. If
+    # you update properties associated with the model before you finish
+    # listing all the properties, you need to start all over again.
+    #
+    # @option params [required, String] :asset_id
+    #   The ID of the asset.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request. If
+    #   not specified, the default value is 50.
+    #
+    # @option params [String] :filter
+    #   Filters the requested list of asset properties. You can choose one of
+    #   the following options:
+    #
+    #   * `ALL` – The list includes all asset properties for a given asset
+    #     model ID.
+    #
+    #   * `BASE` – The list includes only base asset properties for a given
+    #     asset model ID.
+    #
+    #   Default: `BASE`
+    #
+    # @return [Types::ListAssetPropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetPropertiesResponse#asset_property_summaries #asset_property_summaries} => Array&lt;Types::AssetPropertySummary&gt;
+    #   * {Types::ListAssetPropertiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_properties({
+    #     asset_id: "ID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filter: "ALL", # accepts ALL, BASE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_property_summaries #=> Array
+    #   resp.asset_property_summaries[0].id #=> String
+    #   resp.asset_property_summaries[0].alias #=> String
+    #   resp.asset_property_summaries[0].unit #=> String
+    #   resp.asset_property_summaries[0].notification.topic #=> String
+    #   resp.asset_property_summaries[0].notification.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.asset_property_summaries[0].asset_composite_model_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_asset_properties(params = {})
+    # @param [Hash] params ({})
+    def list_asset_properties(params = {}, options = {})
+      req = build_request(:list_asset_properties, params)
       req.send_request(options)
     end
 
@@ -4163,8 +4327,8 @@ module Aws::IoTSiteWise
     #   The ID of the access policy.
     #
     # @option params [required, Types::Identity] :access_policy_identity
-    #   The identity for this access policy. Choose an Amazon Web Services SSO
-    #   user, an Amazon Web Services SSO group, or an IAM user.
+    #   The identity for this access policy. Choose an IAM Identity Center
+    #   user, an IAM Identity Center group, or an IAM user.
     #
     # @option params [required, Types::Resource] :access_policy_resource
     #   The IoT SiteWise Monitor resource for this access policy. Choose
@@ -4490,6 +4654,7 @@ module Aws::IoTSiteWise
     #             },
     #           },
     #         ],
+    #         id: "ID",
     #       },
     #     ],
     #     client_token: "ClientToken",
@@ -4861,7 +5026,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

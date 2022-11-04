@@ -50,9 +50,12 @@ module Aws::AppRunner
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
     CreateVpcConnectorRequest = Shapes::StructureShape.new(name: 'CreateVpcConnectorRequest')
     CreateVpcConnectorResponse = Shapes::StructureShape.new(name: 'CreateVpcConnectorResponse')
+    CreateVpcIngressConnectionRequest = Shapes::StructureShape.new(name: 'CreateVpcIngressConnectionRequest')
+    CreateVpcIngressConnectionResponse = Shapes::StructureShape.new(name: 'CreateVpcIngressConnectionResponse')
     CustomDomain = Shapes::StructureShape.new(name: 'CustomDomain')
     CustomDomainAssociationStatus = Shapes::StringShape.new(name: 'CustomDomainAssociationStatus')
     CustomDomainList = Shapes::ListShape.new(name: 'CustomDomainList')
+    CustomerAccountId = Shapes::StringShape.new(name: 'CustomerAccountId')
     DeleteAutoScalingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteAutoScalingConfigurationRequest')
     DeleteAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteAutoScalingConfigurationResponse')
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
@@ -63,6 +66,8 @@ module Aws::AppRunner
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
     DeleteVpcConnectorRequest = Shapes::StructureShape.new(name: 'DeleteVpcConnectorRequest')
     DeleteVpcConnectorResponse = Shapes::StructureShape.new(name: 'DeleteVpcConnectorResponse')
+    DeleteVpcIngressConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVpcIngressConnectionRequest')
+    DeleteVpcIngressConnectionResponse = Shapes::StructureShape.new(name: 'DeleteVpcIngressConnectionResponse')
     DescribeAutoScalingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAutoScalingConfigurationRequest')
     DescribeAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAutoScalingConfigurationResponse')
     DescribeCustomDomainsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCustomDomainsMaxResults')
@@ -74,6 +79,8 @@ module Aws::AppRunner
     DescribeServiceResponse = Shapes::StructureShape.new(name: 'DescribeServiceResponse')
     DescribeVpcConnectorRequest = Shapes::StructureShape.new(name: 'DescribeVpcConnectorRequest')
     DescribeVpcConnectorResponse = Shapes::StructureShape.new(name: 'DescribeVpcConnectorResponse')
+    DescribeVpcIngressConnectionRequest = Shapes::StructureShape.new(name: 'DescribeVpcIngressConnectionRequest')
+    DescribeVpcIngressConnectionResponse = Shapes::StructureShape.new(name: 'DescribeVpcIngressConnectionResponse')
     DisassociateCustomDomainRequest = Shapes::StructureShape.new(name: 'DisassociateCustomDomainRequest')
     DisassociateCustomDomainResponse = Shapes::StructureShape.new(name: 'DisassociateCustomDomainResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -92,6 +99,8 @@ module Aws::AppRunner
     ImageIdentifier = Shapes::StringShape.new(name: 'ImageIdentifier')
     ImageRepository = Shapes::StructureShape.new(name: 'ImageRepository')
     ImageRepositoryType = Shapes::StringShape.new(name: 'ImageRepositoryType')
+    IngressConfiguration = Shapes::StructureShape.new(name: 'IngressConfiguration')
+    IngressVpcConfiguration = Shapes::StructureShape.new(name: 'IngressVpcConfiguration')
     InstanceConfiguration = Shapes::StructureShape.new(name: 'InstanceConfiguration')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
@@ -113,6 +122,9 @@ module Aws::AppRunner
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListVpcConnectorsRequest = Shapes::StructureShape.new(name: 'ListVpcConnectorsRequest')
     ListVpcConnectorsResponse = Shapes::StructureShape.new(name: 'ListVpcConnectorsResponse')
+    ListVpcIngressConnectionsFilter = Shapes::StructureShape.new(name: 'ListVpcIngressConnectionsFilter')
+    ListVpcIngressConnectionsRequest = Shapes::StructureShape.new(name: 'ListVpcIngressConnectionsRequest')
+    ListVpcIngressConnectionsResponse = Shapes::StructureShape.new(name: 'ListVpcIngressConnectionsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Memory = Shapes::StringShape.new(name: 'Memory')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
@@ -170,10 +182,19 @@ module Aws::AppRunner
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
+    UpdateVpcIngressConnectionRequest = Shapes::StructureShape.new(name: 'UpdateVpcIngressConnectionRequest')
+    UpdateVpcIngressConnectionResponse = Shapes::StructureShape.new(name: 'UpdateVpcIngressConnectionResponse')
     VpcConnector = Shapes::StructureShape.new(name: 'VpcConnector')
     VpcConnectorName = Shapes::StringShape.new(name: 'VpcConnectorName')
     VpcConnectorStatus = Shapes::StringShape.new(name: 'VpcConnectorStatus')
     VpcConnectors = Shapes::ListShape.new(name: 'VpcConnectors')
+    VpcDNSTarget = Shapes::StructureShape.new(name: 'VpcDNSTarget')
+    VpcDNSTargetList = Shapes::ListShape.new(name: 'VpcDNSTargetList')
+    VpcIngressConnection = Shapes::StructureShape.new(name: 'VpcIngressConnection')
+    VpcIngressConnectionName = Shapes::StringShape.new(name: 'VpcIngressConnectionName')
+    VpcIngressConnectionStatus = Shapes::StringShape.new(name: 'VpcIngressConnectionStatus')
+    VpcIngressConnectionSummary = Shapes::StructureShape.new(name: 'VpcIngressConnectionSummary')
+    VpcIngressConnectionSummaryList = Shapes::ListShape.new(name: 'VpcIngressConnectionSummaryList')
 
     AssociateCustomDomainRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     AssociateCustomDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -183,6 +204,7 @@ module Aws::AppRunner
     AssociateCustomDomainResponse.add_member(:dns_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DNSTarget"))
     AssociateCustomDomainResponse.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     AssociateCustomDomainResponse.add_member(:custom_domain, Shapes::ShapeRef.new(shape: CustomDomain, required: true, location_name: "CustomDomain"))
+    AssociateCustomDomainResponse.add_member(:vpc_dns_targets, Shapes::ShapeRef.new(shape: VpcDNSTargetList, required: true, location_name: "VpcDNSTargets"))
     AssociateCustomDomainResponse.struct_class = Types::AssociateCustomDomainResponse
 
     AuthenticationConfiguration.add_member(:connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ConnectionArn"))
@@ -298,6 +320,15 @@ module Aws::AppRunner
     CreateVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
     CreateVpcConnectorResponse.struct_class = Types::CreateVpcConnectorResponse
 
+    CreateVpcIngressConnectionRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
+    CreateVpcIngressConnectionRequest.add_member(:vpc_ingress_connection_name, Shapes::ShapeRef.new(shape: VpcIngressConnectionName, required: true, location_name: "VpcIngressConnectionName"))
+    CreateVpcIngressConnectionRequest.add_member(:ingress_vpc_configuration, Shapes::ShapeRef.new(shape: IngressVpcConfiguration, required: true, location_name: "IngressVpcConfiguration"))
+    CreateVpcIngressConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVpcIngressConnectionRequest.struct_class = Types::CreateVpcIngressConnectionRequest
+
+    CreateVpcIngressConnectionResponse.add_member(:vpc_ingress_connection, Shapes::ShapeRef.new(shape: VpcIngressConnection, required: true, location_name: "VpcIngressConnection"))
+    CreateVpcIngressConnectionResponse.struct_class = Types::CreateVpcIngressConnectionResponse
+
     CustomDomain.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CustomDomain.add_member(:enable_www_subdomain, Shapes::ShapeRef.new(shape: NullableBoolean, required: true, location_name: "EnableWWWSubdomain"))
     CustomDomain.add_member(:certificate_validation_records, Shapes::ShapeRef.new(shape: CertificateValidationRecordList, location_name: "CertificateValidationRecords"))
@@ -337,6 +368,12 @@ module Aws::AppRunner
     DeleteVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
     DeleteVpcConnectorResponse.struct_class = Types::DeleteVpcConnectorResponse
 
+    DeleteVpcIngressConnectionRequest.add_member(:vpc_ingress_connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcIngressConnectionArn"))
+    DeleteVpcIngressConnectionRequest.struct_class = Types::DeleteVpcIngressConnectionRequest
+
+    DeleteVpcIngressConnectionResponse.add_member(:vpc_ingress_connection, Shapes::ShapeRef.new(shape: VpcIngressConnection, required: true, location_name: "VpcIngressConnection"))
+    DeleteVpcIngressConnectionResponse.struct_class = Types::DeleteVpcIngressConnectionResponse
+
     DescribeAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "AutoScalingConfigurationArn"))
     DescribeAutoScalingConfigurationRequest.struct_class = Types::DescribeAutoScalingConfigurationRequest
 
@@ -351,6 +388,7 @@ module Aws::AppRunner
     DescribeCustomDomainsResponse.add_member(:dns_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DNSTarget"))
     DescribeCustomDomainsResponse.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DescribeCustomDomainsResponse.add_member(:custom_domains, Shapes::ShapeRef.new(shape: CustomDomainList, required: true, location_name: "CustomDomains"))
+    DescribeCustomDomainsResponse.add_member(:vpc_dns_targets, Shapes::ShapeRef.new(shape: VpcDNSTargetList, required: true, location_name: "VpcDNSTargets"))
     DescribeCustomDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeCustomDomainsResponse.struct_class = Types::DescribeCustomDomainsResponse
 
@@ -372,6 +410,12 @@ module Aws::AppRunner
     DescribeVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
     DescribeVpcConnectorResponse.struct_class = Types::DescribeVpcConnectorResponse
 
+    DescribeVpcIngressConnectionRequest.add_member(:vpc_ingress_connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcIngressConnectionArn"))
+    DescribeVpcIngressConnectionRequest.struct_class = Types::DescribeVpcIngressConnectionRequest
+
+    DescribeVpcIngressConnectionResponse.add_member(:vpc_ingress_connection, Shapes::ShapeRef.new(shape: VpcIngressConnection, required: true, location_name: "VpcIngressConnection"))
+    DescribeVpcIngressConnectionResponse.struct_class = Types::DescribeVpcIngressConnectionResponse
+
     DisassociateCustomDomainRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DisassociateCustomDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     DisassociateCustomDomainRequest.struct_class = Types::DisassociateCustomDomainRequest
@@ -379,6 +423,7 @@ module Aws::AppRunner
     DisassociateCustomDomainResponse.add_member(:dns_target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DNSTarget"))
     DisassociateCustomDomainResponse.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DisassociateCustomDomainResponse.add_member(:custom_domain, Shapes::ShapeRef.new(shape: CustomDomain, required: true, location_name: "CustomDomain"))
+    DisassociateCustomDomainResponse.add_member(:vpc_dns_targets, Shapes::ShapeRef.new(shape: VpcDNSTargetList, required: true, location_name: "VpcDNSTargets"))
     DisassociateCustomDomainResponse.struct_class = Types::DisassociateCustomDomainResponse
 
     EgressConfiguration.add_member(:egress_type, Shapes::ShapeRef.new(shape: EgressType, location_name: "EgressType"))
@@ -405,6 +450,13 @@ module Aws::AppRunner
     ImageRepository.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "ImageConfiguration"))
     ImageRepository.add_member(:image_repository_type, Shapes::ShapeRef.new(shape: ImageRepositoryType, required: true, location_name: "ImageRepositoryType"))
     ImageRepository.struct_class = Types::ImageRepository
+
+    IngressConfiguration.add_member(:is_publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsPubliclyAccessible"))
+    IngressConfiguration.struct_class = Types::IngressConfiguration
+
+    IngressVpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
+    IngressVpcConfiguration.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
+    IngressVpcConfiguration.struct_class = Types::IngressVpcConfiguration
 
     InstanceConfiguration.add_member(:cpu, Shapes::ShapeRef.new(shape: Cpu, location_name: "Cpu"))
     InstanceConfiguration.add_member(:memory, Shapes::ShapeRef.new(shape: Memory, location_name: "Memory"))
@@ -480,7 +532,21 @@ module Aws::AppRunner
     ListVpcConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVpcConnectorsResponse.struct_class = Types::ListVpcConnectorsResponse
 
+    ListVpcIngressConnectionsFilter.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ServiceArn"))
+    ListVpcIngressConnectionsFilter.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
+    ListVpcIngressConnectionsFilter.struct_class = Types::ListVpcIngressConnectionsFilter
+
+    ListVpcIngressConnectionsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListVpcIngressConnectionsFilter, location_name: "Filter"))
+    ListVpcIngressConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListVpcIngressConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVpcIngressConnectionsRequest.struct_class = Types::ListVpcIngressConnectionsRequest
+
+    ListVpcIngressConnectionsResponse.add_member(:vpc_ingress_connection_summary_list, Shapes::ShapeRef.new(shape: VpcIngressConnectionSummaryList, required: true, location_name: "VpcIngressConnectionSummaryList"))
+    ListVpcIngressConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVpcIngressConnectionsResponse.struct_class = Types::ListVpcIngressConnectionsResponse
+
     NetworkConfiguration.add_member(:egress_configuration, Shapes::ShapeRef.new(shape: EgressConfiguration, location_name: "EgressConfiguration"))
+    NetworkConfiguration.add_member(:ingress_configuration, Shapes::ShapeRef.new(shape: IngressConfiguration, location_name: "IngressConfiguration"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     ObservabilityConfiguration.add_member(:observability_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ObservabilityConfigurationArn"))
@@ -534,7 +600,7 @@ module Aws::AppRunner
     Service.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
     Service.add_member(:service_id, Shapes::ShapeRef.new(shape: ServiceId, required: true, location_name: "ServiceId"))
     Service.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
-    Service.add_member(:service_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceUrl"))
+    Service.add_member(:service_url, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUrl"))
     Service.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     Service.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
     Service.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletedAt"))
@@ -620,6 +686,13 @@ module Aws::AppRunner
     UpdateServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     UpdateServiceResponse.struct_class = Types::UpdateServiceResponse
 
+    UpdateVpcIngressConnectionRequest.add_member(:vpc_ingress_connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcIngressConnectionArn"))
+    UpdateVpcIngressConnectionRequest.add_member(:ingress_vpc_configuration, Shapes::ShapeRef.new(shape: IngressVpcConfiguration, required: true, location_name: "IngressVpcConfiguration"))
+    UpdateVpcIngressConnectionRequest.struct_class = Types::UpdateVpcIngressConnectionRequest
+
+    UpdateVpcIngressConnectionResponse.add_member(:vpc_ingress_connection, Shapes::ShapeRef.new(shape: VpcIngressConnection, required: true, location_name: "VpcIngressConnection"))
+    UpdateVpcIngressConnectionResponse.struct_class = Types::UpdateVpcIngressConnectionResponse
+
     VpcConnector.add_member(:vpc_connector_name, Shapes::ShapeRef.new(shape: VpcConnectorName, location_name: "VpcConnectorName"))
     VpcConnector.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcConnectorArn"))
     VpcConnector.add_member(:vpc_connector_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "VpcConnectorRevision"))
@@ -631,6 +704,30 @@ module Aws::AppRunner
     VpcConnector.struct_class = Types::VpcConnector
 
     VpcConnectors.member = Shapes::ShapeRef.new(shape: VpcConnector)
+
+    VpcDNSTarget.add_member(:vpc_ingress_connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcIngressConnectionArn"))
+    VpcDNSTarget.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
+    VpcDNSTarget.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    VpcDNSTarget.struct_class = Types::VpcDNSTarget
+
+    VpcDNSTargetList.member = Shapes::ShapeRef.new(shape: VpcDNSTarget)
+
+    VpcIngressConnection.add_member(:vpc_ingress_connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcIngressConnectionArn"))
+    VpcIngressConnection.add_member(:vpc_ingress_connection_name, Shapes::ShapeRef.new(shape: VpcIngressConnectionName, location_name: "VpcIngressConnectionName"))
+    VpcIngressConnection.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ServiceArn"))
+    VpcIngressConnection.add_member(:status, Shapes::ShapeRef.new(shape: VpcIngressConnectionStatus, location_name: "Status"))
+    VpcIngressConnection.add_member(:account_id, Shapes::ShapeRef.new(shape: CustomerAccountId, location_name: "AccountId"))
+    VpcIngressConnection.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    VpcIngressConnection.add_member(:ingress_vpc_configuration, Shapes::ShapeRef.new(shape: IngressVpcConfiguration, location_name: "IngressVpcConfiguration"))
+    VpcIngressConnection.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    VpcIngressConnection.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletedAt"))
+    VpcIngressConnection.struct_class = Types::VpcIngressConnection
+
+    VpcIngressConnectionSummary.add_member(:vpc_ingress_connection_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcIngressConnectionArn"))
+    VpcIngressConnectionSummary.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "ServiceArn"))
+    VpcIngressConnectionSummary.struct_class = Types::VpcIngressConnectionSummary
+
+    VpcIngressConnectionSummaryList.member = Shapes::ShapeRef.new(shape: VpcIngressConnectionSummary)
 
 
     # @api private
@@ -717,6 +814,18 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_vpc_ingress_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcIngressConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcIngressConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcIngressConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAutoScalingConfiguration"
         o.http_method = "POST"
@@ -771,6 +880,18 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_vpc_ingress_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcIngressConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcIngressConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcIngressConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:describe_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -829,6 +950,17 @@ module Aws::AppRunner
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeVpcConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeVpcConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_vpc_ingress_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcIngressConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcIngressConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcIngressConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -955,6 +1087,22 @@ module Aws::AppRunner
         )
       end)
 
+      api.add_operation(:list_vpc_ingress_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcIngressConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcIngressConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcIngressConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:pause_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PauseService"
         o.http_method = "POST"
@@ -1020,6 +1168,18 @@ module Aws::AppRunner
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:update_vpc_ingress_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVpcIngressConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVpcIngressConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVpcIngressConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)

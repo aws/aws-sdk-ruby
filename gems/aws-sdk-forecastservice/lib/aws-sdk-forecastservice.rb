@@ -13,9 +13,13 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-forecastservice/types'
 require_relative 'aws-sdk-forecastservice/client_api'
+require_relative 'aws-sdk-forecastservice/plugins/endpoints.rb'
 require_relative 'aws-sdk-forecastservice/client'
 require_relative 'aws-sdk-forecastservice/errors'
 require_relative 'aws-sdk-forecastservice/resource'
+require_relative 'aws-sdk-forecastservice/endpoint_parameters'
+require_relative 'aws-sdk-forecastservice/endpoint_provider'
+require_relative 'aws-sdk-forecastservice/endpoints'
 require_relative 'aws-sdk-forecastservice/customizations'
 
 # This module provides support for Amazon Forecast Service. This module is available in the
@@ -48,6 +52,6 @@ require_relative 'aws-sdk-forecastservice/customizations'
 # @!group service
 module Aws::ForecastService
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end

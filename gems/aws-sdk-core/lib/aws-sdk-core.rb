@@ -97,6 +97,10 @@ require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 require_relative 'aws-sdk-core/ec2_metadata'
 
+# dynamic endpoints
+require_relative 'aws-sdk-core/endpoints'
+require_relative 'aws-sdk-core/plugins/signature_v4'
+
 # defaults
 require_relative 'aws-defaults'
 

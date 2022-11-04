@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-10-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2022-10-21)
+------------------
+
+* Feature - This release adds a new "DeletionProtection" field to the UserPool in Cognito. Application admins can configure this value with either ACTIVE or INACTIVE value. Setting this field to ACTIVE will prevent a user pool from accidental deletion.
+
 1.70.0 (2022-09-02)
 ------------------
 

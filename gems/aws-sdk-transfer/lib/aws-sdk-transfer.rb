@@ -13,10 +13,14 @@ require 'aws-sigv4'
 
 require_relative 'aws-sdk-transfer/types'
 require_relative 'aws-sdk-transfer/client_api'
+require_relative 'aws-sdk-transfer/plugins/endpoints.rb'
 require_relative 'aws-sdk-transfer/client'
 require_relative 'aws-sdk-transfer/errors'
 require_relative 'aws-sdk-transfer/waiters'
 require_relative 'aws-sdk-transfer/resource'
+require_relative 'aws-sdk-transfer/endpoint_parameters'
+require_relative 'aws-sdk-transfer/endpoint_provider'
+require_relative 'aws-sdk-transfer/endpoints'
 require_relative 'aws-sdk-transfer/customizations'
 
 # This module provides support for AWS Transfer Family. This module is available in the
@@ -49,6 +53,6 @@ require_relative 'aws-sdk-transfer/customizations'
 # @!group service
 module Aws::Transfer
 
-  GEM_VERSION = '1.60.0'
+  GEM_VERSION = '1.61.0'
 
 end
