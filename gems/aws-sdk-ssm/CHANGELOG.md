@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2022-11-07)
+------------------
+
+* Feature - This release includes support for applying a CloudWatch alarm to multi account multi region Systems Manager Automation
+
 1.143.0 (2022-10-25)
 ------------------
 

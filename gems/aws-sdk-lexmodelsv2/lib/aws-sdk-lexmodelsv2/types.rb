@@ -368,6 +368,257 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchCreateCustomVocabularyItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         custom_vocabulary_item_list: [ # required
+    #           {
+    #             phrase: "Phrase", # required
+    #             weight: 1,
+    #             display_as: "Phrase",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to batch create the custom
+    #   vocabulary item for.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to batch create the custom vocabulary
+    #   item for.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The unique locale identifier of the bot to batch create the custom
+    #   vocabulary item for.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_vocabulary_item_list
+    #   The custom vocabulary item list of the bot to batch create the
+    #   custom vocabulary item for.
+    #   @return [Array<Types::NewCustomVocabularyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchCreateCustomVocabularyItemRequest AWS API Documentation
+    #
+    class BatchCreateCustomVocabularyItemRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :custom_vocabulary_item_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to batch create response for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to batch create the custom vocabulary
+    #   item response for.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The unique locale identifier of the bot to batch create the custom
+    #   vocabulary item response for.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The errors of the action to batch create the custom vocabulary item
+    #   response for a bot.
+    #   @return [Array<Types::FailedCustomVocabularyItem>]
+    #
+    # @!attribute [rw] resources
+    #   The resources of the action to batch create the custom vocabulary
+    #   item response for a bot.
+    #   @return [Array<Types::CustomVocabularyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchCreateCustomVocabularyItemResponse AWS API Documentation
+    #
+    class BatchCreateCustomVocabularyItemResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :errors,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDeleteCustomVocabularyItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         custom_vocabulary_item_list: [ # required
+    #           {
+    #             item_id: "ItemId", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to batch delete request for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to batch delete request for the custom
+    #   vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot to batch delete request for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_vocabulary_item_list
+    #   The custom vocabulary list to batch delete request for the custom
+    #   vocabulary item.
+    #   @return [Array<Types::CustomVocabularyEntryId>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchDeleteCustomVocabularyItemRequest AWS API Documentation
+    #
+    class BatchDeleteCustomVocabularyItemRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :custom_vocabulary_item_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to batch delete response for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to batch delete response for the custom
+    #   vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot to batch delete response for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The errors of the action to batch delete response for the custom
+    #   vocabulary item.
+    #   @return [Array<Types::FailedCustomVocabularyItem>]
+    #
+    # @!attribute [rw] resources
+    #   The resources of the action to batch delete response for the custom
+    #   vocabulary item.
+    #   @return [Array<Types::CustomVocabularyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchDeleteCustomVocabularyItemResponse AWS API Documentation
+    #
+    class BatchDeleteCustomVocabularyItemResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :errors,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchUpdateCustomVocabularyItemRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         custom_vocabulary_item_list: [ # required
+    #           {
+    #             item_id: "ItemId", # required
+    #             phrase: "Phrase", # required
+    #             weight: 1,
+    #             display_as: "Phrase",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to the batch update request for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to the batch update request for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot to the batch update request for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_vocabulary_item_list
+    #   The custom vocabulary item list of the bot to the batch update
+    #   request for the custom vocabulary item.
+    #   @return [Array<Types::CustomVocabularyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchUpdateCustomVocabularyItemRequest AWS API Documentation
+    #
+    class BatchUpdateCustomVocabularyItemRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :custom_vocabulary_item_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to the batch update response for
+    #   the custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to the batch update response for the
+    #   custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot to the batch update response for
+    #   the custom vocabulary item.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The errors of the action to batch update response for the custom
+    #   vocabulary item.
+    #   @return [Array<Types::FailedCustomVocabularyItem>]
+    #
+    # @!attribute [rw] resources
+    #   The resources of the action to batch update response for the custom
+    #   vocabulary item.
+    #   @return [Array<Types::CustomVocabularyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchUpdateCustomVocabularyItemResponse AWS API Documentation
+    #
+    class BatchUpdateCustomVocabularyItemResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :errors,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides a record of an event that affects a bot alias. For example,
     # when the version of a bot that the alias points to changes.
     #
@@ -8864,6 +9115,27 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The unique entry identifier for the custom vocabulary items.
+    #
+    # @note When making an API call, you may pass CustomVocabularyEntryId
+    #   data as a hash:
+    #
+    #       {
+    #         item_id: "ItemId", # required
+    #       }
+    #
+    # @!attribute [rw] item_id
+    #   The unique item identifier for the custom vocabulary items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CustomVocabularyEntryId AWS API Documentation
+    #
+    class CustomVocabularyEntryId < Struct.new(
+      :item_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the parameters required for exporting a custom vocabulary.
     #
     # @note When making an API call, you may pass CustomVocabularyExportSpecification
@@ -8929,6 +9201,49 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique custom vocabulary item from the custom vocabulary list.
+    #
+    # @note When making an API call, you may pass CustomVocabularyItem
+    #   data as a hash:
+    #
+    #       {
+    #         item_id: "ItemId", # required
+    #         phrase: "Phrase", # required
+    #         weight: 1,
+    #         display_as: "Phrase",
+    #       }
+    #
+    # @!attribute [rw] item_id
+    #   The unique item identifer for the custom vocabulary item from the
+    #   custom vocabulary list.
+    #   @return [String]
+    #
+    # @!attribute [rw] phrase
+    #   The unique phrase for the custom vocabulary item from the custom
+    #   vocabulary list.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The weight assigned for the custom vocabulary item from the custom
+    #   vocabulary list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] display_as
+    #   The display as value for the custom vocabulary item from the custom
+    #   vocabulary list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CustomVocabularyItem AWS API Documentation
+    #
+    class CustomVocabularyItem < Struct.new(
+      :item_id,
+      :phrase,
+      :weight,
+      :display_as)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12169,6 +12484,34 @@ module Aws::LexModelsV2
     #
     class ExternalSourceSetting < Struct.new(
       :grammar_slot_type_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The unique failed custom vocabulary item from the custom vocabulary
+    # list.
+    #
+    # @!attribute [rw] item_id
+    #   The unique item identifer for the failed custom vocabulary item from
+    #   the custom vocabulary list.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the failed custom vocabulary item from the
+    #   custom vocabulary list.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The unique error code for the failed custom vocabulary item from the
+    #   custom vocabulary list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/FailedCustomVocabularyItem AWS API Documentation
+    #
+    class FailedCustomVocabularyItem < Struct.new(
+      :item_id,
+      :error_message,
+      :error_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17819,6 +18162,86 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListCustomVocabularyItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to the list custom vocabulary
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to the list custom vocabulary request.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot to the list custom vocabulary
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum results to the list custom vocabulary request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken identifier to the list custom vocabulary request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListCustomVocabularyItemsRequest AWS API Documentation
+    #
+    class ListCustomVocabularyItemsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to the list custom vocabulary
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to the list custom vocabulary response.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier of the bot to the list custom vocabulary
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_vocabulary_items
+    #   The custom vocabulary items from the list custom vocabulary
+    #   response.
+    #   @return [Array<Types::CustomVocabularyItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken identifier to the list custom vocabulary response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListCustomVocabularyItemsResponse AWS API Documentation
+    #
+    class ListCustomVocabularyItemsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :custom_vocabulary_items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListExportsRequest
     #   data as a hash:
     #
@@ -18719,6 +19142,42 @@ module Aws::LexModelsV2
     #
     class MultipleValuesSetting < Struct.new(
       :allow_multiple_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The new custom vocabulary item from the custom vocabulary list.
+    #
+    # @note When making an API call, you may pass NewCustomVocabularyItem
+    #   data as a hash:
+    #
+    #       {
+    #         phrase: "Phrase", # required
+    #         weight: 1,
+    #         display_as: "Phrase",
+    #       }
+    #
+    # @!attribute [rw] phrase
+    #   The unique phrase for the new custom vocabulary item from the custom
+    #   vocabulary list.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The weight assigned to the new custom vocabulary item from the
+    #   custom vocabulary list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] display_as
+    #   The display as value assigned to the new custom vocabulary item from
+    #   the custom vocabulary list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/NewCustomVocabularyItem AWS API Documentation
+    #
+    class NewCustomVocabularyItem < Struct.new(
+      :phrase,
+      :weight,
+      :display_as)
       SENSITIVE = []
       include Aws::Structure
     end

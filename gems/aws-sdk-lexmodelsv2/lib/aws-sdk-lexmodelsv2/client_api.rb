@@ -37,6 +37,12 @@ module Aws::LexModelsV2
     AudioLogSettingsList = Shapes::ListShape.new(name: 'AudioLogSettingsList')
     AudioRecognitionStrategy = Shapes::StringShape.new(name: 'AudioRecognitionStrategy')
     AudioSpecification = Shapes::StructureShape.new(name: 'AudioSpecification')
+    BatchCreateCustomVocabularyItemRequest = Shapes::StructureShape.new(name: 'BatchCreateCustomVocabularyItemRequest')
+    BatchCreateCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchCreateCustomVocabularyItemResponse')
+    BatchDeleteCustomVocabularyItemRequest = Shapes::StructureShape.new(name: 'BatchDeleteCustomVocabularyItemRequest')
+    BatchDeleteCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchDeleteCustomVocabularyItemResponse')
+    BatchUpdateCustomVocabularyItemRequest = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemRequest')
+    BatchUpdateCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotAliasHistoryEvent = Shapes::StructureShape.new(name: 'BotAliasHistoryEvent')
     BotAliasHistoryEventsList = Shapes::ListShape.new(name: 'BotAliasHistoryEventsList')
@@ -130,6 +136,7 @@ module Aws::LexModelsV2
     CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
     CreateBotVersionRequest = Shapes::StructureShape.new(name: 'CreateBotVersionRequest')
     CreateBotVersionResponse = Shapes::StructureShape.new(name: 'CreateBotVersionResponse')
+    CreateCustomVocabularyItemsList = Shapes::ListShape.new(name: 'CreateCustomVocabularyItemsList')
     CreateExportRequest = Shapes::StructureShape.new(name: 'CreateExportRequest')
     CreateExportResponse = Shapes::StructureShape.new(name: 'CreateExportResponse')
     CreateIntentRequest = Shapes::StructureShape.new(name: 'CreateIntentRequest')
@@ -146,8 +153,11 @@ module Aws::LexModelsV2
     CreateUploadUrlResponse = Shapes::StructureShape.new(name: 'CreateUploadUrlResponse')
     CustomPayload = Shapes::StructureShape.new(name: 'CustomPayload')
     CustomPayloadValue = Shapes::StringShape.new(name: 'CustomPayloadValue')
+    CustomVocabularyEntryId = Shapes::StructureShape.new(name: 'CustomVocabularyEntryId')
     CustomVocabularyExportSpecification = Shapes::StructureShape.new(name: 'CustomVocabularyExportSpecification')
     CustomVocabularyImportSpecification = Shapes::StructureShape.new(name: 'CustomVocabularyImportSpecification')
+    CustomVocabularyItem = Shapes::StructureShape.new(name: 'CustomVocabularyItem')
+    CustomVocabularyItems = Shapes::ListShape.new(name: 'CustomVocabularyItems')
     CustomVocabularyStatus = Shapes::StringShape.new(name: 'CustomVocabularyStatus')
     DTMFCharacter = Shapes::StringShape.new(name: 'DTMFCharacter')
     DTMFSpecification = Shapes::StructureShape.new(name: 'DTMFSpecification')
@@ -162,6 +172,7 @@ module Aws::LexModelsV2
     DeleteBotResponse = Shapes::StructureShape.new(name: 'DeleteBotResponse')
     DeleteBotVersionRequest = Shapes::StructureShape.new(name: 'DeleteBotVersionRequest')
     DeleteBotVersionResponse = Shapes::StructureShape.new(name: 'DeleteBotVersionResponse')
+    DeleteCustomVocabularyItemsList = Shapes::ListShape.new(name: 'DeleteCustomVocabularyItemsList')
     DeleteCustomVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteCustomVocabularyRequest')
     DeleteCustomVocabularyResponse = Shapes::StructureShape.new(name: 'DeleteCustomVocabularyResponse')
     DeleteExportRequest = Shapes::StructureShape.new(name: 'DeleteExportRequest')
@@ -211,6 +222,8 @@ module Aws::LexModelsV2
     Effect = Shapes::StringShape.new(name: 'Effect')
     ElicitationCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'ElicitationCodeHookInvocationSetting')
     EncryptionSetting = Shapes::StructureShape.new(name: 'EncryptionSetting')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
     ExportFilterName = Shapes::StringShape.new(name: 'ExportFilterName')
@@ -223,6 +236,8 @@ module Aws::LexModelsV2
     ExportSummary = Shapes::StructureShape.new(name: 'ExportSummary')
     ExportSummaryList = Shapes::ListShape.new(name: 'ExportSummaryList')
     ExternalSourceSetting = Shapes::StructureShape.new(name: 'ExternalSourceSetting')
+    FailedCustomVocabularyItem = Shapes::StructureShape.new(name: 'FailedCustomVocabularyItem')
+    FailedCustomVocabularyItems = Shapes::ListShape.new(name: 'FailedCustomVocabularyItems')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
     FilePassword = Shapes::StringShape.new(name: 'FilePassword')
@@ -271,6 +286,7 @@ module Aws::LexModelsV2
     IntentSummary = Shapes::StructureShape.new(name: 'IntentSummary')
     IntentSummaryList = Shapes::ListShape.new(name: 'IntentSummaryList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    ItemId = Shapes::StringShape.new(name: 'ItemId')
     KendraConfiguration = Shapes::StructureShape.new(name: 'KendraConfiguration')
     KendraIndexArn = Shapes::StringShape.new(name: 'KendraIndexArn')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
@@ -293,6 +309,8 @@ module Aws::LexModelsV2
     ListBuiltInIntentsResponse = Shapes::StructureShape.new(name: 'ListBuiltInIntentsResponse')
     ListBuiltInSlotTypesRequest = Shapes::StructureShape.new(name: 'ListBuiltInSlotTypesRequest')
     ListBuiltInSlotTypesResponse = Shapes::StructureShape.new(name: 'ListBuiltInSlotTypesResponse')
+    ListCustomVocabularyItemsRequest = Shapes::StructureShape.new(name: 'ListCustomVocabularyItemsRequest')
+    ListCustomVocabularyItemsResponse = Shapes::StructureShape.new(name: 'ListCustomVocabularyItemsResponse')
     ListExportsRequest = Shapes::StructureShape.new(name: 'ListExportsRequest')
     ListExportsResponse = Shapes::StructureShape.new(name: 'ListExportsResponse')
     ListImportsRequest = Shapes::StructureShape.new(name: 'ListImportsRequest')
@@ -321,6 +339,7 @@ module Aws::LexModelsV2
     MissedCount = Shapes::IntegerShape.new(name: 'MissedCount')
     MultipleValuesSetting = Shapes::StructureShape.new(name: 'MultipleValuesSetting')
     Name = Shapes::StringShape.new(name: 'Name')
+    NewCustomVocabularyItem = Shapes::StructureShape.new(name: 'NewCustomVocabularyItem')
     NextIndex = Shapes::IntegerShape.new(name: 'NextIndex')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
@@ -334,6 +353,7 @@ module Aws::LexModelsV2
     OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
     OutputContextsList = Shapes::ListShape.new(name: 'OutputContextsList')
     PathFormat = Shapes::StructureShape.new(name: 'PathFormat')
+    Phrase = Shapes::StringShape.new(name: 'Phrase')
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
     PlainTextMessageValue = Shapes::StringShape.new(name: 'PlainTextMessageValue')
     Policy = Shapes::StringShape.new(name: 'Policy')
@@ -470,6 +490,7 @@ module Aws::LexModelsV2
     UpdateBotRecommendationResponse = Shapes::StructureShape.new(name: 'UpdateBotRecommendationResponse')
     UpdateBotRequest = Shapes::StructureShape.new(name: 'UpdateBotRequest')
     UpdateBotResponse = Shapes::StructureShape.new(name: 'UpdateBotResponse')
+    UpdateCustomVocabularyItemsList = Shapes::ListShape.new(name: 'UpdateCustomVocabularyItemsList')
     UpdateExportRequest = Shapes::StructureShape.new(name: 'UpdateExportRequest')
     UpdateExportResponse = Shapes::StructureShape.new(name: 'UpdateExportResponse')
     UpdateIntentRequest = Shapes::StructureShape.new(name: 'UpdateIntentRequest')
@@ -488,6 +509,7 @@ module Aws::LexModelsV2
     VoiceId = Shapes::StringShape.new(name: 'VoiceId')
     VoiceSettings = Shapes::StructureShape.new(name: 'VoiceSettings')
     WaitAndContinueSpecification = Shapes::StructureShape.new(name: 'WaitAndContinueSpecification')
+    Weight = Shapes::IntegerShape.new(name: 'Weight')
 
     AdvancedRecognitionSetting.add_member(:audio_recognition_strategy, Shapes::ShapeRef.new(shape: AudioRecognitionStrategy, location_name: "audioRecognitionStrategy"))
     AdvancedRecognitionSetting.struct_class = Types::AdvancedRecognitionSetting
@@ -545,6 +567,45 @@ module Aws::LexModelsV2
     AudioSpecification.add_member(:max_length_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "maxLengthMs"))
     AudioSpecification.add_member(:end_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "endTimeoutMs"))
     AudioSpecification.struct_class = Types::AudioSpecification
+
+    BatchCreateCustomVocabularyItemRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    BatchCreateCustomVocabularyItemRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    BatchCreateCustomVocabularyItemRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    BatchCreateCustomVocabularyItemRequest.add_member(:custom_vocabulary_item_list, Shapes::ShapeRef.new(shape: CreateCustomVocabularyItemsList, required: true, location_name: "customVocabularyItemList"))
+    BatchCreateCustomVocabularyItemRequest.struct_class = Types::BatchCreateCustomVocabularyItemRequest
+
+    BatchCreateCustomVocabularyItemResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    BatchCreateCustomVocabularyItemResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    BatchCreateCustomVocabularyItemResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    BatchCreateCustomVocabularyItemResponse.add_member(:errors, Shapes::ShapeRef.new(shape: FailedCustomVocabularyItems, location_name: "errors"))
+    BatchCreateCustomVocabularyItemResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "resources"))
+    BatchCreateCustomVocabularyItemResponse.struct_class = Types::BatchCreateCustomVocabularyItemResponse
+
+    BatchDeleteCustomVocabularyItemRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    BatchDeleteCustomVocabularyItemRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    BatchDeleteCustomVocabularyItemRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    BatchDeleteCustomVocabularyItemRequest.add_member(:custom_vocabulary_item_list, Shapes::ShapeRef.new(shape: DeleteCustomVocabularyItemsList, required: true, location_name: "customVocabularyItemList"))
+    BatchDeleteCustomVocabularyItemRequest.struct_class = Types::BatchDeleteCustomVocabularyItemRequest
+
+    BatchDeleteCustomVocabularyItemResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    BatchDeleteCustomVocabularyItemResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    BatchDeleteCustomVocabularyItemResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    BatchDeleteCustomVocabularyItemResponse.add_member(:errors, Shapes::ShapeRef.new(shape: FailedCustomVocabularyItems, location_name: "errors"))
+    BatchDeleteCustomVocabularyItemResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "resources"))
+    BatchDeleteCustomVocabularyItemResponse.struct_class = Types::BatchDeleteCustomVocabularyItemResponse
+
+    BatchUpdateCustomVocabularyItemRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    BatchUpdateCustomVocabularyItemRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    BatchUpdateCustomVocabularyItemRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    BatchUpdateCustomVocabularyItemRequest.add_member(:custom_vocabulary_item_list, Shapes::ShapeRef.new(shape: UpdateCustomVocabularyItemsList, required: true, location_name: "customVocabularyItemList"))
+    BatchUpdateCustomVocabularyItemRequest.struct_class = Types::BatchUpdateCustomVocabularyItemRequest
+
+    BatchUpdateCustomVocabularyItemResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    BatchUpdateCustomVocabularyItemResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    BatchUpdateCustomVocabularyItemResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    BatchUpdateCustomVocabularyItemResponse.add_member(:errors, Shapes::ShapeRef.new(shape: FailedCustomVocabularyItems, location_name: "errors"))
+    BatchUpdateCustomVocabularyItemResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "resources"))
+    BatchUpdateCustomVocabularyItemResponse.struct_class = Types::BatchUpdateCustomVocabularyItemResponse
 
     BotAliasHistoryEvent.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
     BotAliasHistoryEvent.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startDate"))
@@ -832,6 +893,8 @@ module Aws::LexModelsV2
     CreateBotVersionResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateBotVersionResponse.struct_class = Types::CreateBotVersionResponse
 
+    CreateCustomVocabularyItemsList.member = Shapes::ShapeRef.new(shape: NewCustomVocabularyItem)
+
     CreateExportRequest.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ExportResourceSpecification, required: true, location_name: "resourceSpecification"))
     CreateExportRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: ImportExportFileFormat, required: true, location_name: "fileFormat"))
     CreateExportRequest.add_member(:file_password, Shapes::ShapeRef.new(shape: ImportExportFilePassword, location_name: "filePassword"))
@@ -964,6 +1027,9 @@ module Aws::LexModelsV2
     CustomPayload.add_member(:value, Shapes::ShapeRef.new(shape: CustomPayloadValue, required: true, location_name: "value"))
     CustomPayload.struct_class = Types::CustomPayload
 
+    CustomVocabularyEntryId.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemId, required: true, location_name: "itemId"))
+    CustomVocabularyEntryId.struct_class = Types::CustomVocabularyEntryId
+
     CustomVocabularyExportSpecification.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "botId"))
     CustomVocabularyExportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location_name: "botVersion"))
     CustomVocabularyExportSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
@@ -973,6 +1039,14 @@ module Aws::LexModelsV2
     CustomVocabularyImportSpecification.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location_name: "botVersion"))
     CustomVocabularyImportSpecification.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
     CustomVocabularyImportSpecification.struct_class = Types::CustomVocabularyImportSpecification
+
+    CustomVocabularyItem.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemId, required: true, location_name: "itemId"))
+    CustomVocabularyItem.add_member(:phrase, Shapes::ShapeRef.new(shape: Phrase, required: true, location_name: "phrase"))
+    CustomVocabularyItem.add_member(:weight, Shapes::ShapeRef.new(shape: Weight, location_name: "weight"))
+    CustomVocabularyItem.add_member(:display_as, Shapes::ShapeRef.new(shape: Phrase, location_name: "displayAs"))
+    CustomVocabularyItem.struct_class = Types::CustomVocabularyItem
+
+    CustomVocabularyItems.member = Shapes::ShapeRef.new(shape: CustomVocabularyItem)
 
     DTMFSpecification.add_member(:max_length, Shapes::ShapeRef.new(shape: MaxUtteranceDigits, required: true, location_name: "maxLength"))
     DTMFSpecification.add_member(:end_timeout_ms, Shapes::ShapeRef.new(shape: TimeInMilliSeconds, required: true, location_name: "endTimeoutMs"))
@@ -1029,6 +1103,8 @@ module Aws::LexModelsV2
     DeleteBotVersionResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: NumericalBotVersion, location_name: "botVersion"))
     DeleteBotVersionResponse.add_member(:bot_status, Shapes::ShapeRef.new(shape: BotStatus, location_name: "botStatus"))
     DeleteBotVersionResponse.struct_class = Types::DeleteBotVersionResponse
+
+    DeleteCustomVocabularyItemsList.member = Shapes::ShapeRef.new(shape: CustomVocabularyEntryId)
 
     DeleteCustomVocabularyRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     DeleteCustomVocabularyRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
@@ -1365,6 +1441,13 @@ module Aws::LexModelsV2
     ExternalSourceSetting.add_member(:grammar_slot_type_setting, Shapes::ShapeRef.new(shape: GrammarSlotTypeSetting, location_name: "grammarSlotTypeSetting"))
     ExternalSourceSetting.struct_class = Types::ExternalSourceSetting
 
+    FailedCustomVocabularyItem.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemId, location_name: "itemId"))
+    FailedCustomVocabularyItem.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    FailedCustomVocabularyItem.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
+    FailedCustomVocabularyItem.struct_class = Types::FailedCustomVocabularyItem
+
+    FailedCustomVocabularyItems.member = Shapes::ShapeRef.new(shape: FailedCustomVocabularyItem)
+
     FailureReasons.member = Shapes::ShapeRef.new(shape: FailureReason)
 
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
@@ -1613,6 +1696,20 @@ module Aws::LexModelsV2
     ListBuiltInSlotTypesResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     ListBuiltInSlotTypesResponse.struct_class = Types::ListBuiltInSlotTypesResponse
 
+    ListCustomVocabularyItemsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListCustomVocabularyItemsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    ListCustomVocabularyItemsRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    ListCustomVocabularyItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListCustomVocabularyItemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCustomVocabularyItemsRequest.struct_class = Types::ListCustomVocabularyItemsRequest
+
+    ListCustomVocabularyItemsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListCustomVocabularyItemsResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    ListCustomVocabularyItemsResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    ListCustomVocabularyItemsResponse.add_member(:custom_vocabulary_items, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "customVocabularyItems"))
+    ListCustomVocabularyItemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCustomVocabularyItemsResponse.struct_class = Types::ListCustomVocabularyItemsResponse
+
     ListExportsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
     ListExportsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
     ListExportsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ExportSortBy, location_name: "sortBy"))
@@ -1733,6 +1830,11 @@ module Aws::LexModelsV2
 
     MultipleValuesSetting.add_member(:allow_multiple_values, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowMultipleValues"))
     MultipleValuesSetting.struct_class = Types::MultipleValuesSetting
+
+    NewCustomVocabularyItem.add_member(:phrase, Shapes::ShapeRef.new(shape: Phrase, required: true, location_name: "phrase"))
+    NewCustomVocabularyItem.add_member(:weight, Shapes::ShapeRef.new(shape: Weight, location_name: "weight"))
+    NewCustomVocabularyItem.add_member(:display_as, Shapes::ShapeRef.new(shape: Phrase, location_name: "displayAs"))
+    NewCustomVocabularyItem.struct_class = Types::NewCustomVocabularyItem
 
     ObfuscationSetting.add_member(:obfuscation_setting_type, Shapes::ShapeRef.new(shape: ObfuscationSettingType, required: true, location_name: "obfuscationSettingType"))
     ObfuscationSetting.struct_class = Types::ObfuscationSetting
@@ -2172,6 +2274,8 @@ module Aws::LexModelsV2
     UpdateBotResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateBotResponse.struct_class = Types::UpdateBotResponse
 
+    UpdateCustomVocabularyItemsList.member = Shapes::ShapeRef.new(shape: CustomVocabularyItem)
+
     UpdateExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "exportId"))
     UpdateExportRequest.add_member(:file_password, Shapes::ShapeRef.new(shape: ImportExportFilePassword, location_name: "filePassword"))
     UpdateExportRequest.struct_class = Types::UpdateExportRequest
@@ -2325,6 +2429,45 @@ module Aws::LexModelsV2
         "signingName" => "lex",
         "uid" => "models.lex.v2-2020-08-07",
       }
+
+      api.add_operation(:batch_create_custom_vocabulary_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateCustomVocabularyItem"
+        o.http_method = "PUT"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchcreate"
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateCustomVocabularyItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateCustomVocabularyItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_delete_custom_vocabulary_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteCustomVocabularyItem"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchdelete"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteCustomVocabularyItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteCustomVocabularyItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_update_custom_vocabulary_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateCustomVocabularyItem"
+        o.http_method = "PUT"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchupdate"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateCustomVocabularyItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateCustomVocabularyItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:build_bot_locale, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BuildBotLocale"
@@ -2953,6 +3096,25 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_vocabulary_items, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomVocabularyItems"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/list"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomVocabularyItemsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomVocabularyItemsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

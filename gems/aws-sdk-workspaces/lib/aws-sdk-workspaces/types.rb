@@ -897,6 +897,7 @@ module Aws::WorkSpaces
     #               root_volume_size_gib: 1,
     #               user_volume_size_gib: 1,
     #               compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #               protocols: ["PCOIP"], # accepts PCOIP, WSP
     #             },
     #             tags: [
     #               {
@@ -3128,6 +3129,7 @@ module Aws::WorkSpaces
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
     #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #           protocols: ["PCOIP"], # accepts PCOIP, WSP
     #         },
     #       }
     #
@@ -4758,6 +4760,7 @@ module Aws::WorkSpaces
     #         root_volume_size_gib: 1,
     #         user_volume_size_gib: 1,
     #         compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #         protocols: ["PCOIP"], # accepts PCOIP, WSP
     #       }
     #
     # @!attribute [rw] running_mode
@@ -4810,6 +4813,26 @@ module Aws::WorkSpaces
     #   [1]: http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles
     #   @return [String]
     #
+    # @!attribute [rw] protocols
+    #   The protocol. For more information, see [ Protocols for Amazon
+    #   WorkSpaces][1].
+    #
+    #   <note markdown="1"> * Only available for WorkSpaces created with PCoIP bundles.
+    #
+    #   * The `Protocols` property is case sensitive. Ensure you use `PCOIP`
+    #     or `WSP`.
+    #
+    #   * Unavailable for Windows 7 WorkSpaces and WorkSpaces using
+    #     GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn, and
+    #     GraphicsPro.g4dn).
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceProperties AWS API Documentation
     #
     class WorkspaceProperties < Struct.new(
@@ -4817,7 +4840,8 @@ module Aws::WorkSpaces
       :running_mode_auto_stop_timeout_in_minutes,
       :root_volume_size_gib,
       :user_volume_size_gib,
-      :compute_type_name)
+      :compute_type_name,
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4840,6 +4864,7 @@ module Aws::WorkSpaces
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
     #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #           protocols: ["PCOIP"], # accepts PCOIP, WSP
     #         },
     #         tags: [
     #           {

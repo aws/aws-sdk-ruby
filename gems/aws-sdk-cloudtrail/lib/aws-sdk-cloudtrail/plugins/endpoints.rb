@@ -68,6 +68,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::DeleteEventDataStore.build(context)
           when :delete_trail
             Aws::CloudTrail::Endpoints::DeleteTrail.build(context)
+          when :deregister_organization_delegated_admin
+            Aws::CloudTrail::Endpoints::DeregisterOrganizationDelegatedAdmin.build(context)
           when :describe_query
             Aws::CloudTrail::Endpoints::DescribeQuery.build(context)
           when :describe_trails
@@ -110,6 +112,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::PutEventSelectors.build(context)
           when :put_insight_selectors
             Aws::CloudTrail::Endpoints::PutInsightSelectors.build(context)
+          when :register_organization_delegated_admin
+            Aws::CloudTrail::Endpoints::RegisterOrganizationDelegatedAdmin.build(context)
           when :remove_tags
             Aws::CloudTrail::Endpoints::RemoveTags.build(context)
           when :restore_event_data_store

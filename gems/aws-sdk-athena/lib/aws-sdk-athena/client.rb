@@ -506,6 +506,8 @@ module Aws::Athena
     #   resp.query_executions[0].result_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_executions[0].result_configuration.expected_bucket_owner #=> String
     #   resp.query_executions[0].result_configuration.acl_configuration.s3_acl_option #=> String, one of "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.query_executions[0].result_reuse_configuration.result_reuse_by_age_configuration.enabled #=> Boolean
+    #   resp.query_executions[0].result_reuse_configuration.result_reuse_by_age_configuration.max_age_in_minutes #=> Integer
     #   resp.query_executions[0].query_execution_context.database #=> String
     #   resp.query_executions[0].query_execution_context.catalog #=> String
     #   resp.query_executions[0].status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
@@ -523,6 +525,7 @@ module Aws::Athena
     #   resp.query_executions[0].statistics.query_queue_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.query_planning_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.service_processing_time_in_millis #=> Integer
+    #   resp.query_executions[0].statistics.result_reuse_information.reused_previous_result #=> Boolean
     #   resp.query_executions[0].work_group #=> String
     #   resp.query_executions[0].engine_version.selected_engine_version #=> String
     #   resp.query_executions[0].engine_version.effective_engine_version #=> String
@@ -1084,6 +1087,8 @@ module Aws::Athena
     #   resp.query_execution.result_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_execution.result_configuration.expected_bucket_owner #=> String
     #   resp.query_execution.result_configuration.acl_configuration.s3_acl_option #=> String, one of "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.query_execution.result_reuse_configuration.result_reuse_by_age_configuration.enabled #=> Boolean
+    #   resp.query_execution.result_reuse_configuration.result_reuse_by_age_configuration.max_age_in_minutes #=> Integer
     #   resp.query_execution.query_execution_context.database #=> String
     #   resp.query_execution.query_execution_context.catalog #=> String
     #   resp.query_execution.status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
@@ -1101,6 +1106,7 @@ module Aws::Athena
     #   resp.query_execution.statistics.query_queue_time_in_millis #=> Integer
     #   resp.query_execution.statistics.query_planning_time_in_millis #=> Integer
     #   resp.query_execution.statistics.service_processing_time_in_millis #=> Integer
+    #   resp.query_execution.statistics.result_reuse_information.reused_previous_result #=> Boolean
     #   resp.query_execution.work_group #=> String
     #   resp.query_execution.engine_version.selected_engine_version #=> String
     #   resp.query_execution.engine_version.effective_engine_version #=> String
@@ -1834,6 +1840,9 @@ module Aws::Athena
     #   sequentially to the parameters in the query in the order in which the
     #   parameters occur.
     #
+    # @option params [Types::ResultReuseConfiguration] :result_reuse_configuration
+    #   Specifies the query result reuse behavior for the query.
+    #
     # @return [Types::StartQueryExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartQueryExecutionOutput#query_execution_id #query_execution_id} => String
@@ -1860,6 +1869,12 @@ module Aws::Athena
     #     },
     #     work_group: "WorkGroupName",
     #     execution_parameters: ["ExecutionParameter"],
+    #     result_reuse_configuration: {
+    #       result_reuse_by_age_configuration: {
+    #         enabled: false, # required
+    #         max_age_in_minutes: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2193,7 +2208,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

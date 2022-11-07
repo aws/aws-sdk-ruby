@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2022-11-07)
+------------------
+
+* Feature - Amazon Lex now supports new APIs for viewing and editing Custom Vocabulary in bots.
+
 1.29.0 (2022-10-25)
 ------------------
 

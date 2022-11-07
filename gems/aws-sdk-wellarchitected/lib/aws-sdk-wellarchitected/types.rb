@@ -219,6 +219,149 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Account details for a Well-Architected best practice in relation to
+    # Trusted Advisor checks.
+    #
+    # @!attribute [rw] id
+    #   Trusted Advisor check ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Trusted Advisor check name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Trusted Advisor check description.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   Provider of the check related to the best practice.
+    #   @return [String]
+    #
+    # @!attribute [rw] lens_arn
+    #   Well-Architected Lens ARN associated to the check.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status associated to the check.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   An Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] flagged_resources
+    #   Count of flagged resources associated to the check.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reason
+    #   Reason associated to the check.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CheckDetail AWS API Documentation
+    #
+    class CheckDetail < Struct.new(
+      :id,
+      :name,
+      :description,
+      :provider,
+      :lens_arn,
+      :pillar_id,
+      :question_id,
+      :choice_id,
+      :status,
+      :account_id,
+      :flagged_resources,
+      :reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Trusted Advisor check summary.
+    #
+    # @!attribute [rw] id
+    #   Trusted Advisor check ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Trusted Advisor check name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   Provider of the check related to the best practice.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Trusted Advisor check description.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lens_arn
+    #   Well-Architected Lens ARN associated to the check.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status associated to the check.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_summary
+    #   Account summary associated to the check.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CheckSummary AWS API Documentation
+    #
+    class CheckSummary < Struct.new(
+      :id,
+      :name,
+      :provider,
+      :description,
+      :updated_at,
+      :lens_arn,
+      :pillar_id,
+      :question_id,
+      :choice_id,
+      :status,
+      :account_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A choice available to answer question.
     #
     # @!attribute [rw] choice_id
@@ -442,8 +585,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -658,6 +801,10 @@ module Aws::WellArchitected
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         discovery_config: {
+    #           trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         applications: ["ApplicationArn"],
     #       }
     #
     # @!attribute [rw] workload_name
@@ -802,6 +949,15 @@ module Aws::WellArchitected
     #   The tags to be associated with the workload.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] discovery_config
+    #   Well-Architected discovery configuration settings associated to the
+    #   workload.
+    #   @return [Types::WorkloadDiscoveryConfig]
+    #
+    # @!attribute [rw] applications
+    #   List of AppRegistry application ARNs associated to the workload.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadInput AWS API Documentation
     #
     class CreateWorkloadInput < Struct.new(
@@ -819,7 +975,9 @@ module Aws::WellArchitected
       :lenses,
       :notes,
       :client_request_token,
-      :tags)
+      :tags,
+      :discovery_config,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -862,8 +1020,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -1998,8 +2156,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2258,6 +2416,158 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListCheckDetailsInput
+    #   data as a hash:
+    #
+    #       {
+    #         workload_id: "WorkloadId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         lens_arn: "LensArn", # required
+    #         pillar_id: "PillarId", # required
+    #         question_id: "QuestionId", # required
+    #         choice_id: "ChoiceId", # required
+    #       }
+    #
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lens_arn
+    #   Well-Architected Lens ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListCheckDetailsInput AWS API Documentation
+    #
+    class ListCheckDetailsInput < Struct.new(
+      :workload_id,
+      :next_token,
+      :max_results,
+      :lens_arn,
+      :pillar_id,
+      :question_id,
+      :choice_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] check_details
+    #   The details about the Trusted Advisor checks related to the
+    #   Well-Architected best practice.
+    #   @return [Array<Types::CheckDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListCheckDetailsOutput AWS API Documentation
+    #
+    class ListCheckDetailsOutput < Struct.new(
+      :check_details,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCheckSummariesInput
+    #   data as a hash:
+    #
+    #       {
+    #         workload_id: "WorkloadId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         lens_arn: "LensArn", # required
+    #         pillar_id: "PillarId", # required
+    #         question_id: "QuestionId", # required
+    #         choice_id: "ChoiceId", # required
+    #       }
+    #
+    # @!attribute [rw] workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lens_arn
+    #   Well-Architected Lens ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_id
+    #   The ID of the question.
+    #   @return [String]
+    #
+    # @!attribute [rw] choice_id
+    #   The ID of a choice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListCheckSummariesInput AWS API Documentation
+    #
+    class ListCheckSummariesInput < Struct.new(
+      :workload_id,
+      :next_token,
+      :max_results,
+      :lens_arn,
+      :pillar_id,
+      :question_id,
+      :choice_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] check_summaries
+    #   List of Trusted Advisor summaries related to the Well-Architected
+    #   best practice.
+    #   @return [Array<Types::CheckSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListCheckSummariesOutput AWS API Documentation
+    #
+    class ListCheckSummariesOutput < Struct.new(
+      :check_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input to list lens review improvements.
     #
     # @note When making an API call, you may pass ListLensReviewImprovementsInput
@@ -2473,8 +2783,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with_prefix
-    #   The Amazon Web Services account ID or IAM role with which the lens
-    #   is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the lens is shared.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2806,8 +3116,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with_prefix
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3197,8 +3507,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -3570,7 +3880,7 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] share_invitation
-    #   The updated workload share invitation.
+    #   The updated workload or custom lens share invitation.
     #   @return [Types::ShareInvitation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateShareInvitationOutput AWS API Documentation
@@ -3602,6 +3912,10 @@ module Aws::WellArchitected
     #         industry: "WorkloadIndustry",
     #         notes: "Notes",
     #         improvement_status: "NOT_APPLICABLE", # accepts NOT_APPLICABLE, NOT_STARTED, IN_PROGRESS, COMPLETE, RISK_ACKNOWLEDGED
+    #         discovery_config: {
+    #           trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         applications: ["ApplicationArn"],
     #       }
     #
     # @!attribute [rw] workload_id
@@ -3737,6 +4051,15 @@ module Aws::WellArchitected
     #   The improvement status for a workload.
     #   @return [String]
     #
+    # @!attribute [rw] discovery_config
+    #   Well-Architected discovery configuration settings to associate to
+    #   the workload.
+    #   @return [Types::WorkloadDiscoveryConfig]
+    #
+    # @!attribute [rw] applications
+    #   List of AppRegistry application ARNs to associate to the workload.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkloadInput AWS API Documentation
     #
     class UpdateWorkloadInput < Struct.new(
@@ -3754,7 +4077,9 @@ module Aws::WellArchitected
       :industry_type,
       :industry,
       :notes,
-      :improvement_status)
+      :improvement_status,
+      :discovery_config,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4114,6 +4439,14 @@ module Aws::WellArchitected
     #   The tags associated with the workload.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] discovery_config
+    #   Discovery configuration associated to the workload.
+    #   @return [Types::WorkloadDiscoveryConfig]
+    #
+    # @!attribute [rw] applications
+    #   List of AppRegistry application ARNs associated to the workload.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Workload AWS API Documentation
     #
     class Workload < Struct.new(
@@ -4139,7 +4472,31 @@ module Aws::WellArchitected
       :lenses,
       :owner,
       :share_invitation_id,
-      :tags)
+      :tags,
+      :discovery_config,
+      :applications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Discovery configuration associated to the workload.
+    #
+    # @note When making an API call, you may pass WorkloadDiscoveryConfig
+    #   data as a hash:
+    #
+    #       {
+    #         trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] trusted_advisor_integration_status
+    #   Discovery integration status in respect to Trusted Advisor for the
+    #   workload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/WorkloadDiscoveryConfig AWS API Documentation
+    #
+    class WorkloadDiscoveryConfig < Struct.new(
+      :trusted_advisor_integration_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4155,8 +4512,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type
@@ -4201,8 +4558,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] shared_with
-    #   The Amazon Web Services account ID or IAM role with which the
-    #   workload is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #   @return [String]
     #
     # @!attribute [rw] permission_type

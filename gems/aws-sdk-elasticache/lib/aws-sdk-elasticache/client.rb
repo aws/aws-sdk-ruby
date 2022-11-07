@@ -733,6 +733,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -1330,12 +1332,31 @@ module Aws::ElastiCache
     #
     # @option params [Boolean] :transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to true. You cannot
-    #   modify the value of `TransitEncryptionEnabled` after the cluster is
+    #   modify the value of TransitEncryptionEnabled after the cluster is
     #   created. To enable in-transit encryption on a cluster you must set
     #   `TransitEncryptionEnabled` to true when you create a cluster.
     #
-    #   **Required:** Only available when creating a cache cluster in an
-    #   Amazon VPC using Memcached version `1.6.12` or later.
+    #   Only available when creating a cache cluster in an Amazon VPC using
+    #   Memcached version 1.6.12 or later.
+    #
+    # @option params [String] :network_type
+    #   Must be either `ipv4` \| `ipv6` \| `dual_stack`. IPv6 is supported for
+    #   workloads using Redis engine version 6.2 onward or Memcached engine
+    #   version 1.6.6 on all instances built on the [Nitro system][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #
+    # @option params [String] :ip_discovery
+    #   The network type you choose when modifying a cluster, either `ipv4` \|
+    #   `ipv6`. IPv6 is supported for workloads using Redis engine version 6.2
+    #   onward or Memcached engine version 1.6.6 on all instances built on the
+    #   [Nitro system][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/ec2/nitro/
     #
     # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1481,6 +1502,8 @@ module Aws::ElastiCache
     #       },
     #     ],
     #     transit_encryption_enabled: false,
+    #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
+    #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #   })
     #
     # @example Response structure
@@ -1551,6 +1574,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
+    #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster AWS API Documentation
     #
@@ -1826,7 +1851,11 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_outpost.subnet_outpost_arn #=> String
+    #   resp.cache_subnet_group.subnets[0].supported_network_types #=> Array
+    #   resp.cache_subnet_group.subnets[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_subnet_group.arn #=> String
+    #   resp.cache_subnet_group.supported_network_types #=> Array
+    #   resp.cache_subnet_group.supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup AWS API Documentation
     #
@@ -2135,16 +2164,6 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized with data tiering:
-    #
-    #     * Current generation:
-    #
-    #       **R6gd node types** (available only for Redis engine version 6.2
-    #       onward).
-    #
-    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
@@ -2423,6 +2442,25 @@ module Aws::ElastiCache
     #
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
     #
+    # @option params [String] :network_type
+    #   Must be either `ipv4` \| `ipv6` \| `dual_stack`. IPv6 is supported for
+    #   workloads using Redis engine version 6.2 onward or Memcached engine
+    #   version 1.6.6 on all instances built on the [Nitro system][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #
+    # @option params [String] :ip_discovery
+    #   The network type you choose when creating a replication group, either
+    #   `ipv4` \| `ipv6`. IPv6 is supported for workloads using Redis engine
+    #   version 6.2 onward or Memcached engine version 1.6.6 on all instances
+    #   built on the [Nitro system][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -2585,6 +2623,8 @@ module Aws::ElastiCache
     #       },
     #     ],
     #     data_tiering_enabled: false,
+    #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
+    #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #   })
     #
     # @example Response structure
@@ -2656,6 +2696,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -3250,6 +3292,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -3411,6 +3455,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
+    #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster AWS API Documentation
     #
@@ -3740,6 +3786,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -4226,6 +4274,8 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_clusters[0].log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.cache_clusters[0].log_delivery_configurations[0].message #=> String
+    #   resp.cache_clusters[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.cache_clusters[0].ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5222,7 +5272,11 @@ module Aws::ElastiCache
     #   resp.cache_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
     #   resp.cache_subnet_groups[0].subnets[0].subnet_outpost.subnet_outpost_arn #=> String
+    #   resp.cache_subnet_groups[0].subnets[0].supported_network_types #=> Array
+    #   resp.cache_subnet_groups[0].subnets[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_subnet_groups[0].arn #=> String
+    #   resp.cache_subnet_groups[0].supported_network_types #=> Array
+    #   resp.cache_subnet_groups[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups AWS API Documentation
     #
@@ -6356,6 +6410,8 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].replication_group_create_time #=> Time
     #   resp.replication_groups[0].data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_groups[0].auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_groups[0].network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_groups[0].ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6396,7 +6452,7 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types:** (available only for Redis engine version 5.0.6
+    #       **M6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
@@ -6414,7 +6470,7 @@ module Aws::ElastiCache
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
     #       **T4g node types** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward):
+    #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -6442,16 +6498,6 @@ module Aws::ElastiCache
     #       types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
-    #   * Memory optimized with data tiering:
-    #
-    #     * Current generation:
-    #
-    #       **R6gd node types** (available only for Redis engine version 6.2
-    #       onward).
-    #
-    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
     #
     #   * Memory optimized:
     #
@@ -6618,8 +6664,8 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types:** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward)
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -6636,7 +6682,7 @@ module Aws::ElastiCache
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
     #       **T4g node types** (available only for Redis engine version 5.0.6
-    #       onward and for Memcached engine version 1.5.16 onward):
+    #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -6664,16 +6710,6 @@ module Aws::ElastiCache
     #       types.)
     #
     #       **C1 node types:** `cache.c1.xlarge`
-    #
-    #   * Memory optimized with data tiering:
-    #
-    #     * Current generation:
-    #
-    #       **R6gd node types** (available only for Redis engine version 6.2
-    #       onward).
-    #
-    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
     #
     #   * Memory optimized:
     #
@@ -7650,9 +7686,9 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Used to failover the primary region to a selected secondary region.
-    # The selected secondary region will become primary, and all other
-    # clusters will become secondary.
+    # Used to failover the primary region to a secondary region. The
+    # secondary region will become primary, and all other clusters will
+    # become secondary.
     #
     # @option params [required, String] :global_replication_group_id
     #   The name of the Global datastore
@@ -7896,6 +7932,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -8385,6 +8423,16 @@ module Aws::ElastiCache
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
     #
+    # @option params [String] :ip_discovery
+    #   The network type you choose when modifying a cluster, either `ipv4` \|
+    #   `ipv6`. IPv6 is supported for workloads using Redis engine version 6.2
+    #   onward or Memcached engine version 1.6.6 on all instances built on the
+    #   [Nitro system][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #
     # @return [Types::ModifyCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
@@ -8468,6 +8516,7 @@ module Aws::ElastiCache
     #         enabled: false,
     #       },
     #     ],
+    #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #   })
     #
     # @example Response structure
@@ -8538,6 +8587,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
+    #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster AWS API Documentation
     #
@@ -8705,7 +8756,11 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_outpost.subnet_outpost_arn #=> String
+    #   resp.cache_subnet_group.subnets[0].supported_network_types #=> Array
+    #   resp.cache_subnet_group.subnets[0].supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #   resp.cache_subnet_group.arn #=> String
+    #   resp.cache_subnet_group.supported_network_types #=> Array
+    #   resp.cache_subnet_group.supported_network_types[0] #=> String, one of "ipv4", "ipv6", "dual_stack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup AWS API Documentation
     #
@@ -9010,6 +9065,16 @@ module Aws::ElastiCache
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
     #
+    # @option params [String] :ip_discovery
+    #   The network type you choose when modifying a cluster, either `ipv4` \|
+    #   `ipv6`. IPv6 is supported for workloads using Redis engine version 6.2
+    #   onward or Memcached engine version 1.6.6 on all instances built on the
+    #   [Nitro system][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/ec2/nitro/
+    #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -9128,6 +9193,7 @@ module Aws::ElastiCache
     #         enabled: false,
     #       },
     #     ],
+    #     ip_discovery: "ipv4", # accepts ipv4, ipv6
     #   })
     #
     # @example Response structure
@@ -9199,6 +9265,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -9344,6 +9412,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -9769,6 +9839,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.log_delivery_configurations[0].log_format #=> String, one of "text", "json"
     #   resp.cache_cluster.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.cache_cluster.log_delivery_configurations[0].message #=> String
+    #   resp.cache_cluster.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.cache_cluster.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster AWS API Documentation
     #
@@ -10094,6 +10166,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -10253,6 +10327,8 @@ module Aws::ElastiCache
     #   resp.replication_group.replication_group_create_time #=> Time
     #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #   resp.replication_group.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_group.network_type #=> String, one of "ipv4", "ipv6", "dual_stack"
+    #   resp.replication_group.ip_discovery #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -10276,7 +10352,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

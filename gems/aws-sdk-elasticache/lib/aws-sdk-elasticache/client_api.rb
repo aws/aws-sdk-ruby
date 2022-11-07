@@ -200,6 +200,7 @@ module Aws::ElastiCache
     InvalidUserGroupStateFault = Shapes::StructureShape.new(name: 'InvalidUserGroupStateFault')
     InvalidUserStateFault = Shapes::StructureShape.new(name: 'InvalidUserStateFault')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
+    IpDiscovery = Shapes::StringShape.new(name: 'IpDiscovery')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KinesisFirehoseDestinationDetails = Shapes::StructureShape.new(name: 'KinesisFirehoseDestinationDetails')
     ListAllowedNodeTypeModificationsMessage = Shapes::StructureShape.new(name: 'ListAllowedNodeTypeModificationsMessage')
@@ -225,6 +226,8 @@ module Aws::ElastiCache
     ModifyUserGroupMessage = Shapes::StructureShape.new(name: 'ModifyUserGroupMessage')
     ModifyUserMessage = Shapes::StructureShape.new(name: 'ModifyUserMessage')
     MultiAZStatus = Shapes::StringShape.new(name: 'MultiAZStatus')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
+    NetworkTypeList = Shapes::ListShape.new(name: 'NetworkTypeList')
     NoOperationFault = Shapes::StructureShape.new(name: 'NoOperationFault')
     NodeGroup = Shapes::StructureShape.new(name: 'NodeGroup')
     NodeGroupConfiguration = Shapes::StructureShape.new(name: 'NodeGroupConfiguration')
@@ -443,6 +446,8 @@ module Aws::ElastiCache
     CacheCluster.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     CacheCluster.add_member(:replication_group_log_delivery_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReplicationGroupLogDeliveryEnabled"))
     CacheCluster.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
+    CacheCluster.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CacheCluster.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     CacheCluster.struct_class = Types::CacheCluster
 
     CacheClusterAlreadyExistsFault.struct_class = Types::CacheClusterAlreadyExistsFault
@@ -579,6 +584,7 @@ module Aws::ElastiCache
     CacheSubnetGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
     CacheSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     CacheSubnetGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    CacheSubnetGroup.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: "SupportedNetworkTypes"))
     CacheSubnetGroup.struct_class = Types::CacheSubnetGroup
 
     CacheSubnetGroupAlreadyExistsFault.struct_class = Types::CacheSubnetGroupAlreadyExistsFault
@@ -655,6 +661,8 @@ module Aws::ElastiCache
     CreateCacheClusterMessage.add_member(:preferred_outpost_arns, Shapes::ShapeRef.new(shape: PreferredOutpostArnList, location_name: "PreferredOutpostArns"))
     CreateCacheClusterMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
     CreateCacheClusterMessage.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
+    CreateCacheClusterMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateCacheClusterMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     CreateCacheClusterMessage.struct_class = Types::CreateCacheClusterMessage
 
     CreateCacheClusterResult.add_member(:cache_cluster, Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster"))
@@ -728,6 +736,8 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:user_group_ids, Shapes::ShapeRef.new(shape: UserGroupIdListInput, location_name: "UserGroupIds"))
     CreateReplicationGroupMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
     CreateReplicationGroupMessage.add_member(:data_tiering_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DataTieringEnabled"))
+    CreateReplicationGroupMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    CreateReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     CreateReplicationGroupMessage.struct_class = Types::CreateReplicationGroupMessage
 
     CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1171,6 +1181,7 @@ module Aws::ElastiCache
     ModifyCacheClusterMessage.add_member(:auth_token, Shapes::ShapeRef.new(shape: String, location_name: "AuthToken"))
     ModifyCacheClusterMessage.add_member(:auth_token_update_strategy, Shapes::ShapeRef.new(shape: AuthTokenUpdateStrategyType, location_name: "AuthTokenUpdateStrategy"))
     ModifyCacheClusterMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
+    ModifyCacheClusterMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     ModifyCacheClusterMessage.struct_class = Types::ModifyCacheClusterMessage
 
     ModifyCacheClusterResult.add_member(:cache_cluster, Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster"))
@@ -1225,6 +1236,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:user_group_ids_to_remove, Shapes::ShapeRef.new(shape: UserGroupIdList, location_name: "UserGroupIdsToRemove"))
     ModifyReplicationGroupMessage.add_member(:remove_user_groups, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RemoveUserGroups"))
     ModifyReplicationGroupMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
+    ModifyReplicationGroupMessage.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     ModifyReplicationGroupMessage.struct_class = Types::ModifyReplicationGroupMessage
 
     ModifyReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1252,6 +1264,8 @@ module Aws::ElastiCache
     ModifyUserMessage.add_member(:passwords, Shapes::ShapeRef.new(shape: PasswordListInput, location_name: "Passwords"))
     ModifyUserMessage.add_member(:no_password_required, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoPasswordRequired"))
     ModifyUserMessage.struct_class = Types::ModifyUserMessage
+
+    NetworkTypeList.member = Shapes::ShapeRef.new(shape: NetworkType)
 
     NoOperationFault.struct_class = Types::NoOperationFault
 
@@ -1456,6 +1470,8 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:replication_group_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationGroupCreateTime"))
     ReplicationGroup.add_member(:data_tiering, Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
     ReplicationGroup.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
+    ReplicationGroup.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    ReplicationGroup.add_member(:ip_discovery, Shapes::ShapeRef.new(shape: IpDiscovery, location_name: "IpDiscovery"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault
@@ -1640,6 +1656,7 @@ module Aws::ElastiCache
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_outpost, Shapes::ShapeRef.new(shape: SubnetOutpost, location_name: "SubnetOutpost"))
+    Subnet.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: NetworkTypeList, location_name: "SupportedNetworkTypes"))
     Subnet.struct_class = Types::Subnet
 
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")

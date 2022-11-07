@@ -56,6 +56,12 @@ module Aws::LexModelsV2
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :batch_create_custom_vocabulary_item
+            Aws::LexModelsV2::Endpoints::BatchCreateCustomVocabularyItem.build(context)
+          when :batch_delete_custom_vocabulary_item
+            Aws::LexModelsV2::Endpoints::BatchDeleteCustomVocabularyItem.build(context)
+          when :batch_update_custom_vocabulary_item
+            Aws::LexModelsV2::Endpoints::BatchUpdateCustomVocabularyItem.build(context)
           when :build_bot_locale
             Aws::LexModelsV2::Endpoints::BuildBotLocale.build(context)
           when :create_bot
@@ -146,6 +152,8 @@ module Aws::LexModelsV2
             Aws::LexModelsV2::Endpoints::ListBuiltInIntents.build(context)
           when :list_built_in_slot_types
             Aws::LexModelsV2::Endpoints::ListBuiltInSlotTypes.build(context)
+          when :list_custom_vocabulary_items
+            Aws::LexModelsV2::Endpoints::ListCustomVocabularyItems.build(context)
           when :list_exports
             Aws::LexModelsV2::Endpoints::ListExports.build(context)
           when :list_imports

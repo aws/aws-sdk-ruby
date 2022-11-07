@@ -222,6 +222,8 @@ module Aws::WorkSpaces
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
     OperationNotSupportedException = Shapes::StructureShape.new(name: 'OperationNotSupportedException')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    Protocol = Shapes::StringShape.new(name: 'Protocol')
+    ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
     RebootRequest = Shapes::StructureShape.new(name: 'RebootRequest')
     RebootWorkspaceRequests = Shapes::ListShape.new(name: 'RebootWorkspaceRequests')
     RebootWorkspacesRequest = Shapes::StructureShape.new(name: 'RebootWorkspacesRequest')
@@ -899,6 +901,8 @@ module Aws::WorkSpaces
     OperationNotSupportedException.add_member(:reason, Shapes::ShapeRef.new(shape: ExceptionErrorCode, location_name: "reason"))
     OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
+    ProtocolList.member = Shapes::ShapeRef.new(shape: Protocol)
+
     RebootRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
     RebootRequest.struct_class = Types::RebootRequest
 
@@ -1173,6 +1177,7 @@ module Aws::WorkSpaces
     WorkspaceProperties.add_member(:root_volume_size_gib, Shapes::ShapeRef.new(shape: RootVolumeSizeGib, location_name: "RootVolumeSizeGib"))
     WorkspaceProperties.add_member(:user_volume_size_gib, Shapes::ShapeRef.new(shape: UserVolumeSizeGib, location_name: "UserVolumeSizeGib"))
     WorkspaceProperties.add_member(:compute_type_name, Shapes::ShapeRef.new(shape: Compute, location_name: "ComputeTypeName"))
+    WorkspaceProperties.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols"))
     WorkspaceProperties.struct_class = Types::WorkspaceProperties
 
     WorkspaceRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))

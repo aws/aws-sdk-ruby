@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-11-07)
+------------------
+
+* Feature - The geo match statement now adds labels for country and region. You can match requests at the region level by combining a geo match statement with label match statements.
+
 1.44.0 (2022-10-27)
 ------------------
 

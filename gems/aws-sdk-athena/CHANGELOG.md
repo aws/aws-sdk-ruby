@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-11-07)
+------------------
+
+* Feature - Adds support for using Query Result Reuse
+
 1.57.0 (2022-10-25)
 ------------------
 

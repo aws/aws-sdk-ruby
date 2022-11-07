@@ -1892,6 +1892,11 @@ module Aws::Athena
     #   workgroup.
     #   @return [Types::ResultConfiguration]
     #
+    # @!attribute [rw] result_reuse_configuration
+    #   Specifies the query result reuse behavior that was used for the
+    #   query.
+    #   @return [Types::ResultReuseConfiguration]
+    #
     # @!attribute [rw] query_execution_context
     #   The database in which the query execution occurred.
     #   @return [Types::QueryExecutionContext]
@@ -1928,6 +1933,7 @@ module Aws::Athena
       :query,
       :statement_type,
       :result_configuration,
+      :result_reuse_configuration,
       :query_execution_context,
       :status,
       :statistics,
@@ -2017,6 +2023,11 @@ module Aws::Athena
     #   the query results after the query engine finished running the query.
     #   @return [Integer]
     #
+    # @!attribute [rw] result_reuse_information
+    #   Contains information about whether previous query results were
+    #   reused for the query.
+    #   @return [Types::ResultReuseInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatistics AWS API Documentation
     #
     class QueryExecutionStatistics < Struct.new(
@@ -2026,7 +2037,8 @@ module Aws::Athena
       :total_execution_time_in_millis,
       :query_queue_time_in_millis,
       :query_planning_time_in_millis,
-      :service_processing_time_in_millis)
+      :service_processing_time_in_millis,
+      :result_reuse_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2532,6 +2544,77 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # Specifies whether previous query results are reused, and if so, their
+    # maximum age.
+    #
+    # @note When making an API call, you may pass ResultReuseByAgeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         max_age_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   True if previous query results can be reused when the query is run;
+    #   otherwise, false. The default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_age_in_minutes
+    #   Specifies, in minutes, the maximum age of a previous query result
+    #   that Athena should consider for reuse. The default is 60.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultReuseByAgeConfiguration AWS API Documentation
+    #
+    class ResultReuseByAgeConfiguration < Struct.new(
+      :enabled,
+      :max_age_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the query result reuse behavior for the query.
+    #
+    # @note When making an API call, you may pass ResultReuseConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         result_reuse_by_age_configuration: {
+    #           enabled: false, # required
+    #           max_age_in_minutes: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] result_reuse_by_age_configuration
+    #   Specifies whether previous query results are reused, and if so,
+    #   their maximum age.
+    #   @return [Types::ResultReuseByAgeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultReuseConfiguration AWS API Documentation
+    #
+    class ResultReuseConfiguration < Struct.new(
+      :result_reuse_by_age_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about whether the result of a previous query was
+    # reused.
+    #
+    # @!attribute [rw] reused_previous_result
+    #   True if a previous query result was reused; false if the result was
+    #   generated from a new run of the query.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultReuseInformation AWS API Documentation
+    #
+    class ResultReuseInformation < Struct.new(
+      :reused_previous_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The metadata and rows that make up a query result set. The metadata
     # describes the column structure and data types. To return a `ResultSet`
     # object, use GetQueryResults.
@@ -2607,6 +2690,12 @@ module Aws::Athena
     #         },
     #         work_group: "WorkGroupName",
     #         execution_parameters: ["ExecutionParameter"],
+    #         result_reuse_configuration: {
+    #           result_reuse_by_age_configuration: {
+    #             enabled: false, # required
+    #             max_age_in_minutes: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] query_string
@@ -2654,6 +2743,10 @@ module Aws::Athena
     #   which the parameters occur.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] result_reuse_configuration
+    #   Specifies the query result reuse behavior for the query.
+    #   @return [Types::ResultReuseConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionInput AWS API Documentation
     #
     class StartQueryExecutionInput < Struct.new(
@@ -2662,7 +2755,8 @@ module Aws::Athena
       :query_execution_context,
       :result_configuration,
       :work_group,
-      :execution_parameters)
+      :execution_parameters,
+      :result_reuse_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

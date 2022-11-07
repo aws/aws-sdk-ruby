@@ -98,6 +98,10 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::ImportLens.build(context)
           when :list_answers
             Aws::WellArchitected::Endpoints::ListAnswers.build(context)
+          when :list_check_details
+            Aws::WellArchitected::Endpoints::ListCheckDetails.build(context)
+          when :list_check_summaries
+            Aws::WellArchitected::Endpoints::ListCheckSummaries.build(context)
           when :list_lens_review_improvements
             Aws::WellArchitected::Endpoints::ListLensReviewImprovements.build(context)
           when :list_lens_reviews

@@ -133,8 +133,16 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] bitrate
-    #   Specify the average bitrate in bits per second. Valid bitrates
-    #   depend on the coding mode.
+    #   Specify the average bitrate in bits per second. The bitrate that you
+    #   specify must be a multiple of 8000 within the allowed minimum and
+    #   maximum values. Leave blank to use the default bitrate for the
+    #   coding mode you select according ETSI TS 102 366. Valid bitrates for
+    #   coding mode 1/0: Default: 96000. Minimum: 64000. Maximum: 128000.
+    #   Valid bitrates for coding mode 1/1: Default: 192000. Minimum:
+    #   128000. Maximum: 384000. Valid bitrates for coding mode 2/0:
+    #   Default: 192000. Minimum: 128000. Maximum: 384000. Valid bitrates
+    #   for coding mode 3/2 with FLE: Default: 384000. Minimum: 384000.
+    #   Maximum: 640000.
     #   @return [Integer]
     #
     # @!attribute [rw] bitstream_mode
@@ -3540,7 +3548,7 @@ module Aws::MediaConvert
     #
     #       {
     #         brightness: 1,
-    #         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #         contrast: 1,
     #         hdr_10_metadata: {
     #           blue_primary_x: 1,
@@ -3559,6 +3567,7 @@ module Aws::MediaConvert
     #         hue: 1,
     #         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #         saturation: 1,
+    #         sdr_reference_white_level: 1,
     #       }
     #
     # @!attribute [rw] brightness
@@ -3572,7 +3581,10 @@ module Aws::MediaConvert
     #   upgrade the dynamic range. The converted video has an HDR format,
     #   but visually appears the same as an unconverted output. HDR to SDR
     #   conversion uses Elemental tone mapping technology to approximate the
-    #   outcome of manually regrading from HDR to SDR.
+    #   outcome of manually regrading from HDR to SDR. Select Force P3D65
+    #   (SDR) to set the output color space metadata to the following: *
+    #   Color primaries: Display P3 * Transfer characteristics: SMPTE 428M
+    #   * Matrix coefficients: BT.709
     #   @return [String]
     #
     # @!attribute [rw] contrast
@@ -3619,6 +3631,19 @@ module Aws::MediaConvert
     #   Saturation level.
     #   @return [Integer]
     #
+    # @!attribute [rw] sdr_reference_white_level
+    #   Specify the reference white level, in nits, for all of your SDR
+    #   inputs. Use to correct brightness levels within HDR10 outputs. The
+    #   following color metadata must be present in your SDR input: color
+    #   primaries, transfer characteristics, and matrix coefficients. If
+    #   your SDR input has missing color metadata, or if you want to correct
+    #   input color metadata, manually specify a color space in the input
+    #   video selector. For 1,000 nit peak brightness displays, we recommend
+    #   that you set SDR reference white level to 203 (according to ITU-R
+    #   BT.2408). Leave blank to use the default value of 100, or specify an
+    #   integer from 100 to 1000.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ColorCorrector AWS API Documentation
     #
     class ColorCorrector < Struct.new(
@@ -3628,7 +3653,8 @@ module Aws::MediaConvert
       :hdr_10_metadata,
       :hue,
       :sample_range_conversion,
-      :saturation)
+      :saturation,
+      :sdr_reference_white_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4001,6 +4027,7 @@ module Aws::MediaConvert
     #                     width: 1,
     #                   },
     #                 ],
+    #                 sdr_reference_white_level: 1,
     #               },
     #               input_clippings: [
     #                 {
@@ -4025,7 +4052,7 @@ module Aws::MediaConvert
     #               },
     #               video_selector: {
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #                 embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #                 hdr_10_metadata: {
@@ -5042,7 +5069,7 @@ module Aws::MediaConvert
     #                     video_preprocessors: {
     #                       color_corrector: {
     #                         brightness: 1,
-    #                         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                         contrast: 1,
     #                         hdr_10_metadata: {
     #                           blue_primary_x: 1,
@@ -5061,6 +5088,7 @@ module Aws::MediaConvert
     #                         hue: 1,
     #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                         saturation: 1,
+    #                         sdr_reference_white_level: 1,
     #                       },
     #                       deinterlacer: {
     #                         algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -5096,6 +5124,7 @@ module Aws::MediaConvert
     #                             width: 1,
     #                           },
     #                         ],
+    #                         sdr_reference_white_level: 1,
     #                       },
     #                       noise_reducer: {
     #                         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -5436,6 +5465,7 @@ module Aws::MediaConvert
     #                     width: 1,
     #                   },
     #                 ],
+    #                 sdr_reference_white_level: 1,
     #               },
     #               input_clippings: [
     #                 {
@@ -5456,7 +5486,7 @@ module Aws::MediaConvert
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #                 embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #                 hdr_10_metadata: {
@@ -6473,7 +6503,7 @@ module Aws::MediaConvert
     #                     video_preprocessors: {
     #                       color_corrector: {
     #                         brightness: 1,
-    #                         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                         contrast: 1,
     #                         hdr_10_metadata: {
     #                           blue_primary_x: 1,
@@ -6492,6 +6522,7 @@ module Aws::MediaConvert
     #                         hue: 1,
     #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                         saturation: 1,
+    #                         sdr_reference_white_level: 1,
     #                       },
     #                       deinterlacer: {
     #                         algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -6527,6 +6558,7 @@ module Aws::MediaConvert
     #                             width: 1,
     #                           },
     #                         ],
+    #                         sdr_reference_white_level: 1,
     #                       },
     #                       noise_reducer: {
     #                         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -7331,7 +7363,7 @@ module Aws::MediaConvert
     #             video_preprocessors: {
     #               color_corrector: {
     #                 brightness: 1,
-    #                 color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                 color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                 contrast: 1,
     #                 hdr_10_metadata: {
     #                   blue_primary_x: 1,
@@ -7350,6 +7382,7 @@ module Aws::MediaConvert
     #                 hue: 1,
     #                 sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                 saturation: 1,
+    #                 sdr_reference_white_level: 1,
     #               },
     #               deinterlacer: {
     #                 algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -7385,6 +7418,7 @@ module Aws::MediaConvert
     #                     width: 1,
     #                   },
     #                 ],
+    #                 sdr_reference_white_level: 1,
     #               },
     #               noise_reducer: {
     #                 filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -9040,8 +9074,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Specify the average bitrate in bits per second. Valid bitrates
-    #   depend on the coding mode.
+    #   Specify the average bitrate in bits per second. The bitrate that you
+    #   specify must be a multiple of 8000 within the allowed minimum and
+    #   maximum values. Leave blank to use the default bitrate for the
+    #   coding mode you select according ETSI TS 102 366. Valid bitrates for
+    #   coding mode 1/0: Default: 96000. Minimum: 32000. Maximum: 3024000.
+    #   Valid bitrates for coding mode 2/0: Default: 192000. Minimum: 96000.
+    #   Maximum: 3024000. Valid bitrates for coding mode 3/2: Default:
+    #   384000. Minimum: 192000. Maximum: 3024000.
     #   @return [Integer]
     #
     # @!attribute [rw] bitstream_mode
@@ -12056,6 +12096,7 @@ module Aws::MediaConvert
     #             width: 1,
     #           },
     #         ],
+    #         sdr_reference_white_level: 1,
     #       }
     #
     # @!attribute [rw] insertable_images
@@ -12063,10 +12104,20 @@ module Aws::MediaConvert
     #   images must be PNG or TGA files.
     #   @return [Array<Types::InsertableImage>]
     #
+    # @!attribute [rw] sdr_reference_white_level
+    #   Specify the reference white level, in nits, for all of your image
+    #   inserter images. Use to correct brightness levels within HDR10
+    #   outputs. For 1,000 nit peak brightness displays, we recommend that
+    #   you set SDR reference white level to 203 (according to ITU-R
+    #   BT.2408). Leave blank to use the default value of 100, or specify an
+    #   integer from 100 to 1000.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ImageInserter AWS API Documentation
     #
     class ImageInserter < Struct.new(
-      :insertable_images)
+      :insertable_images,
+      :sdr_reference_white_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12241,6 +12292,7 @@ module Aws::MediaConvert
     #               width: 1,
     #             },
     #           ],
+    #           sdr_reference_white_level: 1,
     #         },
     #         input_clippings: [
     #           {
@@ -12265,7 +12317,7 @@ module Aws::MediaConvert
     #         },
     #         video_selector: {
     #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #           embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #           hdr_10_metadata: {
@@ -12723,6 +12775,7 @@ module Aws::MediaConvert
     #               width: 1,
     #             },
     #           ],
+    #           sdr_reference_white_level: 1,
     #         },
     #         input_clippings: [
     #           {
@@ -12743,7 +12796,7 @@ module Aws::MediaConvert
     #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #         video_selector: {
     #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #           embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #           hdr_10_metadata: {
@@ -13436,6 +13489,7 @@ module Aws::MediaConvert
     #                   width: 1,
     #                 },
     #               ],
+    #               sdr_reference_white_level: 1,
     #             },
     #             input_clippings: [
     #               {
@@ -13460,7 +13514,7 @@ module Aws::MediaConvert
     #             },
     #             video_selector: {
     #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #               embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #               hdr_10_metadata: {
@@ -14477,7 +14531,7 @@ module Aws::MediaConvert
     #                   video_preprocessors: {
     #                     color_corrector: {
     #                       brightness: 1,
-    #                       color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                       color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                       contrast: 1,
     #                       hdr_10_metadata: {
     #                         blue_primary_x: 1,
@@ -14496,6 +14550,7 @@ module Aws::MediaConvert
     #                       hue: 1,
     #                       sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                       saturation: 1,
+    #                       sdr_reference_white_level: 1,
     #                     },
     #                     deinterlacer: {
     #                       algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -14531,6 +14586,7 @@ module Aws::MediaConvert
     #                           width: 1,
     #                         },
     #                       ],
+    #                       sdr_reference_white_level: 1,
     #                     },
     #                     noise_reducer: {
     #                       filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -14921,6 +14977,7 @@ module Aws::MediaConvert
     #                   width: 1,
     #                 },
     #               ],
+    #               sdr_reference_white_level: 1,
     #             },
     #             input_clippings: [
     #               {
@@ -14941,7 +14998,7 @@ module Aws::MediaConvert
     #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #             video_selector: {
     #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #               embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #               hdr_10_metadata: {
@@ -15958,7 +16015,7 @@ module Aws::MediaConvert
     #                   video_preprocessors: {
     #                     color_corrector: {
     #                       brightness: 1,
-    #                       color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                       color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                       contrast: 1,
     #                       hdr_10_metadata: {
     #                         blue_primary_x: 1,
@@ -15977,6 +16034,7 @@ module Aws::MediaConvert
     #                       hue: 1,
     #                       sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                       saturation: 1,
+    #                       sdr_reference_white_level: 1,
     #                     },
     #                     deinterlacer: {
     #                       algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -16012,6 +16070,7 @@ module Aws::MediaConvert
     #                           width: 1,
     #                         },
     #                       ],
+    #                       sdr_reference_white_level: 1,
     #                     },
     #                     noise_reducer: {
     #                       filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -19610,7 +19669,7 @@ module Aws::MediaConvert
     #           video_preprocessors: {
     #             color_corrector: {
     #               brightness: 1,
-    #               color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #               color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #               contrast: 1,
     #               hdr_10_metadata: {
     #                 blue_primary_x: 1,
@@ -19629,6 +19688,7 @@ module Aws::MediaConvert
     #               hue: 1,
     #               sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #               saturation: 1,
+    #               sdr_reference_white_level: 1,
     #             },
     #             deinterlacer: {
     #               algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -19664,6 +19724,7 @@ module Aws::MediaConvert
     #                   width: 1,
     #                 },
     #               ],
+    #               sdr_reference_white_level: 1,
     #             },
     #             noise_reducer: {
     #               filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -20771,7 +20832,7 @@ module Aws::MediaConvert
     #               video_preprocessors: {
     #                 color_corrector: {
     #                   brightness: 1,
-    #                   color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                   color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                   contrast: 1,
     #                   hdr_10_metadata: {
     #                     blue_primary_x: 1,
@@ -20790,6 +20851,7 @@ module Aws::MediaConvert
     #                   hue: 1,
     #                   sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                   saturation: 1,
+    #                   sdr_reference_white_level: 1,
     #                 },
     #                 deinterlacer: {
     #                   algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -20825,6 +20887,7 @@ module Aws::MediaConvert
     #                       width: 1,
     #                     },
     #                   ],
+    #                   sdr_reference_white_level: 1,
     #                 },
     #                 noise_reducer: {
     #                   filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -22031,7 +22094,7 @@ module Aws::MediaConvert
     #           video_preprocessors: {
     #             color_corrector: {
     #               brightness: 1,
-    #               color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #               color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #               contrast: 1,
     #               hdr_10_metadata: {
     #                 blue_primary_x: 1,
@@ -22050,6 +22113,7 @@ module Aws::MediaConvert
     #               hue: 1,
     #               sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #               saturation: 1,
+    #               sdr_reference_white_level: 1,
     #             },
     #             deinterlacer: {
     #               algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -22085,6 +22149,7 @@ module Aws::MediaConvert
     #                   width: 1,
     #                 },
     #               ],
+    #               sdr_reference_white_level: 1,
     #             },
     #             noise_reducer: {
     #               filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -23610,6 +23675,7 @@ module Aws::MediaConvert
     #                     width: 1,
     #                   },
     #                 ],
+    #                 sdr_reference_white_level: 1,
     #               },
     #               input_clippings: [
     #                 {
@@ -23630,7 +23696,7 @@ module Aws::MediaConvert
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #                 embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #                 hdr_10_metadata: {
@@ -24647,7 +24713,7 @@ module Aws::MediaConvert
     #                     video_preprocessors: {
     #                       color_corrector: {
     #                         brightness: 1,
-    #                         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                         color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                         contrast: 1,
     #                         hdr_10_metadata: {
     #                           blue_primary_x: 1,
@@ -24666,6 +24732,7 @@ module Aws::MediaConvert
     #                         hue: 1,
     #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                         saturation: 1,
+    #                         sdr_reference_white_level: 1,
     #                       },
     #                       deinterlacer: {
     #                         algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -24701,6 +24768,7 @@ module Aws::MediaConvert
     #                             width: 1,
     #                           },
     #                         ],
+    #                         sdr_reference_white_level: 1,
     #                       },
     #                       noise_reducer: {
     #                         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -25492,7 +25560,7 @@ module Aws::MediaConvert
     #             video_preprocessors: {
     #               color_corrector: {
     #                 brightness: 1,
-    #                 color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #                 color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #                 contrast: 1,
     #                 hdr_10_metadata: {
     #                   blue_primary_x: 1,
@@ -25511,6 +25579,7 @@ module Aws::MediaConvert
     #                 hue: 1,
     #                 sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #                 saturation: 1,
+    #                 sdr_reference_white_level: 1,
     #               },
     #               deinterlacer: {
     #                 algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -25546,6 +25615,7 @@ module Aws::MediaConvert
     #                     width: 1,
     #                   },
     #                 ],
+    #                 sdr_reference_white_level: 1,
     #               },
     #               noise_reducer: {
     #                 filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -26506,7 +26576,7 @@ module Aws::MediaConvert
     #         video_preprocessors: {
     #           color_corrector: {
     #             brightness: 1,
-    #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #             color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #             contrast: 1,
     #             hdr_10_metadata: {
     #               blue_primary_x: 1,
@@ -26525,6 +26595,7 @@ module Aws::MediaConvert
     #             hue: 1,
     #             sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #             saturation: 1,
+    #             sdr_reference_white_level: 1,
     #           },
     #           deinterlacer: {
     #             algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -26560,6 +26631,7 @@ module Aws::MediaConvert
     #                 width: 1,
     #               },
     #             ],
+    #             sdr_reference_white_level: 1,
     #           },
     #           noise_reducer: {
     #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -26774,7 +26846,7 @@ module Aws::MediaConvert
     #       {
     #         color_corrector: {
     #           brightness: 1,
-    #           color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020
+    #           color_space_conversion: "NONE", # accepts NONE, FORCE_601, FORCE_709, FORCE_HDR10, FORCE_HLG_2020, FORCE_P3DCI, FORCE_P3D65_SDR
     #           contrast: 1,
     #           hdr_10_metadata: {
     #             blue_primary_x: 1,
@@ -26793,6 +26865,7 @@ module Aws::MediaConvert
     #           hue: 1,
     #           sample_range_conversion: "LIMITED_RANGE_SQUEEZE", # accepts LIMITED_RANGE_SQUEEZE, NONE
     #           saturation: 1,
+    #           sdr_reference_white_level: 1,
     #         },
     #         deinterlacer: {
     #           algorithm: "INTERPOLATE", # accepts INTERPOLATE, INTERPOLATE_TICKER, BLEND, BLEND_TICKER
@@ -26828,6 +26901,7 @@ module Aws::MediaConvert
     #               width: 1,
     #             },
     #           ],
+    #           sdr_reference_white_level: 1,
     #         },
     #         noise_reducer: {
     #           filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL, TEMPORAL
@@ -26931,7 +27005,7 @@ module Aws::MediaConvert
     #
     #       {
     #         alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
-    #         color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
+    #         color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020, P3DCI, P3D65_SDR
     #         color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #         embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #         hdr_10_metadata: {
@@ -26968,16 +27042,18 @@ module Aws::MediaConvert
     # @!attribute [rw] color_space
     #   If your input video has accurate color space metadata, or if you
     #   don't know about color space, leave this set to the default value
-    #   Follow (FOLLOW). The service will automatically detect your input
-    #   color space. If your input video has metadata indicating the wrong
-    #   color space, specify the accurate color space here. If your input
-    #   video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume
-    #   static metadata isn't present in your video stream, or if that
-    #   metadata is present but not accurate, choose Force HDR 10
-    #   (FORCE\_HDR10) here and specify correct values in the input HDR 10
-    #   metadata (Hdr10Metadata) settings. For more information about
-    #   MediaConvert HDR jobs, see
-    #   https://docs.aws.amazon.com/console/mediaconvert/hdr.
+    #   Follow. The service will automatically detect your input color
+    #   space. If your input video has metadata indicating the wrong color
+    #   space, specify the accurate color space here. If your input video is
+    #   HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static
+    #   metadata isn't present in your video stream, or if that metadata is
+    #   present but not accurate, choose Force HDR 10 here and specify
+    #   correct values in the input HDR 10 metadata settings. For more
+    #   information about MediaConvert HDR jobs, see
+    #   https://docs.aws.amazon.com/console/mediaconvert/hdr. Select P3D65
+    #   (SDR) to set the input color space metadata to the following: *
+    #   Color primaries: Display P3 * Transfer characteristics: SMPTE 428M
+    #   * Matrix coefficients: BT.709
     #   @return [String]
     #
     # @!attribute [rw] color_space_usage
