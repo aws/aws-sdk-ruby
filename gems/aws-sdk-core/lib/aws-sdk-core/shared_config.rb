@@ -4,9 +4,9 @@ module Aws
   # @api private
   class SharedConfig
     SSO_CREDENTIAL_PROFILE_KEYS = %w[sso_account_id sso_role_name].freeze
-    SSO_PROFILE_KEYS = %w[sso_session sso_start_url sso_region sso_account_id sso_role_name].freeze # TODO: Do we need this one?
+    SSO_PROFILE_KEYS = %w[sso_session sso_start_url sso_region sso_account_id sso_role_name].freeze
     SSO_TOKEN_PROFILE_KEYS = %w[sso_session].freeze
-    SSO_SESSION_KEYS = %w[sso_region sso_start_url].freeze # TODO: Is this needed?
+    SSO_SESSION_KEYS = %w[sso_region sso_start_url].freeze
 
 
     # @return [String]
