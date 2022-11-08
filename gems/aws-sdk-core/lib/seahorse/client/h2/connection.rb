@@ -104,7 +104,7 @@ module Seahorse
           @mutex.synchronize {
             return if @socket_thread
             @socket_thread = Thread.new do
-              while !@socket.closed?
+              while @socket && !@socket.closed?
                 begin
                   data = @socket.read_nonblock(@chunk_size)
                   @h2_client << data
@@ -130,6 +130,7 @@ module Seahorse
                   self.close!
                 end
               end
+              @socket_thread = nil
             end
             @socket_thread.abort_on_exception = true
           }
@@ -141,10 +142,6 @@ module Seahorse
             if @socket
               @socket.close
               @socket = nil
-            end
-            if @socket_thread
-              Thread.kill(@socket_thread)
-              @socket_thread = nil
             end
             @status = :closed
           }

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure the stream_thread is not killed before H2 connection status is updated (#2779).
+
 * Feature - Add token refresh support to `SSOCredentialProvider`.
 
 3.166.0 (2022-10-26)
