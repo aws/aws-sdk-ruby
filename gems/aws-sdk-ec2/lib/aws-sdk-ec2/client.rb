@@ -6024,6 +6024,11 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #             image_id: "ImageId",
     #           },
@@ -6106,6 +6111,10 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.errors[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.errors[0].error_code #=> String
@@ -6157,6 +6166,10 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.instances[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.instances[0].instance_ids #=> Array
@@ -7740,6 +7753,11 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
+    #         network_bandwidth_gbps: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         allowed_instance_types: ["AllowedInstanceType"],
     #       },
     #       private_dns_name_options: {
     #         hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -8105,6 +8123,11 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
+    #         network_bandwidth_gbps: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         allowed_instance_types: ["AllowedInstanceType"],
     #       },
     #       private_dns_name_options: {
     #         hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -8257,6 +8280,10 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.launch_template_version.launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.launch_template_version.launch_template_data.instance_requirements.allowed_instance_types #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -20333,6 +20360,10 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types[0] #=> String
     #   resp.fleets[0].launch_template_configs[0].overrides[0].image_id #=> String
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
@@ -20409,6 +20440,10 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].errors[0].error_code #=> String
@@ -20460,6 +20495,10 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].instances[0].instance_ids #=> Array
@@ -24277,6 +24316,10 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.allowed_instance_types #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -29423,7 +29466,7 @@ module Aws::EC2
     # hours.
     #
     # For more information, see [Monitor fleet events using Amazon
-    # EventBridge][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    # EventBridge][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -29755,6 +29798,10 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types[0] #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
@@ -29802,6 +29849,10 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types[0] #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
@@ -37209,6 +37260,11 @@ module Aws::EC2
     #         min: 1,
     #         max: 1,
     #       },
+    #       network_bandwidth_gbps: {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       },
+    #       allowed_instance_types: ["AllowedInstanceType"],
     #     },
     #     max_results: 1,
     #     next_token: "String",
@@ -37834,6 +37890,10 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p", "inferentia", "k520"
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.launch_template_data.instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.launch_template_data.instance_requirements.allowed_instance_types #=> Array
+    #   resp.launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -38683,6 +38743,11 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
+    #         network_bandwidth_gbps: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         allowed_instance_types: ["AllowedInstanceType"],
     #       },
     #     },
     #     dry_run: false,
@@ -40975,6 +41040,11 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #             image_id: "ImageId",
     #           },
@@ -43427,6 +43497,11 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -47575,12 +47650,12 @@ module Aws::EC2
     # types are supported.
     #
     # For more information, see [Spot Fleet requests][1] in the *Amazon EC2
-    # User Guide for Linux Instances*.
+    # User Guide*.
     #
     # We strongly discourage using the RequestSpotFleet API because it is a
     # legacy API with no planned investment. For options for requesting Spot
     # Instances, see [Which is the best Spot request method to use?][2] in
-    # the *Amazon EC2 User Guide for Linux Instances*.
+    # the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -47915,6 +47990,11 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
     #           },
     #         },
     #       ],
@@ -47979,6 +48059,11 @@ module Aws::EC2
     #                   min: 1,
     #                   max: 1,
     #                 },
+    #                 network_bandwidth_gbps: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 allowed_instance_types: ["AllowedInstanceType"],
     #               },
     #             },
     #           ],
@@ -52477,7 +52562,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.345.0'
+      context[:gem_version] = '1.346.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

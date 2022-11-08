@@ -3026,6 +3026,14 @@ module Aws::SSM
     #                 target_location_max_concurrency: "MaxConcurrency",
     #                 target_location_max_errors: "MaxErrors",
     #                 execution_role_name: "ExecutionRoleName",
+    #                 target_location_alarm_configuration: {
+    #                   ignore_poll_alarm_failure: false,
+    #                   alarms: [ # required
+    #                     {
+    #                       name: "AlarmName", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             ],
     #             schedule_offset: 1,
@@ -3100,6 +3108,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         schedule_offset: 1,
@@ -3362,6 +3378,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         schedule_offset: 1,
@@ -18341,6 +18365,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #       }
@@ -19136,6 +19168,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         tags: [
@@ -19334,6 +19374,14 @@ module Aws::SSM
     #                 target_location_max_concurrency: "MaxConcurrency",
     #                 target_location_max_errors: "MaxErrors",
     #                 execution_role_name: "ExecutionRoleName",
+    #                 target_location_alarm_configuration: {
+    #                   ignore_poll_alarm_failure: false,
+    #                   alarms: [ # required
+    #                     {
+    #                       name: "AlarmName", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #             ],
     #           },
@@ -19672,6 +19720,10 @@ module Aws::SSM
     #   Services accounts targeted by the current Automation execution.
     #   @return [Types::TargetLocation]
     #
+    # @!attribute [rw] triggered_alarms
+    #   The CloudWatch alarms that were invoked by the automation.
+    #   @return [Array<Types::AlarmStateInformation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -19696,7 +19748,8 @@ module Aws::SSM
       :is_critical,
       :valid_next_steps,
       :targets,
-      :target_location)
+      :target_location,
+      :triggered_alarms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19933,6 +19986,14 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #         target_location_alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] accounts
@@ -19962,6 +20023,11 @@ module Aws::SSM
     #   `AWS-SystemsManager-AutomationExecutionRole`.
     #   @return [String]
     #
+    # @!attribute [rw] target_location_alarm_configuration
+    #   The details for the CloudWatch alarm you want to apply to an
+    #   automation or command.
+    #   @return [Types::AlarmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation AWS API Documentation
     #
     class TargetLocation < Struct.new(
@@ -19969,7 +20035,8 @@ module Aws::SSM
       :regions,
       :target_location_max_concurrency,
       :target_location_max_errors,
-      :execution_role_name)
+      :execution_role_name,
+      :target_location_alarm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20263,6 +20330,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         schedule_offset: 1,

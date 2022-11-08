@@ -843,11 +843,9 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
     #
     # @option params [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy.
-    #
-    #   For more information, see [Auto Scaling groups with multiple instance
-    #   types and purchase options][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   The mixed instances policy. For more information, see [Auto Scaling
+    #   groups with multiple instance types and purchase options][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1256,6 +1254,11 @@ module Aws::AutoScaling
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -1330,10 +1333,21 @@ module Aws::AutoScaling
     # For more information, see [Launch configurations][2] in the *Amazon
     # EC2 Auto Scaling User Guide*.
     #
+    # <note markdown="1"> Amazon EC2 Auto Scaling configures instances launched as part of an
+    # Auto Scaling group using either a launch template or a launch
+    # configuration. We strongly recommend that you do not use launch
+    # configurations. They do not provide full functionality for Amazon EC2
+    # Auto Scaling or Amazon EC2. For information about using launch
+    # templates, see [Launch templates][3] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html
     # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html
+    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html
     #
     # @option params [required, String] :launch_configuration_name
     #   The name of the launch configuration. This name must be unique per
@@ -1370,26 +1384,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     #
     # @option params [String] :classic_link_vpc_id
-    #   *EC2-Classic retires on August 15, 2022. This property is not
-    #   supported after that date.*
-    #
-    #   The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
-    #   to. For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    #   Guide for Linux Instances*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #   Available for backward compatibility.
     #
     # @option params [Array<String>] :classic_link_vpc_security_groups
-    #   *EC2-Classic retires on August 15, 2022. This property is not
-    #   supported after that date.*
-    #
-    #   The IDs of one or more security groups for the specified
-    #   ClassicLink-enabled VPC.
-    #
-    #   If you specify the `ClassicLinkVPCId` property, you must specify
-    #   `ClassicLinkVPCSecurityGroups`.
+    #   Available for backward compatibility.
     #
     # @option params [String] :user_data
     #   The user data to make available to the launched EC2 instances. For
@@ -1720,10 +1718,9 @@ module Aws::AutoScaling
     #
     # If the group has instances or scaling activities in progress, you must
     # specify the option to force the deletion in order for it to succeed.
-    #
-    # If the group has policies, deleting the group deletes the policies,
-    # the underlying alarm actions, and any alarm that no longer has an
-    # associated action.
+    # The force delete operation will also terminate the EC2 instances. If
+    # the group has a warm pool, the force delete option also deletes the
+    # warm pool.
     #
     # To remove instances from the Auto Scaling group before deleting it,
     # call the DetachInstances API with the list of instances and the option
@@ -1733,6 +1730,17 @@ module Aws::AutoScaling
     # To terminate all instances before deleting the Auto Scaling group,
     # call the UpdateAutoScalingGroup API and set the minimum size and
     # desired capacity of the Auto Scaling group to zero.
+    #
+    # If the group has scaling policies, deleting the group deletes the
+    # policies, the underlying alarm actions, and any alarm that no longer
+    # has an associated action.
+    #
+    # For more information, see [Delete your Auto Scaling infrastructure][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-process-shutdown.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -2321,6 +2329,10 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.allowed_instance_types #=> Array
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.allowed_instance_types[0] #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_allocation_strategy #=> String
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_base_capacity #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.instances_distribution.on_demand_percentage_above_base_capacity #=> Integer
@@ -2690,6 +2702,10 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.allowed_instance_types #=> Array
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.allowed_instance_types[0] #=> String
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_allocation_strategy #=> String
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_base_capacity #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.instances_distribution.on_demand_percentage_above_base_capacity #=> Integer
@@ -5980,6 +5996,11 @@ module Aws::AutoScaling
     #                   min: 1,
     #                   max: 1,
     #                 },
+    #                 network_bandwidth_gbps: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 allowed_instance_types: ["AllowedInstanceType"],
     #               },
     #             },
     #           ],
@@ -6228,9 +6249,9 @@ module Aws::AutoScaling
     #   `LaunchConfigurationName` or `MixedInstancesPolicy`.
     #
     # @option params [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy. For more
-    #   information, see [Auto Scaling groups with multiple instance types and
-    #   purchase options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   The mixed instances policy. For more information, see [Auto Scaling
+    #   groups with multiple instance types and purchase options][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -6502,6 +6523,11 @@ module Aws::AutoScaling
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -6556,7 +6582,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

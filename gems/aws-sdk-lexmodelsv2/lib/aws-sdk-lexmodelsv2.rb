@@ -33,7 +33,7 @@ require_relative 'aws-sdk-lexmodelsv2/customizations'
 # structure.
 #
 #     lex_models_v2 = Aws::LexModelsV2::Client.new
-#     resp = lex_models_v2.build_bot_locale(params)
+#     resp = lex_models_v2.batch_create_custom_vocabulary_item(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-lexmodelsv2/customizations'
 # @!group service
 module Aws::LexModelsV2
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

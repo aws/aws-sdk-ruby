@@ -28,6 +28,10 @@ module Aws::CloudTrail
   #
   # ## Error Classes
   # * {AccountHasOngoingImportException}
+  # * {AccountNotFoundException}
+  # * {AccountNotRegisteredException}
+  # * {AccountRegisteredException}
+  # * {CannotDelegateManagementAccountException}
   # * {ChannelARNInvalidException}
   # * {ChannelNotFoundException}
   # * {CloudTrailARNInvalidException}
@@ -35,6 +39,7 @@ module Aws::CloudTrail
   # * {CloudTrailInvalidClientTokenIdException}
   # * {CloudWatchLogsDeliveryUnavailableException}
   # * {ConflictException}
+  # * {DelegatedAdminAccountLimitExceededException}
   # * {EventDataStoreARNInvalidException}
   # * {EventDataStoreAlreadyExistsException}
   # * {EventDataStoreHasOngoingImportException}
@@ -79,6 +84,8 @@ module Aws::CloudTrail
   # * {KmsKeyNotFoundException}
   # * {MaxConcurrentQueriesException}
   # * {MaximumNumberOfTrailsExceededException}
+  # * {NoManagementAccountSLRExistsException}
+  # * {NotOrganizationManagementAccountException}
   # * {NotOrganizationMasterAccountException}
   # * {OperationNotPermittedException}
   # * {OrganizationNotInAllFeaturesModeException}
@@ -104,6 +111,46 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::AccountHasOngoingImportException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class AccountNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::AccountNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class AccountNotRegisteredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::AccountNotRegisteredException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class AccountRegisteredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::AccountRegisteredException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CannotDelegateManagementAccountException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::CannotDelegateManagementAccountException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -174,6 +221,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class DelegatedAdminAccountLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::DelegatedAdminAccountLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -614,6 +671,26 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::MaximumNumberOfTrailsExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class NoManagementAccountSLRExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::NoManagementAccountSLRExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class NotOrganizationManagementAccountException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::NotOrganizationManagementAccountException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

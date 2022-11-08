@@ -17,6 +17,27 @@ module Aws::CloudTrail
     #
     class AccountHasOngoingImportException < Aws::EmptyStructure; end
 
+    # This exception is thrown when when the specified account is not found
+    # or not part of an organization.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccountNotFoundException AWS API Documentation
+    #
+    class AccountNotFoundException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified account is not registered
+    # as the CloudTrail delegated administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccountNotRegisteredException AWS API Documentation
+    #
+    class AccountNotRegisteredException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the account is already registered as the
+    # CloudTrail delegated administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccountRegisteredException AWS API Documentation
+    #
+    class AccountRegisteredException < Aws::EmptyStructure; end
+
     # Specifies the tags to add to a trail or event data store.
     #
     # @note When making an API call, you may pass AddTagsRequest
@@ -329,7 +350,7 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         event_data_store: "EventDataStoreArn", # required
+    #         event_data_store: "EventDataStoreArn",
     #         query_id: "UUID", # required
     #       }
     #
@@ -369,6 +390,13 @@ module Aws::CloudTrail
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # This exception is thrown when the management account of an
+    # organization is registered as the CloudTrail delegated administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CannotDelegateManagementAccountException AWS API Documentation
+    #
+    class CannotDelegateManagementAccountException < Aws::EmptyStructure; end
 
     # Contains information about a returned CloudTrail channel.
     #
@@ -485,6 +513,7 @@ module Aws::CloudTrail
     #             value: "TagValue",
     #           },
     #         ],
+    #         kms_key_id: "EventDataStoreKmsKeyId",
     #       }
     #
     # @!attribute [rw] name
@@ -528,6 +557,40 @@ module Aws::CloudTrail
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key ID to use to encrypt the events delivered by
+    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
+    #   fully specified ARN to an alias, a fully specified ARN to a key, or
+    #   a globally unique identifier.
+    #
+    #   Disabling or deleting the KMS key, or removing CloudTrail
+    #   permissions on the key, prevents CloudTrail from logging events to
+    #   the event data store, and prevents users from querying the data in
+    #   the event data store that was encrypted with the key. After you
+    #   associate an event data store with a KMS key, the KMS key cannot be
+    #   removed or changed. Before you disable or delete a KMS key that you
+    #   are using with an event data store, delete or back up your event
+    #   data store.
+    #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the
+    #   *Key Management Service Developer Guide*.
+    #
+    #   Examples:
+    #
+    #   * `alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * `12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreRequest AWS API Documentation
     #
     class CreateEventDataStoreRequest < Struct.new(
@@ -537,7 +600,8 @@ module Aws::CloudTrail
       :organization_enabled,
       :retention_period,
       :termination_protection_enabled,
-      :tags_list)
+      :tags_list,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -592,6 +656,14 @@ module Aws::CloudTrail
     #   than the time shown in `CreatedTimestamp`.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key ID that encrypts the events delivered by
+    #   CloudTrail. The value is a fully specified ARN to a KMS key in the
+    #   following format.
+    #
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreResponse AWS API Documentation
     #
     class CreateEventDataStoreResponse < Struct.new(
@@ -605,7 +677,8 @@ module Aws::CloudTrail
       :termination_protection_enabled,
       :tags_list,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1026,6 +1099,13 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # This exception is thrown when the maximum number of CloudTrail
+    # delegated administrators is reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DelegatedAdminAccountLimitExceededException AWS API Documentation
+    #
+    class DelegatedAdminAccountLimitExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteEventDataStoreRequest
     #   data as a hash:
     #
@@ -1080,11 +1160,43 @@ module Aws::CloudTrail
     #
     class DeleteTrailResponse < Aws::EmptyStructure; end
 
+    # Removes CloudTrail delegated administrator permissions from a
+    # specified member account in an organization that is currently
+    # designated as a delegated administrator.
+    #
+    # @note When making an API call, you may pass DeregisterOrganizationDelegatedAdminRequest
+    #   data as a hash:
+    #
+    #       {
+    #         delegated_admin_account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] delegated_admin_account_id
+    #   A delegated administrator account ID. This is a member account in an
+    #   organization that is currently designated as a delegated
+    #   administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeregisterOrganizationDelegatedAdminRequest AWS API Documentation
+    #
+    class DeregisterOrganizationDelegatedAdminRequest < Struct.new(
+      :delegated_admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the following response if successful. Otherwise, returns an
+    # error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeregisterOrganizationDelegatedAdminResponse AWS API Documentation
+    #
+    class DeregisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeQueryRequest
     #   data as a hash:
     #
     #       {
-    #         event_data_store: "EventDataStoreArn", # required
+    #         event_data_store: "EventDataStoreArn",
     #         query_id: "UUID", # required
     #       }
     #
@@ -1642,6 +1754,14 @@ module Aws::CloudTrail
     #   shown in `CreatedTimestamp`.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key ID that encrypts the events delivered by
+    #   CloudTrail. The value is a fully specified ARN to a KMS key in the
+    #   following format.
+    #
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStoreResponse AWS API Documentation
     #
     class GetEventDataStoreResponse < Struct.new(
@@ -1654,7 +1774,8 @@ module Aws::CloudTrail
       :retention_period,
       :termination_protection_enabled,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1856,7 +1977,7 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         event_data_store: "EventDataStoreArn", # required
+    #         event_data_store: "EventDataStoreArn",
     #         query_id: "UUID", # required
     #         next_token: "PaginationToken",
     #         max_query_results: 1,
@@ -2551,7 +2672,7 @@ module Aws::CloudTrail
     class InvalidTrailNameException < Aws::EmptyStructure; end
 
     # This exception is thrown when there is an issue with the specified KMS
-    # key and the trail can’t be updated.
+    # key and the trail or event data store can't be updated.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/KmsException AWS API Documentation
     #
@@ -3131,6 +3252,20 @@ module Aws::CloudTrail
     #
     class MaximumNumberOfTrailsExceededException < Aws::EmptyStructure; end
 
+    # This exception is thrown when the management account does not have a
+    # service-linked role.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/NoManagementAccountSLRExistsException AWS API Documentation
+    #
+    class NoManagementAccountSLRExistsException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the account making the request is not
+    # the organization's management account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/NotOrganizationManagementAccountException AWS API Documentation
+    #
+    class NotOrganizationManagementAccountException < Aws::EmptyStructure; end
+
     # This exception is thrown when the Amazon Web Services account making
     # the request to create or update an organization trail or event data
     # store is not the management account for an organization in
@@ -3464,6 +3599,36 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # Specifies an organization member account ID as a CloudTrail delegated
+    # administrator.
+    #
+    # @note When making an API call, you may pass RegisterOrganizationDelegatedAdminRequest
+    #   data as a hash:
+    #
+    #       {
+    #         member_account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] member_account_id
+    #   An organization member account ID that you want to designate as a
+    #   delegated administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RegisterOrganizationDelegatedAdminRequest AWS API Documentation
+    #
+    class RegisterOrganizationDelegatedAdminRequest < Struct.new(
+      :member_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the following response if successful. Otherwise, returns an
+    # error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RegisterOrganizationDelegatedAdminResponse AWS API Documentation
+    #
+    class RegisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure; end
+
     # Specifies the tags to remove from a trail or event data store.
     #
     # @note When making an API call, you may pass RemoveTagsRequest
@@ -3640,6 +3805,14 @@ module Aws::CloudTrail
     #   than the time shown in `CreatedTimestamp`.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key ID that encrypts the events delivered by
+    #   CloudTrail. The value is a fully specified ARN to a KMS key in the
+    #   following format.
+    #
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStoreResponse AWS API Documentation
     #
     class RestoreEventDataStoreResponse < Struct.new(
@@ -3652,7 +3825,8 @@ module Aws::CloudTrail
       :retention_period,
       :termination_protection_enabled,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4243,6 +4417,7 @@ module Aws::CloudTrail
     #         organization_enabled: false,
     #         retention_period: 1,
     #         termination_protection_enabled: false,
+    #         kms_key_id: "EventDataStoreKmsKeyId",
     #       }
     #
     # @!attribute [rw] event_data_store
@@ -4279,6 +4454,40 @@ module Aws::CloudTrail
     #   store cannot be automatically deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key ID to use to encrypt the events delivered by
+    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
+    #   fully specified ARN to an alias, a fully specified ARN to a key, or
+    #   a globally unique identifier.
+    #
+    #   Disabling or deleting the KMS key, or removing CloudTrail
+    #   permissions on the key, prevents CloudTrail from logging events to
+    #   the event data store, and prevents users from querying the data in
+    #   the event data store that was encrypted with the key. After you
+    #   associate an event data store with a KMS key, the KMS key cannot be
+    #   removed or changed. Before you disable or delete a KMS key that you
+    #   are using with an event data store, delete or back up your event
+    #   data store.
+    #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the
+    #   *Key Management Service Developer Guide*.
+    #
+    #   Examples:
+    #
+    #   * `alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * `12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreRequest AWS API Documentation
     #
     class UpdateEventDataStoreRequest < Struct.new(
@@ -4288,7 +4497,8 @@ module Aws::CloudTrail
       :multi_region_enabled,
       :organization_enabled,
       :retention_period,
-      :termination_protection_enabled)
+      :termination_protection_enabled,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4340,6 +4550,14 @@ module Aws::CloudTrail
     #   shown in `CreatedTimestamp`.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key ID that encrypts the events delivered by
+    #   CloudTrail. The value is a fully specified ARN to a KMS key in the
+    #   following format.
+    #
+    #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreResponse AWS API Documentation
     #
     class UpdateEventDataStoreResponse < Struct.new(
@@ -4352,7 +4570,8 @@ module Aws::CloudTrail
       :retention_period,
       :termination_protection_enabled,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end

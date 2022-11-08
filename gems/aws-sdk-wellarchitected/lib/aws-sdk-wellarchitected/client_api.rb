@@ -14,6 +14,7 @@ module Aws::WellArchitected
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountSummary = Shapes::MapShape.new(name: 'AccountSummary')
     AdditionalResourceType = Shapes::StringShape.new(name: 'AdditionalResourceType')
     AdditionalResources = Shapes::StructureShape.new(name: 'AdditionalResources')
     AdditionalResourcesList = Shapes::ListShape.new(name: 'AdditionalResourcesList')
@@ -21,10 +22,22 @@ module Aws::WellArchitected
     AnswerReason = Shapes::StringShape.new(name: 'AnswerReason')
     AnswerSummaries = Shapes::ListShape.new(name: 'AnswerSummaries')
     AnswerSummary = Shapes::StructureShape.new(name: 'AnswerSummary')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     AssociateLensesInput = Shapes::StructureShape.new(name: 'AssociateLensesInput')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Base64String = Shapes::StringShape.new(name: 'Base64String')
+    CheckDescription = Shapes::StringShape.new(name: 'CheckDescription')
+    CheckDetail = Shapes::StructureShape.new(name: 'CheckDetail')
+    CheckDetails = Shapes::ListShape.new(name: 'CheckDetails')
+    CheckFailureReason = Shapes::StringShape.new(name: 'CheckFailureReason')
+    CheckId = Shapes::StringShape.new(name: 'CheckId')
+    CheckName = Shapes::StringShape.new(name: 'CheckName')
+    CheckProvider = Shapes::StringShape.new(name: 'CheckProvider')
+    CheckStatus = Shapes::StringShape.new(name: 'CheckStatus')
+    CheckStatusCount = Shapes::IntegerShape.new(name: 'CheckStatusCount')
+    CheckSummaries = Shapes::ListShape.new(name: 'CheckSummaries')
+    CheckSummary = Shapes::StructureShape.new(name: 'CheckSummary')
     Choice = Shapes::StructureShape.new(name: 'Choice')
     ChoiceAnswer = Shapes::StructureShape.new(name: 'ChoiceAnswer')
     ChoiceAnswerSummaries = Shapes::ListShape.new(name: 'ChoiceAnswerSummaries')
@@ -69,6 +82,7 @@ module Aws::WellArchitected
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExportLensInput = Shapes::StructureShape.new(name: 'ExportLensInput')
     ExportLensOutput = Shapes::StructureShape.new(name: 'ExportLensOutput')
+    FlaggedResources = Shapes::IntegerShape.new(name: 'FlaggedResources')
     GetAnswerInput = Shapes::StructureShape.new(name: 'GetAnswerInput')
     GetAnswerOutput = Shapes::StructureShape.new(name: 'GetAnswerOutput')
     GetLensInput = Shapes::StructureShape.new(name: 'GetLensInput')
@@ -119,6 +133,10 @@ module Aws::WellArchitected
     ListAnswersInput = Shapes::StructureShape.new(name: 'ListAnswersInput')
     ListAnswersMaxResults = Shapes::IntegerShape.new(name: 'ListAnswersMaxResults')
     ListAnswersOutput = Shapes::StructureShape.new(name: 'ListAnswersOutput')
+    ListCheckDetailsInput = Shapes::StructureShape.new(name: 'ListCheckDetailsInput')
+    ListCheckDetailsOutput = Shapes::StructureShape.new(name: 'ListCheckDetailsOutput')
+    ListCheckSummariesInput = Shapes::StructureShape.new(name: 'ListCheckSummariesInput')
+    ListCheckSummariesOutput = Shapes::StructureShape.new(name: 'ListCheckSummariesOutput')
     ListLensReviewImprovementsInput = Shapes::StructureShape.new(name: 'ListLensReviewImprovementsInput')
     ListLensReviewImprovementsMaxResults = Shapes::IntegerShape.new(name: 'ListLensReviewImprovementsMaxResults')
     ListLensReviewImprovementsOutput = Shapes::StructureShape.new(name: 'ListLensReviewImprovementsOutput')
@@ -195,6 +213,7 @@ module Aws::WellArchitected
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TrustedAdvisorIntegrationStatus = Shapes::StringShape.new(name: 'TrustedAdvisorIntegrationStatus')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateAnswerInput = Shapes::StructureShape.new(name: 'UpdateAnswerInput')
@@ -218,10 +237,12 @@ module Aws::WellArchitected
     VersionDifferences = Shapes::StructureShape.new(name: 'VersionDifferences')
     Workload = Shapes::StructureShape.new(name: 'Workload')
     WorkloadAccountIds = Shapes::ListShape.new(name: 'WorkloadAccountIds')
+    WorkloadApplications = Shapes::ListShape.new(name: 'WorkloadApplications')
     WorkloadArchitecturalDesign = Shapes::StringShape.new(name: 'WorkloadArchitecturalDesign')
     WorkloadArn = Shapes::StringShape.new(name: 'WorkloadArn')
     WorkloadAwsRegions = Shapes::ListShape.new(name: 'WorkloadAwsRegions')
     WorkloadDescription = Shapes::StringShape.new(name: 'WorkloadDescription')
+    WorkloadDiscoveryConfig = Shapes::StructureShape.new(name: 'WorkloadDiscoveryConfig')
     WorkloadEnvironment = Shapes::StringShape.new(name: 'WorkloadEnvironment')
     WorkloadId = Shapes::StringShape.new(name: 'WorkloadId')
     WorkloadImprovementStatus = Shapes::StringShape.new(name: 'WorkloadImprovementStatus')
@@ -242,6 +263,9 @@ module Aws::WellArchitected
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountSummary.key = Shapes::ShapeRef.new(shape: CheckStatus)
+    AccountSummary.value = Shapes::ShapeRef.new(shape: CheckStatusCount)
 
     AdditionalResources.add_member(:type, Shapes::ShapeRef.new(shape: AdditionalResourceType, location_name: "Type"))
     AdditionalResources.add_member(:content, Shapes::ShapeRef.new(shape: Urls, location_name: "Content"))
@@ -281,6 +305,38 @@ module Aws::WellArchitected
     AssociateLensesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     AssociateLensesInput.add_member(:lens_aliases, Shapes::ShapeRef.new(shape: LensAliases, required: true, location_name: "LensAliases"))
     AssociateLensesInput.struct_class = Types::AssociateLensesInput
+
+    CheckDetail.add_member(:id, Shapes::ShapeRef.new(shape: CheckId, location_name: "Id"))
+    CheckDetail.add_member(:name, Shapes::ShapeRef.new(shape: CheckName, location_name: "Name"))
+    CheckDetail.add_member(:description, Shapes::ShapeRef.new(shape: CheckDescription, location_name: "Description"))
+    CheckDetail.add_member(:provider, Shapes::ShapeRef.new(shape: CheckProvider, location_name: "Provider"))
+    CheckDetail.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    CheckDetail.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    CheckDetail.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
+    CheckDetail.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
+    CheckDetail.add_member(:status, Shapes::ShapeRef.new(shape: CheckStatus, location_name: "Status"))
+    CheckDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
+    CheckDetail.add_member(:flagged_resources, Shapes::ShapeRef.new(shape: FlaggedResources, location_name: "FlaggedResources"))
+    CheckDetail.add_member(:reason, Shapes::ShapeRef.new(shape: CheckFailureReason, location_name: "Reason"))
+    CheckDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    CheckDetail.struct_class = Types::CheckDetail
+
+    CheckDetails.member = Shapes::ShapeRef.new(shape: CheckDetail)
+
+    CheckSummaries.member = Shapes::ShapeRef.new(shape: CheckSummary)
+
+    CheckSummary.add_member(:id, Shapes::ShapeRef.new(shape: CheckId, location_name: "Id"))
+    CheckSummary.add_member(:name, Shapes::ShapeRef.new(shape: CheckName, location_name: "Name"))
+    CheckSummary.add_member(:provider, Shapes::ShapeRef.new(shape: CheckProvider, location_name: "Provider"))
+    CheckSummary.add_member(:description, Shapes::ShapeRef.new(shape: CheckDescription, location_name: "Description"))
+    CheckSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    CheckSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    CheckSummary.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    CheckSummary.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
+    CheckSummary.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
+    CheckSummary.add_member(:status, Shapes::ShapeRef.new(shape: CheckStatus, location_name: "Status"))
+    CheckSummary.add_member(:account_summary, Shapes::ShapeRef.new(shape: AccountSummary, location_name: "AccountSummary"))
+    CheckSummary.struct_class = Types::CheckSummary
 
     Choice.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
     Choice.add_member(:title, Shapes::ShapeRef.new(shape: ChoiceTitle, location_name: "Title"))
@@ -373,6 +429,8 @@ module Aws::WellArchitected
     CreateWorkloadInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     CreateWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateWorkloadInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateWorkloadInput.add_member(:discovery_config, Shapes::ShapeRef.new(shape: WorkloadDiscoveryConfig, location_name: "DiscoveryConfig"))
+    CreateWorkloadInput.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
     CreateWorkloadInput.struct_class = Types::CreateWorkloadInput
 
     CreateWorkloadOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -593,6 +651,32 @@ module Aws::WellArchitected
     ListAnswersOutput.add_member(:answer_summaries, Shapes::ShapeRef.new(shape: AnswerSummaries, location_name: "AnswerSummaries"))
     ListAnswersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnswersOutput.struct_class = Types::ListAnswersOutput
+
+    ListCheckDetailsInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
+    ListCheckDetailsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCheckDetailsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListCheckDetailsInput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, required: true, location_name: "LensArn"))
+    ListCheckDetailsInput.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, required: true, location_name: "PillarId"))
+    ListCheckDetailsInput.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, required: true, location_name: "QuestionId"))
+    ListCheckDetailsInput.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, required: true, location_name: "ChoiceId"))
+    ListCheckDetailsInput.struct_class = Types::ListCheckDetailsInput
+
+    ListCheckDetailsOutput.add_member(:check_details, Shapes::ShapeRef.new(shape: CheckDetails, location_name: "CheckDetails"))
+    ListCheckDetailsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCheckDetailsOutput.struct_class = Types::ListCheckDetailsOutput
+
+    ListCheckSummariesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
+    ListCheckSummariesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCheckSummariesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListCheckSummariesInput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, required: true, location_name: "LensArn"))
+    ListCheckSummariesInput.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, required: true, location_name: "PillarId"))
+    ListCheckSummariesInput.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, required: true, location_name: "QuestionId"))
+    ListCheckSummariesInput.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, required: true, location_name: "ChoiceId"))
+    ListCheckSummariesInput.struct_class = Types::ListCheckSummariesInput
+
+    ListCheckSummariesOutput.add_member(:check_summaries, Shapes::ShapeRef.new(shape: CheckSummaries, location_name: "CheckSummaries"))
+    ListCheckSummariesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCheckSummariesOutput.struct_class = Types::ListCheckSummariesOutput
 
     ListLensReviewImprovementsInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     ListLensReviewImprovementsInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
@@ -857,6 +941,8 @@ module Aws::WellArchitected
     UpdateWorkloadInput.add_member(:industry, Shapes::ShapeRef.new(shape: WorkloadIndustry, location_name: "Industry"))
     UpdateWorkloadInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     UpdateWorkloadInput.add_member(:improvement_status, Shapes::ShapeRef.new(shape: WorkloadImprovementStatus, location_name: "ImprovementStatus"))
+    UpdateWorkloadInput.add_member(:discovery_config, Shapes::ShapeRef.new(shape: WorkloadDiscoveryConfig, location_name: "DiscoveryConfig"))
+    UpdateWorkloadInput.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
     UpdateWorkloadInput.struct_class = Types::UpdateWorkloadInput
 
     UpdateWorkloadOutput.add_member(:workload, Shapes::ShapeRef.new(shape: Workload, location_name: "Workload"))
@@ -916,11 +1002,18 @@ module Aws::WellArchitected
     Workload.add_member(:owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "Owner"))
     Workload.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, location_name: "ShareInvitationId"))
     Workload.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Workload.add_member(:discovery_config, Shapes::ShapeRef.new(shape: WorkloadDiscoveryConfig, location_name: "DiscoveryConfig"))
+    Workload.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
     Workload.struct_class = Types::Workload
 
     WorkloadAccountIds.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
+    WorkloadApplications.member = Shapes::ShapeRef.new(shape: ApplicationArn)
+
     WorkloadAwsRegions.member = Shapes::ShapeRef.new(shape: AwsRegion)
+
+    WorkloadDiscoveryConfig.add_member(:trusted_advisor_integration_status, Shapes::ShapeRef.new(shape: TrustedAdvisorIntegrationStatus, location_name: "TrustedAdvisorIntegrationStatus"))
+    WorkloadDiscoveryConfig.struct_class = Types::WorkloadDiscoveryConfig
 
     WorkloadLenses.member = Shapes::ShapeRef.new(shape: LensAlias)
 
@@ -1263,6 +1356,44 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_check_details, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCheckDetails"
+        o.http_method = "POST"
+        o.http_request_uri = "/workloads/{WorkloadId}/checks"
+        o.input = Shapes::ShapeRef.new(shape: ListCheckDetailsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCheckDetailsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_check_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCheckSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/workloads/{WorkloadId}/checkSummaries"
+        o.input = Shapes::ShapeRef.new(shape: ListCheckSummariesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCheckSummariesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(

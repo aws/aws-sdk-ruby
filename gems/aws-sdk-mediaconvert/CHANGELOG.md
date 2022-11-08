@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2022-11-07)
+------------------
+
+* Feature - The AWS Elemental MediaConvert SDK has added support for setting the SDR reference white point for HDR conversions and conversion of HDR10 to DolbyVision without mastering metadata.
+
 1.94.0 (2022-10-25)
 ------------------
 

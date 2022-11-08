@@ -107,6 +107,11 @@ module Aws::AutoScaling
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -190,11 +195,9 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy.
-    #
-    #   For more information, see [Auto Scaling groups with multiple instance
-    #   types and purchase options][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   The mixed instances policy. For more information, see [Auto Scaling
+    #   groups with multiple instance types and purchase options][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -513,25 +516,9 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     # @option options [String] :classic_link_vpc_id
-    #   *EC2-Classic retires on August 15, 2022. This property is not
-    #   supported after that date.*
-    #
-    #   The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
-    #   to. For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    #   Guide for Linux Instances*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #   Available for backward compatibility.
     # @option options [Array<String>] :classic_link_vpc_security_groups
-    #   *EC2-Classic retires on August 15, 2022. This property is not
-    #   supported after that date.*
-    #
-    #   The IDs of one or more security groups for the specified
-    #   ClassicLink-enabled VPC.
-    #
-    #   If you specify the `ClassicLinkVPCId` property, you must specify
-    #   `ClassicLinkVPCSecurityGroups`.
+    #   Available for backward compatibility.
     # @option options [String] :user_data
     #   The user data to make available to the launched EC2 instances. For
     #   more information, see [Instance metadata and user data][1] (Linux) and

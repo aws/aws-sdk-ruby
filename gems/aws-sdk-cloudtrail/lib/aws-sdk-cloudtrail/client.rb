@@ -426,7 +426,7 @@ module Aws::CloudTrail
     # cancel is also required. When you run `CancelQuery`, the query status
     # might show as `CANCELLED` even if the operation is not yet finished.
     #
-    # @option params [required, String] :event_data_store
+    # @option params [String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
     #   the specified query is running.
     #
@@ -442,7 +442,7 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_query({
-    #     event_data_store: "EventDataStoreArn", # required
+    #     event_data_store: "EventDataStoreArn",
     #     query_id: "UUID", # required
     #   })
     #
@@ -496,6 +496,38 @@ module Aws::CloudTrail
     # @option params [Array<Types::Tag>] :tags_list
     #   A list of tags.
     #
+    # @option params [String] :kms_key_id
+    #   Specifies the KMS key ID to use to encrypt the events delivered by
+    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
+    #   fully specified ARN to an alias, a fully specified ARN to a key, or a
+    #   globally unique identifier.
+    #
+    #   Disabling or deleting the KMS key, or removing CloudTrail permissions
+    #   on the key, prevents CloudTrail from logging events to the event data
+    #   store, and prevents users from querying the data in the event data
+    #   store that was encrypted with the key. After you associate an event
+    #   data store with a KMS key, the KMS key cannot be removed or changed.
+    #   Before you disable or delete a KMS key that you are using with an
+    #   event data store, delete or back up your event data store.
+    #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #   Examples:
+    #
+    #   * `alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * `12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    #
     # @return [Types::CreateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -509,6 +541,7 @@ module Aws::CloudTrail
     #   * {Types::CreateEventDataStoreResponse#tags_list #tags_list} => Array&lt;Types::Tag&gt;
     #   * {Types::CreateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::CreateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #   * {Types::CreateEventDataStoreResponse#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -540,6 +573,7 @@ module Aws::CloudTrail
     #         value: "TagValue",
     #       },
     #     ],
+    #     kms_key_id: "EventDataStoreKmsKeyId",
     #   })
     #
     # @example Response structure
@@ -572,6 +606,7 @@ module Aws::CloudTrail
     #   resp.tags_list[0].value #=> String
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStore AWS API Documentation
     #
@@ -818,12 +853,37 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Removes CloudTrail delegated administrator permissions from a member
+    # account in an organization.
+    #
+    # @option params [required, String] :delegated_admin_account_id
+    #   A delegated administrator account ID. This is a member account in an
+    #   organization that is currently designated as a delegated
+    #   administrator.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_organization_delegated_admin({
+    #     delegated_admin_account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeregisterOrganizationDelegatedAdmin AWS API Documentation
+    #
+    # @overload deregister_organization_delegated_admin(params = {})
+    # @param [Hash] params ({})
+    def deregister_organization_delegated_admin(params = {}, options = {})
+      req = build_request(:deregister_organization_delegated_admin, params)
+      req.send_request(options)
+    end
+
     # Returns metadata about a query, including query run time in
     # milliseconds, number of events scanned and matched, and query status.
     # You must specify an ARN for `EventDataStore`, and a value for
     # `QueryID`.
     #
-    # @option params [required, String] :event_data_store
+    # @option params [String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
     #   the specified query was run.
     #
@@ -843,7 +903,7 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_query({
-    #     event_data_store: "EventDataStoreArn", # required
+    #     event_data_store: "EventDataStoreArn",
     #     query_id: "UUID", # required
     #   })
     #
@@ -948,7 +1008,7 @@ module Aws::CloudTrail
     # services create service-linked channels to get information about
     # CloudTrail events on your behalf. For more information about
     # service-linked channels, see [Viewing service-linked channels for
-    # CloudTrail by using the CLI.][1].
+    # CloudTrail by using the CLI][1].
     #
     #
     #
@@ -1025,6 +1085,7 @@ module Aws::CloudTrail
     #   * {Types::GetEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
     #   * {Types::GetEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::GetEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #   * {Types::GetEventDataStoreResponse#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1059,6 +1120,7 @@ module Aws::CloudTrail
     #   resp.termination_protection_enabled #=> Boolean
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStore AWS API Documentation
     #
@@ -1279,7 +1341,7 @@ module Aws::CloudTrail
     # value returned by the `StartQuery` operation, and an ARN for
     # `EventDataStore`.
     #
-    # @option params [required, String] :event_data_store
+    # @option params [String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store against
     #   which the query was run.
     #
@@ -1305,7 +1367,7 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_query_results({
-    #     event_data_store: "EventDataStoreArn", # required
+    #     event_data_store: "EventDataStoreArn",
     #     query_id: "UUID", # required
     #     next_token: "PaginationToken",
     #     max_query_results: 1,
@@ -2197,6 +2259,30 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Registers an organization’s member account as the CloudTrail delegated
+    # administrator.
+    #
+    # @option params [required, String] :member_account_id
+    #   An organization member account ID that you want to designate as a
+    #   delegated administrator.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_organization_delegated_admin({
+    #     member_account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RegisterOrganizationDelegatedAdmin AWS API Documentation
+    #
+    # @overload register_organization_delegated_admin(params = {})
+    # @param [Hash] params ({})
+    def register_organization_delegated_admin(params = {}, options = {})
+      req = build_request(:register_organization_delegated_admin, params)
+      req.send_request(options)
+    end
+
     # Removes the specified tags from a trail or event data store.
     #
     # @option params [required, String] :resource_id
@@ -2257,6 +2343,7 @@ module Aws::CloudTrail
     #   * {Types::RestoreEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
     #   * {Types::RestoreEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::RestoreEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #   * {Types::RestoreEventDataStoreResponse#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2291,6 +2378,7 @@ module Aws::CloudTrail
     #   resp.termination_protection_enabled #=> Boolean
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStore AWS API Documentation
     #
@@ -2589,6 +2677,38 @@ module Aws::CloudTrail
     #   Indicates that termination protection is enabled and the event data
     #   store cannot be automatically deleted.
     #
+    # @option params [String] :kms_key_id
+    #   Specifies the KMS key ID to use to encrypt the events delivered by
+    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
+    #   fully specified ARN to an alias, a fully specified ARN to a key, or a
+    #   globally unique identifier.
+    #
+    #   Disabling or deleting the KMS key, or removing CloudTrail permissions
+    #   on the key, prevents CloudTrail from logging events to the event data
+    #   store, and prevents users from querying the data in the event data
+    #   store that was encrypted with the key. After you associate an event
+    #   data store with a KMS key, the KMS key cannot be removed or changed.
+    #   Before you disable or delete a KMS key that you are using with an
+    #   event data store, delete or back up your event data store.
+    #
+    #   CloudTrail also supports KMS multi-Region keys. For more information
+    #   about multi-Region keys, see [Using multi-Region keys][1] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #   Examples:
+    #
+    #   * `alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:alias/MyAliasName`
+    #
+    #   * `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
+    #
+    #   * `12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
+    #
     # @return [Types::UpdateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -2601,6 +2721,7 @@ module Aws::CloudTrail
     #   * {Types::UpdateEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
     #   * {Types::UpdateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::UpdateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #   * {Types::UpdateEventDataStoreResponse#kms_key_id #kms_key_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2627,6 +2748,7 @@ module Aws::CloudTrail
     #     organization_enabled: false,
     #     retention_period: 1,
     #     termination_protection_enabled: false,
+    #     kms_key_id: "EventDataStoreKmsKeyId",
     #   })
     #
     # @example Response structure
@@ -2656,6 +2778,7 @@ module Aws::CloudTrail
     #   resp.termination_protection_enabled #=> Boolean
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
+    #   resp.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStore AWS API Documentation
     #
@@ -2862,7 +2985,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

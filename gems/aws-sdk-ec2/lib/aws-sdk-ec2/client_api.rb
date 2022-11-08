@@ -85,6 +85,8 @@ module Aws::EC2
     AllocationState = Shapes::StringShape.new(name: 'AllocationState')
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
     AllocationType = Shapes::StringShape.new(name: 'AllocationType')
+    AllowedInstanceType = Shapes::StringShape.new(name: 'AllowedInstanceType')
+    AllowedInstanceTypeSet = Shapes::ListShape.new(name: 'AllowedInstanceTypeSet')
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
     AllowedPrincipalSet = Shapes::ListShape.new(name: 'AllowedPrincipalSet')
     AllowsMultipleInstanceTypes = Shapes::StringShape.new(name: 'AllowsMultipleInstanceTypes')
@@ -1946,6 +1948,8 @@ module Aws::EC2
     NetworkAclId = Shapes::StringShape.new(name: 'NetworkAclId')
     NetworkAclIdStringList = Shapes::ListShape.new(name: 'NetworkAclIdStringList')
     NetworkAclList = Shapes::ListShape.new(name: 'NetworkAclList')
+    NetworkBandwidthGbps = Shapes::StructureShape.new(name: 'NetworkBandwidthGbps')
+    NetworkBandwidthGbpsRequest = Shapes::StructureShape.new(name: 'NetworkBandwidthGbpsRequest')
     NetworkCardIndex = Shapes::IntegerShape.new(name: 'NetworkCardIndex')
     NetworkCardInfo = Shapes::StructureShape.new(name: 'NetworkCardInfo')
     NetworkCardInfoList = Shapes::ListShape.new(name: 'NetworkCardInfoList')
@@ -3018,6 +3022,8 @@ module Aws::EC2
     AllocationIdList.member = Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId")
 
     AllocationIds.member = Shapes::ShapeRef.new(shape: AllocationId, location_name: "item")
+
+    AllowedInstanceTypeSet.member = Shapes::ShapeRef.new(shape: AllowedInstanceType, location_name: "item")
 
     AllowedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "principalType"))
     AllowedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
@@ -8969,6 +8975,8 @@ module Aws::EC2
     InstanceRequirements.add_member(:accelerator_manufacturers, Shapes::ShapeRef.new(shape: AcceleratorManufacturerSet, location_name: "acceleratorManufacturerSet"))
     InstanceRequirements.add_member(:accelerator_names, Shapes::ShapeRef.new(shape: AcceleratorNameSet, location_name: "acceleratorNameSet"))
     InstanceRequirements.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AcceleratorTotalMemoryMiB, location_name: "acceleratorTotalMemoryMiB"))
+    InstanceRequirements.add_member(:network_bandwidth_gbps, Shapes::ShapeRef.new(shape: NetworkBandwidthGbps, location_name: "networkBandwidthGbps"))
+    InstanceRequirements.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: AllowedInstanceTypeSet, location_name: "allowedInstanceTypeSet"))
     InstanceRequirements.struct_class = Types::InstanceRequirements
 
     InstanceRequirementsRequest.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: VCpuCountRangeRequest, required: true, location_name: "VCpuCount"))
@@ -8992,6 +9000,8 @@ module Aws::EC2
     InstanceRequirementsRequest.add_member(:accelerator_manufacturers, Shapes::ShapeRef.new(shape: AcceleratorManufacturerSet, location_name: "AcceleratorManufacturer"))
     InstanceRequirementsRequest.add_member(:accelerator_names, Shapes::ShapeRef.new(shape: AcceleratorNameSet, location_name: "AcceleratorName"))
     InstanceRequirementsRequest.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AcceleratorTotalMemoryMiBRequest, location_name: "AcceleratorTotalMemoryMiB"))
+    InstanceRequirementsRequest.add_member(:network_bandwidth_gbps, Shapes::ShapeRef.new(shape: NetworkBandwidthGbpsRequest, location_name: "NetworkBandwidthGbps"))
+    InstanceRequirementsRequest.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: AllowedInstanceTypeSet, location_name: "AllowedInstanceType"))
     InstanceRequirementsRequest.struct_class = Types::InstanceRequirementsRequest
 
     InstanceRequirementsWithMetadataRequest.add_member(:architecture_types, Shapes::ShapeRef.new(shape: ArchitectureTypeSet, location_name: "ArchitectureType"))
@@ -10570,6 +10580,14 @@ module Aws::EC2
     NetworkAclIdStringList.member = Shapes::ShapeRef.new(shape: NetworkAclId, location_name: "item")
 
     NetworkAclList.member = Shapes::ShapeRef.new(shape: NetworkAcl, location_name: "item")
+
+    NetworkBandwidthGbps.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "min"))
+    NetworkBandwidthGbps.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "max"))
+    NetworkBandwidthGbps.struct_class = Types::NetworkBandwidthGbps
+
+    NetworkBandwidthGbpsRequest.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "Min"))
+    NetworkBandwidthGbpsRequest.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "Max"))
+    NetworkBandwidthGbpsRequest.struct_class = Types::NetworkBandwidthGbpsRequest
 
     NetworkCardInfo.add_member(:network_card_index, Shapes::ShapeRef.new(shape: NetworkCardIndex, location_name: "networkCardIndex"))
     NetworkCardInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))

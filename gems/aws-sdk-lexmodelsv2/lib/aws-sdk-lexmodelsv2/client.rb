@@ -368,6 +368,203 @@ module Aws::LexModelsV2
 
     # @!group API Operations
 
+    # Batch create custom vocabulary item for the specified locale in the
+    # specified bot.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot to batch create the custom vocabulary
+    #   item for.
+    #
+    # @option params [required, String] :bot_version
+    #   The bot version of the bot to batch create the custom vocabulary item
+    #   for.
+    #
+    # @option params [required, String] :locale_id
+    #   The unique locale identifier of the bot to batch create the custom
+    #   vocabulary item for.
+    #
+    # @option params [required, Array<Types::NewCustomVocabularyItem>] :custom_vocabulary_item_list
+    #   The custom vocabulary item list of the bot to batch create the custom
+    #   vocabulary item for.
+    #
+    # @return [Types::BatchCreateCustomVocabularyItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateCustomVocabularyItemResponse#bot_id #bot_id} => String
+    #   * {Types::BatchCreateCustomVocabularyItemResponse#bot_version #bot_version} => String
+    #   * {Types::BatchCreateCustomVocabularyItemResponse#locale_id #locale_id} => String
+    #   * {Types::BatchCreateCustomVocabularyItemResponse#errors #errors} => Array&lt;Types::FailedCustomVocabularyItem&gt;
+    #   * {Types::BatchCreateCustomVocabularyItemResponse#resources #resources} => Array&lt;Types::CustomVocabularyItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_custom_vocabulary_item({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     custom_vocabulary_item_list: [ # required
+    #       {
+    #         phrase: "Phrase", # required
+    #         weight: 1,
+    #         display_as: "Phrase",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].item_id #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].error_code #=> String, one of "DUPLICATE_INPUT", "RESOURCE_DOES_NOT_EXIST", "RESOURCE_ALREADY_EXISTS", "INTERNAL_SERVER_FAILURE"
+    #   resp.resources #=> Array
+    #   resp.resources[0].item_id #=> String
+    #   resp.resources[0].phrase #=> String
+    #   resp.resources[0].weight #=> Integer
+    #   resp.resources[0].display_as #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchCreateCustomVocabularyItem AWS API Documentation
+    #
+    # @overload batch_create_custom_vocabulary_item(params = {})
+    # @param [Hash] params ({})
+    def batch_create_custom_vocabulary_item(params = {}, options = {})
+      req = build_request(:batch_create_custom_vocabulary_item, params)
+      req.send_request(options)
+    end
+
+    # Batch delete custom vocabulary item for the specified locale in the
+    # specified bot.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot to batch delete request for the
+    #   custom vocabulary item.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot to batch delete request for the custom
+    #   vocabulary item.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale identifier of the bot to batch delete request for the
+    #   custom vocabulary item.
+    #
+    # @option params [required, Array<Types::CustomVocabularyEntryId>] :custom_vocabulary_item_list
+    #   The custom vocabulary list to batch delete request for the custom
+    #   vocabulary item.
+    #
+    # @return [Types::BatchDeleteCustomVocabularyItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteCustomVocabularyItemResponse#bot_id #bot_id} => String
+    #   * {Types::BatchDeleteCustomVocabularyItemResponse#bot_version #bot_version} => String
+    #   * {Types::BatchDeleteCustomVocabularyItemResponse#locale_id #locale_id} => String
+    #   * {Types::BatchDeleteCustomVocabularyItemResponse#errors #errors} => Array&lt;Types::FailedCustomVocabularyItem&gt;
+    #   * {Types::BatchDeleteCustomVocabularyItemResponse#resources #resources} => Array&lt;Types::CustomVocabularyItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_custom_vocabulary_item({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     custom_vocabulary_item_list: [ # required
+    #       {
+    #         item_id: "ItemId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].item_id #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].error_code #=> String, one of "DUPLICATE_INPUT", "RESOURCE_DOES_NOT_EXIST", "RESOURCE_ALREADY_EXISTS", "INTERNAL_SERVER_FAILURE"
+    #   resp.resources #=> Array
+    #   resp.resources[0].item_id #=> String
+    #   resp.resources[0].phrase #=> String
+    #   resp.resources[0].weight #=> Integer
+    #   resp.resources[0].display_as #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchDeleteCustomVocabularyItem AWS API Documentation
+    #
+    # @overload batch_delete_custom_vocabulary_item(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_custom_vocabulary_item(params = {}, options = {})
+      req = build_request(:batch_delete_custom_vocabulary_item, params)
+      req.send_request(options)
+    end
+
+    # Batch update custom vocabulary item for the specified locale in the
+    # specified bot.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot to the batch update request for the
+    #   custom vocabulary item.
+    #
+    # @option params [required, String] :bot_version
+    #   The bot version of the bot to the batch update request for the custom
+    #   vocabulary item.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale identifier of the bot to the batch update request for the
+    #   custom vocabulary item.
+    #
+    # @option params [required, Array<Types::CustomVocabularyItem>] :custom_vocabulary_item_list
+    #   The custom vocabulary item list of the bot to the batch update request
+    #   for the custom vocabulary item.
+    #
+    # @return [Types::BatchUpdateCustomVocabularyItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateCustomVocabularyItemResponse#bot_id #bot_id} => String
+    #   * {Types::BatchUpdateCustomVocabularyItemResponse#bot_version #bot_version} => String
+    #   * {Types::BatchUpdateCustomVocabularyItemResponse#locale_id #locale_id} => String
+    #   * {Types::BatchUpdateCustomVocabularyItemResponse#errors #errors} => Array&lt;Types::FailedCustomVocabularyItem&gt;
+    #   * {Types::BatchUpdateCustomVocabularyItemResponse#resources #resources} => Array&lt;Types::CustomVocabularyItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_custom_vocabulary_item({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     custom_vocabulary_item_list: [ # required
+    #       {
+    #         item_id: "ItemId", # required
+    #         phrase: "Phrase", # required
+    #         weight: 1,
+    #         display_as: "Phrase",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].item_id #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].error_code #=> String, one of "DUPLICATE_INPUT", "RESOURCE_DOES_NOT_EXIST", "RESOURCE_ALREADY_EXISTS", "INTERNAL_SERVER_FAILURE"
+    #   resp.resources #=> Array
+    #   resp.resources[0].item_id #=> String
+    #   resp.resources[0].phrase #=> String
+    #   resp.resources[0].weight #=> Integer
+    #   resp.resources[0].display_as #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BatchUpdateCustomVocabularyItem AWS API Documentation
+    #
+    # @overload batch_update_custom_vocabulary_item(params = {})
+    # @param [Hash] params ({})
+    def batch_update_custom_vocabulary_item(params = {}, options = {})
+      req = build_request(:batch_update_custom_vocabulary_item, params)
+      req.send_request(options)
+    end
+
     # Builds a bot, its intents, and its slot types into a specific locale.
     # A bot can be built into multiple locales. At runtime the locale is
     # used to choose a specific build of the bot.
@@ -13499,6 +13696,67 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # List custom vocabulary items for the specified locale in the specified
+    # bot.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot to the list custom vocabulary
+    #   request.
+    #
+    # @option params [required, String] :bot_version
+    #   The bot version of the bot to the list custom vocabulary request.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale identifier of the bot to the list custom vocabulary
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum results to the list custom vocabulary request.
+    #
+    # @option params [String] :next_token
+    #   The nextToken identifier to the list custom vocabulary request.
+    #
+    # @return [Types::ListCustomVocabularyItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomVocabularyItemsResponse#bot_id #bot_id} => String
+    #   * {Types::ListCustomVocabularyItemsResponse#bot_version #bot_version} => String
+    #   * {Types::ListCustomVocabularyItemsResponse#locale_id #locale_id} => String
+    #   * {Types::ListCustomVocabularyItemsResponse#custom_vocabulary_items #custom_vocabulary_items} => Array&lt;Types::CustomVocabularyItem&gt;
+    #   * {Types::ListCustomVocabularyItemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_vocabulary_items({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.custom_vocabulary_items #=> Array
+    #   resp.custom_vocabulary_items[0].item_id #=> String
+    #   resp.custom_vocabulary_items[0].phrase #=> String
+    #   resp.custom_vocabulary_items[0].weight #=> Integer
+    #   resp.custom_vocabulary_items[0].display_as #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListCustomVocabularyItems AWS API Documentation
+    #
+    # @overload list_custom_vocabulary_items(params = {})
+    # @param [Hash] params ({})
+    def list_custom_vocabulary_items(params = {}, options = {})
+      req = build_request(:list_custom_vocabulary_items, params)
+      req.send_request(options)
+    end
+
     # Lists the exports for a bot, bot locale, or custom vocabulary. Exports
     # are kept in the list for 7 days.
     #
@@ -13796,7 +14054,8 @@ module Aws::LexModelsV2
     end
 
     # Gets a list of recommended intents provided by the bot recommendation
-    # that you can use in your bot.
+    # that you can use in your bot. Intents in the response are ordered by
+    # relevance.
     #
     # @option params [required, String] :bot_id
     #   The unique identifier of the bot associated with the recommended
@@ -23178,7 +23437,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

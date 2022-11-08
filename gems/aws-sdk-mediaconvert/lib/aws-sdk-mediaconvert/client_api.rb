@@ -686,6 +686,7 @@ module Aws::MediaConvert
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin1000Max300000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max300000000')
     __integerMin1000Max480000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max480000000')
+    __integerMin100Max1000 = Shapes::IntegerShape.new(name: '__integerMin100Max1000')
     __integerMin10Max48 = Shapes::IntegerShape.new(name: '__integerMin10Max48')
     __integerMin16000Max320000 = Shapes::IntegerShape.new(name: '__integerMin16000Max320000')
     __integerMin16000Max48000 = Shapes::IntegerShape.new(name: '__integerMin16000Max48000')
@@ -716,6 +717,7 @@ module Aws::MediaConvert
     __integerMin2Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin2Max2147483647')
     __integerMin2Max4096 = Shapes::IntegerShape.new(name: '__integerMin2Max4096')
     __integerMin32000Max192000 = Shapes::IntegerShape.new(name: '__integerMin32000Max192000')
+    __integerMin32000Max3024000 = Shapes::IntegerShape.new(name: '__integerMin32000Max3024000')
     __integerMin32000Max384000 = Shapes::IntegerShape.new(name: '__integerMin32000Max384000')
     __integerMin32000Max48000 = Shapes::IntegerShape.new(name: '__integerMin32000Max48000')
     __integerMin32Max8182 = Shapes::IntegerShape.new(name: '__integerMin32Max8182')
@@ -1130,6 +1132,7 @@ module Aws::MediaConvert
     ColorCorrector.add_member(:hue, Shapes::ShapeRef.new(shape: __integerMinNegative180Max180, location_name: "hue"))
     ColorCorrector.add_member(:sample_range_conversion, Shapes::ShapeRef.new(shape: SampleRangeConversion, location_name: "sampleRangeConversion"))
     ColorCorrector.add_member(:saturation, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "saturation"))
+    ColorCorrector.add_member(:sdr_reference_white_level, Shapes::ShapeRef.new(shape: __integerMin100Max1000, location_name: "sdrReferenceWhiteLevel"))
     ColorCorrector.struct_class = Types::ColorCorrector
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1353,7 +1356,7 @@ module Aws::MediaConvert
     Eac3AtmosSettings.struct_class = Types::Eac3AtmosSettings
 
     Eac3Settings.add_member(:attenuation_control, Shapes::ShapeRef.new(shape: Eac3AttenuationControl, location_name: "attenuationControl"))
-    Eac3Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin64000Max640000, location_name: "bitrate"))
+    Eac3Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin32000Max3024000, location_name: "bitrate"))
     Eac3Settings.add_member(:bitstream_mode, Shapes::ShapeRef.new(shape: Eac3BitstreamMode, location_name: "bitstreamMode"))
     Eac3Settings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Eac3CodingMode, location_name: "codingMode"))
     Eac3Settings.add_member(:dc_filter, Shapes::ShapeRef.new(shape: Eac3DcFilter, location_name: "dcFilter"))
@@ -1660,6 +1663,7 @@ module Aws::MediaConvert
     Id3Insertion.struct_class = Types::Id3Insertion
 
     ImageInserter.add_member(:insertable_images, Shapes::ShapeRef.new(shape: __listOfInsertableImage, location_name: "insertableImages"))
+    ImageInserter.add_member(:sdr_reference_white_level, Shapes::ShapeRef.new(shape: __integerMin100Max1000, location_name: "sdrReferenceWhiteLevel"))
     ImageInserter.struct_class = Types::ImageInserter
 
     ImscDestinationSettings.add_member(:accessibility, Shapes::ShapeRef.new(shape: ImscAccessibilitySubs, location_name: "accessibility"))

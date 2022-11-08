@@ -8289,6 +8289,11 @@ module Aws::EC2
     #                     min: 1,
     #                     max: 1,
     #                   },
+    #                   network_bandwidth_gbps: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   allowed_instance_types: ["AllowedInstanceType"],
     #                 },
     #                 image_id: "ImageId",
     #               },
@@ -9768,6 +9773,11 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
     #           },
     #           private_dns_name_options: {
     #             hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -10076,6 +10086,11 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
     #           },
     #           private_dns_name_options: {
     #             hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -11393,7 +11408,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] placement_group
-    #   Describes a placement group.
+    #   Information about the placement group.
     #   @return [Types::PlacementGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupResult AWS API Documentation
@@ -35450,6 +35465,11 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #             image_id: "ImageId",
     #           },
@@ -35634,6 +35654,11 @@ module Aws::EC2
     #             min: 1,
     #             max: 1,
     #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
     #         },
     #         image_id: "ImageId",
     #       }
@@ -35732,8 +35757,7 @@ module Aws::EC2
     # of the launch template in the request, but not both.
     #
     # For information about launch templates, see [Launch an instance from a
-    # launch template][1] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
+    # launch template][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -37053,6 +37077,11 @@ module Aws::EC2
     #             min: 1,
     #             max: 1,
     #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
     #         },
     #         max_results: 1,
     #         next_token: "String",
@@ -38033,6 +38062,11 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
+    #             network_bandwidth_gbps: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             allowed_instance_types: ["AllowedInstanceType"],
     #           },
     #         },
     #         dry_run: false,
@@ -42849,6 +42883,17 @@ module Aws::EC2
     # values for an attribute, you get instance types that satisfy any of
     # the specified values.
     #
+    # To limit the list of instance types from which Amazon EC2 can identify
+    # matching instance types, you can use one of the following parameters,
+    # but not both in the same request:
+    #
+    # * `AllowedInstanceTypes` - The instance types to include in the list.
+    #   All other instance types are ignored, even if they match your
+    #   specified attributes.
+    #
+    # * `ExcludedInstanceTypes` - The instance types to exclude from the
+    #   list, even if they match your specified attributes.
+    #
     # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other attributes are
     # optional. Any unspecified optional attribute is set to its default.
     #
@@ -42914,6 +42959,11 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
+    #         network_bandwidth_gbps: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         allowed_instance_types: ["AllowedInstanceType"],
     #       }
     #
     # @!attribute [rw] v_cpu_count
@@ -42962,6 +43012,11 @@ module Aws::EC2
     #   C5 instance family, which includes all C5a and C5n instance types.
     #   If you specify `m5a.*`, Amazon EC2 will exclude all the M5a instance
     #   types, but not the M5n instance types.
+    #
+    #   <note markdown="1"> If you specify `ExcludedInstanceTypes`, you can't specify
+    #   `AllowedInstanceTypes`.
+    #
+    #    </note>
     #
     #   Default: No excluded instance types
     #   @return [Array<String>]
@@ -43220,6 +43275,35 @@ module Aws::EC2
     #   Default: No minimum or maximum limits
     #   @return [Types::AcceleratorTotalMemoryMiB]
     #
+    # @!attribute [rw] network_bandwidth_gbps
+    #   The minimum and maximum amount of network bandwidth, in gigabits per
+    #   second (Gbps).
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::NetworkBandwidthGbps]
+    #
+    # @!attribute [rw] allowed_instance_types
+    #   The instance types to apply your specified attributes against. All
+    #   other instance types are ignored, even if they match your specified
+    #   attributes.
+    #
+    #   You can use strings with one or more wild cards, represented by an
+    #   asterisk (`*`), to allow an instance type, size, or generation. The
+    #   following are examples: `m5.8xlarge`, `c5*.*`, `m5a.*`, `r*`, `*3*`.
+    #
+    #   For example, if you specify `c5*`,Amazon EC2 will allow the entire
+    #   C5 instance family, which includes all C5a and C5n instance types.
+    #   If you specify `m5a.*`, Amazon EC2 will allow all the M5a instance
+    #   types, but not the M5n instance types.
+    #
+    #   <note markdown="1"> If you specify `AllowedInstanceTypes`, you can't specify
+    #   `ExcludedInstanceTypes`.
+    #
+    #    </note>
+    #
+    #   Default: All instance types
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirements AWS API Documentation
     #
     class InstanceRequirements < Struct.new(
@@ -43243,7 +43327,9 @@ module Aws::EC2
       :accelerator_count,
       :accelerator_manufacturers,
       :accelerator_names,
-      :accelerator_total_memory_mi_b)
+      :accelerator_total_memory_mi_b,
+      :network_bandwidth_gbps,
+      :allowed_instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43256,6 +43342,17 @@ module Aws::EC2
     # satisfy all of the specified attributes. If you specify multiple
     # values for an attribute, you get instance types that satisfy any of
     # the specified values.
+    #
+    # To limit the list of instance types from which Amazon EC2 can identify
+    # matching instance types, you can use one of the following parameters,
+    # but not both in the same request:
+    #
+    # * `AllowedInstanceTypes` - The instance types to include in the list.
+    #   All other instance types are ignored, even if they match your
+    #   specified attributes.
+    #
+    # * `ExcludedInstanceTypes` - The instance types to exclude from the
+    #   list, even if they match your specified attributes.
     #
     # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other attributes are
     # optional. Any unspecified optional attribute is set to its default.
@@ -43322,6 +43419,11 @@ module Aws::EC2
     #           min: 1,
     #           max: 1,
     #         },
+    #         network_bandwidth_gbps: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         allowed_instance_types: ["AllowedInstanceType"],
     #       }
     #
     # @!attribute [rw] v_cpu_count
@@ -43370,6 +43472,11 @@ module Aws::EC2
     #   C5 instance family, which includes all C5a and C5n instance types.
     #   If you specify `m5a.*`, Amazon EC2 will exclude all the M5a instance
     #   types, but not the M5n instance types.
+    #
+    #   <note markdown="1"> If you specify `ExcludedInstanceTypes`, you can't specify
+    #   `AllowedInstanceTypes`.
+    #
+    #    </note>
     #
     #   Default: No excluded instance types
     #   @return [Array<String>]
@@ -43628,6 +43735,35 @@ module Aws::EC2
     #   Default: No minimum or maximum limits
     #   @return [Types::AcceleratorTotalMemoryMiBRequest]
     #
+    # @!attribute [rw] network_bandwidth_gbps
+    #   The minimum and maximum amount of network bandwidth, in gigabits per
+    #   second (Gbps).
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::NetworkBandwidthGbpsRequest]
+    #
+    # @!attribute [rw] allowed_instance_types
+    #   The instance types to apply your specified attributes against. All
+    #   other instance types are ignored, even if they match your specified
+    #   attributes.
+    #
+    #   You can use strings with one or more wild cards, represented by an
+    #   asterisk (`*`), to allow an instance type, size, or generation. The
+    #   following are examples: `m5.8xlarge`, `c5*.*`, `m5a.*`, `r*`, `*3*`.
+    #
+    #   For example, if you specify `c5*`,Amazon EC2 will allow the entire
+    #   C5 instance family, which includes all C5a and C5n instance types.
+    #   If you specify `m5a.*`, Amazon EC2 will allow all the M5a instance
+    #   types, but not the M5n instance types.
+    #
+    #   <note markdown="1"> If you specify `AllowedInstanceTypes`, you can't specify
+    #   `ExcludedInstanceTypes`.
+    #
+    #    </note>
+    #
+    #   Default: All instance types
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirementsRequest AWS API Documentation
     #
     class InstanceRequirementsRequest < Struct.new(
@@ -43651,7 +43787,9 @@ module Aws::EC2
       :accelerator_count,
       :accelerator_manufacturers,
       :accelerator_names,
-      :accelerator_total_memory_mi_b)
+      :accelerator_total_memory_mi_b,
+      :network_bandwidth_gbps,
+      :allowed_instance_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43715,6 +43853,11 @@ module Aws::EC2
     #             min: 1,
     #             max: 1,
     #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
     #         },
     #       }
     #
@@ -45993,6 +46136,11 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -47082,6 +47230,11 @@ module Aws::EC2
     #             min: 1,
     #             max: 1,
     #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
     #         },
     #       }
     #
@@ -49102,6 +49255,11 @@ module Aws::EC2
     #                     min: 1,
     #                     max: 1,
     #                   },
+    #                   network_bandwidth_gbps: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   allowed_instance_types: ["AllowedInstanceType"],
     #                 },
     #                 image_id: "ImageId",
     #               },
@@ -49938,7 +50096,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] event
-    #   Describes a scheduled event for an instance.
+    #   Information about the event.
     #   @return [Types::InstanceStatusEvent]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceEventStartTimeResult AWS API Documentation
@@ -51267,6 +51425,11 @@ module Aws::EC2
     #                     min: 1,
     #                     max: 1,
     #                   },
+    #                   network_bandwidth_gbps: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   allowed_instance_types: ["AllowedInstanceType"],
     #                 },
     #               },
     #             ],
@@ -53735,6 +53898,92 @@ module Aws::EC2
       :protocol,
       :rule_action,
       :rule_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of network bandwidth, in gigabits per
+    # second (Gbps).
+    #
+    # <note markdown="1"> Setting the minimum bandwidth does not guarantee that your instance
+    # will achieve the minimum bandwidth. Amazon EC2 will identify instance
+    # types that support the specified minimum bandwidth, but the actual
+    # bandwidth of your instance might go below the specified minimum at
+    # times. For more information, see [Available instance bandwidth][1] in
+    # the *Amazon EC2 User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth
+    #
+    # @note When making an API call, you may pass NetworkBandwidthGbps
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of network bandwidth, in Gbps. If this parameter
+    #   is not specified, there is no minimum limit.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of network bandwidth, in Gbps. If this parameter
+    #   is not specified, there is no maximum limit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkBandwidthGbps AWS API Documentation
+    #
+    class NetworkBandwidthGbps < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of network bandwidth, in gigabits per
+    # second (Gbps).
+    #
+    # <note markdown="1"> Setting the minimum bandwidth does not guarantee that your instance
+    # will achieve the minimum bandwidth. Amazon EC2 will identify instance
+    # types that support the specified minimum bandwidth, but the actual
+    # bandwidth of your instance might go below the specified minimum at
+    # times. For more information, see [Available instance bandwidth][1] in
+    # the *Amazon EC2 User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth
+    #
+    # @note When making an API call, you may pass NetworkBandwidthGbpsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of network bandwidth, in Gbps. To specify no
+    #   minimum limit, omit this parameter.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of network bandwidth, in Gbps. To specify no
+    #   maximum limit, omit this parameter.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkBandwidthGbpsRequest AWS API Documentation
+    #
+    class NetworkBandwidthGbpsRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58471,6 +58720,11 @@ module Aws::EC2
     #             min: 1,
     #             max: 1,
     #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
     #         },
     #         private_dns_name_options: {
     #           hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -58962,6 +59216,11 @@ module Aws::EC2
     #                   min: 1,
     #                   max: 1,
     #                 },
+    #                 network_bandwidth_gbps: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 allowed_instance_types: ["AllowedInstanceType"],
     #               },
     #             },
     #           ],
@@ -59026,6 +59285,11 @@ module Aws::EC2
     #                       min: 1,
     #                       max: 1,
     #                     },
+    #                     network_bandwidth_gbps: {
+    #                       min: 1.0,
+    #                       max: 1.0,
+    #                     },
+    #                     allowed_instance_types: ["AllowedInstanceType"],
     #                   },
     #                 },
     #               ],
@@ -64886,6 +65150,11 @@ module Aws::EC2
     #             min: 1,
     #             max: 1,
     #           },
+    #           network_bandwidth_gbps: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           allowed_instance_types: ["AllowedInstanceType"],
     #         },
     #       }
     #
@@ -65275,6 +65544,11 @@ module Aws::EC2
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -65339,6 +65613,11 @@ module Aws::EC2
     #                     min: 1,
     #                     max: 1,
     #                   },
+    #                   network_bandwidth_gbps: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   allowed_instance_types: ["AllowedInstanceType"],
     #                 },
     #               },
     #             ],
@@ -65392,7 +65671,7 @@ module Aws::EC2
     #   Instance capacity across the Spot Instance pools specified by the
     #   Spot Fleet launch configuration. For more information, see
     #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
-    #   User Guide for Linux Instances*.
+    #   User Guide*.
     #
     #   `lowestPrice` - Spot Fleet launches instances from the lowest-price
     #   Spot Instance pool that has available capacity. If the cheapest pool
@@ -65473,10 +65752,10 @@ module Aws::EC2
     #   (IAM) role that grants the Spot Fleet the permission to request,
     #   launch, terminate, and tag instances on your behalf. For more
     #   information, see [Spot Fleet prerequisites][1] in the *Amazon EC2
-    #   User Guide for Linux Instances*. Spot Fleet can terminate Spot
-    #   Instances on your behalf when you cancel its Spot Fleet request
-    #   using [CancelSpotFleetRequests][2] or when the Spot Fleet request
-    #   expires, if you set `TerminateInstancesWithExpiration`.
+    #   User Guide*. Spot Fleet can terminate Spot Instances on your behalf
+    #   when you cancel its Spot Fleet request using
+    #   [CancelSpotFleetRequests][2] or when the Spot Fleet request expires,
+    #   if you set `TerminateInstancesWithExpiration`.
     #
     #
     #

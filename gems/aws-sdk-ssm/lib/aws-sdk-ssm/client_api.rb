@@ -4295,6 +4295,7 @@ module Aws::SSM
     StepExecution.add_member(:valid_next_steps, Shapes::ShapeRef.new(shape: ValidNextStepList, location_name: "ValidNextSteps"))
     StepExecution.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets", metadata: {"box"=>true}))
     StepExecution.add_member(:target_location, Shapes::ShapeRef.new(shape: TargetLocation, location_name: "TargetLocation", metadata: {"box"=>true}))
+    StepExecution.add_member(:triggered_alarms, Shapes::ShapeRef.new(shape: AlarmStateInformationList, location_name: "TriggeredAlarms"))
     StepExecution.struct_class = Types::StepExecution
 
     StepExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: StepExecutionFilterKey, required: true, location_name: "Key"))
@@ -4336,6 +4337,7 @@ module Aws::SSM
     TargetLocation.add_member(:target_location_max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "TargetLocationMaxConcurrency", metadata: {"box"=>true}))
     TargetLocation.add_member(:target_location_max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "TargetLocationMaxErrors", metadata: {"box"=>true}))
     TargetLocation.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName", metadata: {"box"=>true}))
+    TargetLocation.add_member(:target_location_alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "TargetLocationAlarmConfiguration", metadata: {"box"=>true}))
     TargetLocation.struct_class = Types::TargetLocation
 
     TargetLocations.member = Shapes::ShapeRef.new(shape: TargetLocation)

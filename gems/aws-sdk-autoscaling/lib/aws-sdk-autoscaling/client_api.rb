@@ -31,6 +31,8 @@ module Aws::AutoScaling
     AdjustmentTypes = Shapes::ListShape.new(name: 'AdjustmentTypes')
     Alarm = Shapes::StructureShape.new(name: 'Alarm')
     Alarms = Shapes::ListShape.new(name: 'Alarms')
+    AllowedInstanceType = Shapes::StringShape.new(name: 'AllowedInstanceType')
+    AllowedInstanceTypes = Shapes::ListShape.new(name: 'AllowedInstanceTypes')
     AlreadyExistsFault = Shapes::StructureShape.new(name: 'AlreadyExistsFault')
     AsciiStringMaxLen255 = Shapes::StringShape.new(name: 'AsciiStringMaxLen255')
     AssociatePublicIpAddress = Shapes::BooleanShape.new(name: 'AssociatePublicIpAddress')
@@ -239,6 +241,7 @@ module Aws::AutoScaling
     MixedInstanceSpotPrice = Shapes::StringShape.new(name: 'MixedInstanceSpotPrice')
     MixedInstancesPolicy = Shapes::StructureShape.new(name: 'MixedInstancesPolicy')
     MonitoringEnabled = Shapes::BooleanShape.new(name: 'MonitoringEnabled')
+    NetworkBandwidthGbpsRequest = Shapes::StructureShape.new(name: 'NetworkBandwidthGbpsRequest')
     NetworkInterfaceCountRequest = Shapes::StructureShape.new(name: 'NetworkInterfaceCountRequest')
     NoDevice = Shapes::BooleanShape.new(name: 'NoDevice')
     NonZeroIntPercent = Shapes::IntegerShape.new(name: 'NonZeroIntPercent')
@@ -416,6 +419,8 @@ module Aws::AutoScaling
     Alarm.struct_class = Types::Alarm
 
     Alarms.member = Shapes::ShapeRef.new(shape: Alarm)
+
+    AllowedInstanceTypes.member = Shapes::ShapeRef.new(shape: AllowedInstanceType)
 
     AlreadyExistsFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     AlreadyExistsFault.struct_class = Types::AlreadyExistsFault
@@ -928,6 +933,8 @@ module Aws::AutoScaling
     InstanceRequirements.add_member(:accelerator_manufacturers, Shapes::ShapeRef.new(shape: AcceleratorManufacturers, location_name: "AcceleratorManufacturers"))
     InstanceRequirements.add_member(:accelerator_names, Shapes::ShapeRef.new(shape: AcceleratorNames, location_name: "AcceleratorNames"))
     InstanceRequirements.add_member(:accelerator_total_memory_mi_b, Shapes::ShapeRef.new(shape: AcceleratorTotalMemoryMiBRequest, location_name: "AcceleratorTotalMemoryMiB"))
+    InstanceRequirements.add_member(:network_bandwidth_gbps, Shapes::ShapeRef.new(shape: NetworkBandwidthGbpsRequest, location_name: "NetworkBandwidthGbps"))
+    InstanceRequirements.add_member(:allowed_instance_types, Shapes::ShapeRef.new(shape: AllowedInstanceTypes, location_name: "AllowedInstanceTypes"))
     InstanceRequirements.struct_class = Types::InstanceRequirements
 
     InstanceReusePolicy.add_member(:reuse_on_scale_in, Shapes::ShapeRef.new(shape: ReuseOnScaleIn, location_name: "ReuseOnScaleIn"))
@@ -1099,6 +1106,10 @@ module Aws::AutoScaling
     MixedInstancesPolicy.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "LaunchTemplate"))
     MixedInstancesPolicy.add_member(:instances_distribution, Shapes::ShapeRef.new(shape: InstancesDistribution, location_name: "InstancesDistribution"))
     MixedInstancesPolicy.struct_class = Types::MixedInstancesPolicy
+
+    NetworkBandwidthGbpsRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveDouble, location_name: "Min"))
+    NetworkBandwidthGbpsRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveDouble, location_name: "Max"))
+    NetworkBandwidthGbpsRequest.struct_class = Types::NetworkBandwidthGbpsRequest
 
     NetworkInterfaceCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Min"))
     NetworkInterfaceCountRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Max"))

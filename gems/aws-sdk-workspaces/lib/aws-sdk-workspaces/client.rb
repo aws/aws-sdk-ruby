@@ -999,6 +999,7 @@ module Aws::WorkSpaces
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
     #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #           protocols: ["PCOIP"], # accepts PCOIP, WSP
     #         },
     #         tags: [
     #           {
@@ -1024,6 +1025,8 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.root_volume_size_gib #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.user_volume_size_gib #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.protocols #=> Array
+    #   resp.failed_requests[0].workspace_request.workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -1048,6 +1051,8 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.pending_requests[0].workspace_properties.user_volume_size_gib #=> Integer
     #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
+    #   resp.pending_requests[0].workspace_properties.protocols #=> Array
+    #   resp.pending_requests[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
     #   resp.pending_requests[0].modification_states #=> Array
     #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -2064,6 +2069,8 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.workspaces[0].workspace_properties.user_volume_size_gib #=> Integer
     #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
+    #   resp.workspaces[0].workspace_properties.protocols #=> Array
+    #   resp.workspaces[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
     #   resp.workspaces[0].modification_states #=> Array
     #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -2797,6 +2804,7 @@ module Aws::WorkSpaces
     #       root_volume_size_gib: 1,
     #       user_volume_size_gib: 1,
     #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
+    #       protocols: ["PCOIP"], # accepts PCOIP, WSP
     #     },
     #   })
     #
@@ -3454,7 +3462,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

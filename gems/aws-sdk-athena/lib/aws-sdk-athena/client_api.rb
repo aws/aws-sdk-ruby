@@ -14,6 +14,7 @@ module Aws::Athena
     include Seahorse::Model
 
     AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
+    Age = Shapes::IntegerShape.new(name: 'Age')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
@@ -156,6 +157,9 @@ module Aws::Athena
     ResultConfiguration = Shapes::StructureShape.new(name: 'ResultConfiguration')
     ResultConfigurationUpdates = Shapes::StructureShape.new(name: 'ResultConfigurationUpdates')
     ResultOutputLocation = Shapes::StringShape.new(name: 'ResultOutputLocation')
+    ResultReuseByAgeConfiguration = Shapes::StructureShape.new(name: 'ResultReuseByAgeConfiguration')
+    ResultReuseConfiguration = Shapes::StructureShape.new(name: 'ResultReuseConfiguration')
+    ResultReuseInformation = Shapes::StructureShape.new(name: 'ResultReuseInformation')
     ResultSet = Shapes::StructureShape.new(name: 'ResultSet')
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
     Row = Shapes::StructureShape.new(name: 'Row')
@@ -543,6 +547,7 @@ module Aws::Athena
     QueryExecution.add_member(:query, Shapes::ShapeRef.new(shape: QueryString, location_name: "Query"))
     QueryExecution.add_member(:statement_type, Shapes::ShapeRef.new(shape: StatementType, location_name: "StatementType"))
     QueryExecution.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ResultConfiguration, location_name: "ResultConfiguration"))
+    QueryExecution.add_member(:result_reuse_configuration, Shapes::ShapeRef.new(shape: ResultReuseConfiguration, location_name: "ResultReuseConfiguration"))
     QueryExecution.add_member(:query_execution_context, Shapes::ShapeRef.new(shape: QueryExecutionContext, location_name: "QueryExecutionContext"))
     QueryExecution.add_member(:status, Shapes::ShapeRef.new(shape: QueryExecutionStatus, location_name: "Status"))
     QueryExecution.add_member(:statistics, Shapes::ShapeRef.new(shape: QueryExecutionStatistics, location_name: "Statistics"))
@@ -566,6 +571,7 @@ module Aws::Athena
     QueryExecutionStatistics.add_member(:query_queue_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryQueueTimeInMillis"))
     QueryExecutionStatistics.add_member(:query_planning_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryPlanningTimeInMillis"))
     QueryExecutionStatistics.add_member(:service_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServiceProcessingTimeInMillis"))
+    QueryExecutionStatistics.add_member(:result_reuse_information, Shapes::ShapeRef.new(shape: ResultReuseInformation, location_name: "ResultReuseInformation"))
     QueryExecutionStatistics.struct_class = Types::QueryExecutionStatistics
 
     QueryExecutionStatus.add_member(:state, Shapes::ShapeRef.new(shape: QueryExecutionState, location_name: "State"))
@@ -634,6 +640,16 @@ module Aws::Athena
     ResultConfigurationUpdates.add_member(:remove_acl_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveAclConfiguration"))
     ResultConfigurationUpdates.struct_class = Types::ResultConfigurationUpdates
 
+    ResultReuseByAgeConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    ResultReuseByAgeConfiguration.add_member(:max_age_in_minutes, Shapes::ShapeRef.new(shape: Age, location_name: "MaxAgeInMinutes"))
+    ResultReuseByAgeConfiguration.struct_class = Types::ResultReuseByAgeConfiguration
+
+    ResultReuseConfiguration.add_member(:result_reuse_by_age_configuration, Shapes::ShapeRef.new(shape: ResultReuseByAgeConfiguration, location_name: "ResultReuseByAgeConfiguration"))
+    ResultReuseConfiguration.struct_class = Types::ResultReuseConfiguration
+
+    ResultReuseInformation.add_member(:reused_previous_result, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ReusedPreviousResult"))
+    ResultReuseInformation.struct_class = Types::ResultReuseInformation
+
     ResultSet.add_member(:rows, Shapes::ShapeRef.new(shape: RowList, location_name: "Rows"))
     ResultSet.add_member(:result_set_metadata, Shapes::ShapeRef.new(shape: ResultSetMetadata, location_name: "ResultSetMetadata"))
     ResultSet.struct_class = Types::ResultSet
@@ -652,6 +668,7 @@ module Aws::Athena
     StartQueryExecutionInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ResultConfiguration, location_name: "ResultConfiguration"))
     StartQueryExecutionInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     StartQueryExecutionInput.add_member(:execution_parameters, Shapes::ShapeRef.new(shape: ExecutionParameters, location_name: "ExecutionParameters"))
+    StartQueryExecutionInput.add_member(:result_reuse_configuration, Shapes::ShapeRef.new(shape: ResultReuseConfiguration, location_name: "ResultReuseConfiguration"))
     StartQueryExecutionInput.struct_class = Types::StartQueryExecutionInput
 
     StartQueryExecutionOutput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, location_name: "QueryExecutionId"))
@@ -976,6 +993,7 @@ module Aws::Athena
         o.output = Shapes::ShapeRef.new(shape: GetQueryResultsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

@@ -413,8 +413,9 @@ module Aws::WellArchitected
     # Create a lens share.
     #
     # The owner of a lens can share it with other Amazon Web Services
-    # accounts and IAM users in the same Amazon Web Services Region. Shared
-    # access to a lens is not removed until the lens invitation is deleted.
+    # accounts, IAM users, an organization, and organizational units (OUs)
+    # in the same Amazon Web Services Region. Shared access to a lens is not
+    # removed until the lens invitation is deleted.
     #
     # <note markdown="1"> **Disclaimer**
     #
@@ -440,8 +441,8 @@ module Aws::WellArchitected
     #   Each lens is identified by its LensSummary$LensAlias.
     #
     # @option params [required, String] :shared_with
-    #   The Amazon Web Services account ID or IAM role with which the workload
-    #   is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #
     # @option params [required, String] :client_request_token
     #   A unique case-sensitive string used to ensure that this request is
@@ -615,8 +616,9 @@ module Aws::WellArchitected
     # Create a new workload.
     #
     # The owner of a workload can share the workload with other Amazon Web
-    # Services accounts and IAM users in the same Amazon Web Services
-    # Region. Only the owner of a workload can delete it.
+    # Services accounts, IAM users, an organization, and organizational
+    # units (OUs) in the same Amazon Web Services Region. Only the owner of
+    # a workload can delete it.
     #
     # For more information, see [Defining a Workload][1] in the
     # *Well-Architected Tool User Guide*.
@@ -752,6 +754,13 @@ module Aws::WellArchitected
     # @option params [Hash<String,String>] :tags
     #   The tags to be associated with the workload.
     #
+    # @option params [Types::WorkloadDiscoveryConfig] :discovery_config
+    #   Well-Architected discovery configuration settings associated to the
+    #   workload.
+    #
+    # @option params [Array<String>] :applications
+    #   List of AppRegistry application ARNs associated to the workload.
+    #
     # @return [Types::CreateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkloadOutput#workload_id #workload_id} => String
@@ -777,6 +786,10 @@ module Aws::WellArchitected
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     discovery_config: {
+    #       trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     applications: ["ApplicationArn"],
     #   })
     #
     # @example Response structure
@@ -812,8 +825,8 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [required, String] :shared_with
-    #   The Amazon Web Services account ID or IAM role with which the workload
-    #   is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #
     # @option params [required, String] :permission_type
     #   Permission granted on a workload share.
@@ -934,9 +947,10 @@ module Aws::WellArchitected
 
     # Delete a lens share.
     #
-    # After the lens share is deleted, Amazon Web Services accounts and IAM
-    # users that you shared the lens with can continue to use it, but they
-    # will no longer be able to apply it to new workloads.
+    # After the lens share is deleted, Amazon Web Services accounts, IAM
+    # users, organizations, and organizational units (OUs) that you shared
+    # the lens with can continue to use it, but they will no longer be able
+    # to apply it to new workloads.
     #
     # <note markdown="1"> **Disclaimer**
     #
@@ -1565,6 +1579,9 @@ module Aws::WellArchitected
     #   resp.milestone.workload.share_invitation_id #=> String
     #   resp.milestone.workload.tags #=> Hash
     #   resp.milestone.workload.tags["TagKey"] #=> String
+    #   resp.milestone.workload.discovery_config.trusted_advisor_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.milestone.workload.applications #=> Array
+    #   resp.milestone.workload.applications[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetMilestone AWS API Documentation
     #
@@ -1623,6 +1640,9 @@ module Aws::WellArchitected
     #   resp.workload.share_invitation_id #=> String
     #   resp.workload.tags #=> Hash
     #   resp.workload.tags["TagKey"] #=> String
+    #   resp.workload.discovery_config.trusted_advisor_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.workload.applications #=> Array
+    #   resp.workload.applications[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetWorkload AWS API Documentation
     #
@@ -1823,6 +1843,151 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # List of Trusted Advisor check details by account related to the
+    # workload.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @option params [required, String] :lens_arn
+    #   Well-Architected Lens ARN.
+    #
+    # @option params [required, String] :pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #
+    # @option params [required, String] :question_id
+    #   The ID of the question.
+    #
+    # @option params [required, String] :choice_id
+    #   The ID of a choice.
+    #
+    # @return [Types::ListCheckDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCheckDetailsOutput#check_details #check_details} => Array&lt;Types::CheckDetail&gt;
+    #   * {Types::ListCheckDetailsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_check_details({
+    #     workload_id: "WorkloadId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     lens_arn: "LensArn", # required
+    #     pillar_id: "PillarId", # required
+    #     question_id: "QuestionId", # required
+    #     choice_id: "ChoiceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.check_details #=> Array
+    #   resp.check_details[0].id #=> String
+    #   resp.check_details[0].name #=> String
+    #   resp.check_details[0].description #=> String
+    #   resp.check_details[0].provider #=> String, one of "TRUSTED_ADVISOR"
+    #   resp.check_details[0].lens_arn #=> String
+    #   resp.check_details[0].pillar_id #=> String
+    #   resp.check_details[0].question_id #=> String
+    #   resp.check_details[0].choice_id #=> String
+    #   resp.check_details[0].status #=> String, one of "OKAY", "WARNING", "ERROR", "NOT_AVAILABLE", "FETCH_FAILED"
+    #   resp.check_details[0].account_id #=> String
+    #   resp.check_details[0].flagged_resources #=> Integer
+    #   resp.check_details[0].reason #=> String, one of "ASSUME_ROLE_ERROR", "ACCESS_DENIED", "UNKNOWN_ERROR", "PREMIUM_SUPPORT_REQUIRED"
+    #   resp.check_details[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListCheckDetails AWS API Documentation
+    #
+    # @overload list_check_details(params = {})
+    # @param [Hash] params ({})
+    def list_check_details(params = {}, options = {})
+      req = build_request(:list_check_details, params)
+      req.send_request(options)
+    end
+
+    # List of Trusted Advisor checks summarized for all accounts related to
+    # the workload.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @option params [required, String] :lens_arn
+    #   Well-Architected Lens ARN.
+    #
+    # @option params [required, String] :pillar_id
+    #   The ID used to identify a pillar, for example, `security`.
+    #
+    #   A pillar is identified by its PillarReviewSummary$PillarId.
+    #
+    # @option params [required, String] :question_id
+    #   The ID of the question.
+    #
+    # @option params [required, String] :choice_id
+    #   The ID of a choice.
+    #
+    # @return [Types::ListCheckSummariesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCheckSummariesOutput#check_summaries #check_summaries} => Array&lt;Types::CheckSummary&gt;
+    #   * {Types::ListCheckSummariesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_check_summaries({
+    #     workload_id: "WorkloadId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     lens_arn: "LensArn", # required
+    #     pillar_id: "PillarId", # required
+    #     question_id: "QuestionId", # required
+    #     choice_id: "ChoiceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.check_summaries #=> Array
+    #   resp.check_summaries[0].id #=> String
+    #   resp.check_summaries[0].name #=> String
+    #   resp.check_summaries[0].provider #=> String, one of "TRUSTED_ADVISOR"
+    #   resp.check_summaries[0].description #=> String
+    #   resp.check_summaries[0].updated_at #=> Time
+    #   resp.check_summaries[0].lens_arn #=> String
+    #   resp.check_summaries[0].pillar_id #=> String
+    #   resp.check_summaries[0].question_id #=> String
+    #   resp.check_summaries[0].choice_id #=> String
+    #   resp.check_summaries[0].status #=> String, one of "OKAY", "WARNING", "ERROR", "NOT_AVAILABLE", "FETCH_FAILED"
+    #   resp.check_summaries[0].account_summary #=> Hash
+    #   resp.check_summaries[0].account_summary["CheckStatus"] #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListCheckSummaries AWS API Documentation
+    #
+    # @overload list_check_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_check_summaries(params = {}, options = {})
+      req = build_request(:list_check_summaries, params)
+      req.send_request(options)
+    end
+
     # List lens review improvements.
     #
     # @option params [required, String] :workload_id
@@ -1980,8 +2145,8 @@ module Aws::WellArchitected
     #   Each lens is identified by its LensSummary$LensAlias.
     #
     # @option params [String] :shared_with_prefix
-    #   The Amazon Web Services account ID or IAM role with which the lens is
-    #   shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the lens is shared.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next set of results.
@@ -2289,8 +2454,8 @@ module Aws::WellArchitected
     #   Web Services Region.
     #
     # @option params [String] :shared_with_prefix
-    #   The Amazon Web Services account ID or IAM role with which the workload
-    #   is shared.
+    #   The Amazon Web Services account ID, IAM role, organization ID, or
+    #   organizational unit (OU) ID with which the workload is shared.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next set of results.
@@ -2663,7 +2828,12 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # Update a workload invitation.
+    # Update a workload or custom lens share invitation.
+    #
+    # <note markdown="1"> This API operation can be called independently of any resource.
+    # Previous documentation implied that a workload ARN must be specified.
+    #
+    #  </note>
     #
     # @option params [required, String] :share_invitation_id
     #   The ID assigned to the share invitation.
@@ -2819,6 +2989,13 @@ module Aws::WellArchitected
     # @option params [String] :improvement_status
     #   The improvement status for a workload.
     #
+    # @option params [Types::WorkloadDiscoveryConfig] :discovery_config
+    #   Well-Architected discovery configuration settings to associate to the
+    #   workload.
+    #
+    # @option params [Array<String>] :applications
+    #   List of AppRegistry application ARNs to associate to the workload.
+    #
     # @return [Types::UpdateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkloadOutput#workload #workload} => Types::Workload
@@ -2841,6 +3018,10 @@ module Aws::WellArchitected
     #     industry: "WorkloadIndustry",
     #     notes: "Notes",
     #     improvement_status: "NOT_APPLICABLE", # accepts NOT_APPLICABLE, NOT_STARTED, IN_PROGRESS, COMPLETE, RISK_ACKNOWLEDGED
+    #     discovery_config: {
+    #       trusted_advisor_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     applications: ["ApplicationArn"],
     #   })
     #
     # @example Response structure
@@ -2875,6 +3056,9 @@ module Aws::WellArchitected
     #   resp.workload.share_invitation_id #=> String
     #   resp.workload.tags #=> Hash
     #   resp.workload.tags["TagKey"] #=> String
+    #   resp.workload.discovery_config.trusted_advisor_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.workload.applications #=> Array
+    #   resp.workload.applications[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkload AWS API Documentation
     #
@@ -3000,7 +3184,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

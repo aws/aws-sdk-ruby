@@ -1168,6 +1168,11 @@ module Aws::AutoScaling
     #                 min: 1,
     #                 max: 1,
     #               },
+    #               network_bandwidth_gbps: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               allowed_instance_types: ["AllowedInstanceType"],
     #             },
     #           },
     #         ],
@@ -1209,9 +1214,9 @@ module Aws::AutoScaling
     #   specify `LaunchTemplate` in your update request, you can't specify
     #   `LaunchConfigurationName` or `MixedInstancesPolicy`.
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy. For more
-    #   information, see [Auto Scaling groups with multiple instance types and
-    #   purchase options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   The mixed instances policy. For more information, see [Auto Scaling
+    #   groups with multiple instance types and purchase options][1] in the
+    #   *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #

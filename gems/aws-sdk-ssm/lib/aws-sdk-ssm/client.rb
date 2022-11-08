@@ -968,6 +968,14 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #         target_location_alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     schedule_offset: 1,
@@ -1039,6 +1047,9 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
@@ -1120,6 +1131,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         schedule_offset: 1,
@@ -1188,6 +1207,9 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.successful[0].target_locations[0].target_location_max_errors #=> String
     #   resp.successful[0].target_locations[0].execution_role_name #=> String
+    #   resp.successful[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.successful[0].schedule_offset #=> Integer
     #   resp.successful[0].target_maps #=> Array
     #   resp.successful[0].target_maps[0] #=> Hash
@@ -1231,6 +1253,9 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_max_concurrency #=> String
     #   resp.failed[0].entry.target_locations[0].target_location_max_errors #=> String
     #   resp.failed[0].entry.target_locations[0].execution_role_name #=> String
+    #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.failed[0].entry.schedule_offset #=> Integer
     #   resp.failed[0].entry.target_maps #=> Array
     #   resp.failed[0].entry.target_maps[0] #=> Hash
@@ -2730,6 +2755,9 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
@@ -3004,6 +3032,9 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_max_errors #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].execution_role_name #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.automation_execution_metadata_list[0].ops_item_id #=> String
     #   resp.automation_execution_metadata_list[0].association_id #=> String
     #   resp.automation_execution_metadata_list[0].change_request_name #=> String
@@ -3108,6 +3139,12 @@ module Aws::SSM
     #   resp.step_executions[0].target_location.target_location_max_concurrency #=> String
     #   resp.step_executions[0].target_location.target_location_max_errors #=> String
     #   resp.step_executions[0].target_location.execution_role_name #=> String
+    #   resp.step_executions[0].target_location.target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.step_executions[0].target_location.target_location_alarm_configuration.alarms #=> Array
+    #   resp.step_executions[0].target_location.target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.step_executions[0].triggered_alarms #=> Array
+    #   resp.step_executions[0].triggered_alarms[0].name #=> String
+    #   resp.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
@@ -5207,6 +5244,12 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].target_location.target_location_max_concurrency #=> String
     #   resp.automation_execution.step_executions[0].target_location.target_location_max_errors #=> String
     #   resp.automation_execution.step_executions[0].target_location.execution_role_name #=> String
+    #   resp.automation_execution.step_executions[0].target_location.target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.automation_execution.step_executions[0].target_location.target_location_alarm_configuration.alarms #=> Array
+    #   resp.automation_execution.step_executions[0].target_location.target_location_alarm_configuration.alarms[0].name #=> String
+    #   resp.automation_execution.step_executions[0].triggered_alarms #=> Array
+    #   resp.automation_execution.step_executions[0].triggered_alarms[0].name #=> String
+    #   resp.automation_execution.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
     #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
@@ -5243,6 +5286,9 @@ module Aws::SSM
     #   resp.automation_execution.target_locations[0].target_location_max_concurrency #=> String
     #   resp.automation_execution.target_locations[0].target_location_max_errors #=> String
     #   resp.automation_execution.target_locations[0].execution_role_name #=> String
+    #   resp.automation_execution.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.automation_execution.target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.automation_execution.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.automation_execution.progress_counters.total_steps #=> Integer
     #   resp.automation_execution.progress_counters.success_steps #=> Integer
     #   resp.automation_execution.progress_counters.failed_steps #=> Integer
@@ -5281,6 +5327,9 @@ module Aws::SSM
     #   resp.automation_execution.runbooks[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.automation_execution.runbooks[0].target_locations[0].target_location_max_errors #=> String
     #   resp.automation_execution.runbooks[0].target_locations[0].execution_role_name #=> String
+    #   resp.automation_execution.runbooks[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.automation_execution.runbooks[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.automation_execution.runbooks[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.automation_execution.ops_item_id #=> String
     #   resp.automation_execution.association_id #=> String
     #   resp.automation_execution.change_request_name #=> String
@@ -6989,6 +7038,9 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_versions[0].target_locations[0].target_location_max_errors #=> String
     #   resp.association_versions[0].target_locations[0].execution_role_name #=> String
+    #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_versions[0].schedule_offset #=> Integer
     #   resp.association_versions[0].target_maps #=> Array
     #   resp.association_versions[0].target_maps[0] #=> Hash
@@ -9674,6 +9726,14 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #         target_location_alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     tags: [
@@ -9831,6 +9891,14 @@ module Aws::SSM
     #             target_location_max_concurrency: "MaxConcurrency",
     #             target_location_max_errors: "MaxErrors",
     #             execution_role_name: "ExecutionRoleName",
+    #             target_location_alarm_configuration: {
+    #               ignore_poll_alarm_failure: false,
+    #               alarms: [ # required
+    #                 {
+    #                   name: "AlarmName", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #       },
@@ -10284,6 +10352,14 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #         target_location_alarm_configuration: {
+    #           ignore_poll_alarm_failure: false,
+    #           alarms: [ # required
+    #             {
+    #               name: "AlarmName", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     schedule_offset: 1,
@@ -10349,6 +10425,9 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
@@ -10451,6 +10530,9 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.ignore_poll_alarm_failure #=> Boolean
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
+    #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
@@ -11844,7 +11926,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

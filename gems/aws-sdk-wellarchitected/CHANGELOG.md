@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-11-07)
+------------------
+
+* Feature - This release adds support for integrations with AWS Trusted Advisor and AWS Service Catalog AppRegistry to improve workload discovery and speed up your workload reviews.
+
 1.18.0 (2022-10-25)
 ------------------
 

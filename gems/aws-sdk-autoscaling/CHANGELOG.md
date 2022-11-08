@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-11-07)
+------------------
+
+* Feature - This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.
+
 1.81.0 (2022-10-25)
 ------------------
 
