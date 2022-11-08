@@ -14,6 +14,7 @@ module Aws::FMS
     include Seahorse::Model
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
+    AWSAccountIdList = Shapes::ListShape.new(name: 'AWSAccountIdList')
     AccountRoleStatus = Shapes::StringShape.new(name: 'AccountRoleStatus')
     ActionTarget = Shapes::StructureShape.new(name: 'ActionTarget')
     App = Shapes::StructureShape.new(name: 'App')
@@ -28,7 +29,12 @@ module Aws::FMS
     AwsEc2NetworkInterfaceViolation = Shapes::StructureShape.new(name: 'AwsEc2NetworkInterfaceViolation')
     AwsEc2NetworkInterfaceViolations = Shapes::ListShape.new(name: 'AwsEc2NetworkInterfaceViolations')
     AwsVPCSecurityGroupViolation = Shapes::StructureShape.new(name: 'AwsVPCSecurityGroupViolation')
+    Base62Id = Shapes::StringShape.new(name: 'Base62Id')
     BasicInteger = Shapes::IntegerShape.new(name: 'BasicInteger')
+    BatchAssociateResourceRequest = Shapes::StructureShape.new(name: 'BatchAssociateResourceRequest')
+    BatchAssociateResourceResponse = Shapes::StructureShape.new(name: 'BatchAssociateResourceResponse')
+    BatchDisassociateResourceRequest = Shapes::StructureShape.new(name: 'BatchDisassociateResourceRequest')
+    BatchDisassociateResourceResponse = Shapes::StructureShape.new(name: 'BatchDisassociateResourceResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     ComplianceViolator = Shapes::StructureShape.new(name: 'ComplianceViolator')
@@ -42,12 +48,16 @@ module Aws::FMS
     DeleteNotificationChannelRequest = Shapes::StructureShape.new(name: 'DeleteNotificationChannelRequest')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
     DeleteProtocolsListRequest = Shapes::StructureShape.new(name: 'DeleteProtocolsListRequest')
+    DeleteResourceSetRequest = Shapes::StructureShape.new(name: 'DeleteResourceSetRequest')
     DependentServiceName = Shapes::StringShape.new(name: 'DependentServiceName')
+    Description = Shapes::StringShape.new(name: 'Description')
     DestinationType = Shapes::StringShape.new(name: 'DestinationType')
     DetailedInfo = Shapes::StringShape.new(name: 'DetailedInfo')
     DisassociateAdminAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAdminAccountRequest')
     DisassociateThirdPartyFirewallRequest = Shapes::StructureShape.new(name: 'DisassociateThirdPartyFirewallRequest')
     DisassociateThirdPartyFirewallResponse = Shapes::StructureShape.new(name: 'DisassociateThirdPartyFirewallResponse')
+    DiscoveredResource = Shapes::StructureShape.new(name: 'DiscoveredResource')
+    DiscoveredResourceList = Shapes::ListShape.new(name: 'DiscoveredResourceList')
     DnsDuplicateRuleGroupViolation = Shapes::StructureShape.new(name: 'DnsDuplicateRuleGroupViolation')
     DnsRuleGroupLimitExceededViolation = Shapes::StructureShape.new(name: 'DnsRuleGroupLimitExceededViolation')
     DnsRuleGroupPriorities = Shapes::ListShape.new(name: 'DnsRuleGroupPriorities')
@@ -66,6 +76,9 @@ module Aws::FMS
     ExpectedRoute = Shapes::StructureShape.new(name: 'ExpectedRoute')
     ExpectedRoutes = Shapes::ListShape.new(name: 'ExpectedRoutes')
     FMSPolicyUpdateFirewallCreationConfigAction = Shapes::StructureShape.new(name: 'FMSPolicyUpdateFirewallCreationConfigAction')
+    FailedItem = Shapes::StructureShape.new(name: 'FailedItem')
+    FailedItemList = Shapes::ListShape.new(name: 'FailedItemList')
+    FailedItemReason = Shapes::StringShape.new(name: 'FailedItemReason')
     FirewallDeploymentModel = Shapes::StringShape.new(name: 'FirewallDeploymentModel')
     FirewallPolicyId = Shapes::StringShape.new(name: 'FirewallPolicyId')
     FirewallPolicyName = Shapes::StringShape.new(name: 'FirewallPolicyName')
@@ -85,11 +98,15 @@ module Aws::FMS
     GetProtectionStatusResponse = Shapes::StructureShape.new(name: 'GetProtectionStatusResponse')
     GetProtocolsListRequest = Shapes::StructureShape.new(name: 'GetProtocolsListRequest')
     GetProtocolsListResponse = Shapes::StructureShape.new(name: 'GetProtocolsListResponse')
+    GetResourceSetRequest = Shapes::StructureShape.new(name: 'GetResourceSetRequest')
+    GetResourceSetResponse = Shapes::StructureShape.new(name: 'GetResourceSetResponse')
     GetThirdPartyFirewallAssociationStatusRequest = Shapes::StructureShape.new(name: 'GetThirdPartyFirewallAssociationStatusRequest')
     GetThirdPartyFirewallAssociationStatusResponse = Shapes::StructureShape.new(name: 'GetThirdPartyFirewallAssociationStatusResponse')
     GetViolationDetailsRequest = Shapes::StructureShape.new(name: 'GetViolationDetailsRequest')
     GetViolationDetailsResponse = Shapes::StructureShape.new(name: 'GetViolationDetailsResponse')
     IPPortNumber = Shapes::IntegerShape.new(name: 'IPPortNumber')
+    Identifier = Shapes::StringShape.new(name: 'Identifier')
+    IdentifierList = Shapes::ListShape.new(name: 'IdentifierList')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -102,6 +119,8 @@ module Aws::FMS
     ListAppsListsResponse = Shapes::StructureShape.new(name: 'ListAppsListsResponse')
     ListComplianceStatusRequest = Shapes::StructureShape.new(name: 'ListComplianceStatusRequest')
     ListComplianceStatusResponse = Shapes::StructureShape.new(name: 'ListComplianceStatusResponse')
+    ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
+    ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
     ListId = Shapes::StringShape.new(name: 'ListId')
     ListMemberAccountsRequest = Shapes::StructureShape.new(name: 'ListMemberAccountsRequest')
     ListMemberAccountsResponse = Shapes::StructureShape.new(name: 'ListMemberAccountsResponse')
@@ -109,6 +128,10 @@ module Aws::FMS
     ListPoliciesResponse = Shapes::StructureShape.new(name: 'ListPoliciesResponse')
     ListProtocolsListsRequest = Shapes::StructureShape.new(name: 'ListProtocolsListsRequest')
     ListProtocolsListsResponse = Shapes::StructureShape.new(name: 'ListProtocolsListsResponse')
+    ListResourceSetResourcesRequest = Shapes::StructureShape.new(name: 'ListResourceSetResourcesRequest')
+    ListResourceSetResourcesResponse = Shapes::StructureShape.new(name: 'ListResourceSetResourcesResponse')
+    ListResourceSetsRequest = Shapes::StructureShape.new(name: 'ListResourceSetsRequest')
+    ListResourceSetsResponse = Shapes::StructureShape.new(name: 'ListResourceSetsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListThirdPartyFirewallFirewallPoliciesRequest = Shapes::StructureShape.new(name: 'ListThirdPartyFirewallFirewallPoliciesRequest')
@@ -116,6 +139,7 @@ module Aws::FMS
     ManagedServiceData = Shapes::StringShape.new(name: 'ManagedServiceData')
     MarketplaceSubscriptionOnboardingStatus = Shapes::StringShape.new(name: 'MarketplaceSubscriptionOnboardingStatus')
     MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
+    Name = Shapes::StringShape.new(name: 'Name')
     NetworkFirewallAction = Shapes::StringShape.new(name: 'NetworkFirewallAction')
     NetworkFirewallActionList = Shapes::ListShape.new(name: 'NetworkFirewallActionList')
     NetworkFirewallBlackHoleRouteDetectedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallBlackHoleRouteDetectedViolation')
@@ -168,17 +192,26 @@ module Aws::FMS
     PutPolicyResponse = Shapes::StructureShape.new(name: 'PutPolicyResponse')
     PutProtocolsListRequest = Shapes::StructureShape.new(name: 'PutProtocolsListRequest')
     PutProtocolsListResponse = Shapes::StructureShape.new(name: 'PutProtocolsListResponse')
+    PutResourceSetRequest = Shapes::StructureShape.new(name: 'PutResourceSetRequest')
+    PutResourceSetResponse = Shapes::StructureShape.new(name: 'PutResourceSetResponse')
     ReferenceRule = Shapes::StringShape.new(name: 'ReferenceRule')
     RemediationAction = Shapes::StructureShape.new(name: 'RemediationAction')
     RemediationActionDescription = Shapes::StringShape.new(name: 'RemediationActionDescription')
     RemediationActionType = Shapes::StringShape.new(name: 'RemediationActionType')
     RemediationActionWithOrder = Shapes::StructureShape.new(name: 'RemediationActionWithOrder')
+    Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
+    ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
+    ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceSet = Shapes::StructureShape.new(name: 'ResourceSet')
+    ResourceSetIds = Shapes::ListShape.new(name: 'ResourceSetIds')
+    ResourceSetSummary = Shapes::StructureShape.new(name: 'ResourceSetSummary')
+    ResourceSetSummaryList = Shapes::ListShape.new(name: 'ResourceSetSummaryList')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
     ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
@@ -227,6 +260,8 @@ module Aws::FMS
     ViolationDetail = Shapes::StructureShape.new(name: 'ViolationDetail')
     ViolationReason = Shapes::StringShape.new(name: 'ViolationReason')
     ViolationTarget = Shapes::StringShape.new(name: 'ViolationTarget')
+
+    AWSAccountIdList.member = Shapes::ShapeRef.new(shape: AWSAccountId)
 
     ActionTarget.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     ActionTarget.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
@@ -281,6 +316,22 @@ module Aws::FMS
     AwsVPCSecurityGroupViolation.add_member(:possible_security_group_remediation_actions, Shapes::ShapeRef.new(shape: SecurityGroupRemediationActions, location_name: "PossibleSecurityGroupRemediationActions"))
     AwsVPCSecurityGroupViolation.struct_class = Types::AwsVPCSecurityGroupViolation
 
+    BatchAssociateResourceRequest.add_member(:resource_set_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ResourceSetIdentifier"))
+    BatchAssociateResourceRequest.add_member(:items, Shapes::ShapeRef.new(shape: IdentifierList, required: true, location_name: "Items"))
+    BatchAssociateResourceRequest.struct_class = Types::BatchAssociateResourceRequest
+
+    BatchAssociateResourceResponse.add_member(:resource_set_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ResourceSetIdentifier"))
+    BatchAssociateResourceResponse.add_member(:failed_items, Shapes::ShapeRef.new(shape: FailedItemList, required: true, location_name: "FailedItems"))
+    BatchAssociateResourceResponse.struct_class = Types::BatchAssociateResourceResponse
+
+    BatchDisassociateResourceRequest.add_member(:resource_set_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ResourceSetIdentifier"))
+    BatchDisassociateResourceRequest.add_member(:items, Shapes::ShapeRef.new(shape: IdentifierList, required: true, location_name: "Items"))
+    BatchDisassociateResourceRequest.struct_class = Types::BatchDisassociateResourceRequest
+
+    BatchDisassociateResourceResponse.add_member(:resource_set_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ResourceSetIdentifier"))
+    BatchDisassociateResourceResponse.add_member(:failed_items, Shapes::ShapeRef.new(shape: FailedItemList, required: true, location_name: "FailedItems"))
+    BatchDisassociateResourceResponse.struct_class = Types::BatchDisassociateResourceResponse
+
     ComplianceViolator.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     ComplianceViolator.add_member(:violation_reason, Shapes::ShapeRef.new(shape: ViolationReason, location_name: "ViolationReason"))
     ComplianceViolator.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
@@ -309,6 +360,9 @@ module Aws::FMS
     DeleteProtocolsListRequest.add_member(:list_id, Shapes::ShapeRef.new(shape: ListId, required: true, location_name: "ListId"))
     DeleteProtocolsListRequest.struct_class = Types::DeleteProtocolsListRequest
 
+    DeleteResourceSetRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Base62Id, required: true, location_name: "Identifier"))
+    DeleteResourceSetRequest.struct_class = Types::DeleteResourceSetRequest
+
     DisassociateAdminAccountRequest.struct_class = Types::DisassociateAdminAccountRequest
 
     DisassociateThirdPartyFirewallRequest.add_member(:third_party_firewall, Shapes::ShapeRef.new(shape: ThirdPartyFirewall, required: true, location_name: "ThirdPartyFirewall"))
@@ -316,6 +370,14 @@ module Aws::FMS
 
     DisassociateThirdPartyFirewallResponse.add_member(:third_party_firewall_status, Shapes::ShapeRef.new(shape: ThirdPartyFirewallAssociationStatus, location_name: "ThirdPartyFirewallStatus"))
     DisassociateThirdPartyFirewallResponse.struct_class = Types::DisassociateThirdPartyFirewallResponse
+
+    DiscoveredResource.add_member(:uri, Shapes::ShapeRef.new(shape: Identifier, location_name: "URI"))
+    DiscoveredResource.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AccountId"))
+    DiscoveredResource.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "Type"))
+    DiscoveredResource.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    DiscoveredResource.struct_class = Types::DiscoveredResource
+
+    DiscoveredResourceList.member = Shapes::ShapeRef.new(shape: DiscoveredResource)
 
     DnsDuplicateRuleGroupViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
     DnsDuplicateRuleGroupViolation.add_member(:violation_target_description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ViolationTargetDescription"))
@@ -400,6 +462,12 @@ module Aws::FMS
     FMSPolicyUpdateFirewallCreationConfigAction.add_member(:firewall_creation_config, Shapes::ShapeRef.new(shape: ManagedServiceData, location_name: "FirewallCreationConfig"))
     FMSPolicyUpdateFirewallCreationConfigAction.struct_class = Types::FMSPolicyUpdateFirewallCreationConfigAction
 
+    FailedItem.add_member(:uri, Shapes::ShapeRef.new(shape: Identifier, location_name: "URI"))
+    FailedItem.add_member(:reason, Shapes::ShapeRef.new(shape: FailedItemReason, location_name: "Reason"))
+    FailedItem.struct_class = Types::FailedItem
+
+    FailedItemList.member = Shapes::ShapeRef.new(shape: FailedItem)
+
     FirewallSubnetIsOutOfScopeViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
     FirewallSubnetIsOutOfScopeViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
     FirewallSubnetIsOutOfScopeViolation.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZone"))
@@ -469,6 +537,13 @@ module Aws::FMS
     GetProtocolsListResponse.add_member(:protocols_list_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtocolsListArn"))
     GetProtocolsListResponse.struct_class = Types::GetProtocolsListResponse
 
+    GetResourceSetRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Base62Id, required: true, location_name: "Identifier"))
+    GetResourceSetRequest.struct_class = Types::GetResourceSetRequest
+
+    GetResourceSetResponse.add_member(:resource_set, Shapes::ShapeRef.new(shape: ResourceSet, required: true, location_name: "ResourceSet"))
+    GetResourceSetResponse.add_member(:resource_set_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceSetArn"))
+    GetResourceSetResponse.struct_class = Types::GetResourceSetResponse
+
     GetThirdPartyFirewallAssociationStatusRequest.add_member(:third_party_firewall, Shapes::ShapeRef.new(shape: ThirdPartyFirewall, required: true, location_name: "ThirdPartyFirewall"))
     GetThirdPartyFirewallAssociationStatusRequest.struct_class = Types::GetThirdPartyFirewallAssociationStatusRequest
 
@@ -484,6 +559,8 @@ module Aws::FMS
 
     GetViolationDetailsResponse.add_member(:violation_detail, Shapes::ShapeRef.new(shape: ViolationDetail, location_name: "ViolationDetail"))
     GetViolationDetailsResponse.struct_class = Types::GetViolationDetailsResponse
+
+    IdentifierList.member = Shapes::ShapeRef.new(shape: Identifier)
 
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalErrorException.struct_class = Types::InternalErrorException
@@ -523,6 +600,16 @@ module Aws::FMS
     ListComplianceStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListComplianceStatusResponse.struct_class = Types::ListComplianceStatusResponse
 
+    ListDiscoveredResourcesRequest.add_member(:member_account_ids, Shapes::ShapeRef.new(shape: AWSAccountIdList, required: true, location_name: "MemberAccountIds"))
+    ListDiscoveredResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ListDiscoveredResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListDiscoveredResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDiscoveredResourcesRequest.struct_class = Types::ListDiscoveredResourcesRequest
+
+    ListDiscoveredResourcesResponse.add_member(:items, Shapes::ShapeRef.new(shape: DiscoveredResourceList, location_name: "Items"))
+    ListDiscoveredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListDiscoveredResourcesResponse.struct_class = Types::ListDiscoveredResourcesResponse
+
     ListMemberAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMemberAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListMemberAccountsRequest.struct_class = Types::ListMemberAccountsRequest
@@ -547,6 +634,23 @@ module Aws::FMS
     ListProtocolsListsResponse.add_member(:protocols_lists, Shapes::ShapeRef.new(shape: ProtocolsListsData, location_name: "ProtocolsLists"))
     ListProtocolsListsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListProtocolsListsResponse.struct_class = Types::ListProtocolsListsResponse
+
+    ListResourceSetResourcesRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Identifier"))
+    ListResourceSetResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListResourceSetResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourceSetResourcesRequest.struct_class = Types::ListResourceSetResourcesRequest
+
+    ListResourceSetResourcesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ResourceList, required: true, location_name: "Items"))
+    ListResourceSetResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourceSetResourcesResponse.struct_class = Types::ListResourceSetResourcesResponse
+
+    ListResourceSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourceSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListResourceSetsRequest.struct_class = Types::ListResourceSetsRequest
+
+    ListResourceSetsResponse.add_member(:resource_sets, Shapes::ShapeRef.new(shape: ResourceSetSummaryList, location_name: "ResourceSets"))
+    ListResourceSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourceSetsResponse.struct_class = Types::ListResourceSetsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -685,6 +789,8 @@ module Aws::FMS
     Policy.add_member(:delete_unused_fm_managed_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteUnusedFMManagedResources"))
     Policy.add_member(:include_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "IncludeMap"))
     Policy.add_member(:exclude_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "ExcludeMap"))
+    Policy.add_member(:resource_set_ids, Shapes::ShapeRef.new(shape: ResourceSetIds, location_name: "ResourceSetIds"))
+    Policy.add_member(:policy_description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "PolicyDescription"))
     Policy.struct_class = Types::Policy
 
     PolicyComplianceDetail.add_member(:policy_owner, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "PolicyOwner"))
@@ -786,6 +892,14 @@ module Aws::FMS
     PutProtocolsListResponse.add_member(:protocols_list_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtocolsListArn"))
     PutProtocolsListResponse.struct_class = Types::PutProtocolsListResponse
 
+    PutResourceSetRequest.add_member(:resource_set, Shapes::ShapeRef.new(shape: ResourceSet, required: true, location_name: "ResourceSet"))
+    PutResourceSetRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    PutResourceSetRequest.struct_class = Types::PutResourceSetRequest
+
+    PutResourceSetResponse.add_member(:resource_set, Shapes::ShapeRef.new(shape: ResourceSet, required: true, location_name: "ResourceSet"))
+    PutResourceSetResponse.add_member(:resource_set_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceSetArn"))
+    PutResourceSetResponse.struct_class = Types::PutResourceSetResponse
+
     RemediationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
     RemediationAction.add_member(:ec2_create_route_action, Shapes::ShapeRef.new(shape: EC2CreateRouteAction, location_name: "EC2CreateRouteAction"))
     RemediationAction.add_member(:ec2_replace_route_action, Shapes::ShapeRef.new(shape: EC2ReplaceRouteAction, location_name: "EC2ReplaceRouteAction"))
@@ -801,10 +915,34 @@ module Aws::FMS
     RemediationActionWithOrder.add_member(:order, Shapes::ShapeRef.new(shape: BasicInteger, location_name: "Order"))
     RemediationActionWithOrder.struct_class = Types::RemediationActionWithOrder
 
+    Resource.add_member(:uri, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "URI"))
+    Resource.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AccountId"))
+    Resource.struct_class = Types::Resource
+
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
+
+    ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceSet.add_member(:id, Shapes::ShapeRef.new(shape: Base62Id, location_name: "Id"))
+    ResourceSet.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    ResourceSet.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ResourceSet.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    ResourceSet.add_member(:resource_type_list, Shapes::ShapeRef.new(shape: ResourceTypeList, required: true, location_name: "ResourceTypeList"))
+    ResourceSet.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdateTime"))
+    ResourceSet.struct_class = Types::ResourceSet
+
+    ResourceSetIds.member = Shapes::ShapeRef.new(shape: Base62Id)
+
+    ResourceSetSummary.add_member(:id, Shapes::ShapeRef.new(shape: Base62Id, location_name: "Id"))
+    ResourceSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    ResourceSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ResourceSetSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdateTime"))
+    ResourceSetSummary.struct_class = Types::ResourceSetSummary
+
+    ResourceSetSummaryList.member = Shapes::ShapeRef.new(shape: ResourceSetSummary)
 
     ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: ResourceTagKey, required: true, location_name: "Key"))
     ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: ResourceTagValue, location_name: "Value"))
@@ -1005,6 +1143,31 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:batch_associate_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAssociateResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchAssociateResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchAssociateResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:batch_disassociate_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_apps_list, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAppsList"
         o.http_method = "POST"
@@ -1049,6 +1212,18 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:delete_resource_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourceSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourceSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:disassociate_admin_account, Seahorse::Model::Operation.new.tap do |o|
@@ -1153,6 +1328,18 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:get_resource_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourceSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourceSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourceSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:get_third_party_firewall_association_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetThirdPartyFirewallAssociationStatus"
         o.http_method = "POST"
@@ -1210,6 +1397,17 @@ module Aws::FMS
         )
       end)
 
+      api.add_operation(:list_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDiscoveredResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDiscoveredResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDiscoveredResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:list_member_accounts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListMemberAccounts"
         o.http_method = "POST"
@@ -1259,6 +1457,29 @@ module Aws::FMS
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_resource_set_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceSetResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceSetResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceSetResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_resource_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1336,6 +1557,18 @@ module Aws::FMS
         o.input = Shapes::ShapeRef.new(shape: PutProtocolsListRequest)
         o.output = Shapes::ShapeRef.new(shape: PutProtocolsListResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:put_resource_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourceSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourceSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourceSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

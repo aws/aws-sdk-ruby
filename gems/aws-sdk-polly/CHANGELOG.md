@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2022-11-08)
+------------------
+
+* Feature - Amazon Polly adds new voices: Elin (sv-SE), Ida (nb-NO), Laura (nl-NL) and Suvi (fi-FI). They are available as neural voices only.
+
 1.59.0 (2022-10-25)
 ------------------
 

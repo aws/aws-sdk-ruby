@@ -1188,6 +1188,9 @@ module Aws::Lightsail
     #   resp.certificate.certificate_detail.domain_validation_records[0].resource_record.name #=> String
     #   resp.certificate.certificate_detail.domain_validation_records[0].resource_record.type #=> String
     #   resp.certificate.certificate_detail.domain_validation_records[0].resource_record.value #=> String
+    #   resp.certificate.certificate_detail.domain_validation_records[0].dns_record_creation_state.code #=> String, one of "SUCCEEDED", "STARTED", "FAILED"
+    #   resp.certificate.certificate_detail.domain_validation_records[0].dns_record_creation_state.message #=> String
+    #   resp.certificate.certificate_detail.domain_validation_records[0].validation_status #=> String, one of "PENDING_VALIDATION", "FAILED", "SUCCESS"
     #   resp.certificate.certificate_detail.request_failure_reason #=> String
     #   resp.certificate.certificate_detail.in_use_resource_count #=> Integer
     #   resp.certificate.certificate_detail.key_algorithm #=> String
@@ -1202,6 +1205,9 @@ module Aws::Lightsail
     #   resp.certificate.certificate_detail.renewal_summary.domain_validation_records[0].resource_record.name #=> String
     #   resp.certificate.certificate_detail.renewal_summary.domain_validation_records[0].resource_record.type #=> String
     #   resp.certificate.certificate_detail.renewal_summary.domain_validation_records[0].resource_record.value #=> String
+    #   resp.certificate.certificate_detail.renewal_summary.domain_validation_records[0].dns_record_creation_state.code #=> String, one of "SUCCEEDED", "STARTED", "FAILED"
+    #   resp.certificate.certificate_detail.renewal_summary.domain_validation_records[0].dns_record_creation_state.message #=> String
+    #   resp.certificate.certificate_detail.renewal_summary.domain_validation_records[0].validation_status #=> String, one of "PENDING_VALIDATION", "FAILED", "SUCCESS"
     #   resp.certificate.certificate_detail.renewal_summary.renewal_status #=> String, one of "PendingAutoRenewal", "PendingValidation", "Success", "Failed"
     #   resp.certificate.certificate_detail.renewal_summary.renewal_status_reason #=> String
     #   resp.certificate.certificate_detail.renewal_summary.updated_at #=> Time
@@ -1415,8 +1421,9 @@ module Aws::Lightsail
     #   typically
     #   `https://<ServiceName>.<RandomGUID>.<AWSRegion>.cs.amazonlightsail.com`.
     #   If the name of your container service is `container-service-1`, and
-    #   it's located in the US East (Ohio) AWS region (`us-east-2`), then the
-    #   domain for your container service will be like the following example:
+    #   it's located in the US East (Ohio) Amazon Web Services Region
+    #   (`us-east-2`), then the domain for your container service will be like
+    #   the following example:
     #   `https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com`
     #
     #   The following are the requirements for container service names:
@@ -3365,7 +3372,7 @@ module Aws::Lightsail
     #   block of time for each AWS Region. For more information about the
     #   preferred backup window time blocks for each region, see the [Working
     #   With Backups][1] guide in the Amazon Relational Database Service
-    #   (Amazon RDS) documentation.
+    #   documentation.
     #
     #   Constraints:
     #
@@ -5888,6 +5895,9 @@ module Aws::Lightsail
     #   resp.certificates[0].certificate_detail.domain_validation_records[0].resource_record.name #=> String
     #   resp.certificates[0].certificate_detail.domain_validation_records[0].resource_record.type #=> String
     #   resp.certificates[0].certificate_detail.domain_validation_records[0].resource_record.value #=> String
+    #   resp.certificates[0].certificate_detail.domain_validation_records[0].dns_record_creation_state.code #=> String, one of "SUCCEEDED", "STARTED", "FAILED"
+    #   resp.certificates[0].certificate_detail.domain_validation_records[0].dns_record_creation_state.message #=> String
+    #   resp.certificates[0].certificate_detail.domain_validation_records[0].validation_status #=> String, one of "PENDING_VALIDATION", "FAILED", "SUCCESS"
     #   resp.certificates[0].certificate_detail.request_failure_reason #=> String
     #   resp.certificates[0].certificate_detail.in_use_resource_count #=> Integer
     #   resp.certificates[0].certificate_detail.key_algorithm #=> String
@@ -5902,6 +5912,9 @@ module Aws::Lightsail
     #   resp.certificates[0].certificate_detail.renewal_summary.domain_validation_records[0].resource_record.name #=> String
     #   resp.certificates[0].certificate_detail.renewal_summary.domain_validation_records[0].resource_record.type #=> String
     #   resp.certificates[0].certificate_detail.renewal_summary.domain_validation_records[0].resource_record.value #=> String
+    #   resp.certificates[0].certificate_detail.renewal_summary.domain_validation_records[0].dns_record_creation_state.code #=> String, one of "SUCCEEDED", "STARTED", "FAILED"
+    #   resp.certificates[0].certificate_detail.renewal_summary.domain_validation_records[0].dns_record_creation_state.message #=> String
+    #   resp.certificates[0].certificate_detail.renewal_summary.domain_validation_records[0].validation_status #=> String, one of "PENDING_VALIDATION", "FAILED", "SUCCESS"
     #   resp.certificates[0].certificate_detail.renewal_summary.renewal_status #=> String, one of "PendingAutoRenewal", "PendingValidation", "Success", "Failed"
     #   resp.certificates[0].certificate_detail.renewal_summary.renewal_status_reason #=> String
     #   resp.certificates[0].certificate_detail.renewal_summary.updated_at #=> Time
@@ -6104,7 +6117,7 @@ module Aws::Lightsail
     #
     # <note markdown="1"> Container logs are retained for a certain amount of time. For more
     # information, see [Amazon Lightsail endpoints and quotas][1] in the
-    # *AWS General Reference*.
+    # *Amazon Web Services General Reference*.
     #
     #  </note>
     #
@@ -6227,7 +6240,8 @@ module Aws::Lightsail
     #
     # <note markdown="1"> A set number of deployments are kept before the oldest one is replaced
     # with the newest one. For more information, see [Amazon Lightsail
-    # endpoints and quotas][1] in the *AWS General Reference*.
+    # endpoints and quotas][1] in the *Amazon Web Services General
+    # Reference*.
     #
     #  </note>
     #
@@ -7091,6 +7105,10 @@ module Aws::Lightsail
     #   resp.domain.domain_entries[0].type #=> String
     #   resp.domain.domain_entries[0].options #=> Hash
     #   resp.domain.domain_entries[0].options["DomainEntryOptionsKeys"] #=> String
+    #   resp.domain.registered_domain_delegation_info.name_servers_update_state.code #=> String, one of "SUCCEEDED", "PENDING", "FAILED", "STARTED"
+    #   resp.domain.registered_domain_delegation_info.name_servers_update_state.message #=> String
+    #   resp.domain.registered_domain_delegation_info.r53_hosted_zone_deletion_state.code #=> String, one of "SUCCEEDED", "PENDING", "FAILED", "STARTED"
+    #   resp.domain.registered_domain_delegation_info.r53_hosted_zone_deletion_state.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomain AWS API Documentation
     #
@@ -7142,6 +7160,10 @@ module Aws::Lightsail
     #   resp.domains[0].domain_entries[0].type #=> String
     #   resp.domains[0].domain_entries[0].options #=> Hash
     #   resp.domains[0].domain_entries[0].options["DomainEntryOptionsKeys"] #=> String
+    #   resp.domains[0].registered_domain_delegation_info.name_servers_update_state.code #=> String, one of "SUCCEEDED", "PENDING", "FAILED", "STARTED"
+    #   resp.domains[0].registered_domain_delegation_info.name_servers_update_state.message #=> String
+    #   resp.domains[0].registered_domain_delegation_info.r53_hosted_zone_deletion_state.code #=> String, one of "SUCCEEDED", "PENDING", "FAILED", "STARTED"
+    #   resp.domains[0].registered_domain_delegation_info.r53_hosted_zone_deletion_state.message #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomains AWS API Documentation
@@ -8319,6 +8341,8 @@ module Aws::Lightsail
     #   resp.tls_certificates[0].domain_validation_records[0].value #=> String
     #   resp.tls_certificates[0].domain_validation_records[0].validation_status #=> String, one of "PENDING_VALIDATION", "FAILED", "SUCCESS"
     #   resp.tls_certificates[0].domain_validation_records[0].domain_name #=> String
+    #   resp.tls_certificates[0].domain_validation_records[0].dns_record_creation_state.code #=> String, one of "SUCCEEDED", "STARTED", "FAILED"
+    #   resp.tls_certificates[0].domain_validation_records[0].dns_record_creation_state.message #=> String
     #   resp.tls_certificates[0].failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "OTHER"
     #   resp.tls_certificates[0].issued_at #=> Time
     #   resp.tls_certificates[0].issuer #=> String
@@ -10974,10 +10998,11 @@ module Aws::Lightsail
     #
     # A bucket bundle specifies the monthly cost, storage space, and data
     # transfer quota for a bucket. You can update a bucket's bundle only
-    # one time within a monthly AWS billing cycle. To determine if you can
-    # update a bucket's bundle, use the [GetBuckets][1] action. The
-    # `ableToUpdateBundle` parameter in the response will indicate whether
-    # you can currently update a bucket's bundle.
+    # one time within a monthly Amazon Web Services billing cycle. To
+    # determine if you can update a bucket's bundle, use the
+    # [GetBuckets][1] action. The `ableToUpdateBundle` parameter in the
+    # response will indicate whether you can currently update a bucket's
+    # bundle.
     #
     # Update a bucket's bundle if it's consistently going over its storage
     # space or data transfer quota, or if a bucket's usage is consistently
@@ -11318,10 +11343,10 @@ module Aws::Lightsail
     # its monthly network transfer quota and is incurring an overage fee.
     #
     # You can update your distribution's bundle only one time within your
-    # monthly AWS billing cycle. To determine if you can update your
-    # distribution's bundle, use the `GetDistributions` action. The
-    # `ableToUpdateBundle` parameter in the result will indicate whether you
-    # can currently update your distribution's bundle.
+    # monthly Amazon Web Services billing cycle. To determine if you can
+    # update your distribution's bundle, use the `GetDistributions` action.
+    # The `ableToUpdateBundle` parameter in the result will indicate whether
+    # you can currently update your distribution's bundle.
     #
     # @option params [String] :distribution_name
     #   The name of the distribution for which to update the bundle.
@@ -11681,8 +11706,8 @@ module Aws::Lightsail
     #   your database.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week.
+    #   block of time for each Amazon Web Services Region, occurring on a
+    #   random day of the week.
     #
     #   Constraints:
     #
@@ -11862,7 +11887,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

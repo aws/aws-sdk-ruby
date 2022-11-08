@@ -320,6 +320,98 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchAssociateResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_set_identifier: "Identifier", # required
+    #         items: ["Identifier"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_set_identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The uniform resource identifiers (URIs) of resources that should be
+    #   associated to the resource set. The URIs must be Amazon Resource
+    #   Names (ARNs).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/BatchAssociateResourceRequest AWS API Documentation
+    #
+    class BatchAssociateResourceRequest < Struct.new(
+      :resource_set_identifier,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_set_identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   The resources that failed to associate to the resource set.
+    #   @return [Array<Types::FailedItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/BatchAssociateResourceResponse AWS API Documentation
+    #
+    class BatchAssociateResourceResponse < Struct.new(
+      :resource_set_identifier,
+      :failed_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDisassociateResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_set_identifier: "Identifier", # required
+    #         items: ["Identifier"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_set_identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The uniform resource identifiers (URI) of resources that should be
+    #   disassociated from the resource set. The URIs must be Amazon
+    #   Resource Names (ARNs).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/BatchDisassociateResourceRequest AWS API Documentation
+    #
+    class BatchDisassociateResourceRequest < Struct.new(
+      :resource_set_identifier,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_set_identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_items
+    #   The resources that failed to disassociate from the resource set.
+    #   @return [Array<Types::FailedItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/BatchDisassociateResourceResponse AWS API Documentation
+    #
+    class BatchDisassociateResourceResponse < Struct.new(
+      :resource_set_identifier,
+      :failed_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of the resource that is not protected by the policy.
     #
     # @!attribute [rw] resource_id
@@ -460,6 +552,26 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteResourceSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "Base62Id", # required
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteResourceSetRequest AWS API Documentation
+    #
+    class DeleteResourceSetRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DisassociateAdminAccountRequest AWS API Documentation
@@ -494,6 +606,37 @@ module Aws::FMS
     #
     class DisassociateThirdPartyFirewallResponse < Struct.new(
       :third_party_firewall_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource in the organization that's available to be associated with
+    # a Firewall Manager resource set.
+    #
+    # @!attribute [rw] uri
+    #   The universal resource identifier (URI) of the discovered resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID associated with the discovered
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the discovered resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the discovered resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DiscoveredResource AWS API Documentation
+    #
+    class DiscoveredResource < Struct.new(
+      :uri,
+      :account_id,
+      :type,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -925,6 +1068,26 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # Details of a resource that failed when trying to update it's
+    # association to a resource set.
+    #
+    # @!attribute [rw] uri
+    #   The univeral resource indicator (URI) of the resource that failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the resource's association could not be updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/FailedItem AWS API Documentation
+    #
+    class FailedItem < Struct.new(
+      :uri,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about the firewall subnet that violates the policy
     # scope.
     #
@@ -1323,6 +1486,43 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourceSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "Base62Id", # required
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetResourceSetRequest AWS API Documentation
+    #
+    class GetResourceSetRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_set
+    #   Information about the specified resource set.
+    #   @return [Types::ResourceSet]
+    #
+    # @!attribute [rw] resource_set_arn
+    #   The Amazon Resource Name (ARN) of the resource set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetResourceSetResponse AWS API Documentation
+    #
+    class GetResourceSetResponse < Struct.new(
+      :resource_set,
+      :resource_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetThirdPartyFirewallAssociationStatusRequest
     #   data as a hash:
     #
@@ -1653,6 +1853,73 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDiscoveredResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         member_account_ids: ["AWSAccountId"], # required
+    #         resource_type: "ResourceType", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] member_account_ids
+    #   The Amazon Web Services account IDs to discover resources in. Only
+    #   one account is supported per request. The account must be a member
+    #   of your organization.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resources to discover.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, Firewall Manager provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListDiscoveredResourcesRequest AWS API Documentation
+    #
+    class ListDiscoveredResourcesRequest < Struct.new(
+      :member_account_ids,
+      :resource_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Details of the resources that were discovered.
+    #   @return [Array<Types::DiscoveredResource>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListDiscoveredResourcesResponse AWS API Documentation
+    #
+    class ListDiscoveredResourcesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMemberAccountsRequest
     #   data as a hash:
     #
@@ -1822,6 +2089,120 @@ module Aws::FMS
     #
     class ListProtocolsListsResponse < Struct.new(
       :protocols_lists,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourceSetResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "ResourceId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, Firewall Manager provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSetResourcesRequest AWS API Documentation
+    #
+    class ListResourceSetResourcesRequest < Struct.new(
+      :identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of the associated resources' uniform resource identifiers
+    #   (URI).
+    #   @return [Array<Types::Resource>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSetResourcesResponse AWS API Documentation
+    #
+    class ListResourceSetResourcesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourceSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Firewall Manager to
+    #   return for this request. If more objects are available, in the
+    #   response, Firewall Manager provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSetsRequest AWS API Documentation
+    #
+    class ListResourceSetsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_sets
+    #   An array of `ResourceSetSummary` objects.
+    #   @return [Array<Types::ResourceSetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Firewall Manager returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSetsResponse AWS API Documentation
+    #
+    class ListResourceSetsResponse < Struct.new(
+      :resource_sets,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2494,7 +2875,7 @@ module Aws::FMS
     #         policy_name: "ResourceName", # required
     #         policy_update_token: "PolicyUpdateToken",
     #         security_service_policy_data: { # required
-    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL
+    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
     #           managed_service_data: "ManagedServiceData",
     #           policy_option: {
     #             network_firewall_policy: {
@@ -2522,6 +2903,8 @@ module Aws::FMS
     #         exclude_map: {
     #           "ACCOUNT" => ["CustomerPolicyScopeId"],
     #         },
+    #         resource_set_ids: ["Base62Id"],
+    #         policy_description: "ResourceDescription",
     #       }
     #
     # @!attribute [rw] policy_id
@@ -2666,6 +3049,14 @@ module Aws::FMS
     #     “ouid112”]\}`.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] resource_set_ids
+    #   The unique identifiers of the resource sets used by the policy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] policy_description
+    #   The definition of the Network Firewall firewall policy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Policy AWS API Documentation
     #
     class Policy < Struct.new(
@@ -2680,7 +3071,9 @@ module Aws::FMS
       :remediation_enabled,
       :delete_unused_fm_managed_resources,
       :include_map,
-      :exclude_map)
+      :exclude_map,
+      :resource_set_ids,
+      :policy_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3135,7 +3528,7 @@ module Aws::FMS
     #           policy_name: "ResourceName", # required
     #           policy_update_token: "PolicyUpdateToken",
     #           security_service_policy_data: { # required
-    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL
+    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
     #             managed_service_data: "ManagedServiceData",
     #             policy_option: {
     #               network_firewall_policy: {
@@ -3163,6 +3556,8 @@ module Aws::FMS
     #           exclude_map: {
     #             "ACCOUNT" => ["CustomerPolicyScopeId"],
     #           },
+    #           resource_set_ids: ["Base62Id"],
+    #           policy_description: "ResourceDescription",
     #         },
     #         tag_list: [
     #           {
@@ -3263,6 +3658,65 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutResourceSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_set: { # required
+    #           id: "Base62Id",
+    #           name: "Name", # required
+    #           description: "Description",
+    #           update_token: "UpdateToken",
+    #           resource_type_list: ["ResourceType"], # required
+    #           last_update_time: Time.now,
+    #         },
+    #         tag_list: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_set
+    #   Details about the resource set to be created or updated.&gt;
+    #   @return [Types::ResourceSet]
+    #
+    # @!attribute [rw] tag_list
+    #   Retrieves the tags associated with the specified resource set. Tags
+    #   are key:value pairs that you can use to categorize and manage your
+    #   resources, for purposes like billing. For example, you might set the
+    #   tag key to "customer" and the value to the customer name or ID.
+    #   You can specify one or more tags to add to each Amazon Web Services
+    #   resource, up to 50 tags for a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutResourceSetRequest AWS API Documentation
+    #
+    class PutResourceSetRequest < Struct.new(
+      :resource_set,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_set
+    #   Details about the resource set.
+    #   @return [Types::ResourceSet]
+    #
+    # @!attribute [rw] resource_set_arn
+    #   The Amazon Resource Name (ARN) of the resource set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutResourceSetResponse AWS API Documentation
+    #
+    class PutResourceSetResponse < Struct.new(
+      :resource_set,
+      :resource_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an individual action you can take to remediate a
     # violation.
     #
@@ -3339,6 +3793,27 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # Details of a resource that is associated to an Firewall Manager
+    # resource set.
+    #
+    # @!attribute [rw] uri
+    #   The resource's universal resource indicator (URI).
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that the associated resource
+    #   belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Resource AWS API Documentation
+    #
+    class Resource < Struct.new(
+      :uri,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource was not found.
     #
     # @!attribute [rw] message
@@ -3348,6 +3823,112 @@ module Aws::FMS
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of resources to include in a policy.
+    #
+    # @note When making an API call, you may pass ResourceSet
+    #   data as a hash:
+    #
+    #       {
+    #         id: "Base62Id",
+    #         name: "Name", # required
+    #         description: "Description",
+    #         update_token: "UpdateToken",
+    #         resource_type_list: ["ResourceType"], # required
+    #         last_update_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the resource set. This ID is returned in the
+    #   responses to create and list commands. You provide it to operations
+    #   like update and delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the resource set. You can't change the name
+    #   of a resource set after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Firewall
+    #   Manager returns a token to your requests that access the resource
+    #   set. The token marks the state of the resource set resource at the
+    #   time of the request. Update tokens are not allowed when creating a
+    #   resource set. After creation, each subsequent update call to the
+    #   resource set requires the update token.
+    #
+    #   To make an unconditional change to the resource set, omit the token
+    #   in your update request. Without the token, Firewall Manager performs
+    #   your updates regardless of whether the resource set has changed
+    #   since you last retrieved it.
+    #
+    #   To make a conditional change to the resource set, provide the token
+    #   in your update request. Firewall Manager uses the token to ensure
+    #   that the resource set hasn't changed since you last retrieved it.
+    #   If it has changed, the operation fails with an
+    #   `InvalidTokenException`. If this happens, retrieve the resource set
+    #   again to get a current copy of it with a new token. Reapply your
+    #   changes as needed, then try the operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type_list
+    #   Determines the resources that can be associated to the resource set.
+    #   Depending on your setting for max results and the number of resource
+    #   sets, a single call might not return the full list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last time that the resource set was changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceSet AWS API Documentation
+    #
+    class ResourceSet < Struct.new(
+      :id,
+      :name,
+      :description,
+      :update_token,
+      :resource_type_list,
+      :last_update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarizes the resource sets used in a policy.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the resource set. This ID is returned in the
+    #   responses to create and list commands. You provide it to operations
+    #   like update and delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the resource set. You can't change the name
+    #   of a resource set after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the resource set.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last time that the resource set was changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceSetSummary AWS API Documentation
+    #
+    class ResourceSetSummary < Struct.new(
+      :id,
+      :name,
+      :description,
+      :last_update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3722,7 +4303,7 @@ module Aws::FMS
     #   data as a hash:
     #
     #       {
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
     #         managed_service_data: "ManagedServiceData",
     #         policy_option: {
     #           network_firewall_policy: {

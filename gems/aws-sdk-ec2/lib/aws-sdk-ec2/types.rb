@@ -8242,6 +8242,7 @@ module Aws::EC2
     #                   tenancy: "default", # accepts default, dedicated, host
     #                   spread_domain: "String",
     #                   host_resource_group_arn: "String",
+    #                   group_id: "PlacementGroupId",
     #                 },
     #                 instance_requirements: {
     #                   v_cpu_count: { # required
@@ -9656,6 +9657,7 @@ module Aws::EC2
     #             spread_domain: "String",
     #             host_resource_group_arn: "String",
     #             partition_number: 1,
+    #             group_id: "PlacementGroupId",
     #           },
     #           ram_disk_id: "RamdiskId",
     #           disable_api_termination: false,
@@ -9969,6 +9971,7 @@ module Aws::EC2
     #             spread_domain: "String",
     #             host_resource_group_arn: "String",
     #             partition_number: 1,
+    #             group_id: "PlacementGroupId",
     #           },
     #           ram_disk_id: "RamdiskId",
     #           disable_api_termination: false,
@@ -35418,6 +35421,7 @@ module Aws::EC2
     #               tenancy: "default", # accepts default, dedicated, host
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
+    #               group_id: "PlacementGroupId",
     #             },
     #             instance_requirements: {
     #               v_cpu_count: { # required
@@ -35607,6 +35611,7 @@ module Aws::EC2
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
+    #           group_id: "PlacementGroupId",
     #         },
     #         instance_requirements: {
     #           v_cpu_count: { # required
@@ -40562,6 +40567,7 @@ module Aws::EC2
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
+    #           group_id: "PlacementGroupId",
     #         },
     #         private_ip_address: "String",
     #         subnet_id: "SubnetId",
@@ -40677,6 +40683,7 @@ module Aws::EC2
     #             tenancy: "default", # accepts default, dedicated, host
     #             spread_domain: "String",
     #             host_resource_group_arn: "String",
+    #             group_id: "PlacementGroupId",
     #           },
     #           private_ip_address: "String",
     #           subnet_id: "SubnetId",
@@ -47347,6 +47354,12 @@ module Aws::EC2
     #   only if the placement group strategy is set to `partition`.
     #   @return [Integer]
     #
+    # @!attribute [rw] group_id
+    #   The Group ID of the placement group. You must specify the Placement
+    #   Group **Group ID** to launch an instance in a shared placement
+    #   group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacement AWS API Documentation
     #
     class LaunchTemplatePlacement < Struct.new(
@@ -47357,7 +47370,8 @@ module Aws::EC2
       :tenancy,
       :spread_domain,
       :host_resource_group_arn,
-      :partition_number)
+      :partition_number,
+      :group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47376,6 +47390,7 @@ module Aws::EC2
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
     #         partition_number: 1,
+    #         group_id: "PlacementGroupId",
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -47415,6 +47430,12 @@ module Aws::EC2
     #   only if the placement group strategy is set to `partition`.
     #   @return [Integer]
     #
+    # @!attribute [rw] group_id
+    #   The Group Id of a placement group. You must specify the Placement
+    #   Group **Group Id** to launch an instance in a shared placement
+    #   group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacementRequest AWS API Documentation
     #
     class LaunchTemplatePlacementRequest < Struct.new(
@@ -47425,7 +47446,8 @@ module Aws::EC2
       :tenancy,
       :spread_domain,
       :host_resource_group_arn,
-      :partition_number)
+      :partition_number,
+      :group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49208,6 +49230,7 @@ module Aws::EC2
     #                   tenancy: "default", # accepts default, dedicated, host
     #                   spread_domain: "String",
     #                   host_resource_group_arn: "String",
+    #                   group_id: "PlacementGroupId",
     #                 },
     #                 instance_requirements: {
     #                   v_cpu_count: { # required
@@ -50371,6 +50394,7 @@ module Aws::EC2
     #         tenancy: "dedicated", # accepts dedicated, host
     #         partition_number: 1,
     #         host_resource_group_arn: "String",
+    #         group_id: "PlacementGroupId",
     #       }
     #
     # @!attribute [rw] affinity
@@ -50415,6 +50439,12 @@ module Aws::EC2
     #   The ARN of the host resource group in which to place the instance.
     #   @return [String]
     #
+    # @!attribute [rw] group_id
+    #   The Group Id of a placement group. You must specify the Placement
+    #   Group **Group Id** to launch an instance in a shared placement
+    #   group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementRequest AWS API Documentation
     #
     class ModifyInstancePlacementRequest < Struct.new(
@@ -50424,7 +50454,8 @@ module Aws::EC2
       :instance_id,
       :tenancy,
       :partition_number,
-      :host_resource_group_arn)
+      :host_resource_group_arn,
+      :group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55610,6 +55641,7 @@ module Aws::EC2
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
+    #         group_id: "PlacementGroupId",
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -55703,6 +55735,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
+    # @!attribute [rw] group_id
+    #   The Group Id of the placement group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
     #
     class Placement < Struct.new(
@@ -55713,7 +55749,8 @@ module Aws::EC2
       :host_id,
       :tenancy,
       :spread_domain,
-      :host_resource_group_arn)
+      :host_resource_group_arn,
+      :group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58603,6 +58640,7 @@ module Aws::EC2
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
     #           partition_number: 1,
+    #           group_id: "PlacementGroupId",
     #         },
     #         ram_disk_id: "RamdiskId",
     #         disable_api_termination: false,
@@ -61925,6 +61963,7 @@ module Aws::EC2
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
+    #           group_id: "PlacementGroupId",
     #         },
     #         ramdisk_id: "RamdiskId",
     #         security_group_ids: ["SecurityGroupId"],

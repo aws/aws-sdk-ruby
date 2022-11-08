@@ -258,6 +258,7 @@ module Aws
   autoload :RedshiftServerless, 'aws-sdk-redshiftserverless'
   autoload :Rekognition, 'aws-sdk-rekognition'
   autoload :ResilienceHub, 'aws-sdk-resiliencehub'
+  autoload :ResourceExplorer2, 'aws-sdk-resourceexplorer2'
   autoload :ResourceGroups, 'aws-sdk-resourcegroups'
   autoload :ResourceGroupsTaggingAPI, 'aws-sdk-resourcegroupstaggingapi'
   autoload :RoboMaker, 'aws-sdk-robomaker'

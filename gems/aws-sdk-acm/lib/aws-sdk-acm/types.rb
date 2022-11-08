@@ -1381,13 +1381,14 @@ module Aws::ACM
     #         options: {
     #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #         },
-    #         certificate_authority_arn: "Arn",
+    #         certificate_authority_arn: "PcaArn",
     #         tags: [
     #           {
     #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
+    #         key_algorithm: "RSA_1024", # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1485,19 +1486,34 @@ module Aws::ACM
     #   (CA) that will be used to issue the certificate. If you do not
     #   provide an ARN and you are trying to request a private certificate,
     #   ACM will attempt to issue a public certificate. For more information
-    #   about private CAs, see the [Certificate Manager Private Certificate
+    #   about private CAs, see the [Amazon Web Services Private Certificate
     #   Authority][1] user guide. The ARN must have the following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   One or more resource tags to associate with the certificate.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] key_algorithm
+    #   Specifies the algorithm of the public and private key pair that your
+    #   certificate uses to encrypt data. RSA is the default key algorithm
+    #   for ACM certificates. Elliptic Curve Digital Signature Algorithm
+    #   (ECDSA) keys are smaller, offering security comparable to RSA keys
+    #   but with greater computing efficiency. However, ECDSA is not
+    #   supported by all network clients. Some AWS services may require RSA
+    #   keys, or only support ECDSA keys of a particular size, while others
+    #   allow the use of either RSA and ECDSA keys to ensure that
+    #   compatibility is not broken. Check the requirements for the AWS
+    #   service where you plan to deploy your certificate.
+    #
+    #   Default: RSA\_2048
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
@@ -1509,7 +1525,8 @@ module Aws::ACM
       :domain_validation_options,
       :options,
       :certificate_authority_arn,
-      :tags)
+      :tags,
+      :key_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end

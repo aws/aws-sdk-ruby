@@ -62,6 +62,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::AddTags.build(context)
           when :associate_package
             Aws::OpenSearchService::Endpoints::AssociatePackage.build(context)
+          when :authorize_vpc_endpoint_access
+            Aws::OpenSearchService::Endpoints::AuthorizeVpcEndpointAccess.build(context)
           when :cancel_service_software_update
             Aws::OpenSearchService::Endpoints::CancelServiceSoftwareUpdate.build(context)
           when :create_domain
@@ -70,6 +72,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::CreateOutboundConnection.build(context)
           when :create_package
             Aws::OpenSearchService::Endpoints::CreatePackage.build(context)
+          when :create_vpc_endpoint
+            Aws::OpenSearchService::Endpoints::CreateVpcEndpoint.build(context)
           when :delete_domain
             Aws::OpenSearchService::Endpoints::DeleteDomain.build(context)
           when :delete_inbound_connection
@@ -78,6 +82,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::DeleteOutboundConnection.build(context)
           when :delete_package
             Aws::OpenSearchService::Endpoints::DeletePackage.build(context)
+          when :delete_vpc_endpoint
+            Aws::OpenSearchService::Endpoints::DeleteVpcEndpoint.build(context)
           when :describe_domain
             Aws::OpenSearchService::Endpoints::DescribeDomain.build(context)
           when :describe_domain_auto_tunes
@@ -100,6 +106,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::DescribeReservedInstanceOfferings.build(context)
           when :describe_reserved_instances
             Aws::OpenSearchService::Endpoints::DescribeReservedInstances.build(context)
+          when :describe_vpc_endpoints
+            Aws::OpenSearchService::Endpoints::DescribeVpcEndpoints.build(context)
           when :dissociate_package
             Aws::OpenSearchService::Endpoints::DissociatePackage.build(context)
           when :get_compatible_versions
@@ -122,18 +130,28 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::ListTags.build(context)
           when :list_versions
             Aws::OpenSearchService::Endpoints::ListVersions.build(context)
+          when :list_vpc_endpoint_access
+            Aws::OpenSearchService::Endpoints::ListVpcEndpointAccess.build(context)
+          when :list_vpc_endpoints
+            Aws::OpenSearchService::Endpoints::ListVpcEndpoints.build(context)
+          when :list_vpc_endpoints_for_domain
+            Aws::OpenSearchService::Endpoints::ListVpcEndpointsForDomain.build(context)
           when :purchase_reserved_instance_offering
             Aws::OpenSearchService::Endpoints::PurchaseReservedInstanceOffering.build(context)
           when :reject_inbound_connection
             Aws::OpenSearchService::Endpoints::RejectInboundConnection.build(context)
           when :remove_tags
             Aws::OpenSearchService::Endpoints::RemoveTags.build(context)
+          when :revoke_vpc_endpoint_access
+            Aws::OpenSearchService::Endpoints::RevokeVpcEndpointAccess.build(context)
           when :start_service_software_update
             Aws::OpenSearchService::Endpoints::StartServiceSoftwareUpdate.build(context)
           when :update_domain_config
             Aws::OpenSearchService::Endpoints::UpdateDomainConfig.build(context)
           when :update_package
             Aws::OpenSearchService::Endpoints::UpdatePackage.build(context)
+          when :update_vpc_endpoint
+            Aws::OpenSearchService::Endpoints::UpdateVpcEndpoint.build(context)
           when :upgrade_domain
             Aws::OpenSearchService::Endpoints::UpgradeDomain.build(context)
           end

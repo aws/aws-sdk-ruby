@@ -430,6 +430,7 @@ RubyGems.org page under "LINKS" section.
 | AWS RDS DataService                                   | Aws::RDSDataService                      | aws-sdk-rdsdataservice                      | 2018-08-01  |
 | AWS Resilience Hub                                    | Aws::ResilienceHub                       | aws-sdk-resiliencehub                       | 2020-04-30  |
 | AWS Resource Access Manager                           | Aws::RAM                                 | aws-sdk-ram                                 | 2018-01-04  |
+| AWS Resource Explorer                                 | Aws::ResourceExplorer2                   | aws-sdk-resourceexplorer2                   | 2022-07-28  |
 | AWS Resource Groups                                   | Aws::ResourceGroups                      | aws-sdk-resourcegroups                      | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI            | aws-sdk-resourcegroupstaggingapi            | 2017-01-26  |
 | AWS RoboMaker                                         | Aws::RoboMaker                           | aws-sdk-robomaker                           | 2018-06-29  |

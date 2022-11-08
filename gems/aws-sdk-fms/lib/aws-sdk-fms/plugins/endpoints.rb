@@ -60,6 +60,10 @@ module Aws::FMS
             Aws::FMS::Endpoints::AssociateAdminAccount.build(context)
           when :associate_third_party_firewall
             Aws::FMS::Endpoints::AssociateThirdPartyFirewall.build(context)
+          when :batch_associate_resource
+            Aws::FMS::Endpoints::BatchAssociateResource.build(context)
+          when :batch_disassociate_resource
+            Aws::FMS::Endpoints::BatchDisassociateResource.build(context)
           when :delete_apps_list
             Aws::FMS::Endpoints::DeleteAppsList.build(context)
           when :delete_notification_channel
@@ -68,6 +72,8 @@ module Aws::FMS
             Aws::FMS::Endpoints::DeletePolicy.build(context)
           when :delete_protocols_list
             Aws::FMS::Endpoints::DeleteProtocolsList.build(context)
+          when :delete_resource_set
+            Aws::FMS::Endpoints::DeleteResourceSet.build(context)
           when :disassociate_admin_account
             Aws::FMS::Endpoints::DisassociateAdminAccount.build(context)
           when :disassociate_third_party_firewall
@@ -86,6 +92,8 @@ module Aws::FMS
             Aws::FMS::Endpoints::GetProtectionStatus.build(context)
           when :get_protocols_list
             Aws::FMS::Endpoints::GetProtocolsList.build(context)
+          when :get_resource_set
+            Aws::FMS::Endpoints::GetResourceSet.build(context)
           when :get_third_party_firewall_association_status
             Aws::FMS::Endpoints::GetThirdPartyFirewallAssociationStatus.build(context)
           when :get_violation_details
@@ -94,12 +102,18 @@ module Aws::FMS
             Aws::FMS::Endpoints::ListAppsLists.build(context)
           when :list_compliance_status
             Aws::FMS::Endpoints::ListComplianceStatus.build(context)
+          when :list_discovered_resources
+            Aws::FMS::Endpoints::ListDiscoveredResources.build(context)
           when :list_member_accounts
             Aws::FMS::Endpoints::ListMemberAccounts.build(context)
           when :list_policies
             Aws::FMS::Endpoints::ListPolicies.build(context)
           when :list_protocols_lists
             Aws::FMS::Endpoints::ListProtocolsLists.build(context)
+          when :list_resource_set_resources
+            Aws::FMS::Endpoints::ListResourceSetResources.build(context)
+          when :list_resource_sets
+            Aws::FMS::Endpoints::ListResourceSets.build(context)
           when :list_tags_for_resource
             Aws::FMS::Endpoints::ListTagsForResource.build(context)
           when :list_third_party_firewall_firewall_policies
@@ -112,6 +126,8 @@ module Aws::FMS
             Aws::FMS::Endpoints::PutPolicy.build(context)
           when :put_protocols_list
             Aws::FMS::Endpoints::PutProtocolsList.build(context)
+          when :put_resource_set
+            Aws::FMS::Endpoints::PutResourceSet.build(context)
           when :tag_resource
             Aws::FMS::Endpoints::TagResource.build(context)
           when :untag_resource

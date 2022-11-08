@@ -76,6 +76,7 @@ module Aws::Lightsail
     CacheBehaviorPerPath = Shapes::StructureShape.new(name: 'CacheBehaviorPerPath')
     CacheSettings = Shapes::StructureShape.new(name: 'CacheSettings')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateDomainValidationStatus = Shapes::StringShape.new(name: 'CertificateDomainValidationStatus')
     CertificateName = Shapes::StringShape.new(name: 'CertificateName')
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
     CertificateStatusList = Shapes::ListShape.new(name: 'CertificateStatusList')
@@ -246,6 +247,8 @@ module Aws::Lightsail
     DistributionBundleList = Shapes::ListShape.new(name: 'DistributionBundleList')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
     DistributionMetricName = Shapes::StringShape.new(name: 'DistributionMetricName')
+    DnsRecordCreationState = Shapes::StructureShape.new(name: 'DnsRecordCreationState')
+    DnsRecordCreationStateCode = Shapes::StringShape.new(name: 'DnsRecordCreationStateCode')
     Domain = Shapes::StructureShape.new(name: 'Domain')
     DomainEntry = Shapes::StructureShape.new(name: 'DomainEntry')
     DomainEntryList = Shapes::ListShape.new(name: 'DomainEntryList')
@@ -457,6 +460,8 @@ module Aws::Lightsail
     LoadBalancerProtocol = Shapes::StringShape.new(name: 'LoadBalancerProtocol')
     LoadBalancerState = Shapes::StringShape.new(name: 'LoadBalancerState')
     LoadBalancerTlsCertificate = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificate')
+    LoadBalancerTlsCertificateDnsRecordCreationState = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateDnsRecordCreationState')
+    LoadBalancerTlsCertificateDnsRecordCreationStateCode = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateDnsRecordCreationStateCode')
     LoadBalancerTlsCertificateDomainStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateDomainStatus')
     LoadBalancerTlsCertificateDomainValidationOption = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateDomainValidationOption')
     LoadBalancerTlsCertificateDomainValidationOptionList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateDomainValidationOptionList')
@@ -483,6 +488,8 @@ module Aws::Lightsail
     MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
     MonitoredResourceInfo = Shapes::StructureShape.new(name: 'MonitoredResourceInfo')
     MonthlyTransfer = Shapes::StructureShape.new(name: 'MonthlyTransfer')
+    NameServersUpdateState = Shapes::StructureShape.new(name: 'NameServersUpdateState')
+    NameServersUpdateStateCode = Shapes::StringShape.new(name: 'NameServersUpdateStateCode')
     NetworkProtocol = Shapes::StringShape.new(name: 'NetworkProtocol')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -518,6 +525,8 @@ module Aws::Lightsail
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
     PutInstancePublicPortsResult = Shapes::StructureShape.new(name: 'PutInstancePublicPortsResult')
     QueryStringObject = Shapes::StructureShape.new(name: 'QueryStringObject')
+    R53HostedZoneDeletionState = Shapes::StructureShape.new(name: 'R53HostedZoneDeletionState')
+    R53HostedZoneDeletionStateCode = Shapes::StringShape.new(name: 'R53HostedZoneDeletionStateCode')
     RebootInstanceRequest = Shapes::StructureShape.new(name: 'RebootInstanceRequest')
     RebootInstanceResult = Shapes::StructureShape.new(name: 'RebootInstanceResult')
     RebootRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'RebootRelationalDatabaseRequest')
@@ -528,6 +537,7 @@ module Aws::Lightsail
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     RegisterContainerImageRequest = Shapes::StructureShape.new(name: 'RegisterContainerImageRequest')
     RegisterContainerImageResult = Shapes::StructureShape.new(name: 'RegisterContainerImageResult')
+    RegisteredDomainDelegationInfo = Shapes::StructureShape.new(name: 'RegisteredDomainDelegationInfo')
     RelationalDatabase = Shapes::StructureShape.new(name: 'RelationalDatabase')
     RelationalDatabaseBlueprint = Shapes::StructureShape.new(name: 'RelationalDatabaseBlueprint')
     RelationalDatabaseBlueprintList = Shapes::ListShape.new(name: 'RelationalDatabaseBlueprintList')
@@ -1542,6 +1552,10 @@ module Aws::Lightsail
 
     DistributionList.member = Shapes::ShapeRef.new(shape: LightsailDistribution)
 
+    DnsRecordCreationState.add_member(:code, Shapes::ShapeRef.new(shape: DnsRecordCreationStateCode, location_name: "code"))
+    DnsRecordCreationState.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    DnsRecordCreationState.struct_class = Types::DnsRecordCreationState
+
     Domain.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     Domain.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     Domain.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
@@ -1550,6 +1564,7 @@ module Aws::Lightsail
     Domain.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     Domain.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Domain.add_member(:domain_entries, Shapes::ShapeRef.new(shape: DomainEntryList, location_name: "domainEntries"))
+    Domain.add_member(:registered_domain_delegation_info, Shapes::ShapeRef.new(shape: RegisteredDomainDelegationInfo, location_name: "registeredDomainDelegationInfo"))
     Domain.struct_class = Types::Domain
 
     DomainEntry.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "id"))
@@ -1571,6 +1586,8 @@ module Aws::Lightsail
 
     DomainValidationRecord.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     DomainValidationRecord.add_member(:resource_record, Shapes::ShapeRef.new(shape: ResourceRecord, location_name: "resourceRecord"))
+    DomainValidationRecord.add_member(:dns_record_creation_state, Shapes::ShapeRef.new(shape: DnsRecordCreationState, location_name: "dnsRecordCreationState"))
+    DomainValidationRecord.add_member(:validation_status, Shapes::ShapeRef.new(shape: CertificateDomainValidationStatus, location_name: "validationStatus"))
     DomainValidationRecord.struct_class = Types::DomainValidationRecord
 
     DomainValidationRecordList.member = Shapes::ShapeRef.new(shape: DomainValidationRecord)
@@ -2355,6 +2372,10 @@ module Aws::Lightsail
     LoadBalancerTlsCertificate.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: StringList, location_name: "subjectAlternativeNames"))
     LoadBalancerTlsCertificate.struct_class = Types::LoadBalancerTlsCertificate
 
+    LoadBalancerTlsCertificateDnsRecordCreationState.add_member(:code, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDnsRecordCreationStateCode, location_name: "code"))
+    LoadBalancerTlsCertificateDnsRecordCreationState.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    LoadBalancerTlsCertificateDnsRecordCreationState.struct_class = Types::LoadBalancerTlsCertificateDnsRecordCreationState
+
     LoadBalancerTlsCertificateDomainValidationOption.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     LoadBalancerTlsCertificateDomainValidationOption.add_member(:validation_status, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainStatus, location_name: "validationStatus"))
     LoadBalancerTlsCertificateDomainValidationOption.struct_class = Types::LoadBalancerTlsCertificateDomainValidationOption
@@ -2366,6 +2387,7 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "value"))
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:validation_status, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainStatus, location_name: "validationStatus"))
     LoadBalancerTlsCertificateDomainValidationRecord.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    LoadBalancerTlsCertificateDomainValidationRecord.add_member(:dns_record_creation_state, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDnsRecordCreationState, location_name: "dnsRecordCreationState"))
     LoadBalancerTlsCertificateDomainValidationRecord.struct_class = Types::LoadBalancerTlsCertificateDomainValidationRecord
 
     LoadBalancerTlsCertificateDomainValidationRecordList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainValidationRecord)
@@ -2417,6 +2439,10 @@ module Aws::Lightsail
 
     MonthlyTransfer.add_member(:gb_per_month_allocated, Shapes::ShapeRef.new(shape: integer, location_name: "gbPerMonthAllocated"))
     MonthlyTransfer.struct_class = Types::MonthlyTransfer
+
+    NameServersUpdateState.add_member(:code, Shapes::ShapeRef.new(shape: NameServersUpdateStateCode, location_name: "code"))
+    NameServersUpdateState.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    NameServersUpdateState.struct_class = Types::NameServersUpdateState
 
     NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
     NotFoundException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
@@ -2532,6 +2558,10 @@ module Aws::Lightsail
     QueryStringObject.add_member(:query_strings_allow_list, Shapes::ShapeRef.new(shape: StringList, location_name: "queryStringsAllowList"))
     QueryStringObject.struct_class = Types::QueryStringObject
 
+    R53HostedZoneDeletionState.add_member(:code, Shapes::ShapeRef.new(shape: R53HostedZoneDeletionStateCode, location_name: "code"))
+    R53HostedZoneDeletionState.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    R53HostedZoneDeletionState.struct_class = Types::R53HostedZoneDeletionState
+
     RebootInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     RebootInstanceRequest.struct_class = Types::RebootInstanceRequest
 
@@ -2561,6 +2591,10 @@ module Aws::Lightsail
 
     RegisterContainerImageResult.add_member(:container_image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "containerImage"))
     RegisterContainerImageResult.struct_class = Types::RegisterContainerImageResult
+
+    RegisteredDomainDelegationInfo.add_member(:name_servers_update_state, Shapes::ShapeRef.new(shape: NameServersUpdateState, location_name: "nameServersUpdateState"))
+    RegisteredDomainDelegationInfo.add_member(:r53_hosted_zone_deletion_state, Shapes::ShapeRef.new(shape: R53HostedZoneDeletionState, location_name: "r53HostedZoneDeletionState"))
+    RegisteredDomainDelegationInfo.struct_class = Types::RegisteredDomainDelegationInfo
 
     RelationalDatabase.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     RelationalDatabase.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))

@@ -463,7 +463,7 @@ module Aws::BillingConductor
     #     resource_arns: ["CustomLineItemAssociationElement"], # required
     #     billing_period_range: {
     #       inclusive_start_billing_period: "BillingPeriod", # required
-    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod",
     #     },
     #   })
     #
@@ -472,11 +472,11 @@ module Aws::BillingConductor
     #   resp.successfully_associated_resources #=> Array
     #   resp.successfully_associated_resources[0].arn #=> String
     #   resp.successfully_associated_resources[0].error.message #=> String
-    #   resp.successfully_associated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION"
+    #   resp.successfully_associated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"
     #   resp.failed_associated_resources #=> Array
     #   resp.failed_associated_resources[0].arn #=> String
     #   resp.failed_associated_resources[0].error.message #=> String
-    #   resp.failed_associated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION"
+    #   resp.failed_associated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BatchAssociateResourcesToCustomLineItem AWS API Documentation
     #
@@ -511,7 +511,7 @@ module Aws::BillingConductor
     #     resource_arns: ["CustomLineItemAssociationElement"], # required
     #     billing_period_range: {
     #       inclusive_start_billing_period: "BillingPeriod", # required
-    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod",
     #     },
     #   })
     #
@@ -520,11 +520,11 @@ module Aws::BillingConductor
     #   resp.successfully_disassociated_resources #=> Array
     #   resp.successfully_disassociated_resources[0].arn #=> String
     #   resp.successfully_disassociated_resources[0].error.message #=> String
-    #   resp.successfully_disassociated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION"
+    #   resp.successfully_disassociated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"
     #   resp.failed_disassociated_resources #=> Array
     #   resp.failed_disassociated_resources[0].arn #=> String
     #   resp.failed_disassociated_resources[0].error.message #=> String
-    #   resp.failed_disassociated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION"
+    #   resp.failed_disassociated_resources[0].error.reason #=> String, one of "INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BatchDisassociateResourcesFromCustomLineItem AWS API Documentation
     #
@@ -561,7 +561,7 @@ module Aws::BillingConductor
     #   The account ID that serves as the main account in a billing group.
     #
     # @option params [String] :description
-    #   The billing group description.
+    #   The description of the billing group.
     #
     # @option params [Hash<String,String>] :tags
     #   A map that contains tag keys and tag values that are attached to a
@@ -649,7 +649,7 @@ module Aws::BillingConductor
     #     billing_group_arn: "BillingGroupArn", # required
     #     billing_period_range: {
     #       inclusive_start_billing_period: "BillingPeriod", # required
-    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod",
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -690,10 +690,11 @@ module Aws::BillingConductor
     #   not need to pass this option.**
     #
     # @option params [required, String] :name
-    #   The pricing plan name. The names must be unique to each pricing plan.
+    #   The name of the pricing plan. The names must be unique to each pricing
+    #   plan.
     #
     # @option params [String] :description
-    #   The pricing plan description.
+    #   The description of the pricing plan.
     #
     # @option params [Array<String>] :pricing_rule_arns
     #   A list of Amazon Resource Names (ARNs) that define the pricing plan
@@ -736,7 +737,7 @@ module Aws::BillingConductor
     # of pricing plans.
     #
     # @option params [String] :client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
+    #   The token that's needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -749,14 +750,14 @@ module Aws::BillingConductor
     #   The pricing rule description.
     #
     # @option params [required, String] :scope
-    #   The scope of pricing rule that indicates if it is globally applicable,
-    #   or is service-specific.
+    #   The scope of pricing rule that indicates if it's globally applicable,
+    #   or it's service-specific.
     #
     # @option params [required, String] :type
     #   The type of pricing rule.
     #
     # @option params [required, Float] :modifier_percentage
-    #   A percentage modifier applied on the public pricing rates.
+    #   A percentage modifier that's applied on the public pricing rates.
     #
     # @option params [String] :service
     #   If the `Scope` attribute is set to `SERVICE`, the attribute indicates
@@ -801,7 +802,8 @@ module Aws::BillingConductor
     # Deletes a billing group.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the billing group you're deleting.
+    #   The Amazon Resource Name (ARN) of the billing group that you're
+    #   deleting.
     #
     # @return [Types::DeleteBillingGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -846,7 +848,7 @@ module Aws::BillingConductor
     #     arn: "CustomLineItemArn", # required
     #     billing_period_range: {
     #       inclusive_start_billing_period: "BillingPeriod", # required
-    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod",
     #     },
     #   })
     #
@@ -867,7 +869,8 @@ module Aws::BillingConductor
     # any billing groups to delete successfully.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the pricing plan you're deleting.
+    #   The Amazon Resource Name (ARN) of the pricing plan that you're
+    #   deleting.
     #
     # @return [Types::DeletePricingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -892,11 +895,12 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
-    # Deletes the pricing rule identified by the input Amazon Resource Name
-    # (ARN).
+    # Deletes the pricing rule that's identified by the input Amazon
+    # Resource Name (ARN).
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the pricing rule you are deleting.
+    #   The Amazon Resource Name (ARN) of the pricing rule that you are
+    #   deleting.
     #
     # @return [Types::DeletePricingRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -989,17 +993,11 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
-    # <i> <b>Amazon Web Services Billing Conductor is in beta release and is
-    # subject to change. Your use of Amazon Web Services Billing Conductor
-    # is subject to the Beta Service Participation terms of the <a
-    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
-    # Service Terms</a> (Section 1.10).</b> </i>
-    #
     # This is a paginated call to list linked accounts that are linked to
     # the payer account for the specified time period. If no information is
     # provided, the current billing period is used. The response will
-    # optionally include the billing group associated with the linked
-    # account.
+    # optionally include the billing group that's associated with the
+    # linked account.
     #
     # @option params [String] :billing_period
     #   The preferred billing period to get account associations.
@@ -1010,14 +1008,15 @@ module Aws::BillingConductor
     #
     #   `MONITORED`\: linked accounts that are associated to billing groups.
     #
-    #   `UNMONITORED`\: linked accounts that are not associated to billing
+    #   `UNMONITORED`\: linked accounts that aren't associated to billing
     #   groups.
     #
     #   `Billing Group Arn`\: linked accounts that are associated to the
     #   provided billing group Arn.
     #
     # @option params [String] :next_token
-    #   The pagination token used on subsequent calls to retrieve accounts.
+    #   The pagination token that's used on subsequent calls to retrieve
+    #   accounts.
     #
     # @return [Types::ListAccountAssociationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1066,7 +1065,7 @@ module Aws::BillingConductor
     #   The maximum number of reports to retrieve.
     #
     # @option params [String] :next_token
-    #   The pagination token used on subsequent calls to get reports.
+    #   The pagination token that's used on subsequent calls to get reports.
     #
     # @option params [Types::ListBillingGroupCostReportsFilter] :filters
     #   A `ListBillingGroupCostReportsFilter` to specify billing groups to
@@ -1121,7 +1120,8 @@ module Aws::BillingConductor
     #   The maximum number of billing groups to retrieve.
     #
     # @option params [String] :next_token
-    #   The pagination token used on subsequent calls to get billing groups.
+    #   The pagination token that's used on subsequent calls to get billing
+    #   groups.
     #
     # @option params [Types::ListBillingGroupsFilter] :filters
     #   A `ListBillingGroupsFilter` that specifies the billing group and
@@ -1170,6 +1170,70 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
+    # A paginated call to get a list of all custom line item versions.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) for the custom line item.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of custom line item versions to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used on subsequent calls to retrieve
+    #   custom line item versions.
+    #
+    # @option params [Types::ListCustomLineItemVersionsFilter] :filters
+    #   A `ListCustomLineItemVersionsFilter` that specifies the billing period
+    #   range in which the custom line item versions are applied.
+    #
+    # @return [Types::ListCustomLineItemVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomLineItemVersionsOutput#custom_line_item_versions #custom_line_item_versions} => Array&lt;Types::CustomLineItemVersionListElement&gt;
+    #   * {Types::ListCustomLineItemVersionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_line_item_versions({
+    #     arn: "CustomLineItemArn", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #     filters: {
+    #       billing_period_range: {
+    #         start_billing_period: "BillingPeriod",
+    #         end_billing_period: "BillingPeriod",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_line_item_versions #=> Array
+    #   resp.custom_line_item_versions[0].name #=> String
+    #   resp.custom_line_item_versions[0].charge_details.flat.charge_value #=> Float
+    #   resp.custom_line_item_versions[0].charge_details.percentage.percentage_value #=> Float
+    #   resp.custom_line_item_versions[0].charge_details.type #=> String, one of "CREDIT", "FEE"
+    #   resp.custom_line_item_versions[0].currency_code #=> String, one of "USD", "CNY"
+    #   resp.custom_line_item_versions[0].description #=> String
+    #   resp.custom_line_item_versions[0].product_code #=> String
+    #   resp.custom_line_item_versions[0].billing_group_arn #=> String
+    #   resp.custom_line_item_versions[0].creation_time #=> Integer
+    #   resp.custom_line_item_versions[0].last_modified_time #=> Integer
+    #   resp.custom_line_item_versions[0].association_size #=> Integer
+    #   resp.custom_line_item_versions[0].start_billing_period #=> String
+    #   resp.custom_line_item_versions[0].end_billing_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersions AWS API Documentation
+    #
+    # @overload list_custom_line_item_versions(params = {})
+    # @param [Hash] params ({})
+    def list_custom_line_item_versions(params = {}, options = {})
+      req = build_request(:list_custom_line_item_versions, params)
+      req.send_request(options)
+    end
+
     # A paginated call to get a list of all custom line items (FFLIs) for
     # the given billing period. If you don't provide a billing period, the
     # current billing period is used.
@@ -1181,8 +1245,8 @@ module Aws::BillingConductor
     #   The maximum number of billing groups to retrieve.
     #
     # @option params [String] :next_token
-    #   The pagination token used on subsequent calls to get custom line items
-    #   (FFLIs).
+    #   The pagination token that's used on subsequent calls to get custom
+    #   line items (FFLIs).
     #
     # @option params [Types::ListCustomLineItemsFilter] :filters
     #   A `ListCustomLineItemsFilter` that specifies the custom line item
@@ -1250,7 +1314,8 @@ module Aws::BillingConductor
     #   The maximum number of pricing plans to retrieve.
     #
     # @option params [String] :next_token
-    #   The pagination token used on subsequent call to get pricing plans.
+    #   The pagination token that's used on subsequent call to get pricing
+    #   plans.
     #
     # @return [Types::ListPricingPlansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1292,7 +1357,7 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
-    # A list of the pricing plans associated with a pricing rule.
+    # A list of the pricing plans that are associated with a pricing rule.
     #
     # @option params [String] :billing_period
     #   The pricing plan billing period for which associations will be listed.
@@ -1356,7 +1421,8 @@ module Aws::BillingConductor
     #   The maximum number of pricing rules to retrieve.
     #
     # @option params [String] :next_token
-    #   The pagination token used on subsequent call to get pricing rules.
+    #   The pagination token that's used on subsequent call to get pricing
+    #   rules.
     #
     # @return [Types::ListPricingRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1402,7 +1468,7 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
-    # Lists the pricing rules associated with a pricing plan.
+    # Lists the pricing rules that are associated with a pricing plan.
     #
     # @option params [String] :billing_period
     #   The billing period for which the pricing rule associations are to be
@@ -1453,7 +1519,7 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
-    # List the resources associated to a custom line item.
+    # List the resources that are associated to a custom line item.
     #
     # @option params [String] :billing_period
     #   The billing period for which the resource associations will be listed.
@@ -1467,7 +1533,8 @@ module Aws::BillingConductor
     #   retrieved.
     #
     # @option params [String] :next_token
-    #   (Optional) The pagination token returned by a previous request.
+    #   (Optional) The pagination token that's returned by a previous
+    #   request.
     #
     # @option params [Types::ListResourcesAssociatedToCustomLineItemFilter] :filters
     #   (Optional) A `ListResourcesAssociatedToCustomLineItemFilter` that can
@@ -1499,6 +1566,7 @@ module Aws::BillingConductor
     #   resp.associated_resources #=> Array
     #   resp.associated_resources[0].arn #=> String
     #   resp.associated_resources[0].relationship #=> String, one of "PARENT", "CHILD"
+    #   resp.associated_resources[0].end_billing_period #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListResourcesAssociatedToCustomLineItem AWS API Documentation
@@ -1696,7 +1764,7 @@ module Aws::BillingConductor
     #
     #   resp = client.update_custom_line_item({
     #     arn: "CustomLineItemArn", # required
-    #     name: "BillingGroupName",
+    #     name: "CustomLineItemName",
     #     description: "CustomLineItemDescription",
     #     charge_details: {
     #       flat: {
@@ -1708,7 +1776,7 @@ module Aws::BillingConductor
     #     },
     #     billing_period_range: {
     #       inclusive_start_billing_period: "BillingPeriod", # required
-    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod",
     #     },
     #   })
     #
@@ -1736,14 +1804,15 @@ module Aws::BillingConductor
     # This updates an existing pricing plan.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the pricing plan you're updating.
+    #   The Amazon Resource Name (ARN) of the pricing plan that you're
+    #   updating.
     #
     # @option params [String] :name
     #   The name of the pricing plan. The name must be unique to each pricing
     #   plan.
     #
     # @option params [String] :description
-    #   The pricing plan description.
+    #   The description of the pricing plan.
     #
     # @return [Types::UpdatePricingPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1852,7 +1921,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

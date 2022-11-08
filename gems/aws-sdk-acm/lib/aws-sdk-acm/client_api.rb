@@ -79,6 +79,7 @@ module Aws::ACM
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     PassphraseBlob = Shapes::BlobShape.new(name: 'PassphraseBlob')
+    PcaArn = Shapes::StringShape.new(name: 'PcaArn')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
@@ -329,8 +330,9 @@ module Aws::ACM
     RequestCertificateRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     RequestCertificateRequest.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationOptionList, location_name: "DomainValidationOptions"))
     RequestCertificateRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
-    RequestCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    RequestCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: PcaArn, location_name: "CertificateAuthorityArn"))
     RequestCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RequestCertificateRequest.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm"))
     RequestCertificateRequest.struct_class = Types::RequestCertificateRequest
 
     RequestCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
@@ -421,6 +423,9 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
@@ -488,6 +493,7 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCertificatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {

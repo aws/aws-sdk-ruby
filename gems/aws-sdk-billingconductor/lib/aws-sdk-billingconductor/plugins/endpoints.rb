@@ -90,6 +90,8 @@ module Aws::BillingConductor
             Aws::BillingConductor::Endpoints::ListBillingGroupCostReports.build(context)
           when :list_billing_groups
             Aws::BillingConductor::Endpoints::ListBillingGroups.build(context)
+          when :list_custom_line_item_versions
+            Aws::BillingConductor::Endpoints::ListCustomLineItemVersions.build(context)
           when :list_custom_line_items
             Aws::BillingConductor::Endpoints::ListCustomLineItems.build(context)
           when :list_pricing_plans

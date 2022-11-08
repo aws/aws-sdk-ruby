@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.144.0 (2022-11-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-resourceexplorer2` gem.
+
 3.143.0 (2022-10-04)
 ------------------
 

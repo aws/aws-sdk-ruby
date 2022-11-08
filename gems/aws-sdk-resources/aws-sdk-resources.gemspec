@@ -268,6 +268,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-redshiftserverless', '~> 1')
   spec.add_dependency('aws-sdk-rekognition', '~> 1')
   spec.add_dependency('aws-sdk-resiliencehub', '~> 1')
+  spec.add_dependency('aws-sdk-resourceexplorer2', '~> 1')
   spec.add_dependency('aws-sdk-resourcegroups', '~> 1')
   spec.add_dependency('aws-sdk-resourcegroupstaggingapi', '~> 1')
   spec.add_dependency('aws-sdk-robomaker', '~> 1')

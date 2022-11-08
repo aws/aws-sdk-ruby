@@ -23,12 +23,6 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # <i> <b>Amazon Web Services Billing Conductor is in beta release and is
-    # subject to change. Your use of Amazon Web Services Billing Conductor
-    # is subject to the Beta Service Participation terms of the <a
-    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
-    # Service Terms</a> (Section 1.10).</b> </i>
-    #
     # A representation of a linked account.
     #
     # @!attribute [rw] account_id
@@ -161,11 +155,11 @@ module Aws::BillingConductor
     # A representation of a resource association error.
     #
     # @!attribute [rw] message
-    #   The reason the resource association failed.
+    #   The reason why the resource association failed.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   A static error code that used to classify the type of failure.
+    #   A static error code that's used to classify the type of failure.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/AssociateResourceError AWS API Documentation
@@ -205,7 +199,7 @@ module Aws::BillingConductor
     #         resource_arns: ["CustomLineItemAssociationElement"], # required
     #         billing_period_range: {
     #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod", # required
+    #           exclusive_end_billing_period: "BillingPeriod",
     #         },
     #       }
     #
@@ -260,7 +254,7 @@ module Aws::BillingConductor
     #         resource_arns: ["CustomLineItemAssociationElement"], # required
     #         billing_period_range: {
     #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod", # required
+    #           exclusive_end_billing_period: "BillingPeriod",
     #         },
     #       }
     #
@@ -353,7 +347,7 @@ module Aws::BillingConductor
     # A representation of a billing group.
     #
     # @!attribute [rw] name
-    #   The billing group's name.
+    #   The name of the billing group.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -362,7 +356,7 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The billing group description.
+    #   The description of the billing group.
     #   @return [String]
     #
     # @!attribute [rw] primary_account_id
@@ -379,11 +373,11 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
-    #   The time the billing group was created.
+    #   The time when the billing group was created.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the billing group was modified.
+    #   The most recent time when the billing group was modified.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -422,8 +416,8 @@ module Aws::BillingConductor
     #       }
     #
     # @!attribute [rw] pricing_plan_arn
-    #   The Amazon Resource Name (ARN) of the pricing plan used to compute
-    #   the Amazon Web Services charges for a billing group.
+    #   The Amazon Resource Name (ARN) of the pricing plan that's used to
+    #   compute the Amazon Web Services charges for a billing group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ComputationPreference AWS API Documentation
@@ -448,12 +442,17 @@ module Aws::BillingConductor
     #   Type of the resource in use.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Reason for the inconsistent state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
       :message,
       :resource_id,
-      :resource_type)
+      :resource_type,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -504,7 +503,7 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The billing group description.
+    #   The description of the billing group.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -548,7 +547,7 @@ module Aws::BillingConductor
     #         billing_group_arn: "BillingGroupArn", # required
     #         billing_period_range: {
     #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod", # required
+    #           exclusive_end_billing_period: "BillingPeriod",
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -649,12 +648,12 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The pricing plan name. The names must be unique to each pricing
-    #   plan.
+    #   The name of the pricing plan. The names must be unique to each
+    #   pricing plan.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The pricing plan description.
+    #   The description of the pricing plan.
     #   @return [String]
     #
     # @!attribute [rw] pricing_rule_arns
@@ -708,7 +707,7 @@ module Aws::BillingConductor
     #       }
     #
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
+    #   The token that's needed to support idempotency. Idempotency isn't
     #   currently supported, but will be implemented in a future update.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -725,8 +724,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   The scope of pricing rule that indicates if it is globally
-    #   applicable, or is service-specific.
+    #   The scope of pricing rule that indicates if it's globally
+    #   applicable, or it's service-specific.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -734,7 +733,7 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] modifier_percentage
-    #   A percentage modifier applied on the public pricing rates.
+    #   A percentage modifier that's applied on the public pricing rates.
     #   @return [Float]
     #
     # @!attribute [rw] service
@@ -782,7 +781,7 @@ module Aws::BillingConductor
     #
     #       {
     #         inclusive_start_billing_period: "BillingPeriod", # required
-    #         exclusive_end_billing_period: "BillingPeriod", # required
+    #         exclusive_end_billing_period: "BillingPeriod",
     #       }
     #
     # @!attribute [rw] inclusive_start_billing_period
@@ -846,8 +845,8 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # A representation of the charge details associated with a flat custom
-    # line item.
+    # A representation of the charge details that are associated with a flat
+    # custom line item.
     #
     # @note When making an API call, you may pass CustomLineItemFlatChargeDetails
     #   data as a hash:
@@ -894,7 +893,7 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] product_code
-    #   The product code associated with the custom line item.
+    #   The product code that's associated with the custom line item.
     #   @return [String]
     #
     # @!attribute [rw] billing_group_arn
@@ -907,7 +906,7 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the custom line item was modified.
+    #   The most recent time when the custom line item was modified.
     #   @return [Integer]
     #
     # @!attribute [rw] association_size
@@ -931,8 +930,8 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # A representation of the charge details associated with a percentage
-    # custom line item.
+    # A representation of the charge details that are associated with a
+    # percentage custom line item.
     #
     # @note When making an API call, you may pass CustomLineItemPercentageChargeDetails
     #   data as a hash:
@@ -962,6 +961,72 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # A representation of a custom line item version.
+    #
+    # @!attribute [rw] name
+    #   The name of the custom line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_details
+    #   A representation of the charge details of a custom line item.
+    #   @return [Types::ListCustomLineItemChargeDetails]
+    #
+    # @!attribute [rw] currency_code
+    #   The charge value currency of the custom line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the custom line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code
+    #   The product code that’s associated with the custom line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_group_arn
+    #   The Amazon Resource Name (ARN) of the billing group that the custom
+    #   line item applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the custom line item version was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The most recent time that the custom line item version was modified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] association_size
+    #   The number of resources that are associated with the custom line
+    #   item.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_billing_period
+    #   The start billing period of the custom line item version.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_billing_period
+    #   The end billing period of the custom line item version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
+    #
+    class CustomLineItemVersionListElement < Struct.new(
+      :name,
+      :charge_details,
+      :currency_code,
+      :description,
+      :product_code,
+      :billing_group_arn,
+      :creation_time,
+      :last_modified_time,
+      :association_size,
+      :start_billing_period,
+      :end_billing_period)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteBillingGroupInput
     #   data as a hash:
     #
@@ -970,7 +1035,7 @@ module Aws::BillingConductor
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the billing group you're
+    #   The Amazon Resource Name (ARN) of the billing group that you're
     #   deleting.
     #   @return [String]
     #
@@ -1001,7 +1066,7 @@ module Aws::BillingConductor
     #         arn: "CustomLineItemArn", # required
     #         billing_period_range: {
     #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod", # required
+    #           exclusive_end_billing_period: "BillingPeriod",
     #         },
     #       }
     #
@@ -1043,7 +1108,8 @@ module Aws::BillingConductor
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the pricing plan you're deleting.
+    #   The Amazon Resource Name (ARN) of the pricing plan that you're
+    #   deleting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/DeletePricingPlanInput AWS API Documentation
@@ -1074,7 +1140,8 @@ module Aws::BillingConductor
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the pricing rule you are deleting.
+    #   The Amazon Resource Name (ARN) of the pricing rule that you are
+    #   deleting.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/DeletePricingRuleInput AWS API Documentation
@@ -1183,8 +1250,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   An `AssociateResourceError` shown if the resource disassociation
-    #   fails.
+    #   An `AssociateResourceError` that's shown if the resource
+    #   disassociation fails.
     #   @return [Types::AssociateResourceError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/DisassociateResourceResponseElement AWS API Documentation
@@ -1278,7 +1345,7 @@ module Aws::BillingConductor
     #
     #   `MONITORED`\: linked accounts that are associated to billing groups.
     #
-    #   `UNMONITORED`\: linked accounts that are not associated to billing
+    #   `UNMONITORED`\: linked accounts that aren't associated to billing
     #   groups.
     #
     #   `Billing Group Arn`\: linked accounts that are associated to the
@@ -1286,7 +1353,8 @@ module Aws::BillingConductor
     #   @return [Types::ListAccountAssociationsFilter]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to retrieve accounts.
+    #   The pagination token that's used on subsequent calls to retrieve
+    #   accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListAccountAssociationsInput AWS API Documentation
@@ -1304,7 +1372,8 @@ module Aws::BillingConductor
     #   @return [Array<Types::AccountAssociationsListElement>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get accounts.
+    #   The pagination token that's used on subsequent calls to get
+    #   accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListAccountAssociationsOutput AWS API Documentation
@@ -1359,7 +1428,8 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get reports.
+    #   The pagination token that's used on subsequent calls to get
+    #   reports.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -1383,7 +1453,8 @@ module Aws::BillingConductor
     #   @return [Array<Types::BillingGroupCostReportElement>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get reports.
+    #   The pagination token that's used on subsequent calls to get
+    #   reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupCostReportsOutput AWS API Documentation
@@ -1447,7 +1518,8 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get billing groups.
+    #   The pagination token that's used on subsequent calls to get billing
+    #   groups.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -1471,7 +1543,8 @@ module Aws::BillingConductor
     #   @return [Array<Types::BillingGroupListElement>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get billing groups.
+    #   The pagination token that's used on subsequent calls to get billing
+    #   groups.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupsOutput AWS API Documentation
@@ -1510,8 +1583,8 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # A representation of the charge details associated with a flat custom
-    # line item.
+    # A representation of the charge details that are associated with a flat
+    # custom line item.
     #
     # @!attribute [rw] charge_value
     #   The custom line item's fixed charge value in USD.
@@ -1525,8 +1598,8 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # A representation of the charge details associated with a percentage
-    # custom line item.
+    # A representation of the charge details that are associated with a
+    # percentage custom line item.
     #
     # @!attribute [rw] percentage_value
     #   The custom line item's percentage value. This will be multiplied
@@ -1538,6 +1611,124 @@ module Aws::BillingConductor
     #
     class ListCustomLineItemPercentageChargeDetails < Struct.new(
       :percentage_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A billing period filter that specifies the custom line item versions
+    # to retrieve.
+    #
+    # @note When making an API call, you may pass ListCustomLineItemVersionsBillingPeriodRangeFilter
+    #   data as a hash:
+    #
+    #       {
+    #         start_billing_period: "BillingPeriod",
+    #         end_billing_period: "BillingPeriod",
+    #       }
+    #
+    # @!attribute [rw] start_billing_period
+    #   The inclusive start billing period that defines a billing period
+    #   range where a custom line item version is applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_billing_period
+    #   The exclusive end billing period that defines a billing period range
+    #   where a custom line item version is applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersionsBillingPeriodRangeFilter AWS API Documentation
+    #
+    class ListCustomLineItemVersionsBillingPeriodRangeFilter < Struct.new(
+      :start_billing_period,
+      :end_billing_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that specifies the billing period range where the custom line
+    # item versions reside.
+    #
+    # @note When making an API call, you may pass ListCustomLineItemVersionsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         billing_period_range: {
+    #           start_billing_period: "BillingPeriod",
+    #           end_billing_period: "BillingPeriod",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] billing_period_range
+    #   The billing period range in which the custom line item version is
+    #   applied.
+    #   @return [Types::ListCustomLineItemVersionsBillingPeriodRangeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersionsFilter AWS API Documentation
+    #
+    class ListCustomLineItemVersionsFilter < Struct.new(
+      :billing_period_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomLineItemVersionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "CustomLineItemArn", # required
+    #         max_results: 1,
+    #         next_token: "Token",
+    #         filters: {
+    #           billing_period_range: {
+    #             start_billing_period: "BillingPeriod",
+    #             end_billing_period: "BillingPeriod",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the custom line item.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of custom line item versions to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used on subsequent calls to retrieve
+    #   custom line item versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A `ListCustomLineItemVersionsFilter` that specifies the billing
+    #   period range in which the custom line item versions are applied.
+    #   @return [Types::ListCustomLineItemVersionsFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersionsInput AWS API Documentation
+    #
+    class ListCustomLineItemVersionsInput < Struct.new(
+      :arn,
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_line_item_versions
+    #   A list of `CustomLineItemVersionListElements` that are received.
+    #   @return [Array<Types::CustomLineItemVersionListElement>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used on subsequent calls to retrieve
+    #   custom line item versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersionsOutput AWS API Documentation
+    #
+    class ListCustomLineItemVersionsOutput < Struct.new(
+      :custom_line_item_versions,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1600,8 +1791,8 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get custom line
-    #   items (FFLIs).
+    #   The pagination token that's used on subsequent calls to get custom
+    #   line items (FFLIs).
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -1626,8 +1817,8 @@ module Aws::BillingConductor
     #   @return [Array<Types::CustomLineItemListElement>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get custom line
-    #   items (FFLIs).
+    #   The pagination token that's used on subsequent calls to get custom
+    #   line items (FFLIs).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemsOutput AWS API Documentation
@@ -1690,8 +1881,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_arns
-    #   The list containing pricing plans associated with the requested
-    #   pricing rule.
+    #   The list containing pricing plans that are associated with the
+    #   requested pricing rule.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1758,7 +1949,8 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent call to get pricing plans.
+    #   The pagination token that's used on subsequent call to get pricing
+    #   plans.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingPlansInput AWS API Documentation
@@ -1782,7 +1974,8 @@ module Aws::BillingConductor
     #   @return [Array<Types::PricingPlanListElement>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get pricing plans.
+    #   The pagination token that's used on subsequent calls to get pricing
+    #   plans.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingPlansOutput AWS API Documentation
@@ -1846,8 +2039,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] pricing_rule_arns
-    #   A list containing pricing rules associated with the requested
-    #   pricing plan.
+    #   A list containing pricing rules that are associated with the
+    #   requested pricing plan.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1914,7 +2107,8 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent call to get pricing rules.
+    #   The pagination token that's used on subsequent call to get pricing
+    #   rules.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingRulesInput AWS API Documentation
@@ -1938,7 +2132,8 @@ module Aws::BillingConductor
     #   @return [Array<Types::PricingRuleListElement>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used on subsequent calls to get pricing rules.
+    #   The pagination token that's used on subsequent calls to get pricing
+    #   rules.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingRulesOutput AWS API Documentation
@@ -2003,7 +2198,8 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   (Optional) The pagination token returned by a previous request.
+    #   (Optional) The pagination token that's returned by a previous
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -2059,11 +2255,16 @@ module Aws::BillingConductor
     #   associated resource.
     #   @return [String]
     #
+    # @!attribute [rw] end_billing_period
+    #   The end billing period of the associated resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListResourcesAssociatedToCustomLineItemResponseElement AWS API Documentation
     #
     class ListResourcesAssociatedToCustomLineItemResponseElement < Struct.new(
       :arn,
-      :relationship)
+      :relationship,
+      :end_billing_period)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2116,16 +2317,16 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The pricing rules count currently associated with this pricing plan
-    #   list element.
+    #   The pricing rules count that's currently associated with this
+    #   pricing plan list element.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
-    #   The time the pricing plan was created.
+    #   The time when the pricing plan was created.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the pricing plan was modified.
+    #   The most recent time when the pricing plan was modified.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PricingPlanListElement AWS API Documentation
@@ -2179,11 +2380,11 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
-    #   The time the pricing rule was created.
+    #   The time when the pricing rule was created.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the pricing rule was modified.
+    #   The most recent time when the pricing rule was modified.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PricingRuleListElement AWS API Documentation
@@ -2415,7 +2616,7 @@ module Aws::BillingConductor
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the billing group was modified.
+    #   The most recent time when the billing group was modified.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -2477,8 +2678,8 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # A representation of the new charge details associated with a flat
-    # custom line item.
+    # A representation of the new charge details that are associated with a
+    # flat custom line item.
     #
     # @note When making an API call, you may pass UpdateCustomLineItemFlatChargeDetails
     #   data as a hash:
@@ -2504,7 +2705,7 @@ module Aws::BillingConductor
     #
     #       {
     #         arn: "CustomLineItemArn", # required
-    #         name: "BillingGroupName",
+    #         name: "CustomLineItemName",
     #         description: "CustomLineItemDescription",
     #         charge_details: {
     #           flat: {
@@ -2516,7 +2717,7 @@ module Aws::BillingConductor
     #         },
     #         billing_period_range: {
     #           inclusive_start_billing_period: "BillingPeriod", # required
-    #           exclusive_end_billing_period: "BillingPeriod", # required
+    #           exclusive_end_billing_period: "BillingPeriod",
     #         },
     #       }
     #
@@ -2577,7 +2778,7 @@ module Aws::BillingConductor
     #   @return [Types::ListCustomLineItemChargeDetails]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the custom line item was modified.
+    #   The most recent time when the custom line item was modified.
     #   @return [Integer]
     #
     # @!attribute [rw] association_size
@@ -2598,7 +2799,7 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
-    # A representation of the new charge details associated with a
+    # A representation of the new charge details that are associated with a
     # percentage custom line item.
     #
     # @note When making an API call, you may pass UpdateCustomLineItemPercentageChargeDetails
@@ -2632,7 +2833,8 @@ module Aws::BillingConductor
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the pricing plan you're updating.
+    #   The Amazon Resource Name (ARN) of the pricing plan that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2641,7 +2843,7 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The pricing plan description.
+    #   The description of the pricing plan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingPlanInput AWS API Documentation
@@ -2668,12 +2870,12 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The pricing rules count currently associated with this pricing plan
-    #   list.
+    #   The pricing rules count that's currently associated with this
+    #   pricing plan list.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
-    #   The most recent time the pricing plan was modified.
+    #   The most recent time when the pricing plan was modified.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingPlanOutput AWS API Documentation
@@ -2747,8 +2949,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   The scope of pricing rule that indicates if it is globally
-    #   applicable, or is service-specific.
+    #   The scope of pricing rule that indicates if it's globally
+    #   applicable, or it's service-specific.
     #   @return [String]
     #
     # @!attribute [rw] type

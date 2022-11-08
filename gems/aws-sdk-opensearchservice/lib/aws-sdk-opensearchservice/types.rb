@@ -10,6 +10,8 @@
 module Aws::OpenSearchService
   module Types
 
+    # Information about an Amazon OpenSearch Service domain.
+    #
     # @note When making an API call, you may pass AWSDomainInformation
     #   data as a hash:
     #
@@ -20,16 +22,15 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] owner_id
+    #   The Amazon Web Services account ID of the domain owner.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   Name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] region
+    #   The Amazon Web Services Region in which the domain is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AWSDomainInformation AWS API Documentation
@@ -42,7 +43,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` AcceptInboundConnection `
+    # Container for the parameters to the `AcceptInboundConnection`
     # operation.
     #
     # @note When making an API call, you may pass AcceptInboundConnectionRequest
@@ -53,7 +54,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] connection_id
-    #   The ID of the inbound connection you want to accept.
+    #   The ID of the inbound connection to accept.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AcceptInboundConnectionRequest AWS API Documentation
@@ -64,11 +65,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of an ` AcceptInboundConnection ` operation. Contains
-    # details about the accepted inbound connection.
+    # Contains details about the accepted inbound connection.
     #
     # @!attribute [rw] connection
-    #   The ` InboundConnection ` of the accepted inbound connection.
+    #   Information about the accepted inbound connection.
     #   @return [Types::InboundConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AcceptInboundConnectionResponse AWS API Documentation
@@ -86,22 +86,21 @@ module Aws::OpenSearchService
     #
     class AccessDeniedException < Aws::EmptyStructure; end
 
-    # The configured access rules for the domain's document and search
-    # endpoints, and the current status of those rules.
+    # The configured access rules for the domain's search endpoint, and the
+    # current status of those rules.
     #
     # @!attribute [rw] options
     #   The access policy configured for the domain. Access policies can be
-    #   resource-based, IP-based, or IAM-based. See [ Configuring access
-    #   policies][1]for more information.
+    #   resource-based, IP-based, or IAM-based. For more information, see
+    #   [Configuring access policies][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-access-policies
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-access-policies
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the access policy for the domain. See `OptionStatus`
-    #   for the status information that's included.
+    #   The status of the access policy for the domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AccessPoliciesStatus AWS API Documentation
@@ -113,8 +112,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` AddTags ` operation. Specifies
-    # the tags to attach to the domain.
+    # Container for the parameters to the `AddTags` operation. Specifies the
+    # tags to attach to the domain.
     #
     # @note When making an API call, you may pass AddTagsRequest
     #   data as a hash:
@@ -130,11 +129,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] arn
-    #   Specify the `ARN` of the domain you want to add tags to.
+    #   Amazon Resource Name (ARN) for the OpenSearch Service domain to
+    #   which you want to attach resource tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_list
-    #   List of `Tag` to add to the domain.
+    #   List of resource tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddTagsRequest AWS API Documentation
@@ -146,21 +146,21 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # List of limits that are specific to a given InstanceType and for each
-    # of its ` InstanceRole ` .
+    # List of limits that are specific to a given instance type.
     #
     # @!attribute [rw] limit_name
-    #   Additional limit is specific to a given InstanceType and for each of
-    #   its ` InstanceRole ` etc.
-    #    Attributes and their details:
-    #    * MaximumNumberOfDataNodesSupported
-    #   ` ESPartitionInstanceType `*
-    #   MaximumNumberOfDataNodesWithoutMasterNode
-    #   ` ESPartitionInstanceType `
+    #   * `MaximumNumberOfDataNodesSupported` - This attribute only applies
+    #     to master nodes and specifies the maximum number of data nodes of
+    #     a given instance type a master node can support.
+    #
+    #   * `MaximumNumberOfDataNodesWithoutMasterNode` - This attribute only
+    #     applies to data nodes and specifies the maximum number of data
+    #     nodes of a given instance type can exist without a master node
+    #     governing them.
     #   @return [String]
     #
     # @!attribute [rw] limit_values
-    #   Value for a given ` AdditionalLimit$LimitName ` .
+    #   The values of the additional instance type limits.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AdditionalLimit AWS API Documentation
@@ -172,28 +172,44 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Status of the advanced options for the specified domain. Currently,
-    # the following advanced options are available:
+    # Status of the advanced options for the specified domain. The following
+    # options are available:
     #
-    # * Option to allow references to indices in an HTTP request body. Must
-    #   be `false` when configuring access to individual sub-resources. By
-    #   default, the value is `true`. See [Advanced cluster parameters ][1]
-    #   for more information.
-    # * Option to specify the percentage of heap space allocated to field
-    #   data. By default, this setting is unbounded.
+    # * `"rest.action.multi.allow_explicit_index": "true" | "false"` - Note
+    #   the use of a string rather than a boolean. Specifies whether
+    #   explicit references to indexes are allowed inside the body of HTTP
+    #   requests. If you want to configure access policies for domain
+    #   sub-resources, such as specific indexes and domain APIs, you must
+    #   disable this property. Default is true.
     #
-    # For more information, see [ Advanced cluster parameters][1].
+    # * `"indices.fielddata.cache.size": "80" ` - Note the use of a string
+    #   rather than a boolean. Specifies the percentage of heap space
+    #   allocated to field data. Default is unbounded.
+    #
+    # * `"indices.query.bool.max_clause_count": "1024"` - Note the use of a
+    #   string rather than a boolean. Specifies the maximum number of
+    #   clauses allowed in a Lucene boolean query. Default is 1,024. Queries
+    #   with more than the permitted number of clauses result in a
+    #   `TooManyClauses` error.
+    #
+    # * `"override_main_response_version": "true" | "false"` - Note the use
+    #   of a string rather than a boolean. Specifies whether the domain
+    #   reports its version as 7.10 to allow Elasticsearch OSS clients and
+    #   plugins to continue working with it. Default is false when creating
+    #   a domain and true when upgrading a domain.
+    #
+    # For more information, see [Advanced cluster parameters][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #
     # @!attribute [rw] options
     #   The status of advanced options for the specified domain.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
-    #   The `OptionStatus` for advanced options for the specified domain.
+    #   The status of advanced options for the specified domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AdvancedOptionsStatus AWS API Documentation
@@ -205,11 +221,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The advanced security configuration: whether advanced security is
-    # enabled, whether the internal database option is enabled.
+    # Container for fine-grained access control settings.
     #
     # @!attribute [rw] enabled
-    #   True if advanced security is enabled.
+    #   True if fine-grained access control is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] internal_user_database_enabled
@@ -217,17 +232,28 @@ module Aws::OpenSearchService
     #   @return [Boolean]
     #
     # @!attribute [rw] saml_options
-    #   Describes the SAML application configured for a domain.
+    #   Container for information about the SAML configuration for
+    #   OpenSearch Dashboards.
     #   @return [Types::SAMLOptionsOutput]
     #
     # @!attribute [rw] anonymous_auth_disable_date
-    #   Specifies the Anonymous Auth Disable Date when Anonymous Auth is
-    #   enabled.
+    #   Date and time when the migration period will be disabled. Only
+    #   necessary when [enabling fine-grained access control on an existing
+    #   domain][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing
     #   @return [Time]
     #
     # @!attribute [rw] anonymous_auth_enabled
-    #   True if Anonymous auth is enabled. Anonymous auth can be enabled
-    #   only when AdvancedSecurity is enabled on existing domains.
+    #   True if a 30-day migration period is enabled, during which
+    #   administrators can create role mappings. Only necessary when
+    #   [enabling fine-grained access control on an existing domain][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AdvancedSecurityOptions AWS API Documentation
@@ -242,10 +268,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The advanced security configuration: whether advanced security is
-    # enabled, whether the internal database option is enabled, master
-    # username and password (if internal database is enabled), and master
-    # user ARN (if IAM is enabled).
+    # Options for enabling and configuring fine-grained access control. For
+    # more information, see [Fine-grained access control in Amazon
+    # OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html
     #
     # @note When making an API call, you may pass AdvancedSecurityOptionsInput
     #   data as a hash:
@@ -274,25 +303,30 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enabled
-    #   True if advanced security is enabled.
+    #   True to enable fine-grained access control.
     #   @return [Boolean]
     #
     # @!attribute [rw] internal_user_database_enabled
-    #   True if the internal user database is enabled.
+    #   True to enable the internal user database.
     #   @return [Boolean]
     #
     # @!attribute [rw] master_user_options
-    #   Credentials for the master user: username and password, ARN, or
-    #   both.
+    #   Container for information about the master user.
     #   @return [Types::MasterUserOptions]
     #
     # @!attribute [rw] saml_options
-    #   The SAML application configuration for the domain.
+    #   Container for information about the SAML configuration for
+    #   OpenSearch Dashboards.
     #   @return [Types::SAMLOptionsInput]
     #
     # @!attribute [rw] anonymous_auth_enabled
-    #   True if Anonymous auth is enabled. Anonymous auth can be enabled
-    #   only when AdvancedSecurity is enabled on existing domains.
+    #   True to enable a 30-day migration period during which administrators
+    #   can create role mappings. Only necessary when [enabling fine-grained
+    #   access control on an existing domain][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AdvancedSecurityOptionsInput AWS API Documentation
@@ -307,14 +341,14 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The status of advanced security options for the specified domain.
+    # The status of fine-grained access control settings for a domain.
     #
     # @!attribute [rw] options
-    #   Advanced security options for the specified domain.
+    #   Container for fine-grained access control settings.
     #   @return [Types::AdvancedSecurityOptions]
     #
     # @!attribute [rw] status
-    #   Status of the advanced security options for the specified domain.
+    #   Status of the fine-grained access control settings for a domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AdvancedSecurityOptionsStatus AWS API Documentation
@@ -326,7 +360,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` AssociatePackage `
+    # Container for the request parameters to the `AssociatePackage`
     # operation.
     #
     # @note When making an API call, you may pass AssociatePackageRequest
@@ -343,7 +377,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain to associate the package with.
+    #   Name of the domain to associate the package with.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackageRequest AWS API Documentation
@@ -355,10 +389,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by ` AssociatePackage ` operation.
+    # Container for the response returned by the `AssociatePackage`
+    # operation.
     #
     # @!attribute [rw] domain_package_details
-    #   `DomainPackageDetails`
+    #   Information about a package that is associated with a domain.
     #   @return [Types::DomainPackageDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AssociatePackageResponse AWS API Documentation
@@ -369,19 +404,82 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies the Auto-Tune type and Auto-Tune action details.
+    # @note When making an API call, you may pass AuthorizeVpcEndpointAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         account: "AWSAccount", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the OpenSearch Service domain to provide access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The Amazon Web Services account ID to grant access to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AuthorizeVpcEndpointAccessRequest AWS API Documentation
+    #
+    class AuthorizeVpcEndpointAccessRequest < Struct.new(
+      :domain_name,
+      :account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_principal
+    #   Information about the Amazon Web Services account or service that
+    #   was provided access to the domain.
+    #   @return [Types::AuthorizedPrincipal]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AuthorizeVpcEndpointAccessResponse AWS API Documentation
+    #
+    class AuthorizeVpcEndpointAccessResponse < Struct.new(
+      :authorized_principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Amazon Web Services account or service that has
+    # access to an Amazon OpenSearch Service domain through the use of an
+    # interface VPC endpoint.
+    #
+    # @!attribute [rw] principal_type
+    #   The type of principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The [IAM principal][1] that is allowed access to the domain.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AuthorizedPrincipal AWS API Documentation
+    #
+    class AuthorizedPrincipal < Struct.new(
+      :principal_type,
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Auto-Tune action. For more information, see
+    # [Auto-Tune for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @!attribute [rw] auto_tune_type
-    #   Specifies the Auto-Tune type. Valid value is SCHEDULED\_ACTION.
+    #   The type of Auto-Tune action.
     #   @return [String]
     #
     # @!attribute [rw] auto_tune_details
-    #   Specifies details about the Auto-Tune action. See [ Auto-Tune for
-    #   Amazon OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   Details about an Auto-Tune action.
     #   @return [Types::AutoTuneDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTune AWS API Documentation
@@ -393,20 +491,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies details about the Auto-Tune action. See [ Auto-Tune for
-    # Amazon OpenSearch Service ][1] for more information.
+    # Specifies details about a scheduled Auto-Tune action. For more
+    # information, see [Auto-Tune for Amazon OpenSearch Service][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @!attribute [rw] scheduled_auto_tune_details
-    #   Specifies details about the scheduled Auto-Tune action. See [
-    #   Auto-Tune for Amazon OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   Container for details about a scheduled Auto-Tune action.
     #   @return [Types::ScheduledAutoTuneDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneDetails AWS API Documentation
@@ -417,8 +510,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies the Auto-Tune maintenance schedule. See [ Auto-Tune for
-    # Amazon OpenSearch Service ][1] for more information.
+    # The Auto-Tune maintenance schedule. For more information, see
+    # [Auto-Tune for Amazon OpenSearch Service][1].
     #
     #
     #
@@ -437,26 +530,18 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] start_at
-    #   The timestamp at which the Auto-Tune maintenance schedule starts.
+    #   The Epoch timestamp at which the Auto-Tune maintenance schedule
+    #   starts.
     #   @return [Time]
     #
     # @!attribute [rw] duration
-    #   Specifies maintenance schedule duration: duration value and duration
-    #   unit. See [ Auto-Tune for Amazon OpenSearch Service ][1] for more
-    #   information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   The duration of the maintenance schedule. For example, `"Duration":
+    #   \{"Value": 2, "Unit": "HOURS"\}`.
     #   @return [Types::Duration]
     #
     # @!attribute [rw] cron_expression_for_recurrence
-    #   A cron expression for a recurring maintenance schedule. See [
-    #   Auto-Tune for Amazon OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   A cron expression for a recurring maintenance schedule during which
+    #   Auto-Tune can deploy changes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneMaintenanceSchedule AWS API Documentation
@@ -469,9 +554,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The Auto-Tune options: the Auto-Tune desired state for the domain,
-    # rollback state when disabling Auto-Tune options and list of
-    # maintenance schedules.
+    # Auto-Tune settings when updating a domain. For more information, see
+    # [Auto-Tune for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @note When making an API call, you may pass AutoTuneOptions
     #   data as a hash:
@@ -492,21 +580,20 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] desired_state
-    #   The Auto-Tune desired state. Valid values are ENABLED and DISABLED.
+    #   Whether Auto-Tune is enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] rollback_on_disable
-    #   The rollback state while disabling Auto-Tune for the domain. Valid
-    #   values are NO\_ROLLBACK and DEFAULT\_ROLLBACK.
+    #   When disabling Auto-Tune, specify `NO_ROLLBACK` to retain all prior
+    #   Auto-Tune settings or `DEFAULT_ROLLBACK` to revert to the OpenSearch
+    #   Service defaults. If you specify `DEFAULT_ROLLBACK`, you must
+    #   include a `MaintenanceSchedule` in the request. Otherwise,
+    #   OpenSearch Service is unable to perform the rollback.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_schedules
-    #   A list of maintenance schedules. See [ Auto-Tune for Amazon
-    #   OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   A list of maintenance schedules during which Auto-Tune can deploy
+    #   changes.
     #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptions AWS API Documentation
@@ -519,8 +606,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The Auto-Tune options: the Auto-Tune desired state for the domain and
-    # list of maintenance schedules.
+    # Options for configuring Auto-Tune. For more information, see
+    # [Auto-Tune for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @note When making an API call, you may pass AutoTuneOptionsInput
     #   data as a hash:
@@ -540,16 +631,16 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] desired_state
-    #   The Auto-Tune desired state. Valid values are ENABLED and DISABLED.
+    #   Whether Auto-Tune is enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_schedules
-    #   A list of maintenance schedules. See [ Auto-Tune for Amazon
-    #   OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   A list of maintenance schedules during which Auto-Tune can deploy
+    #   changes. Maintenance schedules are overwrite, not append. If your
+    #   request includes no schedules, the request deletes all existing
+    #   schedules. To preserve existing schedules, make a call to
+    #   `DescribeDomainConfig` first and use the `MaintenanceSchedules`
+    #   portion of the response as the basis for this section.
     #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptionsInput AWS API Documentation
@@ -561,15 +652,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The Auto-Tune options: the Auto-Tune desired state for the domain and
-    # list of maintenance schedules.
+    # The Auto-Tune settings for a domain, displayed when enabling or
+    # disabling Auto-Tune.
     #
     # @!attribute [rw] state
-    #   The `AutoTuneState` for the domain.
+    #   The current state of Auto-Tune on the domain.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message while enabling or disabling Auto-Tune.
+    #   Any errors that occurred while enabling or disabling Auto-Tune.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptionsOutput AWS API Documentation
@@ -584,11 +675,11 @@ module Aws::OpenSearchService
     # The Auto-Tune status for the domain.
     #
     # @!attribute [rw] options
-    #   Specifies Auto-Tune options for the domain.
+    #   Auto-Tune settings for updating a domain.
     #   @return [Types::AutoTuneOptions]
     #
     # @!attribute [rw] status
-    #   The status of the Auto-Tune options for the domain.
+    #   The current status of Auto-Tune for a domain.
     #   @return [Types::AutoTuneStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutoTuneOptionsStatus AWS API Documentation
@@ -600,14 +691,20 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Provides the current Auto-Tune status for the domain.
+    # The current status of Auto-Tune for the domain. For more information,
+    # see [Auto-Tune for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @!attribute [rw] creation_date
-    #   The timestamp of the Auto-Tune options creation date.
+    #   Date and time when Auto-Tune was enabled for the domain.
     #   @return [Time]
     #
     # @!attribute [rw] update_date
-    #   The timestamp of when the Auto-Tune options were last updated.
+    #   Date and time when the Auto-Tune options were last updated for the
+    #   domain.
     #   @return [Time]
     #
     # @!attribute [rw] update_version
@@ -615,11 +712,11 @@ module Aws::OpenSearchService
     #   @return [Integer]
     #
     # @!attribute [rw] state
-    #   The `AutoTuneState` for the domain.
+    #   The current state of Auto-Tune on the domain.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message while enabling or disabling Auto-Tune.
+    #   Any errors that occurred while enabling or disabling Auto-Tune.
     #   @return [String]
     #
     # @!attribute [rw] pending_deletion
@@ -653,9 +750,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` CancelServiceSoftwareUpdate `
-    # operation. Specifies the name of the domain that you wish to cancel a
-    # service software update on.
+    # Container for the request parameters to cancel a service software
+    # update.
     #
     # @note When making an API call, you may pass CancelServiceSoftwareUpdateRequest
     #   data as a hash:
@@ -665,8 +761,8 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain that you want to stop the latest service
-    #   software update on.
+    #   Name of the OpenSearch Service domain that you want to cancel the
+    #   service software update on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CancelServiceSoftwareUpdateRequest AWS API Documentation
@@ -677,11 +773,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `CancelServiceSoftwareUpdate` operation. Contains the
-    # status of the update.
+    # Container for the response to a `CancelServiceSoftwareUpdate`
+    # operation. Contains the status of the update.
     #
     # @!attribute [rw] service_software_options
-    #   The current status of the OpenSearch service software update.
+    #   Container for the state of your domain relative to the latest
+    #   service software.
     #   @return [Types::ServiceSoftwareOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CancelServiceSoftwareUpdateResponse AWS API Documentation
@@ -692,16 +789,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies change details of the domain configuration change.
+    # Container for information about a configuration change happening on a
+    # domain.
     #
     # @!attribute [rw] change_id
-    #   The unique change identifier associated with a specific domain
-    #   configuration change.
+    #   The ID of the configuration change.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Contains an optional message associated with the domain
-    #   configuration change.
+    #   A message corresponding to the status of the configuration change.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ChangeProgressDetails AWS API Documentation
@@ -713,22 +809,22 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # A progress stage details of a specific domain configuration change.
+    # Progress details for each stage of a domain update.
     #
     # @!attribute [rw] name
-    #   The name of the specific progress stage.
+    #   The name of the stage.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The overall status of a specific progress stage.
+    #   The status of the stage.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the progress stage.
+    #   The description of the stage.
     #   @return [String]
     #
     # @!attribute [rw] last_updated
-    #   The last updated timestamp of the progress stage.
+    #   The most recent updated timestamp of the stage.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ChangeProgressStage AWS API Documentation
@@ -754,19 +850,17 @@ module Aws::OpenSearchService
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The overall status of the domain configuration change. This field
-    #   can take the following values: `PENDING`, `PROCESSING`, `COMPLETED`
-    #   and `FAILED`
+    #   The overall status of the domain configuration change.
     #   @return [String]
     #
     # @!attribute [rw] pending_properties
-    #   The list of properties involved in the domain configuration change
-    #   that are still in pending.
+    #   The list of properties in the domain configuration change that are
+    #   still pending.
     #   @return [Array<String>]
     #
     # @!attribute [rw] completed_properties
-    #   The list of properties involved in the domain configuration change
-    #   that are completed.
+    #   The list of properties in the domain configuration change that have
+    #   completed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] total_number_of_stages
@@ -792,8 +886,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The configuration for the domain cluster, such as the type and number
-    # of instances.
+    # Container for the cluster configuration of an OpenSearch Service
+    # domain. For more information, see [Creating and managing Amazon
+    # OpenSearch Service domains][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
     #
     # @note When making an API call, you may pass ClusterConfig
     #   data as a hash:
@@ -817,28 +916,24 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] instance_type
-    #   The instance type for an OpenSearch cluster. UltraWarm instance
-    #   types are not supported for data instances.
+    #   Instance type of data nodes in the cluster.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
-    #   The number of instances in the specified domain cluster.
+    #   Number of dedicated master nodes in the cluster. This number must be
+    #   greater than 1, otherwise you receive a validation exception.
     #   @return [Integer]
     #
     # @!attribute [rw] dedicated_master_enabled
-    #   A boolean value to indicate whether a dedicated master node is
-    #   enabled. See [Dedicated master nodes in Amazon OpenSearch Service
-    #   ][1] for more information.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-dedicatedmasternodes
+    #   Indicates whether dedicated master nodes are enabled for the
+    #   cluster.`True` if the cluster will use a dedicated master
+    #   node.`False` if the cluster will not.
     #   @return [Boolean]
     #
     # @!attribute [rw] zone_awareness_enabled
-    #   A boolean value to indicate whether zone awareness is enabled. See
-    #   [Configuring a multi-AZ domain in Amazon OpenSearch Service ][1] for
-    #   more information.
+    #   Indicates whether multiple Availability Zones are enabled. For more
+    #   information, see [Configuring a multi-AZ domain in Amazon OpenSearch
+    #   Service][1].
     #
     #
     #
@@ -846,33 +941,34 @@ module Aws::OpenSearchService
     #   @return [Boolean]
     #
     # @!attribute [rw] zone_awareness_config
-    #   The zone awareness configuration for a domain when zone awareness is
-    #   enabled.
+    #   Container for zone awareness configuration options. Only required if
+    #   `ZoneAwarenessEnabled` is `true`.
     #   @return [Types::ZoneAwarenessConfig]
     #
     # @!attribute [rw] dedicated_master_type
-    #   The instance type for a dedicated master node.
+    #   OpenSearch Service instance type of the dedicated master nodes in
+    #   the cluster.
     #   @return [String]
     #
     # @!attribute [rw] dedicated_master_count
-    #   Total number of dedicated master nodes, active and on standby, for
-    #   the cluster.
+    #   Number of dedicated master nodes in the cluster. This number must be
+    #   greater than 1, otherwise you receive a validation exception.
     #   @return [Integer]
     #
     # @!attribute [rw] warm_enabled
-    #   True to enable UltraWarm storage.
+    #   Whether to enable warm storage for the cluster.
     #   @return [Boolean]
     #
     # @!attribute [rw] warm_type
-    #   The instance type for the OpenSearch cluster's warm nodes.
+    #   The instance type for the cluster's warm nodes.
     #   @return [String]
     #
     # @!attribute [rw] warm_count
-    #   The number of UltraWarm nodes in the cluster.
+    #   The number of warm nodes in the cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] cold_storage_options
-    #   Specifies the `ColdStorageOptions` config for a Domain
+    #   Container for cold storage configuration options.
     #   @return [Types::ColdStorageOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ClusterConfig AWS API Documentation
@@ -893,14 +989,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The configuration status for the specified domain.
+    # The cluster configuration status for a domain.
     #
     # @!attribute [rw] options
-    #   The cluster configuration for the specified domain.
+    #   Cluster configuration options for the specified domain.
     #   @return [Types::ClusterConfig]
     #
     # @!attribute [rw] status
-    #   The cluster configuration status for the specified domain.
+    #   The status of cluster configuration options for the specified
+    #   domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ClusterConfigStatus AWS API Documentation
@@ -912,13 +1009,14 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Options to specify the Cognito user and identity pools for OpenSearch
-    # Dashboards authentication. For more information, see [Configuring
-    # Amazon Cognito authentication for OpenSearch Dashboards][1].
+    # Container for the parameters required to enable Cognito authentication
+    # for an OpenSearch Service domain. For more information, see
+    # [Configuring Amazon Cognito authentication for OpenSearch
+    # Dashboards][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
     #
     # @note When making an API call, you may pass CognitoOptions
     #   data as a hash:
@@ -931,22 +1029,23 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enabled
-    #   The option to enable Cognito for OpenSearch Dashboards
-    #   authentication.
+    #   Whether to enable or disable Amazon Cognito authentication for
+    #   OpenSearch Dashboards.
     #   @return [Boolean]
     #
     # @!attribute [rw] user_pool_id
-    #   The Cognito user pool ID for OpenSearch Dashboards authentication.
+    #   The Amazon Cognito user pool ID that you want OpenSearch Service to
+    #   use for OpenSearch Dashboards authentication.
     #   @return [String]
     #
     # @!attribute [rw] identity_pool_id
-    #   The Cognito identity pool ID for OpenSearch Dashboards
-    #   authentication.
+    #   The Amazon Cognito identity pool ID that you want OpenSearch Service
+    #   to use for OpenSearch Dashboards authentication.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The role ARN that provides OpenSearch permissions for accessing
-    #   Cognito resources.
+    #   The `AmazonOpenSearchServiceCognitoAccess` role that allows
+    #   OpenSearch Service to configure your user pool and identity pool.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CognitoOptions AWS API Documentation
@@ -979,7 +1078,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies the configuration for cold storage options such as enabled
+    # Container for the parameters required to enable cold storage for an
+    # OpenSearch Service domain. For more information, see [Cold storage for
+    # Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cold-storage.html
     #
     # @note When making an API call, you may pass ColdStorageOptions
     #   data as a hash:
@@ -989,7 +1094,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enabled
-    #   Enable cold storage option. Accepted values true or false
+    #   Whether to enable or disable cold storage on the domain.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ColdStorageOptions AWS API Documentation
@@ -1000,15 +1105,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # A map from an ` EngineVersion ` to a list of compatible `
-    # EngineVersion ` s to which the domain can be upgraded.
+    # A map of OpenSearch or Elasticsearch versions and the versions you can
+    # upgrade them to.
     #
     # @!attribute [rw] source_version
-    #   The current version of OpenSearch a domain is on.
+    #   The current version that the OpenSearch Service domain is running.
     #   @return [String]
     #
     # @!attribute [rw] target_versions
-    #   List of supported OpenSearch versions.
+    #   The possible versions that you can upgrade the domain to.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CompatibleVersionsMap AWS API Documentation
@@ -1138,104 +1243,123 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the Amazon OpenSearch Service domain you're creating.
-    #   Domain names are unique across the domains owned by an account
-    #   within an AWS region. Domain names must start with a lowercase
-    #   letter and can contain the following characters: a-z (lowercase),
-    #   0-9, and - (hyphen).
+    #   Name of the OpenSearch Service domain to create. Domain names are
+    #   unique across the domains owned by an account within an Amazon Web
+    #   Services Region.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   String of format Elasticsearch\_X.Y or OpenSearch\_X.Y to specify
-    #   the engine version for the Amazon OpenSearch Service domain. For
-    #   example, "OpenSearch\_1.0" or "Elasticsearch\_7.9". For more
-    #   information, see [Creating and managing Amazon OpenSearch Service
-    #   domains ][1].
+    #   the engine version for the OpenSearch Service domain. For example,
+    #   `OpenSearch_1.0` or `Elasticsearch_7.9`. For more information, see
+    #   [Creating and managing Amazon OpenSearch Service domains][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomains
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomains
     #   @return [String]
     #
     # @!attribute [rw] cluster_config
-    #   Configuration options for a domain. Specifies the instance type and
-    #   number of instances in the domain.
+    #   Container for the cluster configuration of a domain.
     #   @return [Types::ClusterConfig]
     #
     # @!attribute [rw] ebs_options
-    #   Options to enable, disable, and specify the type and size of EBS
-    #   storage volumes.
+    #   Container for the parameters required to enable EBS-based storage
+    #   for an OpenSearch Service domain.
     #   @return [Types::EBSOptions]
     #
     # @!attribute [rw] access_policies
-    #   IAM access policy as a JSON-formatted string.
+    #   Identity and Access Management (IAM) policy document specifying the
+    #   access policies for the new domain.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_options
-    #   Option to set time, in UTC format, of the daily automated snapshot.
-    #   Default value is 0 hours.
+    #   DEPRECATED. Container for the parameters required to configure
+    #   automated snapshots of domain indexes.
     #   @return [Types::SnapshotOptions]
     #
     # @!attribute [rw] vpc_options
-    #   Options to specify the subnets and security groups for a VPC
-    #   endpoint. For more information, see [Launching your Amazon
-    #   OpenSearch Service domains using a VPC ][1].
+    #   Container for the values required to configure VPC access domains.
+    #   If you don't specify these values, OpenSearch Service creates the
+    #   domain with a public endpoint. For more information, see [Launching
+    #   your Amazon OpenSearch Service domains using a VPC][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #   @return [Types::VPCOptions]
     #
     # @!attribute [rw] cognito_options
-    #   Options to specify the Cognito user and identity pools for
-    #   OpenSearch Dashboards authentication. For more information, see
-    #   [Configuring Amazon Cognito authentication for OpenSearch
-    #   Dashboards][1].
+    #   Key-value pairs to configure Amazon Cognito authentication. For more
+    #   information, see [Configuring Amazon Cognito authentication for
+    #   OpenSearch Dashboards][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
     #   @return [Types::CognitoOptions]
     #
     # @!attribute [rw] encryption_at_rest_options
-    #   Options for encryption of data at rest.
+    #   Key-value pairs to enable encryption at rest.
     #   @return [Types::EncryptionAtRestOptions]
     #
     # @!attribute [rw] node_to_node_encryption_options
-    #   Node-to-node encryption options.
+    #   Enables node-to-node encryption.
     #   @return [Types::NodeToNodeEncryptionOptions]
     #
     # @!attribute [rw] advanced_options
-    #   Option to allow references to indices in an HTTP request body. Must
-    #   be `false` when configuring access to individual sub-resources. By
-    #   default, the value is `true`. See [Advanced cluster parameters ][1]
-    #   for more information.
+    #   Key-value pairs to specify advanced configuration options. The
+    #   following key-value pairs are supported:
+    #
+    #   * `"rest.action.multi.allow_explicit_index": "true" | "false"` -
+    #     Note the use of a string rather than a boolean. Specifies whether
+    #     explicit references to indexes are allowed inside the body of HTTP
+    #     requests. If you want to configure access policies for domain
+    #     sub-resources, such as specific indexes and domain APIs, you must
+    #     disable this property. Default is true.
+    #
+    #   * `"indices.fielddata.cache.size": "80" ` - Note the use of a string
+    #     rather than a boolean. Specifies the percentage of heap space
+    #     allocated to field data. Default is unbounded.
+    #
+    #   * `"indices.query.bool.max_clause_count": "1024"` - Note the use of
+    #     a string rather than a boolean. Specifies the maximum number of
+    #     clauses allowed in a Lucene boolean query. Default is 1,024.
+    #     Queries with more than the permitted number of clauses result in a
+    #     `TooManyClauses` error.
+    #
+    #   * `"override_main_response_version": "true" | "false"` - Note the
+    #     use of a string rather than a boolean. Specifies whether the
+    #     domain reports its version as 7.10 to allow Elasticsearch OSS
+    #     clients and plugins to continue working with it. Default is false
+    #     when creating a domain and true when upgrading a domain.
+    #
+    #   For more information, see [Advanced cluster parameters][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] log_publishing_options
-    #   Map of `LogType` and `LogPublishingOption`, each containing options
-    #   to publish a given type of OpenSearch log.
+    #   Key-value pairs to configure slow log publishing.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
     # @!attribute [rw] domain_endpoint_options
-    #   Options to specify configurations that will be applied to the domain
-    #   endpoint.
+    #   Additional options for the domain endpoint, such as whether to
+    #   require HTTPS for all traffic.
     #   @return [Types::DomainEndpointOptions]
     #
     # @!attribute [rw] advanced_security_options
-    #   Specifies advanced security options.
+    #   Options for fine-grained access control.
     #   @return [Types::AdvancedSecurityOptionsInput]
     #
     # @!attribute [rw] tag_list
-    #   A list of `Tag` added during domain creation.
+    #   List of tags to add to the domain upon creation.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] auto_tune_options
-    #   Specifies Auto-Tune options.
+    #   Options for Auto-Tune.
     #   @return [Types::AutoTuneOptionsInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomainRequest AWS API Documentation
@@ -1262,7 +1386,7 @@ module Aws::OpenSearchService
     end
 
     # The result of a `CreateDomain` operation. Contains the status of the
-    # newly created Amazon OpenSearch Service domain.
+    # newly created domain.
     #
     # @!attribute [rw] domain_status
     #   The status of the newly created domain.
@@ -1276,7 +1400,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` CreateOutboundConnection `
+    # Container for the parameters to the `CreateOutboundConnection`
     # operation.
     #
     # @note When making an API call, you may pass CreateOutboundConnectionRequest
@@ -1301,16 +1425,15 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] local_domain_info
-    #   The ` AWSDomainInformation ` for the local OpenSearch domain.
+    #   Name and Region of the source (local) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] remote_domain_info
-    #   The ` AWSDomainInformation ` for the remote OpenSearch domain.
+    #   Name and Region of the destination (remote) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] connection_alias
-    #   The connection alias used used by the customer for this
-    #   cross-cluster connection.
+    #   Name of the connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnectionRequest AWS API Documentation
@@ -1323,28 +1446,28 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a ` CreateOutboundConnection ` request. Contains the
-    # details about the newly created cross-cluster connection.
+    # The result of a `CreateOutboundConnection` request. Contains details
+    # about the newly created cross-cluster connection.
     #
     # @!attribute [rw] local_domain_info
-    #   The ` AWSDomainInformation ` for the local OpenSearch domain.
+    #   Information about the source (local) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] remote_domain_info
-    #   The ` AWSDomainInformation ` for the remote OpenSearch domain.
+    #   Information about the destination (remote) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] connection_alias
-    #   The connection alias provided during the create connection request.
+    #   Name of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_status
-    #   The ` OutboundConnectionStatus ` for the newly created connection.
+    #   The status of the connection.
     #   @return [Types::OutboundConnectionStatus]
     #
     # @!attribute [rw] connection_id
-    #   The unique ID for the created outbound connection, which is used for
-    #   subsequent operations on the connection.
+    #   The unique identifier for the created outbound connection, which is
+    #   used for subsequent operations on the connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateOutboundConnectionResponse AWS API Documentation
@@ -1359,7 +1482,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for request parameters to the ` CreatePackage ` operation.
+    # Container for request parameters to the `CreatePackage` operation.
     #
     # @note When making an API call, you may pass CreatePackageRequest
     #   data as a hash:
@@ -1375,11 +1498,11 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] package_name
-    #   Unique identifier for the package.
+    #   Unique name for the package.
     #   @return [String]
     #
     # @!attribute [rw] package_type
-    #   Type of package. Currently supports only TXT-DICTIONARY.
+    #   Type of package.
     #   @return [String]
     #
     # @!attribute [rw] package_description
@@ -1401,11 +1524,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by the ` CreatePackage `
-    # operation.
+    # Container for the response returned by the `CreatePackage` operation.
     #
     # @!attribute [rw] package_details
-    #   Information about the package.
+    #   Basic information about an OpenSearch Service package.
     #   @return [Types::PackageDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreatePackageResponse AWS API Documentation
@@ -1416,8 +1538,54 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DeleteDomain ` operation.
-    # Specifies the name of the domain you want to delete.
+    # @note When making an API call, you may pass CreateVpcEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_arn: "DomainArn", # required
+    #         vpc_options: { # required
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to grant access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   Options to specify the subnets and security groups for the endpoint.
+    #   @return [Types::VPCOptions]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateVpcEndpointRequest AWS API Documentation
+    #
+    class CreateVpcEndpointRequest < Struct.new(
+      :domain_arn,
+      :vpc_options,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint
+    #   Information about the newly created VPC endpoint.
+    #   @return [Types::VpcEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateVpcEndpointResponse AWS API Documentation
+    #
+    class CreateVpcEndpointResponse < Struct.new(
+      :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `DeleteDomain` operation.
     #
     # @note When making an API call, you may pass DeleteDomainRequest
     #   data as a hash:
@@ -1438,7 +1606,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `DeleteDomain` request. Contains the status of the
+    # The results of a `DeleteDomain` request. Contains the status of the
     # pending deletion, or a "domain not found" error if the domain and
     # all of its resources have been deleted.
     #
@@ -1454,7 +1622,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DeleteInboundConnection `
+    # Container for the parameters to the `DeleteInboundConnection`
     # operation.
     #
     # @note When making an API call, you may pass DeleteInboundConnectionRequest
@@ -1476,11 +1644,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a ` DeleteInboundConnection ` operation. Contains
-    # details about the deleted inbound connection.
+    # The results of a `DeleteInboundConnection` operation. Contains details
+    # about the deleted inbound connection.
     #
     # @!attribute [rw] connection
-    #   The ` InboundConnection ` of the deleted inbound connection.
+    #   The deleted inbound connection.
     #   @return [Types::InboundConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteInboundConnectionResponse AWS API Documentation
@@ -1491,7 +1659,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DeleteOutboundConnection `
+    # Container for the parameters to the `DeleteOutboundConnection`
     # operation.
     #
     # @note When making an API call, you may pass DeleteOutboundConnectionRequest
@@ -1513,11 +1681,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a ` DeleteOutboundConnection ` operation. Contains
-    # details about the deleted outbound connection.
+    # Details about the deleted outbound connection.
     #
     # @!attribute [rw] connection
-    #   The ` OutboundConnection ` of the deleted outbound connection.
+    #   The deleted inbound connection.
     #   @return [Types::OutboundConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteOutboundConnectionResponse AWS API Documentation
@@ -1528,8 +1695,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` DeletePackage `
-    # operation.
+    # Deletes a package from OpenSearch Service. The package can't be
+    # associated with any OpenSearch Service domain.
     #
     # @note When making an API call, you may pass DeletePackageRequest
     #   data as a hash:
@@ -1551,17 +1718,49 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response parameters to the ` DeletePackage `
+    # Container for the response parameters to the `DeletePackage`
     # operation.
     #
     # @!attribute [rw] package_details
-    #   `PackageDetails`
+    #   Information about the deleted package.
     #   @return [Types::PackageDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeletePackageResponse AWS API Documentation
     #
     class DeletePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVpcEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_id: "VpcEndpointId", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteVpcEndpointRequest AWS API Documentation
+    #
+    class DeleteVpcEndpointRequest < Struct.new(
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_summary
+    #   Information about the deleted endpoint, including its current status
+    #   (`DELETING` or `DELETE_FAILED`).
+    #   @return [Types::VpcEndpointSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteVpcEndpointResponse AWS API Documentation
+    #
+    class DeleteVpcEndpointResponse < Struct.new(
+      :vpc_endpoint_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1579,17 +1778,19 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain name for which you want Auto-Tune action details.
+    #   Name of the domain that you want Auto-Tune details about.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   NextToken is sent in case the earlier API call results contain the
-    #   NextToken. Used for pagination.
+    #   If your initial `DescribeDomainAutoTunes` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeDomainAutoTunes` operations, which returns results in the
+    #   next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainAutoTunesRequest AWS API Documentation
@@ -1602,25 +1803,18 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `DescribeDomainAutoTunes` request. See [ Auto-Tune for
-    # Amazon OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    # The result of a `DescribeDomainAutoTunes` request.
     #
     # @!attribute [rw] auto_tunes
     #   The list of setting adjustments that Auto-Tune has made to the
-    #   domain. See [ Auto-Tune for Amazon OpenSearch Service ][1] for more
-    #   information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   domain.
     #   @return [Array<Types::AutoTune>]
     #
     # @!attribute [rw] next_token
-    #   An identifier to allow retrieval of paginated results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainAutoTunesResponse AWS API Documentation
@@ -1633,8 +1827,7 @@ module Aws::OpenSearchService
     end
 
     # Container for the parameters to the `DescribeDomainChangeProgress`
-    # operation. Specifies the domain name and optional change specific
-    # identity for which you want progress information.
+    # operation.
     #
     # @note When making an API call, you may pass DescribeDomainChangeProgressRequest
     #   data as a hash:
@@ -1645,13 +1838,13 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain you want to get the progress information about.
+    #   The name of the domain to get progress information for.
     #   @return [String]
     #
     # @!attribute [rw] change_id
     #   The specific change ID for which you want to get progress
-    #   information. This is an optional parameter. If omitted, the service
-    #   returns information about the most recent configuration change.
+    #   information. If omitted, the request returns information about the
+    #   most recent configuration change.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainChangeProgressRequest AWS API Documentation
@@ -1663,12 +1856,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `DescribeDomainChangeProgress` request. Contains the
-    # progress information of the requested domain change.
+    # The result of a `DescribeDomainChangeProgress` request. Contains
+    # progress information for the requested domain change.
     #
     # @!attribute [rw] change_progress_status
-    #   Progress information for the configuration change that is requested
-    #   in the `DescribeDomainChangeProgress` request.
+    #   Container for information about the stages of a configuration change
+    #   happening on a domain.
     #   @return [Types::ChangeProgressStatusDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainChangeProgressResponse AWS API Documentation
@@ -1680,8 +1873,6 @@ module Aws::OpenSearchService
     end
 
     # Container for the parameters to the `DescribeDomainConfig` operation.
-    # Specifies the domain name for which you want configuration
-    # information.
     #
     # @note When making an API call, you may pass DescribeDomainConfigRequest
     #   data as a hash:
@@ -1691,7 +1882,8 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain you want to get information about.
+    #   Name of the OpenSearch Service domain configuration that you want to
+    #   describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainConfigRequest AWS API Documentation
@@ -1702,12 +1894,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `DescribeDomainConfig` request. Contains the
-    # configuration information of the requested domain.
+    # Contains the configuration information of the requested domain.
     #
     # @!attribute [rw] domain_config
-    #   The configuration information of the domain requested in the
-    #   `DescribeDomainConfig` request.
+    #   Container for the configuration of the OpenSearch Service domain.
     #   @return [Types::DomainConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainConfigResponse AWS API Documentation
@@ -1718,7 +1908,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DescribeDomain ` operation.
+    # Container for the parameters to the `DescribeDomain` operation.
     #
     # @note When making an API call, you may pass DescribeDomainRequest
     #   data as a hash:
@@ -1728,7 +1918,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain for which you want information.
+    #   The name of the domain that you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainRequest AWS API Documentation
@@ -1739,11 +1929,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `DescribeDomain` request. Contains the status of the
-    # domain specified in the request.
+    # Contains the status of the domain specified in the request.
     #
     # @!attribute [rw] domain_status
-    #   The current status of the domain.
+    #   List that contains the status of each specified OpenSearch Service
+    #   domain.
     #   @return [Types::DomainStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainResponse AWS API Documentation
@@ -1754,8 +1944,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DescribeDomains ` operation. By
-    # default, the API returns the status of all domains.
+    # Container for the parameters to the `DescribeDomains` operation.
     #
     # @note When making an API call, you may pass DescribeDomainsRequest
     #   data as a hash:
@@ -1765,7 +1954,9 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_names
-    #   The domains for which you want information.
+    #   Array of OpenSearch Service domain names that you want information
+    #   about. If you don't specify any domains, OpenSearch Service returns
+    #   information about all domains owned by the account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainsRequest AWS API Documentation
@@ -1776,12 +1967,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `DescribeDomains` request. Contains the status of the
-    # specified domains or all domains owned by the account.
+    # Contains the status of the specified domains or all domains owned by
+    # the account.
     #
     # @!attribute [rw] domain_status_list
-    #   The status of the domains requested in the `DescribeDomains`
-    #   request.
+    #   The status of the requested domains.
     #   @return [Array<Types::DomainStatus>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainsResponse AWS API Documentation
@@ -1792,7 +1982,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DescribeInboundConnections `
+    # Container for the parameters to the `DescribeInboundConnections`
     # operation.
     #
     # @note When making an API call, you may pass DescribeInboundConnectionsRequest
@@ -1811,22 +2001,19 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] filters
     #   A list of filters used to match properties for inbound cross-cluster
-    #   connections. Available ` Filter ` values are: * connection-id
-    #   * local-domain-info.domain-name
-    #   * local-domain-info.owner-id
-    #   * local-domain-info.region
-    #   * remote-domain-info.domain-name
+    #   connections.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If more results are available and NextToken is present, make the
-    #   next request to the same API with the received NextToken to paginate
-    #   the remaining results.
+    #   If your initial `DescribeInboundConnections` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeInboundConnections` operations, which returns results in
+    #   the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInboundConnectionsRequest AWS API Documentation
@@ -1839,18 +2026,17 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a ` DescribeInboundConnections ` request. Contains a
-    # list of connections matching the filter criteria.
+    # Contains a list of connections matching the filter criteria.
     #
     # @!attribute [rw] connections
-    #   A list of ` InboundConnection ` matching the specified filter
-    #   criteria.
+    #   List of inbound connections.
     #   @return [Array<Types::InboundConnection>]
     #
     # @!attribute [rw] next_token
-    #   If more results are available and NextToken is present, make the
-    #   next request to the same API with the received NextToken to paginate
-    #   the remaining results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInboundConnectionsResponse AWS API Documentation
@@ -1862,7 +2048,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DescribeInstanceTypeLimits `
+    # Container for the parameters to the `DescribeInstanceTypeLimits`
     # operation.
     #
     # @note When making an API call, you may pass DescribeInstanceTypeLimitsRequest
@@ -1875,17 +2061,19 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain you want to modify. Only include this value
-    #   if you're querying OpenSearch ` Limits ` for an existing domain.
+    #   The name of the domain. Only specify if you need the limits for an
+    #   existing domain.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type for an OpenSearch cluster for which OpenSearch `
-    #   Limits ` are needed.
+    #   The OpenSearch Service instance type for which you need limit
+    #   information.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Version of OpenSearch for which ` Limits ` are needed.
+    #   Version of OpenSearch or Elasticsearch, in the format
+    #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest
+    #   version of OpenSearch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInstanceTypeLimitsRequest AWS API Documentation
@@ -1898,15 +2086,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters received from the `
-    # DescribeInstanceTypeLimits ` operation.
+    # Container for the parameters received from the
+    # `DescribeInstanceTypeLimits` operation.
     #
     # @!attribute [rw] limits_by_role
-    #   The role of a given instance and all applicable limits. The role
-    #   performed by a given OpenSearch instance can be one of the
-    #   following: * data: If the given InstanceType is used as a data node
-    #   * master: If the given InstanceType is used as a master node
-    #   * ultra\_warm: If the given InstanceType is used as a warm node
+    #   Map that contains all applicable instance type limits.`data` refers
+    #   to data nodes.`master` refers to dedicated master nodes.
     #   @return [Hash<String,Types::Limits>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeInstanceTypeLimitsResponse AWS API Documentation
@@ -1917,7 +2102,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` DescribeOutboundConnections `
+    # Container for the parameters to the `DescribeOutboundConnections`
     # operation.
     #
     # @note When making an API call, you may pass DescribeOutboundConnectionsRequest
@@ -1935,23 +2120,19 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] filters
-    #   A list of filters used to match properties for outbound
-    #   cross-cluster connections. Available ` Filter ` names for this
-    #   operation are: * connection-id
-    #   * remote-domain-info.domain-name
-    #   * remote-domain-info.owner-id
-    #   * remote-domain-info.region
-    #   * local-domain-info.domain-name
+    #   List of filter names and values that you can use for requests.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   NextToken is sent in case the earlier API call results contain the
-    #   NextToken parameter. Used for pagination.
+    #   If your initial `DescribeOutboundConnections` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeOutboundConnections` operations, which returns results in
+    #   the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeOutboundConnectionsRequest AWS API Documentation
@@ -1964,18 +2145,17 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a ` DescribeOutboundConnections ` request. Contains the
-    # list of connections matching the filter criteria.
+    # Contains a list of connections matching the filter criteria.
     #
     # @!attribute [rw] connections
-    #   A list of ` OutboundConnection ` matching the specified filter
-    #   criteria.
+    #   List of outbound connections that match the filter criteria.
     #   @return [Array<Types::OutboundConnection>]
     #
     # @!attribute [rw] next_token
-    #   If more results are available and NextToken is present, make the
-    #   next request to the same API with the received NextToken to paginate
-    #   the remaining results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeOutboundConnectionsResponse AWS API Documentation
@@ -2002,7 +2182,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A list of values for the specified field.
+    #   A list of values for the specified filter field.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribePackagesFilter AWS API Documentation
@@ -2014,7 +2194,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` DescribePackage `
+    # Container for the request parameters to the `DescribePackage`
     # operation.
     #
     # @note When making an API call, you may pass DescribePackagesRequest
@@ -2037,12 +2217,14 @@ module Aws::OpenSearchService
     #   @return [Array<Types::DescribePackagesFilter>]
     #
     # @!attribute [rw] max_results
-    #   Limits results to a maximum number of packages.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Used for pagination. Only necessary if a previous API call includes
-    #   a non-null NextToken value. If provided, returns results for the
+    #   If your initial `DescribePackageFilters` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribePackageFilters` operations, which returns results in the
     #   next page.
     #   @return [String]
     #
@@ -2056,14 +2238,18 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by the ` DescribePackages `
+    # Container for the response returned by the `DescribePackages`
     # operation.
     #
     # @!attribute [rw] package_details_list
-    #   List of `PackageDetails` objects.
+    #   Basic information about a package.
     #   @return [Array<Types::PackageDetails>]
     #
     # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribePackagesResponse AWS API Documentation
@@ -2075,7 +2261,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for parameters to `DescribeReservedInstanceOfferings`
+    # Container for the request parameters to a
+    # `DescribeReservedInstanceOfferings` operation.
     #
     # @note When making an API call, you may pass DescribeReservedInstanceOfferingsRequest
     #   data as a hash:
@@ -2087,18 +2274,21 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] reserved_instance_offering_id
-    #   The offering identifier filter value. Use this parameter to show
-    #   only the available offering that matches the specified reservation
-    #   identifier.
+    #   The Reserved Instance identifier filter value. Use this parameter to
+    #   show only the available instance types that match the specified
+    #   reservation identifier.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Provides an identifier to allow retrieval of paginated results.
+    #   If your initial `DescribeReservedInstanceOfferings` operation
+    #   returns a `nextToken`, you can include the returned `nextToken` in
+    #   subsequent `DescribeReservedInstanceOfferings` operations, which
+    #   returns results in the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeReservedInstanceOfferingsRequest AWS API Documentation
@@ -2111,14 +2301,18 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for results from `DescribeReservedInstanceOfferings`
+    # Container for results of a `DescribeReservedInstanceOfferings`
+    # request.
     #
     # @!attribute [rw] next_token
-    #   Provides an identifier to allow retrieval of paginated results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @!attribute [rw] reserved_instance_offerings
-    #   List of reserved OpenSearch instance offerings
+    #   List of Reserved Instance offerings.
     #   @return [Array<Types::ReservedInstanceOffering>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeReservedInstanceOfferingsResponse AWS API Documentation
@@ -2130,7 +2324,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for parameters to `DescribeReservedInstances`
+    # Container for the request parameters to the
+    # `DescribeReservedInstances` operation.
     #
     # @note When making an API call, you may pass DescribeReservedInstancesRequest
     #   data as a hash:
@@ -2148,12 +2343,15 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Provides an identifier to allow retrieval of paginated results.
+    #   If your initial `DescribeReservedInstances` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeReservedInstances` operations, which returns results in the
+    #   next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeReservedInstancesRequest AWS API Documentation
@@ -2169,11 +2367,14 @@ module Aws::OpenSearchService
     # Container for results from `DescribeReservedInstances`
     #
     # @!attribute [rw] next_token
-    #   Provides an identifier to allow retrieval of paginated results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @!attribute [rw] reserved_instances
-    #   List of reserved OpenSearch instances.
+    #   List of Reserved Instances in the current Region.
     #   @return [Array<Types::ReservedInstance>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeReservedInstancesResponse AWS API Documentation
@@ -2185,6 +2386,42 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeVpcEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_ids: ["VpcEndpointId"], # required
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   The unique identifiers of the endpoints to get information about.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeVpcEndpointsRequest AWS API Documentation
+    #
+    class DescribeVpcEndpointsRequest < Struct.new(
+      :vpc_endpoint_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoints
+    #   Information about each requested VPC endpoint.
+    #   @return [Array<Types::VpcEndpoint>]
+    #
+    # @!attribute [rw] vpc_endpoint_errors
+    #   Any errors associated with the request.
+    #   @return [Array<Types::VpcEndpointError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeVpcEndpointsResponse AWS API Documentation
+    #
+    class DescribeVpcEndpointsResponse < Struct.new(
+      :vpc_endpoints,
+      :vpc_endpoint_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error occured because the client wanted to access a not supported
     # operation. Gives http status code of 409.
     #
@@ -2192,7 +2429,7 @@ module Aws::OpenSearchService
     #
     class DisabledOperationException < Aws::EmptyStructure; end
 
-    # Container for the request parameters to the ` DissociatePackage `
+    # Container for the request parameters to the `DissociatePackage`
     # operation.
     #
     # @note When making an API call, you may pass DissociatePackageRequest
@@ -2204,12 +2441,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] package_id
-    #   The internal ID of the package to associate with a domain. Use
-    #   `DescribePackages` to find this value.
+    #   Internal ID of the package to dissociate from the domain. Use
+    #   `ListPackagesForDomain` to find this value.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain to associate the package with.
+    #   Name of the domain to dissociate the package from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DissociatePackageRequest AWS API Documentation
@@ -2221,11 +2458,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by ` DissociatePackage `
+    # Container for the response returned by an `DissociatePackage`
     # operation.
     #
     # @!attribute [rw] domain_package_details
-    #   `DomainPackageDetails`
+    #   Information about a package that has been dissociated from the
+    #   domain.
     #   @return [Types::DomainPackageDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DissociatePackageResponse AWS API Documentation
@@ -2236,83 +2474,76 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The configuration of a domain.
+    # Container for the configuration of an OpenSearch Service domain.
     #
     # @!attribute [rw] engine_version
-    #   String of format Elasticsearch\_X.Y or OpenSearch\_X.Y to specify
-    #   the engine version for the OpenSearch or Elasticsearch domain.
+    #   The OpenSearch or Elasticsearch version that the domain is running.
     #   @return [Types::VersionStatus]
     #
     # @!attribute [rw] cluster_config
-    #   The `ClusterConfig` for the domain.
+    #   Container for the cluster configuration of a the domain.
     #   @return [Types::ClusterConfigStatus]
     #
     # @!attribute [rw] ebs_options
-    #   The `EBSOptions` for the domain.
+    #   Container for EBS options configured for an OpenSearch Service
+    #   domain.
     #   @return [Types::EBSOptionsStatus]
     #
     # @!attribute [rw] access_policies
-    #   IAM access policy as a JSON-formatted string.
+    #   Specifies the access policies for the domain.
     #   @return [Types::AccessPoliciesStatus]
     #
     # @!attribute [rw] snapshot_options
-    #   The `SnapshotOptions` for the domain.
+    #   DEPRECATED. Container for parameters required to configure automated
+    #   snapshots of domain indexes.
     #   @return [Types::SnapshotOptionsStatus]
     #
     # @!attribute [rw] vpc_options
-    #   The `VPCOptions` for the specified domain. For more information, see
-    #   [ Launching your Amazon OpenSearch Service domains using a VPC][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    #   The current VPC options for the domain and the status of any updates
+    #   to their configuration.
     #   @return [Types::VPCDerivedInfoStatus]
     #
     # @!attribute [rw] cognito_options
-    #   The `CognitoOptions` for the specified domain. For more information,
-    #   see [Configuring Amazon Cognito authentication for OpenSearch
-    #   Dashboards][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    #   Container for Amazon Cognito options for the domain.
     #   @return [Types::CognitoOptionsStatus]
     #
     # @!attribute [rw] encryption_at_rest_options
-    #   The `EncryptionAtRestOptions` for the domain.
+    #   Key-value pairs to enable encryption at rest.
     #   @return [Types::EncryptionAtRestOptionsStatus]
     #
     # @!attribute [rw] node_to_node_encryption_options
-    #   The `NodeToNodeEncryptionOptions` for the domain.
+    #   Whether node-to-node encryption is enabled or disabled.
     #   @return [Types::NodeToNodeEncryptionOptionsStatus]
     #
     # @!attribute [rw] advanced_options
-    #   The `AdvancedOptions` for the domain. See [Advanced options ][1] for
-    #   more information.
+    #   Key-value pairs to specify advanced configuration options. For more
+    #   information, see [Advanced options][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #   @return [Types::AdvancedOptionsStatus]
     #
     # @!attribute [rw] log_publishing_options
-    #   Log publishing options for the given domain.
+    #   Key-value pairs to configure slow log publishing.
     #   @return [Types::LogPublishingOptionsStatus]
     #
     # @!attribute [rw] domain_endpoint_options
-    #   The `DomainEndpointOptions` for the domain.
+    #   Additional options for the domain endpoint, such as whether to
+    #   require HTTPS for all traffic.
     #   @return [Types::DomainEndpointOptionsStatus]
     #
     # @!attribute [rw] advanced_security_options
-    #   Specifies `AdvancedSecurityOptions` for the domain.
+    #   Container for fine-grained access control settings for the domain.
     #   @return [Types::AdvancedSecurityOptionsStatus]
     #
     # @!attribute [rw] auto_tune_options
-    #   Specifies `AutoTuneOptions` for the domain.
+    #   Container for Auto-Tune settings for the domain.
     #   @return [Types::AutoTuneOptionsStatus]
     #
     # @!attribute [rw] change_progress_details
-    #   Specifies change details of the domain configuration change.
+    #   Container for information about the progress of an existing
+    #   configuration change.
     #   @return [Types::ChangeProgressDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
@@ -2337,7 +2568,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Options to configure the endpoint for the domain.
+    # Options to configure a custom endpoint for an OpenSearch Service
+    # domain.
     #
     # @note When making an API call, you may pass DomainEndpointOptions
     #   data as a hash:
@@ -2351,17 +2583,20 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enforce_https
-    #   Whether only HTTPS endpoint should be enabled for the domain.
+    #   True to require that all traffic to the domain arrive over HTTPS.
     #   @return [Boolean]
     #
     # @!attribute [rw] tls_security_policy
     #   Specify the TLS security policy to apply to the HTTPS endpoint of
     #   the domain.
-    #    Can be one of the following values: *
-    #   **Policy-Min-TLS-1-0-2019-07:** TLS security policy which supports
-    #     TLSv1.0 and higher.
+    #
+    #   Can be one of the following values:
+    #
+    #   * **Policy-Min-TLS-1-0-2019-07:** TLS security policy which supports
+    #     TLS version 1.0 and higher.
+    #
     #   * **Policy-Min-TLS-1-2-2019-07:** TLS security policy which supports
-    #     only TLSv1.2
+    #     only TLS version 1.2
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -2369,11 +2604,12 @@ module Aws::OpenSearchService
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_endpoint
-    #   The fully qualified domain for your custom endpoint.
+    #   The fully qualified URL for the custom endpoint.
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_certificate_arn
-    #   The ACM certificate ARN for your custom endpoint.
+    #   The ARN for your security certificate, managed in Amazon Web
+    #   Services Certificate Manager (ACM).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainEndpointOptions AWS API Documentation
@@ -2388,16 +2624,14 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The configured endpoint options for the domain and their current
-    # status.
+    # The configured endpoint options for a domain and their current status.
     #
     # @!attribute [rw] options
-    #   Options to configure the endpoint for the domain.
+    #   Options to configure the endpoint for a domain.
     #   @return [Types::DomainEndpointOptions]
     #
     # @!attribute [rw] status
-    #   The status of the endpoint options for the domain. See
-    #   `OptionStatus` for the status information that's included.
+    #   The status of the endpoint options for a domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainEndpointOptionsStatus AWS API Documentation
@@ -2409,12 +2643,16 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Information about an OpenSearch Service domain.
+    #
     # @!attribute [rw] domain_name
-    #   The `DomainName`.
+    #   Name of the domain.
     #   @return [String]
     #
     # @!attribute [rw] engine_type
-    #   Specifies the `EngineType` of the domain.
+    #   The type of search engine that the domain is running.`OpenSearch`
+    #   for an OpenSearch engine, or `Elasticsearch` for a legacy
+    #   Elasticsearch OSS engine.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainInfo AWS API Documentation
@@ -2426,6 +2664,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for information about an OpenSearch Service domain.
+    #
     # @note When making an API call, you may pass DomainInformationContainer
     #   data as a hash:
     #
@@ -2438,6 +2678,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] aws_domain_information
+    #   Information about an Amazon OpenSearch Service domain.
     #   @return [Types::AWSDomainInformation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainInformationContainer AWS API Documentation
@@ -2448,10 +2689,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Information on a package associated with a domain.
+    # Information about a package that is associated with a domain. For more
+    # information, see [Custom packages for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @!attribute [rw] package_id
-    #   The internal ID of the package.
+    #   Internal ID of the package.
     #   @return [String]
     #
     # @!attribute [rw] package_name
@@ -2459,29 +2705,30 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_type
-    #   Currently supports only TXT-DICTIONARY.
+    #   The type of package.
     #   @return [String]
     #
     # @!attribute [rw] last_updated
-    #   The timestamp of the most recent update to the package association
+    #   Timestamp of the most recent update to the package association
     #   status.
     #   @return [Time]
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain you've associated a package with.
+    #   Name of the domain that the package is associated with.
     #   @return [String]
     #
     # @!attribute [rw] domain_package_status
-    #   State of the association. Values are ASSOCIATING,
-    #   ASSOCIATION\_FAILED, ACTIVE, DISSOCIATING, and DISSOCIATION\_FAILED.
+    #   State of the association.
     #   @return [String]
     #
     # @!attribute [rw] package_version
+    #   The current version of the package.
     #   @return [String]
     #
     # @!attribute [rw] reference_path
-    #   The relative path on Amazon OpenSearch Service nodes, which can be
-    #   used as synonym\_path when the package is a synonym file.
+    #   Denotes the location of the package on the OpenSearch Service
+    #   cluster nodes. It's the same as `synonym_path` for dictionary
+    #   files.
     #   @return [String]
     #
     # @!attribute [rw] error_details
@@ -2505,23 +2752,21 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The current status of a domain.
+    # The current status of an OpenSearch Service domain.
     #
     # @!attribute [rw] domain_id
-    #   The unique identifier for the specified domain.
+    #   Unique identifier for the domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   Name of the domain. Domain names are unique across all domains owned
+    #   by the same account within an Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of a domain. See [IAM identifiers
-    #   ][1] in the *AWS Identity and Access Management User Guide* for more
-    #   information.
+    #   The Amazon Resource Name (ARN) of the domain. For more information,
+    #   see [IAM identifiers ][1] in the *AWS Identity and Access Management
+    #   User Guide*.
     #
     #
     #
@@ -2529,92 +2774,86 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] created
-    #   The domain creation status. `True` if the creation of a domain is
-    #   complete. ` False ` if domain creation is still in progress.
+    #   Creation status of an OpenSearch Service domain. True if domain
+    #   creation is complete. False if domain creation is still in progress.
     #   @return [Boolean]
     #
     # @!attribute [rw] deleted
-    #   The domain deletion status. `True` if a delete request has been
-    #   received for the domain but resource cleanup is still in progress.
-    #   `False` if the domain has not been deleted. Once domain deletion is
-    #   complete, the status of the domain is no longer returned.
+    #   Deletion status of an OpenSearch Service domain. True if domain
+    #   deletion is complete. False if domain deletion is still in progress.
+    #   Once deletion is complete, the status of the domain is no longer
+    #   returned.
     #   @return [Boolean]
     #
     # @!attribute [rw] endpoint
-    #   The domain endpoint that you use to submit index and search
-    #   requests.
+    #   Domain-specific endpoint used to submit index, search, and data
+    #   upload requests to the domain.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
-    #   Map containing the domain endpoints used to submit index and search
-    #   requests. Example `key, value`\:
+    #   The key-value pair that exists if the OpenSearch Service domain uses
+    #   VPC endpoints.. Example `key, value`\:
     #   `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] processing
-    #   The status of the domain configuration. `True` if Amazon OpenSearch
-    #   Service is processing configuration changes. `False` if the
-    #   configuration is active.
+    #   The status of the domain configuration. True if OpenSearch Service
+    #   is processing configuration changes. False if the configuration is
+    #   active.
     #   @return [Boolean]
     #
     # @!attribute [rw] upgrade_processing
-    #   The status of a domain version upgrade. `True` if Amazon OpenSearch
-    #   Service is undergoing a version upgrade. `False` if the
-    #   configuration is active.
+    #   The status of a domain version upgrade to a new version of
+    #   OpenSearch or Elasticsearch. True if OpenSearch Service is in the
+    #   process of a version upgrade. False if the configuration is active.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
+    #   Version of OpenSearch or Elasticsearch that the domain is running,
+    #   in the format `Elasticsearch_X.Y` or `OpenSearch_X.Y`.
     #   @return [String]
     #
     # @!attribute [rw] cluster_config
-    #   The type and number of instances in the domain.
+    #   Container for the cluster configuration of the domain.
     #   @return [Types::ClusterConfig]
     #
     # @!attribute [rw] ebs_options
-    #   The `EBSOptions` for the specified domain.
+    #   Container for EBS-based storage settings for the domain.
     #   @return [Types::EBSOptions]
     #
     # @!attribute [rw] access_policies
-    #   IAM access policy as a JSON-formatted string.
+    #   Identity and Access Management (IAM) policy document specifying the
+    #   access policies for the domain.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_options
-    #   The status of the `SnapshotOptions`.
+    #   DEPRECATED. Container for parameters required to configure automated
+    #   snapshots of domain indexes.
     #   @return [Types::SnapshotOptions]
     #
     # @!attribute [rw] vpc_options
-    #   The `VPCOptions` for the specified domain. For more information, see
-    #   [ Launching your Amazon OpenSearch Service domains using a VPC][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    #   The VPC configuration for the domain.
     #   @return [Types::VPCDerivedInfo]
     #
     # @!attribute [rw] cognito_options
-    #   The `CognitoOptions` for the specified domain. For more information,
-    #   see [Configuring Amazon Cognito authentication for OpenSearch
-    #   Dashboards][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    #   Key-value pairs to configure Amazon Cognito authentication for
+    #   OpenSearch Dashboards.
     #   @return [Types::CognitoOptions]
     #
     # @!attribute [rw] encryption_at_rest_options
-    #   The status of the `EncryptionAtRestOptions`.
+    #   Encryption at rest settings for the domain.
     #   @return [Types::EncryptionAtRestOptions]
     #
     # @!attribute [rw] node_to_node_encryption_options
-    #   The status of the `NodeToNodeEncryptionOptions`.
+    #   Whether node-to-node encryption is enabled or disabled.
     #   @return [Types::NodeToNodeEncryptionOptions]
     #
     # @!attribute [rw] advanced_options
-    #   The status of the `AdvancedOptions`.
+    #   Key-value pairs that specify advanced configuration options.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] log_publishing_options
-    #   Log publishing options for the given domain.
+    #   Log publishing options for the domain.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
     # @!attribute [rw] service_software_options
@@ -2622,19 +2861,20 @@ module Aws::OpenSearchService
     #   @return [Types::ServiceSoftwareOptions]
     #
     # @!attribute [rw] domain_endpoint_options
-    #   The current status of the domain's endpoint options.
+    #   Additional options for the domain endpoint, such as whether to
+    #   require HTTPS for all traffic.
     #   @return [Types::DomainEndpointOptions]
     #
     # @!attribute [rw] advanced_security_options
-    #   The current status of the domain's advanced security options.
+    #   Settings for fine-grained access control.
     #   @return [Types::AdvancedSecurityOptions]
     #
     # @!attribute [rw] auto_tune_options
-    #   The current status of the domain's Auto-Tune options.
+    #   Auto-Tune settings for the domain.
     #   @return [Types::AutoTuneOptionsOutput]
     #
     # @!attribute [rw] change_progress_details
-    #   Specifies change details of the domain configuration change.
+    #   Information about a configuration change happening on the domain.
     #   @return [Types::ChangeProgressDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
@@ -2669,18 +2909,25 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Results of a dry run performed in an update domain request.
+    #
     # @!attribute [rw] deployment_type
-    #   Specifies the way in which Amazon OpenSearch Service applies the
-    #   update. Possible responses are `Blue/Green` (the update requires a
-    #   blue/green deployment), `DynamicUpdate` (no blue/green required),
-    #   `Undetermined` (the domain is undergoing an update and can't
-    #   predict the deployment type; try again after the update is
-    #   complete), and `None` (the request doesn't include any
-    #   configuration changes).
+    #   Specifies the way in which OpenSearch Service will apply an update.
+    #   Possible values are:
+    #
+    #   * **Blue/Green** - The update requires a blue/green deployment.
+    #
+    #   * **DynamicUpdate** - No blue/green deployment required
+    #
+    #   * **Undetermined** - The domain is in the middle of an update and
+    #     can't predict the deployment type. Try again after the update is
+    #     complete.
+    #
+    #   * **None** - The request doesn't include any configuration changes.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Contains an optional message associated with the DryRunResults.
+    #   A message corresponding to the deployment type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DryRunResults AWS API Documentation
@@ -2692,9 +2939,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The maintenance schedule duration: duration value and duration unit.
-    # See [ Auto-Tune for Amazon OpenSearch Service ][1] for more
-    # information.
+    # The duration of a maintenance schedule. For more information, see
+    # [Auto-Tune for Amazon OpenSearch Service][1].
     #
     #
     #
@@ -2709,22 +2955,11 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] value
-    #   Integer to specify the value of a maintenance schedule duration. See
-    #   [ Auto-Tune for Amazon OpenSearch Service ][1] for more information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   Integer to specify the value of a maintenance schedule duration.
     #   @return [Integer]
     #
     # @!attribute [rw] unit
-    #   The unit of a maintenance schedule duration. Valid value is HOURS.
-    #   See [ Auto-Tune for Amazon OpenSearch Service ][1] for more
-    #   information.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
+    #   The unit of measurement for the duration of a maintenance schedule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/Duration AWS API Documentation
@@ -2736,8 +2971,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Options to enable, disable, and specify the properties of EBS storage
-    # volumes.
+    # Container for the parameters required to enable EBS-based storage for
+    # an OpenSearch Service domain.
     #
     # @note When making an API call, you may pass EBSOptions
     #   data as a hash:
@@ -2751,23 +2986,27 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] ebs_enabled
-    #   Whether EBS-based storage is enabled.
+    #   Indicates whether EBS volumes are attached to data nodes in an
+    #   OpenSearch Service domain.
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_type
-    #   The volume type for EBS-based storage.
+    #   Specifies the type of EBS volumes attached to data nodes.
     #   @return [String]
     #
     # @!attribute [rw] volume_size
-    #   Integer to specify the size of an EBS volume.
+    #   Specifies the size (in GiB) of EBS volumes attached to data nodes.
     #   @return [Integer]
     #
     # @!attribute [rw] iops
-    #   The IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
+    #   Specifies the baseline input/output (I/O) performance of EBS volumes
+    #   attached to data nodes. Applicable only for the `gp3` and
+    #   provisioned IOPS EBS volume types.
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
-    #   The Throughput for GP3 EBS volume (SSD).
+    #   Specifies the throughput (in MiB/s) of the EBS volumes attached to
+    #   data nodes. Applicable only for the `gp3` volume type.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EBSOptions AWS API Documentation
@@ -2782,10 +3021,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Status of the EBS options for the specified domain.
+    # The status of the EBS options for the specified OpenSearch Service
+    # domain.
     #
     # @!attribute [rw] options
-    #   The EBS options for the specified domain.
+    #   The configured EBS options for the specified domain.
     #   @return [Types::EBSOptions]
     #
     # @!attribute [rw] status
@@ -2801,7 +3041,9 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies encryption at rest options.
+    # Specifies whether the domain should encrypt data at rest, and if so,
+    # the Key Management Service (KMS) key to use. Can be used only to
+    # create a new domain, not update an existing one.
     #
     # @note When making an API call, you may pass EncryptionAtRestOptions
     #   data as a hash:
@@ -2812,11 +3054,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enabled
-    #   The option to enable encryption at rest.
+    #   True to enable encryption at rest.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The KMS key ID for encryption at rest options.
+    #   The KMS key ID. Takes the form
+    #   `1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/EncryptionAtRestOptions AWS API Documentation
@@ -2828,14 +3071,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Status of the encryption At Rest options for the specified domain.
+    # Status of the encryption at rest options for the specified OpenSearch
+    # Service domain.
     #
     # @!attribute [rw] options
-    #   The Encryption At Rest options for the specified domain.
+    #   Encryption at rest options for the specified domain.
     #   @return [Types::EncryptionAtRestOptions]
     #
     # @!attribute [rw] status
-    #   The status of the Encryption At Rest options for the specified
+    #   The status of the encryption at rest options for the specified
     #   domain.
     #   @return [Types::OptionStatus]
     #
@@ -2848,10 +3092,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Additional information if the package is in an error state. Null
+    # otherwise.
+    #
     # @!attribute [rw] error_type
+    #   The type of error that occurred.
     #   @return [String]
     #
     # @!attribute [rw] error_message
+    #   A message describing the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ErrorDetails AWS API Documentation
@@ -2864,9 +3113,9 @@ module Aws::OpenSearchService
     end
 
     # A filter used to limit results when describing inbound or outbound
-    # cross-cluster connections. Multiple values can be specified per
-    # filter. A cross-cluster connection must match at least one of the
-    # specified values for it to be returned from an operation.
+    # cross-cluster connections. You can specify multiple values per filter.
+    # A cross-cluster connection must match at least one of the specified
+    # values for it to be returned from an operation.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -2881,7 +3130,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Contains one or more values for the filter.
+    #   One or more values for the filter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/Filter AWS API Documentation
@@ -2893,7 +3142,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to ` GetCompatibleVersions `
+    # Container for the request parameters to `GetCompatibleVersions`
     # operation.
     #
     # @note When making an API call, you may pass GetCompatibleVersionsRequest
@@ -2904,10 +3153,8 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The name of an existing domain. Provide this parameter to limit the
+    #   results to a single domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetCompatibleVersionsRequest AWS API Documentation
@@ -2918,12 +3165,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by the ` GetCompatibleVersions `
+    # Container for the response returned by the `GetCompatibleVersions`
     # operation.
     #
     # @!attribute [rw] compatible_versions
-    #   A map of compatible OpenSearch versions returned as part of the `
-    #   GetCompatibleVersions ` operation.
+    #   A map of OpenSearch or Elasticsearch versions and the versions you
+    #   can upgrade them to.
     #   @return [Array<Types::CompatibleVersionsMap>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetCompatibleVersionsResponse AWS API Documentation
@@ -2934,8 +3181,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` GetPackageVersionHistory
-    # ` operation.
+    # Container for the request parameters to the `GetPackageVersionHistory`
+    # operation.
     #
     # @note When making an API call, you may pass GetPackageVersionHistoryRequest
     #   data as a hash:
@@ -2947,16 +3194,18 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] package_id
-    #   Returns an audit history of package versions.
+    #   The unique identifier of the package.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Limits results to a maximum number of package versions.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Used for pagination. Only necessary if a previous API call includes
-    #   a non-null NextToken value. If provided, returns results for the
+    #   If your initial `GetPackageVersionHistory` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `GetPackageVersionHistory` operations, which returns results in the
     #   next page.
     #   @return [String]
     #
@@ -2970,17 +3219,23 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for response returned by ` GetPackageVersionHistory `
+    # Container for response returned by `GetPackageVersionHistory`
     # operation.
     #
     # @!attribute [rw] package_id
+    #   The unique identifier of the package.
     #   @return [String]
     #
     # @!attribute [rw] package_version_history_list
-    #   List of `PackageVersionHistory` objects.
+    #   A list of package versions, along with their creation time and
+    #   commit message.
     #   @return [Array<Types::PackageVersionHistory>]
     #
     # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetPackageVersionHistoryResponse AWS API Documentation
@@ -2993,7 +3248,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` GetUpgradeHistory `
+    # Container for the request parameters to the `GetUpgradeHistory`
     # operation.
     #
     # @note When making an API call, you may pass GetUpgradeHistoryRequest
@@ -3006,20 +3261,19 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The name of an existing domain.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you
-    #   can use to retrieve more results.
+    #   If your initial `GetUpgradeHistory` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in subsequent
+    #   `GetUpgradeHistory` operations, which returns results in the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetUpgradeHistoryRequest AWS API Documentation
@@ -3032,18 +3286,19 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by the ` GetUpgradeHistory `
+    # Container for the response returned by the `GetUpgradeHistory`
     # operation.
     #
     # @!attribute [rw] upgrade_histories
-    #   A list of ` UpgradeHistory ` objects corresponding to each upgrade
-    #   or upgrade eligibility check performed on a domain returned as part
-    #   of the ` GetUpgradeHistoryResponse ` object.
+    #   A list of objects corresponding to each upgrade or upgrade
+    #   eligibility check performed on a domain.
     #   @return [Array<Types::UpgradeHistory>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token that needs to be supplied to the next call to get
-    #   the next page of results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetUpgradeHistoryResponse AWS API Documentation
@@ -3055,7 +3310,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` GetUpgradeStatus `
+    # Container for the request parameters to the `GetUpgradeStatus`
     # operation.
     #
     # @note When making an API call, you may pass GetUpgradeStatusRequest
@@ -3066,10 +3321,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The domain of the domain to get upgrade status information for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetUpgradeStatusRequest AWS API Documentation
@@ -3080,27 +3332,20 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by the ` GetUpgradeStatus `
+    # Container for the response returned by the `GetUpgradeStatus`
     # operation.
     #
     # @!attribute [rw] upgrade_step
-    #   One of three steps an upgrade or upgrade eligibility check goes
-    #   through: * PreUpgradeCheck
-    #   * Snapshot
-    #   * Upgrade
+    #   One of three steps that an upgrade or upgrade eligibility check goes
+    #   through.
     #   @return [String]
     #
     # @!attribute [rw] step_status
-    #   One of four statuses an upgrade have, returned as part of the `
-    #   GetUpgradeStatusResponse ` object. The status can take one of the
-    #   following values: * In Progress
-    #   * Succeeded
-    #   * Succeeded with Issues
-    #   * Failed
+    #   The status of the current step that an upgrade is on.
     #   @return [String]
     #
     # @!attribute [rw] upgrade_name
-    #   A string that briefly describes the update.
+    #   A string that describes the update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetUpgradeStatusResponse AWS API Documentation
@@ -3113,22 +3358,28 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Details of an inbound connection.
+    # Describes an inbound cross-cluster connection for Amazon OpenSearch
+    # Service. For more information, see [Cross-cluster search for Amazon
+    # OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @!attribute [rw] local_domain_info
-    #   The ` AWSDomainInformation ` for the local OpenSearch domain.
+    #   Information about the source (local) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] remote_domain_info
-    #   The ` AWSDomainInformation ` for the remote OpenSearch domain.
+    #   Information about the destination (remote) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] connection_id
-    #   The connection ID for the inbound cross-cluster connection.
+    #   The unique identifier of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_status
-    #   The ` InboundConnectionStatus ` for the outbound connection.
+    #   The current status of the connection.
     #   @return [Types::InboundConnectionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InboundConnection AWS API Documentation
@@ -3142,26 +3393,34 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The connection status of an inbound cross-cluster connection.
+    # The status of an inbound cross-cluster connection for OpenSearch
+    # Service.
     #
     # @!attribute [rw] status_code
-    #   The state code for the inbound connection. Can be one of the
-    #   following:
+    #   The status code for the connection. Can be one of the following:
     #
-    #   * PENDING\_ACCEPTANCE: Inbound connection is not yet accepted by the
+    #   * **PENDING\_ACCEPTANCE** - Inbound connection is not yet accepted
+    #     by the remote domain owner.
+    #
+    #   * **APPROVED**\: Inbound connection is pending acceptance by the
     #     remote domain owner.
-    #   * APPROVED: Inbound connection is pending acceptance by the remote
-    #     domain owner.
-    #   * PROVISIONING: Inbound connection provisioning is in progress.
-    #   * ACTIVE: Inbound connection is active and ready to use.
-    #   * REJECTING: Inbound connection rejection is in process.
-    #   * REJECTED: Inbound connection is rejected.
-    #   * DELETING: Inbound connection deletion is in progress.
-    #   * DELETED: Inbound connection is deleted and can no longer be used.
+    #
+    #   * **PROVISIONING**\: Inbound connection is being provisioned.
+    #
+    #   * **ACTIVE**\: Inbound connection is active and ready to use.
+    #
+    #   * **REJECTING**\: Inbound connection rejection is in process.
+    #
+    #   * **REJECTED**\: Inbound connection is rejected.
+    #
+    #   * **DELETING**\: Inbound connection deletion is in progress.
+    #
+    #   * **DELETED**\: Inbound connection is deleted and can no longer be
+    #     used.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Verbose information for the inbound connection status.
+    #   Information about the connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InboundConnectionStatus AWS API Documentation
@@ -3173,18 +3432,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # InstanceCountLimits represents the limits on the number of instances
-    # that can be created in Amazon OpenSearch Service for a given
-    # InstanceType.
+    # Limits on the number of instances that can be created in OpenSearch
+    # Service for a given instance type.
     #
     # @!attribute [rw] minimum_instance_count
-    #   Minimum number of instances that can be instantiated for a given
-    #   InstanceType.
+    #   The maximum allowed number of instances.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_instance_count
-    #   Maximum number of instances that can be instantiated for a given
-    #   InstanceType.
+    #   The minimum allowed number of instances.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InstanceCountLimits AWS API Documentation
@@ -3196,13 +3452,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # InstanceLimits represents the list of instance-related attributes that
-    # are available for a given InstanceType.
+    # Instance-related attributes that are available for a given instance
+    # type.
     #
     # @!attribute [rw] instance_count_limits
-    #   InstanceCountLimits represents the limits on the number of instances
-    #   that can be created in Amazon OpenSearch Service for a given
-    #   InstanceType.
+    #   Limits on the number of instances that can be created for a given
+    #   instance type.
     #   @return [Types::InstanceCountLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InstanceLimits AWS API Documentation
@@ -3213,25 +3468,38 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Lists all instance types and available features for a given OpenSearch
+    # or Elasticsearch version.
+    #
     # @!attribute [rw] instance_type
+    #   The instance type.
     #   @return [String]
     #
     # @!attribute [rw] encryption_enabled
+    #   Whether encryption at rest and node-to-node encryption are supported
+    #   for the instance type.
     #   @return [Boolean]
     #
     # @!attribute [rw] cognito_enabled
+    #   Whether Amazon Cognito access is supported for the instance type.
     #   @return [Boolean]
     #
     # @!attribute [rw] app_logs_enabled
+    #   Whether logging is supported for the instance type.
     #   @return [Boolean]
     #
     # @!attribute [rw] advanced_security_enabled
+    #   Whether fine-grained access control is supported for the instance
+    #   type.
     #   @return [Boolean]
     #
     # @!attribute [rw] warm_enabled
+    #   Whether UltraWarm is supported for the instance type.
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_role
+    #   Whether the instance acts as a data node, a dedicated master node,
+    #   or an UltraWarm node.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InstanceTypeDetails AWS API Documentation
@@ -3277,23 +3545,20 @@ module Aws::OpenSearchService
     #
     class LimitExceededException < Aws::EmptyStructure; end
 
-    # Limits for a given InstanceType and for each of its roles.
-    #  Limits contains the following: ` StorageTypes `, ` InstanceLimits `,
-    # and ` AdditionalLimits `
+    # Limits for a given instance type and for each of its roles.
     #
     # @!attribute [rw] storage_types
-    #   Storage-related types and attributes that are available for a given
-    #   InstanceType.
+    #   Storage-related attributes that are available for a given instance
+    #   type.
     #   @return [Array<Types::StorageType>]
     #
     # @!attribute [rw] instance_limits
-    #   InstanceLimits represents the list of instance-related attributes
-    #   that are available for a given InstanceType.
+    #   The limits for a given instance type.
     #   @return [Types::InstanceLimits]
     #
     # @!attribute [rw] additional_limits
-    #   List of additional limits that are specific to a given InstanceType
-    #   and for each of its ` InstanceRole ` .
+    #   List of additional limits that are specific to a given instance type
+    #   for each of its instance roles.
     #   @return [Array<Types::AdditionalLimit>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/Limits AWS API Documentation
@@ -3316,8 +3581,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] engine_type
-    #   Optional parameter to filter the output by domain engine type.
-    #   Acceptable values are 'Elasticsearch' and 'OpenSearch'.
+    #   Filters the output by domain engine type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainNamesRequest AWS API Documentation
@@ -3328,11 +3592,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `ListDomainNames` operation. Contains the names of all
-    # domains owned by this account and their respective engine types.
+    # The results of a `ListDomainNames` operation. Contains the names of
+    # all domains owned by this account and their respective engine types.
     #
     # @!attribute [rw] domain_names
-    #   List of domain names and respective engine types.
+    #   The names of all OpenSearch Service domains owned by the current
+    #   user and their respective engine types.
     #   @return [Array<Types::DomainInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainNamesResponse AWS API Documentation
@@ -3343,7 +3608,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` ListDomainsForPackage `
+    # Container for the request parameters to the `ListDomainsForPackage`
     # operation.
     #
     # @note When making an API call, you may pass ListDomainsForPackageRequest
@@ -3356,16 +3621,19 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] package_id
-    #   The package for which to list associated domains.
+    #   The unique identifier of the package for which to list associated
+    #   domains.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Limits the results to a maximum number of domains.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Used for pagination. Only necessary if a previous API call includes
-    #   a non-null NextToken value. If provided, returns results for the
+    #   If your initial `ListDomainsForPackage` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListDomainsForPackage` operations, which returns results in the
     #   next page.
     #   @return [String]
     #
@@ -3379,14 +3647,18 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response parameters to the ` ListDomainsForPackage `
+    # Container for the response parameters to the `ListDomainsForPackage`
     # operation.
     #
     # @!attribute [rw] domain_package_details_list
-    #   List of `DomainPackageDetails` objects.
+    #   Information about all domains associated with a package.
     #   @return [Array<Types::DomainPackageDetails>]
     #
     # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainsForPackageResponse AWS API Documentation
@@ -3409,23 +3681,25 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] engine_version
+    #   Version of OpenSearch or Elasticsearch, in the format
+    #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest
+    #   version of OpenSearch.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   Name of the domain to list instance type details for.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you
-    #   can use to retrieve more results.
+    #   If your initial `ListInstanceTypeDetails` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListInstanceTypeDetails` operations, which returns results in the
+    #   next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListInstanceTypeDetailsRequest AWS API Documentation
@@ -3440,12 +3714,15 @@ module Aws::OpenSearchService
     end
 
     # @!attribute [rw] instance_type_details
+    #   Lists all supported instance types and features for the given
+    #   OpenSearch or Elasticsearch version.
     #   @return [Array<Types::InstanceTypeDetails>]
     #
     # @!attribute [rw] next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you
-    #   can use to retrieve more results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListInstanceTypeDetailsResponse AWS API Documentation
@@ -3457,7 +3734,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to the ` ListPackagesForDomain `
+    # Container for the request parameters to the `ListPackagesForDomain`
     # operation.
     #
     # @note When making an API call, you may pass ListPackagesForDomainRequest
@@ -3475,12 +3752,14 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Limits results to a maximum number of packages.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Used for pagination. Only necessary if a previous API call includes
-    #   a non-null NextToken value. If provided, returns results for the
+    #   If your initial `ListPackagesForDomain` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListPackagesForDomain` operations, which returns results in the
     #   next page.
     #   @return [String]
     #
@@ -3494,16 +3773,18 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response parameters to the ` ListPackagesForDomain `
+    # Container for the response parameters to the `ListPackagesForDomain`
     # operation.
     #
     # @!attribute [rw] domain_package_details_list
-    #   List of `DomainPackageDetails` objects.
+    #   List of all packages associated with a domain.
     #   @return [Array<Types::DomainPackageDetails>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token to supply to the next call to get the next page of
-    #   results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListPackagesForDomainResponse AWS API Documentation
@@ -3515,9 +3796,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` ListTags ` operation. Specify
-    # the `ARN` of the domain that the tags you want to view are attached
-    # to.
+    # Container for the parameters to the `ListTags` operation.
     #
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
@@ -3527,8 +3806,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] arn
-    #   Specify the `ARN` of the domain that the tags you want to view are
-    #   attached to.
+    #   Amazon Resource Name (ARN) for the domain to view tags for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListTagsRequest AWS API Documentation
@@ -3539,11 +3817,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `ListTags` operation. Contains tags for all requested
-    # domains.
+    # The results of a `ListTags` operation.
     #
     # @!attribute [rw] tag_list
-    #   List of `Tag` for the requested domain.
+    #   List of resource tags associated with the specified domain.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListTagsResponse AWS API Documentation
@@ -3554,13 +3831,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` ListVersions ` operation. Use `
-    # MaxResults ` to control the maximum number of results to
-    # retrieve in a single call.
-    #
-    #  Use ` NextToken ` in response to retrieve more results. If the
-    # received response does not contain a NextToken, there are no more
-    # results to retrieve.
+    # Container for the request parameters to the `ListVersions` operation.
     #
     # @note When making an API call, you may pass ListVersionsRequest
     #   data as a hash:
@@ -3571,14 +3842,14 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] max_results
-    #   Set this value to limit the number of results returned. Value must
-    #   be greater than 10 or it won't be honored.
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use `nextToken` to get the next page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you
-    #   can use to retrieve more results.
+    #   If your initial `ListVersions` operation returns a `nextToken`, you
+    #   can include the returned `nextToken` in subsequent `ListVersions`
+    #   operations, which returns results in the next page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVersionsRequest AWS API Documentation
@@ -3590,17 +3861,19 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters for response received from the `
-    # ListVersions ` operation.
+    # Container for the parameters for response received from the
+    # `ListVersions` operation.
     #
     # @!attribute [rw] versions
-    #   List of supported OpenSearch versions.
+    #   A list of all versions of OpenSearch and Elasticsearch that Amazon
+    #   OpenSearch Service supports.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you
-    #   can use to retrieve more results.
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVersionsResponse AWS API Documentation
@@ -3612,12 +3885,162 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Log Publishing option that is set for a given domain.
-    # Attributes and their details: * CloudWatchLogsLogGroupArn: ARN of the
-    # Cloudwatch log group to
-    #   publish logs to.
-    # * Enabled: Whether the log publishing for a given log type is enabled
-    #   or not.
+    # @note When making an API call, you may pass ListVpcEndpointAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the OpenSearch Service domain to retrieve access
+    #   information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListVpcEndpointAccess` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListVpcEndpointAccess` operations, which returns results in the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointAccessRequest AWS API Documentation
+    #
+    class ListVpcEndpointAccessRequest < Struct.new(
+      :domain_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_principal_list
+    #   A list of [IAM principals][1] that can currently access the domain.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    #   @return [Array<Types::AuthorizedPrincipal>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointAccessResponse AWS API Documentation
+    #
+    class ListVpcEndpointAccessResponse < Struct.new(
+      :authorized_principal_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListVpcEndpointsForDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain to list associated VPC endpoints for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListEndpointsForDomain` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListEndpointsForDomain` operations, which returns results in the
+    #   next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointsForDomainRequest AWS API Documentation
+    #
+    class ListVpcEndpointsForDomainRequest < Struct.new(
+      :domain_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_summary_list
+    #   Information about each endpoint associated with the domain.
+    #   @return [Array<Types::VpcEndpointSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointsForDomainResponse AWS API Documentation
+    #
+    class ListVpcEndpointsForDomainResponse < Struct.new(
+      :vpc_endpoint_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListVpcEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListVpcEndpoints` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in subsequent
+    #   `ListVpcEndpoints` operations, which returns results in the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointsRequest AWS API Documentation
+    #
+    class ListVpcEndpointsRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_summary_list
+    #   Information about each endpoint.
+    #   @return [Array<Types::VpcEndpointSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointsResponse AWS API Documentation
+    #
+    class ListVpcEndpointsResponse < Struct.new(
+      :vpc_endpoint_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether the Amazon OpenSearch Service domain publishes the
+    # OpenSearch application and slow logs to Amazon CloudWatch. For more
+    # information, see [Monitoring OpenSearch logs with Amazon CloudWatch
+    # Logs][1].
+    #
+    # <note markdown="1"> After you enable log publishing, you still have to enable the
+    # collection of slow logs using the OpenSearch REST API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html
     #
     # @note When making an API call, you may pass LogPublishingOption
     #   data as a hash:
@@ -3628,11 +4051,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] cloud_watch_logs_log_group_arn
-    #   ARN of the Cloudwatch log group to publish logs to.
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs group to
+    #   publish logs to.
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Whether the given log publishing option is enabled or not.
+    #   Whether the log should be published.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/LogPublishingOption AWS API Documentation
@@ -3652,8 +4076,7 @@ module Aws::OpenSearchService
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
     # @!attribute [rw] status
-    #   The status of the log publishing options for the domain. See
-    #   `OptionStatus` for the status information that's included.
+    #   The status of the log publishing options for the domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/LogPublishingOptionsStatus AWS API Documentation
@@ -3665,7 +4088,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Credentials for the master user: username and password, ARN, or both.
+    # Credentials for the master user for a domain.
     #
     # @note When making an API call, you may pass MasterUserOptions
     #   data as a hash:
@@ -3677,17 +4100,18 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] master_user_arn
-    #   ARN for the master user (if IAM is enabled).
+    #   Amazon Resource Name (ARN) for the master user. Only specify if
+    #   `InternalUserDatabaseEnabled` is `false`.
     #   @return [String]
     #
     # @!attribute [rw] master_user_name
-    #   The master user's username, which is stored in the Amazon
-    #   OpenSearch Service domain's internal database.
+    #   User name for the master user. Only specify if
+    #   `InternalUserDatabaseEnabled` is `true`.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   The master user's password, which is stored in the Amazon
-    #   OpenSearch Service domain's internal database.
+    #   Password for the master user. Only specify if
+    #   `InternalUserDatabaseEnabled` is `true`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/MasterUserOptions AWS API Documentation
@@ -3700,7 +4124,12 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The node-to-node encryption options.
+    # Enables or disables node-to-node encryption. For more information, see
+    # [Node-to-node encryption for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html
     #
     # @note When making an API call, you may pass NodeToNodeEncryptionOptions
     #   data as a hash:
@@ -3742,10 +4171,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Provides the current status of the entity.
+    # Provides the current status of an entity.
     #
     # @!attribute [rw] creation_date
-    #   The timestamp of when the entity was created.
+    #   The timestamp when the entity was created.
     #   @return [Time]
     #
     # @!attribute [rw] update_date
@@ -3757,11 +4186,11 @@ module Aws::OpenSearchService
     #   @return [Integer]
     #
     # @!attribute [rw] state
-    #   Provides the `OptionState` for the domain.
+    #   The state of the entity.
     #   @return [String]
     #
     # @!attribute [rw] pending_deletion
-    #   Indicates whether the domain is being deleted.
+    #   Indicates whether the entity is being deleted.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OptionStatus AWS API Documentation
@@ -3776,26 +4205,26 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies details about an outbound connection.
+    # Specifies details about an outbound cross-cluster connection.
     #
     # @!attribute [rw] local_domain_info
-    #   The ` DomainInformation ` for the local OpenSearch domain.
+    #   Information about the source (local) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] remote_domain_info
-    #   The ` DomainInformation ` for the remote OpenSearch domain.
+    #   Information about the destination (remote) domain.
     #   @return [Types::DomainInformationContainer]
     #
     # @!attribute [rw] connection_id
-    #   The connection ID for the outbound cross-cluster connection.
+    #   Unique identifier of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_alias
-    #   The connection alias for the outbound cross-cluster connection.
+    #   Name of the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_status
-    #   The ` OutboundConnectionStatus ` for the outbound connection.
+    #   Status of the connection.
     #   @return [Types::OutboundConnectionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OutboundConnection AWS API Documentation
@@ -3810,30 +4239,42 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The connection status of an outbound cross-cluster connection.
+    # The status of an outbound cross-cluster connection.
     #
     # @!attribute [rw] status_code
-    #   The state code for the outbound connection. Can be one of the
+    #   The status code for the outbound connection. Can be one of the
     #   following:
     #
-    #   * VALIDATING: The outbound connection request is being validated.
-    #   * VALIDATION\_FAILED: Validation failed for the connection request.
-    #   * PENDING\_ACCEPTANCE: Outbound connection request is validated and
-    #     is not yet accepted by the remote domain owner.
-    #   * APPROVED: Outbound connection has been approved by the remote
+    #   * **VALIDATING** - The outbound connection request is being
+    #     validated.
+    #
+    #   * **VALIDATION\_FAILED** - Validation failed for the connection
+    #     request.
+    #
+    #   * **PENDING\_ACCEPTANCE**\: Outbound connection request is validated
+    #     and is not yet accepted by the remote domain owner.
+    #
+    #   * **APPROVED** - Outbound connection has been approved by the remote
     #     domain owner for getting provisioned.
-    #   * PROVISIONING: Outbound connection request is in process.
-    #   * ACTIVE: Outbound connection is active and ready to use.
-    #   * REJECTING: Outbound connection rejection by remote domain owner is
-    #     in progress.
-    #   * REJECTED: Outbound connection request is rejected by remote domain
-    #     owner.
-    #   * DELETING: Outbound connection deletion is in progress.
-    #   * DELETED: Outbound connection is deleted and can no longer be used.
+    #
+    #   * **PROVISIONING** - Outbound connection request is in process.
+    #
+    #   * **ACTIVE** - Outbound connection is active and ready to use.
+    #
+    #   * **REJECTING** - Outbound connection rejection by remote domain
+    #     owner is in progress.
+    #
+    #   * **REJECTED** - Outbound connection request is rejected by remote
+    #     domain owner.
+    #
+    #   * **DELETING** - Outbound connection deletion is in progress.
+    #
+    #   * **DELETED** - Outbound connection is deleted and can no longer be
+    #     used.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Verbose information for the outbound connection status.
+    #   Verbose information for the outbound connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/OutboundConnectionStatus AWS API Documentation
@@ -3848,7 +4289,7 @@ module Aws::OpenSearchService
     # Basic information about a package.
     #
     # @!attribute [rw] package_id
-    #   Internal ID of the package.
+    #   The unique identifier of the package.
     #   @return [String]
     #
     # @!attribute [rw] package_name
@@ -3856,7 +4297,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_type
-    #   Currently supports only TXT-DICTIONARY.
+    #   The type of package.
     #   @return [String]
     #
     # @!attribute [rw] package_description
@@ -3864,18 +4305,19 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_status
-    #   Current state of the package. Values are COPYING, COPY\_FAILED,
-    #   AVAILABLE, DELETING, and DELETE\_FAILED.
+    #   Current status of the package.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp of when the package was created.
+    #   The timestamp when the package was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
+    #   Date and time when the package was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] available_package_version
+    #   The package version.
     #   @return [String]
     #
     # @!attribute [rw] error_details
@@ -3899,8 +4341,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The Amazon S3 location for importing the package specified as
-    # `S3BucketName` and `S3Key`
+    # The Amazon S3 location to import the package from.
     #
     # @note When making an API call, you may pass PackageSource
     #   data as a hash:
@@ -3927,18 +4368,18 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Details of a package version.
+    # Details about a package version.
     #
     # @!attribute [rw] package_version
     #   The package version.
     #   @return [String]
     #
     # @!attribute [rw] commit_message
-    #   A message associated with the package version.
+    #   A message associated with the package version when it was uploaded.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp of when the package was created.
+    #   The date and time when the package was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PackageVersionHistory AWS API Documentation
@@ -3951,7 +4392,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for parameters to `PurchaseReservedInstanceOffering`
+    # Container for request parameters to the
+    # `PurchaseReservedInstanceOffering` operation.
     #
     # @note When making an API call, you may pass PurchaseReservedInstanceOfferingRequest
     #   data as a hash:
@@ -3963,7 +4405,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] reserved_instance_offering_id
-    #   The ID of the reserved OpenSearch instance offering to purchase.
+    #   The ID of the Reserved Instance offering to purchase.
     #   @return [String]
     #
     # @!attribute [rw] reservation_name
@@ -3988,7 +4430,7 @@ module Aws::OpenSearchService
     # operation.
     #
     # @!attribute [rw] reserved_instance_id
-    #   Details of the reserved OpenSearch instance which was purchased.
+    #   The ID of the Reserved Instance offering that was purchased.
     #   @return [String]
     #
     # @!attribute [rw] reservation_name
@@ -4004,9 +4446,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Contains the specific price and frequency of a recurring charges for a
-    # reserved OpenSearch instance, or for a reserved OpenSearch instance
-    # offering.
+    # Contains the specific price and frequency of a recurring charges for
+    # an OpenSearch Reserved Instance, or for a Reserved Instance offering.
     #
     # @!attribute [rw] recurring_charge_amount
     #   The monetary amount of the recurring charge.
@@ -4025,7 +4466,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` RejectInboundConnection `
+    # Container for the request parameters to the `RejectInboundConnection`
     # operation.
     #
     # @note When making an API call, you may pass RejectInboundConnectionRequest
@@ -4036,7 +4477,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] connection_id
-    #   The ID of the inbound connection to reject.
+    #   The unique identifier of the inbound connection to reject.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RejectInboundConnectionRequest AWS API Documentation
@@ -4047,11 +4488,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a ` RejectInboundConnection ` operation. Contains
-    # details about the rejected inbound connection.
+    # Represents the output of a `RejectInboundConnection` operation.
     #
     # @!attribute [rw] connection
-    #   The ` InboundConnection ` of the rejected inbound connection.
+    #   Contains details about the rejected inbound connection.
     #   @return [Types::InboundConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RejectInboundConnectionResponse AWS API Documentation
@@ -4062,9 +4502,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` RemoveTags ` operation. Specify
-    # the `ARN` for the domain from which you want to remove the specified
-    # `TagKey`.
+    # Container for the request parameters to the `RemoveTags` operation.
     #
     # @note When making an API call, you may pass RemoveTagsRequest
     #   data as a hash:
@@ -4075,12 +4513,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] arn
-    #   The `ARN` of the domain from which you want to delete the specified
-    #   tags.
+    #   The Amazon Resource Name (ARN) of the domain from which you want to
+    #   delete the specified tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The `TagKey` list you want to remove from the domain.
+    #   The list of tag keys to remove from the domain.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RemoveTagsRequest AWS API Documentation
@@ -4092,7 +4530,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Details of a reserved OpenSearch instance.
+    # Details of an OpenSearch Reserved Instance.
     #
     # @!attribute [rw] reservation_name
     #   The customer-specified identifier to track this reservation.
@@ -4103,19 +4541,20 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] billing_subscription_id
+    #   The unique identifier of the billing subscription.
     #   @return [Integer]
     #
     # @!attribute [rw] reserved_instance_offering_id
-    #   The offering identifier.
+    #   The unique identifier of the Reserved Instance offering.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The OpenSearch instance type offered by the reserved instance
+    #   The OpenSearch instance type offered by theReserved Instance
     #   offering.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The time the reservation started.
+    #   The date and time when the reservation was purchased.
     #   @return [Time]
     #
     # @!attribute [rw] duration
@@ -4125,16 +4564,16 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] fixed_price
     #   The upfront fixed charge you will paid to purchase the specific
-    #   reserved OpenSearch instance offering.
+    #   Reserved Instance offering.
     #   @return [Float]
     #
     # @!attribute [rw] usage_price
-    #   The rate you are charged for each hour for the domain that is using
-    #   this reserved instance.
+    #   The hourly rate at which you're charged for the domain using this
+    #   Reserved Instance.
     #   @return [Float]
     #
     # @!attribute [rw] currency_code
-    #   The currency code for the reserved OpenSearch instance offering.
+    #   The currency code for the offering.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -4142,17 +4581,16 @@ module Aws::OpenSearchService
     #   @return [Integer]
     #
     # @!attribute [rw] state
-    #   The state of the reserved OpenSearch instance.
+    #   The state of the Reserved Instance.
     #   @return [String]
     #
     # @!attribute [rw] payment_option
-    #   The payment option as defined in the reserved OpenSearch instance
-    #   offering.
+    #   The payment option as defined in the Reserved Instance offering.
     #   @return [String]
     #
     # @!attribute [rw] recurring_charges
-    #   The charge to your account regardless of whether you are creating
-    #   any domains using the instance offering.
+    #   The recurring charge to your account, regardless of whether you
+    #   create any domains using the Reserved Instance offering.
     #   @return [Array<Types::RecurringCharge>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ReservedInstance AWS API Documentation
@@ -4176,14 +4614,14 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Details of a reserved OpenSearch instance offering.
+    # Details of an OpenSearch Reserved Instance offering.
     #
     # @!attribute [rw] reserved_instance_offering_id
-    #   The OpenSearch reserved instance offering identifier.
+    #   The unique identifier of the Reserved Instance offering.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The OpenSearch instance type offered by the reserved instance
+    #   The OpenSearch instance type offered by the Reserved Instance
     #   offering.
     #   @return [String]
     #
@@ -4194,25 +4632,25 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] fixed_price
     #   The upfront fixed charge you will pay to purchase the specific
-    #   reserved OpenSearch instance offering.
+    #   Reserved Instance offering.
     #   @return [Float]
     #
     # @!attribute [rw] usage_price
-    #   The rate you are charged for each hour the domain that is using the
-    #   offering is running.
+    #   The hourly rate at which you're charged for the domain using this
+    #   Reserved Instance.
     #   @return [Float]
     #
     # @!attribute [rw] currency_code
-    #   The currency code for the reserved OpenSearch instance offering.
+    #   The currency code for the Reserved Instance offering.
     #   @return [String]
     #
     # @!attribute [rw] payment_option
-    #   Payment option for the reserved OpenSearch instance offering
+    #   Payment option for the Reserved Instance offering
     #   @return [String]
     #
     # @!attribute [rw] recurring_charges
-    #   The charge to your account regardless of whether you are creating
-    #   any domains using the instance offering.
+    #   The recurring charge to your account, regardless of whether you
+    #   creates any domains using the offering.
     #   @return [Array<Types::RecurringCharge>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ReservedInstanceOffering AWS API Documentation
@@ -4244,7 +4682,36 @@ module Aws::OpenSearchService
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
-    # The SAML identity povider's information.
+    # @note When making an API call, you may pass RevokeVpcEndpointAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         account: "AWSAccount", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the OpenSearch Service domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The account ID to revoke access from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RevokeVpcEndpointAccessRequest AWS API Documentation
+    #
+    class RevokeVpcEndpointAccessRequest < Struct.new(
+      :domain_name,
+      :account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RevokeVpcEndpointAccessResponse AWS API Documentation
+    #
+    class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure; end
+
+    # The SAML identity povider information.
     #
     # @note When making an API call, you may pass SAMLIdp
     #   data as a hash:
@@ -4255,11 +4722,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] metadata_content
-    #   The metadata of the SAML application in XML format.
+    #   The metadata of the SAML application, in XML format.
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The unique entity ID of the application in SAML identity provider.
+    #   The unique entity ID of the application in the SAML identity
+    #   provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SAMLIdp AWS API Documentation
@@ -4271,7 +4739,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The SAML application configuration for the domain.
+    # The SAML authentication configuration for an Amazon OpenSearch Service
+    # domain.
     #
     # @note When making an API call, you may pass SAMLOptionsInput
     #   data as a hash:
@@ -4290,7 +4759,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enabled
-    #   True if SAML is enabled.
+    #   True to enable SAML authentication for a domain.
     #   @return [Boolean]
     #
     # @!attribute [rw] idp
@@ -4298,8 +4767,8 @@ module Aws::OpenSearchService
     #   @return [Types::SAMLIdp]
     #
     # @!attribute [rw] master_user_name
-    #   The SAML master username, which is stored in the Amazon OpenSearch
-    #   Service domain's internal database.
+    #   The SAML master user name, which is stored in the domain's internal
+    #   user database.
     #   @return [String]
     #
     # @!attribute [rw] master_backend_role
@@ -4307,13 +4776,13 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] subject_key
-    #   Element of the SAML assertion to use for username. Default is
-    #   NameID.
+    #   Element of the SAML assertion to use for the user name. Default is
+    #   `NameID`.
     #   @return [String]
     #
     # @!attribute [rw] roles_key
     #   Element of the SAML assertion to use for backend roles. Default is
-    #   roles.
+    #   `roles`.
     #   @return [String]
     #
     # @!attribute [rw] session_timeout_minutes
@@ -4371,29 +4840,29 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Specifies details about the scheduled Auto-Tune action. See [
-    # Auto-Tune for Amazon OpenSearch Service ][1] for more information.
+    # Specifies details about a scheduled Auto-Tune action. For more
+    # information, see [Auto-Tune for Amazon OpenSearch Service][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @!attribute [rw] date
-    #   The timestamp of the Auto-Tune action scheduled for the domain.
+    #   The date and time when the Auto-Tune action is scheduled for the
+    #   domain.
     #   @return [Time]
     #
     # @!attribute [rw] action_type
-    #   The Auto-Tune action type. Valid values are JVM\_HEAP\_SIZE\_TUNING
-    #   and JVM\_YOUNG\_GEN\_TUNING.
+    #   The type of Auto-Tune action.
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The Auto-Tune action description.
+    #   A description of the Auto-Tune action.
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The Auto-Tune action severity. Valid values are LOW, MEDIUM, and
-    #   HIGH.
+    #   The severity of the Auto-Tune action. Valid values are `LOW`,
+    #   `MEDIUM`, and `HIGH`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ScheduledAutoTuneDetails AWS API Documentation
@@ -4407,34 +4876,38 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The current options of an domain service software options.
+    # The current status of the service software for an Amazon OpenSearch
+    # Service domain. For more information, see [Service software updates in
+    # Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
     #
     # @!attribute [rw] current_version
     #   The current service software version present on the domain.
     #   @return [String]
     #
     # @!attribute [rw] new_version
-    #   The new service software version if one is available.
+    #   The new service software version, if one is available.
     #   @return [String]
     #
     # @!attribute [rw] update_available
-    #   `True` if you're able to update your service software version.
-    #   `False` if you can't update your service software version.
+    #   True if you're able to update your service software version. False
+    #   if you can't update your service software version.
     #   @return [Boolean]
     #
     # @!attribute [rw] cancellable
-    #   `True` if you're able to cancel your service software version
-    #   update. `False` if you can't cancel your service software update.
+    #   True if you're able to cancel your service software version update.
+    #   False if you can't cancel your service software update.
     #   @return [Boolean]
     #
     # @!attribute [rw] update_status
-    #   The status of your service software update. This field can take the
-    #   following values: ` ELIGIBLE`, `PENDING_UPDATE`, `IN_PROGRESS`,
-    #   `COMPLETED`, and ` NOT_ELIGIBLE`.
+    #   The status of your service software update.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the `UpdateStatus`.
+    #   A description of the service software update status.
     #   @return [String]
     #
     # @!attribute [rw] automated_update_date
@@ -4444,9 +4917,9 @@ module Aws::OpenSearchService
     #   @return [Time]
     #
     # @!attribute [rw] optional_deployment
-    #   `True` if a service software is never automatically updated. `False`
-    #   if a service software is automatically updated after
-    #   `AutomatedUpdateDate`.
+    #   True if a service software is never automatically updated. False if
+    #   a service software is automatically updated after the automated
+    #   update date.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ServiceSoftwareOptions AWS API Documentation
@@ -4464,8 +4937,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The time, in UTC format, when the service takes a daily automated
-    # snapshot of the specified domain. Default is `0` hours.
+    # The time, in UTC format, when OpenSearch Service takes a daily
+    # automated snapshot of the specified domain. Default is `0` hours.
     #
     # @note When making an API call, you may pass SnapshotOptions
     #   data as a hash:
@@ -4475,8 +4948,8 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] automated_snapshot_start_hour
-    #   The time, in UTC format, when the service takes a daily automated
-    #   snapshot of the specified domain. Default is `0` hours.
+    #   The time, in UTC format, when OpenSearch Service takes a daily
+    #   automated snapshot of the specified domain. Default is `0` hours.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SnapshotOptions AWS API Documentation
@@ -4487,7 +4960,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Status of a daily automated snapshot.
+    # Container for information about a daily automated snapshot for an
+    # OpenSearch Service domain.
     #
     # @!attribute [rw] options
     #   The daily snapshot options specified for the domain.
@@ -4506,9 +4980,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` StartServiceSoftwareUpdate `
-    # operation. Specifies the name of the domain to schedule a service
-    # software update for.
+    # Container for the request parameters to the
+    # `StartServiceSoftwareUpdate` operation.
     #
     # @note When making an API call, you may pass StartServiceSoftwareUpdateRequest
     #   data as a hash:
@@ -4530,11 +5003,11 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of a `StartServiceSoftwareUpdate` operation. Contains the
-    # status of the update.
+    # Represents the output of a `StartServiceSoftwareUpdate` operation.
+    # Contains the status of the update.
     #
     # @!attribute [rw] service_software_options
-    #   The current status of the OpenSearch service software update.
+    #   The current status of the OpenSearch Service software update.
     #   @return [Types::ServiceSoftwareOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StartServiceSoftwareUpdateResponse AWS API Documentation
@@ -4545,24 +5018,15 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # StorageTypes represents the list of storage-related types and their
-    # attributes that are available for a given InstanceType.
+    # A list of storage types for an Amazon OpenSearch Service domain that
+    # are available for a given intance type.
     #
     # @!attribute [rw] storage_type_name
-    #   Type of storage. List of available storage options: 1.  instance
-    #   2.  ebs
+    #   The name of the storage type.
     #   @return [String]
     #
     # @!attribute [rw] storage_sub_type_name
-    #   Sub-type of the given storage type. List of available sub-storage
-    #   options: "instance" storageType has no storageSubType. "ebs"
-    #   storageType has the following valid storageSubTypes: 1.  standard
-    #   2.  gp2
-    #   3.  gp3
-    #   4.  io1
-    #
-    #    See ` VolumeType ` for more information regarding each EBS storage
-    #   option.
+    #   The storage sub-type, such as `gp3` or `io1`.
     #   @return [String]
     #
     # @!attribute [rw] storage_type_limits
@@ -4579,21 +5043,37 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Limits that are applicable for the given storage type.
+    # Limits that are applicable for the given Amazon OpenSearch Service
+    # storage type.
     #
     # @!attribute [rw] limit_name
     #   Name of storage limits that are applicable for the given storage
-    #   type. If ` StorageType ` is "ebs", the following storage options
-    #   are applicable: 1.  MinimumVolumeSize
-    #   2.  MaximumVolumeSize
-    #   3.  MaximumIops
-    #   4.  MinimumIops
-    #   5.  MaximumThroughput
-    #   6.  MinimumThroughput
+    #   type. If `StorageType` is `ebs`, the following options are
+    #   available:
+    #
+    #   * **MinimumVolumeSize** - Minimum volume size that is available for
+    #     the given storage type. Can be empty if not applicable.
+    #
+    #   * **MaximumVolumeSize** - Maximum volume size that is available for
+    #     the given storage type. Can be empty if not applicable.
+    #
+    #   * **MaximumIops** - Maximum amount of IOPS that is available for the
+    #     given the storage type. Can be empty if not applicable.
+    #
+    #   * **MinimumIops** - Minimum amount of IOPS that is available for the
+    #     given the storage type. Can be empty if not applicable.
+    #
+    #   * **MaximumThroughput** - Maximum amount of throughput that is
+    #     available for the given the storage type. Can be empty if not
+    #     applicable.
+    #
+    #   * **MinimumThroughput** - Minimum amount of throughput that is
+    #     available for the given the storage type. Can be empty if not
+    #     applicable.
     #   @return [String]
     #
     # @!attribute [rw] limit_values
-    #   Values for the ` StorageTypeLimit$LimitName ` .
+    #   The limit values.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/StorageTypeLimit AWS API Documentation
@@ -4605,7 +5085,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # A key value pair for a resource tag.
+    # A tag (key-value pair) for an Amazon OpenSearch Service resource.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -4616,15 +5096,15 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] key
-    #   The `TagKey`, the name of the tag. Tag keys must be unique for the
-    #   domain to which they are attached.
+    #   The tag key. Tag keys must be unique for the domain to which they
+    #   are attached.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The `TagValue`, the value assigned to the corresponding tag key. Tag
-    #   values can be null and don't have to be unique in a tag set. For
-    #   example, you can have a key value pair in a tag set of `project :
-    #   Trinity` and `cost-center : Trinity`
+    #   The value assigned to the corresponding tag key. Tag values can be
+    #   null and don't have to be unique in a tag set. For example, you can
+    #   have a key value pair in a tag set of `project : Trinity` and
+    #   `cost-center : Trinity`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/Tag AWS API Documentation
@@ -4636,8 +5116,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the parameters to the ` UpdateDomain ` operation.
-    # Specifies the type and number of instances in the domain cluster.
+    # Container for the request parameters to the `UpdateDomain` operation.
     #
     # @note When making an API call, you may pass UpdateDomainConfigRequest
     #   data as a hash:
@@ -4745,16 +5224,17 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the domain you're updating.
+    #   The name of the domain that you're updating.
     #   @return [String]
     #
     # @!attribute [rw] cluster_config
-    #   The type and number of instances to instantiate for the domain
-    #   cluster.
+    #   Changes that you want to make to the cluster configuration, such as
+    #   the instance type and number of EC2 instances.
     #   @return [Types::ClusterConfig]
     #
     # @!attribute [rw] ebs_options
-    #   Specify the type and size of the EBS volume to use.
+    #   The type and size of the EBS volume to attach to instances in the
+    #   domain.
     #   @return [Types::EBSOptions]
     #
     # @!attribute [rw] snapshot_options
@@ -4763,71 +5243,88 @@ module Aws::OpenSearchService
     #   @return [Types::SnapshotOptions]
     #
     # @!attribute [rw] vpc_options
-    #   Options to specify the subnets and security groups for the VPC
+    #   Options to specify the subnets and security groups for a VPC
     #   endpoint. For more information, see [Launching your Amazon
-    #   OpenSearch Service domains using a VPC ][1].
+    #   OpenSearch Service domains using a VPC][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #   @return [Types::VPCOptions]
     #
     # @!attribute [rw] cognito_options
-    #   Options to specify the Cognito user and identity pools for
-    #   OpenSearch Dashboards authentication. For more information, see
-    #   [Configuring Amazon Cognito authentication for OpenSearch
-    #   Dashboards][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    #   Key-value pairs to configure Amazon Cognito authentication for
+    #   OpenSearch Dashboards.
     #   @return [Types::CognitoOptions]
     #
     # @!attribute [rw] advanced_options
-    #   Modifies the advanced option to allow references to indices in an
-    #   HTTP request body. Must be `false` when configuring access to
-    #   individual sub-resources. By default, the value is `true`. See
-    #   [Advanced options ][1] for more information.
+    #   Key-value pairs to specify advanced configuration options. The
+    #   following key-value pairs are supported:
+    #
+    #   * `"rest.action.multi.allow_explicit_index": "true" | "false"` -
+    #     Note the use of a string rather than a boolean. Specifies whether
+    #     explicit references to indexes are allowed inside the body of HTTP
+    #     requests. If you want to configure access policies for domain
+    #     sub-resources, such as specific indexes and domain APIs, you must
+    #     disable this property. Default is true.
+    #
+    #   * `"indices.fielddata.cache.size": "80" ` - Note the use of a string
+    #     rather than a boolean. Specifies the percentage of heap space
+    #     allocated to field data. Default is unbounded.
+    #
+    #   * `"indices.query.bool.max_clause_count": "1024"` - Note the use of
+    #     a string rather than a boolean. Specifies the maximum number of
+    #     clauses allowed in a Lucene boolean query. Default is 1,024.
+    #     Queries with more than the permitted number of clauses result in a
+    #     `TooManyClauses` error.
+    #
+    #   * `"override_main_response_version": "true" | "false"` - Note the
+    #     use of a string rather than a boolean. Specifies whether the
+    #     domain reports its version as 7.10 to allow Elasticsearch OSS
+    #     clients and plugins to continue working with it. Default is false
+    #     when creating a domain and true when upgrading a domain.
+    #
+    #   For more information, see [Advanced cluster parameters][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] access_policies
-    #   IAM access policy as a JSON-formatted string.
+    #   Identity and Access Management (IAM) access policy as a
+    #   JSON-formatted string.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_options
-    #   Map of `LogType` and `LogPublishingOption`, each containing options
-    #   to publish a given type of OpenSearch log.
+    #   Options to publish OpenSearch lots to Amazon CloudWatch Logs.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
     # @!attribute [rw] encryption_at_rest_options
-    #   Specifies encryption of data at rest options.
+    #   Encryption at rest options for the domain.
     #   @return [Types::EncryptionAtRestOptions]
     #
     # @!attribute [rw] domain_endpoint_options
-    #   Options to specify configuration that will be applied to the domain
-    #   endpoint.
+    #   Additional options for the domain endpoint, such as whether to
+    #   require HTTPS for all traffic.
     #   @return [Types::DomainEndpointOptions]
     #
     # @!attribute [rw] node_to_node_encryption_options
-    #   Specifies node-to-node encryption options.
+    #   Node-To-Node Encryption options for the domain.
     #   @return [Types::NodeToNodeEncryptionOptions]
     #
     # @!attribute [rw] advanced_security_options
-    #   Specifies advanced security options.
+    #   Options for fine-grained access control.
     #   @return [Types::AdvancedSecurityOptionsInput]
     #
     # @!attribute [rw] auto_tune_options
-    #   Specifies Auto-Tune options.
+    #   Options for Auto-Tune.
     #   @return [Types::AutoTuneOptions]
     #
     # @!attribute [rw] dry_run
     #   This flag, when set to True, specifies whether the `UpdateDomain`
-    #   request should return the results of validation checks
-    #   (DryRunResults) without actually applying the change.
+    #   request should return the results of validation check without
+    #   actually applying the change.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
@@ -4852,7 +5349,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The result of an `UpdateDomain` request. Contains the status of the
+    # The results of an `UpdateDomain` request. Contains the status of the
     # domain being updated.
     #
     # @!attribute [rw] domain_config
@@ -4860,7 +5357,7 @@ module Aws::OpenSearchService
     #   @return [Types::DomainConfig]
     #
     # @!attribute [rw] dry_run_results
-    #   Contains result of DryRun.
+    #   Results of a dry run performed in an update domain request.
     #   @return [Types::DryRunResults]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigResponse AWS API Documentation
@@ -4872,7 +5369,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for request parameters to the ` UpdatePackage ` operation.
+    # Container for request parameters to the `UpdatePackage` operation.
     #
     # @note When making an API call, you may pass UpdatePackageRequest
     #   data as a hash:
@@ -4892,8 +5389,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] package_source
-    #   The Amazon S3 location for importing the package specified as
-    #   `S3BucketName` and `S3Key`
+    #   Amazon S3 bucket and key for the package.
     #   @return [Types::PackageSource]
     #
     # @!attribute [rw] package_description
@@ -4901,7 +5397,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] commit_message
-    #   A commit message for the new version which is shown as part of
+    #   Commit message for the updated file, which is shown as part of
     #   `GetPackageVersionHistoryResponse`.
     #   @return [String]
     #
@@ -4916,11 +5412,10 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the response returned by the ` UpdatePackage `
-    # operation.
+    # Container for the response returned by the `UpdatePackage` operation.
     #
     # @!attribute [rw] package_details
-    #   Information about the package.
+    #   Information about a package.
     #   @return [Types::PackageDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdatePackageResponse AWS API Documentation
@@ -4931,7 +5426,47 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for the request parameters to ` UpgradeDomain ` operation.
+    # @note When making an API call, you may pass UpdateVpcEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_id: "VpcEndpointId", # required
+    #         vpc_options: { # required
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   The security groups and/or subnets to add, remove, or modify.
+    #   @return [Types::VPCOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateVpcEndpointRequest AWS API Documentation
+    #
+    class UpdateVpcEndpointRequest < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint
+    #   The endpoint to be updated.
+    #   @return [Types::VpcEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateVpcEndpointResponse AWS API Documentation
+    #
+    class UpdateVpcEndpointResponse < Struct.new(
+      :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the request parameters to the `UpgradeDomain` operation.
     #
     # @note When making an API call, you may pass UpgradeDomainRequest
     #   data as a hash:
@@ -4946,14 +5481,12 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   Name of the OpenSearch Service domain that you want to upgrade.
     #   @return [String]
     #
     # @!attribute [rw] target_version
-    #   The version of OpenSearch you intend to upgrade the domain to.
+    #   OpenSearch or Elasticsearch version to which you want to upgrade, in
+    #   the format Opensearch\_X.Y or Elasticsearch\_X.Y.
     #   @return [String]
     #
     # @!attribute [rw] perform_check_only
@@ -4962,22 +5495,11 @@ module Aws::OpenSearchService
     #   @return [Boolean]
     #
     # @!attribute [rw] advanced_options
-    #   Exposes select native OpenSearch configuration values from
-    #   `opensearch.yml`. Currently, the following advanced options are
-    #   available:
-    #
-    #   * Option to allow references to indices in an HTTP request body.
-    #     Must be `false` when configuring access to individual
-    #     sub-resources. By default, the value is `true`. See [Advanced
-    #     cluster parameters ][1] for more information.
-    #   * Option to specify the percentage of heap space allocated to field
-    #     data. By default, this setting is unbounded.
-    #
-    #   For more information, see [ Advanced cluster parameters][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   Only supports the `override_main_response_version` parameter and not
+    #   other advanced options. You can only include this option when
+    #   upgrading to an OpenSearch version. Specifies whether the domain
+    #   reports its version as 7.10 so that it continues to work with
+    #   Elasticsearch OSS clients and plugins.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpgradeDomainRequest AWS API Documentation
@@ -4991,48 +5513,32 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Container for response returned by ` UpgradeDomain ` operation.
+    # Container for the response returned by `UpgradeDomain` operation.
     #
     # @!attribute [rw] upgrade_id
+    #   The unique identifier of the domain upgrade.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The name of the domain that was upgraded.
     #   @return [String]
     #
     # @!attribute [rw] target_version
-    #   The version of OpenSearch that you intend to upgrade the domain to.
+    #   OpenSearch or Elasticsearch version that the domain was upgraded to.
     #   @return [String]
     #
     # @!attribute [rw] perform_check_only
-    #   When true, indicates that an upgrade eligibility check needs to be
-    #   performed. Does not actually perform the upgrade.
+    #   When true, indicates that an upgrade eligibility check was
+    #   performed.
     #   @return [Boolean]
     #
     # @!attribute [rw] advanced_options
-    #   Exposes select native OpenSearch configuration values from
-    #   `opensearch.yml`. Currently, the following advanced options are
-    #   available:
-    #
-    #   * Option to allow references to indices in an HTTP request body.
-    #     Must be `false` when configuring access to individual
-    #     sub-resources. By default, the value is `true`. See [Advanced
-    #     cluster parameters ][1] for more information.
-    #   * Option to specify the percentage of heap space allocated to field
-    #     data. By default, this setting is unbounded.
-    #
-    #   For more information, see [ Advanced cluster parameters][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   The advanced options configuration for the domain.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] change_progress_details
-    #   Specifies change details of the domain configuration change.
+    #   Container for information about a configuration change happening on
+    #   a domain.
     #   @return [Types::ChangeProgressDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpgradeDomainResponse AWS API Documentation
@@ -5048,29 +5554,34 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # History of the last 10 upgrades and upgrade eligibility checks.
+    # History of the last 10 upgrades and upgrade eligibility checks for an
+    # Amazon OpenSearch Service domain.
     #
     # @!attribute [rw] upgrade_name
-    #   A string that briefly describes the upgrade.
+    #   A string that describes the upgrade.
     #   @return [String]
     #
     # @!attribute [rw] start_timestamp
-    #   UTC timestamp at which the upgrade API call was made in
-    #   "yyyy-MM-ddTHH:mm:ssZ" format.
+    #   UTC timestamp at which the upgrade API call was made, in the format
+    #   `yyyy-MM-ddTHH:mm:ssZ`.
     #   @return [Time]
     #
     # @!attribute [rw] upgrade_status
     #   The current status of the upgrade. The status can take one of the
-    #   following values: * In Progress
+    #   following values:
+    #
+    #   * In Progress
+    #
     #   * Succeeded
+    #
     #   * Succeeded with Issues
+    #
     #   * Failed
     #   @return [String]
     #
     # @!attribute [rw] steps_list
-    #   A list of ` UpgradeStepItem ` s representing information about each
-    #   step performed as part of a specific upgrade or upgrade eligibility
-    #   check.
+    #   A list of each step performed as part of a specific upgrade or
+    #   upgrade eligibility check.
     #   @return [Array<Types::UpgradeStepItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpgradeHistory AWS API Documentation
@@ -5084,21 +5595,30 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Represents a single step of the upgrade or upgrade eligibility check
+    # Represents a single step of an upgrade or upgrade eligibility check
     # workflow.
     #
     # @!attribute [rw] upgrade_step
-    #   One of three steps an upgrade or upgrade eligibility check goes
-    #   through: * PreUpgradeCheck
+    #   One of three steps that an upgrade or upgrade eligibility check goes
+    #   through:
+    #
+    #   * PreUpgradeCheck
+    #
     #   * Snapshot
+    #
     #   * Upgrade
     #   @return [String]
     #
     # @!attribute [rw] upgrade_step_status
     #   The current status of the upgrade. The status can take one of the
-    #   following values: * In Progress
+    #   following values:
+    #
+    #   * In Progress
+    #
     #   * Succeeded
+    #
     #   * Succeeded with Issues
+    #
     #   * Failed
     #   @return [String]
     #
@@ -5123,30 +5643,33 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Options to specify the subnets and security groups for the VPC
-    # endpoint. For more information, see [ Launching your Amazon OpenSearch
-    # Service domains using a VPC][1].
+    # Information about the subnets and security groups for an Amazon
+    # OpenSearch Service domain provisioned within a virtual private cloud
+    # (VPC). For more information, see [Launching your Amazon OpenSearch
+    # Service domains using a VPC][1]. This information only exists if the
+    # domain was created with `VPCOptions`.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #
     # @!attribute [rw] vpc_id
-    #   The VPC ID for the domain. Exists only if the domain was created
-    #   with `VPCOptions`.
+    #   The ID for your VPC. Amazon VPC generates this value when you create
+    #   a VPC.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   The subnets for the VPC endpoint.
+    #   A list of subnet IDs associated with the VPC endpoints for the
+    #   domain.
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones for the domain. Exists only if the domain was
-    #   created with `VPCOptions`.
+    #   The list of Availability Zones associated with the VPC subnets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   The security groups for the VPC endpoint.
+    #   The list of security group IDs associated with the VPC endpoints for
+    #   the domain.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VPCDerivedInfo AWS API Documentation
@@ -5160,7 +5683,7 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Status of the VPC options for the specified domain.
+    # Status of the VPC options for a specified domain.
     #
     # @!attribute [rw] options
     #   The VPC options for the specified domain.
@@ -5179,13 +5702,13 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Options to specify the subnets and security groups for the VPC
-    # endpoint. For more information, see [ Launching your Amazon OpenSearch
-    # Service domains using a VPC][1].
+    # Options to specify the subnets and security groups for an Amazon
+    # OpenSearch Service VPC endpoint. For more information, see [Launching
+    # your Amazon OpenSearch Service domains using a VPC][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #
     # @note When making an API call, you may pass VPCOptions
     #   data as a hash:
@@ -5196,11 +5719,15 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] subnet_ids
-    #   The subnets for the VPC endpoint.
+    #   A list of subnet IDs associated with the VPC endpoints for the
+    #   domain. If your domain uses multiple Availability Zones, you need to
+    #   provide two subnet IDs, one per zone. Otherwise, provide only one.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
-    #   The security groups for the VPC endpoint.
+    #   The list of security group IDs associated with the VPC endpoints for
+    #   the domain. If you do not provide a security group ID, OpenSearch
+    #   Service uses the default security group for the VPC.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VPCOptions AWS API Documentation
@@ -5219,16 +5746,15 @@ module Aws::OpenSearchService
     #
     class ValidationException < Aws::EmptyStructure; end
 
-    # The status of the OpenSearch version options for the specified
-    # OpenSearch domain.
+    # The status of the the OpenSearch or Elasticsearch version options for
+    # the specified Amazon OpenSearch Service domain.
     #
     # @!attribute [rw] options
-    #   The OpenSearch version for the specified OpenSearch domain.
+    #   The OpenSearch or Elasticsearch version for the specified domain.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the OpenSearch version options for the specified
-    #   OpenSearch domain.
+    #   The status of the version options for the specified domain.
     #   @return [Types::OptionStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VersionStatus AWS API Documentation
@@ -5240,8 +5766,106 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The zone awareness configuration for the domain cluster, such as the
-    # number of availability zones.
+    # The connection endpoint for connecting to an Amazon OpenSearch Service
+    # domain through a proxy.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_owner
+    #   The creator of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the domain associated with the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   Options to specify the subnets and security groups for an Amazon
+    #   OpenSearch Service VPC endpoint.
+    #   @return [Types::VPCDerivedInfo]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The connection endpoint ID for connecting to the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VpcEndpoint AWS API Documentation
+    #
+    class VpcEndpoint < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_endpoint_owner,
+      :domain_arn,
+      :vpc_options,
+      :status,
+      :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error information when attempting to describe an Amazon OpenSearch
+    # Service-managed VPC endpoint.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The code associated with the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VpcEndpointError AWS API Documentation
+    #
+    class VpcEndpointError < Struct.new(
+      :vpc_endpoint_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for an Amazon OpenSearch Service-managed VPC
+    # endpoint.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_owner
+    #   The creator of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the domain associated with the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VpcEndpointSummary AWS API Documentation
+    #
+    class VpcEndpointSummary < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_endpoint_owner,
+      :domain_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The zone awareness configuration for an Amazon OpenSearch Service
+    # domain.
     #
     # @note When making an API call, you may pass ZoneAwarenessConfig
     #   data as a hash:
@@ -5251,9 +5875,10 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] availability_zone_count
-    #   An integer value to indicate the number of availability zones for a
-    #   domain when zone awareness is enabled. This should be equal to
-    #   number of subnets if VPC endpoints is enabled.
+    #   If you enabled multiple Availability Zones, this value is the number
+    #   of zones that you want the domain to use. Valid values are `2` and
+    #   `3`. If your domain is provisioned within a VPC, this value be equal
+    #   to number of subnets.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ZoneAwarenessConfig AWS API Documentation

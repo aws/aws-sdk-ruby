@@ -445,6 +445,84 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Associate resources to a Firewall Manager resource set.
+    #
+    # @option params [required, String] :resource_set_identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #
+    # @option params [required, Array<String>] :items
+    #   The uniform resource identifiers (URIs) of resources that should be
+    #   associated to the resource set. The URIs must be Amazon Resource Names
+    #   (ARNs).
+    #
+    # @return [Types::BatchAssociateResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateResourceResponse#resource_set_identifier #resource_set_identifier} => String
+    #   * {Types::BatchAssociateResourceResponse#failed_items #failed_items} => Array&lt;Types::FailedItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_resource({
+    #     resource_set_identifier: "Identifier", # required
+    #     items: ["Identifier"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_set_identifier #=> String
+    #   resp.failed_items #=> Array
+    #   resp.failed_items[0].uri #=> String
+    #   resp.failed_items[0].reason #=> String, one of "NOT_VALID_ARN", "NOT_VALID_PARTITION", "NOT_VALID_REGION", "NOT_VALID_SERVICE", "NOT_VALID_RESOURCE_TYPE", "NOT_VALID_ACCOUNT_ID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/BatchAssociateResource AWS API Documentation
+    #
+    # @overload batch_associate_resource(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_resource(params = {}, options = {})
+      req = build_request(:batch_associate_resource, params)
+      req.send_request(options)
+    end
+
+    # Disassociates resources from a Firewall Manager resource set.
+    #
+    # @option params [required, String] :resource_set_identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #
+    # @option params [required, Array<String>] :items
+    #   The uniform resource identifiers (URI) of resources that should be
+    #   disassociated from the resource set. The URIs must be Amazon Resource
+    #   Names (ARNs).
+    #
+    # @return [Types::BatchDisassociateResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateResourceResponse#resource_set_identifier #resource_set_identifier} => String
+    #   * {Types::BatchDisassociateResourceResponse#failed_items #failed_items} => Array&lt;Types::FailedItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_resource({
+    #     resource_set_identifier: "Identifier", # required
+    #     items: ["Identifier"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_set_identifier #=> String
+    #   resp.failed_items #=> Array
+    #   resp.failed_items[0].uri #=> String
+    #   resp.failed_items[0].reason #=> String, one of "NOT_VALID_ARN", "NOT_VALID_PARTITION", "NOT_VALID_REGION", "NOT_VALID_SERVICE", "NOT_VALID_RESOURCE_TYPE", "NOT_VALID_ACCOUNT_ID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/BatchDisassociateResource AWS API Documentation
+    #
+    # @overload batch_disassociate_resource(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_resource(params = {}, options = {})
+      req = build_request(:batch_disassociate_resource, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes an Firewall Manager applications list.
     #
     # @option params [required, String] :list_id
@@ -558,6 +636,29 @@ module Aws::FMS
     # @param [Hash] params ({})
     def delete_protocols_list(params = {}, options = {})
       req = build_request(:delete_protocols_list, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified ResourceSet.
+    #
+    # @option params [required, String] :identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_set({
+    #     identifier: "Base62Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeleteResourceSet AWS API Documentation
+    #
+    # @overload delete_resource_set(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_set(params = {}, options = {})
+      req = build_request(:delete_resource_set, params)
       req.send_request(options)
     end
 
@@ -788,7 +889,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
     #   resp.policy.security_service_policy_data.policy_option.third_party_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
@@ -807,6 +908,9 @@ module Aws::FMS
     #   resp.policy.exclude_map #=> Hash
     #   resp.policy.exclude_map["CustomerPolicyScopeIdType"] #=> Array
     #   resp.policy.exclude_map["CustomerPolicyScopeIdType"][0] #=> String
+    #   resp.policy.resource_set_ids #=> Array
+    #   resp.policy.resource_set_ids[0] #=> String
+    #   resp.policy.policy_description #=> String
     #   resp.policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetPolicy AWS API Documentation
@@ -877,7 +981,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -933,6 +1037,43 @@ module Aws::FMS
     # @param [Hash] params ({})
     def get_protocols_list(params = {}, options = {})
       req = build_request(:get_protocols_list, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specific resource set.
+    #
+    # @option params [required, String] :identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #
+    # @return [Types::GetResourceSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceSetResponse#resource_set #resource_set} => Types::ResourceSet
+    #   * {Types::GetResourceSetResponse#resource_set_arn #resource_set_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_set({
+    #     identifier: "Base62Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_set.id #=> String
+    #   resp.resource_set.name #=> String
+    #   resp.resource_set.description #=> String
+    #   resp.resource_set.update_token #=> String
+    #   resp.resource_set.resource_type_list #=> Array
+    #   resp.resource_set.resource_type_list[0] #=> String
+    #   resp.resource_set.last_update_time #=> Time
+    #   resp.resource_set_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetResourceSet AWS API Documentation
+    #
+    # @overload get_resource_set(params = {})
+    # @param [Hash] params ({})
+    def get_resource_set(params = {}, options = {})
+      req = build_request(:get_resource_set, params)
       req.send_request(options)
     end
 
@@ -1454,6 +1595,62 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Returns an array of resources in the organization's accounts that are
+    # available to be associated with a resource set.
+    #
+    # @option params [required, Array<String>] :member_account_ids
+    #   The Amazon Web Services account IDs to discover resources in. Only one
+    #   account is supported per request. The account must be a member of your
+    #   organization.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resources to discover.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Firewall Manager to return
+    #   for this request. If more objects are available, in the response,
+    #   Firewall Manager provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Firewall Manager returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @return [Types::ListDiscoveredResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDiscoveredResourcesResponse#items #items} => Array&lt;Types::DiscoveredResource&gt;
+    #   * {Types::ListDiscoveredResourcesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_discovered_resources({
+    #     member_account_ids: ["AWSAccountId"], # required
+    #     resource_type: "ResourceType", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].uri #=> String
+    #   resp.items[0].account_id #=> String
+    #   resp.items[0].type #=> String
+    #   resp.items[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListDiscoveredResources AWS API Documentation
+    #
+    # @overload list_discovered_resources(params = {})
+    # @param [Hash] params ({})
+    def list_discovered_resources(params = {}, options = {})
+      req = build_request(:list_discovered_resources, params)
+      req.send_request(options)
+    end
+
     # Returns a `MemberAccounts` object that lists the member accounts in
     # the administrator's Amazon Web Services organization.
     #
@@ -1544,7 +1741,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.policy_list[0].delete_unused_fm_managed_resources #=> Boolean
     #   resp.next_token #=> String
@@ -1611,6 +1808,100 @@ module Aws::FMS
     # @param [Hash] params ({})
     def list_protocols_lists(params = {}, options = {})
       req = build_request(:list_protocols_lists, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of resources that are currently associated to a
+    # resource set.
+    #
+    # @option params [required, String] :identifier
+    #   A unique identifier for the resource set, used in a TODO to refer to
+    #   the resource set.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Firewall Manager to return
+    #   for this request. If more objects are available, in the response,
+    #   Firewall Manager provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Firewall Manager returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @return [Types::ListResourceSetResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceSetResourcesResponse#items #items} => Array&lt;Types::Resource&gt;
+    #   * {Types::ListResourceSetResourcesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_set_resources({
+    #     identifier: "ResourceId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].uri #=> String
+    #   resp.items[0].account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSetResources AWS API Documentation
+    #
+    # @overload list_resource_set_resources(params = {})
+    # @param [Hash] params ({})
+    def list_resource_set_resources(params = {}, options = {})
+      req = build_request(:list_resource_set_resources, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of `ResourceSetSummary` objects.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Firewall Manager returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Firewall Manager to return
+    #   for this request. If more objects are available, in the response,
+    #   Firewall Manager provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListResourceSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceSetsResponse#resource_sets #resource_sets} => Array&lt;Types::ResourceSetSummary&gt;
+    #   * {Types::ListResourceSetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_sets({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_sets #=> Array
+    #   resp.resource_sets[0].id #=> String
+    #   resp.resource_sets[0].name #=> String
+    #   resp.resource_sets[0].description #=> String
+    #   resp.resource_sets[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListResourceSets AWS API Documentation
+    #
+    # @overload list_resource_sets(params = {})
+    # @param [Hash] params ({})
+    def list_resource_sets(params = {}, options = {})
+      req = build_request(:list_resource_sets, params)
       req.send_request(options)
     end
 
@@ -1870,7 +2161,7 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL, THIRD_PARTY_FIREWALL, IMPORT_NETWORK_FIREWALL
     #         managed_service_data: "ManagedServiceData",
     #         policy_option: {
     #           network_firewall_policy: {
@@ -1898,6 +2189,8 @@ module Aws::FMS
     #       exclude_map: {
     #         "ACCOUNT" => ["CustomerPolicyScopeId"],
     #       },
+    #       resource_set_ids: ["Base62Id"],
+    #       policy_description: "ResourceDescription",
     #     },
     #     tag_list: [
     #       {
@@ -1912,7 +2205,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL", "THIRD_PARTY_FIREWALL", "IMPORT_NETWORK_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
     #   resp.policy.security_service_policy_data.policy_option.third_party_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED", "DISTRIBUTED"
@@ -1931,6 +2224,9 @@ module Aws::FMS
     #   resp.policy.exclude_map #=> Hash
     #   resp.policy.exclude_map["CustomerPolicyScopeIdType"] #=> Array
     #   resp.policy.exclude_map["CustomerPolicyScopeIdType"][0] #=> String
+    #   resp.policy.resource_set_ids #=> Array
+    #   resp.policy.resource_set_ids[0] #=> String
+    #   resp.policy.policy_description #=> String
     #   resp.policy_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicy AWS API Documentation
@@ -1997,6 +2293,66 @@ module Aws::FMS
     # @param [Hash] params ({})
     def put_protocols_list(params = {}, options = {})
       req = build_request(:put_protocols_list, params)
+      req.send_request(options)
+    end
+
+    # Creates the resource set.
+    #
+    # An Firewall Manager resource set defines the resources to import into
+    # an Firewall Manager policy from another Amazon Web Services service.
+    #
+    # @option params [required, Types::ResourceSet] :resource_set
+    #   Details about the resource set to be created or updated.&gt;
+    #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   Retrieves the tags associated with the specified resource set. Tags
+    #   are key:value pairs that you can use to categorize and manage your
+    #   resources, for purposes like billing. For example, you might set the
+    #   tag key to "customer" and the value to the customer name or ID. You
+    #   can specify one or more tags to add to each Amazon Web Services
+    #   resource, up to 50 tags for a resource.
+    #
+    # @return [Types::PutResourceSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourceSetResponse#resource_set #resource_set} => Types::ResourceSet
+    #   * {Types::PutResourceSetResponse#resource_set_arn #resource_set_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_set({
+    #     resource_set: { # required
+    #       id: "Base62Id",
+    #       name: "Name", # required
+    #       description: "Description",
+    #       update_token: "UpdateToken",
+    #       resource_type_list: ["ResourceType"], # required
+    #       last_update_time: Time.now,
+    #     },
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_set.id #=> String
+    #   resp.resource_set.name #=> String
+    #   resp.resource_set.description #=> String
+    #   resp.resource_set.update_token #=> String
+    #   resp.resource_set.resource_type_list #=> Array
+    #   resp.resource_set.resource_type_list[0] #=> String
+    #   resp.resource_set.last_update_time #=> Time
+    #   resp.resource_set_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutResourceSet AWS API Documentation
+    #
+    # @overload put_resource_set(params = {})
+    # @param [Hash] params ({})
+    def put_resource_set(params = {}, options = {})
+      req = build_request(:put_resource_set, params)
       req.send_request(options)
     end
 
@@ -2074,7 +2430,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -368,11 +368,17 @@ module Aws::OpenSearchService
 
     # @!group API Operations
 
-    # Allows the remote domain owner to accept an inbound cross-cluster
-    # connection request.
+    # Allows the destination Amazon OpenSearch Service domain owner to
+    # accept an inbound cross-cluster search connection request. For more
+    # information, see [Cross-cluster search for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @option params [required, String] :connection_id
-    #   The ID of the inbound connection you want to accept.
+    #   The ID of the inbound connection to accept.
     #
     # @return [Types::AcceptInboundConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -405,19 +411,21 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Attaches tags to an existing domain. Tags are a set of case-sensitive
-    # key value pairs. An domain can have up to 10 tags. See [ Tagging
-    # Amazon OpenSearch Service domains][1] for more information.
+    # Attaches tags to an existing Amazon OpenSearch Service domain. Tags
+    # are a set of case-sensitive key-value pairs. An domain can have up to
+    # 10 tags. For more information, see [ Tagging Amazon OpenSearch Service
+    # domains][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
     #
     # @option params [required, String] :arn
-    #   Specify the `ARN` of the domain you want to add tags to.
+    #   Amazon Resource Name (ARN) for the OpenSearch Service domain to which
+    #   you want to attach resource tags.
     #
     # @option params [required, Array<Types::Tag>] :tag_list
-    #   List of `Tag` to add to the domain.
+    #   List of resource tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -442,14 +450,20 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Associates a package with an Amazon OpenSearch Service domain.
+    # Associates a package with an Amazon OpenSearch Service domain. For
+    # more information, see [Custom packages for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_id
     #   Internal ID of the package to associate with a domain. Use
     #   `DescribePackages` to find this value.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain to associate the package with.
+    #   Name of the domain to associate the package with.
     #
     # @return [Types::AssociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -484,14 +498,53 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Cancels a scheduled service software update for an Amazon OpenSearch
-    # Service domain. You can only perform this operation before the
-    # `AutomatedUpdateDate` and when the `UpdateStatus` is in the
-    # `PENDING_UPDATE` state.
+    # Provides access to an Amazon OpenSearch Service domain through the use
+    # of an interface VPC endpoint.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain that you want to stop the latest service
-    #   software update on.
+    #   The name of the OpenSearch Service domain to provide access to.
+    #
+    # @option params [required, String] :account
+    #   The Amazon Web Services account ID to grant access to.
+    #
+    # @return [Types::AuthorizeVpcEndpointAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AuthorizeVpcEndpointAccessResponse#authorized_principal #authorized_principal} => Types::AuthorizedPrincipal
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_vpc_endpoint_access({
+    #     domain_name: "DomainName", # required
+    #     account: "AWSAccount", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_principal.principal_type #=> String, one of "AWS_ACCOUNT", "AWS_SERVICE"
+    #   resp.authorized_principal.principal #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AuthorizeVpcEndpointAccess AWS API Documentation
+    #
+    # @overload authorize_vpc_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def authorize_vpc_endpoint_access(params = {}, options = {})
+      req = build_request(:authorize_vpc_endpoint_access, params)
+      req.send_request(options)
+    end
+
+    # Cancels a scheduled service software update for an Amazon OpenSearch
+    # Service domain. You can only perform this operation before the
+    # `AutomatedUpdateDate` and when the domain's `UpdateStatus` is
+    # `PENDING_UPDATE`. For more information, see [Service software updates
+    # in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the OpenSearch Service domain that you want to cancel the
+    #   service software update on.
     #
     # @return [Types::CancelServiceSoftwareUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -523,96 +576,116 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Creates a new Amazon OpenSearch Service domain. For more information,
-    # see [Creating and managing Amazon OpenSearch Service domains ][1] in
-    # the *Amazon OpenSearch Service Developer Guide*.
+    # Creates an Amazon OpenSearch Service domain. For more information, see
+    # [Creating and managing Amazon OpenSearch Service domains][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
     #
     # @option params [required, String] :domain_name
-    #   The name of the Amazon OpenSearch Service domain you're creating.
-    #   Domain names are unique across the domains owned by an account within
-    #   an AWS region. Domain names must start with a lowercase letter and can
-    #   contain the following characters: a-z (lowercase), 0-9, and -
-    #   (hyphen).
+    #   Name of the OpenSearch Service domain to create. Domain names are
+    #   unique across the domains owned by an account within an Amazon Web
+    #   Services Region.
     #
     # @option params [String] :engine_version
     #   String of format Elasticsearch\_X.Y or OpenSearch\_X.Y to specify the
-    #   engine version for the Amazon OpenSearch Service domain. For example,
-    #   "OpenSearch\_1.0" or "Elasticsearch\_7.9". For more information,
-    #   see [Creating and managing Amazon OpenSearch Service domains ][1].
+    #   engine version for the OpenSearch Service domain. For example,
+    #   `OpenSearch_1.0` or `Elasticsearch_7.9`. For more information, see
+    #   [Creating and managing Amazon OpenSearch Service domains][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomains
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomains
     #
     # @option params [Types::ClusterConfig] :cluster_config
-    #   Configuration options for a domain. Specifies the instance type and
-    #   number of instances in the domain.
+    #   Container for the cluster configuration of a domain.
     #
     # @option params [Types::EBSOptions] :ebs_options
-    #   Options to enable, disable, and specify the type and size of EBS
-    #   storage volumes.
+    #   Container for the parameters required to enable EBS-based storage for
+    #   an OpenSearch Service domain.
     #
     # @option params [String] :access_policies
-    #   IAM access policy as a JSON-formatted string.
+    #   Identity and Access Management (IAM) policy document specifying the
+    #   access policies for the new domain.
     #
     # @option params [Types::SnapshotOptions] :snapshot_options
-    #   Option to set time, in UTC format, of the daily automated snapshot.
-    #   Default value is 0 hours.
+    #   DEPRECATED. Container for the parameters required to configure
+    #   automated snapshots of domain indexes.
     #
     # @option params [Types::VPCOptions] :vpc_options
-    #   Options to specify the subnets and security groups for a VPC endpoint.
-    #   For more information, see [Launching your Amazon OpenSearch Service
-    #   domains using a VPC ][1].
+    #   Container for the values required to configure VPC access domains. If
+    #   you don't specify these values, OpenSearch Service creates the domain
+    #   with a public endpoint. For more information, see [Launching your
+    #   Amazon OpenSearch Service domains using a VPC][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #
     # @option params [Types::CognitoOptions] :cognito_options
-    #   Options to specify the Cognito user and identity pools for OpenSearch
-    #   Dashboards authentication. For more information, see [Configuring
-    #   Amazon Cognito authentication for OpenSearch Dashboards][1].
+    #   Key-value pairs to configure Amazon Cognito authentication. For more
+    #   information, see [Configuring Amazon Cognito authentication for
+    #   OpenSearch Dashboards][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
     #
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
-    #   Options for encryption of data at rest.
+    #   Key-value pairs to enable encryption at rest.
     #
     # @option params [Types::NodeToNodeEncryptionOptions] :node_to_node_encryption_options
-    #   Node-to-node encryption options.
+    #   Enables node-to-node encryption.
     #
     # @option params [Hash<String,String>] :advanced_options
-    #   Option to allow references to indices in an HTTP request body. Must be
-    #   `false` when configuring access to individual sub-resources. By
-    #   default, the value is `true`. See [Advanced cluster parameters ][1]
-    #   for more information.
+    #   Key-value pairs to specify advanced configuration options. The
+    #   following key-value pairs are supported:
+    #
+    #   * `"rest.action.multi.allow_explicit_index": "true" | "false"` - Note
+    #     the use of a string rather than a boolean. Specifies whether
+    #     explicit references to indexes are allowed inside the body of HTTP
+    #     requests. If you want to configure access policies for domain
+    #     sub-resources, such as specific indexes and domain APIs, you must
+    #     disable this property. Default is true.
+    #
+    #   * `"indices.fielddata.cache.size": "80" ` - Note the use of a string
+    #     rather than a boolean. Specifies the percentage of heap space
+    #     allocated to field data. Default is unbounded.
+    #
+    #   * `"indices.query.bool.max_clause_count": "1024"` - Note the use of a
+    #     string rather than a boolean. Specifies the maximum number of
+    #     clauses allowed in a Lucene boolean query. Default is 1,024. Queries
+    #     with more than the permitted number of clauses result in a
+    #     `TooManyClauses` error.
+    #
+    #   * `"override_main_response_version": "true" | "false"` - Note the use
+    #     of a string rather than a boolean. Specifies whether the domain
+    #     reports its version as 7.10 to allow Elasticsearch OSS clients and
+    #     plugins to continue working with it. Default is false when creating
+    #     a domain and true when upgrading a domain.
+    #
+    #   For more information, see [Advanced cluster parameters][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
-    #   Map of `LogType` and `LogPublishingOption`, each containing options to
-    #   publish a given type of OpenSearch log.
+    #   Key-value pairs to configure slow log publishing.
     #
     # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
-    #   Options to specify configurations that will be applied to the domain
-    #   endpoint.
+    #   Additional options for the domain endpoint, such as whether to require
+    #   HTTPS for all traffic.
     #
     # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
-    #   Specifies advanced security options.
+    #   Options for fine-grained access control.
     #
     # @option params [Array<Types::Tag>] :tag_list
-    #   A list of `Tag` added during domain creation.
+    #   List of tags to add to the domain upon creation.
     #
     # @option params [Types::AutoTuneOptionsInput] :auto_tune_options
-    #   Specifies Auto-Tune options.
+    #   Options for Auto-Tune.
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -814,18 +887,23 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Creates a new cross-cluster connection from a local OpenSearch domain
-    # to a remote OpenSearch domain.
+    # Creates a new cross-cluster search connection from a source Amazon
+    # OpenSearch Service domain to a destination domain. For more
+    # information, see [Cross-cluster search for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @option params [required, Types::DomainInformationContainer] :local_domain_info
-    #   The ` AWSDomainInformation ` for the local OpenSearch domain.
+    #   Name and Region of the source (local) domain.
     #
     # @option params [required, Types::DomainInformationContainer] :remote_domain_info
-    #   The ` AWSDomainInformation ` for the remote OpenSearch domain.
+    #   Name and Region of the destination (remote) domain.
     #
     # @option params [required, String] :connection_alias
-    #   The connection alias used used by the customer for this cross-cluster
-    #   connection.
+    #   Name of the connection.
     #
     # @return [Types::CreateOutboundConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -877,13 +955,19 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Create a package for use with Amazon OpenSearch Service domains.
+    # Creates a package for use with Amazon OpenSearch Service domains. For
+    # more information, see [Custom packages for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_name
-    #   Unique identifier for the package.
+    #   Unique name for the package.
     #
     # @option params [required, String] :package_type
-    #   Type of package. Currently supports only TXT-DICTIONARY.
+    #   Type of package.
     #
     # @option params [String] :package_description
     #   Description of the package.
@@ -929,8 +1013,59 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Permanently deletes the specified domain and all of its data. Once a
-    # domain is deleted, it cannot be recovered.
+    # Creates an Amazon OpenSearch Service-managed VPC endpoint.
+    #
+    # @option params [required, String] :domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to grant access to.
+    #
+    # @option params [required, Types::VPCOptions] :vpc_options
+    #   Options to specify the subnets and security groups for the endpoint.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    # @return [Types::CreateVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcEndpointResponse#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_endpoint({
+    #     domain_arn: "DomainArn", # required
+    #     vpc_options: { # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint.domain_arn #=> String
+    #   resp.vpc_endpoint.vpc_options.vpc_id #=> String
+    #   resp.vpc_endpoint.vpc_options.subnet_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.subnet_ids[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.availability_zones #=> Array
+    #   resp.vpc_endpoint.vpc_options.availability_zones[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.security_group_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoint.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.vpc_endpoint.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateVpcEndpoint AWS API Documentation
+    #
+    # @overload create_vpc_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_endpoint(params = {}, options = {})
+      req = build_request(:create_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon OpenSearch Service domain and all of its data. You
+    # can't recover a domain after you delete it.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain you want to permanently delete.
@@ -1032,8 +1167,14 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Allows the remote domain owner to delete an existing inbound
-    # cross-cluster connection.
+    # Allows the destination Amazon OpenSearch Service domain owner to
+    # delete an existing inbound cross-cluster search connection. For more
+    # information, see [Cross-cluster search for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @option params [required, String] :connection_id
     #   The ID of the inbound connection to permanently delete.
@@ -1069,8 +1210,14 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Allows the local domain owner to delete an existing outbound
-    # cross-cluster connection.
+    # Allows the source Amazon OpenSearch Service domain owner to delete an
+    # existing outbound cross-cluster search connection. For more
+    # information, see [Cross-cluster search for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @option params [required, String] :connection_id
     #   The ID of the outbound connection you want to permanently delete.
@@ -1107,7 +1254,12 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Deletes the package.
+    # Deletes an Amazon OpenSearch Service package. For more information,
+    # see [Custom packages for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_id
     #   The internal ID of the package you want to delete. Use
@@ -1145,11 +1297,43 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns domain configuration information about the specified domain,
-    # including the domain ID, domain endpoint, and domain ARN.
+    # Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
+    #
+    # @option params [required, String] :vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #
+    # @return [Types::DeleteVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcEndpointResponse#vpc_endpoint_summary #vpc_endpoint_summary} => Types::VpcEndpointSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_endpoint({
+    #     vpc_endpoint_id: "VpcEndpointId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_summary.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_summary.vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_summary.domain_arn #=> String
+    #   resp.vpc_endpoint_summary.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteVpcEndpoint AWS API Documentation
+    #
+    # @overload delete_vpc_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_endpoint(params = {}, options = {})
+      req = build_request(:delete_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Describes the domain configuration for the specified Amazon OpenSearch
+    # Service domain, including the domain ID, domain service endpoint, and
+    # domain ARN.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain for which you want information.
+    #   The name of the domain that you want information about.
     #
     # @return [Types::DescribeDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1248,19 +1432,26 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Provides scheduled Auto-Tune action details for the domain, such as
-    # Auto-Tune action type, description, severity, and scheduled date.
+    # Returns the list of optimizations that Auto-Tune has made to an Amazon
+    # OpenSearch Service domain. For more information, see [Auto-Tune for
+    # Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
     #
     # @option params [required, String] :domain_name
-    #   The domain name for which you want Auto-Tune action details.
+    #   Name of the domain that you want Auto-Tune details about.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   NextToken is sent in case the earlier API call results contain the
-    #   NextToken. Used for pagination.
+    #   If your initial `DescribeDomainAutoTunes` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeDomainAutoTunes` operations, which returns results in the
+    #   next page.
     #
     # @return [Types::DescribeDomainAutoTunesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1297,15 +1488,20 @@ module Aws::OpenSearchService
     end
 
     # Returns information about the current blue/green deployment happening
-    # on a domain, including a change ID, status, and progress stages.
+    # on an Amazon OpenSearch Service domain. For more information, see
+    # [Making configuration changes in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes.html
     #
     # @option params [required, String] :domain_name
-    #   The domain you want to get the progress information about.
+    #   The name of the domain to get progress information for.
     #
     # @option params [String] :change_id
     #   The specific change ID for which you want to get progress information.
-    #   This is an optional parameter. If omitted, the service returns
-    #   information about the most recent configuration change.
+    #   If omitted, the request returns information about the most recent
+    #   configuration change.
     #
     # @return [Types::DescribeDomainChangeProgressResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1343,12 +1539,11 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Provides cluster configuration information about the specified domain,
-    # such as the state, creation date, update version, and update date for
-    # cluster options.
+    # Returns the configuration of an Amazon OpenSearch Service domain.
     #
     # @option params [required, String] :domain_name
-    #   The domain you want to get information about.
+    #   Name of the OpenSearch Service domain configuration that you want to
+    #   describe.
     #
     # @return [Types::DescribeDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1505,11 +1700,13 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns domain configuration information about the specified domains,
-    # including the domain ID, domain endpoint, and domain ARN.
+    # Returns domain configuration information about the specified Amazon
+    # OpenSearch Service domains.
     #
     # @option params [required, Array<String>] :domain_names
-    #   The domains for which you want information.
+    #   Array of OpenSearch Service domain names that you want information
+    #   about. If you don't specify any domains, OpenSearch Service returns
+    #   information about all domains owned by the account.
     #
     # @return [Types::DescribeDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1609,24 +1806,28 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Lists all the inbound cross-cluster connections for a remote domain.
+    # Lists all the inbound cross-cluster search connections for a
+    # destination (remote) Amazon OpenSearch Service domain. For more
+    # information, see [Cross-cluster search for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   A list of filters used to match properties for inbound cross-cluster
-    #   connections. Available ` Filter ` values are: * connection-id
-    #   * local-domain-info.domain-name
-    #   * local-domain-info.owner-id
-    #   * local-domain-info.region
-    #   * remote-domain-info.domain-name
+    #   connections.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   If more results are available and NextToken is present, make the next
-    #   request to the same API with the received NextToken to paginate the
-    #   remaining results.
+    #   If your initial `DescribeInboundConnections` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeInboundConnections` operations, which returns results in the
+    #   next page.
     #
     # @return [Types::DescribeInboundConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1671,20 +1872,21 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Describe the limits for a given instance type and OpenSearch or
-    # Elasticsearch version. When modifying an existing domain, specify the
-    # ` DomainName ` to see which limits you can modify.
+    # Describes the instance count, storage, and master node limits for a
+    # given OpenSearch or Elasticsearch version and instance type.
     #
     # @option params [String] :domain_name
-    #   The name of the domain you want to modify. Only include this value if
-    #   you're querying OpenSearch ` Limits ` for an existing domain.
+    #   The name of the domain. Only specify if you need the limits for an
+    #   existing domain.
     #
     # @option params [required, String] :instance_type
-    #   The instance type for an OpenSearch cluster for which OpenSearch `
-    #   Limits ` are needed.
+    #   The OpenSearch Service instance type for which you need limit
+    #   information.
     #
     # @option params [required, String] :engine_version
-    #   Version of OpenSearch for which ` Limits ` are needed.
+    #   Version of OpenSearch or Elasticsearch, in the format
+    #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest version
+    #   of OpenSearch.
     #
     # @return [Types::DescribeInstanceTypeLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1724,24 +1926,26 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Lists all the outbound cross-cluster connections for a local domain.
+    # Lists all the outbound cross-cluster connections for a local (source)
+    # Amazon OpenSearch Service domain. For more information, see
+    # [Cross-cluster search for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A list of filters used to match properties for outbound cross-cluster
-    #   connections. Available ` Filter ` names for this operation are: *
-    #   connection-id
-    #   * remote-domain-info.domain-name
-    #   * remote-domain-info.owner-id
-    #   * remote-domain-info.region
-    #   * local-domain-info.domain-name
+    #   List of filter names and values that you can use for requests.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   NextToken is sent in case the earlier API call results contain the
-    #   NextToken parameter. Used for pagination.
+    #   If your initial `DescribeOutboundConnections` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeOutboundConnections` operations, which returns results in the
+    #   next page.
     #
     # @return [Types::DescribeOutboundConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1787,20 +1991,25 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Describes all packages available to Amazon OpenSearch Service domains.
-    # Includes options for filtering, limiting the number of results, and
-    # pagination.
+    # Describes all packages available to OpenSearch Service. For more
+    # information, see [Custom packages for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [Array<Types::DescribePackagesFilter>] :filters
     #   Only returns packages that match the `DescribePackagesFilterList`
     #   values.
     #
     # @option params [Integer] :max_results
-    #   Limits results to a maximum number of packages.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Used for pagination. Only necessary if a previous API call includes a
-    #   non-null NextToken value. If provided, returns results for the next
+    #   If your initial `DescribePackageFilters` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribePackageFilters` operations, which returns results in the next
     #   page.
     #
     # @return [Types::DescribePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1847,19 +2056,28 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Lists available reserved OpenSearch instance offerings.
+    # Describes the available Amazon OpenSearch Service Reserved Instance
+    # offerings for a given Region. For more information, see [Reserved
+    # Instances in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html
     #
     # @option params [String] :reserved_instance_offering_id
-    #   The offering identifier filter value. Use this parameter to show only
-    #   the available offering that matches the specified reservation
-    #   identifier.
+    #   The Reserved Instance identifier filter value. Use this parameter to
+    #   show only the available instance types that match the specified
+    #   reservation identifier.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Provides an identifier to allow retrieval of paginated results.
+    #   If your initial `DescribeReservedInstanceOfferings` operation returns
+    #   a `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeReservedInstanceOfferings` operations, which returns results
+    #   in the next page.
     #
     # @return [Types::DescribeReservedInstanceOfferingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1900,8 +2118,13 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns information about reserved OpenSearch instances for this
-    # account.
+    # Describes the Amazon OpenSearch Service instances that you have
+    # reserved in a given Region. For more information, see [Reserved
+    # Instances in Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html
     #
     # @option params [String] :reserved_instance_id
     #   The reserved instance identifier filter value. Use this parameter to
@@ -1909,11 +2132,14 @@ module Aws::OpenSearchService
     #   OpenSearch instance ID.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned. If not
-    #   specified, defaults to 100.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Provides an identifier to allow retrieval of paginated results.
+    #   If your initial `DescribeReservedInstances` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `DescribeReservedInstances` operations, which returns results in the
+    #   next page.
     #
     # @return [Types::DescribeReservedInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1960,14 +2186,67 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Dissociates a package from the Amazon OpenSearch Service domain.
+    # Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
+    #
+    # @option params [required, Array<String>] :vpc_endpoint_ids
+    #   The unique identifiers of the endpoints to get information about.
+    #
+    # @return [Types::DescribeVpcEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointsResponse#vpc_endpoints #vpc_endpoints} => Array&lt;Types::VpcEndpoint&gt;
+    #   * {Types::DescribeVpcEndpointsResponse#vpc_endpoint_errors #vpc_endpoint_errors} => Array&lt;Types::VpcEndpointError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoints({
+    #     vpc_endpoint_ids: ["VpcEndpointId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoints #=> Array
+    #   resp.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoints[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoints[0].domain_arn #=> String
+    #   resp.vpc_endpoints[0].vpc_options.vpc_id #=> String
+    #   resp.vpc_endpoints[0].vpc_options.subnet_ids #=> Array
+    #   resp.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
+    #   resp.vpc_endpoints[0].vpc_options.availability_zones #=> Array
+    #   resp.vpc_endpoints[0].vpc_options.availability_zones[0] #=> String
+    #   resp.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
+    #   resp.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.vpc_endpoints[0].endpoint #=> String
+    #   resp.vpc_endpoint_errors #=> Array
+    #   resp.vpc_endpoint_errors[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_errors[0].error_code #=> String, one of "ENDPOINT_NOT_FOUND", "SERVER_ERROR"
+    #   resp.vpc_endpoint_errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeVpcEndpoints AWS API Documentation
+    #
+    # @overload describe_vpc_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoints(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Removes a package from the specified Amazon OpenSearch Service domain.
+    # The package can't be in use with any OpenSearch index for the
+    # dissociation to succeed. The package is still available in OpenSearch
+    # Service for association later. For more information, see [Custom
+    # packages for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_id
-    #   The internal ID of the package to associate with a domain. Use
-    #   `DescribePackages` to find this value.
+    #   Internal ID of the package to dissociate from the domain. Use
+    #   `ListPackagesForDomain` to find this value.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain to associate the package with.
+    #   Name of the domain to dissociate the package from.
     #
     # @return [Types::DissociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2002,16 +2281,12 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns a list of upgrade-compatible versions of
-    # OpenSearch/Elasticsearch. You can optionally pass a ` DomainName ` to
-    # get all upgrade-compatible versions of OpenSearch/Elasticsearch for
-    # that specific domain.
+    # Returns a map of OpenSearch or Elasticsearch versions and the versions
+    # you can upgrade them to.
     #
     # @option params [String] :domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The name of an existing domain. Provide this parameter to limit the
+    #   results to a single domain.
     #
     # @return [Types::GetCompatibleVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2039,19 +2314,26 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns a list of package versions, along with their creation time and
-    # commit message.
+    # Returns a list of Amazon OpenSearch Service package versions, along
+    # with their creation time and commit message. For more information, see
+    # [Custom packages for Amazon OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_id
-    #   Returns an audit history of package versions.
+    #   The unique identifier of the package.
     #
     # @option params [Integer] :max_results
-    #   Limits results to a maximum number of package versions.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Used for pagination. Only necessary if a previous API call includes a
-    #   non-null NextToken value. If provided, returns results for the next
-    #   page.
+    #   If your initial `GetPackageVersionHistory` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `GetPackageVersionHistory` operations, which returns results in the
+    #   next page.
     #
     # @return [Types::GetPackageVersionHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2087,22 +2369,21 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Retrieves the complete history of the last 10 upgrades performed on
-    # the domain.
+    # Retrieves the complete history of the last 10 upgrades performed on an
+    # Amazon OpenSearch Service domain.
     #
     # @option params [required, String] :domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The name of an existing domain.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you can
-    #   use to retrieve more results.
+    #   If your initial `GetUpgradeHistory` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in subsequent
+    #   `GetUpgradeHistory` operations, which returns results in the next
+    #   page.
     #
     # @return [Types::GetUpgradeHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2142,14 +2423,11 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Retrieves the latest status of the last upgrade or upgrade eligibility
-    # check performed on the domain.
+    # Returns the most recent status of the last upgrade or upgrade
+    # eligibility check performed on an Amazon OpenSearch Service domain.
     #
     # @option params [required, String] :domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   The domain of the domain to get upgrade status information for.
     #
     # @return [Types::GetUpgradeStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2178,11 +2456,11 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns the names of all domains owned by the current user's account.
+    # Returns the names of all Amazon OpenSearch Service domains owned by
+    # the current user in the active Region.
     #
     # @option params [String] :engine_type
-    #   Optional parameter to filter the output by domain engine type.
-    #   Acceptable values are 'Elasticsearch' and 'OpenSearch'.
+    #   Filters the output by domain engine type.
     #
     # @return [Types::ListDomainNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2209,18 +2487,26 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Lists all Amazon OpenSearch Service domains associated with the
-    # package.
+    # Lists all Amazon OpenSearch Service domains associated with a given
+    # package. For more information, see [Custom packages for Amazon
+    # OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_id
-    #   The package for which to list associated domains.
+    #   The unique identifier of the package for which to list associated
+    #   domains.
     #
     # @option params [Integer] :max_results
-    #   Limits the results to a maximum number of domains.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Used for pagination. Only necessary if a previous API call includes a
-    #   non-null NextToken value. If provided, returns results for the next
+    #   If your initial `ListDomainsForPackage` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListDomainsForPackage` operations, which returns results in the next
     #   page.
     #
     # @return [Types::ListDomainsForPackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2262,21 +2548,26 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Lists all instance types and available features for a given OpenSearch
+    # or Elasticsearch version.
+    #
     # @option params [required, String] :engine_version
+    #   Version of OpenSearch or Elasticsearch, in the format
+    #   Elasticsearch\_X.Y or OpenSearch\_X.Y. Defaults to the latest version
+    #   of OpenSearch.
     #
     # @option params [String] :domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   Name of the domain to list instance type details for.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you can
-    #   use to retrieve more results.
+    #   If your initial `ListInstanceTypeDetails` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListInstanceTypeDetails` operations, which returns results in the
+    #   next page.
     #
     # @return [Types::ListInstanceTypeDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2316,18 +2607,25 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Lists all packages associated with the Amazon OpenSearch Service
-    # domain.
+    # Lists all packages associated with an Amazon OpenSearch Service
+    # domain. For more information, see [Custom packages for Amazon
+    # OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain for which you want to list associated packages.
     #
     # @option params [Integer] :max_results
-    #   Limits results to a maximum number of packages.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Used for pagination. Only necessary if a previous API call includes a
-    #   non-null NextToken value. If provided, returns results for the next
+    #   If your initial `ListPackagesForDomain` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListPackagesForDomain` operations, which returns results in the next
     #   page.
     #
     # @return [Types::ListPackagesForDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2369,11 +2667,15 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Returns all tags for the given domain.
+    # Returns all resource tags for an Amazon OpenSearch Service domain. For
+    # more information, see [Tagging Amazon OpenSearch Service domains][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html
     #
     # @option params [required, String] :arn
-    #   Specify the `ARN` of the domain that the tags you want to view are
-    #   attached to.
+    #   Amazon Resource Name (ARN) for the domain to view tags for.
     #
     # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2400,16 +2702,17 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # List all supported versions of OpenSearch and Elasticsearch.
+    # Lists all versions of OpenSearch and Elasticsearch that Amazon
+    # OpenSearch Service supports.
     #
     # @option params [Integer] :max_results
-    #   Set this value to limit the number of results returned. Value must be
-    #   greater than 10 or it won't be honored.
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use `nextToken` to get the next page of results.
     #
     # @option params [String] :next_token
-    #   Paginated APIs accept the NextToken input to return the next page of
-    #   results and provide a NextToken output in the response, which you can
-    #   use to retrieve more results.
+    #   If your initial `ListVersions` operation returns a `nextToken`, you
+    #   can include the returned `nextToken` in subsequent `ListVersions`
+    #   operations, which returns results in the next page.
     #
     # @return [Types::ListVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2440,10 +2743,131 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Allows you to purchase reserved OpenSearch instances.
+    # Retrieves information about each Amazon Web Services principal that is
+    # allowed to access a given Amazon OpenSearch Service domain through the
+    # use of an interface VPC endpoint.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the OpenSearch Service domain to retrieve access
+    #   information for.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListVpcEndpointAccess` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListVpcEndpointAccess` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListVpcEndpointAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointAccessResponse#authorized_principal_list #authorized_principal_list} => Array&lt;Types::AuthorizedPrincipal&gt;
+    #   * {Types::ListVpcEndpointAccessResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoint_access({
+    #     domain_name: "DomainName", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_principal_list #=> Array
+    #   resp.authorized_principal_list[0].principal_type #=> String, one of "AWS_ACCOUNT", "AWS_SERVICE"
+    #   resp.authorized_principal_list[0].principal #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointAccess AWS API Documentation
+    #
+    # @overload list_vpc_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoint_access(params = {}, options = {})
+      req = build_request(:list_vpc_endpoint_access, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the
+    # current Amazon Web Services account and Region.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListVpcEndpoints` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in subsequent
+    #   `ListVpcEndpoints` operations, which returns results in the next page.
+    #
+    # @return [Types::ListVpcEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointsResponse#vpc_endpoint_summary_list #vpc_endpoint_summary_list} => Array&lt;Types::VpcEndpointSummary&gt;
+    #   * {Types::ListVpcEndpointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoints({
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_summary_list #=> Array
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_summary_list[0].domain_arn #=> String
+    #   resp.vpc_endpoint_summary_list[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpoints AWS API Documentation
+    #
+    # @overload list_vpc_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoints(params = {}, options = {})
+      req = build_request(:list_vpc_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all Amazon OpenSearch Service-managed VPC endpoints
+    # associated with a particular domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain to list associated VPC endpoints for.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListEndpointsForDomain` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListEndpointsForDomain` operations, which returns results in the next
+    #   page.
+    #
+    # @return [Types::ListVpcEndpointsForDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointsForDomainResponse#vpc_endpoint_summary_list #vpc_endpoint_summary_list} => Array&lt;Types::VpcEndpointSummary&gt;
+    #   * {Types::ListVpcEndpointsForDomainResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoints_for_domain({
+    #     domain_name: "DomainName", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_summary_list #=> Array
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_summary_list[0].domain_arn #=> String
+    #   resp.vpc_endpoint_summary_list[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListVpcEndpointsForDomain AWS API Documentation
+    #
+    # @overload list_vpc_endpoints_for_domain(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoints_for_domain(params = {}, options = {})
+      req = build_request(:list_vpc_endpoints_for_domain, params)
+      req.send_request(options)
+    end
+
+    # Allows you to purchase Amazon OpenSearch Service Reserved Instances.
     #
     # @option params [required, String] :reserved_instance_offering_id
-    #   The ID of the reserved OpenSearch instance offering to purchase.
+    #   The ID of the Reserved Instance offering to purchase.
     #
     # @option params [required, String] :reservation_name
     #   A customer-specified identifier to track this reservation.
@@ -2478,11 +2902,11 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Allows the remote domain owner to reject an inbound cross-cluster
-    # connection request.
+    # Allows the remote Amazon OpenSearch Service domain owner to reject an
+    # inbound cross-cluster connection request.
     #
     # @option params [required, String] :connection_id
-    #   The ID of the inbound connection to reject.
+    #   The unique identifier of the inbound connection to reject.
     #
     # @return [Types::RejectInboundConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2515,14 +2939,20 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Removes the specified set of tags from the given domain.
+    # Removes the specified set of tags from an Amazon OpenSearch Service
+    # domain. For more information, see [ Tagging Amazon OpenSearch Service
+    # domains][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-awsresorcetagging
     #
     # @option params [required, String] :arn
-    #   The `ARN` of the domain from which you want to delete the specified
-    #   tags.
+    #   The Amazon Resource Name (ARN) of the domain from which you want to
+    #   delete the specified tags.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The `TagKey` list you want to remove from the domain.
+    #   The list of tag keys to remove from the domain.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2542,8 +2972,40 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Revokes access to an Amazon OpenSearch Service domain that was
+    # provided through an interface VPC endpoint.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the OpenSearch Service domain.
+    #
+    # @option params [required, String] :account
+    #   The account ID to revoke access from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_vpc_endpoint_access({
+    #     domain_name: "DomainName", # required
+    #     account: "AWSAccount", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RevokeVpcEndpointAccess AWS API Documentation
+    #
+    # @overload revoke_vpc_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def revoke_vpc_endpoint_access(params = {}, options = {})
+      req = build_request(:revoke_vpc_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Schedules a service software update for an Amazon OpenSearch Service
-    # domain.
+    # domain. For more information, see [Service software updates in Amazon
+    # OpenSearch Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want to update to the latest service
@@ -2579,78 +3041,97 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Modifies the cluster configuration of the specified domain, such as
-    # setting the instance type and the number of instances.
+    # Modifies the cluster configuration of the specified Amazon OpenSearch
+    # Service domain.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain you're updating.
+    #   The name of the domain that you're updating.
     #
     # @option params [Types::ClusterConfig] :cluster_config
-    #   The type and number of instances to instantiate for the domain
-    #   cluster.
+    #   Changes that you want to make to the cluster configuration, such as
+    #   the instance type and number of EC2 instances.
     #
     # @option params [Types::EBSOptions] :ebs_options
-    #   Specify the type and size of the EBS volume to use.
+    #   The type and size of the EBS volume to attach to instances in the
+    #   domain.
     #
     # @option params [Types::SnapshotOptions] :snapshot_options
     #   Option to set the time, in UTC format, for the daily automated
     #   snapshot. Default value is `0` hours.
     #
     # @option params [Types::VPCOptions] :vpc_options
-    #   Options to specify the subnets and security groups for the VPC
-    #   endpoint. For more information, see [Launching your Amazon OpenSearch
-    #   Service domains using a VPC ][1].
+    #   Options to specify the subnets and security groups for a VPC endpoint.
+    #   For more information, see [Launching your Amazon OpenSearch Service
+    #   domains using a VPC][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
     #
     # @option params [Types::CognitoOptions] :cognito_options
-    #   Options to specify the Cognito user and identity pools for OpenSearch
-    #   Dashboards authentication. For more information, see [Configuring
-    #   Amazon Cognito authentication for OpenSearch Dashboards][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html
+    #   Key-value pairs to configure Amazon Cognito authentication for
+    #   OpenSearch Dashboards.
     #
     # @option params [Hash<String,String>] :advanced_options
-    #   Modifies the advanced option to allow references to indices in an HTTP
-    #   request body. Must be `false` when configuring access to individual
-    #   sub-resources. By default, the value is `true`. See [Advanced options
-    #   ][1] for more information.
+    #   Key-value pairs to specify advanced configuration options. The
+    #   following key-value pairs are supported:
+    #
+    #   * `"rest.action.multi.allow_explicit_index": "true" | "false"` - Note
+    #     the use of a string rather than a boolean. Specifies whether
+    #     explicit references to indexes are allowed inside the body of HTTP
+    #     requests. If you want to configure access policies for domain
+    #     sub-resources, such as specific indexes and domain APIs, you must
+    #     disable this property. Default is true.
+    #
+    #   * `"indices.fielddata.cache.size": "80" ` - Note the use of a string
+    #     rather than a boolean. Specifies the percentage of heap space
+    #     allocated to field data. Default is unbounded.
+    #
+    #   * `"indices.query.bool.max_clause_count": "1024"` - Note the use of a
+    #     string rather than a boolean. Specifies the maximum number of
+    #     clauses allowed in a Lucene boolean query. Default is 1,024. Queries
+    #     with more than the permitted number of clauses result in a
+    #     `TooManyClauses` error.
+    #
+    #   * `"override_main_response_version": "true" | "false"` - Note the use
+    #     of a string rather than a boolean. Specifies whether the domain
+    #     reports its version as 7.10 to allow Elasticsearch OSS clients and
+    #     plugins to continue working with it. Default is false when creating
+    #     a domain and true when upgrading a domain.
+    #
+    #   For more information, see [Advanced cluster parameters][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
     #
     # @option params [String] :access_policies
-    #   IAM access policy as a JSON-formatted string.
+    #   Identity and Access Management (IAM) access policy as a JSON-formatted
+    #   string.
     #
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
-    #   Map of `LogType` and `LogPublishingOption`, each containing options to
-    #   publish a given type of OpenSearch log.
+    #   Options to publish OpenSearch lots to Amazon CloudWatch Logs.
     #
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
-    #   Specifies encryption of data at rest options.
+    #   Encryption at rest options for the domain.
     #
     # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
-    #   Options to specify configuration that will be applied to the domain
-    #   endpoint.
+    #   Additional options for the domain endpoint, such as whether to require
+    #   HTTPS for all traffic.
     #
     # @option params [Types::NodeToNodeEncryptionOptions] :node_to_node_encryption_options
-    #   Specifies node-to-node encryption options.
+    #   Node-To-Node Encryption options for the domain.
     #
     # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
-    #   Specifies advanced security options.
+    #   Options for fine-grained access control.
     #
     # @option params [Types::AutoTuneOptions] :auto_tune_options
-    #   Specifies Auto-Tune options.
+    #   Options for Auto-Tune.
     #
     # @option params [Boolean] :dry_run
     #   This flag, when set to True, specifies whether the `UpdateDomain`
-    #   request should return the results of validation checks (DryRunResults)
-    #   without actually applying the change.
+    #   request should return the results of validation check without actually
+    #   applying the change.
     #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2908,20 +3389,25 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Updates a package for use with Amazon OpenSearch Service domains.
+    # Updates a package for use with Amazon OpenSearch Service domains. For
+    # more information, see [Custom packages for Amazon OpenSearch
+    # Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
     #
     # @option params [required, String] :package_id
     #   The unique identifier for the package.
     #
     # @option params [required, Types::PackageSource] :package_source
-    #   The Amazon S3 location for importing the package specified as
-    #   `S3BucketName` and `S3Key`
+    #   Amazon S3 bucket and key for the package.
     #
     # @option params [String] :package_description
     #   A new description of the package.
     #
     # @option params [String] :commit_message
-    #   A commit message for the new version which is shown as part of
+    #   Commit message for the updated file, which is shown as part of
     #   `GetPackageVersionHistoryResponse`.
     #
     # @return [Types::UpdatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2962,40 +3448,73 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Allows you to either upgrade your domain or perform an upgrade
-    # eligibility check to a compatible version of OpenSearch or
-    # Elasticsearch.
+    # Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
+    #
+    # @option params [required, String] :vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #
+    # @option params [required, Types::VPCOptions] :vpc_options
+    #   The security groups and/or subnets to add, remove, or modify.
+    #
+    # @return [Types::UpdateVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVpcEndpointResponse#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpc_endpoint({
+    #     vpc_endpoint_id: "VpcEndpointId", # required
+    #     vpc_options: { # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint.domain_arn #=> String
+    #   resp.vpc_endpoint.vpc_options.vpc_id #=> String
+    #   resp.vpc_endpoint.vpc_options.subnet_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.subnet_ids[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.availability_zones #=> Array
+    #   resp.vpc_endpoint.vpc_options.availability_zones[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.security_group_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoint.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.vpc_endpoint.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateVpcEndpoint AWS API Documentation
+    #
+    # @overload update_vpc_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_vpc_endpoint(params = {}, options = {})
+      req = build_request(:update_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Allows you to either upgrade your Amazon OpenSearch Service domain or
+    # perform an upgrade eligibility check to a compatible version of
+    # OpenSearch or Elasticsearch.
     #
     # @option params [required, String] :domain_name
-    #   The name of an domain. Domain names are unique across the domains
-    #   owned by an account within an AWS region. Domain names start with a
-    #   letter or number and can contain the following characters: a-z
-    #   (lowercase), 0-9, and - (hyphen).
+    #   Name of the OpenSearch Service domain that you want to upgrade.
     #
     # @option params [required, String] :target_version
-    #   The version of OpenSearch you intend to upgrade the domain to.
+    #   OpenSearch or Elasticsearch version to which you want to upgrade, in
+    #   the format Opensearch\_X.Y or Elasticsearch\_X.Y.
     #
     # @option params [Boolean] :perform_check_only
     #   When true, indicates that an upgrade eligibility check needs to be
     #   performed. Does not actually perform the upgrade.
     #
     # @option params [Hash<String,String>] :advanced_options
-    #   Exposes select native OpenSearch configuration values from
-    #   `opensearch.yml`. Currently, the following advanced options are
-    #   available:
-    #
-    #   * Option to allow references to indices in an HTTP request body. Must
-    #     be `false` when configuring access to individual sub-resources. By
-    #     default, the value is `true`. See [Advanced cluster parameters ][1]
-    #     for more information.
-    #   * Option to specify the percentage of heap space allocated to field
-    #     data. By default, this setting is unbounded.
-    #
-    #   For more information, see [ Advanced cluster parameters][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options
+    #   Only supports the `override_main_response_version` parameter and not
+    #   other advanced options. You can only include this option when
+    #   upgrading to an OpenSearch version. Specifies whether the domain
+    #   reports its version as 7.10 so that it continues to work with
+    #   Elasticsearch OSS clients and plugins.
     #
     # @return [Types::UpgradeDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3050,7 +3569,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

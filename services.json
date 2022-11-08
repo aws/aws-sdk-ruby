@@ -815,6 +815,9 @@
   "ResilienceHub": {
     "models": "resiliencehub/2020-04-30"
   },
+  "ResourceExplorer2": {
+    "models": "resource-explorer-2/2022-07-28"
+  },
   "ResourceGroups": {
     "models": "resource-groups/2017-11-27"
   },

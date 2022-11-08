@@ -124,14 +124,15 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] region
-    #   The AWS Region where this access key was most recently used.
+    #   The Amazon Web Services Region where this access key was most
+    #   recently used.
     #
     #   This value is `N/A` if the access key has not been used.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service with which this access key was most
-    #   recently used.
+    #   The name of the Amazon Web Services service with which this access
+    #   key was most recently used.
     #
     #   This value is `N/A` if the access key has not been used.
     #   @return [String]
@@ -1720,8 +1721,8 @@ module Aws::Lightsail
     #     requires additional information to process this certificate
     #     request. This can happen as a fraud-protection measure, such as
     #     when the domain ranks within the Alexa top 1000 websites. To
-    #     provide the required information, use the [AWS Support Center][1]
-    #     to contact AWS Support.
+    #     provide the required information, use the [Amazon Web Services
+    #     Support Center][1] to contact Amazon Web Services Support.
     #
     #     <note markdown="1"> You cannot request a certificate for Amazon-owned domain names
     #     such as those ending in amazonaws.com, cloudfront.net, or
@@ -1744,8 +1745,8 @@ module Aws::Lightsail
     #     new certificate.
     #
     #     If you see this error and your domain is not included in the
-    #     VirusTotal list, visit the [AWS Support Center][1] and create a
-    #     case.
+    #     VirusTotal list, visit the [Amazon Web Services Support Center][1]
+    #     and create a case.
     #
     #   * <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the
     #     domain names in the certificate request is not valid. Typically,
@@ -3459,9 +3460,9 @@ module Aws::Lightsail
     #   service is typically
     #   `https://<ServiceName>.<RandomGUID>.<AWSRegion>.cs.amazonlightsail.com`.
     #   If the name of your container service is `container-service-1`, and
-    #   it's located in the US East (Ohio) AWS region (`us-east-2`), then
-    #   the domain for your container service will be like the following
-    #   example:
+    #   it's located in the US East (Ohio) Amazon Web Services Region
+    #   (`us-east-2`), then the domain for your container service will be
+    #   like the following example:
     #   `https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com`
     #
     #   The following are the requirements for container service names:
@@ -5129,7 +5130,7 @@ module Aws::Lightsail
     #   block of time for each AWS Region. For more information about the
     #   preferred backup window time blocks for each region, see the
     #   [Working With Backups][1] guide in the Amazon Relational Database
-    #   Service (Amazon RDS) documentation.
+    #   Service documentation.
     #
     #   Constraints:
     #
@@ -6650,6 +6651,52 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the creation state of the canonical name (CNAME) records
+    # that are automatically added by Amazon Lightsail to the DNS of a
+    # domain to validate domain ownership for an SSL/TLS certificate.
+    #
+    # When you create an SSL/TLS certificate for a Lightsail resource, you
+    # must add a set of CNAME records to the DNS of the domains for the
+    # certificate to validate that you own the domains. Lightsail can
+    # automatically add the CNAME records to the DNS of the domain if the
+    # DNS zone for the domain exists within your Lightsail account. If
+    # automatic record addition fails, or if you manage the DNS of your
+    # domain using a third-party service, then you must manually add the
+    # CNAME records to the DNS of your domain. For more information, see
+    # [Verify an SSL/TLS certificate in Amazon Lightsail][1] in the *Amazon
+    # Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/verify-tls-ssl-certificate-using-dns-cname-https
+    #
+    # @!attribute [rw] code
+    #   The status code for the automated DNS record creation.
+    #
+    #   Following are the possible values:
+    #
+    #   * `SUCCEEDED` - The validation records were successfully added to
+    #     the domain.
+    #
+    #   * `STARTED` - The automatic DNS record creation has started.
+    #
+    #   * `FAILED` - The validation records failed to be added to the
+    #     domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that describes the reason for the status code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DnsRecordCreationState AWS API Documentation
+    #
+    class DnsRecordCreationState < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a domain where you are storing recordsets.
     #
     # @!attribute [rw] name
@@ -6696,6 +6743,11 @@ module Aws::Lightsail
     #   entries.
     #   @return [Array<Types::DomainEntry>]
     #
+    # @!attribute [rw] registered_domain_delegation_info
+    #   An object that describes the state of the Route 53 domain delegation
+    #   to a Lightsail DNS zone.
+    #   @return [Types::RegisteredDomainDelegationInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Domain AWS API Documentation
     #
     class Domain < Struct.new(
@@ -6706,7 +6758,8 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :tags,
-      :domain_entries)
+      :domain_entries,
+      :registered_domain_delegation_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6803,8 +6856,9 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes the domain validation records of an Amazon Lightsail SSL/TLS
-    # certificate.
+    # Describes the domain name system (DNS) records that you must add to
+    # the DNS of your registered domain to validate ownership for an Amazon
+    # Lightsail SSL/TLS certificate.
     #
     # @!attribute [rw] domain_name
     #   The domain name of the certificate validation record. For example,
@@ -6816,11 +6870,23 @@ module Aws::Lightsail
     #   DNS to validate it for the certificate.
     #   @return [Types::ResourceRecord]
     #
+    # @!attribute [rw] dns_record_creation_state
+    #   An object that describes the state of the canonical name (CNAME)
+    #   records that are automatically added by Lightsail to the DNS of the
+    #   domain to validate domain ownership.
+    #   @return [Types::DnsRecordCreationState]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status of the record.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DomainValidationRecord AWS API Documentation
     #
     class DomainValidationRecord < Struct.new(
       :domain_name,
-      :resource_record)
+      :resource_record,
+      :dns_record_creation_state,
+      :validation_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12303,8 +12369,8 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The AWS Region and Availability Zone where you created your
-    #   certificate.
+    #   The Amazon Web Services Region and Availability Zone where you
+    #   created your certificate.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
@@ -12518,6 +12584,35 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # An object that describes the state of the canonical name (CNAME)
+    # records that are automatically added by Lightsail to the DNS of the
+    # domain to validate domain ownership.
+    #
+    # @!attribute [rw] code
+    #   The status code for the automated DNS record creation.
+    #
+    #   Following are the possible values:
+    #
+    #   * `SUCCEEDED` - The validation records were successfully added.
+    #
+    #   * `STARTED` - The automatic DNS record creation has started.
+    #
+    #   * `FAILED` - The validation record addition failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that describes the reason for the status code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDnsRecordCreationState AWS API Documentation
+    #
+    class LoadBalancerTlsCertificateDnsRecordCreationState < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the domain names on an SSL/TLS certificate
     # that you will use to validate domain ownership.
     #
@@ -12564,6 +12659,12 @@ module Aws::Lightsail
     #   validated.
     #   @return [String]
     #
+    # @!attribute [rw] dns_record_creation_state
+    #   An object that describes the state of the canonical name (CNAME)
+    #   records that are automatically added by Lightsail to the DNS of a
+    #   domain to validate domain ownership.
+    #   @return [Types::LoadBalancerTlsCertificateDnsRecordCreationState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationRecord AWS API Documentation
     #
     class LoadBalancerTlsCertificateDomainValidationRecord < Struct.new(
@@ -12571,7 +12672,8 @@ module Aws::Lightsail
       :type,
       :value,
       :validation_status,
-      :domain_name)
+      :domain_name,
+      :dns_record_creation_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12819,6 +12921,43 @@ module Aws::Lightsail
     #
     class MonthlyTransfer < Struct.new(
       :gb_per_month_allocated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the state of the name server records update made by Amazon
+    # Lightsail to an Amazon Route 53 registered domain.
+    #
+    # For more information, see [DNS in Amazon Lightsail][1] in the *Amazon
+    # Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/understanding-dns-in-amazon-lightsail
+    #
+    # @!attribute [rw] code
+    #   The status code for the name servers update.
+    #
+    #   Following are the possible values:
+    #
+    #   * `SUCCEEDED` - The name server records were successfully updated.
+    #
+    #   * `PENDING` - The name server record update is in progress.
+    #
+    #   * `FAILED` - The name server record update failed.
+    #
+    #   * `STARTED` - The automatic name server record update started.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that describes the reason for the status code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/NameServersUpdateState AWS API Documentation
+    #
+    class NameServersUpdateState < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13653,6 +13792,37 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the deletion state of an Amazon Route 53 hosted zone for a
+    # domain that is being automatically delegated to an Amazon Lightsail
+    # DNS zone.
+    #
+    # @!attribute [rw] code
+    #   The status code for the deletion state.
+    #
+    #   Following are the possible values:
+    #
+    #   * `SUCCEEDED` - The hosted zone was successfully deleted.
+    #
+    #   * `PENDING` - The hosted zone deletion is in progress.
+    #
+    #   * `FAILED` - The hosted zone deletion failed.
+    #
+    #   * `STARTED` - The hosted zone deletion started.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that describes the reason for the status code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/R53HostedZoneDeletionState AWS API Documentation
+    #
+    class R53HostedZoneDeletionState < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RebootInstanceRequest
     #   data as a hash:
     #
@@ -13719,15 +13889,16 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes the AWS Region.
+    # Describes the Amazon Web Services Region.
     #
     # @!attribute [rw] continent_code
     #   The continent code (e.g., `NA`, meaning North America).
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the AWS Region (e.g., `This region is recommended
-    #   to serve users in the eastern United States and eastern Canada`).
+    #   The description of the Amazon Web Services Region (e.g., `This
+    #   region is recommended to serve users in the eastern United States
+    #   and eastern Canada`).
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -13826,6 +13997,61 @@ module Aws::Lightsail
     #
     class RegisterContainerImageResult < Struct.new(
       :container_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the delegation state of an Amazon Route 53 registered domain
+    # to Amazon Lightsail.
+    #
+    # When you delegate an Amazon Route 53 registered domain to Lightsail,
+    # you can manage the DNS of the domain using a Lightsail DNS zone. You
+    # no longer use the Route 53 hosted zone to manage the DNS of the
+    # domain. To delegate the domain, Lightsail automatically updates the
+    # domain's name servers in Route 53 to the name servers of the
+    # Lightsail DNS zone. Then, Lightsail automatically deletes the Route 53
+    # hosted zone for the domain.
+    #
+    # All of the following conditions must be true for automatic domain
+    # delegation to be successful:
+    #
+    # * The registered domain must be in the same Amazon Web Services
+    #   account as the Lightsail account making the request.
+    #
+    # * The user or entity making the request must have permission to manage
+    #   domains in Route 53.
+    #
+    # * The Route 53 hosted zone for the domain must be empty. It cannot
+    #   contain DNS records other than start of authority (SOA) and name
+    #   server records.
+    #
+    # If automatic domain delegation fails, or if you manage the DNS of your
+    # domain using a service other than Route 53, then you must manually add
+    # the Lightsail DNS zone name servers to your domain in order to
+    # delegate management of its DNS to Lightsail. For more information, see
+    # [Creating a DNS zone to manage your domain’s records in Amazon
+    # Lightsail][1] in the *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-create-dns-entry
+    #
+    # @!attribute [rw] name_servers_update_state
+    #   An object that describes the state of the name server records that
+    #   are automatically added to the Route 53 domain by Lightsail.
+    #   @return [Types::NameServersUpdateState]
+    #
+    # @!attribute [rw] r53_hosted_zone_deletion_state
+    #   Describes the deletion state of an Amazon Route 53 hosted zone for a
+    #   domain that is being automatically delegated to an Amazon Lightsail
+    #   DNS zone.
+    #   @return [Types::R53HostedZoneDeletionState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RegisteredDomainDelegationInfo AWS API Documentation
+    #
+    class RegisteredDomainDelegationInfo < Struct.new(
+      :name_servers_update_state,
+      :r53_hosted_zone_deletion_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14473,7 +14699,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] region_name
-    #   The AWS Region name.
+    #   The Amazon Web Services Region name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResourceLocation AWS API Documentation
@@ -15860,8 +16086,8 @@ module Aws::Lightsail
     #   your database.
     #
     #   The default is a 30-minute window selected at random from an 8-hour
-    #   block of time for each AWS Region, occurring on a random day of the
-    #   week.
+    #   block of time for each Amazon Web Services Region, occurring on a
+    #   random day of the week.
     #
     #   Constraints:
     #

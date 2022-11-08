@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.347.0 (2022-11-08)
+------------------
+
+* Feature - This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager
+
 1.346.0 (2022-11-07)
 ------------------
 

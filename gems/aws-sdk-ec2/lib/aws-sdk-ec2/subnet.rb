@@ -347,6 +347,7 @@ module Aws::EC2
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
     #       host_resource_group_arn: "String",
+    #       group_id: "PlacementGroupId",
     #     },
     #     ramdisk_id: "RamdiskId",
     #     security_group_ids: ["SecurityGroupId"],

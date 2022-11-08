@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-11-08)
+------------------
+
+* Feature - Amazon Route 53 now supports the Europe (Zurich) Region (eu-central-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.66.0 (2022-10-25)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-11-08)
+------------------
+
+* Feature - This release adds support for Amazon Lightsail to automate the delegation of domains registered through Amazon Route 53 to Lightsail DNS management and to automate record creation for DNS validation of Lightsail SSL/TLS certificates.
+
 1.70.0 (2022-10-25)
 ------------------
 

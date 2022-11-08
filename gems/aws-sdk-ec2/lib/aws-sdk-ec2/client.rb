@@ -5977,6 +5977,7 @@ module Aws::EC2
     #               tenancy: "default", # accepts default, dedicated, host
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
+    #               group_id: "PlacementGroupId",
     #             },
     #             instance_requirements: {
     #               v_cpu_count: { # required
@@ -7636,6 +7637,7 @@ module Aws::EC2
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
     #         partition_number: 1,
+    #         group_id: "PlacementGroupId",
     #       },
     #       ram_disk_id: "RamdiskId",
     #       disable_api_termination: false,
@@ -8006,6 +8008,7 @@ module Aws::EC2
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
     #         partition_number: 1,
+    #         group_id: "PlacementGroupId",
     #       },
     #       ram_disk_id: "RamdiskId",
     #       disable_api_termination: false,
@@ -8204,6 +8207,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.placement.spread_domain #=> String
     #   resp.launch_template_version.launch_template_data.placement.host_resource_group_arn #=> String
     #   resp.launch_template_version.launch_template_data.placement.partition_number #=> Integer
+    #   resp.launch_template_version.launch_template_data.placement.group_id #=> String
     #   resp.launch_template_version.launch_template_data.ram_disk_id #=> String
     #   resp.launch_template_version.launch_template_data.disable_api_termination #=> Boolean
     #   resp.launch_template_version.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
@@ -23291,6 +23295,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.reservations[0].instances[0].placement.spread_domain #=> String
     #   resp.reservations[0].instances[0].placement.host_resource_group_arn #=> String
+    #   resp.reservations[0].instances[0].placement.group_id #=> String
     #   resp.reservations[0].instances[0].platform #=> String, one of "Windows"
     #   resp.reservations[0].instances[0].private_dns_name #=> String
     #   resp.reservations[0].instances[0].private_ip_address #=> String
@@ -24240,6 +24245,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.placement.spread_domain #=> String
     #   resp.launch_template_versions[0].launch_template_data.placement.host_resource_group_arn #=> String
     #   resp.launch_template_versions[0].launch_template_data.placement.partition_number #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.placement.group_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.ram_disk_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.disable_api_termination #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
@@ -37814,6 +37820,7 @@ module Aws::EC2
     #   resp.launch_template_data.placement.spread_domain #=> String
     #   resp.launch_template_data.placement.host_resource_group_arn #=> String
     #   resp.launch_template_data.placement.partition_number #=> Integer
+    #   resp.launch_template_data.placement.group_id #=> String
     #   resp.launch_template_data.ram_disk_id #=> String
     #   resp.launch_template_data.disable_api_termination #=> Boolean
     #   resp.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
@@ -39855,6 +39862,7 @@ module Aws::EC2
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
+    #         group_id: "PlacementGroupId",
     #       },
     #       private_ip_address: "String",
     #       subnet_id: "SubnetId",
@@ -40993,6 +41001,7 @@ module Aws::EC2
     #               tenancy: "default", # accepts default, dedicated, host
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
+    #               group_id: "PlacementGroupId",
     #             },
     #             instance_requirements: {
     #               v_cpu_count: { # required
@@ -42270,6 +42279,10 @@ module Aws::EC2
     # @option params [String] :host_resource_group_arn
     #   The ARN of the host resource group in which to place the instance.
     #
+    # @option params [String] :group_id
+    #   The Group Id of a placement group. You must specify the Placement
+    #   Group **Group Id** to launch an instance in a shared placement group.
+    #
     # @return [Types::ModifyInstancePlacementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyInstancePlacementResult#return #return} => Boolean
@@ -42284,6 +42297,7 @@ module Aws::EC2
     #     tenancy: "dedicated", # accepts dedicated, host
     #     partition_number: 1,
     #     host_resource_group_arn: "String",
+    #     group_id: "PlacementGroupId",
     #   })
     #
     # @example Response structure
@@ -50058,6 +50072,7 @@ module Aws::EC2
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
     #       host_resource_group_arn: "String",
+    #       group_id: "PlacementGroupId",
     #     },
     #     ramdisk_id: "RamdiskId",
     #     security_group_ids: ["SecurityGroupId"],
@@ -50217,6 +50232,7 @@ module Aws::EC2
     #   resp.instances[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.instances[0].placement.spread_domain #=> String
     #   resp.instances[0].placement.host_resource_group_arn #=> String
+    #   resp.instances[0].placement.group_id #=> String
     #   resp.instances[0].platform #=> String, one of "Windows"
     #   resp.instances[0].private_dns_name #=> String
     #   resp.instances[0].private_ip_address #=> String
@@ -52562,7 +52578,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.346.0'
+      context[:gem_version] = '1.347.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

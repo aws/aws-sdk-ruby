@@ -53,6 +53,20 @@ module Aws::OpenSearchService
       end
     end
 
+    class AuthorizeVpcEndpointAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CancelServiceSoftwareUpdate
       def self.build(context)
         unless context.config.regional_endpoint
@@ -109,6 +123,20 @@ module Aws::OpenSearchService
       end
     end
 
+    class CreateVpcEndpoint
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteDomain
       def self.build(context)
         unless context.config.regional_endpoint
@@ -152,6 +180,20 @@ module Aws::OpenSearchService
     end
 
     class DeletePackage
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteVpcEndpoint
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -319,6 +361,20 @@ module Aws::OpenSearchService
       end
     end
 
+    class DescribeVpcEndpoints
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DissociatePackage
       def self.build(context)
         unless context.config.regional_endpoint
@@ -473,6 +529,48 @@ module Aws::OpenSearchService
       end
     end
 
+    class ListVpcEndpointAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListVpcEndpoints
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListVpcEndpointsForDomain
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class PurchaseReservedInstanceOffering
       def self.build(context)
         unless context.config.regional_endpoint
@@ -515,6 +613,20 @@ module Aws::OpenSearchService
       end
     end
 
+    class RevokeVpcEndpointAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class StartServiceSoftwareUpdate
       def self.build(context)
         unless context.config.regional_endpoint
@@ -544,6 +656,20 @@ module Aws::OpenSearchService
     end
 
     class UpdatePackage
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateVpcEndpoint
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

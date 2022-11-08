@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-11-08)
+------------------
+
+* Feature - AWS Firewall Manager now supports importing existing AWS Network Firewall firewalls into Firewall Manager policies.
+
 1.52.0 (2022-10-27)
 ------------------
 

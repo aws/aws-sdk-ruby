@@ -79,6 +79,11 @@ module Aws::BillingConductor
       def resource_type
         @data[:resource_type]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class InternalServerException < ServiceError

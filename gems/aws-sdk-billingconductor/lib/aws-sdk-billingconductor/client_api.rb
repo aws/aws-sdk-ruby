@@ -51,6 +51,7 @@ module Aws::BillingConductor
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ComputationPreference = Shapes::StructureShape.new(name: 'ComputationPreference')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     CreateBillingGroupInput = Shapes::StructureShape.new(name: 'CreateBillingGroupInput')
     CreateBillingGroupOutput = Shapes::StructureShape.new(name: 'CreateBillingGroupOutput')
     CreateCustomLineItemInput = Shapes::StructureShape.new(name: 'CreateCustomLineItemInput')
@@ -81,6 +82,8 @@ module Aws::BillingConductor
     CustomLineItemProductCode = Shapes::StringShape.new(name: 'CustomLineItemProductCode')
     CustomLineItemRelationship = Shapes::StringShape.new(name: 'CustomLineItemRelationship')
     CustomLineItemType = Shapes::StringShape.new(name: 'CustomLineItemType')
+    CustomLineItemVersionList = Shapes::ListShape.new(name: 'CustomLineItemVersionList')
+    CustomLineItemVersionListElement = Shapes::StructureShape.new(name: 'CustomLineItemVersionListElement')
     DeleteBillingGroupInput = Shapes::StructureShape.new(name: 'DeleteBillingGroupInput')
     DeleteBillingGroupOutput = Shapes::StructureShape.new(name: 'DeleteBillingGroupOutput')
     DeleteCustomLineItemInput = Shapes::StructureShape.new(name: 'DeleteCustomLineItemInput')
@@ -109,6 +112,10 @@ module Aws::BillingConductor
     ListCustomLineItemChargeDetails = Shapes::StructureShape.new(name: 'ListCustomLineItemChargeDetails')
     ListCustomLineItemFlatChargeDetails = Shapes::StructureShape.new(name: 'ListCustomLineItemFlatChargeDetails')
     ListCustomLineItemPercentageChargeDetails = Shapes::StructureShape.new(name: 'ListCustomLineItemPercentageChargeDetails')
+    ListCustomLineItemVersionsBillingPeriodRangeFilter = Shapes::StructureShape.new(name: 'ListCustomLineItemVersionsBillingPeriodRangeFilter')
+    ListCustomLineItemVersionsFilter = Shapes::StructureShape.new(name: 'ListCustomLineItemVersionsFilter')
+    ListCustomLineItemVersionsInput = Shapes::StructureShape.new(name: 'ListCustomLineItemVersionsInput')
+    ListCustomLineItemVersionsOutput = Shapes::StructureShape.new(name: 'ListCustomLineItemVersionsOutput')
     ListCustomLineItemsFilter = Shapes::StructureShape.new(name: 'ListCustomLineItemsFilter')
     ListCustomLineItemsInput = Shapes::StructureShape.new(name: 'ListCustomLineItemsInput')
     ListCustomLineItemsOutput = Shapes::StructureShape.new(name: 'ListCustomLineItemsOutput')
@@ -223,7 +230,7 @@ module Aws::BillingConductor
     AssociateResourceError.add_member(:reason, Shapes::ShapeRef.new(shape: AssociateResourceErrorReason, location_name: "Reason"))
     AssociateResourceError.struct_class = Types::AssociateResourceError
 
-    AssociateResourceResponseElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
+    AssociateResourceResponseElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemAssociationElement, location_name: "Arn"))
     AssociateResourceResponseElement.add_member(:error, Shapes::ShapeRef.new(shape: AssociateResourceError, location_name: "Error"))
     AssociateResourceResponseElement.struct_class = Types::AssociateResourceResponseElement
 
@@ -279,6 +286,7 @@ module Aws::BillingConductor
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "Reason"))
     ConflictException.struct_class = Types::ConflictException
 
     CreateBillingGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amzn-Client-Token", metadata: {"idempotencyToken"=>true}))
@@ -337,7 +345,7 @@ module Aws::BillingConductor
     CustomLineItemBatchDisassociationsList.member = Shapes::ShapeRef.new(shape: CustomLineItemAssociationElement)
 
     CustomLineItemBillingPeriodRange.add_member(:inclusive_start_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, required: true, location_name: "InclusiveStartBillingPeriod"))
-    CustomLineItemBillingPeriodRange.add_member(:exclusive_end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, required: true, location_name: "ExclusiveEndBillingPeriod"))
+    CustomLineItemBillingPeriodRange.add_member(:exclusive_end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "ExclusiveEndBillingPeriod"))
     CustomLineItemBillingPeriodRange.struct_class = Types::CustomLineItemBillingPeriodRange
 
     CustomLineItemChargeDetails.add_member(:flat, Shapes::ShapeRef.new(shape: CustomLineItemFlatChargeDetails, location_name: "Flat"))
@@ -367,6 +375,21 @@ module Aws::BillingConductor
     CustomLineItemPercentageChargeDetails.add_member(:percentage_value, Shapes::ShapeRef.new(shape: CustomLineItemPercentageChargeValue, required: true, location_name: "PercentageValue"))
     CustomLineItemPercentageChargeDetails.add_member(:associated_values, Shapes::ShapeRef.new(shape: CustomLineItemAssociationsList, location_name: "AssociatedValues"))
     CustomLineItemPercentageChargeDetails.struct_class = Types::CustomLineItemPercentageChargeDetails
+
+    CustomLineItemVersionList.member = Shapes::ShapeRef.new(shape: CustomLineItemVersionListElement)
+
+    CustomLineItemVersionListElement.add_member(:name, Shapes::ShapeRef.new(shape: CustomLineItemName, location_name: "Name"))
+    CustomLineItemVersionListElement.add_member(:charge_details, Shapes::ShapeRef.new(shape: ListCustomLineItemChargeDetails, location_name: "ChargeDetails"))
+    CustomLineItemVersionListElement.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "CurrencyCode"))
+    CustomLineItemVersionListElement.add_member(:description, Shapes::ShapeRef.new(shape: CustomLineItemDescription, location_name: "Description"))
+    CustomLineItemVersionListElement.add_member(:product_code, Shapes::ShapeRef.new(shape: CustomLineItemProductCode, location_name: "ProductCode"))
+    CustomLineItemVersionListElement.add_member(:billing_group_arn, Shapes::ShapeRef.new(shape: BillingGroupArn, location_name: "BillingGroupArn"))
+    CustomLineItemVersionListElement.add_member(:creation_time, Shapes::ShapeRef.new(shape: Instant, location_name: "CreationTime"))
+    CustomLineItemVersionListElement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
+    CustomLineItemVersionListElement.add_member(:association_size, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "AssociationSize"))
+    CustomLineItemVersionListElement.add_member(:start_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "StartBillingPeriod"))
+    CustomLineItemVersionListElement.add_member(:end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "EndBillingPeriod"))
+    CustomLineItemVersionListElement.struct_class = Types::CustomLineItemVersionListElement
 
     DeleteBillingGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
     DeleteBillingGroupInput.struct_class = Types::DeleteBillingGroupInput
@@ -407,7 +430,7 @@ module Aws::BillingConductor
     DisassociatePricingRulesOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingPlanArn, location_name: "Arn"))
     DisassociatePricingRulesOutput.struct_class = Types::DisassociatePricingRulesOutput
 
-    DisassociateResourceResponseElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, location_name: "Arn"))
+    DisassociateResourceResponseElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemAssociationElement, location_name: "Arn"))
     DisassociateResourceResponseElement.add_member(:error, Shapes::ShapeRef.new(shape: AssociateResourceError, location_name: "Error"))
     DisassociateResourceResponseElement.struct_class = Types::DisassociateResourceResponseElement
 
@@ -468,13 +491,30 @@ module Aws::BillingConductor
     ListCustomLineItemPercentageChargeDetails.add_member(:percentage_value, Shapes::ShapeRef.new(shape: CustomLineItemPercentageChargeValue, required: true, location_name: "PercentageValue"))
     ListCustomLineItemPercentageChargeDetails.struct_class = Types::ListCustomLineItemPercentageChargeDetails
 
+    ListCustomLineItemVersionsBillingPeriodRangeFilter.add_member(:start_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "StartBillingPeriod"))
+    ListCustomLineItemVersionsBillingPeriodRangeFilter.add_member(:end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "EndBillingPeriod"))
+    ListCustomLineItemVersionsBillingPeriodRangeFilter.struct_class = Types::ListCustomLineItemVersionsBillingPeriodRangeFilter
+
+    ListCustomLineItemVersionsFilter.add_member(:billing_period_range, Shapes::ShapeRef.new(shape: ListCustomLineItemVersionsBillingPeriodRangeFilter, location_name: "BillingPeriodRange"))
+    ListCustomLineItemVersionsFilter.struct_class = Types::ListCustomLineItemVersionsFilter
+
+    ListCustomLineItemVersionsInput.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, required: true, location_name: "Arn"))
+    ListCustomLineItemVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCustomLineItemResults, location_name: "MaxResults"))
+    ListCustomLineItemVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCustomLineItemVersionsInput.add_member(:filters, Shapes::ShapeRef.new(shape: ListCustomLineItemVersionsFilter, location_name: "Filters"))
+    ListCustomLineItemVersionsInput.struct_class = Types::ListCustomLineItemVersionsInput
+
+    ListCustomLineItemVersionsOutput.add_member(:custom_line_item_versions, Shapes::ShapeRef.new(shape: CustomLineItemVersionList, location_name: "CustomLineItemVersions"))
+    ListCustomLineItemVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCustomLineItemVersionsOutput.struct_class = Types::ListCustomLineItemVersionsOutput
+
     ListCustomLineItemsFilter.add_member(:names, Shapes::ShapeRef.new(shape: CustomLineItemNameList, location_name: "Names"))
     ListCustomLineItemsFilter.add_member(:billing_groups, Shapes::ShapeRef.new(shape: BillingGroupArnList, location_name: "BillingGroups"))
     ListCustomLineItemsFilter.add_member(:arns, Shapes::ShapeRef.new(shape: CustomLineItemArns, location_name: "Arns"))
     ListCustomLineItemsFilter.struct_class = Types::ListCustomLineItemsFilter
 
     ListCustomLineItemsInput.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "BillingPeriod"))
-    ListCustomLineItemsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxBillingGroupResults, location_name: "MaxResults"))
+    ListCustomLineItemsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCustomLineItemResults, location_name: "MaxResults"))
     ListCustomLineItemsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListCustomLineItemsInput.add_member(:filters, Shapes::ShapeRef.new(shape: ListCustomLineItemsFilter, location_name: "Filters"))
     ListCustomLineItemsInput.struct_class = Types::ListCustomLineItemsInput
@@ -552,6 +592,7 @@ module Aws::BillingConductor
 
     ListResourcesAssociatedToCustomLineItemResponseElement.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemAssociationElement, location_name: "Arn"))
     ListResourcesAssociatedToCustomLineItemResponseElement.add_member(:relationship, Shapes::ShapeRef.new(shape: CustomLineItemRelationship, location_name: "Relationship"))
+    ListResourcesAssociatedToCustomLineItemResponseElement.add_member(:end_billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "EndBillingPeriod"))
     ListResourcesAssociatedToCustomLineItemResponseElement.struct_class = Types::ListResourcesAssociatedToCustomLineItemResponseElement
 
     ListResourcesAssociatedToCustomLineItemResponseList.member = Shapes::ShapeRef.new(shape: ListResourcesAssociatedToCustomLineItemResponseElement)
@@ -653,7 +694,7 @@ module Aws::BillingConductor
     UpdateCustomLineItemFlatChargeDetails.struct_class = Types::UpdateCustomLineItemFlatChargeDetails
 
     UpdateCustomLineItemInput.add_member(:arn, Shapes::ShapeRef.new(shape: CustomLineItemArn, required: true, location_name: "Arn"))
-    UpdateCustomLineItemInput.add_member(:name, Shapes::ShapeRef.new(shape: BillingGroupName, location_name: "Name"))
+    UpdateCustomLineItemInput.add_member(:name, Shapes::ShapeRef.new(shape: CustomLineItemName, location_name: "Name"))
     UpdateCustomLineItemInput.add_member(:description, Shapes::ShapeRef.new(shape: CustomLineItemDescription, location_name: "Description"))
     UpdateCustomLineItemInput.add_member(:charge_details, Shapes::ShapeRef.new(shape: UpdateCustomLineItemChargeDetails, location_name: "ChargeDetails"))
     UpdateCustomLineItemInput.add_member(:billing_period_range, Shapes::ShapeRef.new(shape: CustomLineItemBillingPeriodRange, location_name: "BillingPeriodRange"))
@@ -973,6 +1014,24 @@ module Aws::BillingConductor
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_line_item_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomLineItemVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-custom-line-item-versions"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomLineItemVersionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomLineItemVersionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

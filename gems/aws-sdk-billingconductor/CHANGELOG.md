@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2022-11-08)
+------------------
+
+* Feature - This release adds the Recurring Custom Line Item feature along with a new API ListCustomLineItemVersions.
+
 1.1.0 (2022-10-25)
 ------------------
 

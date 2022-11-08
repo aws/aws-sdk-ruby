@@ -1058,13 +1058,14 @@ module Aws::ACM
 
     # Renews an eligible ACM certificate. At this time, only exported
     # private certificates can be renewed with this operation. In order to
-    # renew your ACM Private CA certificates with ACM, you must first [grant
-    # the ACM service principal permission to do so][1]. For more
-    # information, see [Testing Managed Renewal][2] in the ACM User Guide.
+    # renew your Amazon Web Services Private CA certificates with ACM, you
+    # must first [grant the ACM service principal permission to do so][1].
+    # For more information, see [Testing Managed Renewal][2] in the ACM User
+    # Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html
     # [2]: https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html
     #
     # @option params [required, String] :certificate_arn
@@ -1214,17 +1215,31 @@ module Aws::ACM
     #   (CA) that will be used to issue the certificate. If you do not provide
     #   an ARN and you are trying to request a private certificate, ACM will
     #   attempt to issue a public certificate. For more information about
-    #   private CAs, see the [Certificate Manager Private Certificate
+    #   private CAs, see the [Amazon Web Services Private Certificate
     #   Authority][1] user guide. The ARN must have the following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more resource tags to associate with the certificate.
+    #
+    # @option params [String] :key_algorithm
+    #   Specifies the algorithm of the public and private key pair that your
+    #   certificate uses to encrypt data. RSA is the default key algorithm for
+    #   ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA)
+    #   keys are smaller, offering security comparable to RSA keys but with
+    #   greater computing efficiency. However, ECDSA is not supported by all
+    #   network clients. Some AWS services may require RSA keys, or only
+    #   support ECDSA keys of a particular size, while others allow the use of
+    #   either RSA and ECDSA keys to ensure that compatibility is not broken.
+    #   Check the requirements for the AWS service where you plan to deploy
+    #   your certificate.
+    #
+    #   Default: RSA\_2048
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1246,13 +1261,14 @@ module Aws::ACM
     #     options: {
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #     },
-    #     certificate_authority_arn: "Arn",
+    #     certificate_authority_arn: "PcaArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
+    #     key_algorithm: "RSA_1024", # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
     #   })
     #
     # @example Response structure
@@ -1393,7 +1409,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

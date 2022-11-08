@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.658.0 (2022-11-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ResourceExplorer2`.
+
 1.657.0 (2022-11-07)
 ------------------
 

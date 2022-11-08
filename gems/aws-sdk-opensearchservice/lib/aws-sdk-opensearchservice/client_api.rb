@@ -14,6 +14,7 @@ module Aws::OpenSearchService
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AWSAccount = Shapes::StringShape.new(name: 'AWSAccount')
     AWSDomainInformation = Shapes::StructureShape.new(name: 'AWSDomainInformation')
     AcceptInboundConnectionRequest = Shapes::StructureShape.new(name: 'AcceptInboundConnectionRequest')
     AcceptInboundConnectionResponse = Shapes::StructureShape.new(name: 'AcceptInboundConnectionResponse')
@@ -29,6 +30,10 @@ module Aws::OpenSearchService
     AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
     AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
     AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
+    AuthorizeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'AuthorizeVpcEndpointAccessRequest')
+    AuthorizeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'AuthorizeVpcEndpointAccessResponse')
+    AuthorizedPrincipal = Shapes::StructureShape.new(name: 'AuthorizedPrincipal')
+    AuthorizedPrincipalList = Shapes::ListShape.new(name: 'AuthorizedPrincipalList')
     AutoTune = Shapes::StructureShape.new(name: 'AutoTune')
     AutoTuneDate = Shapes::TimestampShape.new(name: 'AutoTuneDate')
     AutoTuneDesiredState = Shapes::StringShape.new(name: 'AutoTuneDesiredState')
@@ -54,6 +59,7 @@ module Aws::OpenSearchService
     ChangeProgressStageName = Shapes::StringShape.new(name: 'ChangeProgressStageName')
     ChangeProgressStageStatus = Shapes::StringShape.new(name: 'ChangeProgressStageStatus')
     ChangeProgressStatusDetails = Shapes::StructureShape.new(name: 'ChangeProgressStatusDetails')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     ClusterConfig = Shapes::StructureShape.new(name: 'ClusterConfig')
     ClusterConfigStatus = Shapes::StructureShape.new(name: 'ClusterConfigStatus')
@@ -73,6 +79,8 @@ module Aws::OpenSearchService
     CreateOutboundConnectionResponse = Shapes::StructureShape.new(name: 'CreateOutboundConnectionResponse')
     CreatePackageRequest = Shapes::StructureShape.new(name: 'CreatePackageRequest')
     CreatePackageResponse = Shapes::StructureShape.new(name: 'CreatePackageResponse')
+    CreateVpcEndpointRequest = Shapes::StructureShape.new(name: 'CreateVpcEndpointRequest')
+    CreateVpcEndpointResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
@@ -82,6 +90,8 @@ module Aws::OpenSearchService
     DeleteOutboundConnectionResponse = Shapes::StructureShape.new(name: 'DeleteOutboundConnectionResponse')
     DeletePackageRequest = Shapes::StructureShape.new(name: 'DeletePackageRequest')
     DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
+    DeleteVpcEndpointRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointRequest')
+    DeleteVpcEndpointResponse = Shapes::StructureShape.new(name: 'DeleteVpcEndpointResponse')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
@@ -112,11 +122,14 @@ module Aws::OpenSearchService
     DescribeReservedInstanceOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedInstanceOfferingsResponse')
     DescribeReservedInstancesRequest = Shapes::StructureShape.new(name: 'DescribeReservedInstancesRequest')
     DescribeReservedInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReservedInstancesResponse')
+    DescribeVpcEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeVpcEndpointsRequest')
+    DescribeVpcEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeVpcEndpointsResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DisableTimestamp = Shapes::TimestampShape.new(name: 'DisableTimestamp')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DissociatePackageRequest = Shapes::StructureShape.new(name: 'DissociatePackageRequest')
     DissociatePackageResponse = Shapes::StructureShape.new(name: 'DissociatePackageResponse')
+    DomainArn = Shapes::StringShape.new(name: 'DomainArn')
     DomainConfig = Shapes::StructureShape.new(name: 'DomainConfig')
     DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
     DomainEndpointOptionsStatus = Shapes::StructureShape.new(name: 'DomainEndpointOptionsStatus')
@@ -141,6 +154,7 @@ module Aws::OpenSearchService
     EBSOptionsStatus = Shapes::StructureShape.new(name: 'EBSOptionsStatus')
     EncryptionAtRestOptions = Shapes::StructureShape.new(name: 'EncryptionAtRestOptions')
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
+    Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
@@ -196,6 +210,12 @@ module Aws::OpenSearchService
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListVersionsRequest = Shapes::StructureShape.new(name: 'ListVersionsRequest')
     ListVersionsResponse = Shapes::StructureShape.new(name: 'ListVersionsResponse')
+    ListVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'ListVpcEndpointAccessRequest')
+    ListVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointAccessResponse')
+    ListVpcEndpointsForDomainRequest = Shapes::StructureShape.new(name: 'ListVpcEndpointsForDomainRequest')
+    ListVpcEndpointsForDomainResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointsForDomainResponse')
+    ListVpcEndpointsRequest = Shapes::StructureShape.new(name: 'ListVpcEndpointsRequest')
+    ListVpcEndpointsResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointsResponse')
     LogPublishingOption = Shapes::StructureShape.new(name: 'LogPublishingOption')
     LogPublishingOptions = Shapes::MapShape.new(name: 'LogPublishingOptions')
     LogPublishingOptionsStatus = Shapes::StructureShape.new(name: 'LogPublishingOptionsStatus')
@@ -233,6 +253,7 @@ module Aws::OpenSearchService
     PackageVersionHistoryList = Shapes::ListShape.new(name: 'PackageVersionHistoryList')
     Password = Shapes::StringShape.new(name: 'Password')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PurchaseReservedInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingRequest')
     PurchaseReservedInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingResponse')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
@@ -250,6 +271,8 @@ module Aws::OpenSearchService
     ReservedInstancePaymentOption = Shapes::StringShape.new(name: 'ReservedInstancePaymentOption')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RevokeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessRequest')
+    RevokeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RollbackOnDisable = Shapes::StringShape.new(name: 'RollbackOnDisable')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
@@ -292,6 +315,8 @@ module Aws::OpenSearchService
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
     UpdatePackageResponse = Shapes::StructureShape.new(name: 'UpdatePackageResponse')
     UpdateTimestamp = Shapes::TimestampShape.new(name: 'UpdateTimestamp')
+    UpdateVpcEndpointRequest = Shapes::StructureShape.new(name: 'UpdateVpcEndpointRequest')
+    UpdateVpcEndpointResponse = Shapes::StructureShape.new(name: 'UpdateVpcEndpointResponse')
     UpgradeDomainRequest = Shapes::StructureShape.new(name: 'UpgradeDomainRequest')
     UpgradeDomainResponse = Shapes::StructureShape.new(name: 'UpgradeDomainResponse')
     UpgradeHistory = Shapes::StructureShape.new(name: 'UpgradeHistory')
@@ -312,6 +337,16 @@ module Aws::OpenSearchService
     VersionStatus = Shapes::StructureShape.new(name: 'VersionStatus')
     VersionString = Shapes::StringShape.new(name: 'VersionString')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
+    VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
+    VpcEndpointError = Shapes::StructureShape.new(name: 'VpcEndpointError')
+    VpcEndpointErrorCode = Shapes::StringShape.new(name: 'VpcEndpointErrorCode')
+    VpcEndpointErrorList = Shapes::ListShape.new(name: 'VpcEndpointErrorList')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
+    VpcEndpointIdList = Shapes::ListShape.new(name: 'VpcEndpointIdList')
+    VpcEndpointStatus = Shapes::StringShape.new(name: 'VpcEndpointStatus')
+    VpcEndpointSummary = Shapes::StructureShape.new(name: 'VpcEndpointSummary')
+    VpcEndpointSummaryList = Shapes::ListShape.new(name: 'VpcEndpointSummaryList')
+    VpcEndpoints = Shapes::ListShape.new(name: 'VpcEndpoints')
     ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
 
     AWSDomainInformation.add_member(:owner_id, Shapes::ShapeRef.new(shape: OwnerId, location_name: "OwnerId"))
@@ -372,6 +407,19 @@ module Aws::OpenSearchService
 
     AssociatePackageResponse.add_member(:domain_package_details, Shapes::ShapeRef.new(shape: DomainPackageDetails, location_name: "DomainPackageDetails"))
     AssociatePackageResponse.struct_class = Types::AssociatePackageResponse
+
+    AuthorizeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    AuthorizeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, required: true, location_name: "Account"))
+    AuthorizeVpcEndpointAccessRequest.struct_class = Types::AuthorizeVpcEndpointAccessRequest
+
+    AuthorizeVpcEndpointAccessResponse.add_member(:authorized_principal, Shapes::ShapeRef.new(shape: AuthorizedPrincipal, required: true, location_name: "AuthorizedPrincipal"))
+    AuthorizeVpcEndpointAccessResponse.struct_class = Types::AuthorizeVpcEndpointAccessResponse
+
+    AuthorizedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
+    AuthorizedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "Principal"))
+    AuthorizedPrincipal.struct_class = Types::AuthorizedPrincipal
+
+    AuthorizedPrincipalList.member = Shapes::ShapeRef.new(shape: AuthorizedPrincipal)
 
     AutoTune.add_member(:auto_tune_type, Shapes::ShapeRef.new(shape: AutoTuneType, location_name: "AutoTuneType"))
     AutoTune.add_member(:auto_tune_details, Shapes::ShapeRef.new(shape: AutoTuneDetails, location_name: "AutoTuneDetails"))
@@ -524,6 +572,14 @@ module Aws::OpenSearchService
     CreatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
     CreatePackageResponse.struct_class = Types::CreatePackageResponse
 
+    CreateVpcEndpointRequest.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "DomainArn"))
+    CreateVpcEndpointRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCOptions, required: true, location_name: "VpcOptions"))
+    CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
+
+    CreateVpcEndpointResponse.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, required: true, location_name: "VpcEndpoint"))
+    CreateVpcEndpointResponse.struct_class = Types::CreateVpcEndpointResponse
+
     DeleteDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
 
@@ -547,6 +603,12 @@ module Aws::OpenSearchService
 
     DeletePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
     DeletePackageResponse.struct_class = Types::DeletePackageResponse
+
+    DeleteVpcEndpointRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location: "uri", location_name: "VpcEndpointId"))
+    DeleteVpcEndpointRequest.struct_class = Types::DeleteVpcEndpointRequest
+
+    DeleteVpcEndpointResponse.add_member(:vpc_endpoint_summary, Shapes::ShapeRef.new(shape: VpcEndpointSummary, required: true, location_name: "VpcEndpointSummary"))
+    DeleteVpcEndpointResponse.struct_class = Types::DeleteVpcEndpointResponse
 
     DescribeDomainAutoTunesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainAutoTunesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -642,6 +704,13 @@ module Aws::OpenSearchService
     DescribeReservedInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeReservedInstancesResponse.add_member(:reserved_instances, Shapes::ShapeRef.new(shape: ReservedInstanceList, location_name: "ReservedInstances"))
     DescribeReservedInstancesResponse.struct_class = Types::DescribeReservedInstancesResponse
+
+    DescribeVpcEndpointsRequest.add_member(:vpc_endpoint_ids, Shapes::ShapeRef.new(shape: VpcEndpointIdList, required: true, location_name: "VpcEndpointIds"))
+    DescribeVpcEndpointsRequest.struct_class = Types::DescribeVpcEndpointsRequest
+
+    DescribeVpcEndpointsResponse.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: VpcEndpoints, required: true, location_name: "VpcEndpoints"))
+    DescribeVpcEndpointsResponse.add_member(:vpc_endpoint_errors, Shapes::ShapeRef.new(shape: VpcEndpointErrorList, required: true, location_name: "VpcEndpointErrors"))
+    DescribeVpcEndpointsResponse.struct_class = Types::DescribeVpcEndpointsResponse
 
     DisabledOperationException.struct_class = Types::DisabledOperationException
 
@@ -906,6 +975,29 @@ module Aws::OpenSearchService
     ListVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVersionsResponse.struct_class = Types::ListVersionsResponse
 
+    ListVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    ListVpcEndpointAccessRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListVpcEndpointAccessRequest.struct_class = Types::ListVpcEndpointAccessRequest
+
+    ListVpcEndpointAccessResponse.add_member(:authorized_principal_list, Shapes::ShapeRef.new(shape: AuthorizedPrincipalList, required: true, location_name: "AuthorizedPrincipalList"))
+    ListVpcEndpointAccessResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "NextToken"))
+    ListVpcEndpointAccessResponse.struct_class = Types::ListVpcEndpointAccessResponse
+
+    ListVpcEndpointsForDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    ListVpcEndpointsForDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListVpcEndpointsForDomainRequest.struct_class = Types::ListVpcEndpointsForDomainRequest
+
+    ListVpcEndpointsForDomainResponse.add_member(:vpc_endpoint_summary_list, Shapes::ShapeRef.new(shape: VpcEndpointSummaryList, required: true, location_name: "VpcEndpointSummaryList"))
+    ListVpcEndpointsForDomainResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "NextToken"))
+    ListVpcEndpointsForDomainResponse.struct_class = Types::ListVpcEndpointsForDomainResponse
+
+    ListVpcEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListVpcEndpointsRequest.struct_class = Types::ListVpcEndpointsRequest
+
+    ListVpcEndpointsResponse.add_member(:vpc_endpoint_summary_list, Shapes::ShapeRef.new(shape: VpcEndpointSummaryList, required: true, location_name: "VpcEndpointSummaryList"))
+    ListVpcEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "NextToken"))
+    ListVpcEndpointsResponse.struct_class = Types::ListVpcEndpointsResponse
+
     LogPublishingOption.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroupArn, location_name: "CloudWatchLogsLogGroupArn"))
     LogPublishingOption.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     LogPublishingOption.struct_class = Types::LogPublishingOption
@@ -1032,6 +1124,12 @@ module Aws::OpenSearchService
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RevokeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    RevokeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, required: true, location_name: "Account"))
+    RevokeVpcEndpointAccessRequest.struct_class = Types::RevokeVpcEndpointAccessRequest
+
+    RevokeVpcEndpointAccessResponse.struct_class = Types::RevokeVpcEndpointAccessResponse
+
     SAMLIdp.add_member(:metadata_content, Shapes::ShapeRef.new(shape: SAMLMetadata, required: true, location_name: "MetadataContent"))
     SAMLIdp.add_member(:entity_id, Shapes::ShapeRef.new(shape: SAMLEntityId, required: true, location_name: "EntityId"))
     SAMLIdp.struct_class = Types::SAMLIdp
@@ -1132,6 +1230,13 @@ module Aws::OpenSearchService
     UpdatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
     UpdatePackageResponse.struct_class = Types::UpdatePackageResponse
 
+    UpdateVpcEndpointRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "VpcEndpointId"))
+    UpdateVpcEndpointRequest.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCOptions, required: true, location_name: "VpcOptions"))
+    UpdateVpcEndpointRequest.struct_class = Types::UpdateVpcEndpointRequest
+
+    UpdateVpcEndpointResponse.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, required: true, location_name: "VpcEndpoint"))
+    UpdateVpcEndpointResponse.struct_class = Types::UpdateVpcEndpointResponse
+
     UpgradeDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     UpgradeDomainRequest.add_member(:target_version, Shapes::ShapeRef.new(shape: VersionString, required: true, location_name: "TargetVersion"))
     UpgradeDomainRequest.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
@@ -1185,6 +1290,33 @@ module Aws::OpenSearchService
     VersionStatus.add_member(:options, Shapes::ShapeRef.new(shape: VersionString, required: true, location_name: "Options"))
     VersionStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     VersionStatus.struct_class = Types::VersionStatus
+
+    VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    VpcEndpoint.add_member(:vpc_endpoint_owner, Shapes::ShapeRef.new(shape: AWSAccount, location_name: "VpcEndpointOwner"))
+    VpcEndpoint.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    VpcEndpoint.add_member(:vpc_options, Shapes::ShapeRef.new(shape: VPCDerivedInfo, location_name: "VpcOptions"))
+    VpcEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: VpcEndpointStatus, location_name: "Status"))
+    VpcEndpoint.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    VpcEndpoint.struct_class = Types::VpcEndpoint
+
+    VpcEndpointError.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    VpcEndpointError.add_member(:error_code, Shapes::ShapeRef.new(shape: VpcEndpointErrorCode, location_name: "ErrorCode"))
+    VpcEndpointError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    VpcEndpointError.struct_class = Types::VpcEndpointError
+
+    VpcEndpointErrorList.member = Shapes::ShapeRef.new(shape: VpcEndpointError)
+
+    VpcEndpointIdList.member = Shapes::ShapeRef.new(shape: VpcEndpointId)
+
+    VpcEndpointSummary.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    VpcEndpointSummary.add_member(:vpc_endpoint_owner, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointOwner"))
+    VpcEndpointSummary.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    VpcEndpointSummary.add_member(:status, Shapes::ShapeRef.new(shape: VpcEndpointStatus, location_name: "Status"))
+    VpcEndpointSummary.struct_class = Types::VpcEndpointSummary
+
+    VpcEndpointSummaryList.member = Shapes::ShapeRef.new(shape: VpcEndpointSummary)
+
+    VpcEndpoints.member = Shapes::ShapeRef.new(shape: VpcEndpoint)
 
     ZoneAwarenessConfig.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.struct_class = Types::ZoneAwarenessConfig
@@ -1242,6 +1374,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:authorize_vpc_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AuthorizeVpcEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/authorizeVpcEndpointAccess"
+        o.input = Shapes::ShapeRef.new(shape: AuthorizeVpcEndpointAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: AuthorizeVpcEndpointAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
       api.add_operation(:cancel_service_software_update, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelServiceSoftwareUpdate"
         o.http_method = "POST"
@@ -1296,6 +1442,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/vpcEndpoints"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
       api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDomain"
         o.http_method = "DELETE"
@@ -1340,6 +1500,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcEndpoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2021-01-01/opensearch/vpcEndpoints/{VpcEndpointId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
       end)
 
       api.add_operation(:describe_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -1506,6 +1678,18 @@ module Aws::OpenSearchService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_vpc_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/vpcEndpoints/describe"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
       end)
 
       api.add_operation(:dissociate_package, Seahorse::Model::Operation.new.tap do |o|
@@ -1682,6 +1866,41 @@ module Aws::OpenSearchService
         )
       end)
 
+      api.add_operation(:list_vpc_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcEndpointAccess"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/listVpcEndpointAccess"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcEndpointAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcEndpointAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
+      api.add_operation(:list_vpc_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcEndpoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/vpcEndpoints"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
+      api.add_operation(:list_vpc_endpoints_for_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcEndpointsForDomain"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/vpcEndpoints"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcEndpointsForDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcEndpointsForDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
       api.add_operation(:purchase_reserved_instance_offering, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PurchaseReservedInstanceOffering"
         o.http_method = "POST"
@@ -1715,6 +1934,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:revoke_vpc_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeVpcEndpointAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/revokeVpcEndpointAccess"
+        o.input = Shapes::ShapeRef.new(shape: RevokeVpcEndpointAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeVpcEndpointAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
       end)
 
       api.add_operation(:start_service_software_update, Seahorse::Model::Operation.new.tap do |o|
@@ -1755,6 +1987,20 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_vpc_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVpcEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/vpcEndpoints/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVpcEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVpcEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
       end)
 
       api.add_operation(:upgrade_domain, Seahorse::Model::Operation.new.tap do |o|
