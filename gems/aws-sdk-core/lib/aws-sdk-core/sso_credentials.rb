@@ -1,28 +1,21 @@
 # frozen_string_literal: true
 
 module Aws
-  # TODO: Update documentation
-
   # An auto-refreshing credential provider that assumes a role via
   # {Aws::SSO::Client#get_role_credentials} using a cached access
-  # token. This class does NOT implement the SSO login token flow - tokens
-  # must generated and refreshed separately by running `aws login` from the
-  # AWS CLI with the correct profile.
-  #
-  # The `SSOCredentials` will auto-refresh the AWS credentials from SSO. In
-  # addition to AWS credentials expiring after a given amount of time, the
-  # access token generated and cached from `aws login` will also expire.
-  # Once this token expires, it will not be usable to refresh AWS credentials,
-  # and another token will be needed. The SDK does not manage refreshing of
-  # the token value, but this can be done by running `aws login` with the
-  # correct profile.
+  # token. When `sso_session` is specified, token refresh logic from
+  # {Aws::SSOTokenProvider} will be used to refresh the token if possible.
+  # This class does NOT implement the SSO login token flow - tokens
+  # must generated separately by running `aws login` from the
+  # AWS CLI with the correct profile. The `SSOCredentials` will
+  # auto-refresh the AWS credentials from SSO.
   #
   #     # You must first run aws sso login --profile your-sso-profile
   #     sso_credentials = Aws::SSOCredentials.new(
   #       sso_account_id: '123456789',
   #       sso_role_name: "role_name",
   #       sso_region: "us-east-1",
-  #       sso_start_url: 'https://your-start-url.awsapps.com/start'
+  #       sso_session: 'my_sso_session'
   #     )
   #     ec2 = Aws::EC2::Client.new(credentials: sso_credentials)
   #
@@ -74,7 +67,7 @@ module Aws
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      options.compact!
+      options = options.select {|k, v| !v.nil? }
       if (options[:sso_session])
         missing_keys = TOKEN_PROVIDER_REQUIRED_OPTS.select { |k| options[k].nil? }
         unless missing_keys.empty?
