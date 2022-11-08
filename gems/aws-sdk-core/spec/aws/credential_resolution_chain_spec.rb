@@ -95,10 +95,11 @@ module Aws
 
       it 'prefers sso credentials over assume role' do
         expect(SSOCredentials).to receive(:new).with(
-          sso_start_url: 'START_URL',
+          sso_start_url: nil,
           sso_region: 'us-east-1',
           sso_account_id: 'SSO_ACCOUNT_ID',
-          sso_role_name: 'SSO_ROLE_NAME'
+          sso_role_name: 'SSO_ROLE_NAME',
+          sso_session: 'sso-test-session'
         ).and_return(
           double(
             'creds',
@@ -107,7 +108,53 @@ module Aws
           )
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds'
+          profile: 'sso_creds',
+          token_provider: nil
+        )
+        expect(
+          client.config.credentials.credentials.access_key_id
+        ).to eq('SSO_AKID')
+      end
+
+      it 'loads SSO credentials from a legacy profile' do
+        expect(SSOCredentials).to receive(:new).with(
+          sso_start_url: 'START_URL',
+          sso_region: 'us-east-1',
+          sso_account_id: 'SSO_ACCOUNT_ID',
+          sso_role_name: 'SSO_ROLE_NAME',
+          sso_session: nil
+        ).and_return(
+          double(
+            'creds',
+            set?: true,
+            credentials: double(access_key_id: 'SSO_AKID')
+          )
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'sso_creds_legacy'
+        )
+        expect(
+          client.config.credentials.credentials.access_key_id
+        ).to eq('SSO_AKID')
+      end
+
+      it 'loads SSO credentials from a mixed legacy profile when values match' do
+        expect(SSOCredentials).to receive(:new).with(
+          sso_start_url: 'START_URL',
+          sso_region: 'us-east-1',
+          sso_account_id: 'SSO_ACCOUNT_ID',
+          sso_role_name: 'SSO_ROLE_NAME',
+          sso_session: 'sso-test-session'
+        ).and_return(
+          double(
+            'creds',
+            set?: true,
+            credentials: double(access_key_id: 'SSO_AKID')
+          )
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'sso_creds_mixed_legacy',
+          token_provider: nil,
         )
         expect(
           client.config.credentials.credentials.access_key_id
@@ -121,6 +168,25 @@ module Aws
             region: 'us-east-1'
           )
         end.to raise_error(ArgumentError, /Missing required keys/)
+      end
+
+      it 'raises when attempting to load a mixed legacy SSO Profile with mismatched values' do
+        expect do
+          ApiHelper.sample_rest_xml::Client.new(
+            profile: 'sso_creds_mixed_legacy_mismatch',
+            region: 'us-east-1'
+          )
+        end.to raise_error(ArgumentError, /does not match the profile/)
+      end
+
+      it 'raises when attempting to load an SSO profile with a missing sso-session' do
+        expect do
+          ApiHelper.sample_rest_xml::Client.new(
+            profile: 'sso_creds_bad_session',
+            region: 'us-east-1'
+          )
+        end.to raise_error(ArgumentError,
+          /sso-session session-does-not-exist must be defined in the config file/)
       end
 
       it 'prefers assume role over shared config' do
@@ -300,10 +366,11 @@ module Aws
 
         it 'supports :source_profile from sso credentials' do
           expect(SSOCredentials).to receive(:new).with(
-            sso_start_url: 'START_URL',
+            sso_start_url: nil,
             sso_region: 'us-east-1',
             sso_account_id: 'SSO_ACCOUNT_ID',
-            sso_role_name: 'SSO_ROLE_NAME'
+            sso_role_name: 'SSO_ROLE_NAME',
+            sso_session: 'sso-test-session'
           ).and_return(
             double(
               'SSOCreds',
@@ -311,6 +378,9 @@ module Aws
               credentials: Credentials.new('SSO_AKID', 'sak')
             )
           )
+
+          allow(SSOTokenProvider).to receive(:new)
+           .and_return(double('SSOToken', set?: true))
 
           assume_role_stub(
             'arn:aws:iam:123456789012:role/foo',

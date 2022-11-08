@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add token refresh support to `SSOCredentialProvider`.
+
 3.166.0 (2022-10-26)
 ------------------
 
