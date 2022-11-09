@@ -75,6 +75,12 @@ module BuildTools
 
     def load_api(svc_name, models_dir)
       api = JSON.load(File.read(model_path('api-2.json', models_dir)))
+      # preprocess api to ensure that all structures have members
+      api['shapes'].each do |_shape_name, shape|
+        if shape['type'] == 'structure' && shape['members'].nil?
+          shape['members'] = {}
+        end
+      end
       BuildTools::Customizations.apply_api_customizations(svc_name, api)
       api
     end
