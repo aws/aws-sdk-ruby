@@ -805,6 +805,9 @@ module Aws::Connect
     #   SDK populates this field. For more information about idempotency, see
     #   [Making retries safe with idempotent APIs][1].
     #
+    #   Pattern:
+    #   `^[a-f0-9]\{8\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{12\}$`
+    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
@@ -3917,6 +3920,9 @@ module Aws::Connect
     # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFederationTokenResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::GetFederationTokenResponse#sign_in_url #sign_in_url} => String
+    #   * {Types::GetFederationTokenResponse#user_arn #user_arn} => String
+    #   * {Types::GetFederationTokenResponse#user_id #user_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3930,6 +3936,9 @@ module Aws::Connect
     #   resp.credentials.access_token_expiration #=> Time
     #   resp.credentials.refresh_token #=> String
     #   resp.credentials.refresh_token_expiration #=> Time
+    #   resp.sign_in_url #=> String
+    #   resp.user_arn #=> String
+    #   resp.user_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationToken AWS API Documentation
     #
@@ -6161,7 +6170,8 @@ module Aws::Connect
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   instanceId in the ARN of the instance. You can provide the
+    #   `InstanceId`, or the entire ARN.
     #
     # @option params [required, String] :replica_region
     #   The Amazon Web Services Region where to replicate the Amazon Connect
@@ -9143,7 +9153,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

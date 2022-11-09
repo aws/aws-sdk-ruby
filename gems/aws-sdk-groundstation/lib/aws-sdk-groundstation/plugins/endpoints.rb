@@ -62,16 +62,22 @@ module Aws::GroundStation
             Aws::GroundStation::Endpoints::CreateConfig.build(context)
           when :create_dataflow_endpoint_group
             Aws::GroundStation::Endpoints::CreateDataflowEndpointGroup.build(context)
+          when :create_ephemeris
+            Aws::GroundStation::Endpoints::CreateEphemeris.build(context)
           when :create_mission_profile
             Aws::GroundStation::Endpoints::CreateMissionProfile.build(context)
           when :delete_config
             Aws::GroundStation::Endpoints::DeleteConfig.build(context)
           when :delete_dataflow_endpoint_group
             Aws::GroundStation::Endpoints::DeleteDataflowEndpointGroup.build(context)
+          when :delete_ephemeris
+            Aws::GroundStation::Endpoints::DeleteEphemeris.build(context)
           when :delete_mission_profile
             Aws::GroundStation::Endpoints::DeleteMissionProfile.build(context)
           when :describe_contact
             Aws::GroundStation::Endpoints::DescribeContact.build(context)
+          when :describe_ephemeris
+            Aws::GroundStation::Endpoints::DescribeEphemeris.build(context)
           when :get_config
             Aws::GroundStation::Endpoints::GetConfig.build(context)
           when :get_dataflow_endpoint_group
@@ -88,6 +94,8 @@ module Aws::GroundStation
             Aws::GroundStation::Endpoints::ListContacts.build(context)
           when :list_dataflow_endpoint_groups
             Aws::GroundStation::Endpoints::ListDataflowEndpointGroups.build(context)
+          when :list_ephemerides
+            Aws::GroundStation::Endpoints::ListEphemerides.build(context)
           when :list_ground_stations
             Aws::GroundStation::Endpoints::ListGroundStations.build(context)
           when :list_mission_profiles
@@ -104,6 +112,8 @@ module Aws::GroundStation
             Aws::GroundStation::Endpoints::UntagResource.build(context)
           when :update_config
             Aws::GroundStation::Endpoints::UpdateConfig.build(context)
+          when :update_ephemeris
+            Aws::GroundStation::Endpoints::UpdateEphemeris.build(context)
           when :update_mission_profile
             Aws::GroundStation::Endpoints::UpdateMissionProfile.build(context)
           end

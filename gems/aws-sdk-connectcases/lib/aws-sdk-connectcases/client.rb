@@ -474,10 +474,16 @@ module Aws::ConnectCases
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -754,11 +760,13 @@ module Aws::ConnectCases
     end
 
     # Creates a template in the Cases domain. This template is used to
-    # define the case object model (that is, define what data can be
+    # define the case object model (that is, to define what data can be
     # captured on cases) in a Cases domain. A template must have a unique
     # name within a domain, and it must reference existing field IDs and
     # layout IDs. Additionally, multiple fields with same IDs are not
-    # allowed within the same Template.
+    # allowed within the same Template. A template can be either Active or
+    # Inactive, as indicated by its status. Inactive templates cannot be
+    # used to create cases.
     #
     # @option params [String] :description
     #   A brief description of the template.
@@ -775,6 +783,9 @@ module Aws::ConnectCases
     # @option params [Array<Types::RequiredField>] :required_fields
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
+    #
+    # @option params [String] :status
+    #   The status of the template.
     #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -795,6 +806,7 @@ module Aws::ConnectCases
     #         field_id: "FieldId", # required
     #       },
     #     ],
+    #     status: "Active", # accepts Active, Inactive
     #   })
     #
     # @example Response structure
@@ -1002,6 +1014,7 @@ module Aws::ConnectCases
     #   * {Types::GetTemplateResponse#layout_configuration #layout_configuration} => Types::LayoutConfiguration
     #   * {Types::GetTemplateResponse#name #name} => String
     #   * {Types::GetTemplateResponse#required_fields #required_fields} => Array&lt;Types::RequiredField&gt;
+    #   * {Types::GetTemplateResponse#status #status} => String
     #   * {Types::GetTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetTemplateResponse#template_arn #template_arn} => String
     #   * {Types::GetTemplateResponse#template_id #template_id} => String
@@ -1020,6 +1033,7 @@ module Aws::ConnectCases
     #   resp.name #=> String
     #   resp.required_fields #=> Array
     #   resp.required_fields[0].field_id #=> String
+    #   resp.status #=> String, one of "Active", "Inactive"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #   resp.template_arn #=> String
@@ -1313,6 +1327,9 @@ module Aws::ConnectCases
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
+    # @option params [Array<String>] :status
+    #   A list of status values to filter on.
+    #
     # @return [Types::ListTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTemplatesResponse#next_token #next_token} => String
@@ -1326,6 +1343,7 @@ module Aws::ConnectCases
     #     domain_id: "DomainId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     status: ["Active"], # accepts Active, Inactive
     #   })
     #
     # @example Response structure
@@ -1333,6 +1351,7 @@ module Aws::ConnectCases
     #   resp.next_token #=> String
     #   resp.templates #=> Array
     #   resp.templates[0].name #=> String
+    #   resp.templates[0].status #=> String, one of "Active", "Inactive"
     #   resp.templates[0].template_arn #=> String
     #   resp.templates[0].template_id #=> String
     #
@@ -1813,9 +1832,10 @@ module Aws::ConnectCases
 
     # Updates the attributes of an existing template. The template
     # attributes that can be modified include `name`, `description`,
-    # `layouts`, and `requiredFields`. At least one of these attributes must
-    # not be null. If a null value is provided for a given attribute, that
-    # attribute is ignored and its current value is preserved.
+    # `layoutConfiguration`, `requiredFields`, and `status`. At least one of
+    # these attributes must not be null. If a null value is provided for a
+    # given attribute, that attribute is ignored and its current value is
+    # preserved.
     #
     # @option params [String] :description
     #   A brief description of the template.
@@ -1832,6 +1852,9 @@ module Aws::ConnectCases
     # @option params [Array<Types::RequiredField>] :required_fields
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
+    #
+    # @option params [String] :status
+    #   The status of the template.
     #
     # @option params [required, String] :template_id
     #   A unique identifier for the template.
@@ -1852,6 +1875,7 @@ module Aws::ConnectCases
     #         field_id: "FieldId", # required
     #       },
     #     ],
+    #     status: "Active", # accepts Active, Inactive
     #     template_id: "TemplateId", # required
     #   })
     #
@@ -1877,7 +1901,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-11-09)
+------------------
+
+* Feature - This will release hi-IN and th-TH
+
 1.43.0 (2022-10-25)
 ------------------
 

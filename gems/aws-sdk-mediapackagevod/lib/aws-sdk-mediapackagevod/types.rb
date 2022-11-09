@@ -535,6 +535,7 @@ module Aws::MediaPackageVod
     #             },
     #           },
     #           include_encoder_configuration_in_segments: false,
+    #           include_iframe_only_stream: false,
     #           period_triggers: ["ADS"], # accepts ADS
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -893,6 +894,7 @@ module Aws::MediaPackageVod
     #           },
     #         },
     #         include_encoder_configuration_in_segments: false,
+    #         include_iframe_only_stream: false,
     #         period_triggers: ["ADS"], # accepts ADS
     #         segment_duration_seconds: 1,
     #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -914,6 +916,10 @@ module Aws::MediaPackageVod
     #   in every video segment instead of in the init fragment. This lets
     #   you use different SPS/PPS/VPS settings for your assets during
     #   content playback.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_iframe_only_stream
+    #   When enabled, an I-Frame only stream will be included in the output.
     #   @return [Boolean]
     #
     # @!attribute [rw] period_triggers
@@ -946,6 +952,7 @@ module Aws::MediaPackageVod
       :dash_manifests,
       :encryption,
       :include_encoder_configuration_in_segments,
+      :include_iframe_only_stream,
       :period_triggers,
       :segment_duration_seconds,
       :segment_template_format)

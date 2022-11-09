@@ -271,61 +271,109 @@ module Aws::TranscribeStreamingService
 
     # @!group API Operations
 
-    # Starts a bidirectional HTTP/2 stream where audio is streamed to Amazon
-    # Transcribe Medical and the transcription results are streamed to your
-    # application.
+    # Starts a bidirectional HTTP/2 or WebSocket stream where audio is
+    # streamed to Amazon Transcribe Medical and the transcription results
+    # are streamed to your application.
+    #
+    # For more information on streaming with Amazon Transcribe Medical, see
+    # [Transcribing streaming audio][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
     #
     # @option params [required, String] :language_code
-    #   Indicates the source language used in the input audio stream. For
-    #   Amazon Transcribe Medical, this is US English (en-US).
+    #   Specify the language code that represents the language spoken in your
+    #   audio.
+    #
+    #   Amazon Transcribe Medical only supports US English (`en-US`).
     #
     # @option params [required, Integer] :media_sample_rate_hertz
-    #   The sample rate of the input audio (in Hertz). Amazon Transcribe
-    #   medical supports a range from 16,000 Hz to 48,000 Hz. Note that the
+    #   The sample rate of the input audio (in hertz). Amazon Transcribe
+    #   Medical supports a range from 16,000 Hz to 48,000 Hz. Note that the
     #   sample rate you specify must match that of your audio.
     #
     # @option params [required, String] :media_encoding
-    #   The encoding used for the input audio.
+    #   Specify the encoding used for the input audio. Supported formats are:
+    #
+    #   * FLAC
+    #
+    #   * OPUS-encoded audio in an Ogg container
+    #
+    #   * PCM (only signed 16-bit little-endian audio formats, which does not
+    #     include WAV)
+    #
+    #   For more information, see [Media formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
     #
     # @option params [String] :vocabulary_name
-    #   The name of the medical custom vocabulary to use when processing the
-    #   real-time stream.
+    #   Specify the name of the custom vocabulary that you want to use when
+    #   processing your transcription. Note that vocabulary names are case
+    #   sensitive.
     #
     # @option params [required, String] :specialty
-    #   The medical specialty of the clinician or provider.
+    #   Specify the medical specialty contained in your audio.
     #
     # @option params [required, String] :type
-    #   The type of input audio. Choose `DICTATION` for a provider dictating
-    #   patient notes. Choose `CONVERSATION` for a dialogue between a patient
-    #   and one or more medical professionanls.
+    #   Specify the type of input audio. For example, choose `DICTATION` for a
+    #   provider dictating patient notes and `CONVERSATION` for a dialogue
+    #   between a patient and a medical professional.
     #
     # @option params [Boolean] :show_speaker_label
-    #   When `true`, enables speaker identification in your real-time stream.
+    #   Enables speaker partitioning (diarization) in your transcription
+    #   output. Speaker partitioning labels the speech from individual
+    #   speakers in your media file.
+    #
+    #   For more information, see [Partitioning speakers (diarization)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html
     #
     # @option params [String] :session_id
-    #   Optional. An identifier for the transcription session. If you don't
-    #   provide a session ID, Amazon Transcribe generates one for you and
-    #   returns it in the response.
+    #   Specify a name for your transcription session. If you don't include
+    #   this parameter in your request, Amazon Transcribe Medical generates an
+    #   ID and returns it in the response.
+    #
+    #   You can use a session ID to retry a streaming session.
     #
     # @option params [Boolean] :enable_channel_identification
-    #   When `true`, instructs Amazon Transcribe Medical to process each audio
-    #   channel separately and then merge the transcription output of each
-    #   channel into a single transcription.
+    #   Enables channel identification in multi-channel audio.
     #
-    #   Amazon Transcribe Medical also produces a transcription of each item.
-    #   An item includes the start time, end time, and any alternative
-    #   transcriptions.
+    #   Channel identification transcribes the audio on each channel
+    #   independently, then appends the output for each channel into one
+    #   transcript.
     #
-    #   You can't set both `ShowSpeakerLabel` and
-    #   `EnableChannelIdentification` in the same request. If you set both,
-    #   your request returns a `BadRequestException`.
+    #   If you have multi-channel audio and do not enable channel
+    #   identification, your audio is transcribed in a continuous manner and
+    #   your transcript is not separated by channel.
+    #
+    #   For more information, see [Transcribing multi-channel audio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html
     #
     # @option params [Integer] :number_of_channels
-    #   The number of channels that are in your audio stream.
+    #   Specify the number of channels in your audio stream. Up to two
+    #   channels are supported.
     #
     # @option params [String] :content_identification_type
-    #   Set this field to `PHI` to identify personal health information in the
-    #   transcription output.
+    #   Labels all personal health information (PHI) identified in your
+    #   transcript.
+    #
+    #   Content identification is performed at the segment level; PHI is
+    #   flagged upon complete transcription of an audio segment.
+    #
+    #   For more information, see [Identifying personal health information
+    #   (PHI) in a transcription][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html
     #
     # @return [Types::StartMedicalStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -438,7 +486,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_medical_stream_transcription({
-    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #     vocabulary_name: "VocabularyName",
@@ -459,7 +507,7 @@ module Aws::TranscribeStreamingService
     # @example Response structure
     #
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
     #   resp.vocabulary_name #=> String
@@ -542,179 +590,331 @@ module Aws::TranscribeStreamingService
       req.send_request(options, &block)
     end
 
-    # Starts a bidirectional HTTP/2 stream where audio is streamed to Amazon
-    # Transcribe and the transcription results are streamed to your
-    # application.
+    # Starts a bidirectional HTTP/2 or WebSocket stream where audio is
+    # streamed to Amazon Transcribe and the transcription results are
+    # streamed to your application.
     #
-    # The following are encoded as HTTP/2 headers:
+    # The following are encoded as headers:
     #
-    # * x-amzn-transcribe-language-code
+    # * language-code
     #
-    # * x-amzn-transcribe-media-encoding
+    # * media-encoding
     #
-    # * x-amzn-transcribe-sample-rate
+    # * sample-rate
     #
-    # * x-amzn-transcribe-session-id
+    # * session-id
     #
-    # See the [ SDK for Go API Reference][1] for more detail.
+    # For more information on streaming with Amazon Transcribe, see
+    # [Transcribing streaming audio][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sdk-for-go/api/service/transcribestreamingservice/#TranscribeStreamingService.StartStreamTranscription
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
     #
     # @option params [String] :language_code
-    #   The language code of the input audio stream.
+    #   Specify the language code that represents the language spoken in your
+    #   audio.
+    #
+    #   If you're unsure of the language spoken in your audio, consider using
+    #   `IdentifyLanguage` to enable automatic language identification.
+    #
+    #   For a list of languages supported with Amazon Transcribe streaming,
+    #   refer to the [Supported languages][1] table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [required, Integer] :media_sample_rate_hertz
-    #   The sample rate of the input audio (in Hertz). Low-quality audio, such
+    #   The sample rate of the input audio (in hertz). Low-quality audio, such
     #   as telephone audio, is typically around 8,000 Hz. High-quality audio
     #   typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample
     #   rate you specify must match that of your audio.
     #
     # @option params [required, String] :media_encoding
-    #   The encoding used for the input audio.
+    #   Specify the encoding used for the input audio. Supported formats are:
+    #
+    #   * FLAC
+    #
+    #   * OPUS-encoded audio in an Ogg container
+    #
+    #   * PCM (only signed 16-bit little-endian audio formats, which does not
+    #     include WAV)
+    #
+    #   For more information, see [Media formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
     #
     # @option params [String] :vocabulary_name
-    #   The name of the custom vocabulary you want to use with your
-    #   transcription.
+    #   Specify the name of the custom vocabulary that you want to use when
+    #   processing your transcription. Note that vocabulary names are case
+    #   sensitive.
     #
-    #   This operation is not intended for use in conjunction with the
-    #   `IdentifyLanguage` operation. If you're using `IdentifyLanguage` in
-    #   your request and want to use one or more custom vocabularies with your
-    #   transcription, use the `VocabularyNames` operation instead.
+    #   If the language of the specified custom vocabulary doesn't match the
+    #   language identified in your media, your job fails.
+    #
+    #   This parameter is **not** intended for use with the `IdentifyLanguage`
+    #   parameter. If you're including `IdentifyLanguage` in your request and
+    #   want to use one or more custom vocabularies with your transcription,
+    #   use the `VocabularyNames` parameter instead.
+    #
+    #   For more information, see [Custom vocabularies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     #
     # @option params [String] :session_id
-    #   A identifier for the transcription session. Use this parameter when
-    #   you want to retry a session. If you don't provide a session ID,
-    #   Amazon Transcribe will generate one for you and return it in the
-    #   response.
+    #   Specify a name for your transcription session. If you don't include
+    #   this parameter in your request, Amazon Transcribe generates an ID and
+    #   returns it in the response.
+    #
+    #   You can use a session ID to retry a streaming session.
     #
     # @option params [String] :vocabulary_filter_name
-    #   The name of the vocabulary filter you want to use with your
-    #   transcription.
+    #   Specify the name of the custom vocabulary filter that you want to use
+    #   when processing your transcription. Note that vocabulary filter names
+    #   are case sensitive.
     #
-    #   This operation is not intended for use in conjunction with the
-    #   `IdentifyLanguage` operation. If you're using `IdentifyLanguage` in
-    #   your request and want to use one or more vocabulary filters with your
-    #   transcription, use the `VocabularyFilterNames` operation instead.
+    #   If the language of the specified custom vocabulary filter doesn't
+    #   match the language identified in your media, your job fails.
+    #
+    #   This parameter is **not** intended for use with the `IdentifyLanguage`
+    #   parameter. If you're including `IdentifyLanguage` in your request and
+    #   want to use one or more vocabulary filters with your transcription,
+    #   use the `VocabularyFilterNames` parameter instead.
+    #
+    #   For more information, see [Using vocabulary filtering with unwanted
+    #   words][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
     #
     # @option params [String] :vocabulary_filter_method
-    #   The manner in which you use your vocabulary filter to filter words in
-    #   your transcript. `Remove` removes filtered words from your
-    #   transcription results. `Mask` masks filtered words with a `***` in
-    #   your transcription results. `Tag` keeps the filtered words in your
-    #   transcription results and tags them. The tag appears as
-    #   `VocabularyFilterMatch` equal to `True`.
+    #   Specify how you want your vocabulary filter applied to your
+    #   transcript.
+    #
+    #   To replace words with `***`, choose `mask`.
+    #
+    #   To delete words, choose `remove`.
+    #
+    #   To flag words without changing them, choose `tag`.
     #
     # @option params [Boolean] :show_speaker_label
-    #   When `true`, enables speaker identification in your media stream.
+    #   Enables speaker partitioning (diarization) in your transcription
+    #   output. Speaker partitioning labels the speech from individual
+    #   speakers in your media file.
+    #
+    #   For more information, see [Partitioning speakers (diarization)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html
     #
     # @option params [Boolean] :enable_channel_identification
-    #   When `true`, instructs Amazon Transcribe to process each audio channel
-    #   separately, then merges the transcription output of each channel into
-    #   a single transcription.
+    #   Enables channel identification in multi-channel audio.
     #
-    #   Amazon Transcribe also produces a transcription of each item. An item
-    #   includes the start time, end time, and any alternative transcriptions.
+    #   Channel identification transcribes the audio on each channel
+    #   independently, then appends the output for each channel into one
+    #   transcript.
+    #
+    #   If you have multi-channel audio and do not enable channel
+    #   identification, your audio is transcribed in a continuous manner and
+    #   your transcript is not separated by channel.
+    #
+    #   For more information, see [Transcribing multi-channel audio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html
     #
     # @option params [Integer] :number_of_channels
-    #   The number of channels that are in your audio stream.
+    #   Specify the number of channels in your audio stream. Up to two
+    #   channels are supported.
     #
     # @option params [Boolean] :enable_partial_results_stabilization
-    #   When `true`, instructs Amazon Transcribe to present transcription
-    #   results that have the partial results stabilized. Normally, any word
-    #   or phrase from one partial result can change in a subsequent partial
-    #   result. With partial results stabilization enabled, only the last few
-    #   words of one partial result can change in another partial result.
+    #   Enables partial result stabilization for your transcription. Partial
+    #   result stabilization can reduce latency in your output, but may impact
+    #   accuracy. For more information, see [Partial-result stabilization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization
     #
     # @option params [String] :partial_results_stability
-    #   You can use this field to set the stability level of the transcription
-    #   results. A higher stability level means that the transcription results
-    #   are less likely to change. Higher stability levels can come with lower
-    #   overall transcription accuracy.
+    #   Specify the level of stability to use when you enable partial results
+    #   stabilization (`EnablePartialResultsStabilization`).
+    #
+    #   Low stability provides the highest accuracy. High stability
+    #   transcribes faster, but with slightly lower accuracy.
+    #
+    #   For more information, see [Partial-result stabilization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization
     #
     # @option params [String] :content_identification_type
-    #   Set this field to PII to identify personally identifiable information
-    #   (PII) in the transcription output. Content identification is performed
-    #   only upon complete transcription of the audio segments.
+    #   Labels all personally identifiable information (PII) identified in
+    #   your transcript.
     #
-    #   You can’t set both `ContentIdentificationType` and
-    #   `ContentRedactionType` in the same request. If you set both, your
-    #   request returns a `BadRequestException`.
+    #   Content identification is performed at the segment level; PII
+    #   specified in `PiiEntityTypes` is flagged upon complete transcription
+    #   of an audio segment.
+    #
+    #   You can’t set `ContentIdentificationType` and `ContentRedactionType`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
+    #
+    #   For more information, see [Redacting or identifying personally
+    #   identifiable information][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html
     #
     # @option params [String] :content_redaction_type
-    #   Set this field to PII to redact personally identifiable information
-    #   (PII) in the transcription output. Content redaction is performed only
-    #   upon complete transcription of the audio segments.
+    #   Redacts all personally identifiable information (PII) identified in
+    #   your transcript.
     #
-    #   You can’t set both `ContentRedactionType` and
-    #   `ContentIdentificationType` in the same request. If you set both, your
-    #   request returns a `BadRequestException`.
+    #   Content redaction is performed at the segment level; PII specified in
+    #   `PiiEntityTypes` is redacted upon complete transcription of an audio
+    #   segment.
+    #
+    #   You can’t set `ContentRedactionType` and `ContentIdentificationType`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
+    #
+    #   For more information, see [Redacting or identifying personally
+    #   identifiable information][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html
     #
     # @option params [String] :pii_entity_types
-    #   List the PII entity types you want to identify or redact. In order to
-    #   specify entity types, you must have either `ContentIdentificationType`
-    #   or `ContentRedactionType` enabled.
+    #   Specify which types of personally identifiable information (PII) you
+    #   want to redact in your transcript. You can include as many types as
+    #   you'd like, or you can select `ALL`.
     #
-    #   `PIIEntityTypes` must be comma-separated; the available values are:
-    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
-    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`, `ADDRESS`,
-    #   `NAME`, `PHONE`, `SSN`, and `ALL`.
+    #   To include `PiiEntityTypes` in your request, you must also include
+    #   either `ContentIdentificationType` or `ContentRedactionType`.
     #
-    #   `PiiEntityTypes` is an optional parameter with a default value of
-    #   `ALL`.
+    #   Values must be comma-separated and can include: `BANK_ACCOUNT_NUMBER`,
+    #   `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`, `CREDIT_DEBIT_CVV`,
+    #   `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`, `ADDRESS`, `NAME`, `PHONE`,
+    #   `SSN`, or `ALL`.
     #
     # @option params [String] :language_model_name
-    #   The name of the language model you want to use.
+    #   Specify the name of the custom language model that you want to use
+    #   when processing your transcription. Note that language model names are
+    #   case sensitive.
+    #
+    #   The language of the specified language model must match the language
+    #   code you specify in your transcription request. If the languages
+    #   don't match, the language model isn't applied. There are no errors
+    #   or warnings associated with a language mismatch.
+    #
+    #   For more information, see [Custom language models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
     #
     # @option params [Boolean] :identify_language
-    #   Optional. Set this value to `true` to enable language identification
-    #   for your media stream.
+    #   Enables automatic language identification for your transcription.
+    #
+    #   If you include `IdentifyLanguage`, you can optionally include a list
+    #   of language codes, using `LanguageOptions`, that you think may be
+    #   present in your audio stream. Including language options can improve
+    #   transcription accuracy.
+    #
+    #   You can also include a preferred language using `PreferredLanguage`.
+    #   Adding a preferred language can help Amazon Transcribe identify the
+    #   language faster than if you omit this parameter.
+    #
+    #   If you have multi-channel audio that contains different languages on
+    #   each channel, and you've enabled channel identification, automatic
+    #   language identification identifies the dominant language on each audio
+    #   channel.
+    #
+    #   Note that you must include either `LanguageCode` or `IdentifyLanguage`
+    #   in your request. If you include both parameters, your request fails.
+    #
+    #   Streaming language identification can't be combined with custom
+    #   language models or redaction.
     #
     # @option params [String] :language_options
-    #   An object containing a list of languages that might be present in your
-    #   audio.
+    #   Specify two or more language codes that represent the languages you
+    #   think may be present in your media; including more than five is not
+    #   recommended. If you're unsure what languages are present, do not
+    #   include this parameter.
     #
-    #   You must provide two or more language codes to help Amazon Transcribe
-    #   identify the correct language of your media stream with the highest
-    #   possible accuracy. You can only select one variant per language; for
-    #   example, you can't include both `en-US` and `en-UK` in the same
-    #   request.
+    #   Including language options can improve the accuracy of language
+    #   identification.
     #
-    #   You can only use this parameter if you've set `IdentifyLanguage` to
-    #   `true`in your request.
+    #   If you include `LanguageOptions` in your request, you must also
+    #   include `IdentifyLanguage`.
+    #
+    #   For a list of languages supported with Amazon Transcribe streaming,
+    #   refer to the [Supported languages][1] table.
+    #
+    #   You can only include one language dialect per language per stream. For
+    #   example, you cannot include `en-US` and `en-AU` in the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [String] :preferred_language
-    #   Optional. From the subset of languages codes you provided for
-    #   `LanguageOptions`, you can select one preferred language for your
-    #   transcription.
+    #   Specify a preferred language from the subset of languages codes you
+    #   specified in `LanguageOptions`.
     #
-    #   You can only use this parameter if you've set `IdentifyLanguage` to
-    #   `true`in your request.
+    #   You can only use this parameter if you've included `IdentifyLanguage`
+    #   and `LanguageOptions` in your request.
     #
     # @option params [String] :vocabulary_names
-    #   The names of the custom vocabularies you want to use with your
-    #   transcription.
+    #   Specify the names of the custom vocabularies that you want to use when
+    #   processing your transcription. Note that vocabulary names are case
+    #   sensitive.
     #
-    #   Note that if the custom vocabularies you specify are in languages that
-    #   don't match the language identified in your media, your job fails.
+    #   If none of the languages of the specified custom vocabularies match
+    #   the language identified in your media, your job fails.
     #
-    #   This operation is only intended for use in conjunction with the
-    #   `IdentifyLanguage` operation. If you're not using `IdentifyLanguage`
-    #   in your request and want to use a custom vocabulary with your
-    #   transcription, use the `VocabularyName` operation instead.
+    #   This parameter is only intended for use **with** the
+    #   `IdentifyLanguage` parameter. If you're **not** including
+    #   `IdentifyLanguage` in your request and want to use a custom vocabulary
+    #   with your transcription, use the `VocabularyName` parameter instead.
+    #
+    #   For more information, see [Custom vocabularies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     #
     # @option params [String] :vocabulary_filter_names
-    #   The names of the vocabulary filters you want to use with your
-    #   transcription.
+    #   Specify the names of the custom vocabulary filters that you want to
+    #   use when processing your transcription. Note that vocabulary filter
+    #   names are case sensitive.
     #
-    #   Note that if the vocabulary filters you specify are in languages that
-    #   don't match the language identified in your media, your job fails.
+    #   If none of the languages of the specified custom vocabulary filters
+    #   match the language identified in your media, your job fails.
     #
-    #   This operation is only intended for use in conjunction with the
-    #   `IdentifyLanguage` operation. If you're not using `IdentifyLanguage`
-    #   in your request and want to use a vocabulary filter with your
-    #   transcription, use the `VocabularyFilterName` operation instead.
+    #   This parameter is only intended for use **with** the
+    #   `IdentifyLanguage` parameter. If you're **not** including
+    #   `IdentifyLanguage` in your request and want to use a custom vocabulary
+    #   filter with your transcription, use the `VocabularyFilterName`
+    #   parameter instead.
+    #
+    #   For more information, see [Using vocabulary filtering with unwanted
+    #   words][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
     #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -837,7 +1037,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_stream_transcription({
-    #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #     vocabulary_name: "VocabularyName",
@@ -856,7 +1056,7 @@ module Aws::TranscribeStreamingService
     #     language_model_name: "ModelName",
     #     identify_language: false,
     #     language_options: "LanguageOptions",
-    #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
     #     vocabulary_names: "VocabularyNames",
     #     vocabulary_filter_names: "VocabularyFilterNames",
     #   })
@@ -868,7 +1068,7 @@ module Aws::TranscribeStreamingService
     # @example Response structure
     #
     #   resp.request_id #=> String
-    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   resp.language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
     #   resp.media_sample_rate_hertz #=> Integer
     #   resp.media_encoding #=> String, one of "pcm", "ogg-opus", "flac"
     #   resp.vocabulary_name #=> String
@@ -902,9 +1102,9 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].entities[0].content #=> String
     #   event.transcript.results[0].alternatives[0].entities[0].confidence #=> Float
     #   event.transcript.results[0].channel_id #=> String
-    #   event.transcript.results[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   event.transcript.results[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
     #   event.transcript.results[0].language_identification #=> Array
-    #   event.transcript.results[0].language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   event.transcript.results[0].language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
     #   event.transcript.results[0].language_identification[0].score #=> Float
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
@@ -935,7 +1135,7 @@ module Aws::TranscribeStreamingService
     #   resp.language_model_name #=> String
     #   resp.identify_language #=> Boolean
     #   resp.language_options #=> String
-    #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
     #   resp.vocabulary_names #=> String
     #   resp.vocabulary_filter_names #=> String
     #
@@ -982,7 +1182,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

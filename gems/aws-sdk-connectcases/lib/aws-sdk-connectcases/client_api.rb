@@ -177,6 +177,8 @@ module Aws::ConnectCases
     TemplateDescription = Shapes::StringShape.new(name: 'TemplateDescription')
     TemplateId = Shapes::StringShape.new(name: 'TemplateId')
     TemplateName = Shapes::StringShape.new(name: 'TemplateName')
+    TemplateStatus = Shapes::StringShape.new(name: 'TemplateStatus')
+    TemplateStatusFilters = Shapes::ListShape.new(name: 'TemplateStatusFilters')
     TemplateSummary = Shapes::StructureShape.new(name: 'TemplateSummary')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -324,6 +326,7 @@ module Aws::ConnectCases
     CreateTemplateRequest.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     CreateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
     CreateTemplateRequest.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
+    CreateTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, location_name: "status"))
     CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
 
     CreateTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
@@ -472,6 +475,7 @@ module Aws::ConnectCases
     GetTemplateResponse.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     GetTemplateResponse.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
     GetTemplateResponse.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
+    GetTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, required: true, location_name: "status"))
     GetTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetTemplateResponse.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
     GetTemplateResponse.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
@@ -560,6 +564,7 @@ module Aws::ConnectCases
     ListTemplatesRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     ListTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTemplatesRequest.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatusFilters, location: "querystring", location_name: "status"))
     ListTemplatesRequest.struct_class = Types::ListTemplatesRequest
 
     ListTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -684,7 +689,10 @@ module Aws::ConnectCases
     Tags.key = Shapes::ShapeRef.new(shape: String)
     Tags.value = Shapes::ShapeRef.new(shape: String)
 
+    TemplateStatusFilters.member = Shapes::ShapeRef.new(shape: TemplateStatus)
+
     TemplateSummary.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "name"))
+    TemplateSummary.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, required: true, location_name: "status"))
     TemplateSummary.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location_name: "templateArn"))
     TemplateSummary.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "templateId"))
     TemplateSummary.struct_class = Types::TemplateSummary
@@ -726,6 +734,7 @@ module Aws::ConnectCases
     UpdateTemplateRequest.add_member(:layout_configuration, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layoutConfiguration"))
     UpdateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "name"))
     UpdateTemplateRequest.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredFieldList, location_name: "requiredFields"))
+    UpdateTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TemplateStatus, location_name: "status"))
     UpdateTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
     UpdateTemplateRequest.struct_class = Types::UpdateTemplateRequest
 
@@ -1181,6 +1190,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_template, Seahorse::Model::Operation.new.tap do |o|

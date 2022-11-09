@@ -380,7 +380,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_contact({
-    #     contact_id: "String", # required
+    #     contact_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -562,6 +562,101 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Creates an Ephemeris with the specified `EphemerisData`.
+    #
+    # @option params [Boolean] :enabled
+    #   Whether to set the ephemeris status to `ENABLED` after validation.
+    #
+    #   Setting this to false will set the ephemeris status to `DISABLED`
+    #   after validation.
+    #
+    # @option params [Types::EphemerisData] :ephemeris
+    #   Ephemeris data.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expiration_time
+    #   An overall expiration time for the ephemeris in UTC, after which it
+    #   will become `EXPIRED`.
+    #
+    # @option params [String] :kms_key_arn
+    #   The ARN of a KMS key used to encrypt the ephemeris in Ground Station.
+    #
+    # @option params [required, String] :name
+    #   A name string associated with the ephemeris. Used as a human-readable
+    #   identifier for the ephemeris.
+    #
+    # @option params [Integer] :priority
+    #   Customer-provided priority score to establish the order in which
+    #   overlapping ephemerides should be used.
+    #
+    #   The default for customer-provided ephemeris priority is 1, and higher
+    #   numbers take precedence.
+    #
+    #   Priority must be 1 or greater
+    #
+    # @option params [required, String] :satellite_id
+    #   AWS Ground Station satellite ID for this ephemeris.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags assigned to an ephemeris.
+    #
+    # @return [Types::EphemerisIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EphemerisIdResponse#ephemeris_id #ephemeris_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ephemeris({
+    #     enabled: false,
+    #     ephemeris: {
+    #       oem: {
+    #         oem_data: "UnboundedString",
+    #         s3_object: {
+    #           bucket: "S3BucketName",
+    #           key: "S3ObjectKey",
+    #           version: "S3VersionId",
+    #         },
+    #       },
+    #       tle: {
+    #         s3_object: {
+    #           bucket: "S3BucketName",
+    #           key: "S3ObjectKey",
+    #           version: "S3VersionId",
+    #         },
+    #         tle_data: [
+    #           {
+    #             tle_line_1: "TleLineOne", # required
+    #             tle_line_2: "TleLineTwo", # required
+    #             valid_time_range: { # required
+    #               end_time: Time.now, # required
+    #               start_time: Time.now, # required
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     expiration_time: Time.now,
+    #     kms_key_arn: "KeyArn",
+    #     name: "SafeName", # required
+    #     priority: 1,
+    #     satellite_id: "Uuid", # required
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ephemeris_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateEphemeris AWS API Documentation
+    #
+    # @overload create_ephemeris(params = {})
+    # @param [Hash] params ({})
+    def create_ephemeris(params = {}, options = {})
+      req = build_request(:create_ephemeris, params)
+      req.send_request(options)
+    end
+
     # Creates a mission profile.
     #
     # `dataflowEdges` is a list of lists of strings. Each lower level list
@@ -643,7 +738,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_config({
-    #     config_id: "String", # required
+    #     config_id: "Uuid", # required
     #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #   })
     #
@@ -674,7 +769,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_dataflow_endpoint_group({
-    #     dataflow_endpoint_group_id: "String", # required
+    #     dataflow_endpoint_group_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -690,6 +785,34 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Deletes an ephemeris
+    #
+    # @option params [required, String] :ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #
+    # @return [Types::EphemerisIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EphemerisIdResponse#ephemeris_id #ephemeris_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ephemeris({
+    #     ephemeris_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ephemeris_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteEphemeris AWS API Documentation
+    #
+    # @overload delete_ephemeris(params = {})
+    # @param [Hash] params ({})
+    def delete_ephemeris(params = {}, options = {})
+      req = build_request(:delete_ephemeris, params)
+      req.send_request(options)
+    end
+
     # Deletes a mission profile.
     #
     # @option params [required, String] :mission_profile_id
@@ -702,7 +825,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_mission_profile({
-    #     mission_profile_id: "String", # required
+    #     mission_profile_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -743,7 +866,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_contact({
-    #     contact_id: "String", # required
+    #     contact_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -807,6 +930,60 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Describes an existing ephemeris.
+    #
+    # @option params [required, String] :ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #
+    # @return [Types::DescribeEphemerisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEphemerisResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeEphemerisResponse#enabled #enabled} => Boolean
+    #   * {Types::DescribeEphemerisResponse#ephemeris_id #ephemeris_id} => String
+    #   * {Types::DescribeEphemerisResponse#invalid_reason #invalid_reason} => String
+    #   * {Types::DescribeEphemerisResponse#name #name} => String
+    #   * {Types::DescribeEphemerisResponse#priority #priority} => Integer
+    #   * {Types::DescribeEphemerisResponse#satellite_id #satellite_id} => String
+    #   * {Types::DescribeEphemerisResponse#status #status} => String
+    #   * {Types::DescribeEphemerisResponse#supplied_data #supplied_data} => Types::EphemerisTypeDescription
+    #   * {Types::DescribeEphemerisResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ephemeris({
+    #     ephemeris_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.creation_time #=> Time
+    #   resp.enabled #=> Boolean
+    #   resp.ephemeris_id #=> String
+    #   resp.invalid_reason #=> String, one of "METADATA_INVALID", "TIME_RANGE_INVALID", "TRAJECTORY_INVALID", "KMS_KEY_INVALID", "VALIDATION_ERROR"
+    #   resp.name #=> String
+    #   resp.priority #=> Integer
+    #   resp.satellite_id #=> String
+    #   resp.status #=> String, one of "VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"
+    #   resp.supplied_data.oem.ephemeris_data #=> String
+    #   resp.supplied_data.oem.source_s3_object.bucket #=> String
+    #   resp.supplied_data.oem.source_s3_object.key #=> String
+    #   resp.supplied_data.oem.source_s3_object.version #=> String
+    #   resp.supplied_data.tle.ephemeris_data #=> String
+    #   resp.supplied_data.tle.source_s3_object.bucket #=> String
+    #   resp.supplied_data.tle.source_s3_object.key #=> String
+    #   resp.supplied_data.tle.source_s3_object.version #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeEphemeris AWS API Documentation
+    #
+    # @overload describe_ephemeris(params = {})
+    # @param [Hash] params ({})
+    def describe_ephemeris(params = {}, options = {})
+      req = build_request(:describe_ephemeris, params)
+      req.send_request(options)
+    end
+
     # Returns `Config` information.
     #
     # Only one `Config` response can be returned.
@@ -829,7 +1006,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_config({
-    #     config_id: "String", # required
+    #     config_id: "Uuid", # required
     #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #   })
     #
@@ -892,7 +1069,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_dataflow_endpoint_group({
-    #     dataflow_endpoint_group_id: "String", # required
+    #     dataflow_endpoint_group_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -983,7 +1160,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_mission_profile({
-    #     mission_profile_id: "String", # required
+    #     mission_profile_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -1018,6 +1195,7 @@ module Aws::GroundStation
     #
     # @return [Types::GetSatelliteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetSatelliteResponse#current_ephemeris #current_ephemeris} => Types::EphemerisMetaData
     #   * {Types::GetSatelliteResponse#ground_stations #ground_stations} => Array&lt;String&gt;
     #   * {Types::GetSatelliteResponse#norad_satellite_id #norad_satellite_id} => Integer
     #   * {Types::GetSatelliteResponse#satellite_arn #satellite_arn} => String
@@ -1026,11 +1204,15 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_satellite({
-    #     satellite_id: "String", # required
+    #     satellite_id: "Uuid", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.current_ephemeris.ephemeris_id #=> String
+    #   resp.current_ephemeris.epoch #=> Time
+    #   resp.current_ephemeris.name #=> String
+    #   resp.current_ephemeris.source #=> String, one of "CUSTOMER_PROVIDED", "SPACE_TRACK"
     #   resp.ground_stations #=> Array
     #   resp.ground_stations[0] #=> String
     #   resp.norad_satellite_id #=> Integer
@@ -1066,7 +1248,7 @@ module Aws::GroundStation
     #
     #   resp = client.list_configs({
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1093,7 +1275,7 @@ module Aws::GroundStation
     # `groundStation`, `missionprofileArn`, and `satelliteArn`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   End time of a contact.
+    #   End time of a contact in UTC.
     #
     # @option params [String] :ground_station
     #   Name of a ground station.
@@ -1112,7 +1294,7 @@ module Aws::GroundStation
     #   ARN of a satellite.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   Start time of a contact.
+    #   Start time of a contact in UTC.
     #
     # @option params [required, Array<String>] :status_list
     #   Status of a contact reservation.
@@ -1128,10 +1310,10 @@ module Aws::GroundStation
     #
     #   resp = client.list_contacts({
     #     end_time: Time.now, # required
-    #     ground_station: "String",
+    #     ground_station: "GroundStationName",
     #     max_results: 1,
     #     mission_profile_arn: "MissionProfileArn",
-    #     next_token: "String",
+    #     next_token: "PaginationToken",
     #     satellite_arn: "satelliteArn",
     #     start_time: Time.now, # required
     #     status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, AWS_FAILED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
@@ -1187,7 +1369,7 @@ module Aws::GroundStation
     #
     #   resp = client.list_dataflow_endpoint_groups({
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1203,6 +1385,71 @@ module Aws::GroundStation
     # @param [Hash] params ({})
     def list_dataflow_endpoint_groups(params = {}, options = {})
       req = build_request(:list_dataflow_endpoint_groups, params)
+      req.send_request(options)
+    end
+
+    # List existing ephemerides.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end time to list in UTC. The operation will return an ephemeris if
+    #   its expiration time is within the time range defined by the
+    #   `startTime` and `endTime`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of ephemerides to return.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @option params [required, String] :satellite_id
+    #   The AWS Ground Station satellite ID to list ephemeris for.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start time to list in UTC. The operation will return an ephemeris
+    #   if its expiration time is within the time range defined by the
+    #   `startTime` and `endTime`.
+    #
+    # @option params [Array<String>] :status_list
+    #   The list of ephemeris status to return.
+    #
+    # @return [Types::ListEphemeridesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEphemeridesResponse#ephemerides #ephemerides} => Array&lt;Types::EphemerisItem&gt;
+    #   * {Types::ListEphemeridesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ephemerides({
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     satellite_id: "Uuid", # required
+    #     start_time: Time.now, # required
+    #     status_list: ["VALIDATING"], # accepts VALIDATING, INVALID, ERROR, ENABLED, DISABLED, EXPIRED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ephemerides #=> Array
+    #   resp.ephemerides[0].creation_time #=> Time
+    #   resp.ephemerides[0].enabled #=> Boolean
+    #   resp.ephemerides[0].ephemeris_id #=> String
+    #   resp.ephemerides[0].name #=> String
+    #   resp.ephemerides[0].priority #=> Integer
+    #   resp.ephemerides[0].source_s3_object.bucket #=> String
+    #   resp.ephemerides[0].source_s3_object.key #=> String
+    #   resp.ephemerides[0].source_s3_object.version #=> String
+    #   resp.ephemerides[0].status #=> String, one of "VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListEphemerides AWS API Documentation
+    #
+    # @overload list_ephemerides(params = {})
+    # @param [Hash] params ({})
+    def list_ephemerides(params = {}, options = {})
+      req = build_request(:list_ephemerides, params)
       req.send_request(options)
     end
 
@@ -1229,8 +1476,8 @@ module Aws::GroundStation
     #
     #   resp = client.list_ground_stations({
     #     max_results: 1,
-    #     next_token: "String",
-    #     satellite_id: "String",
+    #     next_token: "PaginationToken",
+    #     satellite_id: "Uuid",
     #   })
     #
     # @example Response structure
@@ -1270,7 +1517,7 @@ module Aws::GroundStation
     #
     #   resp = client.list_mission_profiles({
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1311,13 +1558,17 @@ module Aws::GroundStation
     #
     #   resp = client.list_satellites({
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.next_token #=> String
     #   resp.satellites #=> Array
+    #   resp.satellites[0].current_ephemeris.ephemeris_id #=> String
+    #   resp.satellites[0].current_ephemeris.epoch #=> Time
+    #   resp.satellites[0].current_ephemeris.name #=> String
+    #   resp.satellites[0].current_ephemeris.source #=> String, one of "CUSTOMER_PROVIDED", "SPACE_TRACK"
     #   resp.satellites[0].ground_stations #=> Array
     #   resp.satellites[0].ground_stations[0] #=> String
     #   resp.satellites[0].norad_satellite_id #=> Integer
@@ -1345,7 +1596,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "String", # required
+    #     resource_arn: "AnyArn", # required
     #   })
     #
     # @example Response structure
@@ -1365,7 +1616,7 @@ module Aws::GroundStation
     # Reserves a contact using specified parameters.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   End time of a contact.
+    #   End time of a contact in UTC.
     #
     # @option params [required, String] :ground_station
     #   Name of a ground station.
@@ -1377,7 +1628,7 @@ module Aws::GroundStation
     #   ARN of a satellite
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   Start time of a contact.
+    #   Start time of a contact in UTC.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to a contact.
@@ -1390,7 +1641,7 @@ module Aws::GroundStation
     #
     #   resp = client.reserve_contact({
     #     end_time: Time.now, # required
-    #     ground_station: "String", # required
+    #     ground_station: "GroundStationName", # required
     #     mission_profile_arn: "MissionProfileArn", # required
     #     satellite_arn: "satelliteArn", # required
     #     start_time: Time.now, # required
@@ -1425,7 +1676,7 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_arn: "String", # required
+    #     resource_arn: "AnyArn", # required
     #     tags: { # required
     #       "String" => "String",
     #     },
@@ -1453,8 +1704,8 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_arn: "String", # required
-    #     tag_keys: ["String"], # required
+    #     resource_arn: "AnyArn", # required
+    #     tag_keys: ["UnboundedString"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UntagResource AWS API Documentation
@@ -1556,7 +1807,7 @@ module Aws::GroundStation
     #         enabled: false, # required
     #       },
     #     },
-    #     config_id: "String", # required
+    #     config_id: "Uuid", # required
     #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #     name: "SafeName", # required
     #   })
@@ -1573,6 +1824,54 @@ module Aws::GroundStation
     # @param [Hash] params ({})
     def update_config(params = {}, options = {})
       req = build_request(:update_config, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing ephemeris
+    #
+    # @option params [required, Boolean] :enabled
+    #   Whether the ephemeris is enabled or not. Changing this value will not
+    #   require the ephemeris to be re-validated.
+    #
+    # @option params [required, String] :ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #
+    # @option params [String] :name
+    #   A name string associated with the ephemeris. Used as a human-readable
+    #   identifier for the ephemeris.
+    #
+    # @option params [Integer] :priority
+    #   Customer-provided priority score to establish the order in which
+    #   overlapping ephemerides should be used.
+    #
+    #   The default for customer-provided ephemeris priority is 1, and higher
+    #   numbers take precedence.
+    #
+    #   Priority must be 1 or greater
+    #
+    # @return [Types::EphemerisIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EphemerisIdResponse#ephemeris_id #ephemeris_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ephemeris({
+    #     enabled: false, # required
+    #     ephemeris_id: "Uuid", # required
+    #     name: "SafeName",
+    #     priority: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ephemeris_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateEphemeris AWS API Documentation
+    #
+    # @overload update_ephemeris(params = {})
+    # @param [Hash] params ({})
+    def update_ephemeris(params = {}, options = {})
+      req = build_request(:update_ephemeris, params)
       req.send_request(options)
     end
 
@@ -1620,7 +1919,7 @@ module Aws::GroundStation
     #       ["ConfigArn"],
     #     ],
     #     minimum_viable_contact_duration_seconds: 1,
-    #     mission_profile_id: "String", # required
+    #     mission_profile_id: "Uuid", # required
     #     name: "SafeName",
     #     tracking_config_arn: "ConfigArn",
     #   })
@@ -1651,7 +1950,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

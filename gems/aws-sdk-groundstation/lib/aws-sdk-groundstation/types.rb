@@ -150,7 +150,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         contact_id: "String", # required
+    #         contact_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] contact_id
@@ -329,7 +329,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   End time of a contact.
+    #   End time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] error_message
@@ -367,7 +367,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Start time of a contact.
+    #   Start time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -541,6 +541,107 @@ module Aws::GroundStation
     #
     class CreateDataflowEndpointGroupRequest < Struct.new(
       :endpoint_details,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEphemerisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         ephemeris: {
+    #           oem: {
+    #             oem_data: "UnboundedString",
+    #             s3_object: {
+    #               bucket: "S3BucketName",
+    #               key: "S3ObjectKey",
+    #               version: "S3VersionId",
+    #             },
+    #           },
+    #           tle: {
+    #             s3_object: {
+    #               bucket: "S3BucketName",
+    #               key: "S3ObjectKey",
+    #               version: "S3VersionId",
+    #             },
+    #             tle_data: [
+    #               {
+    #                 tle_line_1: "TleLineOne", # required
+    #                 tle_line_2: "TleLineTwo", # required
+    #                 valid_time_range: { # required
+    #                   end_time: Time.now, # required
+    #                   start_time: Time.now, # required
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         expiration_time: Time.now,
+    #         kms_key_arn: "KeyArn",
+    #         name: "SafeName", # required
+    #         priority: 1,
+    #         satellite_id: "Uuid", # required
+    #         tags: {
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Whether to set the ephemeris status to `ENABLED` after validation.
+    #
+    #   Setting this to false will set the ephemeris status to `DISABLED`
+    #   after validation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ephemeris
+    #   Ephemeris data.
+    #   @return [Types::EphemerisData]
+    #
+    # @!attribute [rw] expiration_time
+    #   An overall expiration time for the ephemeris in UTC, after which it
+    #   will become `EXPIRED`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of a KMS key used to encrypt the ephemeris in Ground
+    #   Station.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name string associated with the ephemeris. Used as a
+    #   human-readable identifier for the ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Customer-provided priority score to establish the order in which
+    #   overlapping ephemerides should be used.
+    #
+    #   The default for customer-provided ephemeris priority is 1, and
+    #   higher numbers take precedence.
+    #
+    #   Priority must be 1 or greater
+    #   @return [Integer]
+    #
+    # @!attribute [rw] satellite_id
+    #   AWS Ground Station satellite ID for this ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to an ephemeris.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateEphemerisRequest AWS API Documentation
+    #
+    class CreateEphemerisRequest < Struct.new(
+      :enabled,
+      :ephemeris,
+      :expiration_time,
+      :kms_key_arn,
+      :name,
+      :priority,
+      :satellite_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -760,7 +861,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         config_id: "String", # required
+    #         config_id: "Uuid", # required
     #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #       }
     #
@@ -785,7 +886,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         dataflow_endpoint_group_id: "String", # required
+    #         dataflow_endpoint_group_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] dataflow_endpoint_group_id
@@ -800,11 +901,30 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEphemerisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ephemeris_id: "Uuid", # required
+    #       }
+    #
+    # @!attribute [rw] ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteEphemerisRequest AWS API Documentation
+    #
+    class DeleteEphemerisRequest < Struct.new(
+      :ephemeris_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteMissionProfileRequest
     #   data as a hash:
     #
     #       {
-    #         mission_profile_id: "String", # required
+    #         mission_profile_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] mission_profile_id
@@ -861,7 +981,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         contact_id: "String", # required
+    #         contact_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] contact_id
@@ -890,7 +1010,7 @@ module Aws::GroundStation
     #   @return [Array<Types::DataflowDetail>]
     #
     # @!attribute [rw] end_time
-    #   End time of a contact.
+    #   End time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] error_message
@@ -928,7 +1048,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Start time of a contact.
+    #   Start time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -951,6 +1071,90 @@ module Aws::GroundStation
       :region,
       :satellite_arn,
       :start_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEphemerisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ephemeris_id: "Uuid", # required
+    #       }
+    #
+    # @!attribute [rw] ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeEphemerisRequest AWS API Documentation
+    #
+    class DescribeEphemerisRequest < Struct.new(
+      :ephemeris_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] creation_time
+    #   The time the ephemeris was uploaded in UTC.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled
+    #   Whether or not the ephemeris is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_reason
+    #   Reason that an ephemeris failed validation. Only provided for
+    #   ephemerides with `INVALID` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name string associated with the ephemeris. Used as a
+    #   human-readable identifier for the ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Customer-provided priority score to establish the order in which
+    #   overlapping ephemerides should be used.
+    #
+    #   The default for customer-provided ephemeris priority is 1, and
+    #   higher numbers take precedence.
+    #
+    #   Priority must be 1 or greater
+    #   @return [Integer]
+    #
+    # @!attribute [rw] satellite_id
+    #   The AWS Ground Station satellite ID associated with ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplied_data
+    #   Supplied ephemeris data.
+    #   @return [Types::EphemerisTypeDescription]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to an ephemeris.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeEphemerisResponse AWS API Documentation
+    #
+    class DescribeEphemerisResponse < Struct.new(
+      :creation_time,
+      :enabled,
+      :ephemeris_id,
+      :invalid_reason,
+      :name,
+      :priority,
+      :satellite_id,
+      :status,
+      :supplied_data,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1059,7 +1263,8 @@ module Aws::GroundStation
     #   @return [Types::DataflowEndpoint]
     #
     # @!attribute [rw] security_details
-    #   Endpoint security details.
+    #   Endpoint security details including a list of subnets, a list of
+    #   security groups and a role to connect streams to instances.
     #   @return [Types::SecurityDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EndpointDetails AWS API Documentation
@@ -1069,6 +1274,178 @@ module Aws::GroundStation
       :security_details)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Ephemeris data.
+    #
+    # @note EphemerisData is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] oem
+    #   Ephemeris data in Orbit Ephemeris Message (OEM) format.
+    #   @return [Types::OEMEphemeris]
+    #
+    # @!attribute [rw] tle
+    #   Two-line element set (TLE) ephemeris.
+    #   @return [Types::TLEEphemeris]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EphemerisData AWS API Documentation
+    #
+    class EphemerisData < Struct.new(
+      :oem,
+      :tle,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Oem < EphemerisData; end
+      class Tle < EphemerisData; end
+      class Unknown < EphemerisData; end
+    end
+
+    # Description of ephemeris.
+    #
+    # @!attribute [rw] ephemeris_data
+    #   Supplied ephemeris data.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_object
+    #   Source S3 object used for the ephemeris.
+    #   @return [Types::S3Object]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EphemerisDescription AWS API Documentation
+    #
+    class EphemerisDescription < Struct.new(
+      :ephemeris_data,
+      :source_s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EphemerisIdResponse AWS API Documentation
+    #
+    class EphemerisIdResponse < Struct.new(
+      :ephemeris_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Ephemeris item.
+    #
+    # @!attribute [rw] creation_time
+    #   The time the ephemeris was uploaded in UTC.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled
+    #   Whether or not the ephemeris is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name string associated with the ephemeris. Used as a
+    #   human-readable identifier for the ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Customer-provided priority score to establish the order in which
+    #   overlapping ephemerides should be used.
+    #
+    #   The default for customer-provided ephemeris priority is 1, and
+    #   higher numbers take precedence.
+    #
+    #   Priority must be 1 or greater
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_s3_object
+    #   Source S3 object used for the ephemeris.
+    #   @return [Types::S3Object]
+    #
+    # @!attribute [rw] status
+    #   The status of the ephemeris.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EphemerisItem AWS API Documentation
+    #
+    class EphemerisItem < Struct.new(
+      :creation_time,
+      :enabled,
+      :ephemeris_id,
+      :name,
+      :priority,
+      :source_s3_object,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata describing a particular ephemeris.
+    #
+    # @!attribute [rw] ephemeris_id
+    #   UUID of a customer-provided ephemeris.
+    #
+    #   This field is not populated for default ephemerides from Space
+    #   Track.
+    #   @return [String]
+    #
+    # @!attribute [rw] epoch
+    #   The epoch of a default, ephemeris from Space Track in UTC.
+    #
+    #   This field is not populated for customer-provided ephemerides.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A name string associated with the ephemeris. Used as a
+    #   human-readable identifier for the ephemeris.
+    #
+    #   A name is only returned for customer-provider ephemerides that have
+    #   a name associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The `EphemerisSource` that generated a given ephemeris.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EphemerisMetaData AWS API Documentation
+    #
+    class EphemerisMetaData < Struct.new(
+      :ephemeris_id,
+      :epoch,
+      :name,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note EphemerisTypeDescription is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EphemerisTypeDescription corresponding to the set member.
+    #
+    # @!attribute [rw] oem
+    #   Description of ephemeris.
+    #   @return [Types::EphemerisDescription]
+    #
+    # @!attribute [rw] tle
+    #   Description of ephemeris.
+    #   @return [Types::EphemerisDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/EphemerisTypeDescription AWS API Documentation
+    #
+    class EphemerisTypeDescription < Struct.new(
+      :oem,
+      :tle,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Oem < EphemerisTypeDescription; end
+      class Tle < EphemerisTypeDescription; end
+      class Unknown < EphemerisTypeDescription; end
     end
 
     # Object that describes the frequency.
@@ -1140,7 +1517,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         config_id: "String", # required
+    #         config_id: "Uuid", # required
     #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #       }
     #
@@ -1202,7 +1579,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         dataflow_endpoint_group_id: "String", # required
+    #         dataflow_endpoint_group_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] dataflow_endpoint_group_id
@@ -1310,7 +1687,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         mission_profile_id: "String", # required
+    #         mission_profile_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] mission_profile_id
@@ -1391,7 +1768,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         satellite_id: "String", # required
+    #         satellite_id: "Uuid", # required
     #       }
     #
     # @!attribute [rw] satellite_id
@@ -1406,6 +1783,11 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @!attribute [rw] current_ephemeris
+    #   The current ephemeris being used to compute the trajectory of the
+    #   satellite.
+    #   @return [Types::EphemerisMetaData]
+    #
     # @!attribute [rw] ground_stations
     #   A list of ground stations to which the satellite is on-boarded.
     #   @return [Array<String>]
@@ -1425,6 +1807,7 @@ module Aws::GroundStation
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetSatelliteResponse AWS API Documentation
     #
     class GetSatelliteResponse < Struct.new(
+      :current_ephemeris,
       :ground_stations,
       :norad_satellite_id,
       :satellite_arn,
@@ -1479,7 +1862,7 @@ module Aws::GroundStation
     #
     #       {
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] max_results
@@ -1523,17 +1906,17 @@ module Aws::GroundStation
     #
     #       {
     #         end_time: Time.now, # required
-    #         ground_station: "String",
+    #         ground_station: "GroundStationName",
     #         max_results: 1,
     #         mission_profile_arn: "MissionProfileArn",
-    #         next_token: "String",
+    #         next_token: "PaginationToken",
     #         satellite_arn: "satelliteArn",
     #         start_time: Time.now, # required
     #         status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, AWS_FAILED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
     #       }
     #
     # @!attribute [rw] end_time
-    #   End time of a contact.
+    #   End time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] ground_station
@@ -1558,7 +1941,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Start time of a contact.
+    #   Start time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] status_list
@@ -1603,7 +1986,7 @@ module Aws::GroundStation
     #
     #       {
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] max_results
@@ -1644,13 +2027,83 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEphemeridesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         end_time: Time.now, # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         satellite_id: "Uuid", # required
+    #         start_time: Time.now, # required
+    #         status_list: ["VALIDATING"], # accepts VALIDATING, INVALID, ERROR, ENABLED, DISABLED, EXPIRED
+    #       }
+    #
+    # @!attribute [rw] end_time
+    #   The end time to list in UTC. The operation will return an ephemeris
+    #   if its expiration time is within the time range defined by the
+    #   `startTime` and `endTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of ephemerides to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] satellite_id
+    #   The AWS Ground Station satellite ID to list ephemeris for.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time to list in UTC. The operation will return an
+    #   ephemeris if its expiration time is within the time range defined by
+    #   the `startTime` and `endTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_list
+    #   The list of ephemeris status to return.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListEphemeridesRequest AWS API Documentation
+    #
+    class ListEphemeridesRequest < Struct.new(
+      :end_time,
+      :max_results,
+      :next_token,
+      :satellite_id,
+      :start_time,
+      :status_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ephemerides
+    #   List of ephemerides.
+    #   @return [Array<Types::EphemerisItem>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListEphemeridesResponse AWS API Documentation
+    #
+    class ListEphemeridesResponse < Struct.new(
+      :ephemerides,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListGroundStationsRequest
     #   data as a hash:
     #
     #       {
     #         max_results: 1,
-    #         next_token: "String",
-    #         satellite_id: "String",
+    #         next_token: "PaginationToken",
+    #         satellite_id: "Uuid",
     #       }
     #
     # @!attribute [rw] max_results
@@ -1699,7 +2152,7 @@ module Aws::GroundStation
     #
     #       {
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] max_results
@@ -1743,7 +2196,7 @@ module Aws::GroundStation
     #
     #       {
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] max_results
@@ -1786,7 +2239,7 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "String", # required
+    #         resource_arn: "AnyArn", # required
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -1854,12 +2307,44 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Ephemeris data in Orbit Ephemeris Message (OEM) format.
+    #
+    # @note When making an API call, you may pass OEMEphemeris
+    #   data as a hash:
+    #
+    #       {
+    #         oem_data: "UnboundedString",
+    #         s3_object: {
+    #           bucket: "S3BucketName",
+    #           key: "S3ObjectKey",
+    #           version: "S3VersionId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] oem_data
+    #   The data for an OEM ephemeris, supplied directly in the request
+    #   rather than through an S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object
+    #   Identifies the S3 object to be used as the ephemeris.
+    #   @return [Types::S3Object]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/OEMEphemeris AWS API Documentation
+    #
+    class OEMEphemeris < Struct.new(
+      :oem_data,
+      :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ReserveContactRequest
     #   data as a hash:
     #
     #       {
     #         end_time: Time.now, # required
-    #         ground_station: "String", # required
+    #         ground_station: "GroundStationName", # required
     #         mission_profile_arn: "MissionProfileArn", # required
     #         satellite_arn: "satelliteArn", # required
     #         start_time: Time.now, # required
@@ -1869,7 +2354,7 @@ module Aws::GroundStation
     #       }
     #
     # @!attribute [rw] end_time
-    #   End time of a contact.
+    #   End time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] ground_station
@@ -1885,7 +2370,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   Start time of a contact.
+    #   Start time of a contact in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -1935,6 +2420,39 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Object stored in S3 containing ephemeris data.
+    #
+    # @note When making an API call, you may pass S3Object
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3BucketName",
+    #         key: "S3ObjectKey",
+    #         version: "S3VersionId",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   An Amazon S3 Bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   An Amazon S3 key for the ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   For versioned S3 objects, the version to use for the ephemeris.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/S3Object AWS API Documentation
+    #
+    class S3Object < Struct.new(
+      :bucket,
+      :key,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an S3 recording `Config`.
     #
     # @note When making an API call, you may pass S3RecordingConfig
@@ -1975,7 +2493,7 @@ module Aws::GroundStation
     #   @return [String]
     #
     # @!attribute [rw] key_template
-    #   Template of the S3 key used.
+    #   Key template used for the S3 Recording Configuration
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/S3RecordingDetails AWS API Documentation
@@ -1988,6 +2506,11 @@ module Aws::GroundStation
     end
 
     # Item in a list of satellites.
+    #
+    # @!attribute [rw] current_ephemeris
+    #   The current ephemeris being used to compute the trajectory of the
+    #   satellite.
+    #   @return [Types::EphemerisMetaData]
     #
     # @!attribute [rw] ground_stations
     #   A list of ground stations to which the satellite is on-boarded.
@@ -2008,6 +2531,7 @@ module Aws::GroundStation
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/SatelliteListItem AWS API Documentation
     #
     class SatelliteListItem < Struct.new(
+      :current_ephemeris,
       :ground_stations,
       :norad_satellite_id,
       :satellite_arn,
@@ -2080,8 +2604,8 @@ module Aws::GroundStation
     # Dataflow details for the source side.
     #
     # @!attribute [rw] config_details
-    #   Additional details for a `Config`, if type is dataflow endpoint or
-    #   antenna demod decode.
+    #   Additional details for a `Config`, if type is `dataflow-endpoint` or
+    #   `antenna-downlink-demod-decode`
     #   @return [Types::ConfigDetails]
     #
     # @!attribute [rw] config_id
@@ -2159,11 +2683,88 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # Two-line element set (TLE) data.
+    #
+    # @note When making an API call, you may pass TLEData
+    #   data as a hash:
+    #
+    #       {
+    #         tle_line_1: "TleLineOne", # required
+    #         tle_line_2: "TleLineTwo", # required
+    #         valid_time_range: { # required
+    #           end_time: Time.now, # required
+    #           start_time: Time.now, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tle_line_1
+    #   First line of two-line element set (TLE) data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tle_line_2
+    #   Second line of two-line element set (TLE) data.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_time_range
+    #   The valid time range for the TLE. Gaps or overlap are not permitted.
+    #   @return [Types::TimeRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TLEData AWS API Documentation
+    #
+    class TLEData < Struct.new(
+      :tle_line_1,
+      :tle_line_2,
+      :valid_time_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Two-line element set (TLE) ephemeris.
+    #
+    # @note When making an API call, you may pass TLEEphemeris
+    #   data as a hash:
+    #
+    #       {
+    #         s3_object: {
+    #           bucket: "S3BucketName",
+    #           key: "S3ObjectKey",
+    #           version: "S3VersionId",
+    #         },
+    #         tle_data: [
+    #           {
+    #             tle_line_1: "TleLineOne", # required
+    #             tle_line_2: "TleLineTwo", # required
+    #             valid_time_range: { # required
+    #               end_time: Time.now, # required
+    #               start_time: Time.now, # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] s3_object
+    #   Identifies the S3 object to be used as the ephemeris.
+    #   @return [Types::S3Object]
+    #
+    # @!attribute [rw] tle_data
+    #   The data for a TLE ephemeris, supplied directly in the request
+    #   rather than through an S3 object.
+    #   @return [Array<Types::TLEData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TLEEphemeris AWS API Documentation
+    #
+    class TLEEphemeris < Struct.new(
+      :s3_object,
+      :tle_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "String", # required
+    #         resource_arn: "AnyArn", # required
     #         tags: { # required
     #           "String" => "String",
     #         },
@@ -2189,6 +2790,33 @@ module Aws::GroundStation
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # A time range with a start and end time.
+    #
+    # @note When making an API call, you may pass TimeRange
+    #   data as a hash:
+    #
+    #       {
+    #         end_time: Time.now, # required
+    #         start_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] end_time
+    #   Time in UTC at which the time range ends.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   Time in UTC at which the time range starts.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TimeRange AWS API Documentation
+    #
+    class TimeRange < Struct.new(
+      :end_time,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Object that determines whether tracking should be used during a
     # contact executed with this `Config` in the mission profile.
@@ -2216,8 +2844,8 @@ module Aws::GroundStation
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "String", # required
-    #         tag_keys: ["String"], # required
+    #         resource_arn: "AnyArn", # required
+    #         tag_keys: ["UnboundedString"], # required
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -2309,7 +2937,7 @@ module Aws::GroundStation
     #             enabled: false, # required
     #           },
     #         },
-    #         config_id: "String", # required
+    #         config_id: "Uuid", # required
     #         config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, antenna-uplink, dataflow-endpoint, tracking, uplink-echo, s3-recording
     #         name: "SafeName", # required
     #       }
@@ -2341,6 +2969,51 @@ module Aws::GroundStation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateEphemerisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         ephemeris_id: "Uuid", # required
+    #         name: "SafeName",
+    #         priority: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Whether the ephemeris is enabled or not. Changing this value will
+    #   not require the ephemeris to be re-validated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ephemeris_id
+    #   The AWS Ground Station ephemeris ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name string associated with the ephemeris. Used as a
+    #   human-readable identifier for the ephemeris.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   Customer-provided priority score to establish the order in which
+    #   overlapping ephemerides should be used.
+    #
+    #   The default for customer-provided ephemeris priority is 1, and
+    #   higher numbers take precedence.
+    #
+    #   Priority must be 1 or greater
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateEphemerisRequest AWS API Documentation
+    #
+    class UpdateEphemerisRequest < Struct.new(
+      :enabled,
+      :ephemeris_id,
+      :name,
+      :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateMissionProfileRequest
     #   data as a hash:
     #
@@ -2351,7 +3024,7 @@ module Aws::GroundStation
     #           ["ConfigArn"],
     #         ],
     #         minimum_viable_contact_duration_seconds: 1,
-    #         mission_profile_id: "String", # required
+    #         mission_profile_id: "Uuid", # required
     #         name: "SafeName",
     #         tracking_config_arn: "ConfigArn",
     #       }

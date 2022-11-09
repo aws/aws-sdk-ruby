@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-11-09)
+------------------
+
+* Feature - This release adds new fields SignInUrl, UserArn, and UserId to GetFederationToken response payload.
+
 1.81.0 (2022-10-31)
 ------------------
 

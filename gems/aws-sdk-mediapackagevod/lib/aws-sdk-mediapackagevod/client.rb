@@ -571,6 +571,7 @@ module Aws::MediaPackageVod
     #         },
     #       },
     #       include_encoder_configuration_in_segments: false,
+    #       include_iframe_only_stream: false,
     #       period_triggers: ["ADS"], # accepts ADS
     #       segment_duration_seconds: 1,
     #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
@@ -675,6 +676,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.include_encoder_configuration_in_segments #=> Boolean
+    #   resp.dash_package.include_iframe_only_stream #=> Boolean
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
@@ -952,6 +954,7 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.include_encoder_configuration_in_segments #=> Boolean
+    #   resp.dash_package.include_iframe_only_stream #=> Boolean
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
@@ -1150,6 +1153,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.url #=> String
     #   resp.packaging_configurations[0].dash_package.include_encoder_configuration_in_segments #=> Boolean
+    #   resp.packaging_configurations[0].dash_package.include_iframe_only_stream #=> Boolean
     #   resp.packaging_configurations[0].dash_package.period_triggers #=> Array
     #   resp.packaging_configurations[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.packaging_configurations[0].dash_package.segment_duration_seconds #=> Integer
@@ -1382,7 +1386,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

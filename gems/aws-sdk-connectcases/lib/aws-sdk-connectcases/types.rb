@@ -395,10 +395,16 @@ module Aws::ConnectCases
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
     # @!attribute [rw] domain_id
@@ -696,6 +702,7 @@ module Aws::ConnectCases
     #             field_id: "FieldId", # required
     #           },
     #         ],
+    #         status: "Active", # accepts Active, Inactive
     #       }
     #
     # @!attribute [rw] description
@@ -719,6 +726,10 @@ module Aws::ConnectCases
     #   successfully created with this template.
     #   @return [Array<Types::RequiredField>]
     #
+    # @!attribute [rw] status
+    #   The status of the template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CreateTemplateRequest AWS API Documentation
     #
     class CreateTemplateRequest < Struct.new(
@@ -726,7 +737,8 @@ module Aws::ConnectCases
       :domain_id,
       :layout_configuration,
       :name,
-      :required_fields)
+      :required_fields,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1466,6 +1478,10 @@ module Aws::ConnectCases
     #   successfully created with this template.
     #   @return [Array<Types::RequiredField>]
     #
+    # @!attribute [rw] status
+    #   The status of the template.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A map of of key-value pairs that represent tags on a resource. Tags
     #   are used to organize, track, or control access for this resource.
@@ -1486,6 +1502,7 @@ module Aws::ConnectCases
       :layout_configuration,
       :name,
       :required_fields,
+      :status,
       :tags,
       :template_arn,
       :template_id)
@@ -1921,6 +1938,7 @@ module Aws::ConnectCases
     #         domain_id: "DomainId", # required
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         status: ["Active"], # accepts Active, Inactive
     #       }
     #
     # @!attribute [rw] domain_id
@@ -1937,12 +1955,17 @@ module Aws::ConnectCases
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   A list of status values to filter on.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListTemplatesRequest AWS API Documentation
     #
     class ListTemplatesRequest < Struct.new(
       :domain_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2550,6 +2573,10 @@ module Aws::ConnectCases
     #   The template name.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the template.
+    #   @return [String]
+    #
     # @!attribute [rw] template_arn
     #   The Amazon Resource Name (ARN) of the template.
     #   @return [String]
@@ -2562,6 +2589,7 @@ module Aws::ConnectCases
     #
     class TemplateSummary < Struct.new(
       :name,
+      :status,
       :template_arn,
       :template_id)
       SENSITIVE = []
@@ -2782,6 +2810,7 @@ module Aws::ConnectCases
     #             field_id: "FieldId", # required
     #           },
     #         ],
+    #         status: "Active", # accepts Active, Inactive
     #         template_id: "TemplateId", # required
     #       }
     #
@@ -2806,6 +2835,10 @@ module Aws::ConnectCases
     #   successfully created with this template.
     #   @return [Array<Types::RequiredField>]
     #
+    # @!attribute [rw] status
+    #   The status of the template.
+    #   @return [String]
+    #
     # @!attribute [rw] template_id
     #   A unique identifier for the template.
     #   @return [String]
@@ -2818,6 +2851,7 @@ module Aws::ConnectCases
       :layout_configuration,
       :name,
       :required_fields,
+      :status,
       :template_id)
       SENSITIVE = []
       include Aws::Structure

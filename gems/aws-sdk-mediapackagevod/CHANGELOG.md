@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2022-11-09)
+------------------
+
+* Feature - This release adds "IncludeIframeOnlyStream" for Dash endpoints.
+
 1.38.0 (2022-10-25)
 ------------------
 

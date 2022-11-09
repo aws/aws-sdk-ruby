@@ -758,6 +758,9 @@ module Aws::Connect
     #   SDK populates this field. For more information about idempotency,
     #   see [Making retries safe with idempotent APIs][1].
     #
+    #   Pattern:
+    #   `^[a-f0-9]\{8\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{12\}$`
+    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
@@ -4630,10 +4633,25 @@ module Aws::Connect
     #   The credentials to use for federation.
     #   @return [Types::Credentials]
     #
+    # @!attribute [rw] sign_in_url
+    #   The URL to sign into the user's instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn
+    #   The Amazon Resource Name (ARN) of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenResponse AWS API Documentation
     #
     class GetFederationTokenResponse < Struct.new(
-      :credentials)
+      :credentials,
+      :sign_in_url,
+      :user_arn,
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8857,7 +8875,8 @@ module Aws::Connect
     #
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can find the
-    #   instanceId in the ARN of the instance.
+    #   instanceId in the ARN of the instance. You can provide the
+    #   `InstanceId`, or the entire ARN.
     #   @return [String]
     #
     # @!attribute [rw] replica_region

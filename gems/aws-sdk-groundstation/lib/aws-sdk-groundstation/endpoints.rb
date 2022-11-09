@@ -53,6 +53,20 @@ module Aws::GroundStation
       end
     end
 
+    class CreateEphemeris
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateMissionProfile
       def self.build(context)
         unless context.config.regional_endpoint
@@ -95,6 +109,20 @@ module Aws::GroundStation
       end
     end
 
+    class DeleteEphemeris
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteMissionProfile
       def self.build(context)
         unless context.config.regional_endpoint
@@ -110,6 +138,20 @@ module Aws::GroundStation
     end
 
     class DescribeContact
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeEphemeris
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -235,6 +277,20 @@ module Aws::GroundStation
       end
     end
 
+    class ListEphemerides
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListGroundStations
       def self.build(context)
         unless context.config.regional_endpoint
@@ -334,6 +390,20 @@ module Aws::GroundStation
     end
 
     class UpdateConfig
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::GroundStation::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateEphemeris
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

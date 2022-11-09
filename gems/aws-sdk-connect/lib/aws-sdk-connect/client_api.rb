@@ -671,6 +671,7 @@ module Aws::Connect
     UpdateUserPhoneConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserPhoneConfigRequest')
     UpdateUserRoutingProfileRequest = Shapes::StructureShape.new(name: 'UpdateUserRoutingProfileRequest')
     UpdateUserSecurityProfilesRequest = Shapes::StructureShape.new(name: 'UpdateUserSecurityProfilesRequest')
+    Url = Shapes::StringShape.new(name: 'Url')
     UrlReference = Shapes::StructureShape.new(name: 'UrlReference')
     UseCase = Shapes::StructureShape.new(name: 'UseCase')
     UseCaseId = Shapes::StringShape.new(name: 'UseCaseId')
@@ -1469,6 +1470,9 @@ module Aws::Connect
     GetFederationTokenRequest.struct_class = Types::GetFederationTokenRequest
 
     GetFederationTokenResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
+    GetFederationTokenResponse.add_member(:sign_in_url, Shapes::ShapeRef.new(shape: Url, location_name: "SignInUrl"))
+    GetFederationTokenResponse.add_member(:user_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "UserArn"))
+    GetFederationTokenResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "UserId"))
     GetFederationTokenResponse.struct_class = Types::GetFederationTokenResponse
 
     GetMetricDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
