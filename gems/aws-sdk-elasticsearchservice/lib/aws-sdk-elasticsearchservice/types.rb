@@ -318,6 +318,67 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for request parameters to the `AuthorizeVpcEndpointAccess`
+    # operation. Specifies the account to be permitted to manage VPC
+    # endpoints against the domain.
+    #
+    # @note When making an API call, you may pass AuthorizeVpcEndpointAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         account: "AWSAccount", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the OpenSearch Service domain to provide access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The account ID to grant access to.
+    #   @return [String]
+    #
+    class AuthorizeVpcEndpointAccessRequest < Struct.new(
+      :domain_name,
+      :account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `AuthorizeVpcEndpointAccess`
+    # operation. Contains the account ID and the type of the account being
+    # authorized to access the VPC endpoint.
+    #
+    # @!attribute [rw] authorized_principal
+    #   Information about the account or service that was provided access to
+    #   the domain.
+    #   @return [Types::AuthorizedPrincipal]
+    #
+    class AuthorizeVpcEndpointAccessResponse < Struct.new(
+      :authorized_principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an account or service that has access to an Amazon
+    # OpenSearch Service domain through the use of an interface VPC
+    # endpoint.
+    #
+    # @!attribute [rw] principal_type
+    #   The type of principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The IAM principal that is allowed access to the domain.
+    #   @return [String]
+    #
+    class AuthorizedPrincipal < Struct.new(
+      :principal_type,
+      :principal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies Auto-Tune type and Auto-Tune action details.
     #
     # @!attribute [rw] auto_tune_type
@@ -1201,6 +1262,56 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `CreateVpcEndpointRequest`
+    # operation.
+    #
+    # @note When making an API call, you may pass CreateVpcEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_arn: "DomainArn", # required
+    #         vpc_options: { # required
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to grant access to.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   Options to specify the subnets and security groups for the endpoint.
+    #   @return [Types::VPCOptions]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #   @return [String]
+    #
+    class CreateVpcEndpointRequest < Struct.new(
+      :domain_arn,
+      :vpc_options,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `CreateVpcEndpoint`
+    # operation. Contains the configuration and status of the VPC Endpoint
+    # being created.
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   Information about the newly created VPC endpoint.
+    #   @return [Types::VpcEndpoint]
+    #
+    class CreateVpcEndpointResponse < Struct.new(
+      :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `DeleteElasticsearchDomain`
     # operation. Specifies the name of the Elasticsearch domain that you
     # want to delete.
@@ -1335,6 +1446,40 @@ module Aws::ElasticsearchService
     #
     class DeletePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
+    #
+    # @note When making an API call, you may pass DeleteVpcEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_id: "VpcEndpointId", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint to be deleted.
+    #   @return [String]
+    #
+    class DeleteVpcEndpointRequest < Struct.new(
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `DeleteVpcEndpoint`
+    # operation. Contains the summarized detail of the VPC Endpoint being
+    # deleted.
+    #
+    # @!attribute [rw] vpc_endpoint_summary
+    #   Information about the deleted endpoint, including its current status
+    #   (`DELETING` or `DELETE_FAILED`).
+    #   @return [Types::VpcEndpointSummary]
+    #
+    class DeleteVpcEndpointResponse < Struct.new(
+      :vpc_endpoint_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1915,6 +2060,46 @@ module Aws::ElasticsearchService
     class DescribeReservedElasticsearchInstancesResponse < Struct.new(
       :next_token,
       :reserved_elasticsearch_instances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to the `DescribeVpcEndpoints`
+    # operation. Specifies the list of VPC endpoints to be described.
+    #
+    # @note When making an API call, you may pass DescribeVpcEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_ids: ["VpcEndpointId"], # required
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   The unique identifiers of the endpoints to get information about.
+    #   @return [Array<String>]
+    #
+    class DescribeVpcEndpointsRequest < Struct.new(
+      :vpc_endpoint_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `DescribeVpcEndpoints`
+    # operation. Returns a list containing configuration details and status
+    # of the VPC Endpoints as well as a list containing error responses of
+    # the endpoints that could not be described
+    #
+    # @!attribute [rw] vpc_endpoints
+    #   Information about each requested VPC endpoint.
+    #   @return [Array<Types::VpcEndpoint>]
+    #
+    # @!attribute [rw] vpc_endpoint_errors
+    #   Any errors associated with the request.
+    #   @return [Array<Types::VpcEndpointError>]
+    #
+    class DescribeVpcEndpointsResponse < Struct.new(
+      :vpc_endpoints,
+      :vpc_endpoint_errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3386,6 +3571,138 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Retrieves information about each principal that is allowed to access a
+    # given Amazon OpenSearch Service domain through the use of an interface
+    # VPC endpoint
+    #
+    # @note When making an API call, you may pass ListVpcEndpointAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the OpenSearch Service domain to retrieve access
+    #   information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    class ListVpcEndpointAccessRequest < Struct.new(
+      :domain_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `ListVpcEndpointAccess`
+    # operation. Returns a list of accounts id and account type authorized
+    # to manage VPC endpoints.
+    #
+    # @!attribute [rw] authorized_principal_list
+    #   List of `AuthorizedPrincipal` describing the details of the
+    #   permissions to manage VPC endpoints against the specified domain.
+    #   @return [Array<Types::AuthorizedPrincipal>]
+    #
+    # @!attribute [rw] next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    class ListVpcEndpointAccessResponse < Struct.new(
+      :authorized_principal_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to the `ListVpcEndpointsForDomain`
+    # operation. Specifies the domain whose VPC endpoints will be listed.
+    #
+    # @note When making an API call, you may pass ListVpcEndpointsForDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the ElasticSearch domain whose VPC endpoints are to be
+    #   listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    class ListVpcEndpointsForDomainRequest < Struct.new(
+      :domain_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `ListVpcEndpointsForDomain`
+    # operation. Returns a list containing summarized details of the VPC
+    # endpoints.
+    #
+    # @!attribute [rw] vpc_endpoint_summary_list
+    #   Provides list of `VpcEndpointSummary` summarizing details of the VPC
+    #   endpoints.
+    #   @return [Array<Types::VpcEndpointSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Information about each endpoint associated with the domain.
+    #   @return [String]
+    #
+    class ListVpcEndpointsForDomainResponse < Struct.new(
+      :vpc_endpoint_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for request parameters to the `ListVpcEndpoints` operation.
+    #
+    # @note When making an API call, you may pass ListVpcEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    class ListVpcEndpointsRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `ListVpcEndpoints` operation.
+    # Returns a list containing summarized details of the VPC endpoints.
+    #
+    # @!attribute [rw] vpc_endpoint_summary_list
+    #   Information about each endpoint.
+    #   @return [Array<Types::VpcEndpointSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    class ListVpcEndpointsResponse < Struct.new(
+      :vpc_endpoint_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Log Publishing option that is set for given domain.
     # Attributes and their details: * CloudWatchLogsLogGroupArn: ARN of the
     # Cloudwatch log group to which
@@ -3979,6 +4296,37 @@ module Aws::ElasticsearchService
     # Gives http status code of 400.
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # Revokes access to an Amazon OpenSearch Service domain that was
+    # provided through an interface VPC endpoint.
+    #
+    # @note When making an API call, you may pass RevokeVpcEndpointAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         account: "AWSAccount", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the OpenSearch Service domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] account
+    #   The account ID to revoke access from.
+    #   @return [String]
+    #
+    class RevokeVpcEndpointAccessRequest < Struct.new(
+      :domain_name,
+      :account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for response parameters to the `RevokeVpcEndpointAccess`
+    # operation. The response body for this operation is empty.
+    #
+    class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure; end
 
     # Specifies the SAML Identity Provider's information.
     #
@@ -4643,6 +4991,47 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
+    #
+    # @note When making an API call, you may pass UpdateVpcEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_endpoint_id: "VpcEndpointId", # required
+    #         vpc_options: { # required
+    #           subnet_ids: ["String"],
+    #           security_group_ids: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   Unique identifier of the VPC endpoint to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   The security groups and/or subnets to add, remove, or modify.
+    #   @return [Types::VPCOptions]
+    #
+    class UpdateVpcEndpointRequest < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration and status of the VPC endpoint being
+    # updated.
+    #
+    # @!attribute [rw] vpc_endpoint
+    #   The endpoint to be updated.
+    #   @return [Types::VpcEndpoint]
+    #
+    class UpdateVpcEndpointResponse < Struct.new(
+      :vpc_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for request parameters to ` UpgradeElasticsearchDomain `
     # operation.
     #
@@ -4874,6 +5263,98 @@ module Aws::ElasticsearchService
     # code of 400.
     #
     class ValidationException < Aws::EmptyStructure; end
+
+    # The connection endpoint for connecting to an Amazon OpenSearch Service
+    # domain through a proxy.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_owner
+    #   The creator of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the domain associated with the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_options
+    #   Options to specify the subnets and security groups for an Amazon
+    #   OpenSearch Service VPC endpoint.
+    #   @return [Types::VPCDerivedInfo]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The connection endpoint ID for connecting to the domain.
+    #   @return [String]
+    #
+    class VpcEndpoint < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_endpoint_owner,
+      :domain_arn,
+      :vpc_options,
+      :status,
+      :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Error information when attempting to describe an Amazon OpenSearch
+    # Service-managed VPC endpoint.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The code associated with the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    class VpcEndpointError < Struct.new(
+      :vpc_endpoint_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for an Amazon OpenSearch Service-managed VPC
+    # endpoint.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The unique identifier of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_owner
+    #   The creator of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the domain associated with the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint.
+    #   @return [String]
+    #
+    class VpcEndpointSummary < Struct.new(
+      :vpc_endpoint_id,
+      :vpc_endpoint_owner,
+      :domain_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies the zone awareness configuration for the domain cluster,
     # such as the number of availability zones.

@@ -5928,7 +5928,7 @@ module Aws::EC2
     #     dry_run: false,
     #     client_token: "String",
     #     spot_options: {
-    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
+    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized, price-capacity-optimized
     #       maintenance_strategies: {
     #         capacity_rebalance: {
     #           replacement_strategy: "launch", # accepts launch, launch-before-terminate
@@ -20379,7 +20379,7 @@ module Aws::EC2
     #   resp.fleets[0].valid_from #=> Time
     #   resp.fleets[0].valid_until #=> Time
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
-    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized", "capacity-optimized-prioritized"
+    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized", "capacity-optimized-prioritized", "price-capacity-optimized"
     #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch", "launch-before-terminate"
     #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.termination_delay #=> Integer
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
@@ -29694,7 +29694,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs #=> Array
     #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized", "capacityOptimizedPrioritized"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized", "capacityOptimizedPrioritized", "priceCapacityOptimized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch", "launch-before-terminate"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.termination_delay #=> Integer
@@ -47845,7 +47845,7 @@ module Aws::EC2
     #   resp = client.request_spot_fleet({
     #     dry_run: false,
     #     spot_fleet_request_config: { # required
-    #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized
+    #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized, priceCapacityOptimized
     #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #       spot_maintenance_strategies: {
     #         capacity_rebalance: {
@@ -52578,7 +52578,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.348.0'
+      context[:gem_version] = '1.349.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

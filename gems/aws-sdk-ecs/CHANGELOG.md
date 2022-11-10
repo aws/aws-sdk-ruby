@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2022-11-10)
+------------------
+
+* Feature - This release adds support for task scale-in protection with updateTaskProtection and getTaskProtection APIs. UpdateTaskProtection API can be used to protect a service managed task from being terminated by scale-in events and getTaskProtection API to get the scale-in protection status of a task.
+
 1.104.0 (2022-10-25)
 ------------------
 

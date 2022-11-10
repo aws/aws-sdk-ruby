@@ -3923,6 +3923,72 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Retrieves the protection status of tasks in an Amazon ECS service.
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task sets exist in.
+    #
+    # @option params [Array<String>] :tasks
+    #   A list of up to 100 task IDs or full ARN entries.
+    #
+    # @return [Types::GetTaskProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTaskProtectionResponse#protected_tasks #protected_tasks} => Array&lt;Types::ProtectedTask&gt;
+    #   * {Types::GetTaskProtectionResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To get the protection status of a task
+    #
+    #   # In this example, we get the protection status for a single task.
+    #
+    #   resp = client.get_task_protection({
+    #     cluster: "test-task-protection", 
+    #     tasks: [
+    #       "b8b1cf532d0e46ba8d44a40d1de16772", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     protected_tasks: [
+    #       {
+    #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
+    #         protection_enabled: true, 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_task_protection({
+    #     cluster: "String", # required
+    #     tasks: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protected_tasks #=> Array
+    #   resp.protected_tasks[0].task_arn #=> String
+    #   resp.protected_tasks[0].protection_enabled #=> Boolean
+    #   resp.protected_tasks[0].expiration_date #=> Time
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GetTaskProtection AWS API Documentation
+    #
+    # @overload get_task_protection(params = {})
+    # @param [Hash] params ({})
+    def get_task_protection(params = {}, options = {})
+      req = build_request(:get_task_protection, params)
+      req.send_request(options)
+    end
+
     # Lists the account settings for a specified principal.
     #
     # @option params [String] :name
@@ -8679,6 +8745,178 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Updates the protection status of a task. You can set
+    # `protectionEnabled` to `true` to protect your task from termination
+    # during scale-in events from [Service Autoscaling][1] or
+    # [deployments][2].
+    #
+    # Task-protection, by default, expires after 2 hours at which point
+    # Amazon ECS unsets the `protectionEnabled` property making the task
+    # eligible for termination by a subsequent scale-in event.
+    #
+    # You can specify a custom expiration period for task protection from 1
+    # minute to up to 2,880 minutes (48 hours). To specify the custom
+    # expiration period, set the `expiresInMinutes` property. The
+    # `expiresInMinutes` property is always reset when you invoke this
+    # operation for a task that already has `protectionEnabled` set to
+    # `true`. You can keep extending the protection expiration period of a
+    # task by invoking this operation repeatedly.
+    #
+    # To learn more about Amazon ECS task protection, see [Task scale-in
+    # protection][3] in the *Amazon Elastic Container Service Developer
+    # Guide*.
+    #
+    # <note markdown="1"> This operation is only supported for tasks belonging to an Amazon ECS
+    # service. Invoking this operation for a standalone task will result in
+    # an `TASK_NOT_VALID` failure. For more information, see [API failure
+    # reasons][4].
+    #
+    #  </note>
+    #
+    # If you prefer to set task protection from within the container, we
+    # recommend using the [Amazon ECS container agent endpoint][5].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-endpoint.html
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service that the task sets exist in.
+    #
+    # @option params [required, Array<String>] :tasks
+    #   A list of up to 10 task IDs or full ARN entries.
+    #
+    # @option params [required, Boolean] :protection_enabled
+    #   Specify `true` to mark a task for protection and `false` to unset
+    #   protection, making it eligible for termination.
+    #
+    # @option params [Integer] :expires_in_minutes
+    #   If you set `protectionEnabled` to `true`, you can specify the duration
+    #   for task protection in minutes. You can specify a value from 1 minute
+    #   to up to 2,880 minutes (48 hours). During this time, your task will
+    #   not be terminated by scale-in events from Service Auto Scaling or
+    #   deployments. After this time period lapses, `protectionEnabled` will
+    #   be reset to `false`.
+    #
+    #   If you don’t specify the time, then the task is automatically
+    #   protected for 120 minutes (2 hours).
+    #
+    # @return [Types::UpdateTaskProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTaskProtectionResponse#protected_tasks #protected_tasks} => Array&lt;Types::ProtectedTask&gt;
+    #   * {Types::UpdateTaskProtectionResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    #
+    # @example Example: To set task scale-in protection for a task for 60 minutes
+    #
+    #   # This example enables scale-in protection for a task for 60 minutes.
+    #
+    #   resp = client.update_task_protection({
+    #     cluster: "test-task-protection", 
+    #     expires_in_minutes: 60, 
+    #     protection_enabled: true, 
+    #     tasks: [
+    #       "b8b1cf532d0e46ba8d44a40d1de16772", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     protected_tasks: [
+    #       {
+    #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
+    #         protection_enabled: true, 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To set task scale-in protection for the default time period in minutes
+    #
+    #   # This example enables task scale-in protection for a task, without specifying the expiresInMinutes parameter, for the
+    #   # default protection period of 120 minutes.
+    #
+    #   resp = client.update_task_protection({
+    #     cluster: "test-task-protection", 
+    #     protection_enabled: true, 
+    #     tasks: [
+    #       "b8b1cf532d0e46ba8d44a40d1de16772", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     protected_tasks: [
+    #       {
+    #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
+    #         protection_enabled: true, 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To remove task scale-in protection
+    #
+    #   # This example removes scale-in protection for a task.
+    #
+    #   resp = client.update_task_protection({
+    #     cluster: "test-task-protection", 
+    #     protection_enabled: false, 
+    #     tasks: [
+    #       "b8b1cf532d0e46ba8d44a40d1de16772", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     protected_tasks: [
+    #       {
+    #         protection_enabled: false, 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_protection({
+    #     cluster: "String", # required
+    #     tasks: ["String"], # required
+    #     protection_enabled: false, # required
+    #     expires_in_minutes: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.protected_tasks #=> Array
+    #   resp.protected_tasks[0].task_arn #=> String
+    #   resp.protected_tasks[0].protection_enabled #=> Boolean
+    #   resp.protected_tasks[0].expiration_date #=> Time
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskProtection AWS API Documentation
+    #
+    # @overload update_task_protection(params = {})
+    # @param [Hash] params ({})
+    def update_task_protection(params = {}, options = {})
+      req = build_request(:update_task_protection, params)
+      req.send_request(options)
+    end
+
     # Modifies a task set. This is used when a service uses the `EXTERNAL`
     # deployment controller type. For more information, see [Amazon ECS
     # Deployment Types][1] in the *Amazon Elastic Container Service
@@ -8787,7 +9025,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

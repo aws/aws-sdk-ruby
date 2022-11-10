@@ -5346,6 +5346,58 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTaskProtectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         tasks: ["String"],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service that the task sets exist in.
+    #   @return [String]
+    #
+    # @!attribute [rw] tasks
+    #   A list of up to 100 task IDs or full ARN entries.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GetTaskProtectionRequest AWS API Documentation
+    #
+    class GetTaskProtectionRequest < Struct.new(
+      :cluster,
+      :tasks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protected_tasks
+    #   A list of tasks with the following information.
+    #
+    #   * `taskArn`\: The task ARN.
+    #
+    #   * `protectionEnabled`\: The protection status of the task. If
+    #     scale-in protection is enabled for a task, the value is `true`.
+    #     Otherwise, it is `false`.
+    #
+    #   * `expirationDate`\: The epoch time when protection for the task
+    #     will expire.
+    #   @return [Array<Types::ProtectedTask>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GetTaskProtectionResponse AWS API Documentation
+    #
+    class GetTaskProtectionResponse < Struct.new(
+      :protected_tasks,
+      :failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a container health check. Health check
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
@@ -7466,6 +7518,33 @@ module Aws::ECS
       :container_port,
       :host_port,
       :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the protection status details for a task. You
+    # can set the protection status with the UpdateTaskProtection API and
+    # get the status of tasks with the GetTaskProtection API.
+    #
+    # @!attribute [rw] task_arn
+    #   The task ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] protection_enabled
+    #   The protection status of the task. If scale-in protection is enabled
+    #   for a task, the value is `true`. Otherwise, it is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expiration_date
+    #   The epoch time when protection for the task will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ProtectedTask AWS API Documentation
+    #
+    class ProtectedTask < Struct.new(
+      :task_arn,
+      :protection_enabled,
+      :expiration_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12306,6 +12385,79 @@ module Aws::ECS
     #
     class UpdateServiceResponse < Struct.new(
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTaskProtectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         tasks: ["String"], # required
+    #         protection_enabled: false, # required
+    #         expires_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service that the task sets exist in.
+    #   @return [String]
+    #
+    # @!attribute [rw] tasks
+    #   A list of up to 10 task IDs or full ARN entries.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] protection_enabled
+    #   Specify `true` to mark a task for protection and `false` to unset
+    #   protection, making it eligible for termination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expires_in_minutes
+    #   If you set `protectionEnabled` to `true`, you can specify the
+    #   duration for task protection in minutes. You can specify a value
+    #   from 1 minute to up to 2,880 minutes (48 hours). During this time,
+    #   your task will not be terminated by scale-in events from Service
+    #   Auto Scaling or deployments. After this time period lapses,
+    #   `protectionEnabled` will be reset to `false`.
+    #
+    #   If you don’t specify the time, then the task is automatically
+    #   protected for 120 minutes (2 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskProtectionRequest AWS API Documentation
+    #
+    class UpdateTaskProtectionRequest < Struct.new(
+      :cluster,
+      :tasks,
+      :protection_enabled,
+      :expires_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protected_tasks
+    #   A list of tasks with the following information.
+    #
+    #   * `taskArn`\: The task ARN.
+    #
+    #   * `protectionEnabled`\: The protection status of the task. If
+    #     scale-in protection is enabled for a task, the value is `true`.
+    #     Otherwise, it is `false`.
+    #
+    #   * `expirationDate`\: The epoch time when protection for the task
+    #     will expire.
+    #   @return [Array<Types::ProtectedTask>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskProtectionResponse AWS API Documentation
+    #
+    class UpdateTaskProtectionResponse < Struct.new(
+      :protected_tasks,
+      :failures)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -151,6 +151,8 @@ module Aws::ECS
     FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
     FirelensConfigurationOptionsMap = Shapes::MapShape.new(name: 'FirelensConfigurationOptionsMap')
     FirelensConfigurationType = Shapes::StringShape.new(name: 'FirelensConfigurationType')
+    GetTaskProtectionRequest = Shapes::StructureShape.new(name: 'GetTaskProtectionRequest')
+    GetTaskProtectionResponse = Shapes::StructureShape.new(name: 'GetTaskProtectionResponse')
     GpuIds = Shapes::ListShape.new(name: 'GpuIds')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
@@ -234,6 +236,8 @@ module Aws::ECS
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
     PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
+    ProtectedTask = Shapes::StructureShape.new(name: 'ProtectedTask')
+    ProtectedTasks = Shapes::ListShape.new(name: 'ProtectedTasks')
     ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
     ProxyConfigurationProperties = Shapes::ListShape.new(name: 'ProxyConfigurationProperties')
     ProxyConfigurationType = Shapes::StringShape.new(name: 'ProxyConfigurationType')
@@ -355,6 +359,8 @@ module Aws::ECS
     UpdateServicePrimaryTaskSetResponse = Shapes::StructureShape.new(name: 'UpdateServicePrimaryTaskSetResponse')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
+    UpdateTaskProtectionRequest = Shapes::StructureShape.new(name: 'UpdateTaskProtectionRequest')
+    UpdateTaskProtectionResponse = Shapes::StructureShape.new(name: 'UpdateTaskProtectionResponse')
     UpdateTaskSetRequest = Shapes::StructureShape.new(name: 'UpdateTaskSetRequest')
     UpdateTaskSetResponse = Shapes::StructureShape.new(name: 'UpdateTaskSetResponse')
     VersionInfo = Shapes::StructureShape.new(name: 'VersionInfo')
@@ -907,6 +913,14 @@ module Aws::ECS
     FirelensConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
     FirelensConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
 
+    GetTaskProtectionRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    GetTaskProtectionRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: StringList, location_name: "tasks"))
+    GetTaskProtectionRequest.struct_class = Types::GetTaskProtectionRequest
+
+    GetTaskProtectionResponse.add_member(:protected_tasks, Shapes::ShapeRef.new(shape: ProtectedTasks, location_name: "protectedTasks"))
+    GetTaskProtectionResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    GetTaskProtectionResponse.struct_class = Types::GetTaskProtectionResponse
+
     GpuIds.member = Shapes::ShapeRef.new(shape: String)
 
     HealthCheck.add_member(:command, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "command"))
@@ -1158,6 +1172,13 @@ module Aws::ECS
     PortMapping.struct_class = Types::PortMapping
 
     PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)
+
+    ProtectedTask.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
+    ProtectedTask.add_member(:protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "protectionEnabled"))
+    ProtectedTask.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
+    ProtectedTask.struct_class = Types::ProtectedTask
+
+    ProtectedTasks.member = Shapes::ShapeRef.new(shape: ProtectedTask)
 
     ProxyConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ProxyConfigurationType, location_name: "type"))
     ProxyConfiguration.add_member(:container_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerName"))
@@ -1667,6 +1688,16 @@ module Aws::ECS
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     UpdateServiceResponse.struct_class = Types::UpdateServiceResponse
 
+    UpdateTaskProtectionRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    UpdateTaskProtectionRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "tasks"))
+    UpdateTaskProtectionRequest.add_member(:protection_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "protectionEnabled"))
+    UpdateTaskProtectionRequest.add_member(:expires_in_minutes, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "expiresInMinutes"))
+    UpdateTaskProtectionRequest.struct_class = Types::UpdateTaskProtectionRequest
+
+    UpdateTaskProtectionResponse.add_member(:protected_tasks, Shapes::ShapeRef.new(shape: ProtectedTasks, location_name: "protectedTasks"))
+    UpdateTaskProtectionResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    UpdateTaskProtectionResponse.struct_class = Types::UpdateTaskProtectionResponse
+
     UpdateTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     UpdateTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
     UpdateTaskSetRequest.add_member(:task_set, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskSet"))
@@ -1982,6 +2013,21 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotConnectedException)
+      end)
+
+      api.add_operation(:get_task_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTaskProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTaskProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTaskProtectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:list_account_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2401,6 +2447,21 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_task_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTaskProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTaskProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTaskProtectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:update_task_set, Seahorse::Model::Operation.new.tap do |o|

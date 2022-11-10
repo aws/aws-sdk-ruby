@@ -816,6 +816,13 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group. This name must be unique per
     #   Region per account.
     #
+    #   The name can contain any ASCII character 33 to 126 including most
+    #   punctuation characters, digits, and upper and lowercased letters.
+    #
+    #   <note markdown="1"> You cannot use a colon (:) in the name.
+    #
+    #    </note>
+    #
     # @option params [String] :launch_configuration_name
     #   The name of the launch configuration to use to launch instances.
     #
@@ -945,14 +952,15 @@ module Aws::AutoScaling
     #   into service and marking it unhealthy due to a failed Elastic Load
     #   Balancing or custom health check. This is useful if your instances do
     #   not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Health check grace
-    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   `InService` state. For more information, see [Set the health check
+    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #   Default: `0` seconds
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     #
     # @option params [String] :placement_group
     #   The name of the placement group into which to launch your instances.
@@ -6306,12 +6314,13 @@ module Aws::AutoScaling
     #   into service and marking it unhealthy due to a failed Elastic Load
     #   Balancing or custom health check. This is useful if your instances do
     #   not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Health check grace
-    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   `InService` state. For more information, see [Set the health check
+    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     #
     # @option params [String] :placement_group
     #   The name of an existing placement group into which to launch your
@@ -6582,7 +6591,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

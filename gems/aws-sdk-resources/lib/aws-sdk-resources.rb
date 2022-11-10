@@ -290,6 +290,7 @@ module Aws
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
   autoload :SagemakerEdgeManager, 'aws-sdk-sagemakeredgemanager'
   autoload :SavingsPlans, 'aws-sdk-savingsplans'
+  autoload :Scheduler, 'aws-sdk-scheduler'
   autoload :Schemas, 'aws-sdk-schemas'
   autoload :SecretsManager, 'aws-sdk-secretsmanager'
   autoload :SecurityHub, 'aws-sdk-securityhub'

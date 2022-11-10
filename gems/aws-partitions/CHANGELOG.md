@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.659.0 (2022-11-10)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Scheduler`.
+
 1.658.0 (2022-11-08)
 ------------------
 

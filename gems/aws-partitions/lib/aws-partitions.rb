@@ -527,6 +527,7 @@ module Aws
             'SageMakerRuntime' => 'runtime.sagemaker',
             'SagemakerEdgeManager' => 'edge.sagemaker',
             'SavingsPlans' => 'savingsplans',
+            'Scheduler' => 'scheduler',
             'Schemas' => 'schemas',
             'SecretsManager' => 'secretsmanager',
             'SecurityHub' => 'securityhub',

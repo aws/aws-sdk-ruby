@@ -479,6 +479,38 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Provides access to an Amazon OpenSearch Service domain through the use
+    # of an interface VPC endpoint.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the OpenSearch Service domain to provide access to.
+    #
+    # @option params [required, String] :account
+    #   The account ID to grant access to.
+    #
+    # @return [Types::AuthorizeVpcEndpointAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AuthorizeVpcEndpointAccessResponse#authorized_principal #authorized_principal} => Types::AuthorizedPrincipal
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_vpc_endpoint_access({
+    #     domain_name: "DomainName", # required
+    #     account: "AWSAccount", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_principal.principal_type #=> String, one of "AWS_ACCOUNT", "AWS_SERVICE"
+    #   resp.authorized_principal.principal #=> String
+    #
+    # @overload authorize_vpc_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def authorize_vpc_endpoint_access(params = {}, options = {})
+      req = build_request(:authorize_vpc_endpoint_access, params)
+      req.send_request(options)
+    end
+
     # Cancels a scheduled service software update for an Amazon ES domain.
     # You can only perform this operation before the `AutomatedUpdateDate`
     # and when the `UpdateStatus` is in the `PENDING_UPDATE` state.
@@ -912,6 +944,55 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Creates an Amazon OpenSearch Service-managed VPC endpoint.
+    #
+    # @option params [required, String] :domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to grant access to.
+    #
+    # @option params [required, Types::VPCOptions] :vpc_options
+    #   Options to specify the subnets and security groups for the endpoint.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    # @return [Types::CreateVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcEndpointResponse#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_endpoint({
+    #     domain_arn: "DomainArn", # required
+    #     vpc_options: { # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint.domain_arn #=> String
+    #   resp.vpc_endpoint.vpc_options.vpc_id #=> String
+    #   resp.vpc_endpoint.vpc_options.subnet_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.subnet_ids[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.availability_zones #=> Array
+    #   resp.vpc_endpoint.vpc_options.availability_zones[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.security_group_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoint.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.vpc_endpoint.endpoint #=> String
+    #
+    # @overload create_vpc_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_endpoint(params = {}, options = {})
+      req = build_request(:create_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes the specified Elasticsearch domain and all of its
     # data. Once a domain is deleted, it cannot be recovered.
     #
@@ -1138,6 +1219,35 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def delete_package(params = {}, options = {})
       req = build_request(:delete_package, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
+    #
+    # @option params [required, String] :vpc_endpoint_id
+    #   The unique identifier of the endpoint to be deleted.
+    #
+    # @return [Types::DeleteVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcEndpointResponse#vpc_endpoint_summary #vpc_endpoint_summary} => Types::VpcEndpointSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_endpoint({
+    #     vpc_endpoint_id: "VpcEndpointId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_summary.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_summary.vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_summary.domain_arn #=> String
+    #   resp.vpc_endpoint_summary.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #
+    # @overload delete_vpc_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_endpoint(params = {}, options = {})
+      req = build_request(:delete_vpc_endpoint, params)
       req.send_request(options)
     end
 
@@ -1940,6 +2050,49 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
+    #
+    # @option params [required, Array<String>] :vpc_endpoint_ids
+    #   The unique identifiers of the endpoints to get information about.
+    #
+    # @return [Types::DescribeVpcEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointsResponse#vpc_endpoints #vpc_endpoints} => Array&lt;Types::VpcEndpoint&gt;
+    #   * {Types::DescribeVpcEndpointsResponse#vpc_endpoint_errors #vpc_endpoint_errors} => Array&lt;Types::VpcEndpointError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoints({
+    #     vpc_endpoint_ids: ["VpcEndpointId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoints #=> Array
+    #   resp.vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoints[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoints[0].domain_arn #=> String
+    #   resp.vpc_endpoints[0].vpc_options.vpc_id #=> String
+    #   resp.vpc_endpoints[0].vpc_options.subnet_ids #=> Array
+    #   resp.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
+    #   resp.vpc_endpoints[0].vpc_options.availability_zones #=> Array
+    #   resp.vpc_endpoints[0].vpc_options.availability_zones[0] #=> String
+    #   resp.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
+    #   resp.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.vpc_endpoints[0].endpoint #=> String
+    #   resp.vpc_endpoint_errors #=> Array
+    #   resp.vpc_endpoint_errors[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_errors[0].error_code #=> String, one of "ENDPOINT_NOT_FOUND", "SERVER_ERROR"
+    #   resp.vpc_endpoint_errors[0].error_message #=> String
+    #
+    # @overload describe_vpc_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoints(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoints, params)
+      req.send_request(options)
+    end
+
     # Dissociates a package from the Amazon ES domain.
     #
     # @option params [required, String] :package_id
@@ -2393,6 +2546,113 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Retrieves information about each principal that is allowed to access a
+    # given Amazon OpenSearch Service domain through the use of an interface
+    # VPC endpoint.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the OpenSearch Service domain to retrieve access
+    #   information for.
+    #
+    # @option params [String] :next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #
+    # @return [Types::ListVpcEndpointAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointAccessResponse#authorized_principal_list #authorized_principal_list} => Array&lt;Types::AuthorizedPrincipal&gt;
+    #   * {Types::ListVpcEndpointAccessResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoint_access({
+    #     domain_name: "DomainName", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_principal_list #=> Array
+    #   resp.authorized_principal_list[0].principal_type #=> String, one of "AWS_ACCOUNT", "AWS_SERVICE"
+    #   resp.authorized_principal_list[0].principal #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_vpc_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoint_access(params = {}, options = {})
+      req = build_request(:list_vpc_endpoint_access, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the
+    # current account and Region.
+    #
+    # @option params [String] :next_token
+    #   Identifier to allow retrieval of paginated results.
+    #
+    # @return [Types::ListVpcEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointsResponse#vpc_endpoint_summary_list #vpc_endpoint_summary_list} => Array&lt;Types::VpcEndpointSummary&gt;
+    #   * {Types::ListVpcEndpointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoints({
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_summary_list #=> Array
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_summary_list[0].domain_arn #=> String
+    #   resp.vpc_endpoint_summary_list[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @overload list_vpc_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoints(params = {}, options = {})
+      req = build_request(:list_vpc_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all Amazon OpenSearch Service-managed VPC endpoints
+    # associated with a particular domain.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the ElasticSearch domain whose VPC endpoints are to be listed.
+    #
+    # @option params [String] :next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #
+    # @return [Types::ListVpcEndpointsForDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointsForDomainResponse#vpc_endpoint_summary_list #vpc_endpoint_summary_list} => Array&lt;Types::VpcEndpointSummary&gt;
+    #   * {Types::ListVpcEndpointsForDomainResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoints_for_domain({
+    #     domain_name: "DomainName", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_summary_list #=> Array
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_summary_list[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_summary_list[0].domain_arn #=> String
+    #   resp.vpc_endpoint_summary_list[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @overload list_vpc_endpoints_for_domain(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoints_for_domain(params = {}, options = {})
+      req = build_request(:list_vpc_endpoints_for_domain, params)
+      req.send_request(options)
+    end
+
     # Allows you to purchase reserved Elasticsearch instances.
     #
     # @option params [required, String] :reserved_elasticsearch_instance_offering_id
@@ -2488,6 +2748,31 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def remove_tags(params = {}, options = {})
       req = build_request(:remove_tags, params)
+      req.send_request(options)
+    end
+
+    # Revokes access to an Amazon OpenSearch Service domain that was
+    # provided through an interface VPC endpoint.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the OpenSearch Service domain.
+    #
+    # @option params [required, String] :account
+    #   The account ID to revoke access from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_vpc_endpoint_access({
+    #     domain_name: "DomainName", # required
+    #     account: "AWSAccount", # required
+    #   })
+    #
+    # @overload revoke_vpc_endpoint_access(params = {})
+    # @param [Hash] params ({})
+    def revoke_vpc_endpoint_access(params = {}, options = {})
+      req = build_request(:revoke_vpc_endpoint_access, params)
       req.send_request(options)
     end
 
@@ -2908,6 +3193,50 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
+    #
+    # @option params [required, String] :vpc_endpoint_id
+    #   Unique identifier of the VPC endpoint to be updated.
+    #
+    # @option params [required, Types::VPCOptions] :vpc_options
+    #   The security groups and/or subnets to add, remove, or modify.
+    #
+    # @return [Types::UpdateVpcEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVpcEndpointResponse#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpc_endpoint({
+    #     vpc_endpoint_id: "VpcEndpointId", # required
+    #     vpc_options: { # required
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint.vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint.vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint.domain_arn #=> String
+    #   resp.vpc_endpoint.vpc_options.vpc_id #=> String
+    #   resp.vpc_endpoint.vpc_options.subnet_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.subnet_ids[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.availability_zones #=> Array
+    #   resp.vpc_endpoint.vpc_options.availability_zones[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.security_group_ids #=> Array
+    #   resp.vpc_endpoint.vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoint.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.vpc_endpoint.endpoint #=> String
+    #
+    # @overload update_vpc_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_vpc_endpoint(params = {}, options = {})
+      req = build_request(:update_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
     # Allows you to either upgrade your domain or perform an Upgrade
     # eligibility check to a compatible Elasticsearch version.
     #
@@ -2968,7 +3297,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.145.0 (2022-11-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-scheduler` gem.
+
 3.144.0 (2022-11-08)
 ------------------
 

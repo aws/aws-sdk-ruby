@@ -62,6 +62,8 @@ module Aws::ElasticsearchService
             Aws::ElasticsearchService::Endpoints::AddTags.build(context)
           when :associate_package
             Aws::ElasticsearchService::Endpoints::AssociatePackage.build(context)
+          when :authorize_vpc_endpoint_access
+            Aws::ElasticsearchService::Endpoints::AuthorizeVpcEndpointAccess.build(context)
           when :cancel_elasticsearch_service_software_update
             Aws::ElasticsearchService::Endpoints::CancelElasticsearchServiceSoftwareUpdate.build(context)
           when :create_elasticsearch_domain
@@ -70,6 +72,8 @@ module Aws::ElasticsearchService
             Aws::ElasticsearchService::Endpoints::CreateOutboundCrossClusterSearchConnection.build(context)
           when :create_package
             Aws::ElasticsearchService::Endpoints::CreatePackage.build(context)
+          when :create_vpc_endpoint
+            Aws::ElasticsearchService::Endpoints::CreateVpcEndpoint.build(context)
           when :delete_elasticsearch_domain
             Aws::ElasticsearchService::Endpoints::DeleteElasticsearchDomain.build(context)
           when :delete_elasticsearch_service_role
@@ -80,6 +84,8 @@ module Aws::ElasticsearchService
             Aws::ElasticsearchService::Endpoints::DeleteOutboundCrossClusterSearchConnection.build(context)
           when :delete_package
             Aws::ElasticsearchService::Endpoints::DeletePackage.build(context)
+          when :delete_vpc_endpoint
+            Aws::ElasticsearchService::Endpoints::DeleteVpcEndpoint.build(context)
           when :describe_domain_auto_tunes
             Aws::ElasticsearchService::Endpoints::DescribeDomainAutoTunes.build(context)
           when :describe_domain_change_progress
@@ -102,6 +108,8 @@ module Aws::ElasticsearchService
             Aws::ElasticsearchService::Endpoints::DescribeReservedElasticsearchInstanceOfferings.build(context)
           when :describe_reserved_elasticsearch_instances
             Aws::ElasticsearchService::Endpoints::DescribeReservedElasticsearchInstances.build(context)
+          when :describe_vpc_endpoints
+            Aws::ElasticsearchService::Endpoints::DescribeVpcEndpoints.build(context)
           when :dissociate_package
             Aws::ElasticsearchService::Endpoints::DissociatePackage.build(context)
           when :get_compatible_elasticsearch_versions
@@ -124,18 +132,28 @@ module Aws::ElasticsearchService
             Aws::ElasticsearchService::Endpoints::ListPackagesForDomain.build(context)
           when :list_tags
             Aws::ElasticsearchService::Endpoints::ListTags.build(context)
+          when :list_vpc_endpoint_access
+            Aws::ElasticsearchService::Endpoints::ListVpcEndpointAccess.build(context)
+          when :list_vpc_endpoints
+            Aws::ElasticsearchService::Endpoints::ListVpcEndpoints.build(context)
+          when :list_vpc_endpoints_for_domain
+            Aws::ElasticsearchService::Endpoints::ListVpcEndpointsForDomain.build(context)
           when :purchase_reserved_elasticsearch_instance_offering
             Aws::ElasticsearchService::Endpoints::PurchaseReservedElasticsearchInstanceOffering.build(context)
           when :reject_inbound_cross_cluster_search_connection
             Aws::ElasticsearchService::Endpoints::RejectInboundCrossClusterSearchConnection.build(context)
           when :remove_tags
             Aws::ElasticsearchService::Endpoints::RemoveTags.build(context)
+          when :revoke_vpc_endpoint_access
+            Aws::ElasticsearchService::Endpoints::RevokeVpcEndpointAccess.build(context)
           when :start_elasticsearch_service_software_update
             Aws::ElasticsearchService::Endpoints::StartElasticsearchServiceSoftwareUpdate.build(context)
           when :update_elasticsearch_domain_config
             Aws::ElasticsearchService::Endpoints::UpdateElasticsearchDomainConfig.build(context)
           when :update_package
             Aws::ElasticsearchService::Endpoints::UpdatePackage.build(context)
+          when :update_vpc_endpoint
+            Aws::ElasticsearchService::Endpoints::UpdateVpcEndpoint.build(context)
           when :upgrade_elasticsearch_domain
             Aws::ElasticsearchService::Endpoints::UpgradeElasticsearchDomain.build(context)
           end

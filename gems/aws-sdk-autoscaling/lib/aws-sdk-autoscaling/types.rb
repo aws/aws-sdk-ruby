@@ -1114,6 +1114,13 @@ module Aws::AutoScaling
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group. This name must be unique per
     #   Region per account.
+    #
+    #   The name can contain any ASCII character 33 to 126 including most
+    #   punctuation characters, digits, and upper and lowercased letters.
+    #
+    #   <note markdown="1"> You cannot use a colon (:) in the name.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
@@ -1260,14 +1267,15 @@ module Aws::AutoScaling
     #   into service and marking it unhealthy due to a failed Elastic Load
     #   Balancing or custom health check. This is useful if your instances
     #   do not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Health check grace
-    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   `InService` state. For more information, see [Set the health check
+    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #   Default: `0` seconds
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     #   @return [Integer]
     #
     # @!attribute [rw] placement_group
@@ -4454,24 +4462,30 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] on_demand_allocation_strategy
-    #   The order of the launch template overrides to use in fulfilling
-    #   On-Demand capacity.
+    #   The allocation strategy to apply to your On-Demand Instances when
+    #   they are launched. Possible instance types are determined by the
+    #   launch template overrides that you specify.
     #
-    #   If you specify `lowest-price`, Amazon EC2 Auto Scaling uses price to
-    #   determine the order, launching the lowest price first.
+    #   The following lists the valid values:
     #
-    #   If you specify `prioritized`, Amazon EC2 Auto Scaling uses the
-    #   priority that you assigned to each launch template override,
-    #   launching the highest priority first. If all your On-Demand capacity
-    #   cannot be fulfilled using your highest priority instance, then
-    #   Amazon EC2 Auto Scaling launches the remaining capacity using the
-    #   second priority instance type, and so on.
+    #   lowest-price
     #
-    #   Default: `lowest-price` for Auto Scaling groups that specify
-    #   InstanceRequirements in the overrides and `prioritized` for Auto
-    #   Scaling groups that don't.
+    #   : Uses price to determine which instance types are the highest
+    #     priority, launching the lowest priced instance types within an
+    #     Availability Zone first. This is the default value for Auto
+    #     Scaling groups that specify InstanceRequirements.
     #
-    #   Valid values: `lowest-price` \| `prioritized`
+    #   prioritized
+    #
+    #   : You set the order of instance types for the launch template
+    #     overrides from highest to lowest priority (from first to last in
+    #     the list). Amazon EC2 Auto Scaling launches your highest priority
+    #     instance types first. If all your On-Demand capacity cannot be
+    #     fulfilled using your highest priority instance type, then Amazon
+    #     EC2 Auto Scaling launches the remaining capacity using the second
+    #     priority instance type, and so on. This is the default value for
+    #     Auto Scaling groups that don't specify InstanceRequirements and
+    #     cannot be used for groups that do.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_base_capacity
@@ -4479,13 +4493,14 @@ module Aws::AutoScaling
     #   be fulfilled by On-Demand Instances. This base portion is launched
     #   first as your group scales.
     #
-    #   If you specify weights for the instance types in the overrides, the
-    #   base capacity is measured in the same unit of measurement as the
-    #   instance types. If you specify InstanceRequirements in the
-    #   overrides, the base capacity is measured in the same unit of
-    #   measurement as your group's desired capacity.
+    #   This number has the same unit of measurement as the group's desired
+    #   capacity. If you change the default unit of measurement (number of
+    #   instances) by specifying weighted capacity values in your launch
+    #   template overrides list, or by changing the default desired capacity
+    #   type setting of the group, you must specify this number using the
+    #   same unit of measurement.
     #
-    #   Default: `0`
+    #   Default: 0
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_percentage_above_base_capacity
@@ -4495,39 +4510,61 @@ module Aws::AutoScaling
     #   Instances, 80% Spot Instances). If set to 100, only On-Demand
     #   Instances are used.
     #
-    #   Default: `100`
+    #   Default: 100
     #   @return [Integer]
     #
     # @!attribute [rw] spot_allocation_strategy
-    #   Indicates how to allocate instances across Spot Instance pools.
+    #   The allocation strategy to apply to your Spot Instances when they
+    #   are launched. Possible instance types are determined by the launch
+    #   template overrides that you specify.
     #
-    #   If the allocation strategy is `lowest-price`, the Auto Scaling group
-    #   launches instances using the Spot pools with the lowest price, and
-    #   evenly allocates your instances across the number of Spot pools that
-    #   you specify.
+    #   The following lists the valid values:
     #
-    #   If the allocation strategy is `capacity-optimized` (recommended),
-    #   the Auto Scaling group launches instances using Spot pools that are
-    #   optimally chosen based on the available Spot capacity.
-    #   Alternatively, you can use `capacity-optimized-prioritized` and set
-    #   the order of instance types in the list of launch template overrides
-    #   from highest to lowest priority (from first to last in the list).
-    #   Amazon EC2 Auto Scaling honors the instance type priorities on a
-    #   best-effort basis but optimizes for capacity first.
+    #   capacity-optimized
     #
-    #   Default: `lowest-price`
+    #   : Requests Spot Instances using pools that are optimally chosen
+    #     based on the available Spot capacity. This strategy has the lowest
+    #     risk of interruption. To give certain instance types a higher
+    #     chance of launching first, use `capacity-optimized-prioritized`.
     #
-    #   Valid values: `lowest-price` \| `capacity-optimized` \|
-    #   `capacity-optimized-prioritized`
+    #   capacity-optimized-prioritized
+    #
+    #   : You set the order of instance types for the launch template
+    #     overrides from highest to lowest priority (from first to last in
+    #     the list). Amazon EC2 Auto Scaling honors the instance type
+    #     priorities on a best effort basis but optimizes for capacity
+    #     first. Note that if the On-Demand allocation strategy is set to
+    #     `prioritized`, the same priority is applied when fulfilling
+    #     On-Demand capacity. This is not a valid value for Auto Scaling
+    #     groups that specify InstanceRequirements.
+    #
+    #   lowest-price
+    #
+    #   : Requests Spot Instances using the lowest priced pools within an
+    #     Availability Zone, across the number of Spot pools that you
+    #     specify for the `SpotInstancePools` property. To ensure that your
+    #     desired capacity is met, you might receive Spot Instances from
+    #     several pools. This is the default value, but it might lead to
+    #     high interruption rates because this strategy only considers
+    #     instance price and not available capacity.
+    #
+    #   price-capacity-optimized (recommended)
+    #
+    #   : Amazon EC2 Auto Scaling identifies the pools with the highest
+    #     capacity availability for the number of instances that are
+    #     launching. This means that we will request Spot Instances from the
+    #     pools that we believe have the lowest chance of interruption in
+    #     the near term. Amazon EC2 Auto Scaling then requests Spot
+    #     Instances from the lowest priced of these pools.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_pools
     #   The number of Spot Instance pools across which to allocate your Spot
     #   Instances. The Spot pools are determined from the different instance
-    #   types in the overrides. Valid only when the Spot allocation strategy
+    #   types in the overrides. Valid only when the `SpotAllocationStrategy`
     #   is `lowest-price`. Value must be in the range of 1–20.
     #
-    #   Default: `2`
+    #   Default: 2
     #   @return [Integer]
     #
     # @!attribute [rw] spot_max_price
@@ -8937,12 +8974,13 @@ module Aws::AutoScaling
     #   into service and marking it unhealthy due to a failed Elastic Load
     #   Balancing or custom health check. This is useful if your instances
     #   do not immediately pass these health checks after they enter the
-    #   `InService` state. For more information, see [Health check grace
-    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   `InService` state. For more information, see [Set the health check
+    #   grace period for an Auto Scaling group][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html
     #   @return [Integer]
     #
     # @!attribute [rw] placement_group

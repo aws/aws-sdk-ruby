@@ -98,6 +98,8 @@ module Aws::ECS
             Aws::ECS::Endpoints::DiscoverPollEndpoint.build(context)
           when :execute_command
             Aws::ECS::Endpoints::ExecuteCommand.build(context)
+          when :get_task_protection
+            Aws::ECS::Endpoints::GetTaskProtection.build(context)
           when :list_account_settings
             Aws::ECS::Endpoints::ListAccountSettings.build(context)
           when :list_attributes
@@ -158,6 +160,8 @@ module Aws::ECS
             Aws::ECS::Endpoints::UpdateService.build(context)
           when :update_service_primary_task_set
             Aws::ECS::Endpoints::UpdateServicePrimaryTaskSet.build(context)
+          when :update_task_protection
+            Aws::ECS::Endpoints::UpdateTaskProtection.build(context)
           when :update_task_set
             Aws::ECS::Endpoints::UpdateTaskSet.build(context)
           end

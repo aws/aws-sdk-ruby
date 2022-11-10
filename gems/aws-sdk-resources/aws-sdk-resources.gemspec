@@ -297,6 +297,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-sagemakerruntime', '~> 1')
   spec.add_dependency('aws-sdk-sagemakeredgemanager', '~> 1')
   spec.add_dependency('aws-sdk-savingsplans', '~> 1')
+  spec.add_dependency('aws-sdk-scheduler', '~> 1')
   spec.add_dependency('aws-sdk-schemas', '~> 1')
   spec.add_dependency('aws-sdk-secretsmanager', '~> 1')
   spec.add_dependency('aws-sdk-securityhub', '~> 1')

@@ -959,6 +959,9 @@
   "SavingsPlans": {
     "models": "savingsplans/2019-06-28"
   },
+  "Scheduler": {
+    "models": "scheduler/2021-06-30"
+  },
   "Schemas": {
     "models": "schemas/2019-12-02"
   },

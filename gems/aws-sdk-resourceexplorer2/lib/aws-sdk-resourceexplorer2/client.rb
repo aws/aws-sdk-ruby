@@ -482,13 +482,39 @@ module Aws::ResourceExplorer2
     # that allows Resource Explorer to enumerate your resources to populate
     # the index.
     #
-    #      <ul> <li> <p> <b>Action</b>: <code>resource-explorer-2:CreateIndex</code> </p> <p> <b>Resource</b>: The ARN of the index (as it will exist after the operation completes) in the Amazon Web Services Region and account in which you're trying to create the index. Use the wildcard character (<code>*</code>) at the end of the string to match the eventual UUID. For example, the following <code>Resource</code> element restricts the role or user to creating an index in only the <code>us-east-2</code> Region of the specified account.</p> <p> <code>"Resource": "arn:aws:resource-explorer-2:us-east-2:<i>&lt;account-id&gt;</i>:index/*"</code> </p> <p>Alternatively, you can use <code>"Resource": "*"</code> to allow the role or user to create an index in any Region.</p> </li> <li> <p> <b>Action</b>: <code>iam:CreateServiceLinkedRole</code> </p> <p> <b>Resource</b>: No specific resource (*). </p> <p>This permission is required only the first time you create an index to turn on Resource Explorer in the account. Resource Explorer uses this to create the <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html">service-linked role needed to index the resources in your account</a>. Resource Explorer uses the same service-linked role for all additional indexes you create afterwards.</p> </li> </ul>
+    # * **Action**\: `resource-explorer-2:CreateIndex`
+    #
+    #   **Resource**\: The ARN of the index (as it will exist after the
+    #   operation completes) in the Amazon Web Services Region and account
+    #   in which you're trying to create the index. Use the wildcard
+    #   character (`*`) at the end of the string to match the eventual UUID.
+    #   For example, the following `Resource` element restricts the role or
+    #   user to creating an index in only the `us-east-2` Region of the
+    #   specified account.
+    #
+    #   `"Resource":
+    #   "arn:aws:resource-explorer-2:us-west-2:<account-id>:index/*"`
+    #
+    #   Alternatively, you can use `"Resource": "*"` to allow the role or
+    #   user to create an index in any Region.
+    #
+    # * **Action**\: `iam:CreateServiceLinkedRole`
+    #
+    #   **Resource**\: No specific resource (*).
+    #
+    #   This permission is required only the first time you create an index
+    #   to turn on Resource Explorer in the account. Resource Explorer uses
+    #   this to create the [service-linked role needed to index the
+    #   resources in your account][4]. Resource Explorer uses the same
+    #   service-linked role for all additional indexes you create
+    #   afterwards.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html
     # [2]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html
     # [3]: https://docs.aws.amazon.com/arexug/mainline/security_iam_service-linked-roles.html
+    # [4]: https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html
     #
     # @option params [String] :client_token
     #   This value helps ensure idempotency. Resource Explorer uses this value
@@ -1459,7 +1485,7 @@ module Aws::ResourceExplorer2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
