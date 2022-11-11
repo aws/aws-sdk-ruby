@@ -525,6 +525,11 @@ module Aws::LicenseManager
 
     # Checks out the specified license.
     #
+    # <note markdown="1"> If the account that created the license is the same that is performing
+    # the check out, you must specify the account as the beneficiary.
+    #
+    #  </note>
+    #
     # @option params [required, String] :product_sku
     #   Product SKU.
     #
@@ -613,7 +618,8 @@ module Aws::LicenseManager
     #   Amazon Resource Name (ARN) of the license.
     #
     # @option params [required, Array<String>] :principals
-    #   The grant principals.
+    #   The grant principals. This value should be specified as an Amazon
+    #   Resource Name (ARN).
     #
     # @option params [required, String] :home_region
     #   Home Region of the grant.
@@ -929,7 +935,8 @@ module Aws::LicenseManager
     # @option params [required, Types::LicenseConversionContext] :source_license_context
     #   Information that identifies the license type you are converting from.
     #   For the structure of the source license, see [Convert a license type
-    #   using the AWS CLI][1] in the *License Manager User Guide*.
+    #   using the Amazon Web Services CLI][1] in the *License Manager User
+    #   Guide*.
     #
     #
     #
@@ -938,7 +945,8 @@ module Aws::LicenseManager
     # @option params [required, Types::LicenseConversionContext] :destination_license_context
     #   Information that identifies the license type you are converting to.
     #   For the structure of the destination license, see [Convert a license
-    #   type using the AWS CLI][1] in the *License Manager User Guide*.
+    #   type using the Amazon Web Services CLI][1] in the *License Manager
+    #   User Guide*.
     #
     #
     #
@@ -2377,6 +2385,68 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
+    # Lists the grants received for all accounts in the organization.
+    #
+    # @option params [required, String] :license_arn
+    #   The Amazon Resource Name (ARN) of the received license.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results. The following filters are supported:
+    #
+    #   * `ParentArn`
+    #
+    #   * `GranteePrincipalArn`
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @return [Types::ListReceivedGrantsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReceivedGrantsForOrganizationResponse#grants #grants} => Array&lt;Types::Grant&gt;
+    #   * {Types::ListReceivedGrantsForOrganizationResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_received_grants_for_organization({
+    #     license_arn: "Arn", # required
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grants #=> Array
+    #   resp.grants[0].grant_arn #=> String
+    #   resp.grants[0].grant_name #=> String
+    #   resp.grants[0].parent_arn #=> String
+    #   resp.grants[0].license_arn #=> String
+    #   resp.grants[0].grantee_principal_arn #=> String
+    #   resp.grants[0].home_region #=> String
+    #   resp.grants[0].grant_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.grants[0].status_reason #=> String
+    #   resp.grants[0].version #=> String
+    #   resp.grants[0].granted_operations #=> Array
+    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrantsForOrganization AWS API Documentation
+    #
+    # @overload list_received_grants_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_received_grants_for_organization(params = {}, options = {})
+      req = build_request(:list_received_grants_for_organization, params)
+      req.send_request(options)
+    end
+
     # Lists received licenses.
     #
     # @option params [Array<String>] :license_arns
@@ -2463,6 +2533,85 @@ module Aws::LicenseManager
     # @param [Hash] params ({})
     def list_received_licenses(params = {}, options = {})
       req = build_request(:list_received_licenses, params)
+      req.send_request(options)
+    end
+
+    # Lists the licenses received for all accounts in the organization.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results. The following filters are supported:
+    #
+    #   * `Beneficiary`
+    #
+    #   * `ProductSKU`
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @return [Types::ListReceivedLicensesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReceivedLicensesForOrganizationResponse#licenses #licenses} => Array&lt;Types::GrantedLicense&gt;
+    #   * {Types::ListReceivedLicensesForOrganizationResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_received_licenses_for_organization({
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.licenses #=> Array
+    #   resp.licenses[0].license_arn #=> String
+    #   resp.licenses[0].license_name #=> String
+    #   resp.licenses[0].product_name #=> String
+    #   resp.licenses[0].product_sku #=> String
+    #   resp.licenses[0].issuer.name #=> String
+    #   resp.licenses[0].issuer.sign_key #=> String
+    #   resp.licenses[0].issuer.key_fingerprint #=> String
+    #   resp.licenses[0].home_region #=> String
+    #   resp.licenses[0].status #=> String, one of "AVAILABLE", "PENDING_AVAILABLE", "DEACTIVATED", "SUSPENDED", "EXPIRED", "PENDING_DELETE", "DELETED"
+    #   resp.licenses[0].validity.begin #=> String
+    #   resp.licenses[0].validity.end #=> String
+    #   resp.licenses[0].beneficiary #=> String
+    #   resp.licenses[0].entitlements #=> Array
+    #   resp.licenses[0].entitlements[0].name #=> String
+    #   resp.licenses[0].entitlements[0].value #=> String
+    #   resp.licenses[0].entitlements[0].max_count #=> Integer
+    #   resp.licenses[0].entitlements[0].overage #=> Boolean
+    #   resp.licenses[0].entitlements[0].unit #=> String, one of "Count", "None", "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second"
+    #   resp.licenses[0].entitlements[0].allow_check_in #=> Boolean
+    #   resp.licenses[0].consumption_configuration.renew_type #=> String, one of "None", "Weekly", "Monthly"
+    #   resp.licenses[0].consumption_configuration.provisional_configuration.max_time_to_live_in_minutes #=> Integer
+    #   resp.licenses[0].consumption_configuration.borrow_configuration.allow_early_check_in #=> Boolean
+    #   resp.licenses[0].consumption_configuration.borrow_configuration.max_time_to_live_in_minutes #=> Integer
+    #   resp.licenses[0].license_metadata #=> Array
+    #   resp.licenses[0].license_metadata[0].name #=> String
+    #   resp.licenses[0].license_metadata[0].value #=> String
+    #   resp.licenses[0].create_time #=> String
+    #   resp.licenses[0].version #=> String
+    #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.licenses[0].received_metadata.received_status_reason #=> String
+    #   resp.licenses[0].received_metadata.allowed_operations #=> Array
+    #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedLicensesForOrganization AWS API Documentation
+    #
+    # @overload list_received_licenses_for_organization(params = {})
+    # @param [Hash] params ({})
+    def list_received_licenses_for_organization(params = {}, options = {})
+      req = build_request(:list_received_licenses_for_organization, params)
       req.send_request(options)
     end
 
@@ -3008,7 +3157,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

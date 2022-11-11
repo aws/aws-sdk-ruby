@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2022-11-11)
+------------------
+
+* Feature - Added links related to enabling job bookmarks.
+
 1.122.0 (2022-10-27)
 ------------------
 

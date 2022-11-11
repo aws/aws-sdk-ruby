@@ -6668,7 +6668,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves all the development endpoints in this AWS account.
+    # Retrieves all the development endpoints in this Amazon Web Services
+    # account.
     #
     # <note markdown="1"> When you create a development endpoint in a virtual private cloud
     # (VPC), Glue returns only a private IP address and the public IP
@@ -7281,6 +7282,20 @@ module Aws::Glue
     end
 
     # Returns information on a job bookmark entry.
+    #
+    # For more information about enabling and using job bookmarks, see:
+    #
+    # * [Tracking processed data using job bookmarks][1]
+    #
+    # * [Job parameters used by Glue][2]
+    #
+    # * [Job structure][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html
+    # [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    # [3]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-Job
     #
     # @option params [required, String] :job_name
     #   The name of the job in question.
@@ -12125,6 +12140,20 @@ module Aws::Glue
 
     # Resets a bookmark entry.
     #
+    # For more information about enabling and using job bookmarks, see:
+    #
+    # * [Tracking processed data using job bookmarks][1]
+    #
+    # * [Job parameters used by Glue][2]
+    #
+    # * [Job structure][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html
+    # [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    # [3]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-Job
+    #
     # @option params [required, String] :job_name
     #   The name of the job in question.
     #
@@ -15361,7 +15390,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

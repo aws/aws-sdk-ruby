@@ -2375,8 +2375,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # An array of `CopyAction` objects, which contains the details of the
-    # copy operation.
+    # An array of `CopyAction` objects, each of which contains details of
+    # the copy operation.
     #
     # @note When making an API call, you may pass AwsBackupBackupPlanRuleCopyActionsDetails
     #   data as a hash:
@@ -2483,8 +2483,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] copy_actions
-    #   An array of `CopyAction` objects, which contains the details of the
-    #   copy operation.
+    #   An array of `CopyAction` objects, each of which contains details of
+    #   the copy operation.
     #   @return [Array<Types::AwsBackupBackupPlanRuleCopyActionsDetails>]
     #
     # @!attribute [rw] lifecycle
@@ -31044,11 +31044,11 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this
-    #   is a comma-separated list of Regions that do not aggregate findings
+    #   is a space-separated list of Regions that do not aggregate findings
     #   to the aggregation Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   comma-separated list of Regions that do aggregate findings to the
+    #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
     #   @return [Array<String>]
     #
@@ -44683,11 +44683,11 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this
-    #   is a comma-separated list of Regions that do not aggregate findings
+    #   is a space-separated list of Regions that do not aggregate findings
     #   to the aggregation Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   comma-separated list of Regions that do aggregate findings to the
+    #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
     #   @return [Array<String>]
     #

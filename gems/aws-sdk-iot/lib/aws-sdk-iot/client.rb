@@ -1038,6 +1038,12 @@ module Aws::IoT
     #       account: "AwsAccountId",
     #       iam_role_arn: "RoleArn",
     #       role_alias_arn: "RoleAliasArn",
+    #       issuer_certificate_identifier: {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       },
+    #       device_certificate_arn: "CertificateArn",
     #     },
     #     expiration_date: Time.now,
     #     suppress_indefinitely: false,
@@ -3671,6 +3677,12 @@ module Aws::IoT
     #       account: "AwsAccountId",
     #       iam_role_arn: "RoleArn",
     #       role_alias_arn: "RoleAliasArn",
+    #       issuer_certificate_identifier: {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       },
+    #       device_certificate_arn: "CertificateArn",
     #     },
     #   })
     #
@@ -4719,7 +4731,7 @@ module Aws::IoT
     #   resp.finding.task_start_time #=> Time
     #   resp.finding.finding_time #=> Time
     #   resp.finding.severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.finding.non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
+    #   resp.finding.non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE", "ISSUER_CERTIFICATE"
     #   resp.finding.non_compliant_resource.resource_identifier.device_certificate_id #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.ca_certificate_id #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.cognito_identity_pool_id #=> String
@@ -4729,10 +4741,14 @@ module Aws::IoT
     #   resp.finding.non_compliant_resource.resource_identifier.account #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.iam_role_arn #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.role_alias_arn #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.device_certificate_arn #=> String
     #   resp.finding.non_compliant_resource.additional_info #=> Hash
     #   resp.finding.non_compliant_resource.additional_info["String"] #=> String
     #   resp.finding.related_resources #=> Array
-    #   resp.finding.related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
+    #   resp.finding.related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE", "ISSUER_CERTIFICATE"
     #   resp.finding.related_resources[0].resource_identifier.device_certificate_id #=> String
     #   resp.finding.related_resources[0].resource_identifier.ca_certificate_id #=> String
     #   resp.finding.related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
@@ -4742,6 +4758,10 @@ module Aws::IoT
     #   resp.finding.related_resources[0].resource_identifier.account #=> String
     #   resp.finding.related_resources[0].resource_identifier.iam_role_arn #=> String
     #   resp.finding.related_resources[0].resource_identifier.role_alias_arn #=> String
+    #   resp.finding.related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.finding.related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.finding.related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.finding.related_resources[0].resource_identifier.device_certificate_arn #=> String
     #   resp.finding.related_resources[0].additional_info #=> Hash
     #   resp.finding.related_resources[0].additional_info["String"] #=> String
     #   resp.finding.reason_for_non_compliance #=> String
@@ -4855,6 +4875,12 @@ module Aws::IoT
     #       account: "AwsAccountId",
     #       iam_role_arn: "RoleArn",
     #       role_alias_arn: "RoleAliasArn",
+    #       issuer_certificate_identifier: {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       },
+    #       device_certificate_arn: "CertificateArn",
     #     },
     #   })
     #
@@ -4870,6 +4896,10 @@ module Aws::IoT
     #   resp.resource_identifier.account #=> String
     #   resp.resource_identifier.iam_role_arn #=> String
     #   resp.resource_identifier.role_alias_arn #=> String
+    #   resp.resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.resource_identifier.device_certificate_arn #=> String
     #   resp.expiration_date #=> Time
     #   resp.suppress_indefinitely #=> Boolean
     #   resp.description #=> String
@@ -7696,6 +7726,12 @@ module Aws::IoT
     #       account: "AwsAccountId",
     #       iam_role_arn: "RoleArn",
     #       role_alias_arn: "RoleAliasArn",
+    #       issuer_certificate_identifier: {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       },
+    #       device_certificate_arn: "CertificateArn",
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -7713,7 +7749,7 @@ module Aws::IoT
     #   resp.findings[0].task_start_time #=> Time
     #   resp.findings[0].finding_time #=> Time
     #   resp.findings[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.findings[0].non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
+    #   resp.findings[0].non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE", "ISSUER_CERTIFICATE"
     #   resp.findings[0].non_compliant_resource.resource_identifier.device_certificate_id #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.ca_certificate_id #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.cognito_identity_pool_id #=> String
@@ -7723,10 +7759,14 @@ module Aws::IoT
     #   resp.findings[0].non_compliant_resource.resource_identifier.account #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.iam_role_arn #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.role_alias_arn #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.device_certificate_arn #=> String
     #   resp.findings[0].non_compliant_resource.additional_info #=> Hash
     #   resp.findings[0].non_compliant_resource.additional_info["String"] #=> String
     #   resp.findings[0].related_resources #=> Array
-    #   resp.findings[0].related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
+    #   resp.findings[0].related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE", "ISSUER_CERTIFICATE"
     #   resp.findings[0].related_resources[0].resource_identifier.device_certificate_id #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.ca_certificate_id #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
@@ -7736,6 +7776,10 @@ module Aws::IoT
     #   resp.findings[0].related_resources[0].resource_identifier.account #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.iam_role_arn #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.role_alias_arn #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.device_certificate_arn #=> String
     #   resp.findings[0].related_resources[0].additional_info #=> Hash
     #   resp.findings[0].related_resources[0].additional_info["String"] #=> String
     #   resp.findings[0].reason_for_non_compliance #=> String
@@ -7938,6 +7982,12 @@ module Aws::IoT
     #       account: "AwsAccountId",
     #       iam_role_arn: "RoleArn",
     #       role_alias_arn: "RoleAliasArn",
+    #       issuer_certificate_identifier: {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       },
+    #       device_certificate_arn: "CertificateArn",
     #     },
     #     ascending_order: false,
     #     next_token: "NextToken",
@@ -7957,6 +8007,10 @@ module Aws::IoT
     #   resp.suppressions[0].resource_identifier.account #=> String
     #   resp.suppressions[0].resource_identifier.iam_role_arn #=> String
     #   resp.suppressions[0].resource_identifier.role_alias_arn #=> String
+    #   resp.suppressions[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.suppressions[0].resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.suppressions[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.suppressions[0].resource_identifier.device_certificate_arn #=> String
     #   resp.suppressions[0].expiration_date #=> Time
     #   resp.suppressions[0].suppress_indefinitely #=> Boolean
     #   resp.suppressions[0].description #=> String
@@ -9549,6 +9603,91 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # The related resources of an Audit finding. The following resources can
+    # be returned from calling this API:
+    #
+    # * DEVICE\_CERTIFICATE
+    #
+    # * CA\_CERTIFICATE
+    #
+    # * IOT\_POLICY
+    #
+    # * COGNITO\_IDENTITY\_POOL
+    #
+    # * CLIENT\_ID
+    #
+    # * ACCOUNT\_SETTINGS
+    #
+    # * ROLE\_ALIAS
+    #
+    # * IAM\_ROLE
+    #
+    # * ISSUER\_CERTIFICATE
+    #
+    # <note markdown="1"> This API is similar to DescribeAuditFinding's [RelatedResources][1]
+    # but provides pagination and is not limited to 10 resources. When
+    # calling [DescribeAuditFinding][1] for the intermediate CA revoked for
+    # active device certificates check, RelatedResources will not be
+    # populated. You must use this API, ListRelatedResourcesForAuditFinding,
+    # to list the certificates.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html
+    #
+    # @option params [required, String] :finding_id
+    #   The finding Id.
+    #
+    # @option params [String] :next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListRelatedResourcesForAuditFindingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRelatedResourcesForAuditFindingResponse#related_resources #related_resources} => Array&lt;Types::RelatedResource&gt;
+    #   * {Types::ListRelatedResourcesForAuditFindingResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_related_resources_for_audit_finding({
+    #     finding_id: "FindingId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.related_resources #=> Array
+    #   resp.related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE", "ISSUER_CERTIFICATE"
+    #   resp.related_resources[0].resource_identifier.device_certificate_id #=> String
+    #   resp.related_resources[0].resource_identifier.ca_certificate_id #=> String
+    #   resp.related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
+    #   resp.related_resources[0].resource_identifier.client_id #=> String
+    #   resp.related_resources[0].resource_identifier.policy_version_identifier.policy_name #=> String
+    #   resp.related_resources[0].resource_identifier.policy_version_identifier.policy_version_id #=> String
+    #   resp.related_resources[0].resource_identifier.account #=> String
+    #   resp.related_resources[0].resource_identifier.iam_role_arn #=> String
+    #   resp.related_resources[0].resource_identifier.role_alias_arn #=> String
+    #   resp.related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_subject #=> String
+    #   resp.related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_id #=> String
+    #   resp.related_resources[0].resource_identifier.issuer_certificate_identifier.issuer_certificate_serial_number #=> String
+    #   resp.related_resources[0].resource_identifier.device_certificate_arn #=> String
+    #   resp.related_resources[0].additional_info #=> Hash
+    #   resp.related_resources[0].additional_info["String"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_related_resources_for_audit_finding(params = {})
+    # @param [Hash] params ({})
+    def list_related_resources_for_audit_finding(params = {}, options = {})
+      req = build_request(:list_related_resources_for_audit_finding, params)
+      req.send_request(options)
+    end
+
     # Lists the role aliases registered in your account.
     #
     # Requires permission to access the [ListRoleAliases][1] action.
@@ -10242,9 +10381,10 @@ module Aws::IoT
     # parameters to filter your things. For example, calling `ListThings`
     # with attributeName=Color and attributeValue=Red retrieves all things
     # in the registry that contain an attribute **Color** with the value
-    # **Red**.
+    # **Red**. For more information, see [List Things][1] from the *Amazon
+    # Web Services IoT Core Developer Guide*.
     #
-    # Requires permission to access the [ListThings][1] action.
+    # Requires permission to access the [ListThings][2] action.
     #
     # <note markdown="1"> You will not be charged for calling this API if an `Access denied`
     # error is returned. You will also not be charged if no attributes or
@@ -10255,7 +10395,8 @@ module Aws::IoT
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [String] :next_token
     #   To retrieve the next set of results, the `nextToken` value from a
@@ -12374,6 +12515,12 @@ module Aws::IoT
     #       account: "AwsAccountId",
     #       iam_role_arn: "RoleArn",
     #       role_alias_arn: "RoleAliasArn",
+    #       issuer_certificate_identifier: {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       },
+    #       device_certificate_arn: "CertificateArn",
     #     },
     #     expiration_date: Time.now,
     #     suppress_indefinitely: false,
@@ -13833,7 +13980,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

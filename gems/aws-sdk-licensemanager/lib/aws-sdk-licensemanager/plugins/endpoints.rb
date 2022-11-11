@@ -128,8 +128,12 @@ module Aws::LicenseManager
             Aws::LicenseManager::Endpoints::ListLicenses.build(context)
           when :list_received_grants
             Aws::LicenseManager::Endpoints::ListReceivedGrants.build(context)
+          when :list_received_grants_for_organization
+            Aws::LicenseManager::Endpoints::ListReceivedGrantsForOrganization.build(context)
           when :list_received_licenses
             Aws::LicenseManager::Endpoints::ListReceivedLicenses.build(context)
+          when :list_received_licenses_for_organization
+            Aws::LicenseManager::Endpoints::ListReceivedLicensesForOrganization.build(context)
           when :list_resource_inventory
             Aws::LicenseManager::Endpoints::ListResourceInventory.build(context)
           when :list_tags_for_resource

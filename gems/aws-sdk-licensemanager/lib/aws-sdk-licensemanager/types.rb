@@ -468,7 +468,8 @@ module Aws::LicenseManager
     #   @return [String]
     #
     # @!attribute [rw] principals
-    #   The grant principals.
+    #   The grant principals. This value should be specified as an Amazon
+    #   Resource Name (ARN).
     #   @return [Array<String>]
     #
     # @!attribute [rw] home_region
@@ -729,8 +730,8 @@ module Aws::LicenseManager
     # @!attribute [rw] source_license_context
     #   Information that identifies the license type you are converting
     #   from. For the structure of the source license, see [Convert a
-    #   license type using the AWS CLI][1] in the *License Manager User
-    #   Guide*.
+    #   license type using the Amazon Web Services CLI][1] in the *License
+    #   Manager User Guide*.
     #
     #
     #
@@ -740,7 +741,8 @@ module Aws::LicenseManager
     # @!attribute [rw] destination_license_context
     #   Information that identifies the license type you are converting to.
     #   For the structure of the destination license, see [Convert a license
-    #   type using the AWS CLI][1] in the *License Manager User Guide*.
+    #   type using the Amazon Web Services CLI][1] in the *License Manager
+    #   User Guide*.
     #
     #
     #
@@ -3234,6 +3236,69 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListReceivedGrantsForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         license_arn: "Arn", # required
+    #         filters: [
+    #           {
+    #             name: "FilterName",
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] license_arn
+    #   The Amazon Resource Name (ARN) of the received license.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to scope the results. The following filters are supported:
+    #
+    #   * `ParentArn`
+    #
+    #   * `GranteePrincipalArn`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrantsForOrganizationRequest AWS API Documentation
+    #
+    class ListReceivedGrantsForOrganizationRequest < Struct.new(
+      :license_arn,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] grants
+    #   Lists the grants the organization has received.
+    #   @return [Array<Types::Grant>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrantsForOrganizationResponse AWS API Documentation
+    #
+    class ListReceivedGrantsForOrganizationResponse < Struct.new(
+      :grants,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListReceivedGrantsRequest
     #   data as a hash:
     #
@@ -3298,6 +3363,63 @@ module Aws::LicenseManager
     #
     class ListReceivedGrantsResponse < Struct.new(
       :grants,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListReceivedLicensesForOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "FilterName",
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters to scope the results. The following filters are supported:
+    #
+    #   * `Beneficiary`
+    #
+    #   * `ProductSKU`
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedLicensesForOrganizationRequest AWS API Documentation
+    #
+    class ListReceivedLicensesForOrganizationRequest < Struct.new(
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] licenses
+    #   Lists the licenses the organization has received.
+    #   @return [Array<Types::GrantedLicense>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedLicensesForOrganizationResponse AWS API Documentation
+    #
+    class ListReceivedLicensesForOrganizationResponse < Struct.new(
+      :licenses,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

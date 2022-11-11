@@ -66,8 +66,14 @@ module Aws::MarketplaceCatalog
             Aws::MarketplaceCatalog::Endpoints::ListChangeSets.build(context)
           when :list_entities
             Aws::MarketplaceCatalog::Endpoints::ListEntities.build(context)
+          when :list_tags_for_resource
+            Aws::MarketplaceCatalog::Endpoints::ListTagsForResource.build(context)
           when :start_change_set
             Aws::MarketplaceCatalog::Endpoints::StartChangeSet.build(context)
+          when :tag_resource
+            Aws::MarketplaceCatalog::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::MarketplaceCatalog::Endpoints::UntagResource.build(context)
           end
         end
       end

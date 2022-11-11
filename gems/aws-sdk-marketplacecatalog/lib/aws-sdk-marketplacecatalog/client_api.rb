@@ -54,9 +54,12 @@ module Aws::MarketplaceCatalog
     ListChangeSetsResponse = Shapes::StructureShape.new(name: 'ListChangeSetsResponse')
     ListEntitiesRequest = Shapes::StructureShape.new(name: 'ListEntitiesRequest')
     ListEntitiesResponse = Shapes::StructureShape.new(name: 'ListEntitiesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResultInteger = Shapes::IntegerShape.new(name: 'MaxResultInteger')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     RequestedChangeList = Shapes::ListShape.new(name: 'RequestedChangeList')
+    ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -68,7 +71,16 @@ module Aws::MarketplaceCatalog
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartChangeSetRequest = Shapes::StructureShape.new(name: 'StartChangeSetRequest')
     StartChangeSetResponse = Shapes::StructureShape.new(name: 'StartChangeSetResponse')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
     VisibilityValue = Shapes::StringShape.new(name: 'VisibilityValue')
@@ -86,6 +98,7 @@ module Aws::MarketplaceCatalog
 
     Change.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, required: true, location_name: "ChangeType"))
     Change.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, required: true, location_name: "Entity"))
+    Change.add_member(:entity_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "EntityTags"))
     Change.add_member(:details, Shapes::ShapeRef.new(shape: Json, required: true, location_name: "Details"))
     Change.add_member(:change_name, Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
     Change.struct_class = Types::Change
@@ -189,6 +202,13 @@ module Aws::MarketplaceCatalog
     ListEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEntitiesResponse.struct_class = Types::ListEntitiesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn"))
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     RequestedChangeList.member = Shapes::ShapeRef.new(shape: Change)
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
@@ -213,14 +233,35 @@ module Aws::MarketplaceCatalog
     StartChangeSetRequest.add_member(:change_set, Shapes::ShapeRef.new(shape: RequestedChangeList, required: true, location_name: "ChangeSet"))
     StartChangeSetRequest.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
     StartChangeSetRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartChangeSetRequest.add_member(:change_set_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ChangeSetTags"))
     StartChangeSetRequest.struct_class = Types::StartChangeSetRequest
 
     StartChangeSetResponse.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
     StartChangeSetResponse.add_member(:change_set_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
     StartChangeSetResponse.struct_class = Types::StartChangeSetResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -324,6 +365,19 @@ module Aws::MarketplaceCatalog
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListTagsForResource"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:start_change_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartChangeSet"
         o.http_method = "POST"
@@ -337,6 +391,32 @@ module Aws::MarketplaceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/TagResource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/UntagResource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

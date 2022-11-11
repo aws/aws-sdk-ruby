@@ -2177,23 +2177,85 @@ module Aws::Rekognition
     # For an example, see Analyzing images stored in an Amazon S3 bucket in
     # the Amazon Rekognition Developer Guide.
     #
-    # <note markdown="1"> `DetectLabels` does not support the detection of activities. However,
-    # activity detection is supported for label detection in videos. For
-    # more information, see StartLabelDetection in the Amazon Rekognition
-    # Developer Guide.
-    #
-    #  </note>
-    #
     # You pass the input image as base64-encoded image bytes or as a
     # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
     # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
+    # **Optional Parameters**
+    #
+    # You can specify one or both of the `GENERAL_LABELS` and
+    # `IMAGE_PROPERTIES` feature types when calling the DetectLabels API.
+    # Including `GENERAL_LABELS` will ensure the response includes the
+    # labels detected in the input image, while including `IMAGE_PROPERTIES
+    # `will ensure the response includes information about the image quality
+    # and color.
+    #
+    # When using `GENERAL_LABELS` and/or `IMAGE_PROPERTIES` you can provide
+    # filtering criteria to the Settings parameter. You can filter with sets
+    # of individual labels or with label categories. You can specify
+    # inclusive filters, exclusive filters, or a combination of inclusive
+    # and exclusive filters. For more information on filtering see
+    # [Detecting Labels in an Image][1].
+    #
+    # You can specify `MinConfidence` to control the confidence threshold
+    # for the labels returned. The default is 55%. You can also add the
+    # `MaxLabels` parameter to limit the number of labels returned. The
+    # default and upper limit is 1000 labels.
+    #
+    # **Response Elements**
+    #
     # For each object, scene, and concept the API returns one or more
-    # labels. Each label provides the object name, and the level of
-    # confidence that the image contains the object. For example, suppose
-    # the input image has a lighthouse, the sea, and a rock. The response
-    # includes all three labels, one for each object.
+    # labels. The API returns the following types of information regarding
+    # labels:
+    #
+    # * Name - The name of the detected label.
+    #
+    # * Confidence - The level of confidence in the label assigned to a
+    #   detected object.
+    #
+    # * Parents - The ancestor labels for a detected label. DetectLabels
+    #   returns a hierarchical taxonomy of detected labels. For example, a
+    #   detected car might be assigned the label car. The label car has two
+    #   parent labels: Vehicle (its parent) and Transportation (its
+    #   grandparent). The response includes the all ancestors for a label,
+    #   where every ancestor is a unique label. In the previous example,
+    #   Car, Vehicle, and Transportation are returned as unique labels in
+    #   the response.
+    #
+    # * Aliases - Possible Aliases for the label.
+    #
+    # * Categories - The label categories that the detected label belongs
+    #   to. A given label can belong to more than one category.
+    #
+    # * BoundingBox — Bounding boxes are described for all instances of
+    #   detected common object labels, returned in an array of Instance
+    #   objects. An Instance object contains a BoundingBox object,
+    #   describing the location of the label on the input image. It also
+    #   includes the confidence for the accuracy of the detected bounding
+    #   box.
+    #
+    # The API returns the following information regarding the image, as part
+    # of the ImageProperties structure:
+    #
+    # * Quality - Information about the Sharpness, Brightness, and Contrast
+    #   of the input image, scored between 0 to 100. Image quality is
+    #   returned for the entire image, as well as the background and the
+    #   foreground.
+    #
+    # * Dominant Color - An array of the dominant colors in the image.
+    #
+    # * Foreground - Information about the Sharpness and Brightness of the
+    #   input image’s foreground.
+    #
+    # * Background - Information about the Sharpness and Brightness of the
+    #   input image’s background.
+    #
+    # The list of returned labels will include at least one label for every
+    # detected object, along with information about that label. In the
+    # following example, suppose the input image has a lighthouse, the sea,
+    # and a rock. The response includes all three labels, one for each
+    # object, as well as the confidence in the label:
     #
     # `\{Name: lighthouse, Confidence: 98.4629\}`
     #
@@ -2201,11 +2263,9 @@ module Aws::Rekognition
     #
     # ` \{Name: sea,Confidence: 75.061\}`
     #
-    # In the preceding example, the operation returns one label for each of
-    # the three objects. The operation can also return multiple labels for
-    # the same object in the image. For example, if the input image shows a
-    # flower (for example, a tulip), the operation might return the
-    # following three labels.
+    # The list of labels can include multiple labels for the same object.
+    # For example, if the input image shows a flower (for example, a tulip),
+    # the operation might return the following three labels.
     #
     # `\{Name: flower,Confidence: 99.0562\}`
     #
@@ -2216,35 +2276,20 @@ module Aws::Rekognition
     # In this example, the detection algorithm more precisely identifies the
     # flower as a tulip.
     #
-    # In response, the API returns an array of labels. In addition, the
-    # response also includes the orientation correction. Optionally, you can
-    # specify `MinConfidence` to control the confidence threshold for the
-    # labels returned. The default is 55%. You can also add the `MaxLabels`
-    # parameter to limit the number of labels returned.
-    #
     # <note markdown="1"> If the object detected is a person, the operation doesn't provide the
     # same facial details that the DetectFaces operation provides.
     #
     #  </note>
-    #
-    # `DetectLabels` returns bounding boxes for instances of common object
-    # labels in an array of Instance objects. An `Instance` object contains
-    # a BoundingBox object, for the location of the label on the image. It
-    # also includes the confidence by which the bounding box was detected.
-    #
-    # `DetectLabels` also returns a hierarchical taxonomy of detected
-    # labels. For example, a detected car might be assigned the label *car*.
-    # The label *car* has two parent labels: *Vehicle* (its parent) and
-    # *Transportation* (its grandparent). The response returns the entire
-    # list of ancestors for a label. Each ancestor is a unique label in the
-    # response. In the previous example, *Car*, *Vehicle*, and
-    # *Transportation* are returned as unique labels in the response.
     #
     # This is a stateless API operation. That is, the operation does not
     # persist any data.
     #
     # This operation requires permissions to perform the
     # `rekognition:DetectLabels` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/labels-detect-labels-image.html
     #
     # @option params [required, Types::Image] :image
     #   The input image as base64-encoded bytes or an S3 object. If you use
@@ -2270,11 +2315,26 @@ module Aws::Rekognition
     #   If `MinConfidence` is not specified, the operation returns labels with
     #   a confidence values greater than or equal to 55 percent.
     #
+    # @option params [Array<String>] :features
+    #   A list of the types of analysis to perform. Specifying GENERAL\_LABELS
+    #   uses the label detection feature, while specifying IMAGE\_PROPERTIES
+    #   returns information regarding image color and quality. If no option is
+    #   specified GENERAL\_LABELS is used by default.
+    #
+    # @option params [Types::DetectLabelsSettings] :settings
+    #   A list of the filters to be applied to returned detected labels and
+    #   image properties. Specified filters can be inclusive, exclusive, or a
+    #   combination of both. Filters can be used for individual labels or
+    #   label categories. The exact label names or label categories must be
+    #   supplied. For a full list of labels and label categories, see LINK
+    #   HERE.
+    #
     # @return [Types::DetectLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectLabelsResponse#labels #labels} => Array&lt;Types::Label&gt;
     #   * {Types::DetectLabelsResponse#orientation_correction #orientation_correction} => String
     #   * {Types::DetectLabelsResponse#label_model_version #label_model_version} => String
+    #   * {Types::DetectLabelsResponse#image_properties #image_properties} => Types::DetectLabelsImageProperties
     #
     #
     # @example Example: To detect labels
@@ -2319,6 +2379,18 @@ module Aws::Rekognition
     #     },
     #     max_labels: 1,
     #     min_confidence: 1.0,
+    #     features: ["GENERAL_LABELS"], # accepts GENERAL_LABELS, IMAGE_PROPERTIES
+    #     settings: {
+    #       general_labels: {
+    #         label_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #         label_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #         label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #         label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #       },
+    #       image_properties: {
+    #         max_dominant_colors: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2332,10 +2404,55 @@ module Aws::Rekognition
     #   resp.labels[0].instances[0].bounding_box.left #=> Float
     #   resp.labels[0].instances[0].bounding_box.top #=> Float
     #   resp.labels[0].instances[0].confidence #=> Float
+    #   resp.labels[0].instances[0].dominant_colors #=> Array
+    #   resp.labels[0].instances[0].dominant_colors[0].red #=> Integer
+    #   resp.labels[0].instances[0].dominant_colors[0].blue #=> Integer
+    #   resp.labels[0].instances[0].dominant_colors[0].green #=> Integer
+    #   resp.labels[0].instances[0].dominant_colors[0].hex_code #=> String
+    #   resp.labels[0].instances[0].dominant_colors[0].css_color #=> String
+    #   resp.labels[0].instances[0].dominant_colors[0].simplified_color #=> String
+    #   resp.labels[0].instances[0].dominant_colors[0].pixel_percent #=> Float
     #   resp.labels[0].parents #=> Array
     #   resp.labels[0].parents[0].name #=> String
+    #   resp.labels[0].aliases #=> Array
+    #   resp.labels[0].aliases[0].name #=> String
+    #   resp.labels[0].categories #=> Array
+    #   resp.labels[0].categories[0].name #=> String
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
     #   resp.label_model_version #=> String
+    #   resp.image_properties.quality.brightness #=> Float
+    #   resp.image_properties.quality.sharpness #=> Float
+    #   resp.image_properties.quality.contrast #=> Float
+    #   resp.image_properties.dominant_colors #=> Array
+    #   resp.image_properties.dominant_colors[0].red #=> Integer
+    #   resp.image_properties.dominant_colors[0].blue #=> Integer
+    #   resp.image_properties.dominant_colors[0].green #=> Integer
+    #   resp.image_properties.dominant_colors[0].hex_code #=> String
+    #   resp.image_properties.dominant_colors[0].css_color #=> String
+    #   resp.image_properties.dominant_colors[0].simplified_color #=> String
+    #   resp.image_properties.dominant_colors[0].pixel_percent #=> Float
+    #   resp.image_properties.foreground.quality.brightness #=> Float
+    #   resp.image_properties.foreground.quality.sharpness #=> Float
+    #   resp.image_properties.foreground.quality.contrast #=> Float
+    #   resp.image_properties.foreground.dominant_colors #=> Array
+    #   resp.image_properties.foreground.dominant_colors[0].red #=> Integer
+    #   resp.image_properties.foreground.dominant_colors[0].blue #=> Integer
+    #   resp.image_properties.foreground.dominant_colors[0].green #=> Integer
+    #   resp.image_properties.foreground.dominant_colors[0].hex_code #=> String
+    #   resp.image_properties.foreground.dominant_colors[0].css_color #=> String
+    #   resp.image_properties.foreground.dominant_colors[0].simplified_color #=> String
+    #   resp.image_properties.foreground.dominant_colors[0].pixel_percent #=> Float
+    #   resp.image_properties.background.quality.brightness #=> Float
+    #   resp.image_properties.background.quality.sharpness #=> Float
+    #   resp.image_properties.background.quality.contrast #=> Float
+    #   resp.image_properties.background.dominant_colors #=> Array
+    #   resp.image_properties.background.dominant_colors[0].red #=> Integer
+    #   resp.image_properties.background.dominant_colors[0].blue #=> Integer
+    #   resp.image_properties.background.dominant_colors[0].green #=> Integer
+    #   resp.image_properties.background.dominant_colors[0].hex_code #=> String
+    #   resp.image_properties.background.dominant_colors[0].css_color #=> String
+    #   resp.image_properties.background.dominant_colors[0].simplified_color #=> String
+    #   resp.image_properties.background.dominant_colors[0].pixel_percent #=> Float
     #
     # @overload detect_labels(params = {})
     # @param [Hash] params ({})
@@ -3378,8 +3495,20 @@ module Aws::Rekognition
     #   resp.labels[0].label.instances[0].bounding_box.left #=> Float
     #   resp.labels[0].label.instances[0].bounding_box.top #=> Float
     #   resp.labels[0].label.instances[0].confidence #=> Float
+    #   resp.labels[0].label.instances[0].dominant_colors #=> Array
+    #   resp.labels[0].label.instances[0].dominant_colors[0].red #=> Integer
+    #   resp.labels[0].label.instances[0].dominant_colors[0].blue #=> Integer
+    #   resp.labels[0].label.instances[0].dominant_colors[0].green #=> Integer
+    #   resp.labels[0].label.instances[0].dominant_colors[0].hex_code #=> String
+    #   resp.labels[0].label.instances[0].dominant_colors[0].css_color #=> String
+    #   resp.labels[0].label.instances[0].dominant_colors[0].simplified_color #=> String
+    #   resp.labels[0].label.instances[0].dominant_colors[0].pixel_percent #=> Float
     #   resp.labels[0].label.parents #=> Array
     #   resp.labels[0].label.parents[0].name #=> String
+    #   resp.labels[0].label.aliases #=> Array
+    #   resp.labels[0].label.aliases[0].name #=> String
+    #   resp.labels[0].label.categories #=> Array
+    #   resp.labels[0].label.categories[0].name #=> String
     #   resp.label_model_version #=> String
     #
     # @overload get_label_detection(params = {})
@@ -5933,7 +6062,9 @@ module Aws::Rekognition
     # @option params [Types::StreamProcessingStartSelector] :start_selector
     #   Specifies the starting point in the Kinesis stream to start
     #   processing. You can use the producer timestamp or the fragment number.
-    #   For more information, see [Fragment][1].
+    #   If you use the producer timestamp, you must put the time in
+    #   milliseconds. For more information about fragment numbers, see
+    #   [Fragment][1].
     #
     #   This is a required parameter for label detection stream processors and
     #   should not be used to start a face search stream processor.
@@ -6338,7 +6469,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

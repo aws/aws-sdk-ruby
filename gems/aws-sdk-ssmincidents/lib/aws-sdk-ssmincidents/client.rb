@@ -533,6 +533,16 @@ module Aws::SSMIncidents
     # @option params [required, String] :event_data
     #   A short description of the event.
     #
+    # @option params [Array<Types::EventReference>] :event_references
+    #   Adds one or more references to the `TimelineEvent`. A reference can be
+    #   an Amazon Web Services resource involved in the incident or in some
+    #   way associated with it. When you specify a reference, you enter the
+    #   Amazon Resource Name (ARN) of the resource. You can also specify a
+    #   related item. As an example, you could specify the ARN of an Amazon
+    #   DynamoDB (DynamoDB) table. The table for this example is the resource.
+    #   You could also specify a Amazon CloudWatch metric for that table. The
+    #   metric is the related item.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :event_time
     #   The time that the event occurred.
     #
@@ -554,6 +564,12 @@ module Aws::SSMIncidents
     #   resp = client.create_timeline_event({
     #     client_token: "ClientToken",
     #     event_data: "EventData", # required
+    #     event_references: [
+    #       {
+    #         related_item_id: "GeneratedId",
+    #         resource: "Arn",
+    #       },
+    #     ],
     #     event_time: Time.now, # required
     #     event_type: "TimelineEventType", # required
     #     incident_record_arn: "Arn", # required
@@ -922,6 +938,9 @@ module Aws::SSMIncidents
     #
     #   resp.event.event_data #=> String
     #   resp.event.event_id #=> String
+    #   resp.event.event_references #=> Array
+    #   resp.event.event_references[0].related_item_id #=> String
+    #   resp.event.event_references[0].resource #=> String
     #   resp.event.event_time #=> Time
     #   resp.event.event_type #=> String
     #   resp.event.event_updated_time #=> Time
@@ -1051,6 +1070,7 @@ module Aws::SSMIncidents
     #
     #   resp.next_token #=> String
     #   resp.related_items #=> Array
+    #   resp.related_items[0].generated_id #=> String
     #   resp.related_items[0].identifier.type #=> String, one of "ANALYSIS", "INCIDENT", "METRIC", "PARENT", "ATTACHMENT", "OTHER", "AUTOMATION", "INVOLVED_RESOURCE", "TASK"
     #   resp.related_items[0].identifier.value.arn #=> String
     #   resp.related_items[0].identifier.value.metric_definition #=> String
@@ -1243,6 +1263,9 @@ module Aws::SSMIncidents
     #
     #   resp.event_summaries #=> Array
     #   resp.event_summaries[0].event_id #=> String
+    #   resp.event_summaries[0].event_references #=> Array
+    #   resp.event_summaries[0].event_references[0].related_item_id #=> String
+    #   resp.event_summaries[0].event_references[0].resource #=> String
     #   resp.event_summaries[0].event_time #=> Time
     #   resp.event_summaries[0].event_type #=> String
     #   resp.event_summaries[0].event_updated_time #=> Time
@@ -1357,6 +1380,7 @@ module Aws::SSMIncidents
     #     impact: 1,
     #     related_items: [
     #       {
+    #         generated_id: "GeneratedId",
     #         identifier: { # required
     #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
     #           value: { # required
@@ -1600,6 +1624,7 @@ module Aws::SSMIncidents
     #     incident_record_arn: "Arn", # required
     #     related_items_update: { # required
     #       item_to_add: {
+    #         generated_id: "GeneratedId",
     #         identifier: { # required
     #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE, TASK
     #           value: { # required
@@ -1815,6 +1840,20 @@ module Aws::SSMIncidents
     #   The ID of the event you are updating. You can find this by using
     #   `ListTimelineEvents`.
     #
+    # @option params [Array<Types::EventReference>] :event_references
+    #   Updates all existing references in a `TimelineEvent`. A reference can
+    #   be an Amazon Web Services resource involved in the incident or in some
+    #   way associated with it. When you specify a reference, you enter the
+    #   Amazon Resource Name (ARN) of the resource. You can also specify a
+    #   related item. As an example, you could specify the ARN of an Amazon
+    #   DynamoDB (DynamoDB) table. The table for this example is the resource.
+    #   You could also specify a Amazon CloudWatch metric for that table. The
+    #   metric is the related item.
+    #
+    #   This update action overrides all existing references. If you want to
+    #   keep existing references, you must specify them in the call. If you
+    #   don't, this action removes them and enters only new references.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :event_time
     #   The time that the event occurred.
     #
@@ -1833,6 +1872,12 @@ module Aws::SSMIncidents
     #     client_token: "ClientToken",
     #     event_data: "EventData",
     #     event_id: "UUID", # required
+    #     event_references: [
+    #       {
+    #         related_item_id: "GeneratedId",
+    #         resource: "Arn",
+    #       },
+    #     ],
     #     event_time: Time.now,
     #     event_type: "TimelineEventType",
     #     incident_record_arn: "Arn", # required
@@ -1860,7 +1905,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

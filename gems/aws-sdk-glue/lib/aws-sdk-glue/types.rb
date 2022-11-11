@@ -5302,7 +5302,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
-    #   The AWS Availability Zone where this `DevEndpoint` is located.
+    #   The Amazon Web Services Availability Zone where this `DevEndpoint`
+    #   is located.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -9230,7 +9231,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
-    #   The AWS Availability Zone where this `DevEndpoint` is located.
+    #   The Amazon Web Services Availability Zone where this `DevEndpoint`
+    #   is located.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id

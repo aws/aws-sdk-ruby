@@ -117,8 +117,17 @@ module Aws::Rekognition
     DetectCustomLabelsResponse = Shapes::StructureShape.new(name: 'DetectCustomLabelsResponse')
     DetectFacesRequest = Shapes::StructureShape.new(name: 'DetectFacesRequest')
     DetectFacesResponse = Shapes::StructureShape.new(name: 'DetectFacesResponse')
+    DetectLabelsFeatureList = Shapes::ListShape.new(name: 'DetectLabelsFeatureList')
+    DetectLabelsFeatureName = Shapes::StringShape.new(name: 'DetectLabelsFeatureName')
+    DetectLabelsImageBackground = Shapes::StructureShape.new(name: 'DetectLabelsImageBackground')
+    DetectLabelsImageForeground = Shapes::StructureShape.new(name: 'DetectLabelsImageForeground')
+    DetectLabelsImageProperties = Shapes::StructureShape.new(name: 'DetectLabelsImageProperties')
+    DetectLabelsImagePropertiesSettings = Shapes::StructureShape.new(name: 'DetectLabelsImagePropertiesSettings')
+    DetectLabelsImageQuality = Shapes::StructureShape.new(name: 'DetectLabelsImageQuality')
+    DetectLabelsMaxDominantColors = Shapes::IntegerShape.new(name: 'DetectLabelsMaxDominantColors')
     DetectLabelsRequest = Shapes::StructureShape.new(name: 'DetectLabelsRequest')
     DetectLabelsResponse = Shapes::StructureShape.new(name: 'DetectLabelsResponse')
+    DetectLabelsSettings = Shapes::StructureShape.new(name: 'DetectLabelsSettings')
     DetectModerationLabelsRequest = Shapes::StructureShape.new(name: 'DetectModerationLabelsRequest')
     DetectModerationLabelsResponse = Shapes::StructureShape.new(name: 'DetectModerationLabelsResponse')
     DetectProtectiveEquipmentRequest = Shapes::StructureShape.new(name: 'DetectProtectiveEquipmentRequest')
@@ -131,6 +140,8 @@ module Aws::Rekognition
     DistributeDatasetEntriesRequest = Shapes::StructureShape.new(name: 'DistributeDatasetEntriesRequest')
     DistributeDatasetEntriesResponse = Shapes::StructureShape.new(name: 'DistributeDatasetEntriesResponse')
     DistributeDatasetMetadataList = Shapes::ListShape.new(name: 'DistributeDatasetMetadataList')
+    DominantColor = Shapes::StructureShape.new(name: 'DominantColor')
+    DominantColors = Shapes::ListShape.new(name: 'DominantColors')
     Emotion = Shapes::StructureShape.new(name: 'Emotion')
     EmotionName = Shapes::StringShape.new(name: 'EmotionName')
     Emotions = Shapes::ListShape.new(name: 'Emotions')
@@ -161,6 +172,9 @@ module Aws::Rekognition
     FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
     Gender = Shapes::StructureShape.new(name: 'Gender')
     GenderType = Shapes::StringShape.new(name: 'GenderType')
+    GeneralLabelsFilterList = Shapes::ListShape.new(name: 'GeneralLabelsFilterList')
+    GeneralLabelsFilterValue = Shapes::StringShape.new(name: 'GeneralLabelsFilterValue')
+    GeneralLabelsSettings = Shapes::StructureShape.new(name: 'GeneralLabelsSettings')
     Geometry = Shapes::StructureShape.new(name: 'Geometry')
     GetCelebrityInfoRequest = Shapes::StructureShape.new(name: 'GetCelebrityInfoRequest')
     GetCelebrityInfoResponse = Shapes::StructureShape.new(name: 'GetCelebrityInfoResponse')
@@ -223,6 +237,10 @@ module Aws::Rekognition
     KnownGender = Shapes::StructureShape.new(name: 'KnownGender')
     KnownGenderType = Shapes::StringShape.new(name: 'KnownGenderType')
     Label = Shapes::StructureShape.new(name: 'Label')
+    LabelAlias = Shapes::StructureShape.new(name: 'LabelAlias')
+    LabelAliases = Shapes::ListShape.new(name: 'LabelAliases')
+    LabelCategories = Shapes::ListShape.new(name: 'LabelCategories')
+    LabelCategory = Shapes::StructureShape.new(name: 'LabelCategory')
     LabelDetection = Shapes::StructureShape.new(name: 'LabelDetection')
     LabelDetectionSortBy = Shapes::StringShape.new(name: 'LabelDetectionSortBy')
     LabelDetections = Shapes::ListShape.new(name: 'LabelDetections')
@@ -779,15 +797,46 @@ module Aws::Rekognition
     DetectFacesResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
     DetectFacesResponse.struct_class = Types::DetectFacesResponse
 
+    DetectLabelsFeatureList.member = Shapes::ShapeRef.new(shape: DetectLabelsFeatureName)
+
+    DetectLabelsImageBackground.add_member(:quality, Shapes::ShapeRef.new(shape: DetectLabelsImageQuality, location_name: "Quality"))
+    DetectLabelsImageBackground.add_member(:dominant_colors, Shapes::ShapeRef.new(shape: DominantColors, location_name: "DominantColors"))
+    DetectLabelsImageBackground.struct_class = Types::DetectLabelsImageBackground
+
+    DetectLabelsImageForeground.add_member(:quality, Shapes::ShapeRef.new(shape: DetectLabelsImageQuality, location_name: "Quality"))
+    DetectLabelsImageForeground.add_member(:dominant_colors, Shapes::ShapeRef.new(shape: DominantColors, location_name: "DominantColors"))
+    DetectLabelsImageForeground.struct_class = Types::DetectLabelsImageForeground
+
+    DetectLabelsImageProperties.add_member(:quality, Shapes::ShapeRef.new(shape: DetectLabelsImageQuality, location_name: "Quality"))
+    DetectLabelsImageProperties.add_member(:dominant_colors, Shapes::ShapeRef.new(shape: DominantColors, location_name: "DominantColors"))
+    DetectLabelsImageProperties.add_member(:foreground, Shapes::ShapeRef.new(shape: DetectLabelsImageForeground, location_name: "Foreground"))
+    DetectLabelsImageProperties.add_member(:background, Shapes::ShapeRef.new(shape: DetectLabelsImageBackground, location_name: "Background"))
+    DetectLabelsImageProperties.struct_class = Types::DetectLabelsImageProperties
+
+    DetectLabelsImagePropertiesSettings.add_member(:max_dominant_colors, Shapes::ShapeRef.new(shape: DetectLabelsMaxDominantColors, location_name: "MaxDominantColors"))
+    DetectLabelsImagePropertiesSettings.struct_class = Types::DetectLabelsImagePropertiesSettings
+
+    DetectLabelsImageQuality.add_member(:brightness, Shapes::ShapeRef.new(shape: Float, location_name: "Brightness"))
+    DetectLabelsImageQuality.add_member(:sharpness, Shapes::ShapeRef.new(shape: Float, location_name: "Sharpness"))
+    DetectLabelsImageQuality.add_member(:contrast, Shapes::ShapeRef.new(shape: Float, location_name: "Contrast"))
+    DetectLabelsImageQuality.struct_class = Types::DetectLabelsImageQuality
+
     DetectLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     DetectLabelsRequest.add_member(:max_labels, Shapes::ShapeRef.new(shape: UInteger, location_name: "MaxLabels"))
     DetectLabelsRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    DetectLabelsRequest.add_member(:features, Shapes::ShapeRef.new(shape: DetectLabelsFeatureList, location_name: "Features"))
+    DetectLabelsRequest.add_member(:settings, Shapes::ShapeRef.new(shape: DetectLabelsSettings, location_name: "Settings"))
     DetectLabelsRequest.struct_class = Types::DetectLabelsRequest
 
     DetectLabelsResponse.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
     DetectLabelsResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
     DetectLabelsResponse.add_member(:label_model_version, Shapes::ShapeRef.new(shape: String, location_name: "LabelModelVersion"))
+    DetectLabelsResponse.add_member(:image_properties, Shapes::ShapeRef.new(shape: DetectLabelsImageProperties, location_name: "ImageProperties"))
     DetectLabelsResponse.struct_class = Types::DetectLabelsResponse
+
+    DetectLabelsSettings.add_member(:general_labels, Shapes::ShapeRef.new(shape: GeneralLabelsSettings, location_name: "GeneralLabels"))
+    DetectLabelsSettings.add_member(:image_properties, Shapes::ShapeRef.new(shape: DetectLabelsImagePropertiesSettings, location_name: "ImageProperties"))
+    DetectLabelsSettings.struct_class = Types::DetectLabelsSettings
 
     DetectModerationLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
     DetectModerationLabelsRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
@@ -834,6 +883,17 @@ module Aws::Rekognition
     DistributeDatasetEntriesResponse.struct_class = Types::DistributeDatasetEntriesResponse
 
     DistributeDatasetMetadataList.member = Shapes::ShapeRef.new(shape: DistributeDataset)
+
+    DominantColor.add_member(:red, Shapes::ShapeRef.new(shape: UInteger, location_name: "Red"))
+    DominantColor.add_member(:blue, Shapes::ShapeRef.new(shape: UInteger, location_name: "Blue"))
+    DominantColor.add_member(:green, Shapes::ShapeRef.new(shape: UInteger, location_name: "Green"))
+    DominantColor.add_member(:hex_code, Shapes::ShapeRef.new(shape: String, location_name: "HexCode"))
+    DominantColor.add_member(:css_color, Shapes::ShapeRef.new(shape: String, location_name: "CSSColor"))
+    DominantColor.add_member(:simplified_color, Shapes::ShapeRef.new(shape: String, location_name: "SimplifiedColor"))
+    DominantColor.add_member(:pixel_percent, Shapes::ShapeRef.new(shape: Percent, location_name: "PixelPercent"))
+    DominantColor.struct_class = Types::DominantColor
+
+    DominantColors.member = Shapes::ShapeRef.new(shape: DominantColor)
 
     Emotion.add_member(:type, Shapes::ShapeRef.new(shape: EmotionName, location_name: "Type"))
     Emotion.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -919,6 +979,14 @@ module Aws::Rekognition
     Gender.add_member(:value, Shapes::ShapeRef.new(shape: GenderType, location_name: "Value"))
     Gender.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Gender.struct_class = Types::Gender
+
+    GeneralLabelsFilterList.member = Shapes::ShapeRef.new(shape: GeneralLabelsFilterValue)
+
+    GeneralLabelsSettings.add_member(:label_inclusion_filters, Shapes::ShapeRef.new(shape: GeneralLabelsFilterList, location_name: "LabelInclusionFilters"))
+    GeneralLabelsSettings.add_member(:label_exclusion_filters, Shapes::ShapeRef.new(shape: GeneralLabelsFilterList, location_name: "LabelExclusionFilters"))
+    GeneralLabelsSettings.add_member(:label_category_inclusion_filters, Shapes::ShapeRef.new(shape: GeneralLabelsFilterList, location_name: "LabelCategoryInclusionFilters"))
+    GeneralLabelsSettings.add_member(:label_category_exclusion_filters, Shapes::ShapeRef.new(shape: GeneralLabelsFilterList, location_name: "LabelCategoryExclusionFilters"))
+    GeneralLabelsSettings.struct_class = Types::GeneralLabelsSettings
 
     Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
@@ -1089,6 +1157,7 @@ module Aws::Rekognition
 
     Instance.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     Instance.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    Instance.add_member(:dominant_colors, Shapes::ShapeRef.new(shape: DominantColors, location_name: "DominantColors"))
     Instance.struct_class = Types::Instance
 
     Instances.member = Shapes::ShapeRef.new(shape: Instance)
@@ -1122,7 +1191,19 @@ module Aws::Rekognition
     Label.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Label.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, location_name: "Instances"))
     Label.add_member(:parents, Shapes::ShapeRef.new(shape: Parents, location_name: "Parents"))
+    Label.add_member(:aliases, Shapes::ShapeRef.new(shape: LabelAliases, location_name: "Aliases"))
+    Label.add_member(:categories, Shapes::ShapeRef.new(shape: LabelCategories, location_name: "Categories"))
     Label.struct_class = Types::Label
+
+    LabelAlias.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    LabelAlias.struct_class = Types::LabelAlias
+
+    LabelAliases.member = Shapes::ShapeRef.new(shape: LabelAlias)
+
+    LabelCategories.member = Shapes::ShapeRef.new(shape: LabelCategory)
+
+    LabelCategory.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    LabelCategory.struct_class = Types::LabelCategory
 
     LabelDetection.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     LabelDetection.add_member(:label, Shapes::ShapeRef.new(shape: Label, location_name: "Label"))

@@ -650,18 +650,58 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
-    # This operation allows you to request changes for your entities. Within
-    # a single ChangeSet, you cannot start the same change type against the
-    # same entity multiple times. Additionally, when a ChangeSet is running,
-    # all the entities targeted by the different changes are locked until
-    # the ChangeSet has completed (either succeeded, cancelled, or failed).
-    # If you try to start a ChangeSet containing a change against an entity
-    # that is already locked, you will receive a `ResourceInUseException`.
+    # Lists all tags that have been added to a resource (either an
+    # [entity][1] or [change set][2]).
     #
-    # For example, you cannot start the ChangeSet described in the
-    # [example][1] later in this topic, because it contains two changes to
-    # execute the same change type (`AddRevisions`) against the same entity
-    # (`entity-id@1)`.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities
+    # [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
+    #
+    # @option params [required, String] :resource_arn
+    #   Required. The Amazon Resource Name (ARN) associated with the resource
+    #   you want to list tags on.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Allows you to request changes for your entities. Within a single
+    # `ChangeSet`, you can't start the same change type against the same
+    # entity multiple times. Additionally, when a `ChangeSet` is running,
+    # all the entities targeted by the different changes are locked until
+    # the change set has completed (either succeeded, cancelled, or failed).
+    # If you try to start a change set containing a change against an entity
+    # that is already locked, you will receive a `ResourceInUseException`
+    # error.
+    #
+    # For example, you can't start the `ChangeSet` described in the
+    # [example][1] later in this topic because it contains two changes to
+    # run the same change type (`AddRevisions`) against the same entity
+    # (`entity-id@1`).
     #
     # For more information about working with change sets, see [ Working
     # with change sets][2].
@@ -687,6 +727,10 @@ module Aws::MarketplaceCatalog
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :change_set_tags
+    #   A list of objects specifying each key name and value for the
+    #   `ChangeSetTags` property.
+    #
     # @return [Types::StartChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChangeSetResponse#change_set_id #change_set_id} => String
@@ -703,12 +747,24 @@ module Aws::MarketplaceCatalog
     #           type: "EntityType", # required
     #           identifier: "Identifier",
     #         },
+    #         entity_tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #         details: "Json", # required
     #         change_name: "ChangeName",
     #       },
     #     ],
     #     change_set_name: "ChangeSetName",
     #     client_request_token: "ClientRequestToken",
+    #     change_set_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -725,6 +781,78 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
+    # Tags a resource (either an [entity][1] or [change set][2]).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities
+    # [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
+    #
+    # @option params [required, String] :resource_arn
+    #   Required. The Amazon Resource Name (ARN) associated with the resource
+    #   you want to tag.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   Required. A list of objects specifying each key name and value. Number
+    #   of objects allowed: 1-50.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceARN", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag or list of tags from a resource (either an [entity][1]
+    # or [change set][2]).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities
+    # [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
+    #
+    # @option params [required, String] :resource_arn
+    #   Required. The Amazon Resource Name (ARN) associated with the resource
+    #   you want to remove the tag from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Required. A list of key names of tags to be removed. Number of strings
+    #   allowed: 0-256.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -738,7 +866,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

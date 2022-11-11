@@ -78,6 +78,12 @@ module Aws::MarketplaceCatalog
     #           type: "EntityType", # required
     #           identifier: "Identifier",
     #         },
+    #         entity_tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #         details: "Json", # required
     #         change_name: "ChangeName",
     #       }
@@ -91,6 +97,10 @@ module Aws::MarketplaceCatalog
     # @!attribute [rw] entity
     #   The entity to be changed.
     #   @return [Types::Entity]
+    #
+    # @!attribute [rw] entity_tags
+    #   The tags associated with the change.
+    #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] details
     #   This object contains details specific to the change type of the
@@ -106,6 +116,7 @@ module Aws::MarketplaceCatalog
     class Change < Struct.new(
       :change_type,
       :entity,
+      :entity_tags,
       :details,
       :change_name)
       SENSITIVE = []
@@ -670,6 +681,45 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Required. The Amazon Resource Name (ARN) associated with the
+    #   resource you want to list tags on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   Required. The ARN associated with the resource you want to list tags
+    #   on.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Required. A list of objects specifying each key name and value.
+    #   Number of objects allowed: 1-50.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource is currently in use.
     #
     # @!attribute [rw] message
@@ -766,12 +816,24 @@ module Aws::MarketplaceCatalog
     #               type: "EntityType", # required
     #               identifier: "Identifier",
     #             },
+    #             entity_tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue", # required
+    #               },
+    #             ],
     #             details: "Json", # required
     #             change_name: "ChangeName",
     #           },
     #         ],
     #         change_set_name: "ChangeSetName",
     #         client_request_token: "ClientRequestToken",
+    #         change_set_tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] catalog
@@ -794,13 +856,19 @@ module Aws::MarketplaceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] change_set_tags
+    #   A list of objects specifying each key name and value for the
+    #   `ChangeSetTags` property.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartChangeSetRequest AWS API Documentation
     #
     class StartChangeSetRequest < Struct.new(
       :catalog,
       :change_set,
       :change_set_name,
-      :client_request_token)
+      :client_request_token,
+      :change_set_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -823,6 +891,69 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # A list of objects specifying each key name and value.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key associated with the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Required. The Amazon Resource Name (ARN) associated with the
+    #   resource you want to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Required. A list of objects specifying each key name and value.
+    #   Number of objects allowed: 1-50.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Too many requests.
     #
     # @!attribute [rw] message
@@ -835,6 +966,37 @@ module Aws::MarketplaceCatalog
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Required. The Amazon Resource Name (ARN) associated with the
+    #   resource you want to remove the tag from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   Required. A list of key names of tags to be removed. Number of
+    #   strings allowed: 0-256.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # An error occurred during validation.
     #

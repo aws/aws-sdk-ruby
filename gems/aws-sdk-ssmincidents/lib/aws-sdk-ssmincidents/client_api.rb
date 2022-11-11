@@ -51,12 +51,15 @@ module Aws::SSMIncidents
     EmptyChatChannel = Shapes::StructureShape.new(name: 'EmptyChatChannel')
     EngagementSet = Shapes::ListShape.new(name: 'EngagementSet')
     EventData = Shapes::StringShape.new(name: 'EventData')
+    EventReference = Shapes::UnionShape.new(name: 'EventReference')
+    EventReferenceList = Shapes::ListShape.new(name: 'EventReferenceList')
     EventSummary = Shapes::StructureShape.new(name: 'EventSummary')
     EventSummaryList = Shapes::ListShape.new(name: 'EventSummaryList')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterKeyString = Shapes::StringShape.new(name: 'FilterKeyString')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    GeneratedId = Shapes::StringShape.new(name: 'GeneratedId')
     GetIncidentRecordInput = Shapes::StructureShape.new(name: 'GetIncidentRecordInput')
     GetIncidentRecordOutput = Shapes::StructureShape.new(name: 'GetIncidentRecordOutput')
     GetReplicationSetInput = Shapes::StructureShape.new(name: 'GetReplicationSetInput')
@@ -261,6 +264,7 @@ module Aws::SSMIncidents
 
     CreateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateTimelineEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, required: true, location_name: "eventData"))
+    CreateTimelineEventInput.add_member(:event_references, Shapes::ShapeRef.new(shape: EventReferenceList, location_name: "eventReferences"))
     CreateTimelineEventInput.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventTime"))
     CreateTimelineEventInput.add_member(:event_type, Shapes::ShapeRef.new(shape: TimelineEventType, required: true, location_name: "eventType"))
     CreateTimelineEventInput.add_member(:incident_record_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "incidentRecordArn"))
@@ -313,7 +317,18 @@ module Aws::SSMIncidents
 
     EngagementSet.member = Shapes::ShapeRef.new(shape: SsmContactsArn)
 
+    EventReference.add_member(:related_item_id, Shapes::ShapeRef.new(shape: GeneratedId, location_name: "relatedItemId"))
+    EventReference.add_member(:resource, Shapes::ShapeRef.new(shape: Arn, location_name: "resource"))
+    EventReference.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EventReference.add_member_subclass(:related_item_id, Types::EventReference::RelatedItemId)
+    EventReference.add_member_subclass(:resource, Types::EventReference::Resource)
+    EventReference.add_member_subclass(:unknown, Types::EventReference::Unknown)
+    EventReference.struct_class = Types::EventReference
+
+    EventReferenceList.member = Shapes::ShapeRef.new(shape: EventReference)
+
     EventSummary.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))
+    EventSummary.add_member(:event_references, Shapes::ShapeRef.new(shape: EventReferenceList, location_name: "eventReferences"))
     EventSummary.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventTime"))
     EventSummary.add_member(:event_type, Shapes::ShapeRef.new(shape: TimelineEventType, required: true, location_name: "eventType"))
     EventSummary.add_member(:event_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventUpdatedTime"))
@@ -510,6 +525,7 @@ module Aws::SSMIncidents
     RegionMapInputValue.add_member(:sse_kms_key_id, Shapes::ShapeRef.new(shape: SseKmsKey, location_name: "sseKmsKeyId"))
     RegionMapInputValue.struct_class = Types::RegionMapInputValue
 
+    RelatedItem.add_member(:generated_id, Shapes::ShapeRef.new(shape: GeneratedId, location_name: "generatedId"))
     RelatedItem.add_member(:identifier, Shapes::ShapeRef.new(shape: ItemIdentifier, required: true, location_name: "identifier"))
     RelatedItem.add_member(:title, Shapes::ShapeRef.new(shape: RelatedItemTitleString, location_name: "title"))
     RelatedItem.struct_class = Types::RelatedItem
@@ -609,6 +625,7 @@ module Aws::SSMIncidents
 
     TimelineEvent.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, required: true, location_name: "eventData"))
     TimelineEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))
+    TimelineEvent.add_member(:event_references, Shapes::ShapeRef.new(shape: EventReferenceList, location_name: "eventReferences"))
     TimelineEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventTime"))
     TimelineEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: TimelineEventType, required: true, location_name: "eventType"))
     TimelineEvent.add_member(:event_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "eventUpdatedTime"))
@@ -689,6 +706,7 @@ module Aws::SSMIncidents
     UpdateTimelineEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateTimelineEventInput.add_member(:event_data, Shapes::ShapeRef.new(shape: EventData, location_name: "eventData"))
     UpdateTimelineEventInput.add_member(:event_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "eventId"))
+    UpdateTimelineEventInput.add_member(:event_references, Shapes::ShapeRef.new(shape: EventReferenceList, location_name: "eventReferences"))
     UpdateTimelineEventInput.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "eventTime"))
     UpdateTimelineEventInput.add_member(:event_type, Shapes::ShapeRef.new(shape: TimelineEventType, location_name: "eventType"))
     UpdateTimelineEventInput.add_member(:incident_record_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "incidentRecordArn"))

@@ -388,6 +388,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::ListProvisioningTemplateVersions.build(context)
           when :list_provisioning_templates
             Aws::IoT::Endpoints::ListProvisioningTemplates.build(context)
+          when :list_related_resources_for_audit_finding
+            Aws::IoT::Endpoints::ListRelatedResourcesForAuditFinding.build(context)
           when :list_role_aliases
             Aws::IoT::Endpoints::ListRoleAliases.build(context)
           when :list_scheduled_audits

@@ -316,7 +316,9 @@ module Aws::Rekognition
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the
-    #   celebrity was recognized.
+    #   celebrity was recognized. Note that `Timestamp` is not guaranteed to
+    #   be accurate to the individual frame where the celebrity first
+    #   appears.
     #   @return [Integer]
     #
     # @!attribute [rw] celebrity
@@ -629,7 +631,9 @@ module Aws::Rekognition
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the beginning of the video, that the
-    #   content moderation label was detected.
+    #   content moderation label was detected. Note that `Timestamp` is not
+    #   guaranteed to be accurate to the individual frame where the
+    #   moderated content first appears.
     #   @return [Integer]
     #
     # @!attribute [rw] moderation_label
@@ -2096,6 +2100,131 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The background of the image with regard to image quality and dominant
+    # colors.
+    #
+    # @!attribute [rw] quality
+    #   The quality of the image background as defined by brightness and
+    #   sharpness.
+    #   @return [Types::DetectLabelsImageQuality]
+    #
+    # @!attribute [rw] dominant_colors
+    #   The dominant colors found in the background of an image, defined
+    #   with RGB values, CSS color name, simplified color name, and
+    #   PixelPercentage (the percentage of image pixels that have a
+    #   particular color).
+    #   @return [Array<Types::DominantColor>]
+    #
+    class DetectLabelsImageBackground < Struct.new(
+      :quality,
+      :dominant_colors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The foreground of the image with regard to image quality and dominant
+    # colors.
+    #
+    # @!attribute [rw] quality
+    #   The quality of the image foreground as defined by brightness and
+    #   sharpness.
+    #   @return [Types::DetectLabelsImageQuality]
+    #
+    # @!attribute [rw] dominant_colors
+    #   The dominant colors found in the foreground of an image, defined
+    #   with RGB values, CSS color name, simplified color name, and
+    #   PixelPercentage (the percentage of image pixels that have a
+    #   particular color).
+    #   @return [Array<Types::DominantColor>]
+    #
+    class DetectLabelsImageForeground < Struct.new(
+      :quality,
+      :dominant_colors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the quality and dominant colors of an input image.
+    # Quality and color information is returned for the entire image,
+    # foreground, and background.
+    #
+    # @!attribute [rw] quality
+    #   Information about the quality of the image foreground as defined by
+    #   brightness, sharpness, and contrast. The higher the value the
+    #   greater the brightness, sharpness, and contrast respectively.
+    #   @return [Types::DetectLabelsImageQuality]
+    #
+    # @!attribute [rw] dominant_colors
+    #   Information about the dominant colors found in an image, described
+    #   with RGB values, CSS color name, simplified color name, and
+    #   PixelPercentage (the percentage of image pixels that have a
+    #   particular color).
+    #   @return [Array<Types::DominantColor>]
+    #
+    # @!attribute [rw] foreground
+    #   Information about the properties of an image’s foreground, including
+    #   the foreground’s quality and dominant colors, including the quality
+    #   and dominant colors of the image.
+    #   @return [Types::DetectLabelsImageForeground]
+    #
+    # @!attribute [rw] background
+    #   Information about the properties of an image’s background, including
+    #   the background’s quality and dominant colors, including the quality
+    #   and dominant colors of the image.
+    #   @return [Types::DetectLabelsImageBackground]
+    #
+    class DetectLabelsImageProperties < Struct.new(
+      :quality,
+      :dominant_colors,
+      :foreground,
+      :background)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the IMAGE\_PROPERTIES feature type.
+    #
+    # @note When making an API call, you may pass DetectLabelsImagePropertiesSettings
+    #   data as a hash:
+    #
+    #       {
+    #         max_dominant_colors: 1,
+    #       }
+    #
+    # @!attribute [rw] max_dominant_colors
+    #   The maximum number of dominant colors to return when detecting
+    #   labels in an image. The default value is 10.
+    #   @return [Integer]
+    #
+    class DetectLabelsImagePropertiesSettings < Struct.new(
+      :max_dominant_colors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The quality of an image provided for label detection, with regard to
+    # brightness, sharpness, and contrast.
+    #
+    # @!attribute [rw] brightness
+    #   The brightness of an image provided for label detection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sharpness
+    #   The sharpness of an image provided for label detection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] contrast
+    #   The contrast of an image provided for label detection.
+    #   @return [Float]
+    #
+    class DetectLabelsImageQuality < Struct.new(
+      :brightness,
+      :sharpness,
+      :contrast)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetectLabelsRequest
     #   data as a hash:
     #
@@ -2110,6 +2239,18 @@ module Aws::Rekognition
     #         },
     #         max_labels: 1,
     #         min_confidence: 1.0,
+    #         features: ["GENERAL_LABELS"], # accepts GENERAL_LABELS, IMAGE_PROPERTIES
+    #         settings: {
+    #           general_labels: {
+    #             label_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #             label_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #             label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #             label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #           },
+    #           image_properties: {
+    #             max_dominant_colors: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] image
@@ -2139,10 +2280,29 @@ module Aws::Rekognition
     #   with a confidence values greater than or equal to 55 percent.
     #   @return [Float]
     #
+    # @!attribute [rw] features
+    #   A list of the types of analysis to perform. Specifying
+    #   GENERAL\_LABELS uses the label detection feature, while specifying
+    #   IMAGE\_PROPERTIES returns information regarding image color and
+    #   quality. If no option is specified GENERAL\_LABELS is used by
+    #   default.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] settings
+    #   A list of the filters to be applied to returned detected labels and
+    #   image properties. Specified filters can be inclusive, exclusive, or
+    #   a combination of both. Filters can be used for individual labels or
+    #   label categories. The exact label names or label categories must be
+    #   supplied. For a full list of labels and label categories, see LINK
+    #   HERE.
+    #   @return [Types::DetectLabelsSettings]
+    #
     class DetectLabelsRequest < Struct.new(
       :image,
       :max_labels,
-      :min_confidence)
+      :min_confidence,
+      :features,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2173,10 +2333,52 @@ module Aws::Rekognition
     #   labels.
     #   @return [String]
     #
+    # @!attribute [rw] image_properties
+    #   Information about the properties of the input image, such as
+    #   brightness, sharpness, contrast, and dominant colors.
+    #   @return [Types::DetectLabelsImageProperties]
+    #
     class DetectLabelsResponse < Struct.new(
       :labels,
       :orientation_correction,
-      :label_model_version)
+      :label_model_version,
+      :image_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the DetectLabels request. Settings can include filters
+    # for both GENERAL\_LABELS and IMAGE\_PROPERTIES. GENERAL\_LABELS
+    # filters can be inclusive or exclusive and applied to individual labels
+    # or label categories. IMAGE\_PROPERTIES filters allow specification of
+    # a maximum number of dominant colors.
+    #
+    # @note When making an API call, you may pass DetectLabelsSettings
+    #   data as a hash:
+    #
+    #       {
+    #         general_labels: {
+    #           label_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #           label_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #           label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #           label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #         },
+    #         image_properties: {
+    #           max_dominant_colors: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] general_labels
+    #   Contains the specified filters for GENERAL\_LABELS.
+    #   @return [Types::GeneralLabelsSettings]
+    #
+    # @!attribute [rw] image_properties
+    #   Contains the chosen number of maximum dominant colors in an image.
+    #   @return [Types::DetectLabelsImagePropertiesSettings]
+    #
+    class DetectLabelsSettings < Struct.new(
+      :general_labels,
+      :image_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2523,6 +2725,48 @@ module Aws::Rekognition
 
     class DistributeDatasetEntriesResponse < Aws::EmptyStructure; end
 
+    # A description of the dominant colors in an image.
+    #
+    # @!attribute [rw] red
+    #   The Red RGB value for a dominant color.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] blue
+    #   The Blue RGB value for a dominant color.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] green
+    #   The Green RGB value for a dominant color.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hex_code
+    #   The Hex code equivalent of the RGB values for a dominant color.
+    #   @return [String]
+    #
+    # @!attribute [rw] css_color
+    #   The CSS color name of a dominant color.
+    #   @return [String]
+    #
+    # @!attribute [rw] simplified_color
+    #   One of 12 simplified color names applied to a dominant color.
+    #   @return [String]
+    #
+    # @!attribute [rw] pixel_percent
+    #   The percentage of image pixels that have a given dominant color.
+    #   @return [Float]
+    #
+    class DominantColor < Struct.new(
+      :red,
+      :blue,
+      :green,
+      :hex_code,
+      :css_color,
+      :simplified_color,
+      :pixel_percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The emotions that appear to be expressed on the face, and the
     # confidence level in the determination. The API is only making a
     # determination of the physical appearance of a person's face. It is
@@ -2799,7 +3043,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the start of the video, that the face was
-    #   detected.
+    #   detected. Note that `Timestamp` is not guaranteed to be accurate to
+    #   the individual frame where the face first appears.
     #   @return [Integer]
     #
     # @!attribute [rw] face
@@ -2916,6 +3161,48 @@ module Aws::Rekognition
     class Gender < Struct.new(
       :value,
       :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains filters for the object labels returned by DetectLabels.
+    # Filters can be inclusive, exclusive, or a combination of both and can
+    # be applied to individual l abels or entire label categories.
+    #
+    # @note When making an API call, you may pass GeneralLabelsSettings
+    #   data as a hash:
+    #
+    #       {
+    #         label_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #         label_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #         label_category_inclusion_filters: ["GeneralLabelsFilterValue"],
+    #         label_category_exclusion_filters: ["GeneralLabelsFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] label_inclusion_filters
+    #   The labels that should be included in the return from DetectLabels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] label_exclusion_filters
+    #   The labels that should be excluded from the return from
+    #   DetectLabels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] label_category_inclusion_filters
+    #   The label categories that should be included in the return from
+    #   DetectLabels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] label_category_exclusion_filters
+    #   The label categories that should be excluded from the return from
+    #   DetectLabels.
+    #   @return [Array<String>]
+    #
+    class GeneralLabelsSettings < Struct.new(
+      :label_inclusion_filters,
+      :label_exclusion_filters,
+      :label_category_inclusion_filters,
+      :label_category_exclusion_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4052,9 +4339,14 @@ module Aws::Rekognition
     #   bounding box.
     #   @return [Float]
     #
+    # @!attribute [rw] dominant_colors
+    #   The dominant colors found in an individual instance of a label.
+    #   @return [Array<Types::DominantColor>]
+    #
     class Instance < Struct.new(
       :bounding_box,
-      :confidence)
+      :confidence,
+      :dominant_colors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4130,8 +4422,10 @@ module Aws::Rekognition
     end
 
     # Specifies the starting point in a Kinesis stream to start processing.
-    # You can use the producer timestamp or the fragment number. For more
-    # information, see [Fragment][1].
+    # You can use the producer timestamp or the fragment number. One of
+    # either producer timestamp or fragment number is required. If you use
+    # the producer timestamp, you must put the time in milliseconds. For
+    # more information about fragment numbers, see [Fragment][1].
     #
     #
     #
@@ -4146,7 +4440,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] producer_timestamp
-    #   The timestamp from the producer corresponding to the fragment.
+    #   The timestamp from the producer corresponding to the fragment, in
+    #   milliseconds, expressed in unix time format.
     #   @return [Integer]
     #
     # @!attribute [rw] fragment_number
@@ -4198,11 +4493,45 @@ module Aws::Rekognition
     #   labels.
     #   @return [Array<Types::Parent>]
     #
+    # @!attribute [rw] aliases
+    #   A list of potential aliases for a given label.
+    #   @return [Array<Types::LabelAlias>]
+    #
+    # @!attribute [rw] categories
+    #   A list of the categories associated with a given label.
+    #   @return [Array<Types::LabelCategory>]
+    #
     class Label < Struct.new(
       :name,
       :confidence,
       :instances,
-      :parents)
+      :parents,
+      :aliases,
+      :categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A potential alias of for a given label.
+    #
+    # @!attribute [rw] name
+    #   The name of an alias for a given label.
+    #   @return [String]
+    #
+    class LabelAlias < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The category that applies to a given label.
+    #
+    # @!attribute [rw] name
+    #   The name of a category that applies to a given label.
+    #   @return [String]
+    #
+    class LabelCategory < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4212,7 +4541,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] timestamp
     #   Time, in milliseconds from the start of the video, that the label
-    #   was detected.
+    #   was detected. Note that `Timestamp` is not guaranteed to be accurate
+    #   to the individual frame where the label first appears.
     #   @return [Integer]
     #
     # @!attribute [rw] label
@@ -4816,7 +5146,9 @@ module Aws::Rekognition
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the
-    #   person's path was tracked.
+    #   person's path was tracked. Note that `Timestamp` is not guaranteed
+    #   to be accurate to the individual frame where the person's path
+    #   first appears.
     #   @return [Integer]
     #
     # @!attribute [rw] person
@@ -6487,7 +6819,9 @@ module Aws::Rekognition
     # @!attribute [rw] start_selector
     #   Specifies the starting point in the Kinesis stream to start
     #   processing. You can use the producer timestamp or the fragment
-    #   number. For more information, see [Fragment][1].
+    #   number. If you use the producer timestamp, you must put the time in
+    #   milliseconds. For more information about fragment numbers, see
+    #   [Fragment][1].
     #
     #   This is a required parameter for label detection stream processors
     #   and should not be used to start a face search stream processor.
@@ -6769,6 +7103,9 @@ module Aws::Rekognition
 
     class StopStreamProcessorResponse < Aws::EmptyStructure; end
 
+    # This is a required parameter for label detection stream processors and
+    # should not be used to start a face search stream processor.
+    #
     # @note When making an API call, you may pass StreamProcessingStartSelector
     #   data as a hash:
     #
@@ -6781,8 +7118,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] kvs_stream_start_selector
     #   Specifies the starting point in the stream to start processing. This
-    #   can be done with a timestamp or a fragment number in a Kinesis
-    #   stream.
+    #   can be done with a producer timestamp or a fragment number in a
+    #   Kinesis stream.
     #   @return [Types::KinesisVideoStreamStartSelector]
     #
     class StreamProcessingStartSelector < Struct.new(
@@ -7235,7 +7572,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] timestamp
     #   The time, in milliseconds from the start of the video, that the text
-    #   was detected.
+    #   was detected. Note that `Timestamp` is not guaranteed to be accurate
+    #   to the individual frame where the text first appears.
     #   @return [Integer]
     #
     # @!attribute [rw] text_detection

@@ -159,8 +159,12 @@ module Aws::LicenseManager
     ListLicenseVersionsResponse = Shapes::StructureShape.new(name: 'ListLicenseVersionsResponse')
     ListLicensesRequest = Shapes::StructureShape.new(name: 'ListLicensesRequest')
     ListLicensesResponse = Shapes::StructureShape.new(name: 'ListLicensesResponse')
+    ListReceivedGrantsForOrganizationRequest = Shapes::StructureShape.new(name: 'ListReceivedGrantsForOrganizationRequest')
+    ListReceivedGrantsForOrganizationResponse = Shapes::StructureShape.new(name: 'ListReceivedGrantsForOrganizationResponse')
     ListReceivedGrantsRequest = Shapes::StructureShape.new(name: 'ListReceivedGrantsRequest')
     ListReceivedGrantsResponse = Shapes::StructureShape.new(name: 'ListReceivedGrantsResponse')
+    ListReceivedLicensesForOrganizationRequest = Shapes::StructureShape.new(name: 'ListReceivedLicensesForOrganizationRequest')
+    ListReceivedLicensesForOrganizationResponse = Shapes::StructureShape.new(name: 'ListReceivedLicensesForOrganizationResponse')
     ListReceivedLicensesRequest = Shapes::StructureShape.new(name: 'ListReceivedLicensesRequest')
     ListReceivedLicensesResponse = Shapes::StructureShape.new(name: 'ListReceivedLicensesResponse')
     ListResourceInventoryRequest = Shapes::StructureShape.new(name: 'ListResourceInventoryRequest')
@@ -833,6 +837,16 @@ module Aws::LicenseManager
     ListLicensesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListLicensesResponse.struct_class = Types::ListLicensesResponse
 
+    ListReceivedGrantsForOrganizationRequest.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "LicenseArn"))
+    ListReceivedGrantsForOrganizationRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListReceivedGrantsForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedGrantsForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListReceivedGrantsForOrganizationRequest.struct_class = Types::ListReceivedGrantsForOrganizationRequest
+
+    ListReceivedGrantsForOrganizationResponse.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
+    ListReceivedGrantsForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedGrantsForOrganizationResponse.struct_class = Types::ListReceivedGrantsForOrganizationResponse
+
     ListReceivedGrantsRequest.add_member(:grant_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "GrantArns"))
     ListReceivedGrantsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListReceivedGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -842,6 +856,15 @@ module Aws::LicenseManager
     ListReceivedGrantsResponse.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
     ListReceivedGrantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListReceivedGrantsResponse.struct_class = Types::ListReceivedGrantsResponse
+
+    ListReceivedLicensesForOrganizationRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListReceivedLicensesForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedLicensesForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    ListReceivedLicensesForOrganizationRequest.struct_class = Types::ListReceivedLicensesForOrganizationRequest
+
+    ListReceivedLicensesForOrganizationResponse.add_member(:licenses, Shapes::ShapeRef.new(shape: GrantedLicenseList, location_name: "Licenses"))
+    ListReceivedLicensesForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListReceivedLicensesForOrganizationResponse.struct_class = Types::ListReceivedLicensesForOrganizationResponse
 
     ListReceivedLicensesRequest.add_member(:license_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "LicenseArns"))
     ListReceivedLicensesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -1620,12 +1643,42 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
       end)
 
+      api.add_operation(:list_received_grants_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReceivedGrantsForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReceivedGrantsForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReceivedGrantsForOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
       api.add_operation(:list_received_licenses, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListReceivedLicenses"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListReceivedLicensesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListReceivedLicensesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
+      api.add_operation(:list_received_licenses_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReceivedLicensesForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReceivedLicensesForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReceivedLicensesForOrganizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-11-11)
+------------------
+
+* Feature - Documentation updates for Security Hub
+
 1.70.0 (2022-10-25)
 ------------------
 

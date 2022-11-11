@@ -616,6 +616,10 @@ module Aws::IoT
     IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
     IsDisabled = Shapes::BooleanShape.new(name: 'IsDisabled')
     IsSuppressed = Shapes::BooleanShape.new(name: 'IsSuppressed')
+    IssuerCertificateIdentifier = Shapes::StructureShape.new(name: 'IssuerCertificateIdentifier')
+    IssuerCertificateSerialNumber = Shapes::StringShape.new(name: 'IssuerCertificateSerialNumber')
+    IssuerCertificateSubject = Shapes::StringShape.new(name: 'IssuerCertificateSubject')
+    IssuerId = Shapes::StringShape.new(name: 'IssuerId')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobDescription = Shapes::StringShape.new(name: 'JobDescription')
@@ -724,6 +728,8 @@ module Aws::IoT
     ListProvisioningTemplateVersionsResponse = Shapes::StructureShape.new(name: 'ListProvisioningTemplateVersionsResponse')
     ListProvisioningTemplatesRequest = Shapes::StructureShape.new(name: 'ListProvisioningTemplatesRequest')
     ListProvisioningTemplatesResponse = Shapes::StructureShape.new(name: 'ListProvisioningTemplatesResponse')
+    ListRelatedResourcesForAuditFindingRequest = Shapes::StructureShape.new(name: 'ListRelatedResourcesForAuditFindingRequest')
+    ListRelatedResourcesForAuditFindingResponse = Shapes::StructureShape.new(name: 'ListRelatedResourcesForAuditFindingResponse')
     ListRoleAliasesRequest = Shapes::StructureShape.new(name: 'ListRoleAliasesRequest')
     ListRoleAliasesResponse = Shapes::StructureShape.new(name: 'ListRoleAliasesResponse')
     ListScheduledAuditsRequest = Shapes::StructureShape.new(name: 'ListScheduledAuditsRequest')
@@ -3015,6 +3021,11 @@ module Aws::IoT
     IotSiteWiseAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     IotSiteWiseAction.struct_class = Types::IotSiteWiseAction
 
+    IssuerCertificateIdentifier.add_member(:issuer_certificate_subject, Shapes::ShapeRef.new(shape: IssuerCertificateSubject, location_name: "issuerCertificateSubject"))
+    IssuerCertificateIdentifier.add_member(:issuer_id, Shapes::ShapeRef.new(shape: IssuerId, location_name: "issuerId"))
+    IssuerCertificateIdentifier.add_member(:issuer_certificate_serial_number, Shapes::ShapeRef.new(shape: IssuerCertificateSerialNumber, location_name: "issuerCertificateSerialNumber"))
+    IssuerCertificateIdentifier.struct_class = Types::IssuerCertificateIdentifier
+
     Job.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
     Job.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     Job.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
@@ -3487,6 +3498,15 @@ module Aws::IoT
     ListProvisioningTemplatesResponse.add_member(:templates, Shapes::ShapeRef.new(shape: ProvisioningTemplateListing, location_name: "templates"))
     ListProvisioningTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListProvisioningTemplatesResponse.struct_class = Types::ListProvisioningTemplatesResponse
+
+    ListRelatedResourcesForAuditFindingRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: FindingId, required: true, location: "querystring", location_name: "findingId"))
+    ListRelatedResourcesForAuditFindingRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListRelatedResourcesForAuditFindingRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRelatedResourcesForAuditFindingRequest.struct_class = Types::ListRelatedResourcesForAuditFindingRequest
+
+    ListRelatedResourcesForAuditFindingResponse.add_member(:related_resources, Shapes::ShapeRef.new(shape: RelatedResources, location_name: "relatedResources"))
+    ListRelatedResourcesForAuditFindingResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRelatedResourcesForAuditFindingResponse.struct_class = Types::ListRelatedResourcesForAuditFindingResponse
 
     ListRoleAliasesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location: "querystring", location_name: "pageSize"))
     ListRoleAliasesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "marker"))
@@ -4058,6 +4078,8 @@ module Aws::IoT
     ResourceIdentifier.add_member(:account, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "account"))
     ResourceIdentifier.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleArn"))
     ResourceIdentifier.add_member(:role_alias_arn, Shapes::ShapeRef.new(shape: RoleAliasArn, location_name: "roleAliasArn"))
+    ResourceIdentifier.add_member(:issuer_certificate_identifier, Shapes::ShapeRef.new(shape: IssuerCertificateIdentifier, location_name: "issuerCertificateIdentifier"))
+    ResourceIdentifier.add_member(:device_certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "deviceCertificateArn"))
     ResourceIdentifier.struct_class = Types::ResourceIdentifier
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -7274,6 +7296,18 @@ module Aws::IoT
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_related_resources_for_audit_finding, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRelatedResourcesForAuditFinding"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/relatedResources"
+        o.input = Shapes::ShapeRef.new(shape: ListRelatedResourcesForAuditFindingRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRelatedResourcesForAuditFindingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_role_aliases, Seahorse::Model::Operation.new.tap do |o|

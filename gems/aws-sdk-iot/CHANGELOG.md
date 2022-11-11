@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2022-11-11)
+------------------
+
+* Feature - This release add new api listRelatedResourcesForAuditFinding and new member type IssuerCertificates for Iot device device defender Audit.
+
 1.96.0 (2022-10-31)
 ------------------
 

@@ -4210,11 +4210,11 @@ module Aws::SecurityHub
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
-    #   a comma-separated list of Regions that do not aggregate findings to
+    #   a space-separated list of Regions that do not aggregate findings to
     #   the aggregation Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   comma-separated list of Regions that do aggregate findings to the
+    #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
     #
     # @return [Types::CreateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -9660,11 +9660,11 @@ module Aws::SecurityHub
     #
     # @option params [Array<String>] :regions
     #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
-    #   a comma-separated list of Regions that do not aggregate findings to
+    #   a space-separated list of Regions that do not aggregate findings to
     #   the aggregation Region.
     #
     #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
-    #   comma-separated list of Regions that do aggregate findings to the
+    #   space-separated list of Regions that do aggregate findings to the
     #   aggregation Region.
     #
     # @return [Types::UpdateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -11133,7 +11133,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2825,6 +2825,12 @@ module Aws::IoT
     #           account: "AwsAccountId",
     #           iam_role_arn: "RoleArn",
     #           role_alias_arn: "RoleAliasArn",
+    #           issuer_certificate_identifier: {
+    #             issuer_certificate_subject: "IssuerCertificateSubject",
+    #             issuer_id: "IssuerId",
+    #             issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #           },
+    #           device_certificate_arn: "CertificateArn",
     #         },
     #         expiration_date: Time.now,
     #         suppress_indefinitely: false,
@@ -5696,6 +5702,12 @@ module Aws::IoT
     #           account: "AwsAccountId",
     #           iam_role_arn: "RoleArn",
     #           role_alias_arn: "RoleAliasArn",
+    #           issuer_certificate_identifier: {
+    #             issuer_certificate_subject: "IssuerCertificateSubject",
+    #             issuer_id: "IssuerId",
+    #             issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #           },
+    #           device_certificate_arn: "CertificateArn",
     #         },
     #       }
     #
@@ -6641,6 +6653,12 @@ module Aws::IoT
     #           account: "AwsAccountId",
     #           iam_role_arn: "RoleArn",
     #           role_alias_arn: "RoleAliasArn",
+    #           issuer_certificate_identifier: {
+    #             issuer_certificate_subject: "IssuerCertificateSubject",
+    #             issuer_id: "IssuerId",
+    #             issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #           },
+    #           device_certificate_arn: "CertificateArn",
     #         },
     #       }
     #
@@ -10256,6 +10274,37 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The certificate issuer indentifier.
+    #
+    # @note When making an API call, you may pass IssuerCertificateIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         issuer_certificate_subject: "IssuerCertificateSubject",
+    #         issuer_id: "IssuerId",
+    #         issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #       }
+    #
+    # @!attribute [rw] issuer_certificate_subject
+    #   The subject of the issuer certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_id
+    #   The issuer ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_certificate_serial_number
+    #   The issuer certificate serial number.
+    #   @return [String]
+    #
+    class IssuerCertificateIdentifier < Struct.new(
+      :issuer_certificate_subject,
+      :issuer_id,
+      :issuer_certificate_serial_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `Job` object contains details about a job.
     #
     # @!attribute [rw] job_arn
@@ -11064,6 +11113,12 @@ module Aws::IoT
     #           account: "AwsAccountId",
     #           iam_role_arn: "RoleArn",
     #           role_alias_arn: "RoleAliasArn",
+    #           issuer_certificate_identifier: {
+    #             issuer_certificate_subject: "IssuerCertificateSubject",
+    #             issuer_id: "IssuerId",
+    #             issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #           },
+    #           device_certificate_arn: "CertificateArn",
     #         },
     #         max_results: 1,
     #         next_token: "NextToken",
@@ -11298,6 +11353,12 @@ module Aws::IoT
     #           account: "AwsAccountId",
     #           iam_role_arn: "RoleArn",
     #           role_alias_arn: "RoleAliasArn",
+    #           issuer_certificate_identifier: {
+    #             issuer_certificate_subject: "IssuerCertificateSubject",
+    #             issuer_id: "IssuerId",
+    #             issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #           },
+    #           device_certificate_arn: "CertificateArn",
     #         },
     #         ascending_order: false,
     #         next_token: "NextToken",
@@ -12867,6 +12928,52 @@ module Aws::IoT
     #
     class ListProvisioningTemplatesResponse < Struct.new(
       :templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRelatedResourcesForAuditFindingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_id: "FindingId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] finding_id
+    #   The finding Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    class ListRelatedResourcesForAuditFindingRequest < Struct.new(
+      :finding_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] related_resources
+    #   The related resources.
+    #   @return [Array<Types::RelatedResource>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` for the first API call.
+    #   @return [String]
+    #
+    class ListRelatedResourcesForAuditFindingResponse < Struct.new(
+      :related_resources,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -16089,6 +16196,12 @@ module Aws::IoT
     #         account: "AwsAccountId",
     #         iam_role_arn: "RoleArn",
     #         role_alias_arn: "RoleAliasArn",
+    #         issuer_certificate_identifier: {
+    #           issuer_certificate_subject: "IssuerCertificateSubject",
+    #           issuer_id: "IssuerId",
+    #           issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #         },
+    #         device_certificate_arn: "CertificateArn",
     #       }
     #
     # @!attribute [rw] device_certificate_id
@@ -16123,6 +16236,14 @@ module Aws::IoT
     #   The ARN of the role alias that has overly permissive actions.
     #   @return [String]
     #
+    # @!attribute [rw] issuer_certificate_identifier
+    #   The issuer certificate identifier.
+    #   @return [Types::IssuerCertificateIdentifier]
+    #
+    # @!attribute [rw] device_certificate_arn
+    #   The ARN of the identified device certificate.
+    #   @return [String]
+    #
     class ResourceIdentifier < Struct.new(
       :device_certificate_id,
       :ca_certificate_id,
@@ -16131,7 +16252,9 @@ module Aws::IoT
       :policy_version_identifier,
       :account,
       :iam_role_arn,
-      :role_alias_arn)
+      :role_alias_arn,
+      :issuer_certificate_identifier,
+      :device_certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19225,6 +19348,12 @@ module Aws::IoT
     #           account: "AwsAccountId",
     #           iam_role_arn: "RoleArn",
     #           role_alias_arn: "RoleAliasArn",
+    #           issuer_certificate_identifier: {
+    #             issuer_certificate_subject: "IssuerCertificateSubject",
+    #             issuer_id: "IssuerId",
+    #             issuer_certificate_serial_number: "IssuerCertificateSerialNumber",
+    #           },
+    #           device_certificate_arn: "CertificateArn",
     #         },
     #         expiration_date: Time.now,
     #         suppress_indefinitely: false,
