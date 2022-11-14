@@ -417,7 +417,10 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    # Information about a connection between two services.
+    # Information about a connection between two services. An edge can be a
+    # synchronous connection, such as typical call between client and
+    # service, or an asynchronous link, such as a Lambda function which
+    # retrieves an event from an SNS queue.
     #
     # @!attribute [rw] reference_id
     #   Identifier of the edge. Unique within a service map.
@@ -437,12 +440,22 @@ module Aws::XRay
     #
     # @!attribute [rw] response_time_histogram
     #   A histogram that maps the spread of client response times on an
-    #   edge.
+    #   edge. Only populated for synchronous edges.
     #   @return [Array<Types::HistogramEntry>]
     #
     # @!attribute [rw] aliases
     #   Aliases for the edge.
     #   @return [Array<Types::Alias>]
+    #
+    # @!attribute [rw] edge_type
+    #   Describes an asynchronous connection, with a value of `link`.
+    #   @return [String]
+    #
+    # @!attribute [rw] received_event_age_histogram
+    #   A histogram that maps the spread of event age when received by
+    #   consumers. Age is calculated each time an event is received. Only
+    #   populated when *EdgeType* is `link`.
+    #   @return [Array<Types::HistogramEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Edge AWS API Documentation
     #
@@ -452,7 +465,9 @@ module Aws::XRay
       :end_time,
       :summary_statistics,
       :response_time_histogram,
-      :aliases)
+      :aliases,
+      :edge_type,
+      :received_event_age_histogram)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3166,9 +3181,10 @@ module Aws::XRay
     #   @return [Float]
     #
     # @!attribute [rw] limit_exceeded
-    #   LimitExceeded is set to true when the trace has exceeded one of the
-    #   defined quotas. For more information about quotas, see [Amazon Web
-    #   Services X-Ray endpoints and quotas][1].
+    #   LimitExceeded is set to true when the trace has exceeded the `Trace
+    #   document size` limit. For more information about this limit and
+    #   other X-Ray limits and quotas, see [Amazon Web Services X-Ray
+    #   endpoints and quotas][1].
     #
     #
     #

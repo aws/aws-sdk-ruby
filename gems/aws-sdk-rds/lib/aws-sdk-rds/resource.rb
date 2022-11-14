@@ -2045,6 +2045,8 @@ module Aws::RDS
     # @option options [Integer] :storage_throughput
     #   Specifies the storage throughput value for the DB instance.
     #
+    #   This setting applies only to the `gp3` storage type.
+    #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]
     def create_db_instance(options = {})

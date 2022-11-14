@@ -726,6 +726,8 @@ module Aws::RDS
     end
 
     # Specifies the storage throughput for the DB instance.
+    #
+    # This setting applies only to the `gp3` storage type.
     # @return [Integer]
     def storage_throughput
       data[:storage_throughput]
@@ -1967,6 +1969,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [Integer] :storage_throughput
     #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting applies only to the `gp3` storage type.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]
@@ -3444,6 +3448,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [Integer] :storage_throughput
     #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting applies only to the `gp3` storage type.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @return [DBInstance]

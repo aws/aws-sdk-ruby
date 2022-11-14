@@ -56,6 +56,7 @@ module Aws::WorkDocs
     DeleteCustomMetadataRequest = Shapes::StructureShape.new(name: 'DeleteCustomMetadataRequest')
     DeleteCustomMetadataResponse = Shapes::StructureShape.new(name: 'DeleteCustomMetadataResponse')
     DeleteDocumentRequest = Shapes::StructureShape.new(name: 'DeleteDocumentRequest')
+    DeleteDocumentVersionRequest = Shapes::StructureShape.new(name: 'DeleteDocumentVersionRequest')
     DeleteFolderContentsRequest = Shapes::StructureShape.new(name: 'DeleteFolderContentsRequest')
     DeleteFolderRequest = Shapes::StructureShape.new(name: 'DeleteFolderRequest')
     DeleteLabelsRequest = Shapes::StructureShape.new(name: 'DeleteLabelsRequest')
@@ -165,8 +166,10 @@ module Aws::WorkDocs
     ResourceSortType = Shapes::StringShape.new(name: 'ResourceSortType')
     ResourceStateType = Shapes::StringShape.new(name: 'ResourceStateType')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RestoreDocumentVersionsRequest = Shapes::StructureShape.new(name: 'RestoreDocumentVersionsRequest')
     RolePermissionType = Shapes::StringShape.new(name: 'RolePermissionType')
     RoleType = Shapes::StringShape.new(name: 'RoleType')
+    SearchMarkerType = Shapes::StringShape.new(name: 'SearchMarkerType')
     SearchQueryType = Shapes::StringShape.new(name: 'SearchQueryType')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SharePrincipal = Shapes::StructureShape.new(name: 'SharePrincipal')
@@ -363,6 +366,12 @@ module Aws::WorkDocs
     DeleteDocumentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
     DeleteDocumentRequest.struct_class = Types::DeleteDocumentRequest
 
+    DeleteDocumentVersionRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
+    DeleteDocumentVersionRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
+    DeleteDocumentVersionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: DocumentVersionIdType, required: true, location: "uri", location_name: "VersionId"))
+    DeleteDocumentVersionRequest.add_member(:delete_prior_versions, Shapes::ShapeRef.new(shape: BooleanType, required: true, location: "querystring", location_name: "deletePriorVersions"))
+    DeleteDocumentVersionRequest.struct_class = Types::DeleteDocumentVersionRequest
+
     DeleteFolderContentsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     DeleteFolderContentsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "FolderId"))
     DeleteFolderContentsRequest.struct_class = Types::DeleteFolderContentsRequest
@@ -396,11 +405,11 @@ module Aws::WorkDocs
     DescribeActivitiesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: IdType, location: "querystring", location_name: "userId"))
     DescribeActivitiesRequest.add_member(:include_indirect_activities, Shapes::ShapeRef.new(shape: BooleanType, location: "querystring", location_name: "includeIndirectActivities"))
     DescribeActivitiesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location: "querystring", location_name: "limit"))
-    DescribeActivitiesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location: "querystring", location_name: "marker"))
+    DescribeActivitiesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: SearchMarkerType, location: "querystring", location_name: "marker"))
     DescribeActivitiesRequest.struct_class = Types::DescribeActivitiesRequest
 
     DescribeActivitiesResponse.add_member(:user_activities, Shapes::ShapeRef.new(shape: UserActivities, location_name: "UserActivities"))
-    DescribeActivitiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
+    DescribeActivitiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: SearchMarkerType, location_name: "Marker"))
     DescribeActivitiesResponse.struct_class = Types::DescribeActivitiesResponse
 
     DescribeCommentsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
@@ -649,7 +658,7 @@ module Aws::WorkDocs
     InitiateDocumentVersionUploadRequest.add_member(:content_modified_timestamp, Shapes::ShapeRef.new(shape: TimestampType, location_name: "ContentModifiedTimestamp"))
     InitiateDocumentVersionUploadRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: DocumentContentType, location_name: "ContentType"))
     InitiateDocumentVersionUploadRequest.add_member(:document_size_in_bytes, Shapes::ShapeRef.new(shape: SizeType, location_name: "DocumentSizeInBytes"))
-    InitiateDocumentVersionUploadRequest.add_member(:parent_folder_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location_name: "ParentFolderId"))
+    InitiateDocumentVersionUploadRequest.add_member(:parent_folder_id, Shapes::ShapeRef.new(shape: ResourceIdType, location_name: "ParentFolderId"))
     InitiateDocumentVersionUploadRequest.struct_class = Types::InitiateDocumentVersionUploadRequest
 
     InitiateDocumentVersionUploadResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "Metadata"))
@@ -730,6 +739,10 @@ module Aws::WorkDocs
     ResourcePathComponent.struct_class = Types::ResourcePathComponent
 
     ResourcePathComponentList.member = Shapes::ShapeRef.new(shape: ResourcePathComponent)
+
+    RestoreDocumentVersionsRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
+    RestoreDocumentVersionsRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
+    RestoreDocumentVersionsRequest.struct_class = Types::RestoreDocumentVersionsRequest
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -883,6 +896,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:activate_user, Seahorse::Model::Operation.new.tap do |o|
@@ -908,6 +922,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
       end)
 
       api.add_operation(:create_comment, Seahorse::Model::Operation.new.tap do |o|
@@ -951,6 +966,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
@@ -981,6 +997,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: TooManySubscriptionsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1045,6 +1062,7 @@ module Aws::WorkDocs
         o.input = Shapes::ShapeRef.new(shape: DeleteDocumentRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: EntityNotExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -1054,6 +1072,22 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_document_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDocumentVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/api/v1/documentVersions/{DocumentId}/versions/{VersionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDocumentVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
+      end)
+
       api.add_operation(:delete_folder, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFolder"
         o.http_method = "DELETE"
@@ -1061,6 +1095,7 @@ module Aws::WorkDocs
         o.input = Shapes::ShapeRef.new(shape: DeleteFolderRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: EntityNotExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
@@ -1096,6 +1131,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
       end)
 
       api.add_operation(:delete_notification_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -1163,6 +1199,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1220,6 +1257,7 @@ module Aws::WorkDocs
         o.http_request_uri = "/api/v1/resources/{ResourceId}/permissions"
         o.input = Shapes::ShapeRef.new(shape: DescribeResourcePermissionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeResourcePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
@@ -1367,6 +1405,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: StorageLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: StorageLimitWillExceedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
@@ -1374,6 +1413,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DraftUploadOutOfSyncException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyCheckedOutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
       end)
 
       api.add_operation(:remove_all_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
@@ -1398,6 +1438,22 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:restore_document_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreDocumentVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v1/documentVersions/restore/{DocumentId}"
+        o.input = Shapes::ShapeRef.new(shape: RestoreDocumentVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
       end)
 
       api.add_operation(:update_document, Seahorse::Model::Operation.new.tap do |o|
@@ -1462,6 +1518,7 @@ module Aws::WorkDocs
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedResourceAccessException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalUserStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ProhibitedStateException)
         o.errors << Shapes::ShapeRef.new(shape: FailedDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DeactivatingLastSystemUserException)

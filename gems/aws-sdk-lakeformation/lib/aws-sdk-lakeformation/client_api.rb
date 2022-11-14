@@ -127,6 +127,7 @@ module Aws::LakeFormation
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
+    KeyString = Shapes::StringShape.new(name: 'KeyString')
     LFTag = Shapes::StructureShape.new(name: 'LFTag')
     LFTagError = Shapes::StructureShape.new(name: 'LFTagError')
     LFTagErrors = Shapes::ListShape.new(name: 'LFTagErrors')
@@ -159,6 +160,8 @@ module Aws::LakeFormation
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
     OptimizerType = Shapes::StringShape.new(name: 'OptimizerType')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
+    ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
+    ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
     PartitionObjects = Shapes::StructureShape.new(name: 'PartitionObjects')
     PartitionValueList = Shapes::StructureShape.new(name: 'PartitionValueList')
     PartitionValueString = Shapes::StringShape.new(name: 'PartitionValueString')
@@ -204,6 +207,7 @@ module Aws::LakeFormation
     SAMLAssertionString = Shapes::StringShape.new(name: 'SAMLAssertionString')
     SearchDatabasesByLFTagsRequest = Shapes::StructureShape.new(name: 'SearchDatabasesByLFTagsRequest')
     SearchDatabasesByLFTagsResponse = Shapes::StructureShape.new(name: 'SearchDatabasesByLFTagsResponse')
+    SearchPageSize = Shapes::IntegerShape.new(name: 'SearchPageSize')
     SearchTablesByLFTagsRequest = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsRequest')
     SearchTablesByLFTagsResponse = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsResponse')
     SecretAccessKeyString = Shapes::StringShape.new(name: 'SecretAccessKeyString')
@@ -401,6 +405,7 @@ module Aws::LakeFormation
     DataLakeSettings.add_member(:data_lake_admins, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "DataLakeAdmins"))
     DataLakeSettings.add_member(:create_database_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateDatabaseDefaultPermissions"))
     DataLakeSettings.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
+    DataLakeSettings.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     DataLakeSettings.add_member(:trusted_resource_owners, Shapes::ShapeRef.new(shape: TrustedResourceOwners, location_name: "TrustedResourceOwners"))
     DataLakeSettings.add_member(:allow_external_data_filtering, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowExternalDataFiltering"))
     DataLakeSettings.add_member(:external_data_filtering_allow_list, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ExternalDataFilteringAllowList"))
@@ -716,6 +721,9 @@ module Aws::LakeFormation
     OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     OperationTimeoutException.struct_class = Types::OperationTimeoutException
 
+    ParametersMap.key = Shapes::ShapeRef.new(shape: KeyString)
+    ParametersMap.value = Shapes::ShapeRef.new(shape: ParametersMapValue)
+
     PartitionObjects.add_member(:partition_values, Shapes::ShapeRef.new(shape: PartitionValuesList, location_name: "PartitionValues"))
     PartitionObjects.add_member(:objects, Shapes::ShapeRef.new(shape: TableObjectList, location_name: "Objects"))
     PartitionObjects.struct_class = Types::PartitionObjects
@@ -825,7 +833,7 @@ module Aws::LakeFormation
     RowFilter.struct_class = Types::RowFilter
 
     SearchDatabasesByLFTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    SearchDatabasesByLFTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    SearchDatabasesByLFTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchPageSize, location_name: "MaxResults"))
     SearchDatabasesByLFTagsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     SearchDatabasesByLFTagsRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
     SearchDatabasesByLFTagsRequest.struct_class = Types::SearchDatabasesByLFTagsRequest
@@ -835,7 +843,7 @@ module Aws::LakeFormation
     SearchDatabasesByLFTagsResponse.struct_class = Types::SearchDatabasesByLFTagsResponse
 
     SearchTablesByLFTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    SearchTablesByLFTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    SearchTablesByLFTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchPageSize, location_name: "MaxResults"))
     SearchTablesByLFTagsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     SearchTablesByLFTagsRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
     SearchTablesByLFTagsRequest.struct_class = Types::SearchTablesByLFTagsRequest

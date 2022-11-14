@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-11-14)
+------------------
+
+* Feature - Added 2 new document related operations, DeleteDocumentVersion and RestoreDocumentVersions.
+
 1.40.0 (2022-10-25)
 ------------------
 

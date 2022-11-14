@@ -2532,14 +2532,22 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
-    # Searches for profiles within a specific domain name using name, phone
-    # number, email address, account number, or a custom defined index.
+    # Searches for profiles within a specific domain using one or more
+    # predefined search keys (e.g., \_fullName, \_phone, \_email, \_account,
+    # etc.) and/or custom-defined search keys. A search key is a data type
+    # pair that consists of a `KeyName` and `Values` list.
+    #
+    # This operation supports searching for profiles with a minimum of 1
+    # key-value(s) pair and up to 5 key-value(s) pairs using either `AND` or
+    # `OR` logic.
     #
     # @option params [String] :next_token
     #   The pagination token from the previous SearchProfiles API call.
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects returned per page.
+    #
+    #   The default is 20 if this parameter is not included in the request.
     #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
@@ -2556,6 +2564,33 @@ module Aws::CustomerProfiles
     # @option params [required, Array<String>] :values
     #   A list of key values.
     #
+    # @option params [Array<Types::AdditionalSearchKey>] :additional_search_keys
+    #   A list of `AdditionalSearchKey` objects that are each searchable
+    #   identifiers of a profile. Each `AdditionalSearchKey` object contains a
+    #   `KeyName` and a list of `Values` associated with that specific key
+    #   (i.e., a key-value(s) pair). These additional search keys will be used
+    #   in conjunction with the `LogicalOperator` and the required `KeyName`
+    #   and `Values` parameters to search for profiles that satisfy the search
+    #   criteria.
+    #
+    # @option params [String] :logical_operator
+    #   Relationship between all specified search keys that will be used to
+    #   search for profiles. This includes the required `KeyName` and `Values`
+    #   parameters as well as any key-value(s) pairs specified in the
+    #   `AdditionalSearchKeys` list.
+    #
+    #   This parameter influences which profiles will be returned in the
+    #   response in the following manner:
+    #
+    #   * `AND` - The response only includes profiles that match all of the
+    #     search keys.
+    #
+    #   * `OR` - The response includes profiles that match at least one of the
+    #     search keys.
+    #
+    #   The `OR` relationship is the default behavior if this parameter is not
+    #   included in the request.
+    #
     # @return [Types::SearchProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchProfilesResponse#items #items} => Array&lt;Types::Profile&gt;
@@ -2569,6 +2604,13 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     key_name: "name", # required
     #     values: ["string1To255"], # required
+    #     additional_search_keys: [
+    #       {
+    #         key_name: "name", # required
+    #         values: ["string1To255"], # required
+    #       },
+    #     ],
+    #     logical_operator: "AND", # accepts AND, OR
     #   })
     #
     # @example Response structure
@@ -2633,6 +2675,10 @@ module Aws::CustomerProfiles
     #   resp.items[0].billing_address.postal_code #=> String
     #   resp.items[0].attributes #=> Hash
     #   resp.items[0].attributes["string1To255"] #=> String
+    #   resp.items[0].found_by_items #=> Array
+    #   resp.items[0].found_by_items[0].key_name #=> String
+    #   resp.items[0].found_by_items[0].values #=> Array
+    #   resp.items[0].found_by_items[0].values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchProfiles AWS API Documentation
@@ -3042,7 +3088,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

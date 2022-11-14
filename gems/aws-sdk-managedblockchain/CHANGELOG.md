@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2022-11-14)
+------------------
+
+* Feature - Updating the API docs data type: NetworkEthereumAttributes, and the operations DeleteNode, and CreateNode to also include the supported Goerli network.
+
 1.34.0 (2022-10-25)
 ------------------
 

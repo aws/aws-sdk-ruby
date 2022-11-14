@@ -189,7 +189,6 @@ module Aws::Proton
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
     OutputValueString = Shapes::StringShape.new(name: 'OutputValueString')
     OutputsList = Shapes::ListShape.new(name: 'OutputsList')
-    PipelineRoleArn = Shapes::StringShape.new(name: 'PipelineRoleArn')
     ProvisionedResource = Shapes::StructureShape.new(name: 'ProvisionedResource')
     ProvisionedResourceEngine = Shapes::StringShape.new(name: 'ProvisionedResourceEngine')
     ProvisionedResourceIdentifier = Shapes::StringShape.new(name: 'ProvisionedResourceIdentifier')
@@ -222,6 +221,8 @@ module Aws::Proton
     ResourceSyncEvents = Shapes::ListShape.new(name: 'ResourceSyncEvents')
     ResourceSyncStatus = Shapes::StringShape.new(name: 'ResourceSyncStatus')
     Revision = Shapes::StructureShape.new(name: 'Revision')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RoleArnOrEmptyString = Shapes::StringShape.new(name: 'RoleArnOrEmptyString')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectSource = Shapes::StructureShape.new(name: 'S3ObjectSource')
@@ -306,8 +307,9 @@ module Aws::Proton
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AccountSettings.add_member(:pipeline_codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArnOrEmptyString, location_name: "pipelineCodebuildRoleArn"))
     AccountSettings.add_member(:pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranch, location_name: "pipelineProvisioningRepository"))
-    AccountSettings.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "pipelineServiceRoleArn"))
+    AccountSettings.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: RoleArnOrEmptyString, location_name: "pipelineServiceRoleArn"))
     AccountSettings.struct_class = Types::AccountSettings
 
     CancelComponentDeploymentInput.add_member(:component_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "componentName"))
@@ -395,17 +397,19 @@ module Aws::Proton
     CreateComponentOutput.struct_class = Types::CreateComponentOutput
 
     CreateEnvironmentAccountConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateEnvironmentAccountConnectionInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
+    CreateEnvironmentAccountConnectionInput.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
+    CreateEnvironmentAccountConnectionInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     CreateEnvironmentAccountConnectionInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
     CreateEnvironmentAccountConnectionInput.add_member(:management_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "managementAccountId"))
-    CreateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    CreateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateEnvironmentAccountConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateEnvironmentAccountConnectionInput.struct_class = Types::CreateEnvironmentAccountConnectionInput
 
     CreateEnvironmentAccountConnectionOutput.add_member(:environment_account_connection, Shapes::ShapeRef.new(shape: EnvironmentAccountConnection, required: true, location_name: "environmentAccountConnection"))
     CreateEnvironmentAccountConnectionOutput.struct_class = Types::CreateEnvironmentAccountConnectionOutput
 
-    CreateEnvironmentInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
+    CreateEnvironmentInput.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
+    CreateEnvironmentInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     CreateEnvironmentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateEnvironmentInput.add_member(:environment_account_connection_id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, location_name: "environmentAccountConnectionId"))
     CreateEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -570,7 +574,8 @@ module Aws::Proton
     DeleteTemplateSyncConfigOutput.struct_class = Types::DeleteTemplateSyncConfigOutput
 
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, required: true, location_name: "arn"))
-    Environment.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
+    Environment.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
+    Environment.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     Environment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     Environment.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
     Environment.add_member(:deployment_status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "deploymentStatusMessage"))
@@ -590,7 +595,8 @@ module Aws::Proton
     Environment.struct_class = Types::Environment
 
     EnvironmentAccountConnection.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionArn, required: true, location_name: "arn"))
-    EnvironmentAccountConnection.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
+    EnvironmentAccountConnection.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
+    EnvironmentAccountConnection.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     EnvironmentAccountConnection.add_member(:environment_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "environmentAccountId"))
     EnvironmentAccountConnection.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
     EnvironmentAccountConnection.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
@@ -973,7 +979,7 @@ module Aws::Proton
     NotifyResourceDeploymentStatusChangeInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     NotifyResourceDeploymentStatusChangeInput.add_member(:outputs, Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeInputOutputsList, location_name: "outputs"))
     NotifyResourceDeploymentStatusChangeInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
-    NotifyResourceDeploymentStatusChangeInput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceDeploymentStatus, required: true, location_name: "status"))
+    NotifyResourceDeploymentStatusChangeInput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceDeploymentStatus, location_name: "status"))
     NotifyResourceDeploymentStatusChangeInput.add_member(:status_message, Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeInputStatusMessageString, location_name: "statusMessage"))
     NotifyResourceDeploymentStatusChangeInput.struct_class = Types::NotifyResourceDeploymentStatusChangeInput
 
@@ -1241,8 +1247,9 @@ module Aws::Proton
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateAccountSettingsInput.add_member(:delete_pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletePipelineProvisioningRepository"))
+    UpdateAccountSettingsInput.add_member(:pipeline_codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArnOrEmptyString, location_name: "pipelineCodebuildRoleArn"))
     UpdateAccountSettingsInput.add_member(:pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranchInput, location_name: "pipelineProvisioningRepository"))
-    UpdateAccountSettingsInput.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "pipelineServiceRoleArn"))
+    UpdateAccountSettingsInput.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: RoleArnOrEmptyString, location_name: "pipelineServiceRoleArn"))
     UpdateAccountSettingsInput.struct_class = Types::UpdateAccountSettingsInput
 
     UpdateAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, required: true, location_name: "accountSettings"))
@@ -1260,15 +1267,17 @@ module Aws::Proton
     UpdateComponentOutput.add_member(:component, Shapes::ShapeRef.new(shape: Component, required: true, location_name: "component"))
     UpdateComponentOutput.struct_class = Types::UpdateComponentOutput
 
-    UpdateEnvironmentAccountConnectionInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
+    UpdateEnvironmentAccountConnectionInput.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
+    UpdateEnvironmentAccountConnectionInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     UpdateEnvironmentAccountConnectionInput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
-    UpdateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
+    UpdateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     UpdateEnvironmentAccountConnectionInput.struct_class = Types::UpdateEnvironmentAccountConnectionInput
 
     UpdateEnvironmentAccountConnectionOutput.add_member(:environment_account_connection, Shapes::ShapeRef.new(shape: EnvironmentAccountConnection, required: true, location_name: "environmentAccountConnection"))
     UpdateEnvironmentAccountConnectionOutput.struct_class = Types::UpdateEnvironmentAccountConnectionOutput
 
-    UpdateEnvironmentInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "componentRoleArn"))
+    UpdateEnvironmentInput.add_member(:codebuild_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "codebuildRoleArn"))
+    UpdateEnvironmentInput.add_member(:component_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "componentRoleArn"))
     UpdateEnvironmentInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentUpdateType, required: true, location_name: "deploymentType"))
     UpdateEnvironmentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateEnvironmentInput.add_member(:environment_account_connection_id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, location_name: "environmentAccountConnectionId"))

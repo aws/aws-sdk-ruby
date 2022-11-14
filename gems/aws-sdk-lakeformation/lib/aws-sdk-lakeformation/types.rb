@@ -954,6 +954,9 @@ module Aws::LakeFormation
     #             permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
     #           },
     #         ],
+    #         parameters: {
+    #           "KeyString" => "ParametersMapValue",
+    #         },
     #         trusted_resource_owners: ["CatalogIdString"],
     #         allow_external_data_filtering: false,
     #         external_data_filtering_allow_list: [
@@ -972,8 +975,7 @@ module Aws::LakeFormation
     # @!attribute [rw] create_database_default_permissions
     #   Specifies whether access control on newly created database is
     #   managed by Lake Formation permissions or exclusively by IAM
-    #   permissions. You can override this default setting when you create a
-    #   database.
+    #   permissions.
     #
     #   A null value indicates access control by Lake Formation permissions.
     #   A value that assigns ALL to IAM\_ALLOWED\_PRINCIPALS indicates
@@ -1016,6 +1018,13 @@ module Aws::LakeFormation
     #
     #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html
     #   @return [Array<Types::PrincipalPermissions>]
+    #
+    # @!attribute [rw] parameters
+    #   A key-value map that provides an additional configuration on your
+    #   data lake. CrossAccountVersion is the key you can configure in the
+    #   Parameters field. Accepted values for the CrossAccountVersion key
+    #   are 1, 2, and 3.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] trusted_resource_owners
     #   A list of the resource-owning account IDs that the caller's account
@@ -1065,6 +1074,7 @@ module Aws::LakeFormation
       :data_lake_admins,
       :create_database_default_permissions,
       :create_table_default_permissions,
+      :parameters,
       :trusted_resource_owners,
       :allow_external_data_filtering,
       :external_data_filtering_allow_list,
@@ -3190,6 +3200,9 @@ module Aws::LakeFormation
     #               permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
     #             },
     #           ],
+    #           parameters: {
+    #             "KeyString" => "ParametersMapValue",
+    #           },
     #           trusted_resource_owners: ["CatalogIdString"],
     #           allow_external_data_filtering: false,
     #           external_data_filtering_allow_list: [
@@ -3307,7 +3320,7 @@ module Aws::LakeFormation
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
     #   @return [Boolean]
     #
     # @!attribute [rw] role_arn

@@ -83,6 +83,41 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # A data type pair that consists of a `KeyName` and `Values` list that
+    # is used in conjunction with the [KeyName][1] and [Values][2]
+    # parameters to search for profiles using the [SearchProfiles][3] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName
+    # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values
+    # [3]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
+    #
+    # @note When making an API call, you may pass AdditionalSearchKey
+    #   data as a hash:
+    #
+    #       {
+    #         key_name: "name", # required
+    #         values: ["string1To255"], # required
+    #       }
+    #
+    # @!attribute [rw] key_name
+    #   A searchable identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of key values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AdditionalSearchKey AWS API Documentation
+    #
+    class AdditionalSearchKey < Struct.new(
+      :key_name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A generic address associated with the customer that is not mailing,
     # shipping, or billing.
     #
@@ -1689,6 +1724,31 @@ module Aws::CustomerProfiles
       :source_flow_config,
       :tasks,
       :trigger_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data type pair that consists of a `KeyName` and `Values` list that
+    # were used to find a profile returned in response to a
+    # [SearchProfiles][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
+    #
+    # @!attribute [rw] key_name
+    #   A searchable identifier of a customer profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of key values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/FoundByKeyValue AWS API Documentation
+    #
+    class FoundByKeyValue < Struct.new(
+      :key_name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3796,6 +3856,34 @@ module Aws::CustomerProfiles
     #   A key value pair of attributes of a customer profile.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] found_by_items
+    #   A list of items used to find a profile returned in a
+    #   [SearchProfiles][1] response. An item is a key-value(s) pair that
+    #   matches an attribute in the profile.
+    #
+    #   If the optional `AdditionalSearchKeys` parameter was included in the
+    #   [SearchProfiles][1] request, the `FoundByItems` list should be
+    #   interpreted based on the `LogicalOperator` used in the request:
+    #
+    #   * `AND` - The profile included in the response matched all of the
+    #     search keys specified in the request. The `FoundByItems` will
+    #     include all of the key-value(s) pairs that were specified in the
+    #     request (as this is a requirement of `AND` search logic).
+    #
+    #   * `OR` - The profile included in the response matched at least one
+    #     of the search keys specified in the request. The `FoundByItems`
+    #     will include each of the key-value(s) pairs that the profile was
+    #     found by.
+    #
+    #   The `OR` relationship is the default behavior if the
+    #   `LogicalOperator` parameter is not included in the
+    #   [SearchProfiles][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
+    #   @return [Array<Types::FoundByKeyValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Profile AWS API Documentation
     #
     class Profile < Struct.new(
@@ -3820,7 +3908,8 @@ module Aws::CustomerProfiles
       :shipping_address,
       :mailing_address,
       :billing_address,
-      :attributes)
+      :attributes,
+      :found_by_items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4445,6 +4534,13 @@ module Aws::CustomerProfiles
     #         domain_name: "name", # required
     #         key_name: "name", # required
     #         values: ["string1To255"], # required
+    #         additional_search_keys: [
+    #           {
+    #             key_name: "name", # required
+    #             values: ["string1To255"], # required
+    #           },
+    #         ],
+    #         logical_operator: "AND", # accepts AND, OR
     #       }
     #
     # @!attribute [rw] next_token
@@ -4453,6 +4549,8 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] max_results
     #   The maximum number of objects returned per page.
+    #
+    #   The default is 20 if this parameter is not included in the request.
     #   @return [Integer]
     #
     # @!attribute [rw] domain_name
@@ -4473,6 +4571,35 @@ module Aws::CustomerProfiles
     #   A list of key values.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_search_keys
+    #   A list of `AdditionalSearchKey` objects that are each searchable
+    #   identifiers of a profile. Each `AdditionalSearchKey` object contains
+    #   a `KeyName` and a list of `Values` associated with that specific key
+    #   (i.e., a key-value(s) pair). These additional search keys will be
+    #   used in conjunction with the `LogicalOperator` and the required
+    #   `KeyName` and `Values` parameters to search for profiles that
+    #   satisfy the search criteria.
+    #   @return [Array<Types::AdditionalSearchKey>]
+    #
+    # @!attribute [rw] logical_operator
+    #   Relationship between all specified search keys that will be used to
+    #   search for profiles. This includes the required `KeyName` and
+    #   `Values` parameters as well as any key-value(s) pairs specified in
+    #   the `AdditionalSearchKeys` list.
+    #
+    #   This parameter influences which profiles will be returned in the
+    #   response in the following manner:
+    #
+    #   * `AND` - The response only includes profiles that match all of the
+    #     search keys.
+    #
+    #   * `OR` - The response includes profiles that match at least one of
+    #     the search keys.
+    #
+    #   The `OR` relationship is the default behavior if this parameter is
+    #   not included in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchProfilesRequest AWS API Documentation
     #
     class SearchProfilesRequest < Struct.new(
@@ -4480,13 +4607,15 @@ module Aws::CustomerProfiles
       :max_results,
       :domain_name,
       :key_name,
-      :values)
+      :values,
+      :additional_search_keys,
+      :logical_operator)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] items
-    #   The list of SearchProfiles instances.
+    #   The list of Profiles matching the search criteria.
     #   @return [Array<Types::Profile>]
     #
     # @!attribute [rw] next_token

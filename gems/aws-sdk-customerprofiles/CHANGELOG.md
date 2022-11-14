@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-11-14)
+------------------
+
+* Feature - This release enhances the SearchProfiles API by providing functionality to search for profiles using multiple keys and logical operators.
+
 1.23.0 (2022-10-25)
 ------------------
 

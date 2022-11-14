@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2022-11-14)
+------------------
+
+* Feature - This release adds a new parameter "Parameters" in the DataLakeSettings.
+
 1.28.0 (2022-10-25)
 ------------------
 

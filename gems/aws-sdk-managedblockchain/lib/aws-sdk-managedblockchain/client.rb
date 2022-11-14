@@ -635,6 +635,8 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-mainnet`
     #
+    #   * `n-ethereum-goerli`
+    #
     #   * `n-ethereum-rinkeby`
     #
     #   * `n-ethereum-ropsten`
@@ -818,7 +820,7 @@ module Aws::ManagedBlockchain
     # `BILLING_TOKEN`. After an accessor is deleted, the status of the
     # accessor changes from `AVAILABLE` to `PENDING_DELETION`. An accessor
     # in the `PENDING_DELETION` state can’t be used for new WebSocket
-    # requests or HTTP requests. However, WebSocket connections that are
+    # requests or HTTP requests. However, WebSocket connections that were
     # initiated while the accessor was in the `AVAILABLE` state remain open
     # until they expire (up to 2 hours).
     #
@@ -888,6 +890,8 @@ module Aws::ManagedBlockchain
     #   Ethereum public networks have the following `NetworkId`s:
     #
     #   * `n-ethereum-mainnet`
+    #
+    #   * `n-ethereum-goerli`
     #
     #   * `n-ethereum-rinkeby`
     #
@@ -1872,7 +1876,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

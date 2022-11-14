@@ -530,7 +530,7 @@ module Aws::WorkDocs
     #       {
     #         organization_id: "IdType", # required
     #         endpoint: "SubscriptionEndPointType", # required
-    #         protocol: "HTTPS", # required, accepts HTTPS
+    #         protocol: "HTTPS", # required, accepts HTTPS, SQS
     #         subscription_type: "ALL", # required, accepts ALL
     #       }
     #
@@ -642,7 +642,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :storage_rule,
       :authentication_token)
-      SENSITIVE = [:password, :authentication_token]
+      SENSITIVE = [:email_address, :password, :authentication_token]
       include Aws::Structure
     end
 
@@ -818,6 +818,45 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDocumentVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #         delete_prior_versions: false, # required
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. Not required when using AWS
+    #   administrator credentials to access the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of a document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of a document.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_prior_versions
+    #   When set to `TRUE`, deletes the specified version and *all prior
+    #   versions* of a document.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentVersionRequest AWS API Documentation
+    #
+    class DeleteDocumentVersionRequest < Struct.new(
+      :authentication_token,
+      :document_id,
+      :version_id,
+      :delete_prior_versions)
+      SENSITIVE = [:authentication_token]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteFolderContentsRequest
     #   data as a hash:
     #
@@ -977,7 +1016,7 @@ module Aws::WorkDocs
     #         user_id: "IdType",
     #         include_indirect_activities: false,
     #         limit: 1,
-    #         marker: "MarkerType",
+    #         marker: "SearchMarkerType",
     #       }
     #
     # @!attribute [rw] authentication_token
@@ -1542,7 +1581,28 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] query
-    #   A query to filter users by user name.
+    #   A query to filter users by user name. Remember the following about
+    #   the `Userids` and `Query` parameters:
+    #
+    #   * If you don't use either parameter, the API returns a paginated
+    #     list of all users on the site.
+    #
+    #   * If you use both parameters, the API ignores the `Query` parameter.
+    #
+    #   * The `Userid` parameter only returns user names that match a
+    #     corresponding user ID.
+    #
+    #   * The `Query` parameter runs a "prefix" search for users by the
+    #     `GivenName`, `SurName`, or `UserName` fields included in a
+    #     [CreateUser][1] API call. For example, querying on `Ma` returns
+    #     Márcia Oliveira, María García, and Mateo Jackson. If you use
+    #     multiple characters, the API only returns data that matches all
+    #     characters. For example, querying on `Ma J` only returns Mateo
+    #     Jackson.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html
     #   @return [String]
     #
     # @!attribute [rw] include
@@ -1783,6 +1843,7 @@ module Aws::WorkDocs
     #   @return [String]
     #
     # @!attribute [rw] entity_ids
+    #   The IDs of the non-existent resources.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/EntityNotExistsException AWS API Documentation
@@ -2291,7 +2352,7 @@ module Aws::WorkDocs
     #         content_modified_timestamp: Time.now,
     #         content_type: "DocumentContentType",
     #         document_size_in_bytes: 1,
-    #         parent_folder_id: "ResourceIdType", # required
+    #         parent_folder_id: "ResourceIdType",
     #       }
     #
     # @!attribute [rw] authentication_token
@@ -2413,8 +2474,8 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
-    # The maximum of 100,000 folders under the parent folder has been
-    # exceeded.
+    # The maximum of 100,000 files and folders under the parent folder has
+    # been exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2696,6 +2757,32 @@ module Aws::WorkDocs
       :id,
       :name)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreDocumentVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_token: "AuthenticationHeaderType",
+    #         document_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] authentication_token
+    #   Amazon WorkDocs authentication token. Not required when using AWS
+    #   administrator credentials to access the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RestoreDocumentVersionsRequest AWS API Documentation
+    #
+    class RestoreDocumentVersionsRequest < Struct.new(
+      :authentication_token,
+      :document_id)
+      SENSITIVE = [:authentication_token]
       include Aws::Structure
     end
 
@@ -3219,7 +3306,7 @@ module Aws::WorkDocs
       :time_zone_id,
       :locale,
       :storage)
-      SENSITIVE = []
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 
@@ -3253,7 +3340,7 @@ module Aws::WorkDocs
       :given_name,
       :surname,
       :email_address)
-      SENSITIVE = []
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 

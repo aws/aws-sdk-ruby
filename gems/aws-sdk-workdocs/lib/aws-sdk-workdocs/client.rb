@@ -718,12 +718,12 @@ module Aws::WorkDocs
     # endpoint receives a confirmation message, and must confirm the
     # subscription.
     #
-    # For more information, see [Subscribe to Notifications][1] in the
-    # *Amazon WorkDocs Developer Guide*.
+    # For more information, see [Setting up notifications for an IAM user or
+    # role][1] in the *Amazon WorkDocs Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html
+    # [1]: https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html
     #
     # @option params [required, String] :organization_id
     #   The ID of the organization.
@@ -748,7 +748,7 @@ module Aws::WorkDocs
     #   resp = client.create_notification_subscription({
     #     organization_id: "IdType", # required
     #     endpoint: "SubscriptionEndPointType", # required
-    #     protocol: "HTTPS", # required, accepts HTTPS
+    #     protocol: "HTTPS", # required, accepts HTTPS, SQS
     #     subscription_type: "ALL", # required, accepts ALL
     #   })
     #
@@ -756,7 +756,7 @@ module Aws::WorkDocs
     #
     #   resp.subscription.subscription_id #=> String
     #   resp.subscription.end_point #=> String
-    #   resp.subscription.protocol #=> String, one of "HTTPS"
+    #   resp.subscription.protocol #=> String, one of "HTTPS", "SQS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscription AWS API Documentation
     #
@@ -981,6 +981,43 @@ module Aws::WorkDocs
       req.send_request(options)
     end
 
+    # Deletes a version of an Amazon WorkDocs document. Use the
+    # `DeletePriorVersions` parameter to delete prior versions.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. Not required when using AWS
+    #   administrator credentials to access the API.
+    #
+    # @option params [required, String] :document_id
+    #   The ID of a document.
+    #
+    # @option params [required, String] :version_id
+    #   The version ID of a document.
+    #
+    # @option params [required, Boolean] :delete_prior_versions
+    #   When set to `TRUE`, deletes the specified version and *all prior
+    #   versions* of a document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_document_version({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     document_id: "ResourceIdType", # required
+    #     version_id: "DocumentVersionIdType", # required
+    #     delete_prior_versions: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentVersion AWS API Documentation
+    #
+    # @overload delete_document_version(params = {})
+    # @param [Hash] params ({})
+    def delete_document_version(params = {}, options = {})
+      req = build_request(:delete_document_version, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes the specified folder and its contents.
     #
     # @option params [String] :authentication_token
@@ -1185,7 +1222,7 @@ module Aws::WorkDocs
     #     user_id: "IdType",
     #     include_indirect_activities: false,
     #     limit: 1,
-    #     marker: "MarkerType",
+    #     marker: "SearchMarkerType",
     #   })
     #
     # @example Response structure
@@ -1596,7 +1633,7 @@ module Aws::WorkDocs
     #   resp.subscriptions #=> Array
     #   resp.subscriptions[0].subscription_id #=> String
     #   resp.subscriptions[0].end_point #=> String
-    #   resp.subscriptions[0].protocol #=> String, one of "HTTPS"
+    #   resp.subscriptions[0].protocol #=> String, one of "HTTPS", "SQS"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptions AWS API Documentation
@@ -1742,7 +1779,28 @@ module Aws::WorkDocs
     #   The IDs of the users.
     #
     # @option params [String] :query
-    #   A query to filter users by user name.
+    #   A query to filter users by user name. Remember the following about the
+    #   `Userids` and `Query` parameters:
+    #
+    #   * If you don't use either parameter, the API returns a paginated list
+    #     of all users on the site.
+    #
+    #   * If you use both parameters, the API ignores the `Query` parameter.
+    #
+    #   * The `Userid` parameter only returns user names that match a
+    #     corresponding user ID.
+    #
+    #   * The `Query` parameter runs a "prefix" search for users by the
+    #     `GivenName`, `SurName`, or `UserName` fields included in a
+    #     [CreateUser][1] API call. For example, querying on `Ma` returns
+    #     Márcia Oliveira, María García, and Mateo Jackson. If you use
+    #     multiple characters, the API only returns data that matches all
+    #     characters. For example, querying on `Ma J` only returns Mateo
+    #     Jackson.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html
     #
     # @option params [String] :include
     #   The state of the users. Specify "ALL" to include inactive users.
@@ -2277,7 +2335,7 @@ module Aws::WorkDocs
     # @option params [Integer] :document_size_in_bytes
     #   The size of the document, in bytes.
     #
-    # @option params [required, String] :parent_folder_id
+    # @option params [String] :parent_folder_id
     #   The ID of the parent folder.
     #
     # @return [Types::InitiateDocumentVersionUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2295,7 +2353,7 @@ module Aws::WorkDocs
     #     content_modified_timestamp: Time.now,
     #     content_type: "DocumentContentType",
     #     document_size_in_bytes: 1,
-    #     parent_folder_id: "ResourceIdType", # required
+    #     parent_folder_id: "ResourceIdType",
     #   })
     #
     # @example Response structure
@@ -2396,6 +2454,33 @@ module Aws::WorkDocs
     # @param [Hash] params ({})
     def remove_resource_permission(params = {}, options = {})
       req = build_request(:remove_resource_permission, params)
+      req.send_request(options)
+    end
+
+    # Recovers a deleted version of an Amazon WorkDocs document.
+    #
+    # @option params [String] :authentication_token
+    #   Amazon WorkDocs authentication token. Not required when using AWS
+    #   administrator credentials to access the API.
+    #
+    # @option params [required, String] :document_id
+    #   The ID of the document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_document_versions({
+    #     authentication_token: "AuthenticationHeaderType",
+    #     document_id: "ResourceIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RestoreDocumentVersions AWS API Documentation
+    #
+    # @overload restore_document_versions(params = {})
+    # @param [Hash] params ({})
+    def restore_document_versions(params = {}, options = {})
+      req = build_request(:restore_document_versions, params)
       req.send_request(options)
     end
 
@@ -2617,7 +2702,7 @@ module Aws::WorkDocs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workdocs'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

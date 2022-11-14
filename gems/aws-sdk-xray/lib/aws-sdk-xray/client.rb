@@ -1259,6 +1259,10 @@ module Aws::XRay
     #   resp.services[0].edges[0].aliases[0].names #=> Array
     #   resp.services[0].edges[0].aliases[0].names[0] #=> String
     #   resp.services[0].edges[0].aliases[0].type #=> String
+    #   resp.services[0].edges[0].edge_type #=> String
+    #   resp.services[0].edges[0].received_event_age_histogram #=> Array
+    #   resp.services[0].edges[0].received_event_age_histogram[0].value #=> Float
+    #   resp.services[0].edges[0].received_event_age_histogram[0].count #=> Integer
     #   resp.services[0].summary_statistics.ok_count #=> Integer
     #   resp.services[0].summary_statistics.error_statistics.throttle_count #=> Integer
     #   resp.services[0].summary_statistics.error_statistics.other_count #=> Integer
@@ -1430,6 +1434,10 @@ module Aws::XRay
     #   resp.services[0].edges[0].aliases[0].names #=> Array
     #   resp.services[0].edges[0].aliases[0].names[0] #=> String
     #   resp.services[0].edges[0].aliases[0].type #=> String
+    #   resp.services[0].edges[0].edge_type #=> String
+    #   resp.services[0].edges[0].received_event_age_histogram #=> Array
+    #   resp.services[0].edges[0].received_event_age_histogram[0].value #=> Float
+    #   resp.services[0].edges[0].received_event_age_histogram[0].count #=> Integer
     #   resp.services[0].summary_statistics.ok_count #=> Integer
     #   resp.services[0].summary_statistics.error_statistics.throttle_count #=> Integer
     #   resp.services[0].summary_statistics.error_statistics.other_count #=> Integer
@@ -2062,7 +2070,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

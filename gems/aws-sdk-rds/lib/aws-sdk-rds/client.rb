@@ -4520,6 +4520,8 @@ module Aws::RDS
     # @option params [Integer] :storage_throughput
     #   Specifies the storage throughput value for the DB instance.
     #
+    #   This setting applies only to the `gp3` storage type.
+    #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -15289,6 +15291,8 @@ module Aws::RDS
     # @option params [Integer] :storage_throughput
     #   Specifies the storage throughput value for the DB instance.
     #
+    #   This setting applies only to the `gp3` storage type.
+    #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -19666,12 +19670,17 @@ module Aws::RDS
     #
     #   Example: `my-snapshot-id`
     #
-    # @option params [required, String] :db_snapshot_identifier
+    # @option params [String] :db_snapshot_identifier
     #   The identifier for the DB snapshot to restore from.
     #
     #   Constraints:
     #
     #   * Must match the identifier of an existing DBSnapshot.
+    #
+    #   * Can't be specified when `DBClusterSnapshotIdentifier` is specified.
+    #
+    #   * Must be specified when `DBClusterSnapshotIdentifier` isn't
+    #     specified.
     #
     #   * If you are restoring from a shared manual DB snapshot, the
     #     `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
@@ -20051,6 +20060,36 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
+    # @option params [String] :db_cluster_snapshot_identifier
+    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
+    #   restore from.
+    #
+    #   For more information on Multi-AZ DB clusters, see [ Multi-AZ
+    #   deployments with two readable standby DB instances][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing Multi-AZ DB cluster
+    #     snapshot.
+    #
+    #   * Can't be specified when `DBSnapshotIdentifier` is specified.
+    #
+    #   * Must be specified when `DBSnapshotIdentifier` isn't specified.
+    #
+    #   * If you are restoring from a shared manual Multi-AZ DB cluster
+    #     snapshot, the `DBClusterSnapshotIdentifier` must be the ARN of the
+    #     shared snapshot.
+    #
+    #   * Can't be the identifier of an Aurora DB cluster snapshot.
+    #
+    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
+    #     cluster snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -20154,7 +20193,7 @@ module Aws::RDS
     #
     #   resp = client.restore_db_instance_from_db_snapshot({
     #     db_instance_identifier: "String", # required
-    #     db_snapshot_identifier: "String", # required
+    #     db_snapshot_identifier: "String",
     #     db_instance_class: "String",
     #     port: 1,
     #     availability_zone: "String",
@@ -20196,6 +20235,7 @@ module Aws::RDS
     #     backup_target: "String",
     #     network_type: "String",
     #     storage_throughput: 1,
+    #     db_cluster_snapshot_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -23149,7 +23189,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

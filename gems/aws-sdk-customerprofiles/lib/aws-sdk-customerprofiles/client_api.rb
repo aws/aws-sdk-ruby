@@ -16,6 +16,7 @@ module Aws::CustomerProfiles
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddProfileKeyRequest = Shapes::StructureShape.new(name: 'AddProfileKeyRequest')
     AddProfileKeyResponse = Shapes::StructureShape.new(name: 'AddProfileKeyResponse')
+    AdditionalSearchKey = Shapes::StructureShape.new(name: 'AdditionalSearchKey')
     Address = Shapes::StructureShape.new(name: 'Address')
     AppflowIntegration = Shapes::StructureShape.new(name: 'AppflowIntegration')
     AppflowIntegrationWorkflowAttributes = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowAttributes')
@@ -71,6 +72,7 @@ module Aws::CustomerProfiles
     FlowDefinition = Shapes::StructureShape.new(name: 'FlowDefinition')
     FlowDescription = Shapes::StringShape.new(name: 'FlowDescription')
     FlowName = Shapes::StringShape.new(name: 'FlowName')
+    FoundByKeyValue = Shapes::StructureShape.new(name: 'FoundByKeyValue')
     Gender = Shapes::StringShape.new(name: 'Gender')
     GetAutoMergingPreviewRequest = Shapes::StructureShape.new(name: 'GetAutoMergingPreviewRequest')
     GetAutoMergingPreviewResponse = Shapes::StructureShape.new(name: 'GetAutoMergingPreviewResponse')
@@ -213,9 +215,12 @@ module Aws::CustomerProfiles
     WorkflowType = Shapes::StringShape.new(name: 'WorkflowType')
     ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
     ZendeskSourceProperties = Shapes::StructureShape.new(name: 'ZendeskSourceProperties')
+    additionalSearchKeysList = Shapes::ListShape.new(name: 'additionalSearchKeysList')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     encryptionKey = Shapes::StringShape.new(name: 'encryptionKey')
     expirationDaysInteger = Shapes::IntegerShape.new(name: 'expirationDaysInteger')
+    foundByList = Shapes::ListShape.new(name: 'foundByList')
+    logicalOperator = Shapes::StringShape.new(name: 'logicalOperator')
     long = Shapes::IntegerShape.new(name: 'long')
     matchesNumber = Shapes::IntegerShape.new(name: 'matchesNumber')
     maxSize100 = Shapes::IntegerShape.new(name: 'maxSize100')
@@ -251,6 +256,10 @@ module Aws::CustomerProfiles
     AddProfileKeyResponse.add_member(:key_name, Shapes::ShapeRef.new(shape: name, location_name: "KeyName"))
     AddProfileKeyResponse.add_member(:values, Shapes::ShapeRef.new(shape: requestValueList, location_name: "Values"))
     AddProfileKeyResponse.struct_class = Types::AddProfileKeyResponse
+
+    AdditionalSearchKey.add_member(:key_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "KeyName"))
+    AdditionalSearchKey.add_member(:values, Shapes::ShapeRef.new(shape: requestValueList, required: true, location_name: "Values"))
+    AdditionalSearchKey.struct_class = Types::AdditionalSearchKey
 
     Address.add_member(:address_1, Shapes::ShapeRef.new(shape: string1To255, location_name: "Address1"))
     Address.add_member(:address_2, Shapes::ShapeRef.new(shape: string1To255, location_name: "Address2"))
@@ -480,6 +489,10 @@ module Aws::CustomerProfiles
     FlowDefinition.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "Tasks"))
     FlowDefinition.add_member(:trigger_config, Shapes::ShapeRef.new(shape: TriggerConfig, required: true, location_name: "TriggerConfig"))
     FlowDefinition.struct_class = Types::FlowDefinition
+
+    FoundByKeyValue.add_member(:key_name, Shapes::ShapeRef.new(shape: name, location_name: "KeyName"))
+    FoundByKeyValue.add_member(:values, Shapes::ShapeRef.new(shape: requestValueList, location_name: "Values"))
+    FoundByKeyValue.struct_class = Types::FoundByKeyValue
 
     GetAutoMergingPreviewRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetAutoMergingPreviewRequest.add_member(:consolidation, Shapes::ShapeRef.new(shape: Consolidation, required: true, location_name: "Consolidation"))
@@ -843,6 +856,7 @@ module Aws::CustomerProfiles
     Profile.add_member(:mailing_address, Shapes::ShapeRef.new(shape: Address, location_name: "MailingAddress"))
     Profile.add_member(:billing_address, Shapes::ShapeRef.new(shape: Address, location_name: "BillingAddress"))
     Profile.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    Profile.add_member(:found_by_items, Shapes::ShapeRef.new(shape: foundByList, location_name: "FoundByItems"))
     Profile.struct_class = Types::Profile
 
     ProfileIdList.member = Shapes::ShapeRef.new(shape: uuid)
@@ -945,6 +959,8 @@ module Aws::CustomerProfiles
     SearchProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     SearchProfilesRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "KeyName"))
     SearchProfilesRequest.add_member(:values, Shapes::ShapeRef.new(shape: requestValueList, required: true, location_name: "Values"))
+    SearchProfilesRequest.add_member(:additional_search_keys, Shapes::ShapeRef.new(shape: additionalSearchKeysList, location_name: "AdditionalSearchKeys"))
+    SearchProfilesRequest.add_member(:logical_operator, Shapes::ShapeRef.new(shape: logicalOperator, location_name: "LogicalOperator"))
     SearchProfilesRequest.struct_class = Types::SearchProfilesRequest
 
     SearchProfilesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ProfileList, location_name: "Items"))
@@ -1086,6 +1102,10 @@ module Aws::CustomerProfiles
 
     ZendeskSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
     ZendeskSourceProperties.struct_class = Types::ZendeskSourceProperties
+
+    additionalSearchKeysList.member = Shapes::ShapeRef.new(shape: AdditionalSearchKey)
+
+    foundByList.member = Shapes::ShapeRef.new(shape: FoundByKeyValue)
 
     requestValueList.member = Shapes::ShapeRef.new(shape: string1To255)
 

@@ -4224,6 +4224,8 @@ module Aws::RDS
     # @!attribute [rw] storage_throughput
     #   Specifies the storage throughput value for the DB instance.
     #
+    #   This setting applies only to the `gp3` storage type.
+    #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #   @return [Integer]
     #
@@ -7970,6 +7972,8 @@ module Aws::RDS
     #
     # @!attribute [rw] storage_throughput
     #   Specifies the storage throughput for the DB instance.
+    #
+    #   This setting applies only to the `gp3` storage type.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
@@ -16687,6 +16691,8 @@ module Aws::RDS
     # @!attribute [rw] storage_throughput
     #   Specifies the storage throughput value for the DB instance.
     #
+    #   This setting applies only to the `gp3` storage type.
+    #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #   @return [Integer]
     #
@@ -21322,7 +21328,7 @@ module Aws::RDS
     #
     #       {
     #         db_instance_identifier: "String", # required
-    #         db_snapshot_identifier: "String", # required
+    #         db_snapshot_identifier: "String",
     #         db_instance_class: "String",
     #         port: 1,
     #         availability_zone: "String",
@@ -21364,6 +21370,7 @@ module Aws::RDS
     #         backup_target: "String",
     #         network_type: "String",
     #         storage_throughput: 1,
+    #         db_cluster_snapshot_identifier: "String",
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -21387,6 +21394,12 @@ module Aws::RDS
     #   Constraints:
     #
     #   * Must match the identifier of an existing DBSnapshot.
+    #
+    #   * Can't be specified when `DBClusterSnapshotIdentifier` is
+    #     specified.
+    #
+    #   * Must be specified when `DBClusterSnapshotIdentifier` isn't
+    #     specified.
     #
     #   * If you are restoring from a shared manual DB snapshot, the
     #     `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
@@ -21803,6 +21816,37 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #   @return [Integer]
     #
+    # @!attribute [rw] db_cluster_snapshot_identifier
+    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
+    #   restore from.
+    #
+    #   For more information on Multi-AZ DB clusters, see [ Multi-AZ
+    #   deployments with two readable standby DB instances][1] in the
+    #   *Amazon RDS User Guide*.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing Multi-AZ DB cluster
+    #     snapshot.
+    #
+    #   * Can't be specified when `DBSnapshotIdentifier` is specified.
+    #
+    #   * Must be specified when `DBSnapshotIdentifier` isn't specified.
+    #
+    #   * If you are restoring from a shared manual Multi-AZ DB cluster
+    #     snapshot, the `DBClusterSnapshotIdentifier` must be the ARN of the
+    #     shared snapshot.
+    #
+    #   * Can't be the identifier of an Aurora DB cluster snapshot.
+    #
+    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
+    #     cluster snapshot.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -21838,7 +21882,8 @@ module Aws::RDS
       :custom_iam_instance_profile,
       :backup_target,
       :network_type,
-      :storage_throughput)
+      :storage_throughput,
+      :db_cluster_snapshot_identifier)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -406,6 +406,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment_account_connection.arn #=> String
+    #   resp.environment_account_connection.codebuild_role_arn #=> String
     #   resp.environment_account_connection.component_role_arn #=> String
     #   resp.environment_account_connection.environment_account_id #=> String
     #   resp.environment_account_connection.environment_name #=> String
@@ -509,6 +510,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment.arn #=> String
+    #   resp.environment.codebuild_role_arn #=> String
     #   resp.environment.component_role_arn #=> String
     #   resp.environment.created_at #=> Time
     #   resp.environment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
@@ -777,12 +779,17 @@ module Aws::Proton
     #
     # **You can provision environments using the following methods:**
     #
-    # * Amazon Web Services-managed provisioning: Proton makes direct calls
-    #   to provision your resources.
+    # * **Amazon Web Services-managed provisioning** – Proton makes direct
+    #   calls to provision your resources.
     #
-    # * Self-managed provisioning: Proton makes pull requests on your
+    # * **Self-managed provisioning** – Proton makes pull requests on your
     #   repository to provide compiled infrastructure as code (IaC) files
     #   that your IaC engine uses to provision resources.
+    #
+    # * **CodeBuild-based provisioning** – Proton uses CodeBuild to run
+    #   shell commands that you provide. Your commands can read inputs that
+    #   Proton provides, and are responsible for provisioning or
+    #   deprovisioning infrastructure and generating output values.
     #
     # For more information, see [Environments][1] and [Provisioning
     # methods][2] in the *Proton User Guide*.
@@ -791,6 +798,15 @@ module Aws::Proton
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html
     # [2]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html
+    #
+    # @option params [String] :codebuild_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM service role that allows
+    #   Proton to provision infrastructure using CodeBuild-based provisioning
+    #   on your behalf.
+    #
+    #   To use CodeBuild-based provisioning for the environment or for any
+    #   service instance running in the environment, specify either the
+    #   `environmentAccountConnectionId` or `codebuildRoleArn` parameter.
     #
     # @option params [String] :component_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that Proton
@@ -812,15 +828,15 @@ module Aws::Proton
     #   A description of the environment that's being created and deployed.
     #
     # @option params [String] :environment_account_connection_id
-    #   The ID of the environment account connection that you provide if
-    #   you're provisioning your environment infrastructure resources to an
-    #   environment account. For more information, see [Environment account
+    #   The ID of the environment account connection that you provide if you
+    #   want Proton to provision infrastructure resources for your environment
+    #   or for any of the service instances running in it in an environment
+    #   account. For more information, see [Environment account
     #   connections][1] in the *Proton User guide*.
     #
-    #   To use Amazon Web Services-managed provisioning for the environment,
-    #   specify either the `environmentAccountConnectionId` or
-    #   `protonServiceRoleArn` parameter and omit the `provisioningRepository`
-    #   parameter.
+    #   If you specify the `environmentAccountConnectionId` parameter, don't
+    #   specify `protonServiceRoleArn`, `codebuildRoleArn`, or
+    #   `provisioningRepository`.
     #
     #
     #
@@ -830,12 +846,13 @@ module Aws::Proton
     #   The name of the environment.
     #
     # @option params [String] :proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the Proton service role that allows
-    #   Proton to make calls to other services on your behalf.
+    #   The Amazon Resource Name (ARN) of the IAM service role that allows
+    #   Proton to provision infrastructure using Amazon Web Services-managed
+    #   provisioning and CloudFormation on your behalf.
     #
-    #   To use Amazon Web Services-managed provisioning for the environment,
-    #   specify either the `environmentAccountConnectionId` or
-    #   `protonServiceRoleArn` parameter and omit the `provisioningRepository`
+    #   To use Amazon Web Services-managed provisioning for the environment or
+    #   for any service instance running in the environment, specify either
+    #   the `environmentAccountConnectionId` or `protonServiceRoleArn`
     #   parameter.
     #
     # @option params [Types::RepositoryBranchInput] :provisioning_repository
@@ -844,9 +861,8 @@ module Aws::Proton
     #   repository is a repository that has been registered with Proton. For
     #   more information, see CreateRepository.
     #
-    #   To use self-managed provisioning for the environment, specify this
-    #   parameter and omit the `environmentAccountConnectionId` and
-    #   `protonServiceRoleArn` parameters.
+    #   To use self-managed provisioning for the environment or for any
+    #   service instance running in the environment, specify this parameter.
     #
     # @option params [required, String] :spec
     #   A YAML formatted string that provides inputs as defined in the
@@ -889,7 +905,8 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_environment({
-    #     component_role_arn: "Arn",
+    #     codebuild_role_arn: "RoleArn",
+    #     component_role_arn: "RoleArn",
     #     description: "Description",
     #     environment_account_connection_id: "EnvironmentAccountConnectionId",
     #     name: "ResourceName", # required
@@ -914,6 +931,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment.arn #=> String
+    #   resp.environment.codebuild_role_arn #=> String
     #   resp.environment.component_role_arn #=> String
     #   resp.environment.created_at #=> Time
     #   resp.environment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
@@ -965,11 +983,18 @@ module Aws::Proton
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :codebuild_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role in the
+    #   environment account. Proton uses this role to provision infrastructure
+    #   resources using CodeBuild-based provisioning in the associated
+    #   environment account.
+    #
     # @option params [String] :component_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that Proton
-    #   uses when provisioning directly defined components in the associated
-    #   environment account. It determines the scope of infrastructure that a
-    #   component can provision in the account.
+    #   The Amazon Resource Name (ARN) of an IAM service role in the
+    #   environment account. Proton uses this role to provision directly
+    #   defined components in the associated environment account. It
+    #   determines the scope of infrastructure that a component can provision
+    #   in the account.
     #
     #   You must specify `componentRoleArn` to allow directly defined
     #   components to be associated with any environments running in this
@@ -995,9 +1020,10 @@ module Aws::Proton
     #   environment account.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that's created
-    #   in the environment account. Proton uses this role to provision
-    #   infrastructure resources in the associated environment account.
+    #   The Amazon Resource Name (ARN) of an IAM service role in the
+    #   environment account. Proton uses this role to provision infrastructure
+    #   resources using Amazon Web Services-managed provisioning and
+    #   CloudFormation in the associated environment account.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An optional list of metadata items that you can associate with the
@@ -1018,10 +1044,11 @@ module Aws::Proton
     #
     #   resp = client.create_environment_account_connection({
     #     client_token: "ClientToken",
-    #     component_role_arn: "Arn",
+    #     codebuild_role_arn: "RoleArn",
+    #     component_role_arn: "RoleArn",
     #     environment_name: "ResourceName", # required
     #     management_account_id: "AwsAccountId", # required
-    #     role_arn: "Arn", # required
+    #     role_arn: "RoleArn", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1033,6 +1060,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment_account_connection.arn #=> String
+    #   resp.environment_account_connection.codebuild_role_arn #=> String
     #   resp.environment_account_connection.component_role_arn #=> String
     #   resp.environment_account_connection.environment_account_id #=> String
     #   resp.environment_account_connection.environment_name #=> String
@@ -1783,6 +1811,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment.arn #=> String
+    #   resp.environment.codebuild_role_arn #=> String
     #   resp.environment.component_role_arn #=> String
     #   resp.environment.created_at #=> Time
     #   resp.environment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
@@ -1845,6 +1874,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment_account_connection.arn #=> String
+    #   resp.environment_account_connection.codebuild_role_arn #=> String
     #   resp.environment_account_connection.component_role_arn #=> String
     #   resp.environment_account_connection.environment_account_id #=> String
     #   resp.environment_account_connection.environment_name #=> String
@@ -2199,6 +2229,7 @@ module Aws::Proton
     #
     # @example Response structure
     #
+    #   resp.account_settings.pipeline_codebuild_role_arn #=> String
     #   resp.account_settings.pipeline_provisioning_repository.arn #=> String
     #   resp.account_settings.pipeline_provisioning_repository.branch #=> String
     #   resp.account_settings.pipeline_provisioning_repository.name #=> String
@@ -2286,6 +2317,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment.arn #=> String
+    #   resp.environment.codebuild_role_arn #=> String
     #   resp.environment.component_role_arn #=> String
     #   resp.environment.created_at #=> Time
     #   resp.environment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
@@ -2348,6 +2380,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment_account_connection.arn #=> String
+    #   resp.environment_account_connection.codebuild_role_arn #=> String
     #   resp.environment_account_connection.component_role_arn #=> String
     #   resp.environment_account_connection.environment_account_id #=> String
     #   resp.environment_account_connection.environment_name #=> String
@@ -3882,27 +3915,40 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Notify Proton of status changes to a provisioned resource when you use
-    # self-managed provisioning.
+    # Notify Proton of the following information related to a provisioned
+    # resource (environment, service instance, or service pipeline):
     #
-    # For more information, see [Self-managed provisioning][1] in the
-    # *Proton User Guide*.
+    # * For [CodeBuild-based provisioning][1], provide your provisioned
+    #   resource output values to Proton.
+    #
+    # * For [self-managed provisioning][2], notify Proton about the status
+    #   of your provisioned resource. To disambiguate between different
+    #   deployments of the same resource, set `deploymentId` to a unique
+    #   deployment ID of your choice.
+    #
+    #        </li> </ul>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
+    # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-codebuild
+    # [2]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
     #
     # @option params [String] :deployment_id
-    #   The deployment ID for your provisioned resource.
+    #   The deployment ID for your provisioned resource. Proton uses it to
+    #   disambiguate different deployments of the resource. Applicable to
+    #   [self-managed provisioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
     #
     # @option params [Array<Types::Output>] :outputs
-    #   The provisioned resource state change detail data that's returned by
-    #   Proton.
+    #   The output values generated by your provisioned resource.
     #
     # @option params [required, String] :resource_arn
-    #   The provisioned resource Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of your provisioned resource.
     #
-    # @option params [required, String] :status
+    # @option params [String] :status
     #   The status of your provisioned resource.
     #
     # @option params [String] :status_message
@@ -3921,7 +3967,7 @@ module Aws::Proton
     #       },
     #     ],
     #     resource_arn: "Arn", # required
-    #     status: "IN_PROGRESS", # required, accepts IN_PROGRESS, FAILED, SUCCEEDED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, SUCCEEDED
     #     status_message: "NotifyResourceDeploymentStatusChangeInputStatusMessageString",
     #   })
     #
@@ -3966,6 +4012,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment_account_connection.arn #=> String
+    #   resp.environment_account_connection.codebuild_role_arn #=> String
     #   resp.environment_account_connection.component_role_arn #=> String
     #   resp.environment_account_connection.environment_account_id #=> String
     #   resp.environment_account_connection.environment_name #=> String
@@ -4069,6 +4116,11 @@ module Aws::Proton
     #   account settings. Don't set this field if you are updating the
     #   configured pipeline repository.
     #
+    # @option params [String] :pipeline_codebuild_role_arn
+    #   The Amazon Resource Name (ARN) of the service role you want to use for
+    #   provisioning pipelines. Proton assumes this role for CodeBuild-based
+    #   provisioning.
+    #
     # @option params [Types::RepositoryBranchInput] :pipeline_provisioning_repository
     #   A linked repository for pipeline provisioning. Specify it if you have
     #   environments configured for self-managed provisioning with services
@@ -4096,16 +4148,18 @@ module Aws::Proton
     #
     #   resp = client.update_account_settings({
     #     delete_pipeline_provisioning_repository: false,
+    #     pipeline_codebuild_role_arn: "RoleArnOrEmptyString",
     #     pipeline_provisioning_repository: {
     #       branch: "GitBranchName", # required
     #       name: "RepositoryName", # required
     #       provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
     #     },
-    #     pipeline_service_role_arn: "PipelineRoleArn",
+    #     pipeline_service_role_arn: "RoleArnOrEmptyString",
     #   })
     #
     # @example Response structure
     #
+    #   resp.account_settings.pipeline_codebuild_role_arn #=> String
     #   resp.account_settings.pipeline_provisioning_repository.arn #=> String
     #   resp.account_settings.pipeline_provisioning_repository.branch #=> String
     #   resp.account_settings.pipeline_provisioning_repository.name #=> String
@@ -4238,9 +4292,8 @@ module Aws::Proton
     # Update an environment.
     #
     # If the environment is associated with an environment account
-    # connection, *don't* update or include the `protonServiceRoleArn` and
-    # `provisioningRepository` parameter to update or connect to an
-    # environment account connection.
+    # connection, *don't* update or include the `protonServiceRoleArn`,
+    # `codebuildRoleArn`, and `provisioningRepository` parameters.
     #
     # You can only update to a new environment account connection if that
     # connection was created in the same environment account that the
@@ -4253,16 +4306,18 @@ module Aws::Proton
     # connect the environment to an environment account connection if it
     # *isn't* already associated with an environment connection.
     #
-    # You can update either the `environmentAccountConnectionId` or
-    # `protonServiceRoleArn` parameter and value. You can’t update both.
+    # You can update either `environmentAccountConnectionId` or one or more
+    # of `protonServiceRoleArn`, `codebuildRoleArn`, and
+    # `provisioningRepository`.
     #
-    # If the environment was configured for Amazon Web Services-managed
-    # provisioning, omit the `provisioningRepository` parameter.
+    # If the environment was configured for Amazon Web Services-managed or
+    # CodeBuild-based provisioning, omit the `provisioningRepository`
+    # parameter.
     #
     # If the environment was configured for self-managed provisioning,
     # specify the `provisioningRepository` parameter and omit the
-    # `protonServiceRoleArn` and `environmentAccountConnectionId`
-    # parameters.
+    # `protonServiceRoleArn`, `codebuildRoleArn`, and
+    # `provisioningRepository` parameters.
     #
     # For more information, see [Environments][1] and [Provisioning
     # methods][2] in the *Proton User Guide*.
@@ -4309,6 +4364,11 @@ module Aws::Proton
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html
     # [2]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html
+    #
+    # @option params [String] :codebuild_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM service role that allows
+    #   Proton to provision infrastructure using CodeBuild-based provisioning
+    #   on your behalf.
     #
     # @option params [String] :component_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that Proton
@@ -4369,19 +4429,28 @@ module Aws::Proton
     #   A description of the environment update.
     #
     # @option params [String] :environment_account_connection_id
-    #   The ID of the environment account connection.
+    #   The ID of the environment account connection that you provide if you
+    #   want Proton to provision infrastructure resources for your environment
+    #   or for any of the service instances running in it in an environment
+    #   account. For more information, see [Environment account
+    #   connections][1] in the *Proton User guide*.
     #
     #   You can only update to a new environment account connection if it was
     #   created in the same environment account that the current environment
     #   account connection was created in and is associated with the current
     #   environment.
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
+    #
     # @option params [required, String] :name
     #   The name of the environment to update.
     #
     # @option params [String] :proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the Proton service role that allows
-    #   Proton to make API calls to other services your behalf.
+    #   The Amazon Resource Name (ARN) of the IAM service role that allows
+    #   Proton to provision infrastructure using Amazon Web Services-managed
+    #   provisioning and CloudFormation on your behalf.
     #
     # @option params [Types::RepositoryBranchInput] :provisioning_repository
     #   The linked repository that you use to host your rendered
@@ -4405,7 +4474,8 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_environment({
-    #     component_role_arn: "Arn",
+    #     codebuild_role_arn: "RoleArn",
+    #     component_role_arn: "RoleArn",
     #     deployment_type: "NONE", # required, accepts NONE, CURRENT_VERSION, MINOR_VERSION, MAJOR_VERSION
     #     description: "Description",
     #     environment_account_connection_id: "EnvironmentAccountConnectionId",
@@ -4424,6 +4494,7 @@ module Aws::Proton
     # @example Response structure
     #
     #   resp.environment.arn #=> String
+    #   resp.environment.codebuild_role_arn #=> String
     #   resp.environment.component_role_arn #=> String
     #   resp.environment.created_at #=> Time
     #   resp.environment.deployment_status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "CANCELLING", "CANCELLED"
@@ -4464,6 +4535,12 @@ module Aws::Proton
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
     #
+    # @option params [String] :codebuild_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role in the
+    #   environment account. Proton uses this role to provision infrastructure
+    #   resources using CodeBuild-based provisioning in the associated
+    #   environment account.
+    #
     # @option params [String] :component_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that Proton
     #   uses when provisioning directly defined components in the associated
@@ -4485,8 +4562,10 @@ module Aws::Proton
     #   The ID of the environment account connection to update.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that's
-    #   associated with the environment account connection to update.
+    #   The Amazon Resource Name (ARN) of an IAM service role in the
+    #   environment account. Proton uses this role to provision infrastructure
+    #   resources using Amazon Web Services-managed provisioning and
+    #   CloudFormation in the associated environment account.
     #
     # @return [Types::UpdateEnvironmentAccountConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4495,14 +4574,16 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_environment_account_connection({
-    #     component_role_arn: "Arn",
+    #     codebuild_role_arn: "RoleArn",
+    #     component_role_arn: "RoleArn",
     #     id: "EnvironmentAccountConnectionId", # required
-    #     role_arn: "Arn",
+    #     role_arn: "RoleArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.environment_account_connection.arn #=> String
+    #   resp.environment_account_connection.codebuild_role_arn #=> String
     #   resp.environment_account_connection.component_role_arn #=> String
     #   resp.environment_account_connection.environment_account_id #=> String
     #   resp.environment_account_connection.environment_name #=> String
@@ -5160,7 +5241,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

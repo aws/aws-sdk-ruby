@@ -508,6 +508,8 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-mainnet`
     #
+    #   * `n-ethereum-goerli`
+    #
     #   * `n-ethereum-rinkeby`
     #
     #   * `n-ethereum-ropsten`
@@ -738,6 +740,8 @@ module Aws::ManagedBlockchain
     #   Ethereum public networks have the following `NetworkId`s:
     #
     #   * `n-ethereum-mainnet`
+    #
+    #   * `n-ethereum-goerli`
     #
     #   * `n-ethereum-rinkeby`
     #
@@ -2125,6 +2129,8 @@ module Aws::ManagedBlockchain
     #
     #   * mainnet = `1`
     #
+    #   * goerli = `5`
+    #
     #   * rinkeby = `4`
     #
     #   * ropsten = `3`
@@ -2510,8 +2516,8 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] web_socket_endpoint
     #   The endpoint on which the Ethereum node listens to run Ethereum
-    #   JSON-RPC methods over WebSockets connections from a client. Use this
-    #   endpoint in client code for smart contracts when using a WebSockets
+    #   JSON-RPC methods over WebSocket connections from a client. Use this
+    #   endpoint in client code for smart contracts when using a WebSocket
     #   connection. Connections to this endpoint are authenticated using
     #   [Signature Version 4][1].
     #

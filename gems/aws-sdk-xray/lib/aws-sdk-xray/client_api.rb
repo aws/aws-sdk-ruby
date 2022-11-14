@@ -310,6 +310,8 @@ module Aws::XRay
     Edge.add_member(:summary_statistics, Shapes::ShapeRef.new(shape: EdgeStatistics, location_name: "SummaryStatistics"))
     Edge.add_member(:response_time_histogram, Shapes::ShapeRef.new(shape: Histogram, location_name: "ResponseTimeHistogram"))
     Edge.add_member(:aliases, Shapes::ShapeRef.new(shape: AliasList, location_name: "Aliases"))
+    Edge.add_member(:edge_type, Shapes::ShapeRef.new(shape: String, location_name: "EdgeType"))
+    Edge.add_member(:received_event_age_histogram, Shapes::ShapeRef.new(shape: Histogram, location_name: "ReceivedEventAgeHistogram"))
     Edge.struct_class = Types::Edge
 
     EdgeList.member = Shapes::ShapeRef.new(shape: Edge)

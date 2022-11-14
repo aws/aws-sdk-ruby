@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-11-14)
+------------------
+
+* Feature - Add support for CodeBuild Provisioning
+
 1.18.0 (2022-10-25)
 ------------------
 

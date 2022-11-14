@@ -82,6 +82,8 @@ module Aws::WorkDocs
             Aws::WorkDocs::Endpoints::DeleteCustomMetadata.build(context)
           when :delete_document
             Aws::WorkDocs::Endpoints::DeleteDocument.build(context)
+          when :delete_document_version
+            Aws::WorkDocs::Endpoints::DeleteDocumentVersion.build(context)
           when :delete_folder
             Aws::WorkDocs::Endpoints::DeleteFolder.build(context)
           when :delete_folder_contents
@@ -130,6 +132,8 @@ module Aws::WorkDocs
             Aws::WorkDocs::Endpoints::RemoveAllResourcePermissions.build(context)
           when :remove_resource_permission
             Aws::WorkDocs::Endpoints::RemoveResourcePermission.build(context)
+          when :restore_document_versions
+            Aws::WorkDocs::Endpoints::RestoreDocumentVersions.build(context)
           when :update_document
             Aws::WorkDocs::Endpoints::UpdateDocument.build(context)
           when :update_document_version

@@ -1189,6 +1189,8 @@ module Aws::LakeFormation
     #   resp.data_lake_settings.create_table_default_permissions[0].principal.data_lake_principal_identifier #=> String
     #   resp.data_lake_settings.create_table_default_permissions[0].permissions #=> Array
     #   resp.data_lake_settings.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ASSOCIATE"
+    #   resp.data_lake_settings.parameters #=> Hash
+    #   resp.data_lake_settings.parameters["KeyString"] #=> String
     #   resp.data_lake_settings.trusted_resource_owners #=> Array
     #   resp.data_lake_settings.trusted_resource_owners[0] #=> String
     #   resp.data_lake_settings.allow_external_data_filtering #=> Boolean
@@ -2416,6 +2418,9 @@ module Aws::LakeFormation
     #           permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ASSOCIATE
     #         },
     #       ],
+    #       parameters: {
+    #         "KeyString" => "ParametersMapValue",
+    #       },
     #       trusted_resource_owners: ["CatalogIdString"],
     #       allow_external_data_filtering: false,
     #       external_data_filtering_allow_list: [
@@ -2473,7 +2478,7 @@ module Aws::LakeFormation
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html
     #
     # @option params [String] :role_arn
     #   The identifier for the role that registers the resource.
@@ -3101,7 +3106,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
