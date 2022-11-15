@@ -142,6 +142,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::MigrateWorkspace.build(context)
           when :modify_account
             Aws::WorkSpaces::Endpoints::ModifyAccount.build(context)
+          when :modify_certificate_based_auth_properties
+            Aws::WorkSpaces::Endpoints::ModifyCertificateBasedAuthProperties.build(context)
           when :modify_client_properties
             Aws::WorkSpaces::Endpoints::ModifyClientProperties.build(context)
           when :modify_saml_properties

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.146.0 (2022-11-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ssmsap` gem.
+
 3.145.0 (2022-11-10)
 ------------------
 

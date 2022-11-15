@@ -310,6 +310,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-simpledb', '~> 1')
   spec.add_dependency('aws-sdk-snowdevicemanagement', '~> 1')
   spec.add_dependency('aws-sdk-snowball', '~> 1')
+  spec.add_dependency('aws-sdk-ssmsap', '~> 1')
   spec.add_dependency('aws-sdk-states', '~> 1')
   spec.add_dependency('aws-sdk-storagegateway', '~> 1')
   spec.add_dependency('aws-sdk-support', '~> 1')

@@ -540,6 +540,7 @@ module Aws
             'SimpleDB' => 'sdb',
             'SnowDeviceManagement' => 'snow-device-management',
             'Snowball' => 'snowball',
+            'SsmSap' => 'ssm-sap',
             'States' => 'states',
             'StorageGateway' => 'storagegateway',
             'Support' => 'support',

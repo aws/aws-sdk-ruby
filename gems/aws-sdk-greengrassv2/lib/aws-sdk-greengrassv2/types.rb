@@ -1060,6 +1060,7 @@ module Aws::GreengrassV2
     #             timeout_in_seconds: 1,
     #           },
     #         },
+    #         parent_target_arn: "ThingGroupARN",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -1067,7 +1068,8 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group. When creating a
+    #   subdeployment, the targetARN can only be a thing group.
     #
     #
     #
@@ -1094,6 +1096,14 @@ module Aws::GreengrassV2
     #   The deployment policies for the deployment. These policies define
     #   how the deployment updates components and handles failure.
     #   @return [Types::DeploymentPolicies]
+    #
+    # @!attribute [rw] parent_target_arn
+    #   The parent deployment's target [ARN][1] within a subdeployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
@@ -1127,6 +1137,7 @@ module Aws::GreengrassV2
       :components,
       :iot_job_configuration,
       :deployment_policies,
+      :parent_target_arn,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -1224,7 +1235,8 @@ module Aws::GreengrassV2
     # Contains information about a deployment.
     #
     # @!attribute [rw] target_arn
-    #   The [ARN][1] of the target IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group. When creating a
+    #   subdeployment, the targetARN can only be a thing group.
     #
     #
     #
@@ -1256,6 +1268,14 @@ module Aws::GreengrassV2
     #   Whether or not the deployment is the latest revision for its target.
     #   @return [Boolean]
     #
+    # @!attribute [rw] parent_target_arn
+    #   The parent deployment's target [ARN][1] within a subdeployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -1265,7 +1285,8 @@ module Aws::GreengrassV2
       :deployment_name,
       :creation_timestamp,
       :deployment_status,
-      :is_latest_for_target)
+      :is_latest_for_target,
+      :parent_target_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2055,6 +2076,14 @@ module Aws::GreengrassV2
     #   Whether or not the deployment is the latest revision for its target.
     #   @return [Boolean]
     #
+    # @!attribute [rw] parent_target_arn
+    #   The parent deployment's target [ARN][1] within a subdeployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of key-value pairs that contain metadata for the resource.
     #   For more information, see [Tag your resources][1] in the *IoT
@@ -2080,6 +2109,7 @@ module Aws::GreengrassV2
       :iot_job_configuration,
       :creation_timestamp,
       :is_latest_for_target,
+      :parent_target_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3142,6 +3172,7 @@ module Aws::GreengrassV2
     #       {
     #         target_arn: "TargetARN",
     #         history_filter: "ALL", # accepts ALL, LATEST_ONLY
+    #         parent_target_arn: "ThingGroupARN",
     #         max_results: 1,
     #         next_token: "NextTokenString",
     #       }
@@ -3166,6 +3197,14 @@ module Aws::GreengrassV2
     #   Default: `LATEST_ONLY`
     #   @return [String]
     #
+    # @!attribute [rw] parent_target_arn
+    #   The parent deployment's target [ARN][1] within a subdeployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
     #   @return [Integer]
@@ -3179,6 +3218,7 @@ module Aws::GreengrassV2
     class ListDeploymentsRequest < Struct.new(
       :target_arn,
       :history_filter,
+      :parent_target_arn,
       :max_results,
       :next_token)
       SENSITIVE = []

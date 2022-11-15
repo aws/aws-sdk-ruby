@@ -380,6 +380,7 @@ module Aws::GreengrassV2
     CreateDeploymentRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentDeploymentSpecifications, location_name: "components"))
     CreateDeploymentRequest.add_member(:iot_job_configuration, Shapes::ShapeRef.new(shape: DeploymentIoTJobConfiguration, location_name: "iotJobConfiguration"))
     CreateDeploymentRequest.add_member(:deployment_policies, Shapes::ShapeRef.new(shape: DeploymentPolicies, location_name: "deploymentPolicies"))
+    CreateDeploymentRequest.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location_name: "parentTargetArn"))
     CreateDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
@@ -405,6 +406,7 @@ module Aws::GreengrassV2
     Deployment.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTimestamp"))
     Deployment.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "deploymentStatus"))
     Deployment.add_member(:is_latest_for_target, Shapes::ShapeRef.new(shape: IsLatestForTarget, location_name: "isLatestForTarget"))
+    Deployment.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location_name: "parentTargetArn"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentComponentUpdatePolicy.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
@@ -530,6 +532,7 @@ module Aws::GreengrassV2
     GetDeploymentResponse.add_member(:iot_job_configuration, Shapes::ShapeRef.new(shape: DeploymentIoTJobConfiguration, location_name: "iotJobConfiguration"))
     GetDeploymentResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTimestamp"))
     GetDeploymentResponse.add_member(:is_latest_for_target, Shapes::ShapeRef.new(shape: IsLatestForTarget, location_name: "isLatestForTarget"))
+    GetDeploymentResponse.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location_name: "parentTargetArn"))
     GetDeploymentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetDeploymentResponse.struct_class = Types::GetDeploymentResponse
 
@@ -681,6 +684,7 @@ module Aws::GreengrassV2
 
     ListDeploymentsRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location: "querystring", location_name: "targetArn"))
     ListDeploymentsRequest.add_member(:history_filter, Shapes::ShapeRef.new(shape: DeploymentHistoryFilter, location: "querystring", location_name: "historyFilter"))
+    ListDeploymentsRequest.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location: "querystring", location_name: "parentTargetArn"))
     ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
     ListDeploymentsRequest.struct_class = Types::ListDeploymentsRequest

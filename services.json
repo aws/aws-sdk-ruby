@@ -999,6 +999,9 @@
   "Snowball": {
     "models": "snowball/2016-06-30"
   },
+  "SsmSap": {
+    "models": "ssmsap/2018-05-10"
+  },
   "States": {
     "models": "states/2016-11-23"
   },

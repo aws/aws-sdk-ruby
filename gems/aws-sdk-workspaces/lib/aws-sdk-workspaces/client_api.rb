@@ -37,6 +37,9 @@ module Aws::WorkSpaces
     BundleIdList = Shapes::ListShape.new(name: 'BundleIdList')
     BundleList = Shapes::ListShape.new(name: 'BundleList')
     BundleOwner = Shapes::StringShape.new(name: 'BundleOwner')
+    CertificateAuthorityArn = Shapes::StringShape.new(name: 'CertificateAuthorityArn')
+    CertificateBasedAuthProperties = Shapes::StructureShape.new(name: 'CertificateBasedAuthProperties')
+    CertificateBasedAuthStatusEnum = Shapes::StringShape.new(name: 'CertificateBasedAuthStatusEnum')
     ClientDeviceType = Shapes::StringShape.new(name: 'ClientDeviceType')
     ClientDeviceTypeList = Shapes::ListShape.new(name: 'ClientDeviceTypeList')
     ClientEmail = Shapes::StringShape.new(name: 'ClientEmail')
@@ -91,6 +94,8 @@ module Aws::WorkSpaces
     DefaultLogo = Shapes::BlobShape.new(name: 'DefaultLogo')
     DefaultOu = Shapes::StringShape.new(name: 'DefaultOu')
     DefaultWorkspaceCreationProperties = Shapes::StructureShape.new(name: 'DefaultWorkspaceCreationProperties')
+    DeletableCertificateBasedAuthPropertiesList = Shapes::ListShape.new(name: 'DeletableCertificateBasedAuthPropertiesList')
+    DeletableCertificateBasedAuthProperty = Shapes::StringShape.new(name: 'DeletableCertificateBasedAuthProperty')
     DeletableSamlPropertiesList = Shapes::ListShape.new(name: 'DeletableSamlPropertiesList')
     DeletableSamlProperty = Shapes::StringShape.new(name: 'DeletableSamlProperty')
     DeleteClientBrandingRequest = Shapes::StructureShape.new(name: 'DeleteClientBrandingRequest')
@@ -202,6 +207,8 @@ module Aws::WorkSpaces
     ModificationStateList = Shapes::ListShape.new(name: 'ModificationStateList')
     ModifyAccountRequest = Shapes::StructureShape.new(name: 'ModifyAccountRequest')
     ModifyAccountResult = Shapes::StructureShape.new(name: 'ModifyAccountResult')
+    ModifyCertificateBasedAuthPropertiesRequest = Shapes::StructureShape.new(name: 'ModifyCertificateBasedAuthPropertiesRequest')
+    ModifyCertificateBasedAuthPropertiesResult = Shapes::StructureShape.new(name: 'ModifyCertificateBasedAuthPropertiesResult')
     ModifyClientPropertiesRequest = Shapes::StructureShape.new(name: 'ModifyClientPropertiesRequest')
     ModifyClientPropertiesResult = Shapes::StructureShape.new(name: 'ModifyClientPropertiesResult')
     ModifySamlPropertiesRequest = Shapes::StructureShape.new(name: 'ModifySamlPropertiesRequest')
@@ -370,6 +377,10 @@ module Aws::WorkSpaces
 
     BundleList.member = Shapes::ShapeRef.new(shape: WorkspaceBundle)
 
+    CertificateBasedAuthProperties.add_member(:status, Shapes::ShapeRef.new(shape: CertificateBasedAuthStatusEnum, location_name: "Status"))
+    CertificateBasedAuthProperties.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: CertificateAuthorityArn, location_name: "CertificateAuthorityArn"))
+    CertificateBasedAuthProperties.struct_class = Types::CertificateBasedAuthProperties
+
     ClientDeviceTypeList.member = Shapes::ShapeRef.new(shape: ClientDeviceType)
 
     ClientProperties.add_member(:reconnect_enabled, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "ReconnectEnabled"))
@@ -525,6 +536,8 @@ module Aws::WorkSpaces
     DefaultWorkspaceCreationProperties.add_member(:user_enabled_as_local_administrator, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UserEnabledAsLocalAdministrator"))
     DefaultWorkspaceCreationProperties.add_member(:enable_maintenance_mode, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableMaintenanceMode"))
     DefaultWorkspaceCreationProperties.struct_class = Types::DefaultWorkspaceCreationProperties
+
+    DeletableCertificateBasedAuthPropertiesList.member = Shapes::ShapeRef.new(shape: DeletableCertificateBasedAuthProperty)
 
     DeletableSamlPropertiesList.member = Shapes::ShapeRef.new(shape: DeletableSamlProperty)
 
@@ -848,6 +861,13 @@ module Aws::WorkSpaces
 
     ModifyAccountResult.struct_class = Types::ModifyAccountResult
 
+    ModifyCertificateBasedAuthPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
+    ModifyCertificateBasedAuthPropertiesRequest.add_member(:certificate_based_auth_properties, Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: "CertificateBasedAuthProperties"))
+    ModifyCertificateBasedAuthPropertiesRequest.add_member(:properties_to_delete, Shapes::ShapeRef.new(shape: DeletableCertificateBasedAuthPropertiesList, location_name: "PropertiesToDelete"))
+    ModifyCertificateBasedAuthPropertiesRequest.struct_class = Types::ModifyCertificateBasedAuthPropertiesRequest
+
+    ModifyCertificateBasedAuthPropertiesResult.struct_class = Types::ModifyCertificateBasedAuthPropertiesResult
+
     ModifyClientPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
     ModifyClientPropertiesRequest.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, required: true, location_name: "ClientProperties"))
     ModifyClientPropertiesRequest.struct_class = Types::ModifyClientPropertiesRequest
@@ -1149,6 +1169,7 @@ module Aws::WorkSpaces
     WorkspaceDirectory.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "Tenancy"))
     WorkspaceDirectory.add_member(:selfservice_permissions, Shapes::ShapeRef.new(shape: SelfservicePermissions, location_name: "SelfservicePermissions"))
     WorkspaceDirectory.add_member(:saml_properties, Shapes::ShapeRef.new(shape: SamlProperties, location_name: "SamlProperties"))
+    WorkspaceDirectory.add_member(:certificate_based_auth_properties, Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: "CertificateBasedAuthProperties"))
     WorkspaceDirectory.struct_class = Types::WorkspaceDirectory
 
     WorkspaceIdList.member = Shapes::ShapeRef.new(shape: WorkspaceId)
@@ -1738,6 +1759,18 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:modify_certificate_based_auth_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyCertificateBasedAuthProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyCertificateBasedAuthPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyCertificateBasedAuthPropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

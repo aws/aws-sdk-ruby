@@ -756,7 +756,8 @@ module Aws::GreengrassV2
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
     #
     # @option params [required, String] :target_arn
-    #   The [ARN][1] of the target IoT thing or thing group.
+    #   The [ARN][1] of the target IoT thing or thing group. When creating a
+    #   subdeployment, the targetARN can only be a thing group.
     #
     #
     #
@@ -778,6 +779,13 @@ module Aws::GreengrassV2
     # @option params [Types::DeploymentPolicies] :deployment_policies
     #   The deployment policies for the deployment. These policies define how
     #   the deployment updates components and handles failure.
+    #
+    # @option params [String] :parent_target_arn
+    #   The parent deployment's target [ARN][1] within a subdeployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Hash<String,String>] :tags
     #   A list of key-value pairs that contain metadata for the resource. For
@@ -865,6 +873,7 @@ module Aws::GreengrassV2
     #         timeout_in_seconds: 1,
     #       },
     #     },
+    #     parent_target_arn: "ThingGroupARN",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1293,6 +1302,7 @@ module Aws::GreengrassV2
     #   * {Types::GetDeploymentResponse#iot_job_configuration #iot_job_configuration} => Types::DeploymentIoTJobConfiguration
     #   * {Types::GetDeploymentResponse#creation_timestamp #creation_timestamp} => Time
     #   * {Types::GetDeploymentResponse#is_latest_for_target #is_latest_for_target} => Boolean
+    #   * {Types::GetDeploymentResponse#parent_target_arn #parent_target_arn} => String
     #   * {Types::GetDeploymentResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1336,6 +1346,7 @@ module Aws::GreengrassV2
     #   resp.iot_job_configuration.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #   resp.creation_timestamp #=> Time
     #   resp.is_latest_for_target #=> Boolean
+    #   resp.parent_target_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1634,6 +1645,13 @@ module Aws::GreengrassV2
     #
     #   Default: `LATEST_ONLY`
     #
+    # @option params [String] :parent_target_arn
+    #   The parent deployment's target [ARN][1] within a subdeployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
@@ -1652,6 +1670,7 @@ module Aws::GreengrassV2
     #   resp = client.list_deployments({
     #     target_arn: "TargetARN",
     #     history_filter: "ALL", # accepts ALL, LATEST_ONLY
+    #     parent_target_arn: "ThingGroupARN",
     #     max_results: 1,
     #     next_token: "NextTokenString",
     #   })
@@ -1666,6 +1685,7 @@ module Aws::GreengrassV2
     #   resp.deployments[0].creation_timestamp #=> Time
     #   resp.deployments[0].deployment_status #=> String, one of "ACTIVE", "COMPLETED", "CANCELED", "FAILED", "INACTIVE"
     #   resp.deployments[0].is_latest_for_target #=> Boolean
+    #   resp.deployments[0].parent_target_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListDeployments AWS API Documentation
@@ -2072,7 +2092,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

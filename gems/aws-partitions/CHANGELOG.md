@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.661.0 (2022-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SsmSap`.
+
 1.660.0 (2022-11-11)
 ------------------
 

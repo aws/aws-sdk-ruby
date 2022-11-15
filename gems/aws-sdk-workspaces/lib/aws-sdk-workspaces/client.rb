@@ -1853,6 +1853,8 @@ module Aws::WorkSpaces
     #   resp.directories[0].saml_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
     #   resp.directories[0].saml_properties.user_access_url #=> String
     #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
+    #   resp.directories[0].certificate_based_auth_properties.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.directories[0].certificate_based_auth_properties.certificate_authority_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -2581,6 +2583,41 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def modify_account(params = {}, options = {})
       req = build_request(:modify_account, params)
+      req.send_request(options)
+    end
+
+    # Modifies the properties of the certificate-based authentication you
+    # want to use with your WorkSpaces.
+    #
+    # @option params [required, String] :resource_id
+    #   The resource identifiers, in the form of directory IDs.
+    #
+    # @option params [Types::CertificateBasedAuthProperties] :certificate_based_auth_properties
+    #   The properties of the certificate-based authentication.
+    #
+    # @option params [Array<String>] :properties_to_delete
+    #   The properties of the certificate-based authentication you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_certificate_based_auth_properties({
+    #     resource_id: "DirectoryId", # required
+    #     certificate_based_auth_properties: {
+    #       status: "DISABLED", # accepts DISABLED, ENABLED
+    #       certificate_authority_arn: "CertificateAuthorityArn",
+    #     },
+    #     properties_to_delete: ["CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"], # accepts CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyCertificateBasedAuthProperties AWS API Documentation
+    #
+    # @overload modify_certificate_based_auth_properties(params = {})
+    # @param [Hash] params ({})
+    def modify_certificate_based_auth_properties(params = {}, options = {})
+      req = build_request(:modify_certificate_based_auth_properties, params)
       req.send_request(options)
     end
 
@@ -3462,7 +3499,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

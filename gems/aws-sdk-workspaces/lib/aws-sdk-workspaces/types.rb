@@ -170,6 +170,35 @@ module Aws::WorkSpaces
     #
     class AuthorizeIpRulesResult < Aws::EmptyStructure; end
 
+    # Describes the properties of the certificate-based authentication you
+    # want to use with your WorkSpaces.
+    #
+    # @note When making an API call, you may pass CertificateBasedAuthProperties
+    #   data as a hash:
+    #
+    #       {
+    #         status: "DISABLED", # accepts DISABLED, ENABLED
+    #         certificate_authority_arn: "CertificateAuthorityArn",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate-based authentication properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   Certificate Manager Private CA resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CertificateBasedAuthProperties AWS API Documentation
+    #
+    class CertificateBasedAuthProperties < Struct.new(
+      :status,
+      :certificate_authority_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon WorkSpaces client.
     #
     # @note When making an API call, you may pass ClientProperties
@@ -2929,6 +2958,45 @@ module Aws::WorkSpaces
     #
     class ModifyAccountResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ModifyCertificateBasedAuthPropertiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #         certificate_based_auth_properties: {
+    #           status: "DISABLED", # accepts DISABLED, ENABLED
+    #           certificate_authority_arn: "CertificateAuthorityArn",
+    #         },
+    #         properties_to_delete: ["CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"], # accepts CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifiers, in the form of directory IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_based_auth_properties
+    #   The properties of the certificate-based authentication.
+    #   @return [Types::CertificateBasedAuthProperties]
+    #
+    # @!attribute [rw] properties_to_delete
+    #   The properties of the certificate-based authentication you want to
+    #   delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyCertificateBasedAuthPropertiesRequest AWS API Documentation
+    #
+    class ModifyCertificateBasedAuthPropertiesRequest < Struct.new(
+      :resource_id,
+      :certificate_based_auth_properties,
+      :properties_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyCertificateBasedAuthPropertiesResult AWS API Documentation
+    #
+    class ModifyCertificateBasedAuthPropertiesResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ModifyClientPropertiesRequest
     #   data as a hash:
     #
@@ -4651,6 +4719,12 @@ module Aws::WorkSpaces
     #   2.0 identity provider.
     #   @return [Types::SamlProperties]
     #
+    # @!attribute [rw] certificate_based_auth_properties
+    #   The certificate-based authentication properties used to authenticate
+    #   SAML 2.0 Identity Provider (IdP) user identities to Active Directory
+    #   for WorkSpaces login.
+    #   @return [Types::CertificateBasedAuthProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory AWS API Documentation
     #
     class WorkspaceDirectory < Struct.new(
@@ -4670,7 +4744,8 @@ module Aws::WorkSpaces
       :workspace_access_properties,
       :tenancy,
       :selfservice_permissions,
-      :saml_properties)
+      :saml_properties,
+      :certificate_based_auth_properties)
       SENSITIVE = []
       include Aws::Structure
     end

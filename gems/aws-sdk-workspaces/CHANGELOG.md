@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-11-15)
+------------------
+
+* Feature - This release introduces ModifyCertificateBasedAuthProperties, a new API that allows control of certificate-based auth properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return certificate-based auth properties in its responses.
+
 1.75.0 (2022-11-07)
 ------------------
 
