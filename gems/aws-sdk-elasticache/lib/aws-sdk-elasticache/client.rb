@@ -2964,6 +2964,9 @@ module Aws::ElastiCache
     #   pair. A tag key must be accompanied by a tag value, although null is
     #   accepted.
     #
+    # @option params [Types::AuthenticationMode] :authentication_mode
+    #   Specifies how to authenticate the user.
+    #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::User#user_id #user_id} => String
@@ -2991,6 +2994,10 @@ module Aws::ElastiCache
     #         value: "String",
     #       },
     #     ],
+    #     authentication_mode: {
+    #       type: "password", # accepts password, no-password-required, iam
+    #       passwords: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3003,7 +3010,7 @@ module Aws::ElastiCache
     #   resp.access_string #=> String
     #   resp.user_group_ids #=> Array
     #   resp.user_group_ids[0] #=> String
-    #   resp.authentication.type #=> String, one of "password", "no-password"
+    #   resp.authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.authentication.password_count #=> Integer
     #   resp.arn #=> String
     #
@@ -3955,7 +3962,7 @@ module Aws::ElastiCache
     #   resp.access_string #=> String
     #   resp.user_group_ids #=> Array
     #   resp.user_group_ids[0] #=> String
-    #   resp.authentication.type #=> String, one of "password", "no-password"
+    #   resp.authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.authentication.password_count #=> Integer
     #   resp.arn #=> String
     #
@@ -7612,7 +7619,7 @@ module Aws::ElastiCache
     #   resp.users[0].access_string #=> String
     #   resp.users[0].user_group_ids #=> Array
     #   resp.users[0].user_group_ids[0] #=> String
-    #   resp.users[0].authentication.type #=> String, one of "password", "no-password"
+    #   resp.users[0].authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.users[0].authentication.password_count #=> Integer
     #   resp.users[0].arn #=> String
     #   resp.marker #=> String
@@ -9441,6 +9448,9 @@ module Aws::ElastiCache
     # @option params [Boolean] :no_password_required
     #   Indicates no password is required for the user.
     #
+    # @option params [Types::AuthenticationMode] :authentication_mode
+    #   Specifies how to authenticate the user.
+    #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::User#user_id #user_id} => String
@@ -9461,6 +9471,10 @@ module Aws::ElastiCache
     #     append_access_string: "AccessString",
     #     passwords: ["String"],
     #     no_password_required: false,
+    #     authentication_mode: {
+    #       type: "password", # accepts password, no-password-required, iam
+    #       passwords: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -9473,7 +9487,7 @@ module Aws::ElastiCache
     #   resp.access_string #=> String
     #   resp.user_group_ids #=> Array
     #   resp.user_group_ids[0] #=> String
-    #   resp.authentication.type #=> String, one of "password", "no-password"
+    #   resp.authentication.type #=> String, one of "password", "no-password", "iam"
     #   resp.authentication.password_count #=> Integer
     #   resp.arn #=> String
     #
@@ -10352,7 +10366,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

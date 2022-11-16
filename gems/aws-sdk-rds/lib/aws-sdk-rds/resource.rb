@@ -99,6 +99,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     db_system_id: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -823,6 +824,8 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [String] :db_system_id
+    #   Reserved for future use.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

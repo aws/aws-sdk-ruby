@@ -446,6 +446,11 @@ module Aws::Batch
     # [Launching an Amazon ECS container instance][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
+    # <note markdown="1"> To create a compute environment that uses EKS resources, the caller
+    # must have permissions to call `eks:DescribeCluster`.
+    #
+    #  </note>
+    #
     # <note markdown="1"> Batch doesn't automatically upgrade the AMIs in a compute environment
     # after it's created. For example, it also doesn't update the AMIs in
     # your compute environment when a newer version of the Amazon ECS
@@ -3587,7 +3592,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-11-16)
+------------------
+
+* Feature - Added UnsupportedTarget HandlerErrorCode for use with CFN Resource Hooks
+
 1.72.0 (2022-10-28)
 ------------------
 

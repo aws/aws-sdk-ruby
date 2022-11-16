@@ -2903,6 +2903,11 @@ module Aws::SSM
     #   [Create an IAM service role for a hybrid environment][1] in the
     #   *Amazon Web Services Systems Manager User Guide*.
     #
+    #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter.
+    #   You must create a unique role.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
@@ -4023,6 +4028,7 @@ module Aws::SSM
     #         actual_end_time: Time.now,
     #         planned_start_time: Time.now,
     #         planned_end_time: Time.now,
+    #         account_id: "OpsItemAccountId",
     #       }
     #
     # @!attribute [rw] description
@@ -4030,8 +4036,23 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] ops_item_type
-    #   The type of OpsItem to create. Currently, the only valid values are
-    #   `/aws/changerequest` and `/aws/issue`.
+    #   The type of OpsItem to create. Systems Manager supports the
+    #   following types of OpsItems:
+    #
+    #   * `/aws/issue`
+    #
+    #     This type of OpsItem is used for default OpsItems created by
+    #     OpsCenter.
+    #
+    #   * `/aws/changerequest`
+    #
+    #     This type of OpsItem is used by Change Manager for reviewing and
+    #     approving or rejecting change requests.
+    #
+    #   * `/aws/insights`
+    #
+    #     This type of OpsItem is used by OpsCenter for aggregating and
+    #     reporting on duplicate OpsItems.
     #   @return [String]
     #
     # @!attribute [rw] operational_data
@@ -4146,6 +4167,18 @@ module Aws::SSM
     #   `/aws/changerequest`.
     #   @return [Time]
     #
+    # @!attribute [rw] account_id
+    #   The target Amazon Web Services account where you want to create an
+    #   OpsItem. To make this call, your account must be configured to work
+    #   with OpsItems across accounts. For more information, see [Setting up
+    #   OpsCenter to work with OpsItems across accounts][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemRequest AWS API Documentation
     #
     class CreateOpsItemRequest < Struct.new(
@@ -4163,7 +4196,8 @@ module Aws::SSM
       :actual_start_time,
       :actual_end_time,
       :planned_start_time,
-      :planned_end_time)
+      :planned_end_time,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4172,10 +4206,15 @@ module Aws::SSM
     #   The ID of the OpsItem.
     #   @return [String]
     #
+    # @!attribute [rw] ops_item_arn
+    #   The OpsItem Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemResponse AWS API Documentation
     #
     class CreateOpsItemResponse < Struct.new(
-      :ops_item_id)
+      :ops_item_id,
+      :ops_item_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4901,6 +4940,43 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSyncResult AWS API Documentation
     #
     class DeleteResourceDataSyncResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArnString", # required
+    #         policy_id: "PolicyId", # required
+    #         policy_hash: "PolicyHash", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which the policies are
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The policy ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash
+    #   ID of the current policy version. The hash helps to prevent multiple
+    #   calls from attempting to overwrite a policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy_id,
+      :policy_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterManagedInstanceRequest
     #   data as a hash:
@@ -6797,7 +6873,7 @@ module Aws::SSM
     #       {
     #         ops_item_filters: [
     #           {
-    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType
+    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
     #             values: ["OpsItemFilterValue"], # required
     #             operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #           },
@@ -9681,16 +9757,22 @@ module Aws::SSM
     #
     #       {
     #         ops_item_id: "OpsItemId", # required
+    #         ops_item_arn: "OpsItemArn",
     #       }
     #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem that you want to get.
     #   @return [String]
     #
+    # @!attribute [rw] ops_item_arn
+    #   The OpsItem Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItemRequest AWS API Documentation
     #
     class GetOpsItemRequest < Struct.new(
-      :ops_item_id)
+      :ops_item_id,
+      :ops_item_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10274,6 +10356,95 @@ module Aws::SSM
       :modified_date,
       :description,
       :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourcePoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArnString", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which the policies are
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetResourcePoliciesRequest AWS API Documentation
+    #
+    class GetResourcePoliciesRequest < Struct.new(
+      :resource_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] policies
+    #   An array of the `Policy` object.
+    #   @return [Array<Types::GetResourcePoliciesResponseEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetResourcePoliciesResponse AWS API Documentation
+    #
+    class GetResourcePoliciesResponse < Struct.new(
+      :next_token,
+      :policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource policy helps you to define the IAM entity (for example, an
+    # Amazon Web Services account) that can manage your Systems Manager
+    # resources. Currently, `OpsItemGroup` is the only resource that
+    # supports Systems Manager resource policies. The resource policy for
+    # `OpsItemGroup` enables Amazon Web Services accounts to view and
+    # interact with OpsCenter operational work items (OpsItems).
+    #
+    # @!attribute [rw] policy_id
+    #   A policy ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash
+    #   ID of the current policy version. The hash helps to prevent a
+    #   situation where multiple users attempt to overwrite a policy. You
+    #   must provide this hash when updating or deleting a policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   A resource policy helps you to define the IAM entity (for example,
+    #   an Amazon Web Services account) that can manage your Systems Manager
+    #   resources. Currently, `OpsItemGroup` is the only resource that
+    #   supports Systems Manager resource policies. The resource policy for
+    #   `OpsItemGroup` enables Amazon Web Services accounts to view and
+    #   interact with OpsCenter operational work items (OpsItems).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetResourcePoliciesResponseEntry AWS API Documentation
+    #
+    class GetResourcePoliciesResponseEntry < Struct.new(
+      :policy_id,
+      :policy_hash,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14613,8 +14784,23 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] ops_item_type
-    #   The type of OpsItem. Currently, the only valid values are
-    #   `/aws/changerequest` and `/aws/issue`.
+    #   The type of OpsItem. Systems Manager supports the following types of
+    #   OpsItems:
+    #
+    #   * `/aws/issue`
+    #
+    #     This type of OpsItem is used for default OpsItems created by
+    #     OpsCenter.
+    #
+    #   * `/aws/changerequest`
+    #
+    #     This type of OpsItem is used by Change Manager for reviewing and
+    #     approving or rejecting change requests.
+    #
+    #   * `/aws/insights`
+    #
+    #     This type of OpsItem is used by OpsCenter for aggregating and
+    #     reporting on duplicate OpsItems.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -14743,6 +14929,10 @@ module Aws::SSM
     #   `/aws/changerequest`.
     #   @return [Time]
     #
+    # @!attribute [rw] ops_item_arn
+    #   The OpsItem Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem AWS API Documentation
     #
     class OpsItem < Struct.new(
@@ -14766,7 +14956,24 @@ module Aws::SSM
       :actual_start_time,
       :actual_end_time,
       :planned_start_time,
-      :planned_end_time)
+      :planned_end_time,
+      :ops_item_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You don't have permission to view OpsItems in the specified account.
+    # Verify that your account is configured either as a Systems Manager
+    # delegated administrator or that you are logged into the Organizations
+    # management account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemAccessDeniedException AWS API Documentation
+    #
+    class OpsItemAccessDeniedException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14906,7 +15113,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
     #         values: ["OpsItemFilterValue"], # required
     #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #       }
@@ -15216,8 +15423,23 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] ops_item_type
-    #   The type of OpsItem. Currently, the only valid values are
-    #   `/aws/changerequest` and `/aws/issue`.
+    #   The type of OpsItem. Systems Manager supports the following types of
+    #   OpsItems:
+    #
+    #   * `/aws/issue`
+    #
+    #     This type of OpsItem is used for default OpsItems created by
+    #     OpsCenter.
+    #
+    #   * `/aws/changerequest`
+    #
+    #     This type of OpsItem is used by Change Manager for reviewing and
+    #     approving or rejecting change requests.
+    #
+    #   * `/aws/insights`
+    #
+    #     This type of OpsItem is used by OpsCenter for aggregating and
+    #     reporting on duplicate OpsItems.
     #   @return [String]
     #
     # @!attribute [rw] actual_start_time
@@ -17017,6 +17239,65 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArnString", # required
+    #         policy: "Policy", # required
+    #         policy_id: "PolicyId",
+    #         policy_hash: "PolicyHash",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which the policies are
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   A policy you want to associate with a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The policy ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash
+    #   ID of the current policy version. The hash helps to prevent a
+    #   situation where multiple users attempt to overwrite a policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy,
+      :policy_id,
+      :policy_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_id
+    #   The policy ID. To update a policy, you must specify `PolicyId` and
+    #   `PolicyHash`.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_hash
+    #   ID of the current policy version. The hash helps to prevent a
+    #   situation where multiple users attempt to overwrite a policy. You
+    #   must provide this hash when updating or deleting a policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy_id,
+      :policy_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterDefaultPatchBaselineRequest
     #   data as a hash:
     #
@@ -18215,6 +18496,62 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceLimitExceededException AWS API Documentation
     #
     class ResourceLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The hash provided in the call doesn't match the stored hash. This
+    # exception is thrown when trying to update an obsolete policy version
+    # or when multiple requests to update a policy are sent.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourcePolicyConflictException AWS API Documentation
+    #
+    class ResourcePolicyConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more parameters specified for the call aren't valid. Verify
+    # the parameters and their values and try again.
+    #
+    # @!attribute [rw] parameter_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourcePolicyInvalidParameterException AWS API Documentation
+    #
+    class ResourcePolicyInvalidParameterException < Struct.new(
+      :parameter_names,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The PutResourcePolicy API action enforces two limits. A policy can't
+    # be greater than 1024 bytes in size. And only one policy can be
+    # attached to `OpsItemGroup`. Verify these limits and try again.
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] limit_type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourcePolicyLimitExceededException AWS API Documentation
+    #
+    class ResourcePolicyLimitExceededException < Struct.new(
+      :limit,
+      :limit_type,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -21550,7 +21887,21 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] iam_role
-    #   The IAM role you want to assign or change.
+    #   The name of the Identity and Access Management (IAM) role that you
+    #   want to assign to the managed node. This IAM role must provide
+    #   AssumeRole permissions for the Amazon Web Services Systems Manager
+    #   service principal `ssm.amazonaws.com`. For more information, see
+    #   [Create an IAM service role for a hybrid environment][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter.
+    #   You must create a unique role.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleRequest AWS API Documentation
@@ -21598,6 +21949,7 @@ module Aws::SSM
     #         actual_end_time: Time.now,
     #         planned_start_time: Time.now,
     #         planned_end_time: Time.now,
+    #         ops_item_arn: "OpsItemArn",
     #       }
     #
     # @!attribute [rw] description
@@ -21710,6 +22062,10 @@ module Aws::SSM
     #   `/aws/changerequest`.
     #   @return [Time]
     #
+    # @!attribute [rw] ops_item_arn
+    #   The OpsItem Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemRequest AWS API Documentation
     #
     class UpdateOpsItemRequest < Struct.new(
@@ -21727,7 +22083,8 @@ module Aws::SSM
       :actual_start_time,
       :actual_end_time,
       :planned_start_time,
-      :planned_end_time)
+      :planned_end_time,
+      :ops_item_arn)
       SENSITIVE = []
       include Aws::Structure
     end

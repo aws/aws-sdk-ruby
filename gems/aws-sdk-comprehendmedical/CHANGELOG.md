@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-11-16)
+------------------
+
+* Feature - This release supports new set of entities and traits. It also adds new category (BEHAVIORAL_ENVIRONMENTAL_SOCIAL).
+
 1.37.0 (2022-10-25)
 ------------------
 

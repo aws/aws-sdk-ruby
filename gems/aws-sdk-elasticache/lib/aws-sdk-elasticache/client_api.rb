@@ -22,6 +22,7 @@ module Aws::ElastiCache
     AuthTokenUpdateStatus = Shapes::StringShape.new(name: 'AuthTokenUpdateStatus')
     AuthTokenUpdateStrategyType = Shapes::StringShape.new(name: 'AuthTokenUpdateStrategyType')
     Authentication = Shapes::StructureShape.new(name: 'Authentication')
+    AuthenticationMode = Shapes::StructureShape.new(name: 'AuthenticationMode')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AuthorizationAlreadyExistsFault = Shapes::StructureShape.new(name: 'AuthorizationAlreadyExistsFault')
     AuthorizationNotFoundFault = Shapes::StructureShape.new(name: 'AuthorizationNotFoundFault')
@@ -183,6 +184,7 @@ module Aws::ElastiCache
     IncreaseNodeGroupsInGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'IncreaseNodeGroupsInGlobalReplicationGroupResult')
     IncreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'IncreaseReplicaCountMessage')
     IncreaseReplicaCountResult = Shapes::StructureShape.new(name: 'IncreaseReplicaCountResult')
+    InputAuthenticationType = Shapes::StringShape.new(name: 'InputAuthenticationType')
     InsufficientCacheClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientCacheClusterCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
@@ -388,6 +390,10 @@ module Aws::ElastiCache
     Authentication.add_member(:type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "Type"))
     Authentication.add_member(:password_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PasswordCount"))
     Authentication.struct_class = Types::Authentication
+
+    AuthenticationMode.add_member(:type, Shapes::ShapeRef.new(shape: InputAuthenticationType, location_name: "Type"))
+    AuthenticationMode.add_member(:passwords, Shapes::ShapeRef.new(shape: PasswordListInput, location_name: "Passwords"))
+    AuthenticationMode.struct_class = Types::AuthenticationMode
 
     AuthorizationAlreadyExistsFault.struct_class = Types::AuthorizationAlreadyExistsFault
 
@@ -766,6 +772,7 @@ module Aws::ElastiCache
     CreateUserMessage.add_member(:access_string, Shapes::ShapeRef.new(shape: AccessString, required: true, location_name: "AccessString"))
     CreateUserMessage.add_member(:no_password_required, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoPasswordRequired"))
     CreateUserMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateUserMessage.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "AuthenticationMode"))
     CreateUserMessage.struct_class = Types::CreateUserMessage
 
     CustomerNodeEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
@@ -1263,6 +1270,7 @@ module Aws::ElastiCache
     ModifyUserMessage.add_member(:append_access_string, Shapes::ShapeRef.new(shape: AccessString, location_name: "AppendAccessString"))
     ModifyUserMessage.add_member(:passwords, Shapes::ShapeRef.new(shape: PasswordListInput, location_name: "Passwords"))
     ModifyUserMessage.add_member(:no_password_required, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "NoPasswordRequired"))
+    ModifyUserMessage.add_member(:authentication_mode, Shapes::ShapeRef.new(shape: AuthenticationMode, location_name: "AuthenticationMode"))
     ModifyUserMessage.struct_class = Types::ModifyUserMessage
 
     NetworkTypeList.member = Shapes::ShapeRef.new(shape: NetworkType)

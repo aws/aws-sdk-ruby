@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-11-16)
+------------------
+
+* Feature - This release adds a new MonitorContact API for initiating monitoring of ongoing Voice and Chat contacts.
+
 1.83.0 (2022-11-15)
 ------------------
 

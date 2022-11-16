@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2022-11-16)
+------------------
+
+* Feature - This release adds support for container databases (CDBs) to Amazon RDS Custom for Oracle. A CDB contains one PDB at creation. You can add more PDBs using Oracle SQL. You can also customize your database installation by setting the Oracle base, Oracle home, and the OS user name and group.
+
 1.159.0 (2022-11-14)
 ------------------
 

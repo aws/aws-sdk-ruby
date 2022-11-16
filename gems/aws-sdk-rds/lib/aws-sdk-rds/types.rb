@@ -788,6 +788,22 @@ module Aws::RDS
     #   The database engine version.
     #   @return [String]
     #
+    # @!attribute [rw] backup_retention_period
+    #   The number of days for which automatic DB snapshots are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The allocated storage size in gibibytes (GiB) for all database
+    #   engines except Amazon Aurora. For Aurora, `AllocatedStorage` always
+    #   returns 1, because Aurora DB cluster storage size isn't fixed, but
+    #   instead automatically adjusts as needed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iops
+    #   The Provisioned IOPS (I/O operations per second) value. This setting
+    #   is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
     #
     class ClusterPendingModifiedValues < Struct.new(
@@ -795,7 +811,10 @@ module Aws::RDS
       :db_cluster_identifier,
       :master_user_password,
       :iam_database_authentication_enabled,
-      :engine_version)
+      :engine_version,
+      :backup_retention_period,
+      :allocated_storage,
+      :iops)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1889,6 +1908,7 @@ module Aws::RDS
     #           max_capacity: 1.0,
     #         },
     #         network_type: "String",
+    #         db_system_id: "String",
     #         source_region: "String",
     #       }
     #
@@ -2710,6 +2730,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] db_system_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2764,6 +2788,7 @@ module Aws::RDS
       :performance_insights_retention_period,
       :serverless_v2_scaling_configuration,
       :network_type,
+      :db_system_id,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -6377,6 +6402,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] db_system_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6448,7 +6477,8 @@ module Aws::RDS
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
       :serverless_v2_scaling_configuration,
-      :network_type)
+      :network_type,
+      :db_system_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7081,6 +7111,10 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] db_system_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -7105,7 +7139,8 @@ module Aws::RDS
       :db_cluster_snapshot_arn,
       :source_db_cluster_snapshot_arn,
       :iam_database_authentication_enabled,
-      :tag_list)
+      :tag_list,
+      :db_system_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7357,6 +7392,20 @@ module Aws::RDS
     #   for Aurora PostgreSQL.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_db_engine_version_manifest
+    #   JSON string that lists the installation files and parameters that
+    #   RDS Custom uses to create a custom engine version (CEV). RDS Custom
+    #   applies the patches in the order in which they're listed in the
+    #   manifest. You can set the Oracle home, Oracle base, and UNIX/Linux
+    #   user and group using the installation parameters. For more
+    #   information, see [JSON fields in the CEV manifest][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -7385,7 +7434,8 @@ module Aws::RDS
       :kms_key_id,
       :create_time,
       :tag_list,
-      :supports_babelfish)
+      :supports_babelfish,
+      :custom_db_engine_version_manifest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7976,6 +8026,12 @@ module Aws::RDS
     #   This setting applies only to the `gp3` storage type.
     #   @return [Integer]
     #
+    # @!attribute [rw] db_system_id
+    #   The Oracle system ID (Oracle SID) for a container database (CDB).
+    #   The Oracle SID is also the name of the CDB. This setting is valid
+    #   for RDS Custom only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8055,7 +8111,8 @@ module Aws::RDS
       :backup_target,
       :network_type,
       :activity_stream_policy_status,
-      :storage_throughput)
+      :storage_throughput,
+      :db_system_id)
       SENSITIVE = []
       include Aws::Structure
     end

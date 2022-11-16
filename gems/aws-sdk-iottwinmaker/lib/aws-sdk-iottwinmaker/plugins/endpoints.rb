@@ -74,10 +74,14 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::DeleteScene.build(context)
           when :delete_workspace
             Aws::IoTTwinMaker::Endpoints::DeleteWorkspace.build(context)
+          when :execute_query
+            Aws::IoTTwinMaker::Endpoints::ExecuteQuery.build(context)
           when :get_component_type
             Aws::IoTTwinMaker::Endpoints::GetComponentType.build(context)
           when :get_entity
             Aws::IoTTwinMaker::Endpoints::GetEntity.build(context)
+          when :get_pricing_plan
+            Aws::IoTTwinMaker::Endpoints::GetPricingPlan.build(context)
           when :get_property_value
             Aws::IoTTwinMaker::Endpoints::GetPropertyValue.build(context)
           when :get_property_value_history
@@ -104,6 +108,8 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::UpdateComponentType.build(context)
           when :update_entity
             Aws::IoTTwinMaker::Endpoints::UpdateEntity.build(context)
+          when :update_pricing_plan
+            Aws::IoTTwinMaker::Endpoints::UpdatePricingPlan.build(context)
           when :update_scene
             Aws::IoTTwinMaker::Endpoints::UpdateScene.build(context)
           when :update_workspace

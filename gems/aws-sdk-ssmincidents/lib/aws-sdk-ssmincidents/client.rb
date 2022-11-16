@@ -445,6 +445,10 @@ module Aws::SSMIncidents
     # @option params [required, Types::IncidentTemplate] :incident_template
     #   Details used to create an incident when using this response plan.
     #
+    # @option params [Array<Types::Integration>] :integrations
+    #   Information about third-party services integrated into the response
+    #   plan.
+    #
     # @option params [required, String] :name
     #   The short format name of the response plan. Can't include spaces.
     #
@@ -498,6 +502,17 @@ module Aws::SSMIncidents
     #       summary: "IncidentSummary",
     #       title: "IncidentTitle", # required
     #     },
+    #     integrations: [
+    #       {
+    #         pager_duty_configuration: {
+    #           name: "PagerDutyConfigurationNameString", # required
+    #           pager_duty_incident_configuration: { # required
+    #             service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
+    #           },
+    #           secret_id: "PagerDutyConfigurationSecretIdString", # required
+    #         },
+    #       },
+    #     ],
     #     name: "ResponsePlanName", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -868,6 +883,7 @@ module Aws::SSMIncidents
     #   * {Types::GetResponsePlanOutput#display_name #display_name} => String
     #   * {Types::GetResponsePlanOutput#engagements #engagements} => Array&lt;String&gt;
     #   * {Types::GetResponsePlanOutput#incident_template #incident_template} => Types::IncidentTemplate
+    #   * {Types::GetResponsePlanOutput#integrations #integrations} => Array&lt;Types::Integration&gt;
     #   * {Types::GetResponsePlanOutput#name #name} => String
     #
     # @example Request syntax with placeholder values
@@ -902,6 +918,10 @@ module Aws::SSMIncidents
     #   resp.incident_template.notification_targets[0].sns_topic_arn #=> String
     #   resp.incident_template.summary #=> String
     #   resp.incident_template.title #=> String
+    #   resp.integrations #=> Array
+    #   resp.integrations[0].pager_duty_configuration.name #=> String
+    #   resp.integrations[0].pager_duty_configuration.pager_duty_incident_configuration.service_id #=> String
+    #   resp.integrations[0].pager_duty_configuration.secret_id #=> String
     #   resp.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetResponsePlan AWS API Documentation
@@ -1074,6 +1094,9 @@ module Aws::SSMIncidents
     #   resp.related_items[0].identifier.type #=> String, one of "ANALYSIS", "INCIDENT", "METRIC", "PARENT", "ATTACHMENT", "OTHER", "AUTOMATION", "INVOLVED_RESOURCE", "TASK"
     #   resp.related_items[0].identifier.value.arn #=> String
     #   resp.related_items[0].identifier.value.metric_definition #=> String
+    #   resp.related_items[0].identifier.value.pager_duty_incident_detail.auto_resolve #=> Boolean
+    #   resp.related_items[0].identifier.value.pager_duty_incident_detail.id #=> String
+    #   resp.related_items[0].identifier.value.pager_duty_incident_detail.secret_id #=> String
     #   resp.related_items[0].identifier.value.url #=> String
     #   resp.related_items[0].title #=> String
     #
@@ -1386,6 +1409,11 @@ module Aws::SSMIncidents
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
+    #             pager_duty_incident_detail: {
+    #               auto_resolve: false,
+    #               id: "PagerDutyIncidentDetailIdString", # required
+    #               secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #             },
     #             url: "Url",
     #           },
     #         },
@@ -1630,6 +1658,11 @@ module Aws::SSMIncidents
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
+    #             pager_duty_incident_detail: {
+    #               auto_resolve: false,
+    #               id: "PagerDutyIncidentDetailIdString", # required
+    #               secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #             },
     #             url: "Url",
     #           },
     #         },
@@ -1640,6 +1673,11 @@ module Aws::SSMIncidents
     #         value: { # required
     #           arn: "Arn",
     #           metric_definition: "MetricDefinition",
+    #           pager_duty_incident_detail: {
+    #             auto_resolve: false,
+    #             id: "PagerDutyIncidentDetailIdString", # required
+    #             secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #           },
     #           url: "Url",
     #         },
     #       },
@@ -1768,6 +1806,10 @@ module Aws::SSMIncidents
     #   The short format name of the incident. The title can't contain
     #   spaces.
     #
+    # @option params [Array<Types::Integration>] :integrations
+    #   Information about third-party services integrated into the response
+    #   plan.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1812,6 +1854,17 @@ module Aws::SSMIncidents
     #       "TagKey" => "TagValue",
     #     },
     #     incident_template_title: "IncidentTitle",
+    #     integrations: [
+    #       {
+    #         pager_duty_configuration: {
+    #           name: "PagerDutyConfigurationNameString", # required
+    #           pager_duty_incident_configuration: { # required
+    #             service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
+    #           },
+    #           secret_id: "PagerDutyConfigurationSecretIdString", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateResponsePlan AWS API Documentation
@@ -1905,7 +1958,7 @@ module Aws::SSMIncidents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

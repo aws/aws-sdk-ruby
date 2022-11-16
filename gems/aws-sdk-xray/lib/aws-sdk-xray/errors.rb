@@ -27,7 +27,12 @@ module Aws::XRay
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {InvalidPolicyRevisionIdException}
   # * {InvalidRequestException}
+  # * {LockoutPreventionException}
+  # * {MalformedPolicyDocumentException}
+  # * {PolicyCountLimitExceededException}
+  # * {PolicySizeLimitExceededException}
   # * {ResourceNotFoundException}
   # * {RuleLimitExceededException}
   # * {ThrottledException}
@@ -39,11 +44,86 @@ module Aws::XRay
 
     extend Aws::Errors::DynamicErrors
 
+    class InvalidPolicyRevisionIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::InvalidPolicyRevisionIdException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidRequestException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::XRay::Types::InvalidRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class LockoutPreventionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::LockoutPreventionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MalformedPolicyDocumentException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::MalformedPolicyDocumentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PolicyCountLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::PolicyCountLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PolicySizeLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::XRay::Types::PolicySizeLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

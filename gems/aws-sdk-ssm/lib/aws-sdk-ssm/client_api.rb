@@ -241,6 +241,8 @@ module Aws::SSM
     DeletePatchBaselineResult = Shapes::StructureShape.new(name: 'DeletePatchBaselineResult')
     DeleteResourceDataSyncRequest = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncRequest')
     DeleteResourceDataSyncResult = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncResult')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeliveryTimedOutCount = Shapes::IntegerShape.new(name: 'DeliveryTimedOutCount')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
@@ -443,6 +445,10 @@ module Aws::SSM
     GetPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupResult')
     GetPatchBaselineRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineRequest')
     GetPatchBaselineResult = Shapes::StructureShape.new(name: 'GetPatchBaselineResult')
+    GetResourcePoliciesRequest = Shapes::StructureShape.new(name: 'GetResourcePoliciesRequest')
+    GetResourcePoliciesResponse = Shapes::StructureShape.new(name: 'GetResourcePoliciesResponse')
+    GetResourcePoliciesResponseEntries = Shapes::ListShape.new(name: 'GetResourcePoliciesResponseEntries')
+    GetResourcePoliciesResponseEntry = Shapes::StructureShape.new(name: 'GetResourcePoliciesResponseEntry')
     GetServiceSettingRequest = Shapes::StructureShape.new(name: 'GetServiceSettingRequest')
     GetServiceSettingResult = Shapes::StructureShape.new(name: 'GetServiceSettingResult')
     HierarchyLevelLimitExceededException = Shapes::StructureShape.new(name: 'HierarchyLevelLimitExceededException')
@@ -741,7 +747,10 @@ module Aws::SSM
     OpsFilterValue = Shapes::StringShape.new(name: 'OpsFilterValue')
     OpsFilterValueList = Shapes::ListShape.new(name: 'OpsFilterValueList')
     OpsItem = Shapes::StructureShape.new(name: 'OpsItem')
+    OpsItemAccessDeniedException = Shapes::StructureShape.new(name: 'OpsItemAccessDeniedException')
+    OpsItemAccountId = Shapes::StringShape.new(name: 'OpsItemAccountId')
     OpsItemAlreadyExistsException = Shapes::StructureShape.new(name: 'OpsItemAlreadyExistsException')
+    OpsItemArn = Shapes::StringShape.new(name: 'OpsItemArn')
     OpsItemCategory = Shapes::StringShape.new(name: 'OpsItemCategory')
     OpsItemDataKey = Shapes::StringShape.new(name: 'OpsItemDataKey')
     OpsItemDataType = Shapes::StringShape.new(name: 'OpsItemDataType')
@@ -946,6 +955,9 @@ module Aws::SSM
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
     PoliciesLimitExceededException = Shapes::StructureShape.new(name: 'PoliciesLimitExceededException')
+    Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyHash = Shapes::StringShape.new(name: 'PolicyHash')
+    PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     Product = Shapes::StringShape.new(name: 'Product')
     ProgressCounters = Shapes::StructureShape.new(name: 'ProgressCounters')
     PutComplianceItemsRequest = Shapes::StructureShape.new(name: 'PutComplianceItemsRequest')
@@ -955,6 +967,8 @@ module Aws::SSM
     PutInventoryResult = Shapes::StructureShape.new(name: 'PutInventoryResult')
     PutParameterRequest = Shapes::StructureShape.new(name: 'PutParameterRequest')
     PutParameterResult = Shapes::StructureShape.new(name: 'PutParameterResult')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RebootOption = Shapes::StringShape.new(name: 'RebootOption')
     Region = Shapes::StringShape.new(name: 'Region')
     Regions = Shapes::ListShape.new(name: 'Regions')
@@ -980,6 +994,7 @@ module Aws::SSM
     ResetServiceSettingRequest = Shapes::StructureShape.new(name: 'ResetServiceSettingRequest')
     ResetServiceSettingResult = Shapes::StructureShape.new(name: 'ResetServiceSettingResult')
     ResolvedTargets = Shapes::StructureShape.new(name: 'ResolvedTargets')
+    ResourceArnString = Shapes::StringShape.new(name: 'ResourceArnString')
     ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
     ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
@@ -1019,6 +1034,11 @@ module Aws::SSM
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
+    ResourcePolicyConflictException = Shapes::StructureShape.new(name: 'ResourcePolicyConflictException')
+    ResourcePolicyInvalidParameterException = Shapes::StructureShape.new(name: 'ResourcePolicyInvalidParameterException')
+    ResourcePolicyLimitExceededException = Shapes::StructureShape.new(name: 'ResourcePolicyLimitExceededException')
+    ResourcePolicyMaxResults = Shapes::IntegerShape.new(name: 'ResourcePolicyMaxResults')
+    ResourcePolicyParameterNamesList = Shapes::ListShape.new(name: 'ResourcePolicyParameterNamesList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeForTagging = Shapes::StringShape.new(name: 'ResourceTypeForTagging')
     ResponseCode = Shapes::IntegerShape.new(name: 'ResponseCode')
@@ -1786,9 +1806,11 @@ module Aws::SSM
     CreateOpsItemRequest.add_member(:actual_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ActualEndTime"))
     CreateOpsItemRequest.add_member(:planned_start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PlannedStartTime"))
     CreateOpsItemRequest.add_member(:planned_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PlannedEndTime"))
+    CreateOpsItemRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: OpsItemAccountId, location_name: "AccountId"))
     CreateOpsItemRequest.struct_class = Types::CreateOpsItemRequest
 
     CreateOpsItemResponse.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: String, location_name: "OpsItemId"))
+    CreateOpsItemResponse.add_member(:ops_item_arn, Shapes::ShapeRef.new(shape: OpsItemArn, location_name: "OpsItemArn"))
     CreateOpsItemResponse.struct_class = Types::CreateOpsItemResponse
 
     CreateOpsMetadataRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: OpsMetadataResourceId, required: true, location_name: "ResourceId"))
@@ -1893,6 +1915,13 @@ module Aws::SSM
     DeleteResourceDataSyncRequest.struct_class = Types::DeleteResourceDataSyncRequest
 
     DeleteResourceDataSyncResult.struct_class = Types::DeleteResourceDataSyncResult
+
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
+    DeleteResourcePolicyRequest.add_member(:policy_hash, Shapes::ShapeRef.new(shape: PolicyHash, required: true, location_name: "PolicyHash"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
 
     DeregisterManagedInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
     DeregisterManagedInstanceRequest.struct_class = Types::DeregisterManagedInstanceRequest
@@ -2620,6 +2649,7 @@ module Aws::SSM
     GetMaintenanceWindowTaskResult.struct_class = Types::GetMaintenanceWindowTaskResult
 
     GetOpsItemRequest.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: OpsItemId, required: true, location_name: "OpsItemId"))
+    GetOpsItemRequest.add_member(:ops_item_arn, Shapes::ShapeRef.new(shape: OpsItemArn, location_name: "OpsItemArn"))
     GetOpsItemRequest.struct_class = Types::GetOpsItemRequest
 
     GetOpsItemResponse.add_member(:ops_item, Shapes::ShapeRef.new(shape: OpsItem, location_name: "OpsItem"))
@@ -2712,6 +2742,22 @@ module Aws::SSM
     GetPatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
     GetPatchBaselineResult.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
     GetPatchBaselineResult.struct_class = Types::GetPatchBaselineResult
+
+    GetResourcePoliciesRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    GetResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetResourcePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResourcePolicyMaxResults, location_name: "MaxResults"))
+    GetResourcePoliciesRequest.struct_class = Types::GetResourcePoliciesRequest
+
+    GetResourcePoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetResourcePoliciesResponse.add_member(:policies, Shapes::ShapeRef.new(shape: GetResourcePoliciesResponseEntries, location_name: "Policies"))
+    GetResourcePoliciesResponse.struct_class = Types::GetResourcePoliciesResponse
+
+    GetResourcePoliciesResponseEntries.member = Shapes::ShapeRef.new(shape: GetResourcePoliciesResponseEntry)
+
+    GetResourcePoliciesResponseEntry.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
+    GetResourcePoliciesResponseEntry.add_member(:policy_hash, Shapes::ShapeRef.new(shape: PolicyHash, location_name: "PolicyHash"))
+    GetResourcePoliciesResponseEntry.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    GetResourcePoliciesResponseEntry.struct_class = Types::GetResourcePoliciesResponseEntry
 
     GetServiceSettingRequest.add_member(:setting_id, Shapes::ShapeRef.new(shape: ServiceSettingId, required: true, location_name: "SettingId"))
     GetServiceSettingRequest.struct_class = Types::GetServiceSettingRequest
@@ -3510,7 +3556,11 @@ module Aws::SSM
     OpsItem.add_member(:actual_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ActualEndTime"))
     OpsItem.add_member(:planned_start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PlannedStartTime"))
     OpsItem.add_member(:planned_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PlannedEndTime"))
+    OpsItem.add_member(:ops_item_arn, Shapes::ShapeRef.new(shape: OpsItemArn, location_name: "OpsItemArn"))
     OpsItem.struct_class = Types::OpsItem
+
+    OpsItemAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    OpsItemAccessDeniedException.struct_class = Types::OpsItemAccessDeniedException
 
     OpsItemAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     OpsItemAlreadyExistsException.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: String, location_name: "OpsItemId"))
@@ -3931,6 +3981,16 @@ module Aws::SSM
     PutParameterResult.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
     PutParameterResult.struct_class = Types::PutParameterResult
 
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    PutResourcePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
+    PutResourcePolicyRequest.add_member(:policy_hash, Shapes::ShapeRef.new(shape: PolicyHash, location_name: "PolicyHash"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
+    PutResourcePolicyResponse.add_member(:policy_hash, Shapes::ShapeRef.new(shape: PolicyHash, location_name: "PolicyHash"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
     Regions.member = Shapes::ShapeRef.new(shape: Region)
 
     RegisterDefaultPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
@@ -4093,6 +4153,20 @@ module Aws::SSM
 
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
+    ResourcePolicyConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourcePolicyConflictException.struct_class = Types::ResourcePolicyConflictException
+
+    ResourcePolicyInvalidParameterException.add_member(:parameter_names, Shapes::ShapeRef.new(shape: ResourcePolicyParameterNamesList, location_name: "ParameterNames"))
+    ResourcePolicyInvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourcePolicyInvalidParameterException.struct_class = Types::ResourcePolicyInvalidParameterException
+
+    ResourcePolicyLimitExceededException.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "Limit"))
+    ResourcePolicyLimitExceededException.add_member(:limit_type, Shapes::ShapeRef.new(shape: String, location_name: "LimitType"))
+    ResourcePolicyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourcePolicyLimitExceededException.struct_class = Types::ResourcePolicyLimitExceededException
+
+    ResourcePolicyParameterNamesList.member = Shapes::ShapeRef.new(shape: String)
 
     ResultAttribute.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
     ResultAttribute.struct_class = Types::ResultAttribute
@@ -4565,6 +4639,7 @@ module Aws::SSM
     UpdateOpsItemRequest.add_member(:actual_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ActualEndTime"))
     UpdateOpsItemRequest.add_member(:planned_start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PlannedStartTime"))
     UpdateOpsItemRequest.add_member(:planned_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "PlannedEndTime"))
+    UpdateOpsItemRequest.add_member(:ops_item_arn, Shapes::ShapeRef.new(shape: OpsItemArn, location_name: "OpsItemArn"))
     UpdateOpsItemRequest.struct_class = Types::UpdateOpsItemRequest
 
     UpdateOpsItemResponse.struct_class = Types::UpdateOpsItemResponse
@@ -4775,6 +4850,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: OpsItemAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemAccessDeniedException)
       end)
 
       api.add_operation(:create_ops_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -4921,6 +4997,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceDataSyncInvalidConfigurationException)
+      end)
+
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyConflictException)
       end)
 
       api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -5658,6 +5745,7 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: GetOpsItemResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemAccessDeniedException)
       end)
 
       api.add_operation(:get_ops_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -5769,6 +5857,22 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: GetPatchBaselineForPatchGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPatchBaselineForPatchGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_resource_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyInvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_service_setting, Seahorse::Model::Operation.new.tap do |o|
@@ -6126,6 +6230,18 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: IncompatiblePolicyException)
       end)
 
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyConflictException)
+      end)
+
       api.add_operation(:register_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterDefaultPatchBaseline"
         o.http_method = "POST"
@@ -6450,6 +6566,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: OpsItemAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: OpsItemInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OpsItemAccessDeniedException)
       end)
 
       api.add_operation(:update_ops_metadata, Seahorse::Model::Operation.new.tap do |o|

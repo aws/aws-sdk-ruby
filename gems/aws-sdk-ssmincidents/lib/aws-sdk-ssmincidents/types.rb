@@ -321,6 +321,17 @@ module Aws::SSMIncidents
     #           summary: "IncidentSummary",
     #           title: "IncidentTitle", # required
     #         },
+    #         integrations: [
+    #           {
+    #             pager_duty_configuration: {
+    #               name: "PagerDutyConfigurationNameString", # required
+    #               pager_duty_incident_configuration: { # required
+    #                 service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
+    #               },
+    #               secret_id: "PagerDutyConfigurationSecretIdString", # required
+    #             },
+    #           },
+    #         ],
     #         name: "ResponsePlanName", # required
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -358,6 +369,11 @@ module Aws::SSMIncidents
     #   Details used to create an incident when using this response plan.
     #   @return [Types::IncidentTemplate]
     #
+    # @!attribute [rw] integrations
+    #   Information about third-party services integrated into the response
+    #   plan.
+    #   @return [Array<Types::Integration>]
+    #
     # @!attribute [rw] name
     #   The short format name of the response plan. Can't include spaces.
     #   @return [String]
@@ -375,6 +391,7 @@ module Aws::SSMIncidents
       :display_name,
       :engagements,
       :incident_template,
+      :integrations,
       :name,
       :tags)
       SENSITIVE = []
@@ -930,6 +947,11 @@ module Aws::SSMIncidents
     #   Details used to create the incident when using this response plan.
     #   @return [Types::IncidentTemplate]
     #
+    # @!attribute [rw] integrations
+    #   Information about third-party services integrated into the Incident
+    #   Manager response plan.
+    #   @return [Array<Types::Integration>]
+    #
     # @!attribute [rw] name
     #   The short format name of the response plan. The name can't contain
     #   spaces.
@@ -944,6 +966,7 @@ module Aws::SSMIncidents
       :display_name,
       :engagements,
       :incident_template,
+      :integrations,
       :name)
       SENSITIVE = []
       include Aws::Structure
@@ -1214,6 +1237,31 @@ module Aws::SSMIncidents
       include Aws::Structure
     end
 
+    # Information about third-party services integrated into a response
+    # plan.
+    #
+    # @note Integration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Integration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Integration corresponding to the set member.
+    #
+    # @!attribute [rw] pager_duty_configuration
+    #   Information about the PagerDuty service where the response plan
+    #   creates an incident.
+    #   @return [Types::PagerDutyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/Integration AWS API Documentation
+    #
+    class Integration < Struct.new(
+      :pager_duty_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PagerDutyConfiguration < Integration; end
+      class Unknown < Integration; end
+    end
+
     # The request processing has failed because of an unknown error,
     # exception or failure.
     #
@@ -1238,6 +1286,11 @@ module Aws::SSMIncidents
     #         value: { # required
     #           arn: "Arn",
     #           metric_definition: "MetricDefinition",
+    #           pager_duty_incident_detail: {
+    #             auto_resolve: false,
+    #             id: "PagerDutyIncidentDetailIdString", # required
+    #             secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #           },
     #           url: "Url",
     #         },
     #       }
@@ -1275,6 +1328,11 @@ module Aws::SSMIncidents
     #   CloudWatch.
     #   @return [String]
     #
+    # @!attribute [rw] pager_duty_incident_detail
+    #   Details about an incident that is associated with a PagerDuty
+    #   incident.
+    #   @return [Types::PagerDutyIncidentDetail]
+    #
     # @!attribute [rw] url
     #   The URL, if the related item is a non-Amazon Web Services resource.
     #   @return [String]
@@ -1284,6 +1342,7 @@ module Aws::SSMIncidents
     class ItemValue < Struct.new(
       :arn,
       :metric_definition,
+      :pager_duty_incident_detail,
       :url,
       :unknown)
       SENSITIVE = []
@@ -1292,6 +1351,7 @@ module Aws::SSMIncidents
 
       class Arn < ItemValue; end
       class MetricDefinition < ItemValue; end
+      class PagerDutyIncidentDetail < ItemValue; end
       class Url < ItemValue; end
       class Unknown < ItemValue; end
     end
@@ -1660,6 +1720,105 @@ module Aws::SSMIncidents
       class Unknown < NotificationTargetItem; end
     end
 
+    # Details about the PagerDuty configuration for a response plan.
+    #
+    # @note When making an API call, you may pass PagerDutyConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PagerDutyConfigurationNameString", # required
+    #         pager_duty_incident_configuration: { # required
+    #           service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
+    #         },
+    #         secret_id: "PagerDutyConfigurationSecretIdString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the PagerDuty configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] pager_duty_incident_configuration
+    #   Details about the PagerDuty service associated with the
+    #   configuration.
+    #   @return [Types::PagerDutyIncidentConfiguration]
+    #
+    # @!attribute [rw] secret_id
+    #   The ID of the Amazon Web Services Secrets Manager secret that stores
+    #   your PagerDuty key, either a General Access REST API Key or User
+    #   Token REST API Key, and other user credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/PagerDutyConfiguration AWS API Documentation
+    #
+    class PagerDutyConfiguration < Struct.new(
+      :name,
+      :pager_duty_incident_configuration,
+      :secret_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the PagerDuty service where the response plan creates an
+    # incident.
+    #
+    # @note When making an API call, you may pass PagerDutyIncidentConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
+    #       }
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the PagerDuty service that the response plan associates
+    #   with an incident when it launches.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/PagerDutyIncidentConfiguration AWS API Documentation
+    #
+    class PagerDutyIncidentConfiguration < Struct.new(
+      :service_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the PagerDuty incident associated with an incident
+    # created by an Incident Manager response plan.
+    #
+    # @note When making an API call, you may pass PagerDutyIncidentDetail
+    #   data as a hash:
+    #
+    #       {
+    #         auto_resolve: false,
+    #         id: "PagerDutyIncidentDetailIdString", # required
+    #         secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #       }
+    #
+    # @!attribute [rw] auto_resolve
+    #   Indicates whether to resolve the PagerDuty incident when you resolve
+    #   the associated Incident Manager incident.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   The ID of the incident associated with the PagerDuty service for the
+    #   response plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ID of the Amazon Web Services Secrets Manager secret that stores
+    #   your PagerDuty key, either a General Access REST API Key or User
+    #   Token REST API Key, and other user credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/PagerDutyIncidentDetail AWS API Documentation
+    #
+    class PagerDutyIncidentDetail < Struct.new(
+      :auto_resolve,
+      :id,
+      :secret_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutResourcePolicyInput
     #   data as a hash:
     #
@@ -1765,6 +1924,11 @@ module Aws::SSMIncidents
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
+    #             pager_duty_incident_detail: {
+    #               auto_resolve: false,
+    #               id: "PagerDutyIncidentDetailIdString", # required
+    #               secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #             },
     #             url: "Url",
     #           },
     #         },
@@ -2060,6 +2224,11 @@ module Aws::SSMIncidents
     #               value: { # required
     #                 arn: "Arn",
     #                 metric_definition: "MetricDefinition",
+    #                 pager_duty_incident_detail: {
+    #                   auto_resolve: false,
+    #                   id: "PagerDutyIncidentDetailIdString", # required
+    #                   secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #                 },
     #                 url: "Url",
     #               },
     #             },
@@ -2483,6 +2652,11 @@ module Aws::SSMIncidents
     #               value: { # required
     #                 arn: "Arn",
     #                 metric_definition: "MetricDefinition",
+    #                 pager_duty_incident_detail: {
+    #                   auto_resolve: false,
+    #                   id: "PagerDutyIncidentDetailIdString", # required
+    #                   secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #                 },
     #                 url: "Url",
     #               },
     #             },
@@ -2493,6 +2667,11 @@ module Aws::SSMIncidents
     #             value: { # required
     #               arn: "Arn",
     #               metric_definition: "MetricDefinition",
+    #               pager_duty_incident_detail: {
+    #                 auto_resolve: false,
+    #                 id: "PagerDutyIncidentDetailIdString", # required
+    #                 secret_id: "PagerDutyIncidentDetailSecretIdString",
+    #               },
     #               url: "Url",
     #             },
     #           },
@@ -2652,6 +2831,17 @@ module Aws::SSMIncidents
     #           "TagKey" => "TagValue",
     #         },
     #         incident_template_title: "IncidentTitle",
+    #         integrations: [
+    #           {
+    #             pager_duty_configuration: {
+    #               name: "PagerDutyConfigurationNameString", # required
+    #               pager_duty_incident_configuration: { # required
+    #                 service_id: "PagerDutyIncidentConfigurationServiceIdString", # required
+    #               },
+    #               secret_id: "PagerDutyConfigurationSecretIdString", # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] actions
@@ -2733,6 +2923,11 @@ module Aws::SSMIncidents
     #   spaces.
     #   @return [String]
     #
+    # @!attribute [rw] integrations
+    #   Information about third-party services integrated into the response
+    #   plan.
+    #   @return [Array<Types::Integration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateResponsePlanInput AWS API Documentation
     #
     class UpdateResponsePlanInput < Struct.new(
@@ -2747,7 +2942,8 @@ module Aws::SSMIncidents
       :incident_template_notification_targets,
       :incident_template_summary,
       :incident_template_tags,
-      :incident_template_title)
+      :incident_template_title,
+      :integrations)
       SENSITIVE = []
       include Aws::Structure
     end

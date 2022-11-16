@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2022-11-16)
+------------------
+
+* Feature - This release adds support for cross account access in CreateOpsItem, UpdateOpsItem and GetOpsItem. It introduces new APIs to setup resource policies for SSM resources: PutResourcePolicy, GetResourcePolicies and DeleteResourcePolicy.
+
 1.144.0 (2022-11-07)
 ------------------
 

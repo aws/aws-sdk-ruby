@@ -1196,6 +1196,7 @@ module Aws::Connect
     end
 
     # The contact with the specified ID is not active or does not exist.
+    # Applies to Voice calls only, not to Chat, Task, or Voice Callback.
     #
     # @!attribute [rw] message
     #   The message.
@@ -4368,12 +4369,16 @@ module Aws::Connect
     # @!attribute [rw] groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
-    #   than aggregated for all queues. If you group by `CHANNEL`, you
-    #   should include a Channels filter. VOICE, CHAT, and TASK channels are
-    #   supported.
+    #   than aggregated for all queues.
     #
-    #   If no `Grouping` is included in the request, a summary of metrics is
-    #   returned.
+    #   * If you group by `CHANNEL`, you should include a Channels filter.
+    #     VOICE, CHAT, and TASK channels are supported.
+    #
+    #   * If you group by `ROUTING_PROFILE`, you must include either a queue
+    #     or routing profile filter.
+    #
+    #   * If no `Grouping` is included in the request, a summary of metrics
+    #     is returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] current_metrics
@@ -8006,6 +8011,79 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MonitorContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         user_id: "AgentResourceId", # required
+    #         allowed_monitor_capabilities: ["SILENT_MONITOR"], # accepts SILENT_MONITOR, BARGE
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_monitor_capabilities
+    #   Specify which monitoring actions the user is allowed to take. For
+    #   example, whether the user is allowed to escalate from silent
+    #   monitoring to barge.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MonitorContactRequest AWS API Documentation
+    #
+    class MonitorContactRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :user_id,
+      :allowed_monitor_capabilities,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MonitorContactResponse AWS API Documentation
+    #
+    class MonitorContactResponse < Struct.new(
+      :contact_id,
+      :contact_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a reference when the `referenceType` is `NUMBER`.
     # Otherwise, null.
     #
@@ -8433,6 +8511,13 @@ module Aws::Connect
     end
 
     # The search criteria to be used to return queues.
+    #
+    # <note markdown="1"> The `name` and `description` fields support "contains" queries with
+    # a minimum of 2 characters and a maximum of 25 characters. Any queries
+    # with character lengths outside of this range will throw invalid
+    # results.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass QueueSearchCriteria
     #   data as a hash:
@@ -9268,6 +9353,13 @@ module Aws::Connect
 
     # The search criteria to be used to return routing profiles.
     #
+    # <note markdown="1"> The `name` and `description` fields support "contains" queries with
+    # a minimum of 2 characters and a maximum of 25 characters. Any queries
+    # with character lengths outside of this range will throw invalid
+    # results.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass RoutingProfileSearchCriteria
     #   data as a hash:
     #
@@ -9589,6 +9681,13 @@ module Aws::Connect
     #
     # @!attribute [rw] search_criteria
     #   The search criteria to be used to return queues.
+    #
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries
+    #   with a minimum of 2 characters and a maximum of 25 characters. Any
+    #   queries with character lengths outside of this range will throw
+    #   invalid results.
+    #
+    #    </note>
     #   @return [Types::QueueSearchCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchQueuesRequest AWS API Documentation
@@ -9695,6 +9794,13 @@ module Aws::Connect
     #
     # @!attribute [rw] search_criteria
     #   The search criteria to be used to return routing profiles.
+    #
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries
+    #   with a minimum of 2 characters and a maximum of 25 characters. Any
+    #   queries with character lengths outside of this range will throw
+    #   invalid results.
+    #
+    #    </note>
     #   @return [Types::RoutingProfileSearchCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchRoutingProfilesRequest AWS API Documentation
@@ -9798,6 +9904,12 @@ module Aws::Connect
     #
     # @!attribute [rw] search_criteria
     #   The search criteria to be used to return security profiles.
+    #
+    #   <note markdown="1"> The `name` field support "contains" queries with a minimum of 2
+    #   characters and maximum of 25 characters. Any queries with character
+    #   lengths outside of this range will throw invalid results.
+    #
+    #    </note>
     #
     #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
     #
@@ -9918,10 +10030,10 @@ module Aws::Connect
     # @!attribute [rw] search_criteria
     #   The search criteria to be used to return users.
     #
-    #   <note markdown="1"> The `Username`, `Firstname`, and `Lastname` fields support
-    #   "contains" queries with a minimum of 2 characters and a maximum of
-    #   25 characters. Any queries with character lengths outside of this
-    #   range result in empty results.
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries
+    #   with a minimum of 2 characters and a maximum of 25 characters. Any
+    #   queries with character lengths outside of this range will throw
+    #   invalid results.
     #
     #    </note>
     #   @return [Types::UserSearchCriteria]
@@ -10104,6 +10216,12 @@ module Aws::Connect
     end
 
     # The search criteria to be used to return security profiles.
+    #
+    # <note markdown="1"> The `name` field support "contains" queries with a minimum of 2
+    # characters and maximum of 25 characters. Any queries with character
+    # lengths outside of this range will throw invalid results.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass SecurityProfileSearchCriteria
     #   data as a hash:
@@ -13489,10 +13607,10 @@ module Aws::Connect
 
     # The search criteria to be used to return users.
     #
-    # <note markdown="1"> The `Username`, `Firstname`, and `Lastname` fields support
-    # "contains" queries with a minimum of 2 characters and a maximum of
-    # 25 characters. Any queries with character lengths outside of this
-    # range result in empty results.
+    # <note markdown="1"> The `name` and `description` fields support "contains" queries with
+    # a minimum of 2 characters and a maximum of 25 characters. Any queries
+    # with character lengths outside of this range will throw invalid
+    # results.
     #
     #  </note>
     #

@@ -430,7 +430,7 @@ module Aws::XRay
     #   * The InsightsEnabled boolean can be set to true to enable insights
     #     for the new group or false to disable insights for the new group.
     #
-    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #   * The NotificationsEnabled boolean can be set to true to enable
     #     insights notifications for the new group. Notifications may only be
     #     enabled on a group with InsightsEnabled set to true.
     #
@@ -624,6 +624,35 @@ module Aws::XRay
     # @param [Hash] params ({})
     def delete_group(params = {}, options = {})
       req = build_request(:delete_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource policy from the target Amazon Web Services account.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the resource policy to delete.
+    #
+    # @option params [String] :policy_revision_id
+    #   Specifies a specific policy revision to delete. Provide a
+    #   `PolicyRevisionId` to ensure an atomic delete operation. If the
+    #   provided revision id does not match the latest policy revision id, an
+    #   `InvalidPolicyRevisionIdException` exception is returned.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     policy_name: "PolicyName", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -1645,6 +1674,43 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Returns the list of resource policies in the target Amazon Web
+    # Services account.
+    #
+    # @option params [String] :next_token
+    #   Not currently supported.
+    #
+    # @return [Types::ListResourcePoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcePoliciesResult#resource_policies #resource_policies} => Array&lt;Types::ResourcePolicy&gt;
+    #   * {Types::ListResourcePoliciesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_policies({
+    #     next_token: "ResourcePolicyNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policies #=> Array
+    #   resp.resource_policies[0].policy_name #=> String
+    #   resp.resource_policies[0].policy_document #=> String
+    #   resp.resource_policies[0].policy_revision_id #=> String
+    #   resp.resource_policies[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListResourcePolicies AWS API Documentation
+    #
+    # @overload list_resource_policies(params = {})
+    # @param [Hash] params ({})
+    def list_resource_policies(params = {}, options = {})
+      req = build_request(:list_resource_policies, params)
+      req.send_request(options)
+    end
+
     # Returns a list of tags that are applied to the specified Amazon Web
     # Services X-Ray group or sampling rule.
     #
@@ -1660,6 +1726,8 @@ module Aws::XRay
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1729,6 +1797,75 @@ module Aws::XRay
     # @param [Hash] params ({})
     def put_encryption_config(params = {}, options = {})
       req = build_request(:put_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Sets the resource policy to grant one or more Amazon Web Services
+    # services and accounts permissions to access X-Ray. Each resource
+    # policy will be associated with a specific Amazon Web Services account.
+    # Each Amazon Web Services account can have a maximum of 5 resource
+    # policies, and each policy name must be unique within that account. The
+    # maximum size of each resource policy is 5KB.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the resource policy. Must be unique within a specific
+    #   Amazon Web Services account.
+    #
+    # @option params [required, String] :policy_document
+    #   The resource policy document, which can be up to 5kb in size.
+    #
+    # @option params [String] :policy_revision_id
+    #   Specifies a specific policy revision, to ensure an atomic create
+    #   operation. By default the resource policy is created if it does not
+    #   exist, or updated with an incremented revision id. The revision id is
+    #   unique to each policy in the account.
+    #
+    #   If the policy revision id does not match the latest revision id, the
+    #   operation will fail with an `InvalidPolicyRevisionIdException`
+    #   exception. You can also provide a `PolicyRevisionId` of 0. In this
+    #   case, the operation will fail with an
+    #   `InvalidPolicyRevisionIdException` exception if a resource policy with
+    #   the same name already exists.
+    #
+    # @option params [Boolean] :bypass_policy_lockout_check
+    #   A flag to indicate whether to bypass the resource policy lockout
+    #   safety check.
+    #
+    #   Setting this value to true increases the risk that the policy becomes
+    #   unmanageable. Do not set this value to true indiscriminately.
+    #
+    #   Use this parameter only when you include a policy in the request and
+    #   you intend to prevent the principal that is making the request from
+    #   making a subsequent `PutResourcePolicy` request.
+    #
+    #   The default value is false.
+    #
+    # @return [Types::PutResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResult#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy_name: "PolicyName", # required
+    #     policy_document: "PolicyDocument", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #     bypass_policy_lockout_check: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.policy_name #=> String
+    #   resp.resource_policy.policy_document #=> String
+    #   resp.resource_policy.policy_revision_id #=> String
+    #   resp.resource_policy.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -1962,7 +2099,7 @@ module Aws::XRay
     #   * The InsightsEnabled boolean can be set to true to enable insights
     #     for the group or false to disable insights for the group.
     #
-    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #   * The NotificationsEnabled boolean can be set to true to enable
     #     insights notifications for the group. Notifications can only be
     #     enabled on a group with InsightsEnabled set to true.
     #
@@ -2070,7 +2207,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

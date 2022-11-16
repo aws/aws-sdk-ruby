@@ -19,6 +19,16 @@ module Aws::IoTTwinMaker
     BatchPutPropertyValuesRequest = Shapes::StructureShape.new(name: 'BatchPutPropertyValuesRequest')
     BatchPutPropertyValuesResponse = Shapes::StructureShape.new(name: 'BatchPutPropertyValuesResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BundleInformation = Shapes::StructureShape.new(name: 'BundleInformation')
+    BundleName = Shapes::StringShape.new(name: 'BundleName')
+    ColumnDescription = Shapes::StructureShape.new(name: 'ColumnDescription')
+    ColumnDescriptions = Shapes::ListShape.new(name: 'ColumnDescriptions')
+    ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ColumnType = Shapes::StringShape.new(name: 'ColumnType')
+    ComponentPropertyGroupRequest = Shapes::StructureShape.new(name: 'ComponentPropertyGroupRequest')
+    ComponentPropertyGroupRequests = Shapes::MapShape.new(name: 'ComponentPropertyGroupRequests')
+    ComponentPropertyGroupResponse = Shapes::StructureShape.new(name: 'ComponentPropertyGroupResponse')
+    ComponentPropertyGroupResponses = Shapes::MapShape.new(name: 'ComponentPropertyGroupResponses')
     ComponentRequest = Shapes::StructureShape.new(name: 'ComponentRequest')
     ComponentResponse = Shapes::StructureShape.new(name: 'ComponentResponse')
     ComponentTypeId = Shapes::StringShape.new(name: 'ComponentTypeId')
@@ -68,6 +78,8 @@ module Aws::IoTTwinMaker
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Errors = Shapes::ListShape.new(name: 'Errors')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExecuteQueryRequest = Shapes::StructureShape.new(name: 'ExecuteQueryRequest')
+    ExecuteQueryResponse = Shapes::StructureShape.new(name: 'ExecuteQueryResponse')
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExtendsFrom = Shapes::ListShape.new(name: 'ExtendsFrom')
     ExternalIdProperty = Shapes::MapShape.new(name: 'ExternalIdProperty')
@@ -79,6 +91,8 @@ module Aws::IoTTwinMaker
     GetComponentTypeResponse = Shapes::StructureShape.new(name: 'GetComponentTypeResponse')
     GetEntityRequest = Shapes::StructureShape.new(name: 'GetEntityRequest')
     GetEntityResponse = Shapes::StructureShape.new(name: 'GetEntityResponse')
+    GetPricingPlanRequest = Shapes::StructureShape.new(name: 'GetPricingPlanRequest')
+    GetPricingPlanResponse = Shapes::StructureShape.new(name: 'GetPricingPlanResponse')
     GetPropertyValueHistoryRequest = Shapes::StructureShape.new(name: 'GetPropertyValueHistoryRequest')
     GetPropertyValueHistoryResponse = Shapes::StructureShape.new(name: 'GetPropertyValueHistoryResponse')
     GetPropertyValueRequest = Shapes::StructureShape.new(name: 'GetPropertyValueRequest')
@@ -87,6 +101,7 @@ module Aws::IoTTwinMaker
     GetSceneResponse = Shapes::StructureShape.new(name: 'GetSceneResponse')
     GetWorkspaceRequest = Shapes::StructureShape.new(name: 'GetWorkspaceRequest')
     GetWorkspaceResponse = Shapes::StructureShape.new(name: 'GetWorkspaceResponse')
+    GroupType = Shapes::StringShape.new(name: 'GroupType')
     Id = Shapes::StringShape.new(name: 'Id')
     IdOrArn = Shapes::StringShape.new(name: 'IdOrArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -114,33 +129,54 @@ module Aws::IoTTwinMaker
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Order = Shapes::StringShape.new(name: 'Order')
+    OrderBy = Shapes::StructureShape.new(name: 'OrderBy')
+    OrderByList = Shapes::ListShape.new(name: 'OrderByList')
     OrderByTime = Shapes::StringShape.new(name: 'OrderByTime')
     ParentEntityId = Shapes::StringShape.new(name: 'ParentEntityId')
     ParentEntityUpdateRequest = Shapes::StructureShape.new(name: 'ParentEntityUpdateRequest')
     ParentEntityUpdateType = Shapes::StringShape.new(name: 'ParentEntityUpdateType')
+    PricingBundles = Shapes::ListShape.new(name: 'PricingBundles')
+    PricingMode = Shapes::StringShape.new(name: 'PricingMode')
+    PricingPlan = Shapes::StructureShape.new(name: 'PricingPlan')
+    PricingTier = Shapes::StringShape.new(name: 'PricingTier')
     PropertyDefinitionRequest = Shapes::StructureShape.new(name: 'PropertyDefinitionRequest')
     PropertyDefinitionResponse = Shapes::StructureShape.new(name: 'PropertyDefinitionResponse')
     PropertyDefinitionsRequest = Shapes::MapShape.new(name: 'PropertyDefinitionsRequest')
     PropertyDefinitionsResponse = Shapes::MapShape.new(name: 'PropertyDefinitionsResponse')
     PropertyFilter = Shapes::StructureShape.new(name: 'PropertyFilter')
     PropertyFilters = Shapes::ListShape.new(name: 'PropertyFilters')
+    PropertyGroupRequest = Shapes::StructureShape.new(name: 'PropertyGroupRequest')
+    PropertyGroupResponse = Shapes::StructureShape.new(name: 'PropertyGroupResponse')
+    PropertyGroupUpdateType = Shapes::StringShape.new(name: 'PropertyGroupUpdateType')
+    PropertyGroupsRequest = Shapes::MapShape.new(name: 'PropertyGroupsRequest')
+    PropertyGroupsResponse = Shapes::MapShape.new(name: 'PropertyGroupsResponse')
     PropertyLatestValue = Shapes::StructureShape.new(name: 'PropertyLatestValue')
     PropertyLatestValueMap = Shapes::MapShape.new(name: 'PropertyLatestValueMap')
+    PropertyNames = Shapes::ListShape.new(name: 'PropertyNames')
     PropertyRequest = Shapes::StructureShape.new(name: 'PropertyRequest')
     PropertyRequests = Shapes::MapShape.new(name: 'PropertyRequests')
     PropertyResponse = Shapes::StructureShape.new(name: 'PropertyResponse')
     PropertyResponses = Shapes::MapShape.new(name: 'PropertyResponses')
+    PropertyTableValue = Shapes::MapShape.new(name: 'PropertyTableValue')
     PropertyUpdateType = Shapes::StringShape.new(name: 'PropertyUpdateType')
     PropertyValue = Shapes::StructureShape.new(name: 'PropertyValue')
     PropertyValueEntry = Shapes::StructureShape.new(name: 'PropertyValueEntry')
     PropertyValueHistory = Shapes::StructureShape.new(name: 'PropertyValueHistory')
     PropertyValueList = Shapes::ListShape.new(name: 'PropertyValueList')
     PropertyValues = Shapes::ListShape.new(name: 'PropertyValues')
+    QueryResultValue = Shapes::DocumentShape.new(name: 'QueryResultValue', document: true)
+    QueryServiceMaxResults = Shapes::IntegerShape.new(name: 'QueryServiceMaxResults')
+    QueryStatement = Shapes::StringShape.new(name: 'QueryStatement')
+    QueryTimeoutException = Shapes::StructureShape.new(name: 'QueryTimeoutException')
     Relationship = Shapes::StructureShape.new(name: 'Relationship')
     RelationshipValue = Shapes::StructureShape.new(name: 'RelationshipValue')
     RequiredProperties = Shapes::ListShape.new(name: 'RequiredProperties')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    Row = Shapes::StructureShape.new(name: 'Row')
+    RowData = Shapes::ListShape.new(name: 'RowData')
+    Rows = Shapes::ListShape.new(name: 'Rows')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     S3Url = Shapes::StringShape.new(name: 'S3Url')
     SceneCapabilities = Shapes::ListShape.new(name: 'SceneCapabilities')
@@ -153,6 +189,9 @@ module Aws::IoTTwinMaker
     State = Shapes::StringShape.new(name: 'State')
     Status = Shapes::StructureShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
+    TabularConditions = Shapes::StructureShape.new(name: 'TabularConditions')
+    TabularPropertyValue = Shapes::ListShape.new(name: 'TabularPropertyValue')
+    TabularPropertyValues = Shapes::ListShape.new(name: 'TabularPropertyValues')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -171,6 +210,9 @@ module Aws::IoTTwinMaker
     UpdateComponentTypeResponse = Shapes::StructureShape.new(name: 'UpdateComponentTypeResponse')
     UpdateEntityRequest = Shapes::StructureShape.new(name: 'UpdateEntityRequest')
     UpdateEntityResponse = Shapes::StructureShape.new(name: 'UpdateEntityResponse')
+    UpdatePricingPlanRequest = Shapes::StructureShape.new(name: 'UpdatePricingPlanRequest')
+    UpdatePricingPlanResponse = Shapes::StructureShape.new(name: 'UpdatePricingPlanResponse')
+    UpdateReason = Shapes::StringShape.new(name: 'UpdateReason')
     UpdateSceneRequest = Shapes::StructureShape.new(name: 'UpdateSceneRequest')
     UpdateSceneResponse = Shapes::StructureShape.new(name: 'UpdateSceneResponse')
     UpdateWorkspaceRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceRequest')
@@ -184,32 +226,60 @@ module Aws::IoTTwinMaker
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    BatchPutPropertyError.add_member(:entry, Shapes::ShapeRef.new(shape: PropertyValueEntry, required: true, location_name: "entry"))
     BatchPutPropertyError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorCode"))
     BatchPutPropertyError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    BatchPutPropertyError.add_member(:entry, Shapes::ShapeRef.new(shape: PropertyValueEntry, required: true, location_name: "entry"))
     BatchPutPropertyError.struct_class = Types::BatchPutPropertyError
 
     BatchPutPropertyErrorEntry.add_member(:errors, Shapes::ShapeRef.new(shape: Errors, required: true, location_name: "errors"))
     BatchPutPropertyErrorEntry.struct_class = Types::BatchPutPropertyErrorEntry
 
-    BatchPutPropertyValuesRequest.add_member(:entries, Shapes::ShapeRef.new(shape: Entries, required: true, location_name: "entries"))
     BatchPutPropertyValuesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    BatchPutPropertyValuesRequest.add_member(:entries, Shapes::ShapeRef.new(shape: Entries, required: true, location_name: "entries"))
     BatchPutPropertyValuesRequest.struct_class = Types::BatchPutPropertyValuesRequest
 
     BatchPutPropertyValuesResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: ErrorEntries, required: true, location_name: "errorEntries"))
     BatchPutPropertyValuesResponse.struct_class = Types::BatchPutPropertyValuesResponse
 
-    ComponentRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
+    BundleInformation.add_member(:bundle_names, Shapes::ShapeRef.new(shape: PricingBundles, required: true, location_name: "bundleNames"))
+    BundleInformation.add_member(:pricing_tier, Shapes::ShapeRef.new(shape: PricingTier, location_name: "pricingTier"))
+    BundleInformation.struct_class = Types::BundleInformation
+
+    ColumnDescription.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "name"))
+    ColumnDescription.add_member(:type, Shapes::ShapeRef.new(shape: ColumnType, location_name: "type"))
+    ColumnDescription.struct_class = Types::ColumnDescription
+
+    ColumnDescriptions.member = Shapes::ShapeRef.new(shape: ColumnDescription)
+
+    ComponentPropertyGroupRequest.add_member(:group_type, Shapes::ShapeRef.new(shape: GroupType, location_name: "groupType"))
+    ComponentPropertyGroupRequest.add_member(:property_names, Shapes::ShapeRef.new(shape: PropertyNames, location_name: "propertyNames"))
+    ComponentPropertyGroupRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: PropertyGroupUpdateType, location_name: "updateType"))
+    ComponentPropertyGroupRequest.struct_class = Types::ComponentPropertyGroupRequest
+
+    ComponentPropertyGroupRequests.key = Shapes::ShapeRef.new(shape: Name)
+    ComponentPropertyGroupRequests.value = Shapes::ShapeRef.new(shape: ComponentPropertyGroupRequest)
+
+    ComponentPropertyGroupResponse.add_member(:group_type, Shapes::ShapeRef.new(shape: GroupType, required: true, location_name: "groupType"))
+    ComponentPropertyGroupResponse.add_member(:property_names, Shapes::ShapeRef.new(shape: PropertyNames, required: true, location_name: "propertyNames"))
+    ComponentPropertyGroupResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isInherited"))
+    ComponentPropertyGroupResponse.struct_class = Types::ComponentPropertyGroupResponse
+
+    ComponentPropertyGroupResponses.key = Shapes::ShapeRef.new(shape: Name)
+    ComponentPropertyGroupResponses.value = Shapes::ShapeRef.new(shape: ComponentPropertyGroupResponse)
+
     ComponentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    ComponentRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     ComponentRequest.add_member(:properties, Shapes::ShapeRef.new(shape: PropertyRequests, location_name: "properties"))
+    ComponentRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: ComponentPropertyGroupRequests, location_name: "propertyGroups"))
     ComponentRequest.struct_class = Types::ComponentRequest
 
     ComponentResponse.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
-    ComponentResponse.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
-    ComponentResponse.add_member(:defined_in, Shapes::ShapeRef.new(shape: String, location_name: "definedIn"))
     ComponentResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    ComponentResponse.add_member(:properties, Shapes::ShapeRef.new(shape: PropertyResponses, location_name: "properties"))
+    ComponentResponse.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     ComponentResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    ComponentResponse.add_member(:defined_in, Shapes::ShapeRef.new(shape: String, location_name: "definedIn"))
+    ComponentResponse.add_member(:properties, Shapes::ShapeRef.new(shape: PropertyResponses, location_name: "properties"))
+    ComponentResponse.add_member(:property_groups, Shapes::ShapeRef.new(shape: ComponentPropertyGroupResponses, location_name: "propertyGroups"))
     ComponentResponse.struct_class = Types::ComponentResponse
 
     ComponentTypeSummaries.member = Shapes::ShapeRef.new(shape: ComponentTypeSummary)
@@ -217,15 +287,16 @@ module Aws::IoTTwinMaker
     ComponentTypeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     ComponentTypeSummary.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location_name: "componentTypeId"))
     ComponentTypeSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    ComponentTypeSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     ComponentTypeSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     ComponentTypeSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    ComponentTypeSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     ComponentTypeSummary.struct_class = Types::ComponentTypeSummary
 
-    ComponentUpdateRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
-    ComponentUpdateRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    ComponentUpdateRequest.add_member(:property_updates, Shapes::ShapeRef.new(shape: PropertyRequests, location_name: "propertyUpdates"))
     ComponentUpdateRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: ComponentUpdateType, location_name: "updateType"))
+    ComponentUpdateRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    ComponentUpdateRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
+    ComponentUpdateRequest.add_member(:property_updates, Shapes::ShapeRef.new(shape: PropertyRequests, location_name: "propertyUpdates"))
+    ComponentUpdateRequest.add_member(:property_group_updates, Shapes::ShapeRef.new(shape: ComponentPropertyGroupRequests, location_name: "propertyGroupUpdates"))
     ComponentUpdateRequest.struct_class = Types::ComponentUpdateRequest
 
     ComponentUpdatesMapRequest.key = Shapes::ShapeRef.new(shape: Name)
@@ -249,14 +320,15 @@ module Aws::IoTTwinMaker
     ConnectorTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConnectorTimeoutException.struct_class = Types::ConnectorTimeoutException
 
+    CreateComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    CreateComponentTypeRequest.add_member(:is_singleton, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSingleton"))
     CreateComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     CreateComponentTypeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateComponentTypeRequest.add_member(:property_definitions, Shapes::ShapeRef.new(shape: PropertyDefinitionsRequest, location_name: "propertyDefinitions"))
     CreateComponentTypeRequest.add_member(:extends_from, Shapes::ShapeRef.new(shape: ExtendsFrom, location_name: "extendsFrom"))
     CreateComponentTypeRequest.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsRequest, location_name: "functions"))
-    CreateComponentTypeRequest.add_member(:is_singleton, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSingleton"))
-    CreateComponentTypeRequest.add_member(:property_definitions, Shapes::ShapeRef.new(shape: PropertyDefinitionsRequest, location_name: "propertyDefinitions"))
     CreateComponentTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    CreateComponentTypeRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsRequest, location_name: "propertyGroups"))
     CreateComponentTypeRequest.struct_class = Types::CreateComponentTypeRequest
 
     CreateComponentTypeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
@@ -264,64 +336,64 @@ module Aws::IoTTwinMaker
     CreateComponentTypeResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     CreateComponentTypeResponse.struct_class = Types::CreateComponentTypeResponse
 
-    CreateEntityRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentsMapRequest, location_name: "components"))
-    CreateEntityRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     CreateEntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     CreateEntityRequest.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "entityName"))
+    CreateEntityRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateEntityRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentsMapRequest, location_name: "components"))
     CreateEntityRequest.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     CreateEntityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     CreateEntityRequest.struct_class = Types::CreateEntityRequest
 
+    CreateEntityResponse.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
     CreateEntityResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     CreateEntityResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    CreateEntityResponse.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
     CreateEntityResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     CreateEntityResponse.struct_class = Types::CreateEntityResponse
 
-    CreateSceneRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
+    CreateSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    CreateSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
     CreateSceneRequest.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "contentLocation"))
     CreateSceneRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
+    CreateSceneRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
     CreateSceneRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     CreateSceneRequest.struct_class = Types::CreateSceneRequest
 
     CreateSceneResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     CreateSceneResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     CreateSceneResponse.struct_class = Types::CreateSceneResponse
 
-    CreateWorkspaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateWorkspaceRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "role"))
-    CreateWorkspaceRequest.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
-    CreateWorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    CreateWorkspaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateWorkspaceRequest.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
+    CreateWorkspaceRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "role"))
+    CreateWorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorkspaceRequest.struct_class = Types::CreateWorkspaceRequest
 
     CreateWorkspaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     CreateWorkspaceResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     CreateWorkspaceResponse.struct_class = Types::CreateWorkspaceResponse
 
-    DataConnector.add_member(:is_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "isNative"))
     DataConnector.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaFunction, location_name: "lambda"))
+    DataConnector.add_member(:is_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "isNative"))
     DataConnector.struct_class = Types::DataConnector
 
-    DataType.add_member(:allowed_values, Shapes::ShapeRef.new(shape: DataValueList, location_name: "allowedValues"))
-    DataType.add_member(:nested_type, Shapes::ShapeRef.new(shape: DataType, location_name: "nestedType"))
-    DataType.add_member(:relationship, Shapes::ShapeRef.new(shape: Relationship, location_name: "relationship"))
     DataType.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
+    DataType.add_member(:nested_type, Shapes::ShapeRef.new(shape: DataType, location_name: "nestedType"))
+    DataType.add_member(:allowed_values, Shapes::ShapeRef.new(shape: DataValueList, location_name: "allowedValues"))
     DataType.add_member(:unit_of_measure, Shapes::ShapeRef.new(shape: String, location_name: "unitOfMeasure"))
+    DataType.add_member(:relationship, Shapes::ShapeRef.new(shape: Relationship, location_name: "relationship"))
     DataType.struct_class = Types::DataType
 
     DataValue.add_member(:boolean_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "booleanValue"))
     DataValue.add_member(:double_value, Shapes::ShapeRef.new(shape: Double, location_name: "doubleValue"))
-    DataValue.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "expression"))
     DataValue.add_member(:integer_value, Shapes::ShapeRef.new(shape: Integer, location_name: "integerValue"))
-    DataValue.add_member(:list_value, Shapes::ShapeRef.new(shape: DataValueList, location_name: "listValue"))
     DataValue.add_member(:long_value, Shapes::ShapeRef.new(shape: Long, location_name: "longValue"))
+    DataValue.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
+    DataValue.add_member(:list_value, Shapes::ShapeRef.new(shape: DataValueList, location_name: "listValue"))
     DataValue.add_member(:map_value, Shapes::ShapeRef.new(shape: DataValueMap, location_name: "mapValue"))
     DataValue.add_member(:relationship_value, Shapes::ShapeRef.new(shape: RelationshipValue, location_name: "relationshipValue"))
-    DataValue.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
+    DataValue.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "expression"))
     DataValue.struct_class = Types::DataValue
 
     DataValueList.member = Shapes::ShapeRef.new(shape: DataValue)
@@ -329,23 +401,23 @@ module Aws::IoTTwinMaker
     DataValueMap.key = Shapes::ShapeRef.new(shape: String)
     DataValueMap.value = Shapes::ShapeRef.new(shape: DataValue)
 
-    DeleteComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     DeleteComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     DeleteComponentTypeRequest.struct_class = Types::DeleteComponentTypeRequest
 
     DeleteComponentTypeResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     DeleteComponentTypeResponse.struct_class = Types::DeleteComponentTypeResponse
 
+    DeleteEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     DeleteEntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityId"))
     DeleteEntityRequest.add_member(:is_recursive, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "isRecursive"))
-    DeleteEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     DeleteEntityRequest.struct_class = Types::DeleteEntityRequest
 
     DeleteEntityResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     DeleteEntityResponse.struct_class = Types::DeleteEntityResponse
 
-    DeleteSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "sceneId"))
     DeleteSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "sceneId"))
     DeleteSceneRequest.struct_class = Types::DeleteSceneRequest
 
     DeleteSceneResponse.struct_class = Types::DeleteSceneResponse
@@ -356,21 +428,21 @@ module Aws::IoTTwinMaker
     DeleteWorkspaceResponse.struct_class = Types::DeleteWorkspaceResponse
 
     EntityPropertyReference.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
-    EntityPropertyReference.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     EntityPropertyReference.add_member(:external_id_property, Shapes::ShapeRef.new(shape: ExternalIdProperty, location_name: "externalIdProperty"))
+    EntityPropertyReference.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     EntityPropertyReference.add_member(:property_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "propertyName"))
     EntityPropertyReference.struct_class = Types::EntityPropertyReference
 
     EntitySummaries.member = Shapes::ShapeRef.new(shape: EntitySummary)
 
-    EntitySummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
-    EntitySummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    EntitySummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     EntitySummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
     EntitySummary.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "entityName"))
-    EntitySummary.add_member(:has_child_entities, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasChildEntities"))
+    EntitySummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     EntitySummary.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     EntitySummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    EntitySummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    EntitySummary.add_member(:has_child_entities, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasChildEntities"))
+    EntitySummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     EntitySummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     EntitySummary.struct_class = Types::EntitySummary
 
@@ -384,20 +456,31 @@ module Aws::IoTTwinMaker
 
     Errors.member = Shapes::ShapeRef.new(shape: BatchPutPropertyError)
 
+    ExecuteQueryRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    ExecuteQueryRequest.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryStatement, required: true, location_name: "queryStatement"))
+    ExecuteQueryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryServiceMaxResults, location_name: "maxResults"))
+    ExecuteQueryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ExecuteQueryRequest.struct_class = Types::ExecuteQueryRequest
+
+    ExecuteQueryResponse.add_member(:column_descriptions, Shapes::ShapeRef.new(shape: ColumnDescriptions, location_name: "columnDescriptions"))
+    ExecuteQueryResponse.add_member(:rows, Shapes::ShapeRef.new(shape: Rows, location_name: "rows"))
+    ExecuteQueryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ExecuteQueryResponse.struct_class = Types::ExecuteQueryResponse
+
     ExtendsFrom.member = Shapes::ShapeRef.new(shape: ComponentTypeId)
 
     ExternalIdProperty.key = Shapes::ShapeRef.new(shape: String)
     ExternalIdProperty.value = Shapes::ShapeRef.new(shape: String)
 
-    FunctionRequest.add_member(:implemented_by, Shapes::ShapeRef.new(shape: DataConnector, location_name: "implementedBy"))
     FunctionRequest.add_member(:required_properties, Shapes::ShapeRef.new(shape: RequiredProperties, location_name: "requiredProperties"))
     FunctionRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    FunctionRequest.add_member(:implemented_by, Shapes::ShapeRef.new(shape: DataConnector, location_name: "implementedBy"))
     FunctionRequest.struct_class = Types::FunctionRequest
 
-    FunctionResponse.add_member(:implemented_by, Shapes::ShapeRef.new(shape: DataConnector, location_name: "implementedBy"))
-    FunctionResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, location_name: "isInherited"))
     FunctionResponse.add_member(:required_properties, Shapes::ShapeRef.new(shape: RequiredProperties, location_name: "requiredProperties"))
     FunctionResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    FunctionResponse.add_member(:implemented_by, Shapes::ShapeRef.new(shape: DataConnector, location_name: "implementedBy"))
+    FunctionResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, location_name: "isInherited"))
     FunctionResponse.struct_class = Types::FunctionResponse
 
     FunctionsRequest.key = Shapes::ShapeRef.new(shape: Name)
@@ -406,60 +489,67 @@ module Aws::IoTTwinMaker
     FunctionsResponse.key = Shapes::ShapeRef.new(shape: Name)
     FunctionsResponse.value = Shapes::ShapeRef.new(shape: FunctionResponse)
 
-    GetComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     GetComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    GetComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     GetComponentTypeRequest.struct_class = Types::GetComponentTypeRequest
 
-    GetComponentTypeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    GetComponentTypeResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    GetComponentTypeResponse.add_member(:is_singleton, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSingleton"))
     GetComponentTypeResponse.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location_name: "componentTypeId"))
-    GetComponentTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     GetComponentTypeResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetComponentTypeResponse.add_member(:property_definitions, Shapes::ShapeRef.new(shape: PropertyDefinitionsResponse, location_name: "propertyDefinitions"))
     GetComponentTypeResponse.add_member(:extends_from, Shapes::ShapeRef.new(shape: ExtendsFrom, location_name: "extendsFrom"))
     GetComponentTypeResponse.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsResponse, location_name: "functions"))
+    GetComponentTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    GetComponentTypeResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    GetComponentTypeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     GetComponentTypeResponse.add_member(:is_abstract, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAbstract"))
     GetComponentTypeResponse.add_member(:is_schema_initialized, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSchemaInitialized"))
-    GetComponentTypeResponse.add_member(:is_singleton, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSingleton"))
-    GetComponentTypeResponse.add_member(:property_definitions, Shapes::ShapeRef.new(shape: PropertyDefinitionsResponse, location_name: "propertyDefinitions"))
     GetComponentTypeResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    GetComponentTypeResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
-    GetComponentTypeResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    GetComponentTypeResponse.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsResponse, location_name: "propertyGroups"))
     GetComponentTypeResponse.struct_class = Types::GetComponentTypeResponse
 
-    GetEntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityId"))
     GetEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    GetEntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityId"))
     GetEntityRequest.struct_class = Types::GetEntityRequest
 
-    GetEntityResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
-    GetEntityResponse.add_member(:components, Shapes::ShapeRef.new(shape: ComponentsMap, location_name: "components"))
-    GetEntityResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    GetEntityResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetEntityResponse.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
     GetEntityResponse.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "entityName"))
-    GetEntityResponse.add_member(:has_child_entities, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "hasChildEntities"))
-    GetEntityResponse.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, required: true, location_name: "parentEntityId"))
+    GetEntityResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     GetEntityResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
-    GetEntityResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetEntityResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    GetEntityResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetEntityResponse.add_member(:components, Shapes::ShapeRef.new(shape: ComponentsMap, location_name: "components"))
+    GetEntityResponse.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, required: true, location_name: "parentEntityId"))
+    GetEntityResponse.add_member(:has_child_entities, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "hasChildEntities"))
+    GetEntityResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    GetEntityResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetEntityResponse.struct_class = Types::GetEntityResponse
 
+    GetPricingPlanRequest.struct_class = Types::GetPricingPlanRequest
+
+    GetPricingPlanResponse.add_member(:current_pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "currentPricingPlan"))
+    GetPricingPlanResponse.add_member(:pending_pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "pendingPricingPlan"))
+    GetPricingPlanResponse.struct_class = Types::GetPricingPlanResponse
+
+    GetPropertyValueHistoryRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    GetPropertyValueHistoryRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     GetPropertyValueHistoryRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
     GetPropertyValueHistoryRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
-    GetPropertyValueHistoryRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "endDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use endTime instead."}))
-    GetPropertyValueHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
-    GetPropertyValueHistoryRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
-    GetPropertyValueHistoryRequest.add_member(:interpolation, Shapes::ShapeRef.new(shape: InterpolationParameters, location_name: "interpolation"))
-    GetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    GetPropertyValueHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    GetPropertyValueHistoryRequest.add_member(:order_by_time, Shapes::ShapeRef.new(shape: OrderByTime, location_name: "orderByTime"))
-    GetPropertyValueHistoryRequest.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
     GetPropertyValueHistoryRequest.add_member(:selected_properties, Shapes::ShapeRef.new(shape: SelectedPropertyList, required: true, location_name: "selectedProperties"))
+    GetPropertyValueHistoryRequest.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
     GetPropertyValueHistoryRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "startDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use startTime instead."}))
+    GetPropertyValueHistoryRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "endDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use endTime instead."}))
+    GetPropertyValueHistoryRequest.add_member(:interpolation, Shapes::ShapeRef.new(shape: InterpolationParameters, location_name: "interpolation"))
+    GetPropertyValueHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetPropertyValueHistoryRequest.add_member(:order_by_time, Shapes::ShapeRef.new(shape: OrderByTime, location_name: "orderByTime"))
     GetPropertyValueHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
-    GetPropertyValueHistoryRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    GetPropertyValueHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     GetPropertyValueHistoryRequest.struct_class = Types::GetPropertyValueHistoryRequest
 
-    GetPropertyValueHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetPropertyValueHistoryResponse.add_member(:property_values, Shapes::ShapeRef.new(shape: PropertyValueList, required: true, location_name: "propertyValues"))
+    GetPropertyValueHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetPropertyValueHistoryResponse.struct_class = Types::GetPropertyValueHistoryResponse
 
     GetPropertyValueRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
@@ -467,35 +557,41 @@ module Aws::IoTTwinMaker
     GetPropertyValueRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     GetPropertyValueRequest.add_member(:selected_properties, Shapes::ShapeRef.new(shape: SelectedPropertyList, required: true, location_name: "selectedProperties"))
     GetPropertyValueRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    GetPropertyValueRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetPropertyValueRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetPropertyValueRequest.add_member(:property_group_name, Shapes::ShapeRef.new(shape: Name, location_name: "propertyGroupName"))
+    GetPropertyValueRequest.add_member(:tabular_conditions, Shapes::ShapeRef.new(shape: TabularConditions, location_name: "tabularConditions"))
     GetPropertyValueRequest.struct_class = Types::GetPropertyValueRequest
 
-    GetPropertyValueResponse.add_member(:property_values, Shapes::ShapeRef.new(shape: PropertyLatestValueMap, required: true, location_name: "propertyValues"))
+    GetPropertyValueResponse.add_member(:property_values, Shapes::ShapeRef.new(shape: PropertyLatestValueMap, location_name: "propertyValues"))
+    GetPropertyValueResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetPropertyValueResponse.add_member(:tabular_property_values, Shapes::ShapeRef.new(shape: TabularPropertyValues, location_name: "tabularPropertyValues"))
     GetPropertyValueResponse.struct_class = Types::GetPropertyValueResponse
 
-    GetSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "sceneId"))
     GetSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    GetSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "sceneId"))
     GetSceneRequest.struct_class = Types::GetSceneRequest
 
-    GetSceneResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
-    GetSceneResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
-    GetSceneResponse.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "contentLocation"))
-    GetSceneResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    GetSceneResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetSceneResponse.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
-    GetSceneResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetSceneResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    GetSceneResponse.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
+    GetSceneResponse.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "contentLocation"))
+    GetSceneResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    GetSceneResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    GetSceneResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    GetSceneResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetSceneResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
     GetSceneResponse.struct_class = Types::GetSceneResponse
 
     GetWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: IdOrArn, required: true, location: "uri", location_name: "workspaceId"))
     GetWorkspaceRequest.struct_class = Types::GetWorkspaceRequest
 
-    GetWorkspaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
-    GetWorkspaceResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    GetWorkspaceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetWorkspaceResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "role"))
-    GetWorkspaceResponse.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
-    GetWorkspaceResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetWorkspaceResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    GetWorkspaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    GetWorkspaceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetWorkspaceResponse.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
+    GetWorkspaceResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "role"))
+    GetWorkspaceResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    GetWorkspaceResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetWorkspaceResponse.struct_class = Types::GetWorkspaceResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -509,100 +605,116 @@ module Aws::IoTTwinMaker
     LambdaFunction.struct_class = Types::LambdaFunction
 
     ListComponentTypesFilter.add_member(:extends_from, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "extendsFrom"))
-    ListComponentTypesFilter.add_member(:is_abstract, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAbstract"))
     ListComponentTypesFilter.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    ListComponentTypesFilter.add_member(:is_abstract, Shapes::ShapeRef.new(shape: Boolean, location_name: "isAbstract"))
     ListComponentTypesFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ListComponentTypesFilter.add_member_subclass(:extends_from, Types::ListComponentTypesFilter::ExtendsFrom)
-    ListComponentTypesFilter.add_member_subclass(:is_abstract, Types::ListComponentTypesFilter::IsAbstract)
     ListComponentTypesFilter.add_member_subclass(:namespace, Types::ListComponentTypesFilter::Namespace)
+    ListComponentTypesFilter.add_member_subclass(:is_abstract, Types::ListComponentTypesFilter::IsAbstract)
     ListComponentTypesFilter.add_member_subclass(:unknown, Types::ListComponentTypesFilter::Unknown)
     ListComponentTypesFilter.struct_class = Types::ListComponentTypesFilter
 
     ListComponentTypesFilters.member = Shapes::ShapeRef.new(shape: ListComponentTypesFilter)
 
-    ListComponentTypesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListComponentTypesFilters, location_name: "filters"))
-    ListComponentTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListComponentTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListComponentTypesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    ListComponentTypesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListComponentTypesFilters, location_name: "filters"))
+    ListComponentTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComponentTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListComponentTypesRequest.struct_class = Types::ListComponentTypesRequest
 
-    ListComponentTypesResponse.add_member(:component_type_summaries, Shapes::ShapeRef.new(shape: ComponentTypeSummaries, required: true, location_name: "componentTypeSummaries"))
-    ListComponentTypesResponse.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListComponentTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListComponentTypesResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    ListComponentTypesResponse.add_member(:component_type_summaries, Shapes::ShapeRef.new(shape: ComponentTypeSummaries, required: true, location_name: "componentTypeSummaries"))
+    ListComponentTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComponentTypesResponse.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListComponentTypesResponse.struct_class = Types::ListComponentTypesResponse
 
+    ListEntitiesFilter.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     ListEntitiesFilter.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     ListEntitiesFilter.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
-    ListEntitiesFilter.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     ListEntitiesFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListEntitiesFilter.add_member_subclass(:parent_entity_id, Types::ListEntitiesFilter::ParentEntityId)
     ListEntitiesFilter.add_member_subclass(:component_type_id, Types::ListEntitiesFilter::ComponentTypeId)
     ListEntitiesFilter.add_member_subclass(:external_id, Types::ListEntitiesFilter::ExternalId)
-    ListEntitiesFilter.add_member_subclass(:parent_entity_id, Types::ListEntitiesFilter::ParentEntityId)
     ListEntitiesFilter.add_member_subclass(:unknown, Types::ListEntitiesFilter::Unknown)
     ListEntitiesFilter.struct_class = Types::ListEntitiesFilter
 
     ListEntitiesFilters.member = Shapes::ShapeRef.new(shape: ListEntitiesFilter)
 
+    ListEntitiesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     ListEntitiesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListEntitiesFilters, location_name: "filters"))
     ListEntitiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListEntitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListEntitiesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     ListEntitiesRequest.struct_class = Types::ListEntitiesRequest
 
     ListEntitiesResponse.add_member(:entity_summaries, Shapes::ShapeRef.new(shape: EntitySummaries, location_name: "entitySummaries"))
     ListEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListEntitiesResponse.struct_class = Types::ListEntitiesResponse
 
+    ListScenesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     ListScenesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListScenesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListScenesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     ListScenesRequest.struct_class = Types::ListScenesRequest
 
-    ListScenesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListScenesResponse.add_member(:scene_summaries, Shapes::ShapeRef.new(shape: SceneSummaries, location_name: "sceneSummaries"))
+    ListScenesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListScenesResponse.struct_class = Types::ListScenesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "resourceARN"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "resourceARN"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
-    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListWorkspacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkspacesRequest.struct_class = Types::ListWorkspacesRequest
 
-    ListWorkspacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkspacesResponse.add_member(:workspace_summaries, Shapes::ShapeRef.new(shape: WorkspaceSummaries, location_name: "workspaceSummaries"))
+    ListWorkspacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkspacesResponse.struct_class = Types::ListWorkspacesResponse
 
-    ParentEntityUpdateRequest.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
+    OrderBy.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "order"))
+    OrderBy.add_member(:property_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "propertyName"))
+    OrderBy.struct_class = Types::OrderBy
+
+    OrderByList.member = Shapes::ShapeRef.new(shape: OrderBy)
+
     ParentEntityUpdateRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: ParentEntityUpdateType, required: true, location_name: "updateType"))
+    ParentEntityUpdateRequest.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     ParentEntityUpdateRequest.struct_class = Types::ParentEntityUpdateRequest
 
-    PropertyDefinitionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
+    PricingBundles.member = Shapes::ShapeRef.new(shape: BundleName)
+
+    PricingPlan.add_member(:billable_entity_count, Shapes::ShapeRef.new(shape: Long, location_name: "billableEntityCount"))
+    PricingPlan.add_member(:bundle_information, Shapes::ShapeRef.new(shape: BundleInformation, location_name: "bundleInformation"))
+    PricingPlan.add_member(:effective_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "effectiveDateTime"))
+    PricingPlan.add_member(:pricing_mode, Shapes::ShapeRef.new(shape: PricingMode, required: true, location_name: "pricingMode"))
+    PricingPlan.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    PricingPlan.add_member(:update_reason, Shapes::ShapeRef.new(shape: UpdateReason, required: true, location_name: "updateReason"))
+    PricingPlan.struct_class = Types::PricingPlan
+
     PropertyDefinitionRequest.add_member(:data_type, Shapes::ShapeRef.new(shape: DataType, location_name: "dataType"))
-    PropertyDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "defaultValue"))
-    PropertyDefinitionRequest.add_member(:is_external_id, Shapes::ShapeRef.new(shape: Boolean, location_name: "isExternalId"))
     PropertyDefinitionRequest.add_member(:is_required_in_entity, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRequiredInEntity"))
+    PropertyDefinitionRequest.add_member(:is_external_id, Shapes::ShapeRef.new(shape: Boolean, location_name: "isExternalId"))
     PropertyDefinitionRequest.add_member(:is_stored_externally, Shapes::ShapeRef.new(shape: Boolean, location_name: "isStoredExternally"))
     PropertyDefinitionRequest.add_member(:is_time_series, Shapes::ShapeRef.new(shape: Boolean, location_name: "isTimeSeries"))
+    PropertyDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "defaultValue"))
+    PropertyDefinitionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
     PropertyDefinitionRequest.struct_class = Types::PropertyDefinitionRequest
 
-    PropertyDefinitionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
     PropertyDefinitionResponse.add_member(:data_type, Shapes::ShapeRef.new(shape: DataType, required: true, location_name: "dataType"))
-    PropertyDefinitionResponse.add_member(:default_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "defaultValue"))
-    PropertyDefinitionResponse.add_member(:is_external_id, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isExternalId"))
-    PropertyDefinitionResponse.add_member(:is_final, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isFinal"))
-    PropertyDefinitionResponse.add_member(:is_imported, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isImported"))
-    PropertyDefinitionResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isInherited"))
-    PropertyDefinitionResponse.add_member(:is_required_in_entity, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isRequiredInEntity"))
-    PropertyDefinitionResponse.add_member(:is_stored_externally, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isStoredExternally"))
     PropertyDefinitionResponse.add_member(:is_time_series, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isTimeSeries"))
+    PropertyDefinitionResponse.add_member(:is_required_in_entity, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isRequiredInEntity"))
+    PropertyDefinitionResponse.add_member(:is_external_id, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isExternalId"))
+    PropertyDefinitionResponse.add_member(:is_stored_externally, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isStoredExternally"))
+    PropertyDefinitionResponse.add_member(:is_imported, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isImported"))
+    PropertyDefinitionResponse.add_member(:is_final, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isFinal"))
+    PropertyDefinitionResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isInherited"))
+    PropertyDefinitionResponse.add_member(:default_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "defaultValue"))
+    PropertyDefinitionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
     PropertyDefinitionResponse.struct_class = Types::PropertyDefinitionResponse
 
     PropertyDefinitionsRequest.key = Shapes::ShapeRef.new(shape: Name)
@@ -611,12 +723,27 @@ module Aws::IoTTwinMaker
     PropertyDefinitionsResponse.key = Shapes::ShapeRef.new(shape: Name)
     PropertyDefinitionsResponse.value = Shapes::ShapeRef.new(shape: PropertyDefinitionResponse)
 
-    PropertyFilter.add_member(:operator, Shapes::ShapeRef.new(shape: String, location_name: "operator"))
     PropertyFilter.add_member(:property_name, Shapes::ShapeRef.new(shape: String, location_name: "propertyName"))
+    PropertyFilter.add_member(:operator, Shapes::ShapeRef.new(shape: String, location_name: "operator"))
     PropertyFilter.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, location_name: "value"))
     PropertyFilter.struct_class = Types::PropertyFilter
 
     PropertyFilters.member = Shapes::ShapeRef.new(shape: PropertyFilter)
+
+    PropertyGroupRequest.add_member(:group_type, Shapes::ShapeRef.new(shape: GroupType, location_name: "groupType"))
+    PropertyGroupRequest.add_member(:property_names, Shapes::ShapeRef.new(shape: PropertyNames, location_name: "propertyNames"))
+    PropertyGroupRequest.struct_class = Types::PropertyGroupRequest
+
+    PropertyGroupResponse.add_member(:group_type, Shapes::ShapeRef.new(shape: GroupType, required: true, location_name: "groupType"))
+    PropertyGroupResponse.add_member(:property_names, Shapes::ShapeRef.new(shape: PropertyNames, required: true, location_name: "propertyNames"))
+    PropertyGroupResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isInherited"))
+    PropertyGroupResponse.struct_class = Types::PropertyGroupResponse
+
+    PropertyGroupsRequest.key = Shapes::ShapeRef.new(shape: Name)
+    PropertyGroupsRequest.value = Shapes::ShapeRef.new(shape: PropertyGroupRequest)
+
+    PropertyGroupsResponse.key = Shapes::ShapeRef.new(shape: Name)
+    PropertyGroupsResponse.value = Shapes::ShapeRef.new(shape: PropertyGroupResponse)
 
     PropertyLatestValue.add_member(:property_reference, Shapes::ShapeRef.new(shape: EntityPropertyReference, required: true, location_name: "propertyReference"))
     PropertyLatestValue.add_member(:property_value, Shapes::ShapeRef.new(shape: DataValue, location_name: "propertyValue"))
@@ -625,9 +752,11 @@ module Aws::IoTTwinMaker
     PropertyLatestValueMap.key = Shapes::ShapeRef.new(shape: Name)
     PropertyLatestValueMap.value = Shapes::ShapeRef.new(shape: PropertyLatestValue)
 
+    PropertyNames.member = Shapes::ShapeRef.new(shape: Name)
+
     PropertyRequest.add_member(:definition, Shapes::ShapeRef.new(shape: PropertyDefinitionRequest, location_name: "definition"))
-    PropertyRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: PropertyUpdateType, location_name: "updateType"))
     PropertyRequest.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, location_name: "value"))
+    PropertyRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: PropertyUpdateType, location_name: "updateType"))
     PropertyRequest.struct_class = Types::PropertyRequest
 
     PropertyRequests.key = Shapes::ShapeRef.new(shape: Name)
@@ -640,9 +769,12 @@ module Aws::IoTTwinMaker
     PropertyResponses.key = Shapes::ShapeRef.new(shape: Name)
     PropertyResponses.value = Shapes::ShapeRef.new(shape: PropertyResponse)
 
-    PropertyValue.add_member(:time, Shapes::ShapeRef.new(shape: Time, location_name: "time"))
+    PropertyTableValue.key = Shapes::ShapeRef.new(shape: Name)
+    PropertyTableValue.value = Shapes::ShapeRef.new(shape: DataValue)
+
     PropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "timestamp", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use time instead."}))
     PropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, required: true, location_name: "value"))
+    PropertyValue.add_member(:time, Shapes::ShapeRef.new(shape: Time, location_name: "time"))
     PropertyValue.struct_class = Types::PropertyValue
 
     PropertyValueEntry.add_member(:entity_property_reference, Shapes::ShapeRef.new(shape: EntityPropertyReference, required: true, location_name: "entityPropertyReference"))
@@ -657,12 +789,15 @@ module Aws::IoTTwinMaker
 
     PropertyValues.member = Shapes::ShapeRef.new(shape: PropertyValue)
 
-    Relationship.add_member(:relationship_type, Shapes::ShapeRef.new(shape: String, location_name: "relationshipType"))
+    QueryTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    QueryTimeoutException.struct_class = Types::QueryTimeoutException
+
     Relationship.add_member(:target_component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "targetComponentTypeId"))
+    Relationship.add_member(:relationship_type, Shapes::ShapeRef.new(shape: String, location_name: "relationshipType"))
     Relationship.struct_class = Types::Relationship
 
-    RelationshipValue.add_member(:target_component_name, Shapes::ShapeRef.new(shape: Name, location_name: "targetComponentName"))
     RelationshipValue.add_member(:target_entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "targetEntityId"))
+    RelationshipValue.add_member(:target_component_name, Shapes::ShapeRef.new(shape: Name, location_name: "targetComponentName"))
     RelationshipValue.struct_class = Types::RelationshipValue
 
     RequiredProperties.member = Shapes::ShapeRef.new(shape: Name)
@@ -670,16 +805,23 @@ module Aws::IoTTwinMaker
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    Row.add_member(:row_data, Shapes::ShapeRef.new(shape: RowData, location_name: "rowData"))
+    Row.struct_class = Types::Row
+
+    RowData.member = Shapes::ShapeRef.new(shape: QueryResultValue)
+
+    Rows.member = Shapes::ShapeRef.new(shape: Row)
+
     SceneCapabilities.member = Shapes::ShapeRef.new(shape: SceneCapability)
 
     SceneSummaries.member = Shapes::ShapeRef.new(shape: SceneSummary)
 
-    SceneSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
-    SceneSummary.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "contentLocation"))
-    SceneSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    SceneSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     SceneSummary.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
+    SceneSummary.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "contentLocation"))
+    SceneSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    SceneSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     SceneSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    SceneSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     SceneSummary.struct_class = Types::SceneSummary
 
     SelectedPropertyList.member = Shapes::ShapeRef.new(shape: String)
@@ -687,9 +829,17 @@ module Aws::IoTTwinMaker
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    Status.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
     Status.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
+    Status.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
     Status.struct_class = Types::Status
+
+    TabularConditions.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderByList, location_name: "orderBy"))
+    TabularConditions.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
+    TabularConditions.struct_class = Types::TabularConditions
+
+    TabularPropertyValue.member = Shapes::ShapeRef.new(shape: PropertyTableValue)
+
+    TabularPropertyValues.member = Shapes::ShapeRef.new(shape: TabularPropertyValue)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -714,46 +864,55 @@ module Aws::IoTTwinMaker
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateComponentTypeRequest.add_member(:is_singleton, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSingleton"))
     UpdateComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location: "uri", location_name: "componentTypeId"))
     UpdateComponentTypeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateComponentTypeRequest.add_member(:property_definitions, Shapes::ShapeRef.new(shape: PropertyDefinitionsRequest, location_name: "propertyDefinitions"))
     UpdateComponentTypeRequest.add_member(:extends_from, Shapes::ShapeRef.new(shape: ExtendsFrom, location_name: "extendsFrom"))
     UpdateComponentTypeRequest.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsRequest, location_name: "functions"))
-    UpdateComponentTypeRequest.add_member(:is_singleton, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSingleton"))
-    UpdateComponentTypeRequest.add_member(:property_definitions, Shapes::ShapeRef.new(shape: PropertyDefinitionsRequest, location_name: "propertyDefinitions"))
-    UpdateComponentTypeRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateComponentTypeRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsRequest, location_name: "propertyGroups"))
     UpdateComponentTypeRequest.struct_class = Types::UpdateComponentTypeRequest
 
+    UpdateComponentTypeResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
     UpdateComponentTypeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     UpdateComponentTypeResponse.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location_name: "componentTypeId"))
     UpdateComponentTypeResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
-    UpdateComponentTypeResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
     UpdateComponentTypeResponse.struct_class = Types::UpdateComponentTypeResponse
 
-    UpdateEntityRequest.add_member(:component_updates, Shapes::ShapeRef.new(shape: ComponentUpdatesMapRequest, location_name: "componentUpdates"))
-    UpdateEntityRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     UpdateEntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityId"))
     UpdateEntityRequest.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "entityName"))
+    UpdateEntityRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateEntityRequest.add_member(:component_updates, Shapes::ShapeRef.new(shape: ComponentUpdatesMapRequest, location_name: "componentUpdates"))
     UpdateEntityRequest.add_member(:parent_entity_update, Shapes::ShapeRef.new(shape: ParentEntityUpdateRequest, location_name: "parentEntityUpdate"))
-    UpdateEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     UpdateEntityRequest.struct_class = Types::UpdateEntityRequest
 
-    UpdateEntityResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     UpdateEntityResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    UpdateEntityResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     UpdateEntityResponse.struct_class = Types::UpdateEntityResponse
 
-    UpdateSceneRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
+    UpdatePricingPlanRequest.add_member(:pricing_mode, Shapes::ShapeRef.new(shape: PricingMode, required: true, location_name: "pricingMode"))
+    UpdatePricingPlanRequest.add_member(:bundle_names, Shapes::ShapeRef.new(shape: PricingBundles, location_name: "bundleNames"))
+    UpdatePricingPlanRequest.struct_class = Types::UpdatePricingPlanRequest
+
+    UpdatePricingPlanResponse.add_member(:current_pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "currentPricingPlan"))
+    UpdatePricingPlanResponse.add_member(:pending_pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "pendingPricingPlan"))
+    UpdatePricingPlanResponse.struct_class = Types::UpdatePricingPlanResponse
+
+    UpdateSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "sceneId"))
     UpdateSceneRequest.add_member(:content_location, Shapes::ShapeRef.new(shape: S3Url, location_name: "contentLocation"))
     UpdateSceneRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "sceneId"))
-    UpdateSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateSceneRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: SceneCapabilities, location_name: "capabilities"))
     UpdateSceneRequest.struct_class = Types::UpdateSceneRequest
 
     UpdateSceneResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     UpdateSceneResponse.struct_class = Types::UpdateSceneResponse
 
+    UpdateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateWorkspaceRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "role"))
-    UpdateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceRequest.struct_class = Types::UpdateWorkspaceRequest
 
     UpdateWorkspaceResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
@@ -766,11 +925,11 @@ module Aws::IoTTwinMaker
 
     WorkspaceSummaries.member = Shapes::ShapeRef.new(shape: WorkspaceSummary)
 
-    WorkspaceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
-    WorkspaceSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
-    WorkspaceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    WorkspaceSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     WorkspaceSummary.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
+    WorkspaceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    WorkspaceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    WorkspaceSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    WorkspaceSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     WorkspaceSummary.struct_class = Types::WorkspaceSummary
 
 
@@ -938,6 +1097,29 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:execute_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExecuteQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/queries/execution"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ExecuteQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExecuteQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: QueryTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_component_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetComponentType"
         o.http_method = "GET"
@@ -951,6 +1133,7 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_entity, Seahorse::Model::Operation.new.tap do |o|
@@ -969,6 +1152,21 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:get_pricing_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPricingPlan"
+        o.http_method = "GET"
+        o.http_request_uri = "/pricingplan"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetPricingPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPricingPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_property_value, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPropertyValue"
         o.http_method = "POST"
@@ -985,6 +1183,12 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_property_value_history, Seahorse::Model::Operation.new.tap do |o|
@@ -1200,6 +1404,21 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:update_pricing_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePricingPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/pricingplan"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdatePricingPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePricingPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_scene, Seahorse::Model::Operation.new.tap do |o|

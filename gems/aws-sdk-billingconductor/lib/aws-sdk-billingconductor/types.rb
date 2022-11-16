@@ -697,13 +697,14 @@ module Aws::BillingConductor
     #         client_token: "ClientToken",
     #         name: "PricingRuleName", # required
     #         description: "PricingRuleDescription",
-    #         scope: "GLOBAL", # required, accepts GLOBAL, SERVICE
+    #         scope: "GLOBAL", # required, accepts GLOBAL, SERVICE, BILLING_ENTITY
     #         type: "MARKUP", # required, accepts MARKUP, DISCOUNT
     #         modifier_percentage: 1.0, # required
     #         service: "Service",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         billing_entity: "BillingEntity",
     #       }
     #
     # @!attribute [rw] client_token
@@ -746,6 +747,12 @@ module Aws::BillingConductor
     #   pricing rule.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] billing_entity
+    #   The seller of services provided by Amazon Web Services, their
+    #   affiliates, or third-party providers selling services via Amazon Web
+    #   Services Marketplace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreatePricingRuleInput AWS API Documentation
     #
     class CreatePricingRuleInput < Struct.new(
@@ -756,7 +763,8 @@ module Aws::BillingConductor
       :type,
       :modifier_percentage,
       :service,
-      :tags)
+      :tags,
+      :billing_entity)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2387,6 +2395,12 @@ module Aws::BillingConductor
     #   The most recent time when the pricing rule was modified.
     #   @return [Integer]
     #
+    # @!attribute [rw] billing_entity
+    #   The seller of services provided by Amazon Web Services, their
+    #   affiliates, or third-party providers selling services via Amazon Web
+    #   Services Marketplace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PricingRuleListElement AWS API Documentation
     #
     class PricingRuleListElement < Struct.new(
@@ -2399,7 +2413,8 @@ module Aws::BillingConductor
       :service,
       :associated_pricing_plan_count,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :billing_entity)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -2974,6 +2989,12 @@ module Aws::BillingConductor
     #   The most recent time the pricing rule was modified.
     #   @return [Integer]
     #
+    # @!attribute [rw] billing_entity
+    #   The seller of services provided by Amazon Web Services, their
+    #   affiliates, or third-party providers selling services via Amazon Web
+    #   Services Marketplace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRuleOutput AWS API Documentation
     #
     class UpdatePricingRuleOutput < Struct.new(
@@ -2985,7 +3006,8 @@ module Aws::BillingConductor
       :modifier_percentage,
       :service,
       :associated_pricing_plan_count,
-      :last_modified_time)
+      :last_modified_time,
+      :billing_entity)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

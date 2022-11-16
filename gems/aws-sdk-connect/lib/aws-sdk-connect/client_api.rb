@@ -35,6 +35,7 @@ module Aws::Connect
     AgentStatusTypes = Shapes::ListShape.new(name: 'AgentStatusTypes')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
+    AllowedMonitorCapabilities = Shapes::ListShape.new(name: 'AllowedMonitorCapabilities')
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
     ApproximateTotalCount = Shapes::IntegerShape.new(name: 'ApproximateTotalCount')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
@@ -403,6 +404,9 @@ module Aws::Connect
     MediaConcurrency = Shapes::StructureShape.new(name: 'MediaConcurrency')
     Message = Shapes::StringShape.new(name: 'Message')
     MinutesLimit60 = Shapes::IntegerShape.new(name: 'MinutesLimit60')
+    MonitorCapability = Shapes::StringShape.new(name: 'MonitorCapability')
+    MonitorContactRequest = Shapes::StructureShape.new(name: 'MonitorContactRequest')
+    MonitorContactResponse = Shapes::StructureShape.new(name: 'MonitorContactResponse')
     Name = Shapes::StringShape.new(name: 'Name')
     Name128 = Shapes::StringShape.new(name: 'Name128')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -752,6 +756,8 @@ module Aws::Connect
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
 
     AgentStatusTypes.member = Shapes::ShapeRef.new(shape: AgentStatusType)
+
+    AllowedMonitorCapabilities.member = Shapes::ShapeRef.new(shape: MonitorCapability)
 
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAnswerMachineDetection"))
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, Shapes::ShapeRef.new(shape: Boolean, location_name: "AwaitAnswerMachinePrompt"))
@@ -2038,6 +2044,17 @@ module Aws::Connect
     MediaConcurrency.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
     MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, required: true, location_name: "Concurrency"))
     MediaConcurrency.struct_class = Types::MediaConcurrency
+
+    MonitorContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    MonitorContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    MonitorContactRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: AgentResourceId, required: true, location_name: "UserId"))
+    MonitorContactRequest.add_member(:allowed_monitor_capabilities, Shapes::ShapeRef.new(shape: AllowedMonitorCapabilities, location_name: "AllowedMonitorCapabilities"))
+    MonitorContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    MonitorContactRequest.struct_class = Types::MonitorContactRequest
+
+    MonitorContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    MonitorContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactArn"))
+    MonitorContactResponse.struct_class = Types::MonitorContactResponse
 
     NumberReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     NumberReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
@@ -4609,6 +4626,21 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:monitor_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "MonitorContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/monitor"
+        o.input = Shapes::ShapeRef.new(shape: MonitorContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: MonitorContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:put_user_status, Seahorse::Model::Operation.new.tap do |o|

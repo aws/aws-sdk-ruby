@@ -82,6 +82,8 @@ module Aws::SSMIncidents
     IncidentTitle = Shapes::StringShape.new(name: 'IncidentTitle')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerList = Shapes::ListShape.new(name: 'IntegerList')
+    Integration = Shapes::UnionShape.new(name: 'Integration')
+    Integrations = Shapes::ListShape.new(name: 'Integrations')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ItemIdentifier = Shapes::StructureShape.new(name: 'ItemIdentifier')
     ItemType = Shapes::StringShape.new(name: 'ItemType')
@@ -103,6 +105,14 @@ module Aws::SSMIncidents
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotificationTargetItem = Shapes::UnionShape.new(name: 'NotificationTargetItem')
     NotificationTargetSet = Shapes::ListShape.new(name: 'NotificationTargetSet')
+    PagerDutyConfiguration = Shapes::StructureShape.new(name: 'PagerDutyConfiguration')
+    PagerDutyConfigurationNameString = Shapes::StringShape.new(name: 'PagerDutyConfigurationNameString')
+    PagerDutyConfigurationSecretIdString = Shapes::StringShape.new(name: 'PagerDutyConfigurationSecretIdString')
+    PagerDutyIncidentConfiguration = Shapes::StructureShape.new(name: 'PagerDutyIncidentConfiguration')
+    PagerDutyIncidentConfigurationServiceIdString = Shapes::StringShape.new(name: 'PagerDutyIncidentConfigurationServiceIdString')
+    PagerDutyIncidentDetail = Shapes::StructureShape.new(name: 'PagerDutyIncidentDetail')
+    PagerDutyIncidentDetailIdString = Shapes::StringShape.new(name: 'PagerDutyIncidentDetailIdString')
+    PagerDutyIncidentDetailSecretIdString = Shapes::StringShape.new(name: 'PagerDutyIncidentDetailSecretIdString')
     Policy = Shapes::StringShape.new(name: 'Policy')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
@@ -255,6 +265,7 @@ module Aws::SSMIncidents
     CreateResponsePlanInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: "displayName"))
     CreateResponsePlanInput.add_member(:engagements, Shapes::ShapeRef.new(shape: EngagementSet, location_name: "engagements"))
     CreateResponsePlanInput.add_member(:incident_template, Shapes::ShapeRef.new(shape: IncidentTemplate, required: true, location_name: "incidentTemplate"))
+    CreateResponsePlanInput.add_member(:integrations, Shapes::ShapeRef.new(shape: Integrations, location_name: "integrations"))
     CreateResponsePlanInput.add_member(:name, Shapes::ShapeRef.new(shape: ResponsePlanName, required: true, location_name: "name"))
     CreateResponsePlanInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateResponsePlanInput.struct_class = Types::CreateResponsePlanInput
@@ -373,6 +384,7 @@ module Aws::SSMIncidents
     GetResponsePlanOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResponsePlanDisplayName, location_name: "displayName"))
     GetResponsePlanOutput.add_member(:engagements, Shapes::ShapeRef.new(shape: EngagementSet, location_name: "engagements"))
     GetResponsePlanOutput.add_member(:incident_template, Shapes::ShapeRef.new(shape: IncidentTemplate, required: true, location_name: "incidentTemplate"))
+    GetResponsePlanOutput.add_member(:integrations, Shapes::ShapeRef.new(shape: Integrations, location_name: "integrations"))
     GetResponsePlanOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResponsePlanName, required: true, location_name: "name"))
     GetResponsePlanOutput.struct_class = Types::GetResponsePlanOutput
 
@@ -426,6 +438,14 @@ module Aws::SSMIncidents
 
     IntegerList.member = Shapes::ShapeRef.new(shape: Integer)
 
+    Integration.add_member(:pager_duty_configuration, Shapes::ShapeRef.new(shape: PagerDutyConfiguration, location_name: "pagerDutyConfiguration"))
+    Integration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Integration.add_member_subclass(:pager_duty_configuration, Types::Integration::PagerDutyConfiguration)
+    Integration.add_member_subclass(:unknown, Types::Integration::Unknown)
+    Integration.struct_class = Types::Integration
+
+    Integrations.member = Shapes::ShapeRef.new(shape: Integration)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -435,10 +455,12 @@ module Aws::SSMIncidents
 
     ItemValue.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     ItemValue.add_member(:metric_definition, Shapes::ShapeRef.new(shape: MetricDefinition, location_name: "metricDefinition"))
+    ItemValue.add_member(:pager_duty_incident_detail, Shapes::ShapeRef.new(shape: PagerDutyIncidentDetail, location_name: "pagerDutyIncidentDetail"))
     ItemValue.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
     ItemValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ItemValue.add_member_subclass(:arn, Types::ItemValue::Arn)
     ItemValue.add_member_subclass(:metric_definition, Types::ItemValue::MetricDefinition)
+    ItemValue.add_member_subclass(:pager_duty_incident_detail, Types::ItemValue::PagerDutyIncidentDetail)
     ItemValue.add_member_subclass(:url, Types::ItemValue::Url)
     ItemValue.add_member_subclass(:unknown, Types::ItemValue::Unknown)
     ItemValue.struct_class = Types::ItemValue
@@ -502,6 +524,19 @@ module Aws::SSMIncidents
     NotificationTargetItem.struct_class = Types::NotificationTargetItem
 
     NotificationTargetSet.member = Shapes::ShapeRef.new(shape: NotificationTargetItem)
+
+    PagerDutyConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: PagerDutyConfigurationNameString, required: true, location_name: "name"))
+    PagerDutyConfiguration.add_member(:pager_duty_incident_configuration, Shapes::ShapeRef.new(shape: PagerDutyIncidentConfiguration, required: true, location_name: "pagerDutyIncidentConfiguration"))
+    PagerDutyConfiguration.add_member(:secret_id, Shapes::ShapeRef.new(shape: PagerDutyConfigurationSecretIdString, required: true, location_name: "secretId"))
+    PagerDutyConfiguration.struct_class = Types::PagerDutyConfiguration
+
+    PagerDutyIncidentConfiguration.add_member(:service_id, Shapes::ShapeRef.new(shape: PagerDutyIncidentConfigurationServiceIdString, required: true, location_name: "serviceId"))
+    PagerDutyIncidentConfiguration.struct_class = Types::PagerDutyIncidentConfiguration
+
+    PagerDutyIncidentDetail.add_member(:auto_resolve, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoResolve"))
+    PagerDutyIncidentDetail.add_member(:id, Shapes::ShapeRef.new(shape: PagerDutyIncidentDetailIdString, required: true, location_name: "id"))
+    PagerDutyIncidentDetail.add_member(:secret_id, Shapes::ShapeRef.new(shape: PagerDutyIncidentDetailSecretIdString, location_name: "secretId"))
+    PagerDutyIncidentDetail.struct_class = Types::PagerDutyIncidentDetail
 
     PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policy"))
     PutResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
@@ -699,6 +734,7 @@ module Aws::SSMIncidents
     UpdateResponsePlanInput.add_member(:incident_template_summary, Shapes::ShapeRef.new(shape: IncidentSummary, location_name: "incidentTemplateSummary"))
     UpdateResponsePlanInput.add_member(:incident_template_tags, Shapes::ShapeRef.new(shape: TagMapUpdate, location_name: "incidentTemplateTags"))
     UpdateResponsePlanInput.add_member(:incident_template_title, Shapes::ShapeRef.new(shape: IncidentTitle, location_name: "incidentTemplateTitle"))
+    UpdateResponsePlanInput.add_member(:integrations, Shapes::ShapeRef.new(shape: Integrations, location_name: "integrations"))
     UpdateResponsePlanInput.struct_class = Types::UpdateResponsePlanInput
 
     UpdateResponsePlanOutput.struct_class = Types::UpdateResponsePlanOutput

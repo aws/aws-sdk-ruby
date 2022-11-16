@@ -25,6 +25,9 @@ module Aws::PersonalizeEvents
     #         sent_at: Time.now, # required
     #         recommendation_id: "RecommendationId",
     #         impression: ["ItemId"],
+    #         metric_attribution: {
+    #           event_attribution_source: "EventAttributionSource", # required
+    #         },
     #       }
     #
     # @!attribute [rw] event_id
@@ -73,13 +76,43 @@ module Aws::PersonalizeEvents
     #   @return [Time]
     #
     # @!attribute [rw] recommendation_id
-    #   The ID of the recommendation.
+    #   The ID of the list of recommendations that contains the item the
+    #   user interacted with. Provide a `recommendationId` to have Amazon
+    #   Personalize implicitly record the recommendations you show your user
+    #   as impressions data. Or provide a `recommendationId` if you use a
+    #   metric attribution to measure the impact of recommendations.
+    #
+    #   For more information on recording impressions data, see [Recording
+    #   impressions data][1]. For more information on creating a metric
+    #   attribution see [Measuring impact of recommendations][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
     #   @return [String]
     #
     # @!attribute [rw] impression
     #   A list of item IDs that represents the sequence of items you have
     #   shown the user. For example, `["itemId1", "itemId2", "itemId3"]`.
+    #   Provide a list of items to manually record impressions data for an
+    #   event. For more information on recording impressions data, see
+    #   [Recording impressions data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] metric_attribution
+    #   Contains information about the metric attribution associated with an
+    #   event. For more information about metric attributions, see
+    #   [Measuring impact of recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
+    #   @return [Types::MetricAttribution]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/Event AWS API Documentation
     #
@@ -91,8 +124,9 @@ module Aws::PersonalizeEvents
       :properties,
       :sent_at,
       :recommendation_id,
-      :impression)
-      SENSITIVE = []
+      :impression,
+      :metric_attribution)
+      SENSITIVE = [:item_id, :properties]
       include Aws::Structure
     end
 
@@ -147,6 +181,33 @@ module Aws::PersonalizeEvents
     class Item < Struct.new(
       :item_id,
       :properties)
+      SENSITIVE = [:properties]
+      include Aws::Structure
+    end
+
+    # Contains information about a metric attribution associated with an
+    # event. For more information about metric attributions, see [Measuring
+    # impact of recommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
+    #
+    # @note When making an API call, you may pass MetricAttribution
+    #   data as a hash:
+    #
+    #       {
+    #         event_attribution_source: "EventAttributionSource", # required
+    #       }
+    #
+    # @!attribute [rw] event_attribution_source
+    #   The source of the event, such as a third party.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/MetricAttribution AWS API Documentation
+    #
+    class MetricAttribution < Struct.new(
+      :event_attribution_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -168,6 +229,9 @@ module Aws::PersonalizeEvents
     #             sent_at: Time.now, # required
     #             recommendation_id: "RecommendationId",
     #             impression: ["ItemId"],
+    #             metric_attribution: {
+    #               event_attribution_source: "EventAttributionSource", # required
+    #             },
     #           },
     #         ],
     #       }
@@ -208,7 +272,7 @@ module Aws::PersonalizeEvents
       :user_id,
       :session_id,
       :event_list)
-      SENSITIVE = []
+      SENSITIVE = [:user_id]
       include Aws::Structure
     end
 
@@ -338,7 +402,7 @@ module Aws::PersonalizeEvents
     class User < Struct.new(
       :user_id,
       :properties)
-      SENSITIVE = []
+      SENSITIVE = [:properties]
       include Aws::Structure
     end
 

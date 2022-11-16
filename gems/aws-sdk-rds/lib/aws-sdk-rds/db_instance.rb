@@ -733,6 +733,14 @@ module Aws::RDS
       data[:storage_throughput]
     end
 
+    # The Oracle system ID (Oracle SID) for a container database (CDB). The
+    # Oracle SID is also the name of the CDB. This setting is valid for RDS
+    # Custom only.
+    # @return [String]
+    def db_system_id
+      data[:db_system_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

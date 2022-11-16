@@ -38,6 +38,8 @@ module Aws::XRay
     CreateSamplingRuleResult = Shapes::StructureShape.new(name: 'CreateSamplingRuleResult')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteGroupResult = Shapes::StructureShape.new(name: 'DeleteGroupResult')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResult = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResult')
     DeleteSamplingRuleRequest = Shapes::StructureShape.new(name: 'DeleteSamplingRuleRequest')
     DeleteSamplingRuleResult = Shapes::StructureShape.new(name: 'DeleteSamplingRuleResult')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -129,16 +131,28 @@ module Aws::XRay
     InsightsConfiguration = Shapes::StructureShape.new(name: 'InsightsConfiguration')
     InstanceIdDetail = Shapes::StructureShape.new(name: 'InstanceIdDetail')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InvalidPolicyRevisionIdException = Shapes::StructureShape.new(name: 'InvalidPolicyRevisionIdException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    ListResourcePoliciesRequest = Shapes::StructureShape.new(name: 'ListResourcePoliciesRequest')
+    ListResourcePoliciesResult = Shapes::StructureShape.new(name: 'ListResourcePoliciesResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LockoutPreventionException = Shapes::StructureShape.new(name: 'LockoutPreventionException')
+    MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
+    PolicyCountLimitExceededException = Shapes::StructureShape.new(name: 'PolicyCountLimitExceededException')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PolicyName = Shapes::StringShape.new(name: 'PolicyName')
+    PolicyRevisionId = Shapes::StringShape.new(name: 'PolicyRevisionId')
+    PolicySizeLimitExceededException = Shapes::StructureShape.new(name: 'PolicySizeLimitExceededException')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     PutEncryptionConfigRequest = Shapes::StructureShape.new(name: 'PutEncryptionConfigRequest')
     PutEncryptionConfigResult = Shapes::StructureShape.new(name: 'PutEncryptionConfigResult')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResult = Shapes::StructureShape.new(name: 'PutResourcePolicyResult')
     PutTelemetryRecordsRequest = Shapes::StructureShape.new(name: 'PutTelemetryRecordsRequest')
     PutTelemetryRecordsResult = Shapes::StructureShape.new(name: 'PutTelemetryRecordsResult')
     PutTraceSegmentsRequest = Shapes::StructureShape.new(name: 'PutTraceSegmentsRequest')
@@ -149,6 +163,9 @@ module Aws::XRay
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceARNDetail = Shapes::StructureShape.new(name: 'ResourceARNDetail')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
+    ResourcePolicyList = Shapes::ListShape.new(name: 'ResourcePolicyList')
+    ResourcePolicyNextToken = Shapes::StringShape.new(name: 'ResourcePolicyNextToken')
     ResponseTimeRootCause = Shapes::StructureShape.new(name: 'ResponseTimeRootCause')
     ResponseTimeRootCauseEntity = Shapes::StructureShape.new(name: 'ResponseTimeRootCauseEntity')
     ResponseTimeRootCauseEntityPath = Shapes::ListShape.new(name: 'ResponseTimeRootCauseEntityPath')
@@ -296,6 +313,12 @@ module Aws::XRay
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
 
     DeleteGroupResult.struct_class = Types::DeleteGroupResult
+
+    DeleteResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
+    DeleteResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResult.struct_class = Types::DeleteResourcePolicyResult
 
     DeleteSamplingRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: String, location_name: "RuleName"))
     DeleteSamplingRuleRequest.add_member(:rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "RuleARN"))
@@ -616,8 +639,18 @@ module Aws::XRay
     InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     InstanceIdDetail.struct_class = Types::InstanceIdDetail
 
+    InvalidPolicyRevisionIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidPolicyRevisionIdException.struct_class = Types::InvalidPolicyRevisionIdException
+
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ListResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ResourcePolicyNextToken, location_name: "NextToken"))
+    ListResourcePoliciesRequest.struct_class = Types::ListResourcePoliciesRequest
+
+    ListResourcePoliciesResult.add_member(:resource_policies, Shapes::ShapeRef.new(shape: ResourcePolicyList, location_name: "ResourcePolicies"))
+    ListResourcePoliciesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ResourcePolicyNextToken, location_name: "NextToken"))
+    ListResourcePoliciesResult.struct_class = Types::ListResourcePoliciesResult
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -627,12 +660,33 @@ module Aws::XRay
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LockoutPreventionException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LockoutPreventionException.struct_class = Types::LockoutPreventionException
+
+    MalformedPolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    MalformedPolicyDocumentException.struct_class = Types::MalformedPolicyDocumentException
+
+    PolicyCountLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyCountLimitExceededException.struct_class = Types::PolicyCountLimitExceededException
+
+    PolicySizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicySizeLimitExceededException.struct_class = Types::PolicySizeLimitExceededException
+
     PutEncryptionConfigRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyId, location_name: "KeyId"))
     PutEncryptionConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     PutEncryptionConfigRequest.struct_class = Types::PutEncryptionConfigRequest
 
     PutEncryptionConfigResult.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     PutEncryptionConfigResult.struct_class = Types::PutEncryptionConfigResult
+
+    PutResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
+    PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "PolicyDocument"))
+    PutResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyRequest.add_member(:bypass_policy_lockout_check, Shapes::ShapeRef.new(shape: Boolean, location_name: "BypassPolicyLockoutCheck"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResult.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "ResourcePolicy"))
+    PutResourcePolicyResult.struct_class = Types::PutResourcePolicyResult
 
     PutTelemetryRecordsRequest.add_member(:telemetry_records, Shapes::ShapeRef.new(shape: TelemetryRecordList, required: true, location_name: "TelemetryRecords"))
     PutTelemetryRecordsRequest.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceId, location_name: "EC2InstanceId"))
@@ -659,6 +713,14 @@ module Aws::XRay
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourcePolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "PolicyName"))
+    ResourcePolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "PolicyDocument"))
+    ResourcePolicy.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    ResourcePolicy.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    ResourcePolicy.struct_class = Types::ResourcePolicy
+
+    ResourcePolicyList.member = Shapes::ShapeRef.new(shape: ResourcePolicy)
 
     ResponseTimeRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ResponseTimeRootCauseServices, location_name: "Services"))
     ResponseTimeRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
@@ -993,6 +1055,17 @@ module Aws::XRay
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteResourcePolicy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
       api.add_operation(:delete_sampling_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSamplingRule"
         o.http_method = "POST"
@@ -1190,6 +1263,21 @@ module Aws::XRay
         )
       end)
 
+      api.add_operation(:list_resource_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourcePolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListResourcePolicies"
+        o.input = Shapes::ShapeRef.new(shape: ListResourcePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourcePoliciesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -1199,6 +1287,11 @@ module Aws::XRay
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_encryption_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1208,6 +1301,20 @@ module Aws::XRay
         o.input = Shapes::ShapeRef.new(shape: PutEncryptionConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: PutEncryptionConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/PutResourcePolicy"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LockoutPreventionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyRevisionIdException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicySizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyCountLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)
 

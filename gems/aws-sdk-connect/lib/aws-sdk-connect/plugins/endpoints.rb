@@ -268,6 +268,8 @@ module Aws::Connect
             Aws::Connect::Endpoints::ListUserHierarchyGroups.build(context)
           when :list_users
             Aws::Connect::Endpoints::ListUsers.build(context)
+          when :monitor_contact
+            Aws::Connect::Endpoints::MonitorContact.build(context)
           when :put_user_status
             Aws::Connect::Endpoints::PutUserStatus.build(context)
           when :release_phone_number

@@ -767,6 +767,11 @@ module Aws::BillingConductor
     #   A map that contains tag keys and tag values that are attached to a
     #   pricing rule.
     #
+    # @option params [String] :billing_entity
+    #   The seller of services provided by Amazon Web Services, their
+    #   affiliates, or third-party providers selling services via Amazon Web
+    #   Services Marketplace.
+    #
     # @return [Types::CreatePricingRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePricingRuleOutput#arn #arn} => String
@@ -777,13 +782,14 @@ module Aws::BillingConductor
     #     client_token: "ClientToken",
     #     name: "PricingRuleName", # required
     #     description: "PricingRuleDescription",
-    #     scope: "GLOBAL", # required, accepts GLOBAL, SERVICE
+    #     scope: "GLOBAL", # required, accepts GLOBAL, SERVICE, BILLING_ENTITY
     #     type: "MARKUP", # required, accepts MARKUP, DISCOUNT
     #     modifier_percentage: 1.0, # required
     #     service: "Service",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     billing_entity: "BillingEntity",
     #   })
     #
     # @example Response structure
@@ -1450,13 +1456,14 @@ module Aws::BillingConductor
     #   resp.pricing_rules[0].name #=> String
     #   resp.pricing_rules[0].arn #=> String
     #   resp.pricing_rules[0].description #=> String
-    #   resp.pricing_rules[0].scope #=> String, one of "GLOBAL", "SERVICE"
+    #   resp.pricing_rules[0].scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY"
     #   resp.pricing_rules[0].type #=> String, one of "MARKUP", "DISCOUNT"
     #   resp.pricing_rules[0].modifier_percentage #=> Float
     #   resp.pricing_rules[0].service #=> String
     #   resp.pricing_rules[0].associated_pricing_plan_count #=> Integer
     #   resp.pricing_rules[0].creation_time #=> Integer
     #   resp.pricing_rules[0].last_modified_time #=> Integer
+    #   resp.pricing_rules[0].billing_entity #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListPricingRules AWS API Documentation
@@ -1876,6 +1883,7 @@ module Aws::BillingConductor
     #   * {Types::UpdatePricingRuleOutput#service #service} => String
     #   * {Types::UpdatePricingRuleOutput#associated_pricing_plan_count #associated_pricing_plan_count} => Integer
     #   * {Types::UpdatePricingRuleOutput#last_modified_time #last_modified_time} => Integer
+    #   * {Types::UpdatePricingRuleOutput#billing_entity #billing_entity} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1892,12 +1900,13 @@ module Aws::BillingConductor
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.scope #=> String, one of "GLOBAL", "SERVICE"
+    #   resp.scope #=> String, one of "GLOBAL", "SERVICE", "BILLING_ENTITY"
     #   resp.type #=> String, one of "MARKUP", "DISCOUNT"
     #   resp.modifier_percentage #=> Float
     #   resp.service #=> String
     #   resp.associated_pricing_plan_count #=> Integer
     #   resp.last_modified_time #=> Integer
+    #   resp.billing_entity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdatePricingRule AWS API Documentation
     #
@@ -1921,7 +1930,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

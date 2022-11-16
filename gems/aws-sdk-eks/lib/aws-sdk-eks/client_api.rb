@@ -51,6 +51,8 @@ module Aws::EKS
     ConnectorConfigProvider = Shapes::StringShape.new(name: 'ConnectorConfigProvider')
     ConnectorConfigRequest = Shapes::StructureShape.new(name: 'ConnectorConfigRequest')
     ConnectorConfigResponse = Shapes::StructureShape.new(name: 'ConnectorConfigResponse')
+    ControlPlanePlacementRequest = Shapes::StructureShape.new(name: 'ControlPlanePlacementRequest')
+    ControlPlanePlacementResponse = Shapes::StructureShape.new(name: 'ControlPlanePlacementResponse')
     CreateAddonRequest = Shapes::StructureShape.new(name: 'CreateAddonRequest')
     CreateAddonResponse = Shapes::StructureShape.new(name: 'CreateAddonResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
@@ -331,6 +333,12 @@ module Aws::EKS
     ConnectorConfigResponse.add_member(:provider, Shapes::ShapeRef.new(shape: String, location_name: "provider"))
     ConnectorConfigResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
     ConnectorConfigResponse.struct_class = Types::ConnectorConfigResponse
+
+    ControlPlanePlacementRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    ControlPlanePlacementRequest.struct_class = Types::ControlPlanePlacementRequest
+
+    ControlPlanePlacementResponse.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    ControlPlanePlacementResponse.struct_class = Types::ControlPlanePlacementResponse
 
     CreateAddonRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location: "uri", location_name: "name"))
     CreateAddonRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "addonName"))
@@ -716,10 +724,12 @@ module Aws::EKS
 
     OutpostConfigRequest.add_member(:outpost_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "outpostArns"))
     OutpostConfigRequest.add_member(:control_plane_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "controlPlaneInstanceType"))
+    OutpostConfigRequest.add_member(:control_plane_placement, Shapes::ShapeRef.new(shape: ControlPlanePlacementRequest, location_name: "controlPlanePlacement"))
     OutpostConfigRequest.struct_class = Types::OutpostConfigRequest
 
     OutpostConfigResponse.add_member(:outpost_arns, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "outpostArns"))
     OutpostConfigResponse.add_member(:control_plane_instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "controlPlaneInstanceType"))
+    OutpostConfigResponse.add_member(:control_plane_placement, Shapes::ShapeRef.new(shape: ControlPlanePlacementResponse, location_name: "controlPlanePlacement"))
     OutpostConfigResponse.struct_class = Types::OutpostConfigResponse
 
     Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))

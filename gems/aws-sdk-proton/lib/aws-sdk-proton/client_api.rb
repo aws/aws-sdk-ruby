@@ -165,8 +165,13 @@ module Aws::Proton
     ListServiceInstanceOutputsOutput = Shapes::StructureShape.new(name: 'ListServiceInstanceOutputsOutput')
     ListServiceInstanceProvisionedResourcesInput = Shapes::StructureShape.new(name: 'ListServiceInstanceProvisionedResourcesInput')
     ListServiceInstanceProvisionedResourcesOutput = Shapes::StructureShape.new(name: 'ListServiceInstanceProvisionedResourcesOutput')
+    ListServiceInstancesFilter = Shapes::StructureShape.new(name: 'ListServiceInstancesFilter')
+    ListServiceInstancesFilterBy = Shapes::StringShape.new(name: 'ListServiceInstancesFilterBy')
+    ListServiceInstancesFilterList = Shapes::ListShape.new(name: 'ListServiceInstancesFilterList')
+    ListServiceInstancesFilterValue = Shapes::StringShape.new(name: 'ListServiceInstancesFilterValue')
     ListServiceInstancesInput = Shapes::StructureShape.new(name: 'ListServiceInstancesInput')
     ListServiceInstancesOutput = Shapes::StructureShape.new(name: 'ListServiceInstancesOutput')
+    ListServiceInstancesSortBy = Shapes::StringShape.new(name: 'ListServiceInstancesSortBy')
     ListServicePipelineOutputsInput = Shapes::StructureShape.new(name: 'ListServicePipelineOutputsInput')
     ListServicePipelineOutputsOutput = Shapes::StructureShape.new(name: 'ListServicePipelineOutputsOutput')
     ListServicePipelineProvisionedResourcesInput = Shapes::StructureShape.new(name: 'ListServicePipelineProvisionedResourcesInput')
@@ -248,6 +253,7 @@ module Aws::Proton
     ServiceTemplateVersionArn = Shapes::StringShape.new(name: 'ServiceTemplateVersionArn')
     ServiceTemplateVersionSummary = Shapes::StructureShape.new(name: 'ServiceTemplateVersionSummary')
     ServiceTemplateVersionSummaryList = Shapes::ListShape.new(name: 'ServiceTemplateVersionSummaryList')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SpecContents = Shapes::StringShape.new(name: 'SpecContents')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
@@ -916,9 +922,18 @@ module Aws::Proton
     ListServiceInstanceProvisionedResourcesOutput.add_member(:provisioned_resources, Shapes::ShapeRef.new(shape: ProvisionedResourceList, required: true, location_name: "provisionedResources"))
     ListServiceInstanceProvisionedResourcesOutput.struct_class = Types::ListServiceInstanceProvisionedResourcesOutput
 
+    ListServiceInstancesFilter.add_member(:key, Shapes::ShapeRef.new(shape: ListServiceInstancesFilterBy, location_name: "key"))
+    ListServiceInstancesFilter.add_member(:value, Shapes::ShapeRef.new(shape: ListServiceInstancesFilterValue, location_name: "value"))
+    ListServiceInstancesFilter.struct_class = Types::ListServiceInstancesFilter
+
+    ListServiceInstancesFilterList.member = Shapes::ShapeRef.new(shape: ListServiceInstancesFilter)
+
+    ListServiceInstancesInput.add_member(:filters, Shapes::ShapeRef.new(shape: ListServiceInstancesFilterList, location_name: "filters"))
     ListServiceInstancesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
     ListServiceInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListServiceInstancesInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
+    ListServiceInstancesInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListServiceInstancesSortBy, location_name: "sortBy"))
+    ListServiceInstancesInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
     ListServiceInstancesInput.struct_class = Types::ListServiceInstancesInput
 
     ListServiceInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))

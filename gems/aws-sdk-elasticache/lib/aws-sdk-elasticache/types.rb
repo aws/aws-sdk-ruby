@@ -109,6 +109,35 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Specifies the authentication mode to use.
+    #
+    # @note When making an API call, you may pass AuthenticationMode
+    #   data as a hash:
+    #
+    #       {
+    #         type: "password", # accepts password, no-password-required, iam
+    #         passwords: ["String"],
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Specifies the authentication type. Possible options are IAM
+    #   authentication, password and no password.
+    #   @return [String]
+    #
+    # @!attribute [rw] passwords
+    #   Specifies the passwords to use for authentication if `Type` is set
+    #   to `password`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthenticationMode AWS API Documentation
+    #
+    class AuthenticationMode < Struct.new(
+      :type,
+      :passwords)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified Amazon EC2 security group is already authorized for the
     # specified cache security group.
     #
@@ -3132,6 +3161,10 @@ module Aws::ElastiCache
     #             value: "String",
     #           },
     #         ],
+    #         authentication_mode: {
+    #           type: "password", # accepts password, no-password-required, iam
+    #           passwords: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] user_id
@@ -3165,6 +3198,10 @@ module Aws::ElastiCache
     #   accepted.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] authentication_mode
+    #   Specifies how to authenticate the user.
+    #   @return [Types::AuthenticationMode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserMessage AWS API Documentation
     #
     class CreateUserMessage < Struct.new(
@@ -3174,7 +3211,8 @@ module Aws::ElastiCache
       :passwords,
       :access_string,
       :no_password_required,
-      :tags)
+      :tags,
+      :authentication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6981,6 +7019,10 @@ module Aws::ElastiCache
     #         append_access_string: "AccessString",
     #         passwords: ["String"],
     #         no_password_required: false,
+    #         authentication_mode: {
+    #           type: "password", # accepts password, no-password-required, iam
+    #           passwords: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] user_id
@@ -7003,6 +7045,10 @@ module Aws::ElastiCache
     #   Indicates no password is required for the user.
     #   @return [Boolean]
     #
+    # @!attribute [rw] authentication_mode
+    #   Specifies how to authenticate the user.
+    #   @return [Types::AuthenticationMode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUserMessage AWS API Documentation
     #
     class ModifyUserMessage < Struct.new(
@@ -7010,7 +7056,8 @@ module Aws::ElastiCache
       :access_string,
       :append_access_string,
       :passwords,
-      :no_password_required)
+      :no_password_required,
+      :authentication_mode)
       SENSITIVE = []
       include Aws::Structure
     end

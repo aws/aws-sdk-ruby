@@ -370,12 +370,12 @@ module Aws::IoTTwinMaker
 
     # Sets values for multiple time series properties.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the properties to set.
+    #
     # @option params [required, Array<Types::PropertyValueEntry>] :entries
     #   An object that maps strings to the property value entries to set. Each
     #   string in the mapping must be unique to this object.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the properties to set.
     #
     # @return [Types::BatchPutPropertyValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -384,75 +384,75 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_put_property_values({
+    #     workspace_id: "Id", # required
     #     entries: [ # required
     #       {
     #         entity_property_reference: { # required
     #           component_name: "Name",
-    #           entity_id: "EntityId",
     #           external_id_property: {
     #             "String" => "String",
     #           },
+    #           entity_id: "EntityId",
     #           property_name: "Name", # required
     #         },
     #         property_values: [
     #           {
-    #             time: "Time",
     #             timestamp: Time.now,
     #             value: { # required
     #               boolean_value: false,
     #               double_value: 1.0,
-    #               expression: "Expression",
     #               integer_value: 1,
+    #               long_value: 1,
+    #               string_value: "String",
     #               list_value: [
     #                 {
     #                   # recursive DataValue
     #                 },
     #               ],
-    #               long_value: 1,
     #               map_value: {
     #                 "String" => {
     #                   # recursive DataValue
     #                 },
     #               },
     #               relationship_value: {
-    #                 target_component_name: "Name",
     #                 target_entity_id: "EntityId",
+    #                 target_component_name: "Name",
     #               },
-    #               string_value: "String",
+    #               expression: "Expression",
     #             },
+    #             time: "Time",
     #           },
     #         ],
     #       },
     #     ],
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.error_entries #=> Array
     #   resp.error_entries[0].errors #=> Array
+    #   resp.error_entries[0].errors[0].error_code #=> String
+    #   resp.error_entries[0].errors[0].error_message #=> String
     #   resp.error_entries[0].errors[0].entry.entity_property_reference.component_name #=> String
-    #   resp.error_entries[0].errors[0].entry.entity_property_reference.entity_id #=> String
     #   resp.error_entries[0].errors[0].entry.entity_property_reference.external_id_property #=> Hash
     #   resp.error_entries[0].errors[0].entry.entity_property_reference.external_id_property["String"] #=> String
+    #   resp.error_entries[0].errors[0].entry.entity_property_reference.entity_id #=> String
     #   resp.error_entries[0].errors[0].entry.entity_property_reference.property_name #=> String
     #   resp.error_entries[0].errors[0].entry.property_values #=> Array
-    #   resp.error_entries[0].errors[0].entry.property_values[0].time #=> String
     #   resp.error_entries[0].errors[0].entry.property_values[0].timestamp #=> Time
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.boolean_value #=> Boolean
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.double_value #=> Float
-    #   resp.error_entries[0].errors[0].entry.property_values[0].value.expression #=> String
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.integer_value #=> Integer
+    #   resp.error_entries[0].errors[0].entry.property_values[0].value.long_value #=> Integer
+    #   resp.error_entries[0].errors[0].entry.property_values[0].value.string_value #=> String
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.list_value #=> Array
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.list_value[0] #=> Types::DataValue
-    #   resp.error_entries[0].errors[0].entry.property_values[0].value.long_value #=> Integer
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.map_value #=> Hash
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.map_value["String"] #=> Types::DataValue
-    #   resp.error_entries[0].errors[0].entry.property_values[0].value.relationship_value.target_component_name #=> String
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.relationship_value.target_entity_id #=> String
-    #   resp.error_entries[0].errors[0].entry.property_values[0].value.string_value #=> String
-    #   resp.error_entries[0].errors[0].error_code #=> String
-    #   resp.error_entries[0].errors[0].error_message #=> String
+    #   resp.error_entries[0].errors[0].entry.property_values[0].value.relationship_value.target_component_name #=> String
+    #   resp.error_entries[0].errors[0].entry.property_values[0].value.expression #=> String
+    #   resp.error_entries[0].errors[0].entry.property_values[0].time #=> String
     #
     # @overload batch_put_property_values(params = {})
     # @param [Hash] params ({})
@@ -463,11 +463,23 @@ module Aws::IoTTwinMaker
 
     # Creates a component type.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the component type.
+    #
+    # @option params [Boolean] :is_singleton
+    #   A Boolean value that specifies whether an entity can have more than
+    #   one component of this type.
+    #
     # @option params [required, String] :component_type_id
     #   The ID of the component type.
     #
     # @option params [String] :description
     #   The description of the component type.
+    #
+    # @option params [Hash<String,Types::PropertyDefinitionRequest>] :property_definitions
+    #   An object that maps strings to the property definitions in the
+    #   component type. Each string in the mapping must be unique to this
+    #   object.
     #
     # @option params [Array<String>] :extends_from
     #   Specifies the parent component type to extend.
@@ -476,20 +488,10 @@ module Aws::IoTTwinMaker
     #   An object that maps strings to the functions in the component type.
     #   Each string in the mapping must be unique to this object.
     #
-    # @option params [Boolean] :is_singleton
-    #   A Boolean value that specifies whether an entity can have more than
-    #   one component of this type.
-    #
-    # @option params [Hash<String,Types::PropertyDefinitionRequest>] :property_definitions
-    #   An object that maps strings to the property definitions in the
-    #   component type. Each string in the mapping must be unique to this
-    #   object.
-    #
     # @option params [Hash<String,String>] :tags
     #   Metadata that you can use to manage the component type.
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the component type.
+    # @option params [Hash<String,Types::PropertyGroupRequest>] :property_groups
     #
     # @return [Types::CreateComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -500,92 +502,98 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_component_type({
+    #     workspace_id: "Id", # required
+    #     is_singleton: false,
     #     component_type_id: "ComponentTypeId", # required
     #     description: "Description",
-    #     extends_from: ["ComponentTypeId"],
-    #     functions: {
-    #       "Name" => {
-    #         implemented_by: {
-    #           is_native: false,
-    #           lambda: {
-    #             arn: "LambdaArn", # required
-    #           },
-    #         },
-    #         required_properties: ["Name"],
-    #         scope: "ENTITY", # accepts ENTITY, WORKSPACE
-    #       },
-    #     },
-    #     is_singleton: false,
     #     property_definitions: {
     #       "Name" => {
-    #         configuration: {
-    #           "Name" => "Value",
-    #         },
     #         data_type: {
+    #           type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
+    #           nested_type: {
+    #             # recursive DataType
+    #           },
     #           allowed_values: [
     #             {
     #               boolean_value: false,
     #               double_value: 1.0,
-    #               expression: "Expression",
     #               integer_value: 1,
+    #               long_value: 1,
+    #               string_value: "String",
     #               list_value: {
     #                 # recursive DataValueList
     #               },
-    #               long_value: 1,
     #               map_value: {
     #                 "String" => {
     #                   # recursive DataValue
     #                 },
     #               },
     #               relationship_value: {
-    #                 target_component_name: "Name",
     #                 target_entity_id: "EntityId",
+    #                 target_component_name: "Name",
     #               },
-    #               string_value: "String",
+    #               expression: "Expression",
     #             },
     #           ],
-    #           nested_type: {
-    #             # recursive DataType
-    #           },
-    #           relationship: {
-    #             relationship_type: "String",
-    #             target_component_type_id: "ComponentTypeId",
-    #           },
-    #           type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
     #           unit_of_measure: "String",
+    #           relationship: {
+    #             target_component_type_id: "ComponentTypeId",
+    #             relationship_type: "String",
+    #           },
     #         },
+    #         is_required_in_entity: false,
+    #         is_external_id: false,
+    #         is_stored_externally: false,
+    #         is_time_series: false,
     #         default_value: {
     #           boolean_value: false,
     #           double_value: 1.0,
-    #           expression: "Expression",
     #           integer_value: 1,
+    #           long_value: 1,
+    #           string_value: "String",
     #           list_value: [
     #             {
     #               # recursive DataValue
     #             },
     #           ],
-    #           long_value: 1,
     #           map_value: {
     #             "String" => {
     #               # recursive DataValue
     #             },
     #           },
     #           relationship_value: {
-    #             target_component_name: "Name",
     #             target_entity_id: "EntityId",
+    #             target_component_name: "Name",
     #           },
-    #           string_value: "String",
+    #           expression: "Expression",
     #         },
-    #         is_external_id: false,
-    #         is_required_in_entity: false,
-    #         is_stored_externally: false,
-    #         is_time_series: false,
+    #         configuration: {
+    #           "Name" => "Value",
+    #         },
+    #       },
+    #     },
+    #     extends_from: ["ComponentTypeId"],
+    #     functions: {
+    #       "Name" => {
+    #         required_properties: ["Name"],
+    #         scope: "ENTITY", # accepts ENTITY, WORKSPACE
+    #         implemented_by: {
+    #           lambda: {
+    #             arn: "LambdaArn", # required
+    #           },
+    #           is_native: false,
+    #         },
     #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workspace_id: "Id", # required
+    #     property_groups: {
+    #       "Name" => {
+    #         group_type: "TABULAR", # accepts TABULAR
+    #         property_names: ["Name"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -603,12 +611,8 @@ module Aws::IoTTwinMaker
 
     # Creates an entity.
     #
-    # @option params [Hash<String,Types::ComponentRequest>] :components
-    #   An object that maps strings to the components in the entity. Each
-    #   string in the mapping must be unique to this object.
-    #
-    # @option params [String] :description
-    #   The description of the entity.
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the entity.
     #
     # @option params [String] :entity_id
     #   The ID of the entity.
@@ -616,137 +620,148 @@ module Aws::IoTTwinMaker
     # @option params [required, String] :entity_name
     #   The name of the entity.
     #
+    # @option params [String] :description
+    #   The description of the entity.
+    #
+    # @option params [Hash<String,Types::ComponentRequest>] :components
+    #   An object that maps strings to the components in the entity. Each
+    #   string in the mapping must be unique to this object.
+    #
     # @option params [String] :parent_entity_id
     #   The ID of the entity's parent entity.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata that you can use to manage the entity.
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the entity.
-    #
     # @return [Types::CreateEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateEntityResponse#entity_id #entity_id} => String
     #   * {Types::CreateEntityResponse#arn #arn} => String
     #   * {Types::CreateEntityResponse#creation_date_time #creation_date_time} => Time
-    #   * {Types::CreateEntityResponse#entity_id #entity_id} => String
     #   * {Types::CreateEntityResponse#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_entity({
+    #     workspace_id: "Id", # required
+    #     entity_id: "EntityId",
+    #     entity_name: "EntityName", # required
+    #     description: "Description",
     #     components: {
     #       "Name" => {
-    #         component_type_id: "ComponentTypeId",
     #         description: "Description",
+    #         component_type_id: "ComponentTypeId",
     #         properties: {
     #           "Name" => {
     #             definition: {
-    #               configuration: {
-    #                 "Name" => "Value",
-    #               },
     #               data_type: {
+    #                 type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
+    #                 nested_type: {
+    #                   # recursive DataType
+    #                 },
     #                 allowed_values: [
     #                   {
     #                     boolean_value: false,
     #                     double_value: 1.0,
-    #                     expression: "Expression",
     #                     integer_value: 1,
+    #                     long_value: 1,
+    #                     string_value: "String",
     #                     list_value: {
     #                       # recursive DataValueList
     #                     },
-    #                     long_value: 1,
     #                     map_value: {
     #                       "String" => {
     #                         # recursive DataValue
     #                       },
     #                     },
     #                     relationship_value: {
-    #                       target_component_name: "Name",
     #                       target_entity_id: "EntityId",
+    #                       target_component_name: "Name",
     #                     },
-    #                     string_value: "String",
+    #                     expression: "Expression",
     #                   },
     #                 ],
-    #                 nested_type: {
-    #                   # recursive DataType
-    #                 },
-    #                 relationship: {
-    #                   relationship_type: "String",
-    #                   target_component_type_id: "ComponentTypeId",
-    #                 },
-    #                 type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
     #                 unit_of_measure: "String",
+    #                 relationship: {
+    #                   target_component_type_id: "ComponentTypeId",
+    #                   relationship_type: "String",
+    #                 },
     #               },
+    #               is_required_in_entity: false,
+    #               is_external_id: false,
+    #               is_stored_externally: false,
+    #               is_time_series: false,
     #               default_value: {
     #                 boolean_value: false,
     #                 double_value: 1.0,
-    #                 expression: "Expression",
     #                 integer_value: 1,
+    #                 long_value: 1,
+    #                 string_value: "String",
     #                 list_value: [
     #                   {
     #                     # recursive DataValue
     #                   },
     #                 ],
-    #                 long_value: 1,
     #                 map_value: {
     #                   "String" => {
     #                     # recursive DataValue
     #                   },
     #                 },
     #                 relationship_value: {
-    #                   target_component_name: "Name",
     #                   target_entity_id: "EntityId",
+    #                   target_component_name: "Name",
     #                 },
-    #                 string_value: "String",
+    #                 expression: "Expression",
     #               },
-    #               is_external_id: false,
-    #               is_required_in_entity: false,
-    #               is_stored_externally: false,
-    #               is_time_series: false,
+    #               configuration: {
+    #                 "Name" => "Value",
+    #               },
     #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #             value: {
     #               boolean_value: false,
     #               double_value: 1.0,
-    #               expression: "Expression",
     #               integer_value: 1,
+    #               long_value: 1,
+    #               string_value: "String",
     #               list_value: [
     #                 {
     #                   # recursive DataValue
     #                 },
     #               ],
-    #               long_value: 1,
     #               map_value: {
     #                 "String" => {
     #                   # recursive DataValue
     #                 },
     #               },
     #               relationship_value: {
-    #                 target_component_name: "Name",
     #                 target_entity_id: "EntityId",
+    #                 target_component_name: "Name",
     #               },
-    #               string_value: "String",
+    #               expression: "Expression",
     #             },
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
+    #           },
+    #         },
+    #         property_groups: {
+    #           "Name" => {
+    #             group_type: "TABULAR", # accepts TABULAR
+    #             property_names: ["Name"],
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #           },
     #         },
     #       },
     #     },
-    #     description: "Description",
-    #     entity_id: "EntityId",
-    #     entity_name: "EntityName", # required
     #     parent_entity_id: "ParentEntityId",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.entity_id #=> String
     #   resp.arn #=> String
     #   resp.creation_date_time #=> Time
-    #   resp.entity_id #=> String
     #   resp.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
     #
     # @overload create_entity(params = {})
@@ -758,8 +773,11 @@ module Aws::IoTTwinMaker
 
     # Creates a scene.
     #
-    # @option params [Array<String>] :capabilities
-    #   A list of capabilities that the scene uses to render itself.
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the scene.
+    #
+    # @option params [required, String] :scene_id
+    #   The ID of the scene.
     #
     # @option params [required, String] :content_location
     #   The relative path that specifies the location of the content
@@ -768,14 +786,11 @@ module Aws::IoTTwinMaker
     # @option params [String] :description
     #   The description for this scene.
     #
-    # @option params [required, String] :scene_id
-    #   The ID of the scene.
+    # @option params [Array<String>] :capabilities
+    #   A list of capabilities that the scene uses to render itself.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata that you can use to manage the scene.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the scene.
     #
     # @return [Types::CreateSceneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -785,14 +800,14 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_scene({
-    #     capabilities: ["SceneCapability"],
+    #     workspace_id: "Id", # required
+    #     scene_id: "Id", # required
     #     content_location: "S3Url", # required
     #     description: "Description",
-    #     scene_id: "Id", # required
+    #     capabilities: ["SceneCapability"],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -809,21 +824,21 @@ module Aws::IoTTwinMaker
 
     # Creates a workplace.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace.
+    #
     # @option params [String] :description
     #   The description of the workspace.
-    #
-    # @option params [required, String] :role
-    #   The ARN of the execution role associated with the workspace.
     #
     # @option params [required, String] :s3_location
     #   The ARN of the S3 bucket where resources associated with the workspace
     #   are stored.
     #
+    # @option params [required, String] :role
+    #   The ARN of the execution role associated with the workspace.
+    #
     # @option params [Hash<String,String>] :tags
     #   Metadata that you can use to manage the workspace
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace.
     #
     # @return [Types::CreateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -833,13 +848,13 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_workspace({
+    #     workspace_id: "Id", # required
     #     description: "Description",
-    #     role: "RoleArn", # required
     #     s3_location: "S3Location", # required
+    #     role: "RoleArn", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -856,11 +871,11 @@ module Aws::IoTTwinMaker
 
     # Deletes a component type.
     #
-    # @option params [required, String] :component_type_id
-    #   The ID of the component type to delete.
-    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace that contains the component type.
+    #
+    # @option params [required, String] :component_type_id
+    #   The ID of the component type to delete.
     #
     # @return [Types::DeleteComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -869,8 +884,8 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_component_type({
-    #     component_type_id: "ComponentTypeId", # required
     #     workspace_id: "Id", # required
+    #     component_type_id: "ComponentTypeId", # required
     #   })
     #
     # @example Response structure
@@ -886,15 +901,15 @@ module Aws::IoTTwinMaker
 
     # Deletes an entity.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the entity to delete.
+    #
     # @option params [required, String] :entity_id
     #   The ID of the entity to delete.
     #
     # @option params [Boolean] :is_recursive
     #   A Boolean value that specifies whether the operation deletes child
     #   entities.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the entity to delete.
     #
     # @return [Types::DeleteEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -903,9 +918,9 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_entity({
+    #     workspace_id: "Id", # required
     #     entity_id: "EntityId", # required
     #     is_recursive: false,
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -921,19 +936,19 @@ module Aws::IoTTwinMaker
 
     # Deletes a scene.
     #
-    # @option params [required, String] :scene_id
-    #   The ID of the scene to delete.
-    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace.
+    #
+    # @option params [required, String] :scene_id
+    #   The ID of the scene to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scene({
-    #     scene_id: "Id", # required
     #     workspace_id: "Id", # required
+    #     scene_id: "Id", # required
     #   })
     #
     # @overload delete_scene(params = {})
@@ -963,99 +978,156 @@ module Aws::IoTTwinMaker
       req.send_request(options)
     end
 
-    # Retrieves information about a component type.
-    #
-    # @option params [required, String] :component_type_id
-    #   The ID of the component type.
+    # Run queries to access information from your knowledge graph of
+    # entities within individual workspaces.
     #
     # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the component type.
+    #   The ID of the workspace.
     #
-    # @return [Types::GetComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @option params [required, String] :query_statement
+    #   The query statement.
     #
-    #   * {Types::GetComponentTypeResponse#arn #arn} => String
-    #   * {Types::GetComponentTypeResponse#component_type_id #component_type_id} => String
-    #   * {Types::GetComponentTypeResponse#creation_date_time #creation_date_time} => Time
-    #   * {Types::GetComponentTypeResponse#description #description} => String
-    #   * {Types::GetComponentTypeResponse#extends_from #extends_from} => Array&lt;String&gt;
-    #   * {Types::GetComponentTypeResponse#functions #functions} => Hash&lt;String,Types::FunctionResponse&gt;
-    #   * {Types::GetComponentTypeResponse#is_abstract #is_abstract} => Boolean
-    #   * {Types::GetComponentTypeResponse#is_schema_initialized #is_schema_initialized} => Boolean
-    #   * {Types::GetComponentTypeResponse#is_singleton #is_singleton} => Boolean
-    #   * {Types::GetComponentTypeResponse#property_definitions #property_definitions} => Hash&lt;String,Types::PropertyDefinitionResponse&gt;
-    #   * {Types::GetComponentTypeResponse#status #status} => Types::Status
-    #   * {Types::GetComponentTypeResponse#update_date_time #update_date_time} => Time
-    #   * {Types::GetComponentTypeResponse#workspace_id #workspace_id} => String
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
+    #
+    # @option params [String] :next_token
+    #   The string that specifies the next page of results.
+    #
+    # @return [Types::ExecuteQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteQueryResponse#column_descriptions #column_descriptions} => Array&lt;Types::ColumnDescription&gt;
+    #   * {Types::ExecuteQueryResponse#rows #rows} => Array&lt;Types::Row&gt;
+    #   * {Types::ExecuteQueryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.get_component_type({
-    #     component_type_id: "ComponentTypeId", # required
+    #   resp = client.execute_query({
     #     workspace_id: "Id", # required
+    #     query_statement: "QueryStatement", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.component_type_id #=> String
-    #   resp.creation_date_time #=> Time
-    #   resp.description #=> String
-    #   resp.extends_from #=> Array
-    #   resp.extends_from[0] #=> String
-    #   resp.functions #=> Hash
-    #   resp.functions["Name"].implemented_by.is_native #=> Boolean
-    #   resp.functions["Name"].implemented_by.lambda.arn #=> String
-    #   resp.functions["Name"].is_inherited #=> Boolean
-    #   resp.functions["Name"].required_properties #=> Array
-    #   resp.functions["Name"].required_properties[0] #=> String
-    #   resp.functions["Name"].scope #=> String, one of "ENTITY", "WORKSPACE"
-    #   resp.is_abstract #=> Boolean
-    #   resp.is_schema_initialized #=> Boolean
+    #   resp.column_descriptions #=> Array
+    #   resp.column_descriptions[0].name #=> String
+    #   resp.column_descriptions[0].type #=> String, one of "NODE", "EDGE", "VALUE"
+    #   resp.rows #=> Array
+    #   resp.rows[0].row_data #=> Array
+    #   resp.next_token #=> String
+    #
+    # @overload execute_query(params = {})
+    # @param [Hash] params ({})
+    def execute_query(params = {}, options = {})
+      req = build_request(:execute_query, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a component type.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the component type.
+    #
+    # @option params [required, String] :component_type_id
+    #   The ID of the component type.
+    #
+    # @return [Types::GetComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetComponentTypeResponse#workspace_id #workspace_id} => String
+    #   * {Types::GetComponentTypeResponse#is_singleton #is_singleton} => Boolean
+    #   * {Types::GetComponentTypeResponse#component_type_id #component_type_id} => String
+    #   * {Types::GetComponentTypeResponse#description #description} => String
+    #   * {Types::GetComponentTypeResponse#property_definitions #property_definitions} => Hash&lt;String,Types::PropertyDefinitionResponse&gt;
+    #   * {Types::GetComponentTypeResponse#extends_from #extends_from} => Array&lt;String&gt;
+    #   * {Types::GetComponentTypeResponse#functions #functions} => Hash&lt;String,Types::FunctionResponse&gt;
+    #   * {Types::GetComponentTypeResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::GetComponentTypeResponse#update_date_time #update_date_time} => Time
+    #   * {Types::GetComponentTypeResponse#arn #arn} => String
+    #   * {Types::GetComponentTypeResponse#is_abstract #is_abstract} => Boolean
+    #   * {Types::GetComponentTypeResponse#is_schema_initialized #is_schema_initialized} => Boolean
+    #   * {Types::GetComponentTypeResponse#status #status} => Types::Status
+    #   * {Types::GetComponentTypeResponse#property_groups #property_groups} => Hash&lt;String,Types::PropertyGroupResponse&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_component_type({
+    #     workspace_id: "Id", # required
+    #     component_type_id: "ComponentTypeId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspace_id #=> String
     #   resp.is_singleton #=> Boolean
+    #   resp.component_type_id #=> String
+    #   resp.description #=> String
     #   resp.property_definitions #=> Hash
-    #   resp.property_definitions["Name"].configuration #=> Hash
-    #   resp.property_definitions["Name"].configuration["Name"] #=> String
+    #   resp.property_definitions["Name"].data_type.type #=> String, one of "RELATIONSHIP", "STRING", "LONG", "BOOLEAN", "INTEGER", "DOUBLE", "LIST", "MAP"
+    #   resp.property_definitions["Name"].data_type.nested_type #=> Types::DataType
     #   resp.property_definitions["Name"].data_type.allowed_values #=> Array
     #   resp.property_definitions["Name"].data_type.allowed_values[0].boolean_value #=> Boolean
     #   resp.property_definitions["Name"].data_type.allowed_values[0].double_value #=> Float
-    #   resp.property_definitions["Name"].data_type.allowed_values[0].expression #=> String
     #   resp.property_definitions["Name"].data_type.allowed_values[0].integer_value #=> Integer
-    #   resp.property_definitions["Name"].data_type.allowed_values[0].list_value #=> Types::DataValueList
     #   resp.property_definitions["Name"].data_type.allowed_values[0].long_value #=> Integer
+    #   resp.property_definitions["Name"].data_type.allowed_values[0].string_value #=> String
+    #   resp.property_definitions["Name"].data_type.allowed_values[0].list_value #=> Types::DataValueList
     #   resp.property_definitions["Name"].data_type.allowed_values[0].map_value #=> Hash
     #   resp.property_definitions["Name"].data_type.allowed_values[0].map_value["String"] #=> Types::DataValue
-    #   resp.property_definitions["Name"].data_type.allowed_values[0].relationship_value.target_component_name #=> String
     #   resp.property_definitions["Name"].data_type.allowed_values[0].relationship_value.target_entity_id #=> String
-    #   resp.property_definitions["Name"].data_type.allowed_values[0].string_value #=> String
-    #   resp.property_definitions["Name"].data_type.nested_type #=> Types::DataType
-    #   resp.property_definitions["Name"].data_type.relationship.relationship_type #=> String
-    #   resp.property_definitions["Name"].data_type.relationship.target_component_type_id #=> String
-    #   resp.property_definitions["Name"].data_type.type #=> String, one of "RELATIONSHIP", "STRING", "LONG", "BOOLEAN", "INTEGER", "DOUBLE", "LIST", "MAP"
+    #   resp.property_definitions["Name"].data_type.allowed_values[0].relationship_value.target_component_name #=> String
+    #   resp.property_definitions["Name"].data_type.allowed_values[0].expression #=> String
     #   resp.property_definitions["Name"].data_type.unit_of_measure #=> String
+    #   resp.property_definitions["Name"].data_type.relationship.target_component_type_id #=> String
+    #   resp.property_definitions["Name"].data_type.relationship.relationship_type #=> String
+    #   resp.property_definitions["Name"].is_time_series #=> Boolean
+    #   resp.property_definitions["Name"].is_required_in_entity #=> Boolean
+    #   resp.property_definitions["Name"].is_external_id #=> Boolean
+    #   resp.property_definitions["Name"].is_stored_externally #=> Boolean
+    #   resp.property_definitions["Name"].is_imported #=> Boolean
+    #   resp.property_definitions["Name"].is_final #=> Boolean
+    #   resp.property_definitions["Name"].is_inherited #=> Boolean
     #   resp.property_definitions["Name"].default_value.boolean_value #=> Boolean
     #   resp.property_definitions["Name"].default_value.double_value #=> Float
-    #   resp.property_definitions["Name"].default_value.expression #=> String
     #   resp.property_definitions["Name"].default_value.integer_value #=> Integer
+    #   resp.property_definitions["Name"].default_value.long_value #=> Integer
+    #   resp.property_definitions["Name"].default_value.string_value #=> String
     #   resp.property_definitions["Name"].default_value.list_value #=> Array
     #   resp.property_definitions["Name"].default_value.list_value[0] #=> Types::DataValue
-    #   resp.property_definitions["Name"].default_value.long_value #=> Integer
     #   resp.property_definitions["Name"].default_value.map_value #=> Hash
     #   resp.property_definitions["Name"].default_value.map_value["String"] #=> Types::DataValue
-    #   resp.property_definitions["Name"].default_value.relationship_value.target_component_name #=> String
     #   resp.property_definitions["Name"].default_value.relationship_value.target_entity_id #=> String
-    #   resp.property_definitions["Name"].default_value.string_value #=> String
-    #   resp.property_definitions["Name"].is_external_id #=> Boolean
-    #   resp.property_definitions["Name"].is_final #=> Boolean
-    #   resp.property_definitions["Name"].is_imported #=> Boolean
-    #   resp.property_definitions["Name"].is_inherited #=> Boolean
-    #   resp.property_definitions["Name"].is_required_in_entity #=> Boolean
-    #   resp.property_definitions["Name"].is_stored_externally #=> Boolean
-    #   resp.property_definitions["Name"].is_time_series #=> Boolean
+    #   resp.property_definitions["Name"].default_value.relationship_value.target_component_name #=> String
+    #   resp.property_definitions["Name"].default_value.expression #=> String
+    #   resp.property_definitions["Name"].configuration #=> Hash
+    #   resp.property_definitions["Name"].configuration["Name"] #=> String
+    #   resp.extends_from #=> Array
+    #   resp.extends_from[0] #=> String
+    #   resp.functions #=> Hash
+    #   resp.functions["Name"].required_properties #=> Array
+    #   resp.functions["Name"].required_properties[0] #=> String
+    #   resp.functions["Name"].scope #=> String, one of "ENTITY", "WORKSPACE"
+    #   resp.functions["Name"].implemented_by.lambda.arn #=> String
+    #   resp.functions["Name"].implemented_by.is_native #=> Boolean
+    #   resp.functions["Name"].is_inherited #=> Boolean
+    #   resp.creation_date_time #=> Time
+    #   resp.update_date_time #=> Time
+    #   resp.arn #=> String
+    #   resp.is_abstract #=> Boolean
+    #   resp.is_schema_initialized #=> Boolean
+    #   resp.status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
     #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.status.error.message #=> String
-    #   resp.status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.update_date_time #=> Time
-    #   resp.workspace_id #=> String
+    #   resp.property_groups #=> Hash
+    #   resp.property_groups["Name"].group_type #=> String, one of "TABULAR"
+    #   resp.property_groups["Name"].property_names #=> Array
+    #   resp.property_groups["Name"].property_names[0] #=> String
+    #   resp.property_groups["Name"].is_inherited #=> Boolean
     #
     # @overload get_component_type(params = {})
     # @param [Hash] params ({})
@@ -1066,111 +1138,149 @@ module Aws::IoTTwinMaker
 
     # Retrieves information about an entity.
     #
-    # @option params [required, String] :entity_id
-    #   The ID of the entity.
-    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace.
     #
+    # @option params [required, String] :entity_id
+    #   The ID of the entity.
+    #
     # @return [Types::GetEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetEntityResponse#arn #arn} => String
-    #   * {Types::GetEntityResponse#components #components} => Hash&lt;String,Types::ComponentResponse&gt;
-    #   * {Types::GetEntityResponse#creation_date_time #creation_date_time} => Time
-    #   * {Types::GetEntityResponse#description #description} => String
     #   * {Types::GetEntityResponse#entity_id #entity_id} => String
     #   * {Types::GetEntityResponse#entity_name #entity_name} => String
-    #   * {Types::GetEntityResponse#has_child_entities #has_child_entities} => Boolean
-    #   * {Types::GetEntityResponse#parent_entity_id #parent_entity_id} => String
+    #   * {Types::GetEntityResponse#arn #arn} => String
     #   * {Types::GetEntityResponse#status #status} => Types::Status
-    #   * {Types::GetEntityResponse#update_date_time #update_date_time} => Time
     #   * {Types::GetEntityResponse#workspace_id #workspace_id} => String
+    #   * {Types::GetEntityResponse#description #description} => String
+    #   * {Types::GetEntityResponse#components #components} => Hash&lt;String,Types::ComponentResponse&gt;
+    #   * {Types::GetEntityResponse#parent_entity_id #parent_entity_id} => String
+    #   * {Types::GetEntityResponse#has_child_entities #has_child_entities} => Boolean
+    #   * {Types::GetEntityResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::GetEntityResponse#update_date_time #update_date_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_entity({
-    #     entity_id: "EntityId", # required
     #     workspace_id: "Id", # required
+    #     entity_id: "EntityId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.entity_id #=> String
+    #   resp.entity_name #=> String
     #   resp.arn #=> String
+    #   resp.status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
+    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.status.error.message #=> String
+    #   resp.workspace_id #=> String
+    #   resp.description #=> String
     #   resp.components #=> Hash
     #   resp.components["Name"].component_name #=> String
-    #   resp.components["Name"].component_type_id #=> String
-    #   resp.components["Name"].defined_in #=> String
     #   resp.components["Name"].description #=> String
+    #   resp.components["Name"].component_type_id #=> String
+    #   resp.components["Name"].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
+    #   resp.components["Name"].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
+    #   resp.components["Name"].status.error.message #=> String
+    #   resp.components["Name"].defined_in #=> String
     #   resp.components["Name"].properties #=> Hash
-    #   resp.components["Name"].properties["Name"].definition.configuration #=> Hash
-    #   resp.components["Name"].properties["Name"].definition.configuration["Name"] #=> String
+    #   resp.components["Name"].properties["Name"].definition.data_type.type #=> String, one of "RELATIONSHIP", "STRING", "LONG", "BOOLEAN", "INTEGER", "DOUBLE", "LIST", "MAP"
+    #   resp.components["Name"].properties["Name"].definition.data_type.nested_type #=> Types::DataType
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values #=> Array
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].boolean_value #=> Boolean
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].double_value #=> Float
-    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].expression #=> String
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].integer_value #=> Integer
-    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].list_value #=> Types::DataValueList
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].long_value #=> Integer
+    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].string_value #=> String
+    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].list_value #=> Types::DataValueList
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].map_value #=> Hash
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].map_value["String"] #=> Types::DataValue
-    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].relationship_value.target_component_name #=> String
     #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].relationship_value.target_entity_id #=> String
-    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].string_value #=> String
-    #   resp.components["Name"].properties["Name"].definition.data_type.nested_type #=> Types::DataType
-    #   resp.components["Name"].properties["Name"].definition.data_type.relationship.relationship_type #=> String
-    #   resp.components["Name"].properties["Name"].definition.data_type.relationship.target_component_type_id #=> String
-    #   resp.components["Name"].properties["Name"].definition.data_type.type #=> String, one of "RELATIONSHIP", "STRING", "LONG", "BOOLEAN", "INTEGER", "DOUBLE", "LIST", "MAP"
+    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].relationship_value.target_component_name #=> String
+    #   resp.components["Name"].properties["Name"].definition.data_type.allowed_values[0].expression #=> String
     #   resp.components["Name"].properties["Name"].definition.data_type.unit_of_measure #=> String
+    #   resp.components["Name"].properties["Name"].definition.data_type.relationship.target_component_type_id #=> String
+    #   resp.components["Name"].properties["Name"].definition.data_type.relationship.relationship_type #=> String
+    #   resp.components["Name"].properties["Name"].definition.is_time_series #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.is_required_in_entity #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.is_external_id #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.is_stored_externally #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.is_imported #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.is_final #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.is_inherited #=> Boolean
     #   resp.components["Name"].properties["Name"].definition.default_value.boolean_value #=> Boolean
     #   resp.components["Name"].properties["Name"].definition.default_value.double_value #=> Float
-    #   resp.components["Name"].properties["Name"].definition.default_value.expression #=> String
     #   resp.components["Name"].properties["Name"].definition.default_value.integer_value #=> Integer
+    #   resp.components["Name"].properties["Name"].definition.default_value.long_value #=> Integer
+    #   resp.components["Name"].properties["Name"].definition.default_value.string_value #=> String
     #   resp.components["Name"].properties["Name"].definition.default_value.list_value #=> Array
     #   resp.components["Name"].properties["Name"].definition.default_value.list_value[0] #=> Types::DataValue
-    #   resp.components["Name"].properties["Name"].definition.default_value.long_value #=> Integer
     #   resp.components["Name"].properties["Name"].definition.default_value.map_value #=> Hash
     #   resp.components["Name"].properties["Name"].definition.default_value.map_value["String"] #=> Types::DataValue
-    #   resp.components["Name"].properties["Name"].definition.default_value.relationship_value.target_component_name #=> String
     #   resp.components["Name"].properties["Name"].definition.default_value.relationship_value.target_entity_id #=> String
-    #   resp.components["Name"].properties["Name"].definition.default_value.string_value #=> String
-    #   resp.components["Name"].properties["Name"].definition.is_external_id #=> Boolean
-    #   resp.components["Name"].properties["Name"].definition.is_final #=> Boolean
-    #   resp.components["Name"].properties["Name"].definition.is_imported #=> Boolean
-    #   resp.components["Name"].properties["Name"].definition.is_inherited #=> Boolean
-    #   resp.components["Name"].properties["Name"].definition.is_required_in_entity #=> Boolean
-    #   resp.components["Name"].properties["Name"].definition.is_stored_externally #=> Boolean
-    #   resp.components["Name"].properties["Name"].definition.is_time_series #=> Boolean
+    #   resp.components["Name"].properties["Name"].definition.default_value.relationship_value.target_component_name #=> String
+    #   resp.components["Name"].properties["Name"].definition.default_value.expression #=> String
+    #   resp.components["Name"].properties["Name"].definition.configuration #=> Hash
+    #   resp.components["Name"].properties["Name"].definition.configuration["Name"] #=> String
     #   resp.components["Name"].properties["Name"].value.boolean_value #=> Boolean
     #   resp.components["Name"].properties["Name"].value.double_value #=> Float
-    #   resp.components["Name"].properties["Name"].value.expression #=> String
     #   resp.components["Name"].properties["Name"].value.integer_value #=> Integer
+    #   resp.components["Name"].properties["Name"].value.long_value #=> Integer
+    #   resp.components["Name"].properties["Name"].value.string_value #=> String
     #   resp.components["Name"].properties["Name"].value.list_value #=> Array
     #   resp.components["Name"].properties["Name"].value.list_value[0] #=> Types::DataValue
-    #   resp.components["Name"].properties["Name"].value.long_value #=> Integer
     #   resp.components["Name"].properties["Name"].value.map_value #=> Hash
     #   resp.components["Name"].properties["Name"].value.map_value["String"] #=> Types::DataValue
-    #   resp.components["Name"].properties["Name"].value.relationship_value.target_component_name #=> String
     #   resp.components["Name"].properties["Name"].value.relationship_value.target_entity_id #=> String
-    #   resp.components["Name"].properties["Name"].value.string_value #=> String
-    #   resp.components["Name"].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
-    #   resp.components["Name"].status.error.message #=> String
-    #   resp.components["Name"].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.creation_date_time #=> Time
-    #   resp.description #=> String
-    #   resp.entity_id #=> String
-    #   resp.entity_name #=> String
-    #   resp.has_child_entities #=> Boolean
+    #   resp.components["Name"].properties["Name"].value.relationship_value.target_component_name #=> String
+    #   resp.components["Name"].properties["Name"].value.expression #=> String
+    #   resp.components["Name"].property_groups #=> Hash
+    #   resp.components["Name"].property_groups["Name"].group_type #=> String, one of "TABULAR"
+    #   resp.components["Name"].property_groups["Name"].property_names #=> Array
+    #   resp.components["Name"].property_groups["Name"].property_names[0] #=> String
+    #   resp.components["Name"].property_groups["Name"].is_inherited #=> Boolean
     #   resp.parent_entity_id #=> String
-    #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
-    #   resp.status.error.message #=> String
-    #   resp.status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
+    #   resp.has_child_entities #=> Boolean
+    #   resp.creation_date_time #=> Time
     #   resp.update_date_time #=> Time
-    #   resp.workspace_id #=> String
     #
     # @overload get_entity(params = {})
     # @param [Hash] params ({})
     def get_entity(params = {}, options = {})
       req = build_request(:get_entity, params)
+      req.send_request(options)
+    end
+
+    # Gets the pricing plan.
+    #
+    # @return [Types::GetPricingPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPricingPlanResponse#current_pricing_plan #current_pricing_plan} => Types::PricingPlan
+    #   * {Types::GetPricingPlanResponse#pending_pricing_plan #pending_pricing_plan} => Types::PricingPlan
+    #
+    # @example Response structure
+    #
+    #   resp.current_pricing_plan.billable_entity_count #=> Integer
+    #   resp.current_pricing_plan.bundle_information.bundle_names #=> Array
+    #   resp.current_pricing_plan.bundle_information.bundle_names[0] #=> String
+    #   resp.current_pricing_plan.bundle_information.pricing_tier #=> String, one of "TIER_1", "TIER_2", "TIER_3", "TIER_4"
+    #   resp.current_pricing_plan.effective_date_time #=> Time
+    #   resp.current_pricing_plan.pricing_mode #=> String, one of "BASIC", "STANDARD", "TIERED_BUNDLE"
+    #   resp.current_pricing_plan.update_date_time #=> Time
+    #   resp.current_pricing_plan.update_reason #=> String, one of "DEFAULT", "PRICING_TIER_UPDATE", "ENTITY_COUNT_UPDATE", "PRICING_MODE_UPDATE", "OVERWRITTEN"
+    #   resp.pending_pricing_plan.billable_entity_count #=> Integer
+    #   resp.pending_pricing_plan.bundle_information.bundle_names #=> Array
+    #   resp.pending_pricing_plan.bundle_information.bundle_names[0] #=> String
+    #   resp.pending_pricing_plan.bundle_information.pricing_tier #=> String, one of "TIER_1", "TIER_2", "TIER_3", "TIER_4"
+    #   resp.pending_pricing_plan.effective_date_time #=> Time
+    #   resp.pending_pricing_plan.pricing_mode #=> String, one of "BASIC", "STANDARD", "TIERED_BUNDLE"
+    #   resp.pending_pricing_plan.update_date_time #=> Time
+    #   resp.pending_pricing_plan.update_reason #=> String, one of "DEFAULT", "PRICING_TIER_UPDATE", "ENTITY_COUNT_UPDATE", "PRICING_MODE_UPDATE", "OVERWRITTEN"
+    #
+    # @overload get_pricing_plan(params = {})
+    # @param [Hash] params ({})
+    def get_pricing_plan(params = {}, options = {})
+      req = build_request(:get_pricing_plan, params)
       req.send_request(options)
     end
 
@@ -1196,9 +1306,28 @@ module Aws::IoTTwinMaker
     # @option params [required, String] :workspace_id
     #   The ID of the workspace whose values the operation returns.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
+    #
+    # @option params [String] :next_token
+    #   The string that specifies the next page of results.
+    #
+    # @option params [String] :property_group_name
+    #   The property group name.
+    #
+    # @option params [Types::TabularConditions] :tabular_conditions
+    #   The tabular conditions.
+    #
     # @return [Types::GetPropertyValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPropertyValueResponse#property_values #property_values} => Hash&lt;String,Types::PropertyLatestValue&gt;
+    #   * {Types::GetPropertyValueResponse#next_token #next_token} => String
+    #   * {Types::GetPropertyValueResponse#tabular_property_values #tabular_property_values} => Array&lt;Array&lt;Hash&lt;String,Types::DataValue&gt;&gt;&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1208,28 +1337,83 @@ module Aws::IoTTwinMaker
     #     entity_id: "EntityId",
     #     selected_properties: ["String"], # required
     #     workspace_id: "Id", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     property_group_name: "Name",
+    #     tabular_conditions: {
+    #       order_by: [
+    #         {
+    #           order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           property_name: "String", # required
+    #         },
+    #       ],
+    #       property_filters: [
+    #         {
+    #           property_name: "String",
+    #           operator: "String",
+    #           value: {
+    #             boolean_value: false,
+    #             double_value: 1.0,
+    #             integer_value: 1,
+    #             long_value: 1,
+    #             string_value: "String",
+    #             list_value: [
+    #               {
+    #                 # recursive DataValue
+    #               },
+    #             ],
+    #             map_value: {
+    #               "String" => {
+    #                 # recursive DataValue
+    #               },
+    #             },
+    #             relationship_value: {
+    #               target_entity_id: "EntityId",
+    #               target_component_name: "Name",
+    #             },
+    #             expression: "Expression",
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.property_values #=> Hash
     #   resp.property_values["Name"].property_reference.component_name #=> String
-    #   resp.property_values["Name"].property_reference.entity_id #=> String
     #   resp.property_values["Name"].property_reference.external_id_property #=> Hash
     #   resp.property_values["Name"].property_reference.external_id_property["String"] #=> String
+    #   resp.property_values["Name"].property_reference.entity_id #=> String
     #   resp.property_values["Name"].property_reference.property_name #=> String
     #   resp.property_values["Name"].property_value.boolean_value #=> Boolean
     #   resp.property_values["Name"].property_value.double_value #=> Float
-    #   resp.property_values["Name"].property_value.expression #=> String
     #   resp.property_values["Name"].property_value.integer_value #=> Integer
+    #   resp.property_values["Name"].property_value.long_value #=> Integer
+    #   resp.property_values["Name"].property_value.string_value #=> String
     #   resp.property_values["Name"].property_value.list_value #=> Array
     #   resp.property_values["Name"].property_value.list_value[0] #=> Types::DataValue
-    #   resp.property_values["Name"].property_value.long_value #=> Integer
     #   resp.property_values["Name"].property_value.map_value #=> Hash
     #   resp.property_values["Name"].property_value.map_value["String"] #=> Types::DataValue
-    #   resp.property_values["Name"].property_value.relationship_value.target_component_name #=> String
     #   resp.property_values["Name"].property_value.relationship_value.target_entity_id #=> String
-    #   resp.property_values["Name"].property_value.string_value #=> String
+    #   resp.property_values["Name"].property_value.relationship_value.target_component_name #=> String
+    #   resp.property_values["Name"].property_value.expression #=> String
+    #   resp.next_token #=> String
+    #   resp.tabular_property_values #=> Array
+    #   resp.tabular_property_values[0] #=> Array
+    #   resp.tabular_property_values[0][0] #=> Hash
+    #   resp.tabular_property_values[0][0]["Name"].boolean_value #=> Boolean
+    #   resp.tabular_property_values[0][0]["Name"].double_value #=> Float
+    #   resp.tabular_property_values[0][0]["Name"].integer_value #=> Integer
+    #   resp.tabular_property_values[0][0]["Name"].long_value #=> Integer
+    #   resp.tabular_property_values[0][0]["Name"].string_value #=> String
+    #   resp.tabular_property_values[0][0]["Name"].list_value #=> Array
+    #   resp.tabular_property_values[0][0]["Name"].list_value[0] #=> Types::DataValue
+    #   resp.tabular_property_values[0][0]["Name"].map_value #=> Hash
+    #   resp.tabular_property_values[0][0]["Name"].map_value["String"] #=> Types::DataValue
+    #   resp.tabular_property_values[0][0]["Name"].relationship_value.target_entity_id #=> String
+    #   resp.tabular_property_values[0][0]["Name"].relationship_value.target_component_name #=> String
+    #   resp.tabular_property_values[0][0]["Name"].expression #=> String
     #
     # @overload get_property_value(params = {})
     # @param [Hash] params ({})
@@ -1245,49 +1429,45 @@ module Aws::IoTTwinMaker
     # queries, specify values for `componentName` and `entityId`. For
     # cross-entity quries, specify a value for `componentTypeId`.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace.
+    #
+    # @option params [String] :entity_id
+    #   The ID of the entity.
+    #
     # @option params [String] :component_name
     #   The name of the component.
     #
     # @option params [String] :component_type_id
     #   The ID of the component type.
     #
+    # @option params [required, Array<String>] :selected_properties
+    #   A list of properties whose value histories the request retrieves.
+    #
+    # @option params [Array<Types::PropertyFilter>] :property_filters
+    #   A list of objects that filter the property value history request.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date_time
+    #   The date and time of the earliest property value to return.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :end_date_time
     #   The date and time of the latest property value to return.
-    #
-    # @option params [String] :end_time
-    #   The ISO8601 DateTime of the latest property value to return.
-    #
-    #   For more information about the ISO8601 DateTime format, see the data
-    #   type [PropertyValue][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html
-    #
-    # @option params [String] :entity_id
-    #   The ID of the entity.
     #
     # @option params [Types::InterpolationParameters] :interpolation
     #   An object that specifies the interpolation type and the interval over
     #   which to interpolate data.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return.
-    #
     # @option params [String] :next_token
     #   The string that specifies the next page of results.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
+    #
     # @option params [String] :order_by_time
     #   The time direction to use in the result order.
-    #
-    # @option params [Array<Types::PropertyFilter>] :property_filters
-    #   A list of objects that filter the property value history request.
-    #
-    # @option params [required, Array<String>] :selected_properties
-    #   A list of properties whose value histories the request retrieves.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :start_date_time
-    #   The date and time of the earliest property value to return.
     #
     # @option params [String] :start_time
     #   The ISO8601 DateTime of the earliest property value to return.
@@ -1297,91 +1477,98 @@ module Aws::IoTTwinMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html
+    #   [1]: https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace.
+    # @option params [String] :end_time
+    #   The ISO8601 DateTime of the latest property value to return.
+    #
+    #   For more information about the ISO8601 DateTime format, see the data
+    #   type [PropertyValue][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html
     #
     # @return [Types::GetPropertyValueHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetPropertyValueHistoryResponse#next_token #next_token} => String
     #   * {Types::GetPropertyValueHistoryResponse#property_values #property_values} => Array&lt;Types::PropertyValueHistory&gt;
+    #   * {Types::GetPropertyValueHistoryResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_property_value_history({
+    #     workspace_id: "Id", # required
+    #     entity_id: "EntityId",
     #     component_name: "Name",
     #     component_type_id: "ComponentTypeId",
-    #     end_date_time: Time.now,
-    #     end_time: "Time",
-    #     entity_id: "EntityId",
-    #     interpolation: {
-    #       interpolation_type: "LINEAR", # accepts LINEAR
-    #       interval_in_seconds: 1,
-    #     },
-    #     max_results: 1,
-    #     next_token: "NextToken",
-    #     order_by_time: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     selected_properties: ["String"], # required
     #     property_filters: [
     #       {
-    #         operator: "String",
     #         property_name: "String",
+    #         operator: "String",
     #         value: {
     #           boolean_value: false,
     #           double_value: 1.0,
-    #           expression: "Expression",
     #           integer_value: 1,
+    #           long_value: 1,
+    #           string_value: "String",
     #           list_value: [
     #             {
     #               # recursive DataValue
     #             },
     #           ],
-    #           long_value: 1,
     #           map_value: {
     #             "String" => {
     #               # recursive DataValue
     #             },
     #           },
     #           relationship_value: {
-    #             target_component_name: "Name",
     #             target_entity_id: "EntityId",
+    #             target_component_name: "Name",
     #           },
-    #           string_value: "String",
+    #           expression: "Expression",
     #         },
     #       },
     #     ],
-    #     selected_properties: ["String"], # required
     #     start_date_time: Time.now,
+    #     end_date_time: Time.now,
+    #     interpolation: {
+    #       interpolation_type: "LINEAR", # accepts LINEAR
+    #       interval_in_seconds: 1,
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     order_by_time: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     start_time: "Time",
-    #     workspace_id: "Id", # required
+    #     end_time: "Time",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.property_values #=> Array
     #   resp.property_values[0].entity_property_reference.component_name #=> String
-    #   resp.property_values[0].entity_property_reference.entity_id #=> String
     #   resp.property_values[0].entity_property_reference.external_id_property #=> Hash
     #   resp.property_values[0].entity_property_reference.external_id_property["String"] #=> String
+    #   resp.property_values[0].entity_property_reference.entity_id #=> String
     #   resp.property_values[0].entity_property_reference.property_name #=> String
     #   resp.property_values[0].values #=> Array
-    #   resp.property_values[0].values[0].time #=> String
     #   resp.property_values[0].values[0].timestamp #=> Time
     #   resp.property_values[0].values[0].value.boolean_value #=> Boolean
     #   resp.property_values[0].values[0].value.double_value #=> Float
-    #   resp.property_values[0].values[0].value.expression #=> String
     #   resp.property_values[0].values[0].value.integer_value #=> Integer
+    #   resp.property_values[0].values[0].value.long_value #=> Integer
+    #   resp.property_values[0].values[0].value.string_value #=> String
     #   resp.property_values[0].values[0].value.list_value #=> Array
     #   resp.property_values[0].values[0].value.list_value[0] #=> Types::DataValue
-    #   resp.property_values[0].values[0].value.long_value #=> Integer
     #   resp.property_values[0].values[0].value.map_value #=> Hash
     #   resp.property_values[0].values[0].value.map_value["String"] #=> Types::DataValue
-    #   resp.property_values[0].values[0].value.relationship_value.target_component_name #=> String
     #   resp.property_values[0].values[0].value.relationship_value.target_entity_id #=> String
-    #   resp.property_values[0].values[0].value.string_value #=> String
+    #   resp.property_values[0].values[0].value.relationship_value.target_component_name #=> String
+    #   resp.property_values[0].values[0].value.expression #=> String
+    #   resp.property_values[0].values[0].time #=> String
+    #   resp.next_token #=> String
     #
     # @overload get_property_value_history(params = {})
     # @param [Hash] params ({})
@@ -1392,41 +1579,41 @@ module Aws::IoTTwinMaker
 
     # Retrieves information about a scene.
     #
-    # @option params [required, String] :scene_id
-    #   The ID of the scene.
-    #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace that contains the scene.
     #
+    # @option params [required, String] :scene_id
+    #   The ID of the scene.
+    #
     # @return [Types::GetSceneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetSceneResponse#arn #arn} => String
-    #   * {Types::GetSceneResponse#capabilities #capabilities} => Array&lt;String&gt;
-    #   * {Types::GetSceneResponse#content_location #content_location} => String
-    #   * {Types::GetSceneResponse#creation_date_time #creation_date_time} => Time
-    #   * {Types::GetSceneResponse#description #description} => String
-    #   * {Types::GetSceneResponse#scene_id #scene_id} => String
-    #   * {Types::GetSceneResponse#update_date_time #update_date_time} => Time
     #   * {Types::GetSceneResponse#workspace_id #workspace_id} => String
+    #   * {Types::GetSceneResponse#scene_id #scene_id} => String
+    #   * {Types::GetSceneResponse#content_location #content_location} => String
+    #   * {Types::GetSceneResponse#arn #arn} => String
+    #   * {Types::GetSceneResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::GetSceneResponse#update_date_time #update_date_time} => Time
+    #   * {Types::GetSceneResponse#description #description} => String
+    #   * {Types::GetSceneResponse#capabilities #capabilities} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_scene({
-    #     scene_id: "Id", # required
     #     workspace_id: "Id", # required
+    #     scene_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.workspace_id #=> String
+    #   resp.scene_id #=> String
+    #   resp.content_location #=> String
     #   resp.arn #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.update_date_time #=> Time
+    #   resp.description #=> String
     #   resp.capabilities #=> Array
     #   resp.capabilities[0] #=> String
-    #   resp.content_location #=> String
-    #   resp.creation_date_time #=> Time
-    #   resp.description #=> String
-    #   resp.scene_id #=> String
-    #   resp.update_date_time #=> Time
-    #   resp.workspace_id #=> String
     #
     # @overload get_scene(params = {})
     # @param [Hash] params ({})
@@ -1442,13 +1629,13 @@ module Aws::IoTTwinMaker
     #
     # @return [Types::GetWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetWorkspaceResponse#arn #arn} => String
-    #   * {Types::GetWorkspaceResponse#creation_date_time #creation_date_time} => Time
-    #   * {Types::GetWorkspaceResponse#description #description} => String
-    #   * {Types::GetWorkspaceResponse#role #role} => String
-    #   * {Types::GetWorkspaceResponse#s3_location #s3_location} => String
-    #   * {Types::GetWorkspaceResponse#update_date_time #update_date_time} => Time
     #   * {Types::GetWorkspaceResponse#workspace_id #workspace_id} => String
+    #   * {Types::GetWorkspaceResponse#arn #arn} => String
+    #   * {Types::GetWorkspaceResponse#description #description} => String
+    #   * {Types::GetWorkspaceResponse#s3_location #s3_location} => String
+    #   * {Types::GetWorkspaceResponse#role #role} => String
+    #   * {Types::GetWorkspaceResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::GetWorkspaceResponse#update_date_time #update_date_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1458,13 +1645,13 @@ module Aws::IoTTwinMaker
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.creation_date_time #=> Time
-    #   resp.description #=> String
-    #   resp.role #=> String
-    #   resp.s3_location #=> String
-    #   resp.update_date_time #=> Time
     #   resp.workspace_id #=> String
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.s3_location #=> String
+    #   resp.role #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.update_date_time #=> Time
     #
     # @overload get_workspace(params = {})
     # @param [Hash] params ({})
@@ -1475,56 +1662,59 @@ module Aws::IoTTwinMaker
 
     # Lists all component types in a workspace.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace.
+    #
     # @option params [Array<Types::ListComponentTypesFilter>] :filters
     #   A list of objects that filter the request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to display.
     #
     # @option params [String] :next_token
     #   The string that specifies the next page of results.
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace.
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
     #
     # @return [Types::ListComponentTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListComponentTypesResponse#component_type_summaries #component_type_summaries} => Array&lt;Types::ComponentTypeSummary&gt;
-    #   * {Types::ListComponentTypesResponse#max_results #max_results} => Integer
-    #   * {Types::ListComponentTypesResponse#next_token #next_token} => String
     #   * {Types::ListComponentTypesResponse#workspace_id #workspace_id} => String
+    #   * {Types::ListComponentTypesResponse#component_type_summaries #component_type_summaries} => Array&lt;Types::ComponentTypeSummary&gt;
+    #   * {Types::ListComponentTypesResponse#next_token #next_token} => String
+    #   * {Types::ListComponentTypesResponse#max_results #max_results} => Integer
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_component_types({
+    #     workspace_id: "Id", # required
     #     filters: [
     #       {
     #         extends_from: "ComponentTypeId",
-    #         is_abstract: false,
     #         namespace: "String",
+    #         is_abstract: false,
     #       },
     #     ],
-    #     max_results: 1,
     #     next_token: "NextToken",
-    #     workspace_id: "Id", # required
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.workspace_id #=> String
     #   resp.component_type_summaries #=> Array
     #   resp.component_type_summaries[0].arn #=> String
     #   resp.component_type_summaries[0].component_type_id #=> String
     #   resp.component_type_summaries[0].creation_date_time #=> Time
+    #   resp.component_type_summaries[0].update_date_time #=> Time
     #   resp.component_type_summaries[0].description #=> String
+    #   resp.component_type_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
     #   resp.component_type_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.component_type_summaries[0].status.error.message #=> String
-    #   resp.component_type_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.component_type_summaries[0].update_date_time #=> Time
-    #   resp.max_results #=> Integer
     #   resp.next_token #=> String
-    #   resp.workspace_id #=> String
+    #   resp.max_results #=> Integer
     #
     # @overload list_component_types(params = {})
     # @param [Hash] params ({})
@@ -1535,6 +1725,9 @@ module Aws::IoTTwinMaker
 
     # Lists all entities in a workspace.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace.
+    #
     # @option params [Array<Types::ListEntitiesFilter>] :filters
     #   A list of objects that filter the request.
     #
@@ -1543,13 +1736,13 @@ module Aws::IoTTwinMaker
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to display.
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
     #
     # @option params [String] :next_token
     #   The string that specifies the next page of results.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace.
     #
     # @return [Types::ListEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1561,31 +1754,31 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_entities({
+    #     workspace_id: "Id", # required
     #     filters: [
     #       {
+    #         parent_entity_id: "ParentEntityId",
     #         component_type_id: "ComponentTypeId",
     #         external_id: "String",
-    #         parent_entity_id: "ParentEntityId",
     #       },
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.entity_summaries #=> Array
-    #   resp.entity_summaries[0].arn #=> String
-    #   resp.entity_summaries[0].creation_date_time #=> Time
-    #   resp.entity_summaries[0].description #=> String
     #   resp.entity_summaries[0].entity_id #=> String
     #   resp.entity_summaries[0].entity_name #=> String
-    #   resp.entity_summaries[0].has_child_entities #=> Boolean
+    #   resp.entity_summaries[0].arn #=> String
     #   resp.entity_summaries[0].parent_entity_id #=> String
+    #   resp.entity_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
     #   resp.entity_summaries[0].status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.entity_summaries[0].status.error.message #=> String
-    #   resp.entity_summaries[0].status.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
+    #   resp.entity_summaries[0].description #=> String
+    #   resp.entity_summaries[0].has_child_entities #=> Boolean
+    #   resp.entity_summaries[0].creation_date_time #=> Time
     #   resp.entity_summaries[0].update_date_time #=> Time
     #   resp.next_token #=> String
     #
@@ -1598,40 +1791,40 @@ module Aws::IoTTwinMaker
 
     # Lists all scenes in a workspace.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the scenes.
+    #
     # @option params [Integer] :max_results
     #   Specifies the maximum number of results to display.
     #
     # @option params [String] :next_token
     #   The string that specifies the next page of results.
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the scenes.
-    #
     # @return [Types::ListScenesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListScenesResponse#next_token #next_token} => String
     #   * {Types::ListScenesResponse#scene_summaries #scene_summaries} => Array&lt;Types::SceneSummary&gt;
+    #   * {Types::ListScenesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_scenes({
+    #     workspace_id: "Id", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.scene_summaries #=> Array
-    #   resp.scene_summaries[0].arn #=> String
-    #   resp.scene_summaries[0].content_location #=> String
-    #   resp.scene_summaries[0].creation_date_time #=> Time
-    #   resp.scene_summaries[0].description #=> String
     #   resp.scene_summaries[0].scene_id #=> String
+    #   resp.scene_summaries[0].content_location #=> String
+    #   resp.scene_summaries[0].arn #=> String
+    #   resp.scene_summaries[0].creation_date_time #=> Time
     #   resp.scene_summaries[0].update_date_time #=> Time
+    #   resp.scene_summaries[0].description #=> String
+    #   resp.next_token #=> String
     #
     # @overload list_scenes(params = {})
     # @param [Hash] params ({})
@@ -1642,33 +1835,36 @@ module Aws::IoTTwinMaker
 
     # Lists all tags associated with a resource.
     #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
     # @option params [Integer] :max_results
-    #   The maximum number of results to display.
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
     #
     # @option params [String] :next_token
     #   The string that specifies the next page of results.
     #
-    # @option params [required, String] :resource_arn
-    #   The ARN of the resource.
-    #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TwinMakerArn", # required
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_arn: "TwinMakerArn", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.next_token #=> String
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -1680,15 +1876,18 @@ module Aws::IoTTwinMaker
     # Retrieves information about workspaces in the current account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to display.
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #
+    #   Valid Range: Minimum value of 1. Maximum value of 250.
     #
     # @option params [String] :next_token
     #   The string that specifies the next page of results.
     #
     # @return [Types::ListWorkspacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListWorkspacesResponse#next_token #next_token} => String
     #   * {Types::ListWorkspacesResponse#workspace_summaries #workspace_summaries} => Array&lt;Types::WorkspaceSummary&gt;
+    #   * {Types::ListWorkspacesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1701,13 +1900,13 @@ module Aws::IoTTwinMaker
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.workspace_summaries #=> Array
-    #   resp.workspace_summaries[0].arn #=> String
-    #   resp.workspace_summaries[0].creation_date_time #=> Time
-    #   resp.workspace_summaries[0].description #=> String
-    #   resp.workspace_summaries[0].update_date_time #=> Time
     #   resp.workspace_summaries[0].workspace_id #=> String
+    #   resp.workspace_summaries[0].arn #=> String
+    #   resp.workspace_summaries[0].description #=> String
+    #   resp.workspace_summaries[0].creation_date_time #=> Time
+    #   resp.workspace_summaries[0].update_date_time #=> Time
+    #   resp.next_token #=> String
     #
     # @overload list_workspaces(params = {})
     # @param [Hash] params ({})
@@ -1769,11 +1968,23 @@ module Aws::IoTTwinMaker
 
     # Updates information in a component type.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the component type.
+    #
+    # @option params [Boolean] :is_singleton
+    #   A Boolean value that specifies whether an entity can have more than
+    #   one component of this type.
+    #
     # @option params [required, String] :component_type_id
     #   The ID of the component type.
     #
     # @option params [String] :description
     #   The description of the component type.
+    #
+    # @option params [Hash<String,Types::PropertyDefinitionRequest>] :property_definitions
+    #   An object that maps strings to the property definitions in the
+    #   component type. Each string in the mapping must be unique to this
+    #   object.
     #
     # @option params [Array<String>] :extends_from
     #   Specifies the component type that this component type extends.
@@ -1782,119 +1993,116 @@ module Aws::IoTTwinMaker
     #   An object that maps strings to the functions in the component type.
     #   Each string in the mapping must be unique to this object.
     #
-    # @option params [Boolean] :is_singleton
-    #   A Boolean value that specifies whether an entity can have more than
-    #   one component of this type.
-    #
-    # @option params [Hash<String,Types::PropertyDefinitionRequest>] :property_definitions
-    #   An object that maps strings to the property definitions in the
-    #   component type. Each string in the mapping must be unique to this
-    #   object.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the component type.
+    # @option params [Hash<String,Types::PropertyGroupRequest>] :property_groups
+    #   The property groups
     #
     # @return [Types::UpdateComponentTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateComponentTypeResponse#workspace_id #workspace_id} => String
     #   * {Types::UpdateComponentTypeResponse#arn #arn} => String
     #   * {Types::UpdateComponentTypeResponse#component_type_id #component_type_id} => String
     #   * {Types::UpdateComponentTypeResponse#state #state} => String
-    #   * {Types::UpdateComponentTypeResponse#workspace_id #workspace_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_component_type({
+    #     workspace_id: "Id", # required
+    #     is_singleton: false,
     #     component_type_id: "ComponentTypeId", # required
     #     description: "Description",
-    #     extends_from: ["ComponentTypeId"],
-    #     functions: {
-    #       "Name" => {
-    #         implemented_by: {
-    #           is_native: false,
-    #           lambda: {
-    #             arn: "LambdaArn", # required
-    #           },
-    #         },
-    #         required_properties: ["Name"],
-    #         scope: "ENTITY", # accepts ENTITY, WORKSPACE
-    #       },
-    #     },
-    #     is_singleton: false,
     #     property_definitions: {
     #       "Name" => {
-    #         configuration: {
-    #           "Name" => "Value",
-    #         },
     #         data_type: {
+    #           type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
+    #           nested_type: {
+    #             # recursive DataType
+    #           },
     #           allowed_values: [
     #             {
     #               boolean_value: false,
     #               double_value: 1.0,
-    #               expression: "Expression",
     #               integer_value: 1,
+    #               long_value: 1,
+    #               string_value: "String",
     #               list_value: {
     #                 # recursive DataValueList
     #               },
-    #               long_value: 1,
     #               map_value: {
     #                 "String" => {
     #                   # recursive DataValue
     #                 },
     #               },
     #               relationship_value: {
-    #                 target_component_name: "Name",
     #                 target_entity_id: "EntityId",
+    #                 target_component_name: "Name",
     #               },
-    #               string_value: "String",
+    #               expression: "Expression",
     #             },
     #           ],
-    #           nested_type: {
-    #             # recursive DataType
-    #           },
-    #           relationship: {
-    #             relationship_type: "String",
-    #             target_component_type_id: "ComponentTypeId",
-    #           },
-    #           type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
     #           unit_of_measure: "String",
+    #           relationship: {
+    #             target_component_type_id: "ComponentTypeId",
+    #             relationship_type: "String",
+    #           },
     #         },
+    #         is_required_in_entity: false,
+    #         is_external_id: false,
+    #         is_stored_externally: false,
+    #         is_time_series: false,
     #         default_value: {
     #           boolean_value: false,
     #           double_value: 1.0,
-    #           expression: "Expression",
     #           integer_value: 1,
+    #           long_value: 1,
+    #           string_value: "String",
     #           list_value: [
     #             {
     #               # recursive DataValue
     #             },
     #           ],
-    #           long_value: 1,
     #           map_value: {
     #             "String" => {
     #               # recursive DataValue
     #             },
     #           },
     #           relationship_value: {
-    #             target_component_name: "Name",
     #             target_entity_id: "EntityId",
+    #             target_component_name: "Name",
     #           },
-    #           string_value: "String",
+    #           expression: "Expression",
     #         },
-    #         is_external_id: false,
-    #         is_required_in_entity: false,
-    #         is_stored_externally: false,
-    #         is_time_series: false,
+    #         configuration: {
+    #           "Name" => "Value",
+    #         },
     #       },
     #     },
-    #     workspace_id: "Id", # required
+    #     extends_from: ["ComponentTypeId"],
+    #     functions: {
+    #       "Name" => {
+    #         required_properties: ["Name"],
+    #         scope: "ENTITY", # accepts ENTITY, WORKSPACE
+    #         implemented_by: {
+    #           lambda: {
+    #             arn: "LambdaArn", # required
+    #           },
+    #           is_native: false,
+    #         },
+    #       },
+    #     },
+    #     property_groups: {
+    #       "Name" => {
+    #         group_type: "TABULAR", # accepts TABULAR
+    #         property_names: ["Name"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.workspace_id #=> String
     #   resp.arn #=> String
     #   resp.component_type_id #=> String
     #   resp.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
-    #   resp.workspace_id #=> String
     #
     # @overload update_component_type(params = {})
     # @param [Hash] params ({})
@@ -1905,12 +2113,8 @@ module Aws::IoTTwinMaker
 
     # Updates an entity.
     #
-    # @option params [Hash<String,Types::ComponentUpdateRequest>] :component_updates
-    #   An object that maps strings to the component updates in the request.
-    #   Each string in the mapping must be unique to this object.
-    #
-    # @option params [String] :description
-    #   The description of the entity.
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the entity.
     #
     # @option params [required, String] :entity_id
     #   The ID of the entity.
@@ -1918,132 +2122,143 @@ module Aws::IoTTwinMaker
     # @option params [String] :entity_name
     #   The name of the entity.
     #
+    # @option params [String] :description
+    #   The description of the entity.
+    #
+    # @option params [Hash<String,Types::ComponentUpdateRequest>] :component_updates
+    #   An object that maps strings to the component updates in the request.
+    #   Each string in the mapping must be unique to this object.
+    #
     # @option params [Types::ParentEntityUpdateRequest] :parent_entity_update
     #   An object that describes the update request for a parent entity.
     #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the entity.
-    #
     # @return [Types::UpdateEntityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::UpdateEntityResponse#state #state} => String
     #   * {Types::UpdateEntityResponse#update_date_time #update_date_time} => Time
+    #   * {Types::UpdateEntityResponse#state #state} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_entity({
+    #     workspace_id: "Id", # required
+    #     entity_id: "EntityId", # required
+    #     entity_name: "EntityName",
+    #     description: "Description",
     #     component_updates: {
     #       "Name" => {
-    #         component_type_id: "ComponentTypeId",
+    #         update_type: "CREATE", # accepts CREATE, UPDATE, DELETE
     #         description: "Description",
+    #         component_type_id: "ComponentTypeId",
     #         property_updates: {
     #           "Name" => {
     #             definition: {
-    #               configuration: {
-    #                 "Name" => "Value",
-    #               },
     #               data_type: {
+    #                 type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
+    #                 nested_type: {
+    #                   # recursive DataType
+    #                 },
     #                 allowed_values: [
     #                   {
     #                     boolean_value: false,
     #                     double_value: 1.0,
-    #                     expression: "Expression",
     #                     integer_value: 1,
+    #                     long_value: 1,
+    #                     string_value: "String",
     #                     list_value: {
     #                       # recursive DataValueList
     #                     },
-    #                     long_value: 1,
     #                     map_value: {
     #                       "String" => {
     #                         # recursive DataValue
     #                       },
     #                     },
     #                     relationship_value: {
-    #                       target_component_name: "Name",
     #                       target_entity_id: "EntityId",
+    #                       target_component_name: "Name",
     #                     },
-    #                     string_value: "String",
+    #                     expression: "Expression",
     #                   },
     #                 ],
-    #                 nested_type: {
-    #                   # recursive DataType
-    #                 },
-    #                 relationship: {
-    #                   relationship_type: "String",
-    #                   target_component_type_id: "ComponentTypeId",
-    #                 },
-    #                 type: "RELATIONSHIP", # required, accepts RELATIONSHIP, STRING, LONG, BOOLEAN, INTEGER, DOUBLE, LIST, MAP
     #                 unit_of_measure: "String",
+    #                 relationship: {
+    #                   target_component_type_id: "ComponentTypeId",
+    #                   relationship_type: "String",
+    #                 },
     #               },
+    #               is_required_in_entity: false,
+    #               is_external_id: false,
+    #               is_stored_externally: false,
+    #               is_time_series: false,
     #               default_value: {
     #                 boolean_value: false,
     #                 double_value: 1.0,
-    #                 expression: "Expression",
     #                 integer_value: 1,
+    #                 long_value: 1,
+    #                 string_value: "String",
     #                 list_value: [
     #                   {
     #                     # recursive DataValue
     #                   },
     #                 ],
-    #                 long_value: 1,
     #                 map_value: {
     #                   "String" => {
     #                     # recursive DataValue
     #                   },
     #                 },
     #                 relationship_value: {
-    #                   target_component_name: "Name",
     #                   target_entity_id: "EntityId",
+    #                   target_component_name: "Name",
     #                 },
-    #                 string_value: "String",
+    #                 expression: "Expression",
     #               },
-    #               is_external_id: false,
-    #               is_required_in_entity: false,
-    #               is_stored_externally: false,
-    #               is_time_series: false,
+    #               configuration: {
+    #                 "Name" => "Value",
+    #               },
     #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #             value: {
     #               boolean_value: false,
     #               double_value: 1.0,
-    #               expression: "Expression",
     #               integer_value: 1,
+    #               long_value: 1,
+    #               string_value: "String",
     #               list_value: [
     #                 {
     #                   # recursive DataValue
     #                 },
     #               ],
-    #               long_value: 1,
     #               map_value: {
     #                 "String" => {
     #                   # recursive DataValue
     #                 },
     #               },
     #               relationship_value: {
-    #                 target_component_name: "Name",
     #                 target_entity_id: "EntityId",
+    #                 target_component_name: "Name",
     #               },
-    #               string_value: "String",
+    #               expression: "Expression",
     #             },
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #           },
     #         },
-    #         update_type: "CREATE", # accepts CREATE, UPDATE, DELETE
+    #         property_group_updates: {
+    #           "Name" => {
+    #             group_type: "TABULAR", # accepts TABULAR
+    #             property_names: ["Name"],
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
+    #           },
+    #         },
     #       },
     #     },
-    #     description: "Description",
-    #     entity_id: "EntityId", # required
-    #     entity_name: "EntityName",
     #     parent_entity_update: {
-    #       parent_entity_id: "ParentEntityId",
     #       update_type: "UPDATE", # required, accepts UPDATE, DELETE
+    #       parent_entity_id: "ParentEntityId",
     #     },
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
     #   resp.update_date_time #=> Time
+    #   resp.state #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "ERROR"
     #
     # @overload update_entity(params = {})
     # @param [Hash] params ({})
@@ -2052,10 +2267,59 @@ module Aws::IoTTwinMaker
       req.send_request(options)
     end
 
+    # Update the pricing plan.
+    #
+    # @option params [required, String] :pricing_mode
+    #   The pricing mode.
+    #
+    # @option params [Array<String>] :bundle_names
+    #   The bundle names.
+    #
+    # @return [Types::UpdatePricingPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePricingPlanResponse#current_pricing_plan #current_pricing_plan} => Types::PricingPlan
+    #   * {Types::UpdatePricingPlanResponse#pending_pricing_plan #pending_pricing_plan} => Types::PricingPlan
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pricing_plan({
+    #     pricing_mode: "BASIC", # required, accepts BASIC, STANDARD, TIERED_BUNDLE
+    #     bundle_names: ["BundleName"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.current_pricing_plan.billable_entity_count #=> Integer
+    #   resp.current_pricing_plan.bundle_information.bundle_names #=> Array
+    #   resp.current_pricing_plan.bundle_information.bundle_names[0] #=> String
+    #   resp.current_pricing_plan.bundle_information.pricing_tier #=> String, one of "TIER_1", "TIER_2", "TIER_3", "TIER_4"
+    #   resp.current_pricing_plan.effective_date_time #=> Time
+    #   resp.current_pricing_plan.pricing_mode #=> String, one of "BASIC", "STANDARD", "TIERED_BUNDLE"
+    #   resp.current_pricing_plan.update_date_time #=> Time
+    #   resp.current_pricing_plan.update_reason #=> String, one of "DEFAULT", "PRICING_TIER_UPDATE", "ENTITY_COUNT_UPDATE", "PRICING_MODE_UPDATE", "OVERWRITTEN"
+    #   resp.pending_pricing_plan.billable_entity_count #=> Integer
+    #   resp.pending_pricing_plan.bundle_information.bundle_names #=> Array
+    #   resp.pending_pricing_plan.bundle_information.bundle_names[0] #=> String
+    #   resp.pending_pricing_plan.bundle_information.pricing_tier #=> String, one of "TIER_1", "TIER_2", "TIER_3", "TIER_4"
+    #   resp.pending_pricing_plan.effective_date_time #=> Time
+    #   resp.pending_pricing_plan.pricing_mode #=> String, one of "BASIC", "STANDARD", "TIERED_BUNDLE"
+    #   resp.pending_pricing_plan.update_date_time #=> Time
+    #   resp.pending_pricing_plan.update_reason #=> String, one of "DEFAULT", "PRICING_TIER_UPDATE", "ENTITY_COUNT_UPDATE", "PRICING_MODE_UPDATE", "OVERWRITTEN"
+    #
+    # @overload update_pricing_plan(params = {})
+    # @param [Hash] params ({})
+    def update_pricing_plan(params = {}, options = {})
+      req = build_request(:update_pricing_plan, params)
+      req.send_request(options)
+    end
+
     # Updates a scene.
     #
-    # @option params [Array<String>] :capabilities
-    #   A list of capabilities that the scene uses to render.
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace that contains the scene.
+    #
+    # @option params [required, String] :scene_id
+    #   The ID of the scene.
     #
     # @option params [String] :content_location
     #   The relative path that specifies the location of the content
@@ -2064,11 +2328,8 @@ module Aws::IoTTwinMaker
     # @option params [String] :description
     #   The description of this scene.
     #
-    # @option params [required, String] :scene_id
-    #   The ID of the scene.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace that contains the scene.
+    # @option params [Array<String>] :capabilities
+    #   A list of capabilities that the scene uses to render.
     #
     # @return [Types::UpdateSceneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2077,11 +2338,11 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_scene({
-    #     capabilities: ["SceneCapability"],
+    #     workspace_id: "Id", # required
+    #     scene_id: "Id", # required
     #     content_location: "S3Url",
     #     description: "Description",
-    #     scene_id: "Id", # required
-    #     workspace_id: "Id", # required
+    #     capabilities: ["SceneCapability"],
     #   })
     #
     # @example Response structure
@@ -2097,14 +2358,14 @@ module Aws::IoTTwinMaker
 
     # Updates a workspace.
     #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace.
+    #
     # @option params [String] :description
     #   The description of the workspace.
     #
     # @option params [String] :role
     #   The ARN of the execution role associated with the workspace.
-    #
-    # @option params [required, String] :workspace_id
-    #   The ID of the workspace.
     #
     # @return [Types::UpdateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2113,9 +2374,9 @@ module Aws::IoTTwinMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_workspace({
+    #     workspace_id: "Id", # required
     #     description: "Description",
     #     role: "RoleArn",
-    #     workspace_id: "Id", # required
     #   })
     #
     # @example Response structure
@@ -2142,7 +2403,7 @@ module Aws::IoTTwinMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

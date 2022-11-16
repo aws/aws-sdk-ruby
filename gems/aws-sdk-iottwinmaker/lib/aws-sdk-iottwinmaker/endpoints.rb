@@ -137,6 +137,20 @@ module Aws::IoTTwinMaker
       end
     end
 
+    class ExecuteQuery
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IoTTwinMaker::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetComponentType
       def self.build(context)
         unless context.config.regional_endpoint
@@ -152,6 +166,20 @@ module Aws::IoTTwinMaker
     end
 
     class GetEntity
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IoTTwinMaker::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetPricingPlan
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -334,6 +362,20 @@ module Aws::IoTTwinMaker
     end
 
     class UpdateEntity
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IoTTwinMaker::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdatePricingPlan
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

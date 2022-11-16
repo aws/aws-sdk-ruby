@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-11-16)
+------------------
+
+* Feature - Documentation updates related to Batch on EKS
+
 1.64.0 (2022-10-25)
 ------------------
 

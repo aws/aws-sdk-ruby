@@ -3636,12 +3636,16 @@ module Aws::Connect
     # @option params [Array<String>] :groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
-    #   than aggregated for all queues. If you group by `CHANNEL`, you should
-    #   include a Channels filter. VOICE, CHAT, and TASK channels are
-    #   supported.
+    #   than aggregated for all queues.
     #
-    #   If no `Grouping` is included in the request, a summary of metrics is
-    #   returned.
+    #   * If you group by `CHANNEL`, you should include a Channels filter.
+    #     VOICE, CHAT, and TASK channels are supported.
+    #
+    #   * If you group by `ROUTING_PROFILE`, you must include either a queue
+    #     or routing profile filter.
+    #
+    #   * If no `Grouping` is included in the request, a summary of metrics is
+    #     returned.
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
@@ -6070,6 +6074,67 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Initiates silent monitoring of a contact. The Contact Control Panel
+    # (CCP) of the user specified by *userId* will be set to silent
+    # monitoring mode on the contact.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [Array<String>] :allowed_monitor_capabilities
+    #   Specify which monitoring actions the user is allowed to take. For
+    #   example, whether the user is allowed to escalate from silent
+    #   monitoring to barge.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::MonitorContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MonitorContactResponse#contact_id #contact_id} => String
+    #   * {Types::MonitorContactResponse#contact_arn #contact_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.monitor_contact({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     user_id: "AgentResourceId", # required
+    #     allowed_monitor_capabilities: ["SILENT_MONITOR"], # accepts SILENT_MONITOR, BARGE
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_id #=> String
+    #   resp.contact_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MonitorContact AWS API Documentation
+    #
+    # @overload monitor_contact(params = {})
+    # @param [Hash] params ({})
+    def monitor_contact(params = {}, options = {})
+      req = build_request(:monitor_contact, params)
+      req.send_request(options)
+    end
+
     # Changes the current status of a user or agent in Amazon Connect. If
     # the agent is currently handling a contact, this sets the agent's next
     # status.
@@ -6344,6 +6409,13 @@ module Aws::Connect
     # @option params [Types::QueueSearchCriteria] :search_criteria
     #   The search criteria to be used to return queues.
     #
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries with
+    #   a minimum of 2 characters and a maximum of 25 characters. Any queries
+    #   with character lengths outside of this range will throw invalid
+    #   results.
+    #
+    #    </note>
+    #
     # @return [Types::SearchQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchQueuesResponse#queues #queues} => Array&lt;Types::Queue&gt;
@@ -6451,6 +6523,13 @@ module Aws::Connect
     # @option params [Types::RoutingProfileSearchCriteria] :search_criteria
     #   The search criteria to be used to return routing profiles.
     #
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries with
+    #   a minimum of 2 characters and a maximum of 25 characters. Any queries
+    #   with character lengths outside of this range will throw invalid
+    #   results.
+    #
+    #    </note>
+    #
     # @return [Types::SearchRoutingProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchRoutingProfilesResponse#routing_profiles #routing_profiles} => Array&lt;Types::RoutingProfile&gt;
@@ -6554,6 +6633,12 @@ module Aws::Connect
     #
     # @option params [Types::SecurityProfileSearchCriteria] :search_criteria
     #   The search criteria to be used to return security profiles.
+    #
+    #   <note markdown="1"> The `name` field support "contains" queries with a minimum of 2
+    #   characters and maximum of 25 characters. Any queries with character
+    #   lengths outside of this range will throw invalid results.
+    #
+    #    </note>
     #
     #   <note markdown="1"> The currently supported value for `FieldName`\: `name`
     #
@@ -6663,10 +6748,10 @@ module Aws::Connect
     # @option params [Types::UserSearchCriteria] :search_criteria
     #   The search criteria to be used to return users.
     #
-    #   <note markdown="1"> The `Username`, `Firstname`, and `Lastname` fields support
-    #   "contains" queries with a minimum of 2 characters and a maximum of
-    #   25 characters. Any queries with character lengths outside of this
-    #   range result in empty results.
+    #   <note markdown="1"> The `name` and `description` fields support "contains" queries with
+    #   a minimum of 2 characters and a maximum of 25 characters. Any queries
+    #   with character lengths outside of this range will throw invalid
+    #   results.
     #
     #    </note>
     #
@@ -9153,7 +9238,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

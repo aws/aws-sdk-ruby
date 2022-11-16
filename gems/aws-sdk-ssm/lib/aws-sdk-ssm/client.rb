@@ -640,6 +640,11 @@ module Aws::SSM
     #   [Create an IAM service role for a hybrid environment][1] in the
     #   *Amazon Web Services Systems Manager User Guide*.
     #
+    #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter. You
+    #   must create a unique role.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
@@ -1640,8 +1645,23 @@ module Aws::SSM
     #   Information about the OpsItem.
     #
     # @option params [String] :ops_item_type
-    #   The type of OpsItem to create. Currently, the only valid values are
-    #   `/aws/changerequest` and `/aws/issue`.
+    #   The type of OpsItem to create. Systems Manager supports the following
+    #   types of OpsItems:
+    #
+    #   * `/aws/issue`
+    #
+    #     This type of OpsItem is used for default OpsItems created by
+    #     OpsCenter.
+    #
+    #   * `/aws/changerequest`
+    #
+    #     This type of OpsItem is used by Change Manager for reviewing and
+    #     approving or rejecting change requests.
+    #
+    #   * `/aws/insights`
+    #
+    #     This type of OpsItem is used by OpsCenter for aggregating and
+    #     reporting on duplicate OpsItems.
     #
     # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
     #   Operational data is custom data that provides useful reference details
@@ -1740,9 +1760,21 @@ module Aws::SSM
     #   The time specified in a change request for a runbook workflow to end.
     #   Currently supported only for the OpsItem type `/aws/changerequest`.
     #
+    # @option params [String] :account_id
+    #   The target Amazon Web Services account where you want to create an
+    #   OpsItem. To make this call, your account must be configured to work
+    #   with OpsItems across accounts. For more information, see [Setting up
+    #   OpsCenter to work with OpsItems across accounts][1] in the *Amazon Web
+    #   Services Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html
+    #
     # @return [Types::CreateOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOpsItemResponse#ops_item_id #ops_item_id} => String
+    #   * {Types::CreateOpsItemResponse#ops_item_arn #ops_item_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1780,11 +1812,13 @@ module Aws::SSM
     #     actual_end_time: Time.now,
     #     planned_start_time: Time.now,
     #     planned_end_time: Time.now,
+    #     account_id: "OpsItemAccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.ops_item_id #=> String
+    #   resp.ops_item_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItem AWS API Documentation
     #
@@ -2474,6 +2508,44 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_resource_data_sync(params = {}, options = {})
       req = build_request(:delete_resource_data_sync, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Systems Manager resource policy. A resource policy helps you
+    # to define the IAM entity (for example, an Amazon Web Services account)
+    # that can manage your Systems Manager resources. Currently,
+    # `OpsItemGroup` is the only resource that supports Systems Manager
+    # resource policies. The resource policy for `OpsItemGroup` enables
+    # Amazon Web Services accounts to view and interact with OpsCenter
+    # operational work items (OpsItems).
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which the policies are
+    #   attached.
+    #
+    # @option params [required, String] :policy_id
+    #   The policy ID.
+    #
+    # @option params [required, String] :policy_hash
+    #   ID of the current policy version. The hash helps to prevent multiple
+    #   calls from attempting to overwrite a policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #     policy_id: "PolicyId", # required
+    #     policy_hash: "PolicyHash", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -4669,7 +4741,7 @@ module Aws::SSM
     #   resp = client.describe_ops_items({
     #     ops_item_filters: [
     #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup, InsightByType, AccountId
     #         values: ["OpsItemFilterValue"], # required
     #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #       },
@@ -6252,6 +6324,9 @@ module Aws::SSM
     # @option params [required, String] :ops_item_id
     #   The ID of the OpsItem that you want to get.
     #
+    # @option params [String] :ops_item_arn
+    #   The OpsItem Amazon Resource Name (ARN).
+    #
     # @return [Types::GetOpsItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOpsItemResponse#ops_item #ops_item} => Types::OpsItem
@@ -6260,6 +6335,7 @@ module Aws::SSM
     #
     #   resp = client.get_ops_item({
     #     ops_item_id: "OpsItemId", # required
+    #     ops_item_arn: "OpsItemArn",
     #   })
     #
     # @example Response structure
@@ -6289,6 +6365,7 @@ module Aws::SSM
     #   resp.ops_item.actual_end_time #=> Time
     #   resp.ops_item.planned_start_time #=> Time
     #   resp.ops_item.planned_end_time #=> Time
+    #   resp.ops_item.ops_item_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsItem AWS API Documentation
     #
@@ -6833,6 +6910,53 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_patch_baseline_for_patch_group(params = {}, options = {})
       req = build_request(:get_patch_baseline_for_patch_group, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of the `Policy` object.
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which the policies are
+    #   attached.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::GetResourcePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
+    #   * {Types::GetResourcePoliciesResponse#policies #policies} => Array&lt;Types::GetResourcePoliciesResponseEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policies({
+    #     resource_arn: "ResourceArnString", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.policies #=> Array
+    #   resp.policies[0].policy_id #=> String
+    #   resp.policies[0].policy_hash #=> String
+    #   resp.policies[0].policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetResourcePolicies AWS API Documentation
+    #
+    # @overload get_resource_policies(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policies(params = {}, options = {})
+      req = build_request(:get_resource_policies, params)
       req.send_request(options)
     end
 
@@ -8649,6 +8773,56 @@ module Aws::SSM
     # @param [Hash] params ({})
     def put_parameter(params = {}, options = {})
       req = build_request(:put_parameter, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a Systems Manager resource policy. A resource
+    # policy helps you to define the IAM entity (for example, an Amazon Web
+    # Services account) that can manage your Systems Manager resources.
+    # Currently, `OpsItemGroup` is the only resource that supports Systems
+    # Manager resource policies. The resource policy for `OpsItemGroup`
+    # enables Amazon Web Services accounts to view and interact with
+    # OpsCenter operational work items (OpsItems).
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource to which the policies are
+    #   attached.
+    #
+    # @option params [required, String] :policy
+    #   A policy you want to associate with a resource.
+    #
+    # @option params [String] :policy_id
+    #   The policy ID.
+    #
+    # @option params [String] :policy_hash
+    #   ID of the current policy version. The hash helps to prevent a
+    #   situation where multiple users attempt to overwrite a policy.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy_id #policy_id} => String
+    #   * {Types::PutResourcePolicyResponse#policy_hash #policy_hash} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #     policy: "Policy", # required
+    #     policy_id: "PolicyId",
+    #     policy_hash: "PolicyHash",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_id #=> String
+    #   resp.policy_hash #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -11376,7 +11550,21 @@ module Aws::SSM
     #   The ID of the managed node where you want to update the role.
     #
     # @option params [required, String] :iam_role
-    #   The IAM role you want to assign or change.
+    #   The name of the Identity and Access Management (IAM) role that you
+    #   want to assign to the managed node. This IAM role must provide
+    #   AssumeRole permissions for the Amazon Web Services Systems Manager
+    #   service principal `ssm.amazonaws.com`. For more information, see
+    #   [Create an IAM service role for a hybrid environment][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter. You
+    #   must create a unique role.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -11506,6 +11694,9 @@ module Aws::SSM
     #   The time specified in a change request for a runbook workflow to end.
     #   Currently supported only for the OpsItem type `/aws/changerequest`.
     #
+    # @option params [String] :ops_item_arn
+    #   The OpsItem Amazon Resource Name (ARN).
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -11539,6 +11730,7 @@ module Aws::SSM
     #     actual_end_time: Time.now,
     #     planned_start_time: Time.now,
     #     planned_end_time: Time.now,
+    #     ops_item_arn: "OpsItemArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItem AWS API Documentation
@@ -11926,7 +12118,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -521,10 +521,7 @@ module Aws::EKS
     # Creates an Amazon EKS add-on.
     #
     # Amazon EKS add-ons help to automate the provisioning and lifecycle
-    # management of common operational software for Amazon EKS clusters.
-    # Amazon EKS add-ons require clusters running version 1.18 or later
-    # because Amazon EKS add-ons rely on the Server-side Apply Kubernetes
-    # feature, which is only available in Kubernetes 1.18 and later. For
+    # management of common operational software for Amazon EKS clusters. For
     # more information, see [Amazon EKS add-ons][1] in the *Amazon EKS User
     # Guide*.
     #
@@ -760,14 +757,14 @@ module Aws::EKS
     # @option params [Types::OutpostConfigRequest] :outpost_config
     #   An object representing the configuration of your local Amazon EKS
     #   cluster on an Amazon Web Services Outpost. Before creating a local
-    #   cluster on an Outpost, review [Creating an Amazon EKS cluster on an
-    #   Amazon Web Services Outpost][1] in the *Amazon EKS User Guide*. This
-    #   object isn't available for creating Amazon EKS clusters on the Amazon
-    #   Web Services cloud.
+    #   cluster on an Outpost, review [Local clusters for Amazon EKS on Amazon
+    #   Web Services Outposts][1] in the *Amazon EKS User Guide*. This object
+    #   isn't available for creating Amazon EKS clusters on the Amazon Web
+    #   Services cloud.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -838,6 +835,9 @@ module Aws::EKS
     #     outpost_config: {
     #       outpost_arns: ["String"], # required
     #       control_plane_instance_type: "String", # required
+    #       control_plane_placement: {
+    #         group_name: "String",
+    #       },
     #     },
     #   })
     #
@@ -891,6 +891,7 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns #=> Array
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
+    #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -1482,6 +1483,7 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns #=> Array
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
+    #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -1689,6 +1691,7 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns #=> Array
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
+    #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeregisterCluster AWS API Documentation
     #
@@ -1940,6 +1943,7 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns #=> Array
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
+    #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2773,6 +2777,7 @@ module Aws::EKS
     #   resp.cluster.outpost_config.outpost_arns #=> Array
     #   resp.cluster.outpost_config.outpost_arns[0] #=> String
     #   resp.cluster.outpost_config.control_plane_instance_type #=> String
+    #   resp.cluster.outpost_config.control_plane_placement.group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterCluster AWS API Documentation
     #
@@ -3387,7 +3392,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

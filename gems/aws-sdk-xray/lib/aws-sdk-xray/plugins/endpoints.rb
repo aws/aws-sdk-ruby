@@ -64,6 +64,8 @@ module Aws::XRay
             Aws::XRay::Endpoints::CreateSamplingRule.build(context)
           when :delete_group
             Aws::XRay::Endpoints::DeleteGroup.build(context)
+          when :delete_resource_policy
+            Aws::XRay::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_sampling_rule
             Aws::XRay::Endpoints::DeleteSamplingRule.build(context)
           when :get_encryption_config
@@ -94,10 +96,14 @@ module Aws::XRay
             Aws::XRay::Endpoints::GetTraceGraph.build(context)
           when :get_trace_summaries
             Aws::XRay::Endpoints::GetTraceSummaries.build(context)
+          when :list_resource_policies
+            Aws::XRay::Endpoints::ListResourcePolicies.build(context)
           when :list_tags_for_resource
             Aws::XRay::Endpoints::ListTagsForResource.build(context)
           when :put_encryption_config
             Aws::XRay::Endpoints::PutEncryptionConfig.build(context)
+          when :put_resource_policy
+            Aws::XRay::Endpoints::PutResourcePolicy.build(context)
           when :put_telemetry_records
             Aws::XRay::Endpoints::PutTelemetryRecords.build(context)
           when :put_trace_segments

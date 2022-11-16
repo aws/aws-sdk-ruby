@@ -5118,7 +5118,7 @@ module Aws::CloudFormation
     #     operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #     current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #     status_message: "StatusMessage",
-    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration, HandlerInternalFailure, NonCompliant, Unknown
+    #     error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration, HandlerInternalFailure, NonCompliant, Unknown, UnsupportedTarget
     #     resource_model: "ResourceModel",
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -6823,7 +6823,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

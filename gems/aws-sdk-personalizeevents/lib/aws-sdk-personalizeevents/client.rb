@@ -418,6 +418,9 @@ module Aws::PersonalizeEvents
     #         sent_at: Time.now, # required
     #         recommendation_id: "RecommendationId",
     #         impression: ["ItemId"],
+    #         metric_attribution: {
+    #           event_attribution_source: "EventAttributionSource", # required
+    #         },
     #       },
     #     ],
     #   })
@@ -518,7 +521,7 @@ module Aws::PersonalizeEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeevents'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

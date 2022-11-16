@@ -191,6 +191,12 @@ module Aws::RDS
       data[:tag_list]
     end
 
+    # Reserved for future use.
+    # @return [String]
+    def db_system_id
+      data[:db_system_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

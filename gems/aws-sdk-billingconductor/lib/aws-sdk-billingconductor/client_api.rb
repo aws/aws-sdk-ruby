@@ -36,6 +36,7 @@ module Aws::BillingConductor
     BatchAssociateResourcesToCustomLineItemOutput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemOutput')
     BatchDisassociateResourcesFromCustomLineItemInput = Shapes::StructureShape.new(name: 'BatchDisassociateResourcesFromCustomLineItemInput')
     BatchDisassociateResourcesFromCustomLineItemOutput = Shapes::StructureShape.new(name: 'BatchDisassociateResourcesFromCustomLineItemOutput')
+    BillingEntity = Shapes::StringShape.new(name: 'BillingEntity')
     BillingGroupArn = Shapes::StringShape.new(name: 'BillingGroupArn')
     BillingGroupArnList = Shapes::ListShape.new(name: 'BillingGroupArnList')
     BillingGroupCostReportElement = Shapes::StructureShape.new(name: 'BillingGroupCostReportElement')
@@ -331,6 +332,7 @@ module Aws::BillingConductor
     CreatePricingRuleInput.add_member(:modifier_percentage, Shapes::ShapeRef.new(shape: ModifierPercentage, required: true, location_name: "ModifierPercentage"))
     CreatePricingRuleInput.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
     CreatePricingRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreatePricingRuleInput.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     CreatePricingRuleInput.struct_class = Types::CreatePricingRuleInput
 
     CreatePricingRuleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingRuleArn, location_name: "Arn"))
@@ -633,6 +635,7 @@ module Aws::BillingConductor
     PricingRuleListElement.add_member(:associated_pricing_plan_count, Shapes::ShapeRef.new(shape: NumberOfPricingPlansAssociatedWith, location_name: "AssociatedPricingPlanCount"))
     PricingRuleListElement.add_member(:creation_time, Shapes::ShapeRef.new(shape: Instant, location_name: "CreationTime"))
     PricingRuleListElement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
+    PricingRuleListElement.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     PricingRuleListElement.struct_class = Types::PricingRuleListElement
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -740,6 +743,7 @@ module Aws::BillingConductor
     UpdatePricingRuleOutput.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
     UpdatePricingRuleOutput.add_member(:associated_pricing_plan_count, Shapes::ShapeRef.new(shape: NumberOfPricingPlansAssociatedWith, location_name: "AssociatedPricingPlanCount"))
     UpdatePricingRuleOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Instant, location_name: "LastModifiedTime"))
+    UpdatePricingRuleOutput.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     UpdatePricingRuleOutput.struct_class = Types::UpdatePricingRuleOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))

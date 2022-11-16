@@ -858,6 +858,12 @@ module Aws::Batch
     #   resources. Don't specify it.
     #
     #    </note>
+    #
+    #   <note markdown="1"> Batch doesn't support changing the desired number of vCPUs of an
+    #   existing compute environment. Don't specify this parameter for
+    #   compute environments using Amazon EKS clusters.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] subnets
@@ -4138,7 +4144,7 @@ module Aws::Batch
     #   documentation*.
     #
     #   Valid values: `Default` \| `ClusterFirst` \|
-    #   `ClusterFirstWithHostNet` \| `None`
+    #   `ClusterFirstWithHostNet`
     #
     #
     #
@@ -4202,16 +4208,24 @@ module Aws::Batch
     #   the `hostNetwork` parameter is not specified, the default is
     #   `ClusterFirstWithHostNet`. `ClusterFirst` indicates that any DNS
     #   query that does not match the configured cluster domain suffix is
-    #   forwarded to the upstream nameserver inherited from the node. For
-    #   more information, see [Pod's DNS policy][1] in the *Kubernetes
-    #   documentation*.
+    #   forwarded to the upstream nameserver inherited from the node. If no
+    #   value was specified for `dnsPolicy` in the
+    #   [RegisterJobDefinition][1] API operation, then no value will be
+    #   returned for `dnsPolicy` by either of [DescribeJobDefinitions][2] or
+    #   [DescribeJobs][3] API operations. The pod spec setting will contain
+    #   either `ClusterFirst` or `ClusterFirstWithHostNet`, depending on the
+    #   value of the `hostNetwork` parameter. For more information, see
+    #   [Pod's DNS policy][4] in the *Kubernetes documentation*.
     #
     #   Valid values: `Default` \| `ClusterFirst` \|
-    #   `ClusterFirstWithHostNet` \| `None`
+    #   `ClusterFirstWithHostNet`
     #
     #
     #
-    #   [1]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeJobDefinitions.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeJobs.html
+    #   [4]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
     #   @return [String]
     #
     # @!attribute [rw] containers
@@ -7046,15 +7060,35 @@ module Aws::Batch
     #
     #     value = 8192
     #
-    #     : `VCPU` = 1, 2, or 4
+    #     : `VCPU` = 1, 2, 4, or 8
     #
-    #     value = 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384
+    #     value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360
     #
     #     : `VCPU` = 2 or 4
     #
-    #     value = 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720
+    #     value = 16384
+    #
+    #     : `VCPU` = 2, 4, or 8
+    #
+    #     value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624, 27648, 29696, or 30720
     #
     #     : `VCPU` = 4
+    #
+    #     value = 20480, 24576, or 28672
+    #
+    #     : `VCPU` = 4 or 8
+    #
+    #     value = 36864, 45056, 53248, or 61440
+    #
+    #     : `VCPU` = 8
+    #
+    #     value = 32768, 40960, 49152, or 57344
+    #
+    #     : `VCPU` = 8 or 16
+    #
+    #     value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880
+    #
+    #     : `VCPU` = 16
     #
     #   type="VCPU"
     #
@@ -7066,10 +7100,14 @@ module Aws::Batch
     #     but can be specified in several places; it must be specified for
     #     each node at least once.
     #
+    #     The default for the Fargate On-Demand vCPU resource count quota is
+    #     6 vCPUs. For more information about Fargate quotas, see [Fargate
+    #     quotas][5] in the *Amazon Web Services General Reference*.
+    #
     #     For jobs that are running on Fargate resources, then `value` must
     #     match one of the supported values and the `MEMORY` values must be
     #     one of the values supported for that `VCPU` value. The supported
-    #     values are 0.25, 0.5, 1, 2, and 4
+    #     values are 0.25, 0.5, 1, 2, 4, 8, and 16
     #
     #     value = 0.25
     #
@@ -7094,12 +7132,23 @@ module Aws::Batch
     #       16384, 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576,
     #       25600, 26624, 27648, 28672, 29696, or 30720
     #
+    #     value = 8
+    #
+    #     : `MEMORY` = 16384, 20480, 24576, 28672, 32768, 36864, 40960,
+    #       45056, 49152, 53248, 57344, or 61440
+    #
+    #     value = 16
+    #
+    #     : `MEMORY` = 32768, 40960, 49152, 57344, 65536, 73728, 81920,
+    #       90112, 98304, 106496, 114688, or 122880
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
     #   [2]: https://docs.docker.com/engine/api/v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
+    #   [5]: https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -8082,11 +8131,11 @@ module Aws::Batch
 
     # Specifies the infrastructure update policy for the compute
     # environment. For more information about infrastructure updates, see
-    # [Infrastructure updates][1] in the *Batch User Guide*.
+    # [Updating compute environments][1] in the *Batch User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/infrastructure-updates.html
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
     # @note When making an API call, you may pass UpdatePolicy
     #   data as a hash:

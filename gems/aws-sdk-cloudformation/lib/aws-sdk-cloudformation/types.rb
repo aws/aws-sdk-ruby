@@ -6004,7 +6004,7 @@ module Aws::CloudFormation
     #         operation_status: "PENDING", # required, accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #         current_operation_status: "PENDING", # accepts PENDING, IN_PROGRESS, SUCCESS, FAILED
     #         status_message: "StatusMessage",
-    #         error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration, HandlerInternalFailure, NonCompliant, Unknown
+    #         error_code: "NotUpdatable", # accepts NotUpdatable, InvalidRequest, AccessDenied, InvalidCredentials, AlreadyExists, NotFound, ResourceConflict, Throttling, ServiceLimitExceeded, NotStabilized, GeneralServiceException, ServiceInternalError, NetworkFailure, InternalFailure, InvalidTypeConfiguration, HandlerInternalFailure, NonCompliant, Unknown, UnsupportedTarget
     #         resource_model: "ResourceModel",
     #         client_request_token: "ClientRequestToken",
     #       }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-11-16)
+------------------
+
+* Feature - Add support for sorting and filtering in ListServiceInstances
+
 1.19.0 (2022-11-14)
 ------------------
 

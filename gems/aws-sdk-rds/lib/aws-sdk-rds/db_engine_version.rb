@@ -225,6 +225,22 @@ module Aws::RDS
       data[:supports_babelfish]
     end
 
+    # JSON string that lists the installation files and parameters that RDS
+    # Custom uses to create a custom engine version (CEV). RDS Custom
+    # applies the patches in the order in which they're listed in the
+    # manifest. You can set the Oracle home, Oracle base, and UNIX/Linux
+    # user and group using the installation parameters. For more
+    # information, see [JSON fields in the CEV manifest][1] in the *Amazon
+    # RDS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
+    # @return [String]
+    def custom_db_engine_version_manifest
+      data[:custom_db_engine_version_manifest]
+    end
+
     # @!endgroup
 
     # @return [Client]

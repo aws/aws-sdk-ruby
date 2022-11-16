@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-11-16)
+------------------
+
+* Feature - This release adds a new feature BillingEntity pricing rule.
+
 1.2.0 (2022-11-08)
 ------------------
 

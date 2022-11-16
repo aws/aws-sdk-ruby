@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-11-16)
+------------------
+
+* Feature - Add support for PagerDuty integrations on ResponsePlan, IncidentRecord, and RelatedItem APIs
+
 1.19.0 (2022-11-11)
 ------------------
 

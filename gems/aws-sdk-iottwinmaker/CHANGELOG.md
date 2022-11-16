@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-11-16)
+------------------
+
+* Feature - This release adds the following: 1) ExecuteQuery API allows users to query their AWS IoT TwinMaker Knowledge Graph 2) Pricing plan APIs allow users to configure and manage their pricing mode 3) Support for property groups and tabular property values in existing AWS IoT TwinMaker APIs.
+
 1.6.0 (2022-10-25)
 ------------------
 

@@ -1292,6 +1292,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list #=> Array
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
+    #   resp.db_cluster_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -1952,6 +1953,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
+    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2020,6 +2022,7 @@ module Aws::RDS
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
+    #   resp.custom_db_engine_version_manifest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -2815,6 +2818,9 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
+    # @option params [String] :db_system_id
+    #   Reserved for future use.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2914,6 +2920,7 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     db_system_id: "String",
     #     source_region: "String",
     #   })
     #
@@ -3009,6 +3016,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -3022,6 +3032,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3390,6 +3401,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list #=> Array
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
+    #   resp.db_cluster_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -4759,6 +4771,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5558,6 +5571,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -6701,6 +6715,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
+    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6758,6 +6773,7 @@ module Aws::RDS
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
+    #   resp.custom_db_engine_version_manifest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -6946,6 +6962,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -6959,6 +6978,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -7154,6 +7174,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list #=> Array
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
+    #   resp.db_cluster_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -7427,6 +7448,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -8811,6 +8833,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].tag_list #=> Array
     #   resp.db_cluster_snapshots[0].tag_list[0].key #=> String
     #   resp.db_cluster_snapshots[0].tag_list[0].value #=> String
+    #   resp.db_cluster_snapshots[0].db_system_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -9027,6 +9050,9 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.master_user_password #=> String
     #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
+    #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
     #   resp.db_clusters[0].storage_type #=> String
     #   resp.db_clusters[0].iops #=> Integer
@@ -9040,6 +9066,7 @@ module Aws::RDS
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_clusters[0].network_type #=> String
+    #   resp.db_clusters[0].db_system_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -9288,6 +9315,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].tag_list[0].key #=> String
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
     #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
+    #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -9669,6 +9697,7 @@ module Aws::RDS
     #   resp.db_instances[0].network_type #=> String
     #   resp.db_instances[0].activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instances[0].storage_throughput #=> Integer
+    #   resp.db_instances[0].db_system_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -12855,6 +12884,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -12868,6 +12900,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -13355,6 +13388,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
+    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -13414,6 +13448,7 @@ module Aws::RDS
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
+    #   resp.custom_db_engine_version_manifest #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -14133,6 +14168,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -14146,6 +14184,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -15527,6 +15566,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -16761,6 +16801,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -16887,6 +16928,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -16900,6 +16944,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -17130,6 +17175,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -17143,6 +17191,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -17362,6 +17411,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -18369,6 +18419,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -18382,6 +18435,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -19003,6 +19057,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -19016,6 +19073,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -19606,6 +19664,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -19619,6 +19680,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -20382,6 +20444,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -21038,6 +21101,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -21785,6 +21849,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -22091,6 +22156,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -22104,6 +22172,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -22287,6 +22356,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -22715,6 +22785,9 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.master_user_password #=> String
     #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -22728,6 +22801,7 @@ module Aws::RDS
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
     #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -22918,6 +22992,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -23166,6 +23241,7 @@ module Aws::RDS
     #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
     #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -23189,7 +23265,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

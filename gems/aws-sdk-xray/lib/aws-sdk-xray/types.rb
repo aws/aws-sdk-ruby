@@ -210,7 +210,7 @@ module Aws::XRay
     #   * The InsightsEnabled boolean can be set to true to enable insights
     #     for the new group or false to disable insights for the new group.
     #
-    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #   * The NotificationsEnabled boolean can be set to true to enable
     #     insights notifications for the new group. Notifications may only
     #     be enabled on a group with InsightsEnabled set to true.
     #   @return [Types::InsightsConfiguration]
@@ -377,6 +377,38 @@ module Aws::XRay
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroupResult AWS API Documentation
     #
     class DeleteGroupResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "PolicyName", # required
+    #         policy_revision_id: "PolicyRevisionId",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the resource policy to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   Specifies a specific policy revision to delete. Provide a
+    #   `PolicyRevisionId` to ensure an atomic delete operation. If the
+    #   provided revision id does not match the latest policy revision id,
+    #   an `InvalidPolicyRevisionIdException` exception is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :policy_name,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteResourcePolicyResult AWS API Documentation
+    #
+    class DeleteResourcePolicyResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteSamplingRuleRequest
     #   data as a hash:
@@ -1999,6 +2031,22 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # A policy revision id was provided which does not match the latest
+    # policy revision. This exception is also if a policy revision id of 0
+    # is provided via `PutResourcePolicy` and a policy with the same name
+    # already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InvalidPolicyRevisionIdException AWS API Documentation
+    #
+    class InvalidPolicyRevisionIdException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request is missing required parameters or has invalid parameters.
     #
     # @!attribute [rw] message
@@ -2008,6 +2056,43 @@ module Aws::XRay
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourcePoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "ResourcePolicyNextToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Not currently supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListResourcePoliciesRequest AWS API Documentation
+    #
+    class ListResourcePoliciesRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policies
+    #   The list of resource policies in the target Amazon Web Services
+    #   account.
+    #   @return [Array<Types::ResourcePolicy>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token. Not currently supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ListResourcePoliciesResult AWS API Documentation
+    #
+    class ListResourcePoliciesResult < Struct.new(
+      :resource_policies,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2059,6 +2144,60 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # The provided resource policy would prevent the caller of this request
+    # from calling PutResourcePolicy in the future.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/LockoutPreventionException AWS API Documentation
+    #
+    class LockoutPreventionException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Invalid policy document provided in request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/MalformedPolicyDocumentException AWS API Documentation
+    #
+    class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exceeded the maximum number of resource policies for a target Amazon
+    # Web Services account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PolicyCountLimitExceededException AWS API Documentation
+    #
+    class PolicyCountLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exceeded the maximum size for a resource policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PolicySizeLimitExceededException AWS API Documentation
+    #
+    class PolicySizeLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEncryptionConfigRequest
     #   data as a hash:
     #
@@ -2106,6 +2245,78 @@ module Aws::XRay
     #
     class PutEncryptionConfigResult < Struct.new(
       :encryption_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "PolicyName", # required
+    #         policy_document: "PolicyDocument", # required
+    #         policy_revision_id: "PolicyRevisionId",
+    #         bypass_policy_lockout_check: false,
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the resource policy. Must be unique within a specific
+    #   Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The resource policy document, which can be up to 5kb in size.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   Specifies a specific policy revision, to ensure an atomic create
+    #   operation. By default the resource policy is created if it does not
+    #   exist, or updated with an incremented revision id. The revision id
+    #   is unique to each policy in the account.
+    #
+    #   If the policy revision id does not match the latest revision id, the
+    #   operation will fail with an `InvalidPolicyRevisionIdException`
+    #   exception. You can also provide a `PolicyRevisionId` of 0. In this
+    #   case, the operation will fail with an
+    #   `InvalidPolicyRevisionIdException` exception if a resource policy
+    #   with the same name already exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] bypass_policy_lockout_check
+    #   A flag to indicate whether to bypass the resource policy lockout
+    #   safety check.
+    #
+    #   Setting this value to true increases the risk that the policy
+    #   becomes unmanageable. Do not set this value to true
+    #   indiscriminately.
+    #
+    #   Use this parameter only when you include a policy in the request and
+    #   you intend to prevent the principal that is making the request from
+    #   making a subsequent `PutResourcePolicy` request.
+    #
+    #   The default value is false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :policy_name,
+      :policy_document,
+      :policy_revision_id,
+      :bypass_policy_lockout_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   The resource policy document, as provided in the
+    #   `PutResourcePolicyRequest`.
+    #   @return [Types::ResourcePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutResourcePolicyResult AWS API Documentation
+    #
+    class PutResourcePolicyResult < Struct.new(
+      :resource_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2247,6 +2458,38 @@ module Aws::XRay
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource policy grants one or more Amazon Web Services services and
+    # accounts permissions to access X-Ray. Each resource policy is
+    # associated with a specific Amazon Web Services account.
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the resource policy. Must be unique within a specific
+    #   Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The resource policy document, which can be up to 5kb in size.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   Returns the current policy revision id for this policy name.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   When the policy was last updated, in Unix time seconds.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResourcePolicy AWS API Documentation
+    #
+    class ResourcePolicy < Struct.new(
+      :policy_name,
+      :policy_document,
+      :policy_revision_id,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3462,7 +3705,7 @@ module Aws::XRay
     #   * The InsightsEnabled boolean can be set to true to enable insights
     #     for the group or false to disable insights for the group.
     #
-    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #   * The NotificationsEnabled boolean can be set to true to enable
     #     insights notifications for the group. Notifications can only be
     #     enabled on a group with InsightsEnabled set to true.
     #   @return [Types::InsightsConfiguration]

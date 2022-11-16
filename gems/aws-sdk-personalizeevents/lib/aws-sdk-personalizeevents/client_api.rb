@@ -17,6 +17,7 @@ module Aws::PersonalizeEvents
     Date = Shapes::TimestampShape.new(name: 'Date')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Event = Shapes::StructureShape.new(name: 'Event')
+    EventAttributionSource = Shapes::StringShape.new(name: 'EventAttributionSource')
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventPropertiesJSON = Shapes::StringShape.new(name: 'EventPropertiesJSON')
     FloatType = Shapes::FloatShape.new(name: 'FloatType')
@@ -26,6 +27,7 @@ module Aws::PersonalizeEvents
     ItemId = Shapes::StringShape.new(name: 'ItemId')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
     ItemProperties = Shapes::StringShape.new(name: 'ItemProperties')
+    MetricAttribution = Shapes::StructureShape.new(name: 'MetricAttribution')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
     PutItemsRequest = Shapes::StructureShape.new(name: 'PutItemsRequest')
     PutUsersRequest = Shapes::StructureShape.new(name: 'PutUsersRequest')
@@ -46,6 +48,7 @@ module Aws::PersonalizeEvents
     Event.add_member(:sent_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "sentAt"))
     Event.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationId, location_name: "recommendationId"))
     Event.add_member(:impression, Shapes::ShapeRef.new(shape: Impression, location_name: "impression"))
+    Event.add_member(:metric_attribution, Shapes::ShapeRef.new(shape: MetricAttribution, location_name: "metricAttribution"))
     Event.struct_class = Types::Event
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
@@ -60,6 +63,9 @@ module Aws::PersonalizeEvents
     Item.struct_class = Types::Item
 
     ItemList.member = Shapes::ShapeRef.new(shape: Item)
+
+    MetricAttribution.add_member(:event_attribution_source, Shapes::ShapeRef.new(shape: EventAttributionSource, required: true, location_name: "eventAttributionSource"))
+    MetricAttribution.struct_class = Types::MetricAttribution
 
     PutEventsRequest.add_member(:tracking_id, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "trackingId"))
     PutEventsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))

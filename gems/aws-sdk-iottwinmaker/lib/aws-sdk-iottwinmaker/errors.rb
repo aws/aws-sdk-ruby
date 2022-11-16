@@ -32,6 +32,7 @@ module Aws::IoTTwinMaker
   # * {ConnectorFailureException}
   # * {ConnectorTimeoutException}
   # * {InternalServerException}
+  # * {QueryTimeoutException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -116,6 +117,25 @@ module Aws::IoTTwinMaker
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class QueryTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTTwinMaker::Types::QueryTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

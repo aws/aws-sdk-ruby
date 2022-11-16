@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-11-16)
+------------------
+
+* Feature - Adds support for customer-provided placement groups for Kubernetes control plane instances when creating local EKS clusters on Outposts
+
 1.78.0 (2022-10-25)
 ------------------
 

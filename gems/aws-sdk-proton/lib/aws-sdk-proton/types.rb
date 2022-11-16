@@ -72,9 +72,10 @@ module Aws::Proton
     #   @return [Types::RepositoryBranch]
     #
     # @!attribute [rw] pipeline_service_role_arn
-    #   The Amazon Resource Name (ARN) of the service role that Proton uses
-    #   for provisioning pipelines. Proton assumes this role for Amazon Web
-    #   Services-managed provisioning.
+    #   The Amazon Resource Name (ARN) of the service role you want to use
+    #   for provisioning pipelines. Assumed by Proton for Amazon Web
+    #   Services-managed provisioning, and by customer-owned automation for
+    #   self-managed provisioning.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/AccountSettings AWS API Documentation
@@ -584,11 +585,10 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] component_role_arn
-    #   The Amazon Resource Name (ARN) of an IAM service role in the
-    #   environment account. Proton uses this role to provision directly
-    #   defined components in the associated environment account. It
-    #   determines the scope of infrastructure that a component can
-    #   provision in the account.
+    #   The Amazon Resource Name (ARN) of the IAM service role that Proton
+    #   uses when provisioning directly defined components in the associated
+    #   environment account. It determines the scope of infrastructure that
+    #   a component can provision in the account.
     #
     #   You must specify `componentRoleArn` to allow directly defined
     #   components to be associated with any environments running in this
@@ -617,10 +617,9 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM service role in the
-    #   environment account. Proton uses this role to provision
-    #   infrastructure resources using Amazon Web Services-managed
-    #   provisioning and CloudFormation in the associated environment
+    #   The Amazon Resource Name (ARN) of the IAM service role that's
+    #   created in the environment account. Proton uses this role to
+    #   provision infrastructure resources in the associated environment
     #   account.
     #   @return [String]
     #
@@ -722,15 +721,15 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] environment_account_connection_id
-    #   The ID of the environment account connection that you provide if you
-    #   want Proton to provision infrastructure resources for your
-    #   environment or for any of the service instances running in it in an
+    #   The ID of the environment account connection that you provide if
+    #   you're provisioning your environment infrastructure resources to an
     #   environment account. For more information, see [Environment account
     #   connections][1] in the *Proton User guide*.
     #
-    #   If you specify the `environmentAccountConnectionId` parameter,
-    #   don't specify `protonServiceRoleArn`, `codebuildRoleArn`, or
-    #   `provisioningRepository`.
+    #   To use Amazon Web Services-managed provisioning for the environment,
+    #   specify either the `environmentAccountConnectionId` or
+    #   `protonServiceRoleArn` parameter and omit the
+    #   `provisioningRepository` parameter.
     #
     #
     #
@@ -742,14 +741,13 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that allows
-    #   Proton to provision infrastructure using Amazon Web Services-managed
-    #   provisioning and CloudFormation on your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make calls to other services on your behalf.
     #
-    #   To use Amazon Web Services-managed provisioning for the environment
-    #   or for any service instance running in the environment, specify
-    #   either the `environmentAccountConnectionId` or
-    #   `protonServiceRoleArn` parameter.
+    #   To use Amazon Web Services-managed provisioning for the environment,
+    #   specify either the `environmentAccountConnectionId` or
+    #   `protonServiceRoleArn` parameter and omit the
+    #   `provisioningRepository` parameter.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_repository
@@ -758,8 +756,9 @@ module Aws::Proton
     #   repository is a repository that has been registered with Proton. For
     #   more information, see CreateRepository.
     #
-    #   To use self-managed provisioning for the environment or for any
-    #   service instance running in the environment, specify this parameter.
+    #   To use self-managed provisioning for the environment, specify this
+    #   parameter and omit the `environmentAccountConnectionId` and
+    #   `protonServiceRoleArn` parameters.
     #   @return [Types::RepositoryBranchInput]
     #
     # @!attribute [rw] spec
@@ -1853,7 +1852,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] environment_account_connection_id
-    #   The ID of the environment account connection that Proton uses to
+    #   The ID of the environment account connection that's used to
     #   provision infrastructure resources in an environment account.
     #   @return [String]
     #
@@ -1875,9 +1874,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that allows
-    #   Proton to provision infrastructure using Amazon Web Services-managed
-    #   provisioning and CloudFormation on your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make calls to other services on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] provisioning
@@ -1994,11 +1992,8 @@ module Aws::Proton
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM service role in the
-    #   environment account. Proton uses this role to provision
-    #   infrastructure resources using Amazon Web Services-managed
-    #   provisioning and CloudFormation in the associated environment
-    #   account.
+    #   The IAM service role that's associated with the environment account
+    #   connection.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3695,14 +3690,64 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # A filtering criterion to scope down the result list of the
+    # ListServiceInstances action.
+    #
+    # @note When making an API call, you may pass ListServiceInstancesFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "name", # accepts name, deploymentStatus, templateName, serviceName, deployedTemplateVersionStatus, environmentName, lastDeploymentAttemptedAtBefore, lastDeploymentAttemptedAtAfter, createdAtBefore, createdAtAfter
+    #         value: "ListServiceInstancesFilterValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of a filtering criterion.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A value to filter by.
+    #
+    #   With the date/time keys (`*At\{Before,After\}`), the value is a
+    #   valid [RFC 3339][1] string with no UTC offset and with an optional
+    #   fractional precision (for example, `1985-04-12T23:20:50.52Z`).
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc3339.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstancesFilter AWS API Documentation
+    #
+    class ListServiceInstancesFilter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListServiceInstancesInput
     #   data as a hash:
     #
     #       {
+    #         filters: [
+    #           {
+    #             key: "name", # accepts name, deploymentStatus, templateName, serviceName, deployedTemplateVersionStatus, environmentName, lastDeploymentAttemptedAtBefore, lastDeploymentAttemptedAtAfter, createdAtBefore, createdAtAfter
+    #             value: "ListServiceInstancesFilterValue",
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #         service_name: "ResourceName",
+    #         sort_by: "name", # accepts name, deploymentStatus, templateName, serviceName, environmentName, lastDeploymentAttemptedAt, createdAt
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       }
+    #
+    # @!attribute [rw] filters
+    #   An array of filtering criteria that scope down the result list. By
+    #   default, all service instances in the Amazon Web Services account
+    #   are returned.
+    #   @return [Array<Types::ListServiceInstancesFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of service instances to list.
@@ -3718,12 +3763,30 @@ module Aws::Proton
     #   The name of the service that the service instance belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] sort_by
+    #   The field that the result list is sorted by.
+    #
+    #   When you choose to sort by `serviceName`, service instances within
+    #   each service are sorted by service instance name.
+    #
+    #   Default: `serviceName`
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Result list sort order.
+    #
+    #   Default: `ASCENDING`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstancesInput AWS API Documentation
     #
     class ListServiceInstancesInput < Struct.new(
+      :filters,
       :max_results,
       :next_token,
-      :service_name)
+      :service_name,
+      :sort_by,
+      :sort_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4064,21 +4127,16 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] deployment_id
-    #   The deployment ID for your provisioned resource. Proton uses it to
-    #   disambiguate different deployments of the resource. Applicable to
-    #   [self-managed provisioning][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
+    #   The deployment ID for your provisioned resource.
     #   @return [String]
     #
     # @!attribute [rw] outputs
-    #   The output values generated by your provisioned resource.
+    #   The provisioned resource state change detail data that's returned
+    #   by Proton.
     #   @return [Array<Types::Output>]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of your provisioned resource.
+    #   The provisioned resource Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5541,11 +5599,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM service role in the
-    #   environment account. Proton uses this role to provision
-    #   infrastructure resources using Amazon Web Services-managed
-    #   provisioning and CloudFormation in the associated environment
-    #   account.
+    #   The Amazon Resource Name (ARN) of the IAM service role that's
+    #   associated with the environment account connection to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateEnvironmentAccountConnectionInput AWS API Documentation
@@ -5661,20 +5716,12 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] environment_account_connection_id
-    #   The ID of the environment account connection that you provide if you
-    #   want Proton to provision infrastructure resources for your
-    #   environment or for any of the service instances running in it in an
-    #   environment account. For more information, see [Environment account
-    #   connections][1] in the *Proton User guide*.
+    #   The ID of the environment account connection.
     #
     #   You can only update to a new environment account connection if it
     #   was created in the same environment account that the current
     #   environment account connection was created in and is associated with
     #   the current environment.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5682,9 +5729,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that allows
-    #   Proton to provision infrastructure using Amazon Web Services-managed
-    #   provisioning and CloudFormation on your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make API calls to other services your behalf.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_repository

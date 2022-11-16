@@ -102,6 +102,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::DeletePatchBaseline.build(context)
           when :delete_resource_data_sync
             Aws::SSM::Endpoints::DeleteResourceDataSync.build(context)
+          when :delete_resource_policy
+            Aws::SSM::Endpoints::DeleteResourcePolicy.build(context)
           when :deregister_managed_instance
             Aws::SSM::Endpoints::DeregisterManagedInstance.build(context)
           when :deregister_patch_baseline_for_patch_group
@@ -222,6 +224,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::GetPatchBaseline.build(context)
           when :get_patch_baseline_for_patch_group
             Aws::SSM::Endpoints::GetPatchBaselineForPatchGroup.build(context)
+          when :get_resource_policies
+            Aws::SSM::Endpoints::GetResourcePolicies.build(context)
           when :get_service_setting
             Aws::SSM::Endpoints::GetServiceSetting.build(context)
           when :label_parameter_version
@@ -266,6 +270,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::PutInventory.build(context)
           when :put_parameter
             Aws::SSM::Endpoints::PutParameter.build(context)
+          when :put_resource_policy
+            Aws::SSM::Endpoints::PutResourcePolicy.build(context)
           when :register_default_patch_baseline
             Aws::SSM::Endpoints::RegisterDefaultPatchBaseline.build(context)
           when :register_patch_baseline_for_patch_group
