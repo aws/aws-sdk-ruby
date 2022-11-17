@@ -29,7 +29,7 @@ module Aws::Textract
     #             version: "S3ObjectVersion",
     #           },
     #         },
-    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
+    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES
     #         human_loop_config: {
     #           human_loop_name: "HumanLoopName", # required
     #           flow_definition_arn: "FlowDefinitionArn", # required
@@ -62,11 +62,13 @@ module Aws::Textract
     # @!attribute [rw] feature_types
     #   A list of the types of analysis to perform. Add TABLES to the list
     #   to return information about the tables that are detected in the
-    #   input document. Add FORMS to return detected form data. To perform
-    #   both types of analysis, add TABLES and FORMS to `FeatureTypes`. All
-    #   lines and words detected in the document are included in the
-    #   response (including text that isn't related to the value of
-    #   `FeatureTypes`).
+    #   input document. Add FORMS to return detected form data. Add
+    #   SIGNATURES to return the locations of detected signatures. To
+    #   perform both forms and table analysis, add TABLES and FORMS to
+    #   `FeatureTypes`. To detect signatures within form data and table
+    #   data, add SIGNATURES to either TABLES or FORMS. All lines and words
+    #   detected in the document are included in the response (including
+    #   text that isn't related to the value of `FeatureTypes`).
     #   @return [Array<String>]
     #
     # @!attribute [rw] human_loop_config
@@ -330,6 +332,10 @@ module Aws::Textract
     #     button (radio button) or a check box that's detected on a
     #     document page. Use the value of `SelectionStatus` to determine the
     #     status of the selection element.
+    #
+    #   * *SIGNATURE* - The location and confidene score of a signature
+    #     detected on a document page. Can be returned as part of a
+    #     Key-Value pair or a detected cell.
     #
     #   * *QUERY* - A question asked during the call of AnalyzeDocument.
     #     Contains an alias and an ID that attaches it to its answer.
@@ -1705,7 +1711,7 @@ module Aws::Textract
     #             version: "S3ObjectVersion",
     #           },
     #         },
-    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
+    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES
     #         client_request_token: "ClientRequestToken",
     #         job_tag: "JobTag",
     #         notification_channel: {

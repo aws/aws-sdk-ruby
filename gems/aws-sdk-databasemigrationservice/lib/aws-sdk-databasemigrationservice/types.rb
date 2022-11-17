@@ -809,9 +809,10 @@ module Aws::DatabaseMigrationService
     #   The type of engine for the endpoint. Valid values, depending on the
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`,
+    #   `"redshift"`, `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`,
     #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`,
-    #   `"elasticsearch"`, `"docdb"`, `"sqlserver"`, and `"neptune"`.
+    #   `"elasticsearch"`, `"docdb"`, `"sqlserver"`, `"neptune"`, and
+    #   `"babelfish"`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1336,6 +1337,7 @@ module Aws::DatabaseMigrationService
     #         publicly_accessible: false,
     #         dns_name_servers: "String",
     #         resource_identifier: "String",
+    #         network_type: "String",
     #       }
     #
     # @!attribute [rw] replication_instance_identifier
@@ -1473,6 +1475,12 @@ module Aws::DatabaseMigrationService
     #   identifier value for the end of `EndpointArn`.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The type of IP address protocol used by a replication instance, such
+    #   as IPv4 only or Dual-stack that supports both IPv4 and IPv6
+    #   addressing. IPv6 only is not yet supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage AWS API Documentation
     #
     class CreateReplicationInstanceMessage < Struct.new(
@@ -1490,7 +1498,8 @@ module Aws::DatabaseMigrationService
       :kms_key_id,
       :publicly_accessible,
       :dns_name_servers,
-      :resource_identifier)
+      :resource_identifier,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4213,16 +4222,16 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
-    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`,
-    #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`,
-    #   `"elasticsearch"`, `"documentdb"`, `"sqlserver"`, and `"neptune"`.
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
+    #   `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
+    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
+    #   `"documentdb"`, `"sqlserver"`, `"neptune"`, and `"babelfish"`.
     #   @return [String]
     #
     # @!attribute [rw] engine_display_name
     #   The expanded name for the engine name. For example, if the
-    #   `EngineName` parameter is "aurora," this value would be "Amazon
-    #   Aurora MySQL."
+    #   `EngineName` parameter is "aurora", this value would be "Amazon
+    #   Aurora MySQL".
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -6034,12 +6043,12 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] engine_name
-    #   The type of engine for the endpoint. Valid values, depending on the
+    #   The database engine name. Valid values, depending on the
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
-    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`,
-    #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`,
-    #   `"elasticsearch"`, `"documentdb"`, `"sqlserver"`, and `"neptune"`.
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
+    #   `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
+    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
+    #   `"documentdb"`, `"sqlserver"`, `"neptune"`, and `"babelfish"`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -6439,6 +6448,7 @@ module Aws::DatabaseMigrationService
     #         allow_major_version_upgrade: false,
     #         auto_minor_version_upgrade: false,
     #         replication_instance_identifier: "String",
+    #         network_type: "String",
     #       }
     #
     # @!attribute [rw] replication_instance_arn
@@ -6538,6 +6548,12 @@ module Aws::DatabaseMigrationService
     #   lowercase string.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The type of IP address protocol used by a replication instance, such
+    #   as IPv4 only or Dual-stack that supports both IPv4 and IPv6
+    #   addressing. IPv6 only is not yet supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstanceMessage AWS API Documentation
     #
     class ModifyReplicationInstanceMessage < Struct.new(
@@ -6551,7 +6567,8 @@ module Aws::DatabaseMigrationService
       :engine_version,
       :allow_major_version_upgrade,
       :auto_minor_version_upgrade,
-      :replication_instance_identifier)
+      :replication_instance_identifier,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7364,8 +7381,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] archived_logs_only
     #   When this field is set to `Y`, DMS only accesses the archived redo
-    #   logs. If the archived redo logs are stored on Oracle ASM only, the
-    #   DMS user account needs to be granted ASM privileges.
+    #   logs. If the archived redo logs are stored on Automatic Storage
+    #   Management (ASM) only, the DMS user account needs to be granted ASM
+    #   privileges.
     #   @return [Boolean]
     #
     # @!attribute [rw] asm_password
@@ -7589,9 +7607,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] secrets_manager_oracle_asm_access_role_arn
-    #   Required only if your Oracle endpoint uses Advanced Storage Manager
-    #   (ASM). The full ARN of the IAM role that specifies DMS as the
-    #   trusted entity and grants the required permissions to access the
+    #   Required only if your Oracle endpoint uses Automatic Storage
+    #   Management (ASM). The full ARN of the IAM role that specifies DMS as
+    #   the trusted entity and grants the required permissions to access the
     #   `SecretsManagerOracleAsmSecret`. This
     #   `SecretsManagerOracleAsmSecret` has the secret value that allows
     #   access to the Oracle ASM of the endpoint.
@@ -7615,8 +7633,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] secrets_manager_oracle_asm_secret_id
-    #   Required only if your Oracle endpoint uses Advanced Storage Manager
-    #   (ASM). The full ARN, partial ARN, or friendly name of the
+    #   Required only if your Oracle endpoint uses Automatic Storage
+    #   Management (ASM). The full ARN, partial ARN, or friendly name of the
     #   `SecretsManagerOracleAsmSecret` that contains the Oracle ASM
     #   connection details for the Oracle endpoint.
     #   @return [String]
@@ -8762,6 +8780,10 @@ module Aws::DatabaseMigrationService
     #   One or more private IP addresses for the replication instance.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] replication_instance_ipv_6_addresses
+    #   One or more IPv6 addresses for the replication instance.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] publicly_accessible
     #   Specifies the accessibility options for the replication instance. A
     #   value of `true` represents an instance with a public IP address. A
@@ -8782,6 +8804,12 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] dns_name_servers
     #   The DNS name servers supported for the replication instance to
     #   access your on-premise source or target database.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_type
+    #   The type of IP address protocol used by a replication instance, such
+    #   as IPv4 only or Dual-stack that supports both IPv4 and IPv6
+    #   addressing. IPv6 only is not yet supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance AWS API Documentation
@@ -8806,10 +8834,12 @@ module Aws::DatabaseMigrationService
       :replication_instance_private_ip_address,
       :replication_instance_public_ip_addresses,
       :replication_instance_private_ip_addresses,
+      :replication_instance_ipv_6_addresses,
       :publicly_accessible,
       :secondary_availability_zone,
       :free_until,
-      :dns_name_servers)
+      :dns_name_servers,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8874,13 +8904,20 @@ module Aws::DatabaseMigrationService
     #   The engine version number of the replication instance.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The type of IP address protocol used by a replication instance, such
+    #   as IPv4 only or Dual-stack that supports both IPv4 and IPv6
+    #   addressing. IPv6 only is not yet supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationPendingModifiedValues AWS API Documentation
     #
     class ReplicationPendingModifiedValues < Struct.new(
       :replication_instance_class,
       :allocated_storage,
       :multi_az,
-      :engine_version)
+      :engine_version,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8908,6 +8945,13 @@ module Aws::DatabaseMigrationService
     #   The subnets that are in the subnet group.
     #   @return [Array<Types::Subnet>]
     #
+    # @!attribute [rw] supported_network_types
+    #   The IP addressing protocol supported by the subnet group. This is
+    #   used by a replication instance with values such as IPv4 only or
+    #   Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is
+    #   not yet supported.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroup AWS API Documentation
     #
     class ReplicationSubnetGroup < Struct.new(
@@ -8915,7 +8959,8 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_description,
       :vpc_id,
       :subnet_group_status,
-      :subnets)
+      :subnets,
+      :supported_network_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10134,7 +10179,7 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] cdc_min_file_size
-    #   Minimum file size, defined in megabytes, to reach for a file output
+    #   Minimum file size, defined in kilobytes, to reach for a file output
     #   to Amazon S3.
     #
     #   When `CdcMinFileSize` and `CdcMaxBatchInterval` are both specified,
@@ -10761,9 +10806,9 @@ module Aws::DatabaseMigrationService
     #   The database engine name. Valid values, depending on the
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
-    #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
-    #   `"sqlserver"`, and `"neptune"`.
+    #   `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
+    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
+    #   `"documentdb"`, `"sqlserver"`, `"neptune"`, and `"babelfish"`.
     #   @return [String]
     #
     # @!attribute [rw] supports_cdc
@@ -10782,8 +10827,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_display_name
     #   The expanded name for the engine name. For example, if the
-    #   `EngineName` parameter is "aurora," this value would be "Amazon
-    #   Aurora MySQL."
+    #   `EngineName` parameter is "aurora", this value would be "Amazon
+    #   Aurora MySQL".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SupportedEndpointType AWS API Documentation
@@ -10906,6 +10951,23 @@ module Aws::DatabaseMigrationService
     #   structure of your tables.
     #   @return [Integer]
     #
+    # @!attribute [rw] applied_inserts
+    #   The number of insert actions applied on a target table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] applied_deletes
+    #   The number of delete actions applied on a target table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] applied_updates
+    #   The number of update actions applied on a target table.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] applied_ddls
+    #   The number of data definition language (DDL) statements used to
+    #   build and modify the structure of your tables applied on the target.
+    #   @return [Integer]
+    #
     # @!attribute [rw] full_load_rows
     #   The number of rows added during the full load operation.
     #   @return [Integer]
@@ -11009,6 +11071,10 @@ module Aws::DatabaseMigrationService
       :deletes,
       :updates,
       :ddls,
+      :applied_inserts,
+      :applied_deletes,
+      :applied_updates,
+      :applied_ddls,
       :full_load_rows,
       :full_load_condtnl_chk_failed_rows,
       :full_load_error_rows,

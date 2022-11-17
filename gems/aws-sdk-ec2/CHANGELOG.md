@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.350.0 (2022-11-17)
+------------------
+
+* Feature - This release adds a new optional parameter "privateIpAddress" for the CreateNatGateway API. PrivateIPAddress will allow customers to select a custom Private IPv4 address instead of having it be auto-assigned.
+
 1.349.0 (2022-11-10)
 ------------------
 

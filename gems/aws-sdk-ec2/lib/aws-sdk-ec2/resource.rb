@@ -705,6 +705,7 @@ module Aws::EC2
     #       },
     #     ],
     #     connectivity_type: "private", # accepts private, public
+    #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :allocation_id
@@ -735,6 +736,10 @@ module Aws::EC2
     # @option options [String] :connectivity_type
     #   Indicates whether the NAT gateway supports public or private
     #   connectivity. The default is public connectivity.
+    # @option options [String] :private_ip_address
+    #   The private IPv4 address to assign to the NAT gateway. If you don't
+    #   provide an address, a private IPv4 address will be automatically
+    #   assigned.
     # @return [NatGateway]
     def create_nat_gateway(options = {})
       resp = @client.create_nat_gateway(options)

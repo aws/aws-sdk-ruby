@@ -74,6 +74,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::CreateEventTracker.build(context)
           when :create_filter
             Aws::Personalize::Endpoints::CreateFilter.build(context)
+          when :create_metric_attribution
+            Aws::Personalize::Endpoints::CreateMetricAttribution.build(context)
           when :create_recommender
             Aws::Personalize::Endpoints::CreateRecommender.build(context)
           when :create_schema
@@ -92,6 +94,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::DeleteEventTracker.build(context)
           when :delete_filter
             Aws::Personalize::Endpoints::DeleteFilter.build(context)
+          when :delete_metric_attribution
+            Aws::Personalize::Endpoints::DeleteMetricAttribution.build(context)
           when :delete_recommender
             Aws::Personalize::Endpoints::DeleteRecommender.build(context)
           when :delete_schema
@@ -120,6 +124,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::DescribeFeatureTransformation.build(context)
           when :describe_filter
             Aws::Personalize::Endpoints::DescribeFilter.build(context)
+          when :describe_metric_attribution
+            Aws::Personalize::Endpoints::DescribeMetricAttribution.build(context)
           when :describe_recipe
             Aws::Personalize::Endpoints::DescribeRecipe.build(context)
           when :describe_recommender
@@ -150,6 +156,10 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::ListEventTrackers.build(context)
           when :list_filters
             Aws::Personalize::Endpoints::ListFilters.build(context)
+          when :list_metric_attribution_metrics
+            Aws::Personalize::Endpoints::ListMetricAttributionMetrics.build(context)
+          when :list_metric_attributions
+            Aws::Personalize::Endpoints::ListMetricAttributions.build(context)
           when :list_recipes
             Aws::Personalize::Endpoints::ListRecipes.build(context)
           when :list_recommenders
@@ -174,6 +184,8 @@ module Aws::Personalize
             Aws::Personalize::Endpoints::UntagResource.build(context)
           when :update_campaign
             Aws::Personalize::Endpoints::UpdateCampaign.build(context)
+          when :update_metric_attribution
+            Aws::Personalize::Endpoints::UpdateMetricAttribution.build(context)
           when :update_recommender
             Aws::Personalize::Endpoints::UpdateRecommender.build(context)
           end

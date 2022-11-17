@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-11-17)
+------------------
+
+* Feature - CloudWatch RUM now supports custom events. To use custom events, create an app monitor or update an app monitor with CustomEvent Status as ENABLED.
+
 1.6.0 (2022-10-25)
 ------------------
 

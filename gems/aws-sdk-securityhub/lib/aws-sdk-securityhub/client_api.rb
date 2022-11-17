@@ -2760,6 +2760,8 @@ module Aws::SecurityHub
     AwsLambdaFunctionDetails.add_member(:tracing_config, Shapes::ShapeRef.new(shape: AwsLambdaFunctionTracingConfig, location_name: "TracingConfig"))
     AwsLambdaFunctionDetails.add_member(:vpc_config, Shapes::ShapeRef.new(shape: AwsLambdaFunctionVpcConfig, location_name: "VpcConfig"))
     AwsLambdaFunctionDetails.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
+    AwsLambdaFunctionDetails.add_member(:architectures, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Architectures"))
+    AwsLambdaFunctionDetails.add_member(:package_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PackageType"))
     AwsLambdaFunctionDetails.struct_class = Types::AwsLambdaFunctionDetails
 
     AwsLambdaFunctionEnvironment.add_member(:variables, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Variables"))
@@ -4838,6 +4840,8 @@ module Aws::SecurityHub
     SoftwarePackage.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FilePath"))
     SoftwarePackage.add_member(:fixed_in_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FixedInVersion"))
     SoftwarePackage.add_member(:remediation, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Remediation"))
+    SoftwarePackage.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceLayerHash"))
+    SoftwarePackage.add_member(:source_layer_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourceLayerArn"))
     SoftwarePackage.struct_class = Types::SoftwarePackage
 
     SoftwarePackageList.member = Shapes::ShapeRef.new(shape: SoftwarePackage)

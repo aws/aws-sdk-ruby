@@ -78,6 +78,8 @@ module Aws::AppRegistry
             Aws::AppRegistry::Endpoints::GetAssociatedResource.build(context)
           when :get_attribute_group
             Aws::AppRegistry::Endpoints::GetAttributeGroup.build(context)
+          when :get_configuration
+            Aws::AppRegistry::Endpoints::GetConfiguration.build(context)
           when :list_applications
             Aws::AppRegistry::Endpoints::ListApplications.build(context)
           when :list_associated_attribute_groups
@@ -90,6 +92,8 @@ module Aws::AppRegistry
             Aws::AppRegistry::Endpoints::ListAttributeGroupsForApplication.build(context)
           when :list_tags_for_resource
             Aws::AppRegistry::Endpoints::ListTagsForResource.build(context)
+          when :put_configuration
+            Aws::AppRegistry::Endpoints::PutConfiguration.build(context)
           when :sync_resource
             Aws::AppRegistry::Endpoints::SyncResource.build(context)
           when :tag_resource

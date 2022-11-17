@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-11-17)
+------------------
+
+* Feature - This release provides support for creation and use of metric attributions in AWS Personalize
+
 1.44.0 (2022-10-25)
 ------------------
 

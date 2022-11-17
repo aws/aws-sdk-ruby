@@ -37,6 +37,18 @@ module Aws::CloudWatchRUM
     #   The date and time that this app monitor was created.
     #   @return [String]
     #
+    # @!attribute [rw] custom_events
+    #   Specifies whether this app monitor allows the web client to define
+    #   and send custom events.
+    #
+    #   For more information about custom events, see [Send custom
+    #   events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #   @return [Types::CustomEvents]
+    #
     # @!attribute [rw] data_storage
     #   A structure that contains information about whether this app monitor
     #   stores a copy of the telemetry data that RUM collects using
@@ -74,6 +86,7 @@ module Aws::CloudWatchRUM
     class AppMonitor < Struct.new(
       :app_monitor_configuration,
       :created,
+      :custom_events,
       :data_storage,
       :domain,
       :id,
@@ -152,7 +165,8 @@ module Aws::CloudWatchRUM
     #   If this app monitor is to collect data from only certain pages in
     #   your application, this structure lists those pages.
     #
-    #        <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>
+    #   You can't include both `ExcludedPages` and `IncludedPages` in the
+    #   same operation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] session_sample_rate
@@ -582,6 +596,9 @@ module Aws::CloudWatchRUM
     #           session_sample_rate: 1.0,
     #           telemetries: ["errors"], # accepts errors, performance, http
     #         },
+    #         custom_events: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #         cw_log_enabled: false,
     #         domain: "AppMonitorDomain", # required
     #         name: "AppMonitorName", # required
@@ -606,6 +623,19 @@ module Aws::CloudWatchRUM
     #
     #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
     #   @return [Types::AppMonitorConfiguration]
+    #
+    # @!attribute [rw] custom_events
+    #   Specifies whether this app monitor allows the web client to define
+    #   and send custom events. If you omit this parameter, custom events
+    #   are `DISABLED`.
+    #
+    #   For more information about custom events, see [Send custom
+    #   events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #   @return [Types::CustomEvents]
     #
     # @!attribute [rw] cw_log_enabled
     #   Data collected by RUM is kept by RUM for 30 days and then deleted.
@@ -637,13 +667,21 @@ module Aws::CloudWatchRUM
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with an app monitor.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with an app monitor.
+    #
+    #   For more information, see [Tagging Amazon Web Services
+    #   resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/CreateAppMonitorRequest AWS API Documentation
     #
     class CreateAppMonitorRequest < Struct.new(
       :app_monitor_configuration,
+      :custom_events,
       :cw_log_enabled,
       :domain,
       :name,
@@ -660,6 +698,30 @@ module Aws::CloudWatchRUM
     #
     class CreateAppMonitorResponse < Struct.new(
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about custom events for this app
+    # monitor.
+    #
+    # @note When making an API call, you may pass CustomEvents
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Specifies whether this app monitor allows the web client to define
+    #   and send custom events. The default is for custom events to be
+    #   `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/CustomEvents AWS API Documentation
+    #
+    class CustomEvents < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1182,9 +1244,9 @@ module Aws::CloudWatchRUM
     #   * `"metadata.countryCode": "CountryCode"`
     #
     #   * `"event_details.fileType": "FileType"`
-    #   ^
     #
-    #        <p> All dimensions listed in this field must also be included in <code>EventPattern</code>.</p>
+    #   All dimensions listed in this field must also be included in
+    #   `EventPattern`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] event_pattern
@@ -1683,6 +1745,9 @@ module Aws::CloudWatchRUM
     #           session_sample_rate: 1.0,
     #           telemetries: ["errors"], # accepts errors, performance, http
     #         },
+    #         custom_events: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #         cw_log_enabled: false,
     #         domain: "AppMonitorDomain",
     #         name: "AppMonitorName", # required
@@ -1701,6 +1766,19 @@ module Aws::CloudWatchRUM
     #
     #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
     #   @return [Types::AppMonitorConfiguration]
+    #
+    # @!attribute [rw] custom_events
+    #   Specifies whether this app monitor allows the web client to define
+    #   and send custom events. The default is for custom events to be
+    #   `DISABLED`.
+    #
+    #   For more information about custom events, see [Send custom
+    #   events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #   @return [Types::CustomEvents]
     #
     # @!attribute [rw] cw_log_enabled
     #   Data collected by RUM is kept by RUM for 30 days and then deleted.
@@ -1723,6 +1801,7 @@ module Aws::CloudWatchRUM
     #
     class UpdateAppMonitorRequest < Struct.new(
       :app_monitor_configuration,
+      :custom_events,
       :cw_log_enabled,
       :domain,
       :name)

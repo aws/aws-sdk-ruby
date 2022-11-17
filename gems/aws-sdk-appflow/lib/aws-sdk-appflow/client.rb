@@ -688,6 +688,12 @@ module Aws::Appflow
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for your flow.
     #
+    # @option params [Types::MetadataCatalogConfig] :metadata_catalog_config
+    #   Specifies the configuration that Amazon AppFlow uses when it catalogs
+    #   the data that's transferred by the associated flow. When Amazon
+    #   AppFlow catalogs the data from a flow, it stores metadata in a data
+    #   catalog.
+    #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowResponse#flow_arn #flow_arn} => String
@@ -810,9 +816,11 @@ module Aws::Appflow
     #               prefix_config: {
     #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #               },
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
+    #                 target_file_size: 1,
     #               },
     #               preserve_source_data_typing: false,
     #             },
@@ -856,9 +864,11 @@ module Aws::Appflow
     #               prefix_config: { # required
     #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #               },
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
+    #                 target_file_size: 1,
     #               },
     #             },
     #           },
@@ -944,7 +954,7 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -952,6 +962,13 @@ module Aws::Appflow
     #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     metadata_catalog_config: {
+    #       glue_data_catalog: {
+    #         role_arn: "GlueDataCatalogIAMRole", # required
+    #         database_name: "GlueDataCatalogDatabaseName", # required
+    #         table_prefix: "GlueDataCatalogTablePrefix", # required
+    #       },
     #     },
     #   })
     #
@@ -1496,6 +1513,9 @@ module Aws::Appflow
     #   * {Types::DescribeFlowResponse#created_by #created_by} => String
     #   * {Types::DescribeFlowResponse#last_updated_by #last_updated_by} => String
     #   * {Types::DescribeFlowResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeFlowResponse#metadata_catalog_config #metadata_catalog_config} => Types::MetadataCatalogConfig
+    #   * {Types::DescribeFlowResponse#last_run_metadata_catalog_details #last_run_metadata_catalog_details} => Array&lt;Types::MetadataCatalogDetail&gt;
+    #   * {Types::DescribeFlowResponse#schema_version #schema_version} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1557,7 +1577,10 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.file_type #=> String, one of "CSV", "JSON", "PARQUET"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_type #=> String, one of "FILENAME", "PATH", "PATH_AND_FILENAME"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_format #=> String, one of "YEAR", "MONTH", "DAY", "HOUR", "MINUTE"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.path_prefix_hierarchy #=> Array
+    #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.path_prefix_hierarchy[0] #=> String, one of "EXECUTION_ID", "SCHEMA_VERSION"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.aggregation_config.aggregation_type #=> String, one of "None", "SingleFile"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.aggregation_config.target_file_size #=> Integer
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.preserve_source_data_typing #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.object #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names #=> Array
@@ -1582,7 +1605,10 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.file_type #=> String, one of "CSV", "JSON", "PARQUET"
     #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.prefix_config.prefix_type #=> String, one of "FILENAME", "PATH", "PATH_AND_FILENAME"
     #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.prefix_config.prefix_format #=> String, one of "YEAR", "MONTH", "DAY", "HOUR", "MINUTE"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.prefix_config.path_prefix_hierarchy #=> Array
+    #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.prefix_config.path_prefix_hierarchy[0] #=> String, one of "EXECUTION_ID", "SCHEMA_VERSION"
     #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.aggregation_config.aggregation_type #=> String, one of "None", "SingleFile"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.upsolver.s3_output_format_config.aggregation_config.target_file_size #=> Integer
     #   resp.destination_flow_config_list[0].destination_connector_properties.honeycode.object #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.honeycode.error_handling_config.fail_on_first_destination_error #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.honeycode.error_handling_config.bucket_prefix #=> String
@@ -1650,7 +1676,7 @@ module Aws::Appflow
     #   resp.tasks[0].connector_operator.sapo_data #=> String, one of "PROJECTION", "LESS_THAN", "CONTAINS", "GREATER_THAN", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].connector_operator.custom_connector #=> String, one of "PROJECTION", "LESS_THAN", "GREATER_THAN", "CONTAINS", "BETWEEN", "LESS_THAN_OR_EQUAL_TO", "GREATER_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO", "ADDITION", "MULTIPLICATION", "DIVISION", "SUBTRACTION", "MASK_ALL", "MASK_FIRST_N", "MASK_LAST_N", "VALIDATE_NON_NULL", "VALIDATE_NON_ZERO", "VALIDATE_NON_NEGATIVE", "VALIDATE_NUMERIC", "NO_OP"
     #   resp.tasks[0].destination_field #=> String
-    #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Map_all", "Mask", "Merge", "Passthrough", "Truncate", "Validate"
+    #   resp.tasks[0].task_type #=> String, one of "Arithmetic", "Filter", "Map", "Map_all", "Mask", "Merge", "Passthrough", "Truncate", "Validate", "Partition"
     #   resp.tasks[0].task_properties #=> Hash
     #   resp.tasks[0].task_properties["OperatorPropertiesKeys"] #=> String
     #   resp.created_at #=> Time
@@ -1659,6 +1685,19 @@ module Aws::Appflow
     #   resp.last_updated_by #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.metadata_catalog_config.glue_data_catalog.role_arn #=> String
+    #   resp.metadata_catalog_config.glue_data_catalog.database_name #=> String
+    #   resp.metadata_catalog_config.glue_data_catalog.table_prefix #=> String
+    #   resp.last_run_metadata_catalog_details #=> Array
+    #   resp.last_run_metadata_catalog_details[0].catalog_type #=> String, one of "GLUE"
+    #   resp.last_run_metadata_catalog_details[0].table_name #=> String
+    #   resp.last_run_metadata_catalog_details[0].table_registration_output.message #=> String
+    #   resp.last_run_metadata_catalog_details[0].table_registration_output.result #=> String
+    #   resp.last_run_metadata_catalog_details[0].table_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.last_run_metadata_catalog_details[0].partition_registration_output.message #=> String
+    #   resp.last_run_metadata_catalog_details[0].partition_registration_output.result #=> String
+    #   resp.last_run_metadata_catalog_details[0].partition_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeFlow AWS API Documentation
     #
@@ -1712,6 +1751,15 @@ module Aws::Appflow
     #   resp.flow_executions[0].last_updated_at #=> Time
     #   resp.flow_executions[0].data_pull_start_time #=> Time
     #   resp.flow_executions[0].data_pull_end_time #=> Time
+    #   resp.flow_executions[0].metadata_catalog_details #=> Array
+    #   resp.flow_executions[0].metadata_catalog_details[0].catalog_type #=> String, one of "GLUE"
+    #   resp.flow_executions[0].metadata_catalog_details[0].table_name #=> String
+    #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.message #=> String
+    #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.result #=> String
+    #   resp.flow_executions[0].metadata_catalog_details[0].table_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
+    #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.message #=> String
+    #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.result #=> String
+    #   resp.flow_executions[0].metadata_catalog_details[0].partition_registration_output.status #=> String, one of "InProgress", "Successful", "Error"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeFlowExecutionRecords AWS API Documentation
@@ -2395,6 +2443,12 @@ module Aws::Appflow
     #   A list of tasks that Amazon AppFlow performs while transferring the
     #   data in the flow run.
     #
+    # @option params [Types::MetadataCatalogConfig] :metadata_catalog_config
+    #   Specifies the configuration that Amazon AppFlow uses when it catalogs
+    #   the data that's transferred by the associated flow. When Amazon
+    #   AppFlow catalogs the data from a flow, it stores metadata in a data
+    #   catalog.
+    #
     # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowResponse#flow_status #flow_status} => String
@@ -2515,9 +2569,11 @@ module Aws::Appflow
     #               prefix_config: {
     #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #               },
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
+    #                 target_file_size: 1,
     #               },
     #               preserve_source_data_typing: false,
     #             },
@@ -2561,9 +2617,11 @@ module Aws::Appflow
     #               prefix_config: { # required
     #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #               },
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
+    #                 target_file_size: 1,
     #               },
     #             },
     #           },
@@ -2649,12 +2707,19 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
     #       },
     #     ],
+    #     metadata_catalog_config: {
+    #       glue_data_catalog: {
+    #         role_arn: "GlueDataCatalogIAMRole", # required
+    #         database_name: "GlueDataCatalogDatabaseName", # required
+    #         table_prefix: "GlueDataCatalogTablePrefix", # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2683,7 +2748,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

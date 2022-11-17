@@ -6246,14 +6246,16 @@ module Aws::EC2
     #   The IDs of the resources to monitor. For example, if the resource type
     #   is `VPC`, specify the IDs of the VPCs.
     #
-    #   Constraints: Maximum of 1000 resources
+    #   Constraints: Maximum of 25 for transit gateway resource types. Maximum
+    #   of 1000 for the other resource types.
     #
     # @option params [required, String] :resource_type
     #   The type of resource to monitor.
     #
     # @option params [String] :traffic_type
     #   The type of traffic to monitor (accepted traffic, rejected traffic, or
-    #   all traffic).
+    #   all traffic). This parameter is not supported for transit gateway
+    #   resource types. It is required for the other resource types.
     #
     # @option params [String] :log_destination_type
     #   The type of destination for the flow log data.
@@ -6286,10 +6288,12 @@ module Aws::EC2
     #
     # @option params [String] :log_format
     #   The fields to include in the flow log record. List the fields in the
-    #   order in which they should appear. For more information about the
-    #   available fields, see [Flow log records][1]. If you omit this
-    #   parameter, the flow log is created using the default format. If you
-    #   specify this parameter, you must include at least one field.
+    #   order in which they should appear. If you omit this parameter, the
+    #   flow log is created using the default format. If you specify this
+    #   parameter, you must include at least one field. For more information
+    #   about the available fields, see [Flow log records][1] in the *Amazon
+    #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
+    #   *Amazon Web Services Transit Gateway Guide*.
     #
     #   Specify the fields using the `$\{field-id\}` format, separated by
     #   spaces. For the CLI, surround this parameter value with single quotes
@@ -6298,14 +6302,16 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
+    #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the flow logs.
     #
     # @option params [Integer] :max_aggregation_interval
     #   The maximum interval of time during which a flow of packets is
-    #   captured and aggregated into a flow log record. You can specify 60
-    #   seconds (1 minute) or 600 seconds (10 minutes).
+    #   captured and aggregated into a flow log record. The possible values
+    #   are 60 seconds (1 minute) or 600 seconds (10 minutes). This parameter
+    #   must be 60 seconds for transit gateway resource types.
     #
     #   When a network interface is attached to a [Nitro-based instance][1],
     #   the aggregation interval is always 60 seconds or less, regardless of
@@ -8718,6 +8724,11 @@ module Aws::EC2
     #   Indicates whether the NAT gateway supports public or private
     #   connectivity. The default is public connectivity.
     #
+    # @option params [String] :private_ip_address
+    #   The private IPv4 address to assign to the NAT gateway. If you don't
+    #   provide an address, a private IPv4 address will be automatically
+    #   assigned.
+    #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNatGatewayResult#client_token #client_token} => String
@@ -8769,6 +8780,7 @@ module Aws::EC2
     #       },
     #     ],
     #     connectivity_type: "private", # accepts private, public
+    #     private_ip_address: "String",
     #   })
     #
     # @example Response structure
@@ -52578,7 +52590,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.349.0'
+      context[:gem_version] = '1.350.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

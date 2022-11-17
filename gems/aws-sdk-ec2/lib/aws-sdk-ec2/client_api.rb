@@ -4349,6 +4349,7 @@ module Aws::EC2
     CreateNatGatewayRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     CreateNatGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNatGatewayRequest.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "ConnectivityType"))
+    CreateNatGatewayRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
     CreateNatGatewayRequest.struct_class = Types::CreateNatGatewayRequest
 
     CreateNatGatewayResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))

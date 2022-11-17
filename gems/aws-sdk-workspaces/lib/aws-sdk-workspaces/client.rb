@@ -708,6 +708,64 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates a Standby WorkSpace in a secondary region.
+    #
+    # @option params [required, String] :primary_region
+    #   The Region of the primary WorkSpace.
+    #
+    # @option params [required, Array<Types::StandbyWorkspace>] :standby_workspaces
+    #   Information about the Standby WorkSpace to be created.
+    #
+    # @return [Types::CreateStandbyWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStandbyWorkspacesResult#failed_standby_requests #failed_standby_requests} => Array&lt;Types::FailedCreateStandbyWorkspacesRequest&gt;
+    #   * {Types::CreateStandbyWorkspacesResult#pending_standby_requests #pending_standby_requests} => Array&lt;Types::PendingCreateStandbyWorkspacesRequest&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_standby_workspaces({
+    #     primary_region: "Region", # required
+    #     standby_workspaces: [ # required
+    #       {
+    #         primary_workspace_id: "WorkspaceId", # required
+    #         volume_encryption_key: "VolumeEncryptionKey",
+    #         directory_id: "DirectoryId", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_standby_requests #=> Array
+    #   resp.failed_standby_requests[0].standby_workspace_request.primary_workspace_id #=> String
+    #   resp.failed_standby_requests[0].standby_workspace_request.volume_encryption_key #=> String
+    #   resp.failed_standby_requests[0].standby_workspace_request.directory_id #=> String
+    #   resp.failed_standby_requests[0].standby_workspace_request.tags #=> Array
+    #   resp.failed_standby_requests[0].standby_workspace_request.tags[0].key #=> String
+    #   resp.failed_standby_requests[0].standby_workspace_request.tags[0].value #=> String
+    #   resp.failed_standby_requests[0].error_code #=> String
+    #   resp.failed_standby_requests[0].error_message #=> String
+    #   resp.pending_standby_requests #=> Array
+    #   resp.pending_standby_requests[0].user_name #=> String
+    #   resp.pending_standby_requests[0].directory_id #=> String
+    #   resp.pending_standby_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.pending_standby_requests[0].workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspaces AWS API Documentation
+    #
+    # @overload create_standby_workspaces(params = {})
+    # @param [Hash] params ({})
+    def create_standby_workspaces(params = {}, options = {})
+      req = build_request(:create_standby_workspaces, params)
+      req.send_request(options)
+    end
+
     # Creates the specified tags for the specified WorkSpaces resource.
     #
     # @option params [required, String] :resource_id
@@ -888,6 +946,8 @@ module Aws::WorkSpaces
     #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.workspace_bundle.last_updated_time #=> Time
     #   resp.workspace_bundle.creation_time #=> Time
+    #   resp.workspace_bundle.state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
+    #   resp.workspace_bundle.bundle_type #=> String, one of "REGULAR", "STANDBY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundle AWS API Documentation
     #
@@ -1056,6 +1116,11 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].modification_states #=> Array
     #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
+    #   resp.pending_requests[0].related_workspaces #=> Array
+    #   resp.pending_requests[0].related_workspaces[0].workspace_id #=> String
+    #   resp.pending_requests[0].related_workspaces[0].region #=> String
+    #   resp.pending_requests[0].related_workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.pending_requests[0].related_workspaces[0].type #=> String, one of "PRIMARY", "STANDBY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces AWS API Documentation
     #
@@ -1772,6 +1837,8 @@ module Aws::WorkSpaces
     #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.bundles[0].last_updated_time #=> Time
     #   resp.bundles[0].creation_time #=> Time
+    #   resp.bundles[0].state #=> String, one of "AVAILABLE", "PENDING", "ERROR"
+    #   resp.bundles[0].bundle_type #=> String, one of "REGULAR", "STANDBY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
@@ -2076,6 +2143,11 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].modification_states #=> Array
     #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
+    #   resp.workspaces[0].related_workspaces #=> Array
+    #   resp.workspaces[0].related_workspaces[0].workspace_id #=> String
+    #   resp.workspaces[0].related_workspaces[0].region #=> String
+    #   resp.workspaces[0].related_workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workspaces[0].related_workspaces[0].type #=> String, one of "PRIMARY", "STANDBY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces AWS API Documentation
@@ -3499,7 +3571,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

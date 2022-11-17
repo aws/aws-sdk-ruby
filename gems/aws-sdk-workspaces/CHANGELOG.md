@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-11-17)
+------------------
+
+* Feature - The release introduces CreateStandbyWorkspaces, an API that allows you to create standby WorkSpaces associated with a primary WorkSpace in another Region. DescribeWorkspaces now includes related WorkSpaces properties. DescribeWorkspaceBundles and CreateWorkspaceBundle now return more bundle details.
+
 1.76.0 (2022-11-15)
 ------------------
 

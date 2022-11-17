@@ -38,7 +38,11 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform for the Amplify app.
+    #   The platform for the Amplify app. For a static app, set the platform
+    #   type to `WEB`. For a dynamic server-side rendered (SSR) app, set the
+    #   platform type to `WEB_COMPUTE`. For an app requiring Amplify
+    #   Hosting's original SSR support only, set the platform type to
+    #   `WEB_DYNAMIC`.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -481,7 +485,7 @@ module Aws::Amplify
     #         name: "Name", # required
     #         description: "Description",
     #         repository: "Repository",
-    #         platform: "WEB", # accepts WEB, WEB_DYNAMIC
+    #         platform: "WEB", # accepts WEB, WEB_DYNAMIC, WEB_COMPUTE
     #         iam_service_role_arn: "ServiceRoleArn",
     #         oauth_token: "OauthToken",
     #         access_token: "AccessToken",
@@ -536,7 +540,11 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform or framework for an Amplify app.
+    #   The platform for the Amplify app. For a static app, set the platform
+    #   type to `WEB`. For a dynamic server-side rendered (SSR) app, set the
+    #   platform type to `WEB_COMPUTE`. For an app requiring Amplify
+    #   Hosting's original SSR support only, set the platform type to
+    #   `WEB_DYNAMIC`.
     #   @return [String]
     #
     # @!attribute [rw] iam_service_role_arn
@@ -2777,7 +2785,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         name: "Name",
     #         description: "Description",
-    #         platform: "WEB", # accepts WEB, WEB_DYNAMIC
+    #         platform: "WEB", # accepts WEB, WEB_DYNAMIC, WEB_COMPUTE
     #         iam_service_role_arn: "ServiceRoleArn",
     #         environment_variables: {
     #           "EnvKey" => "EnvValue",
@@ -2830,7 +2838,11 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform for an Amplify app.
+    #   The platform for the Amplify app. For a static app, set the platform
+    #   type to `WEB`. For a dynamic server-side rendered (SSR) app, set the
+    #   platform type to `WEB_COMPUTE`. For an app requiring Amplify
+    #   Hosting's original SSR support only, set the platform type to
+    #   `WEB_DYNAMIC`.
     #   @return [String]
     #
     # @!attribute [rw] iam_service_role_arn

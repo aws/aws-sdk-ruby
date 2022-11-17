@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2022-11-17)
+------------------
+
+* Feature - Adds LoggingConfiguration APIs for IVS Chat - a feature that allows customers to store and record sent messages in a chat room to S3 buckets, CloudWatch logs, or Kinesis firehose.
+
 1.5.0 (2022-10-25)
 ------------------
 

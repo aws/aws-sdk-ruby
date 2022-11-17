@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-11-17)
+------------------
+
+* Feature - Add Node 18 (nodejs18.x) support to AWS Lambda.
+
 1.86.0 (2022-10-25)
 ------------------
 

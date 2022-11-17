@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-11-17)
+------------------
+
+* Feature - Adds support for AWS Graviton2 based applications. You can now select CPU architecture when creating new applications or updating existing ones.
+
 1.2.0 (2022-10-25)
 ------------------
 

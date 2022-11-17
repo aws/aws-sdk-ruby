@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-11-17)
+------------------
+
+* Feature - Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail
+
 1.71.0 (2022-11-11)
 ------------------
 

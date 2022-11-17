@@ -443,6 +443,9 @@ module Aws::EMRServerless
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for customer VPC connectivity.
     #
+    # @option params [String] :architecture
+    #   The CPU architecture of an application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -485,6 +488,7 @@ module Aws::EMRServerless
     #       subnet_ids: ["SubnetString"],
     #       security_group_ids: ["SecurityGroupString"],
     #     },
+    #     architecture: "ARM64", # accepts ARM64, X86_64
     #   })
     #
     # @example Response structure
@@ -568,6 +572,7 @@ module Aws::EMRServerless
     #   resp.application.network_configuration.subnet_ids[0] #=> String
     #   resp.application.network_configuration.security_group_ids #=> Array
     #   resp.application.network_configuration.security_group_ids[0] #=> String
+    #   resp.application.architecture #=> String, one of "ARM64", "X86_64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -718,6 +723,7 @@ module Aws::EMRServerless
     #   resp.applications[0].state_details #=> String
     #   resp.applications[0].created_at #=> Time
     #   resp.applications[0].updated_at #=> Time
+    #   resp.applications[0].architecture #=> String, one of "ARM64", "X86_64"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListApplications AWS API Documentation
@@ -1069,6 +1075,9 @@ module Aws::EMRServerless
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for customer VPC connectivity.
     #
+    # @option params [String] :architecture
+    #   The CPU architecture of an application.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1104,6 +1113,7 @@ module Aws::EMRServerless
     #       subnet_ids: ["SubnetString"],
     #       security_group_ids: ["SecurityGroupString"],
     #     },
+    #     architecture: "ARM64", # accepts ARM64, X86_64
     #   })
     #
     # @example Response structure
@@ -1134,6 +1144,7 @@ module Aws::EMRServerless
     #   resp.application.network_configuration.subnet_ids[0] #=> String
     #   resp.application.network_configuration.security_group_ids #=> Array
     #   resp.application.network_configuration.security_group_ids[0] #=> String
+    #   resp.application.architecture #=> String, one of "ARM64", "X86_64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1157,7 +1168,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -748,9 +748,10 @@ module Aws::AppSync
     # @option params [String] :response_mapping_template
     #   The `Function` response mapping template.
     #
-    # @option params [required, String] :function_version
+    # @option params [String] :function_version
     #   The `version` of the request mapping template. Currently, the
-    #   supported value is 2018-05-29.
+    #   supported value is 2018-05-29. Note that when using VTL and mapping
+    #   templates, the `functionVersion` is required.
     #
     # @option params [Types::SyncConfig] :sync_config
     #   Describes a Sync configuration for a resolver.
@@ -760,6 +761,16 @@ module Aws::AppSync
     #
     # @option params [Integer] :max_batch_size
     #   The maximum batching size for a resolver.
+    #
+    # @option params [Types::AppSyncRuntime] :runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be specified.
+    #
+    # @option params [String] :code
+    #   The `function` code that contains the request and response functions.
+    #   When code is used, the `runtime` is required. The `runtime` value must
+    #   be `APPSYNC_JS`.
     #
     # @return [Types::CreateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -774,7 +785,7 @@ module Aws::AppSync
     #     data_source_name: "ResourceName", # required
     #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
-    #     function_version: "String", # required
+    #     function_version: "String",
     #     sync_config: {
     #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
     #       conflict_detection: "VERSION", # accepts VERSION, NONE
@@ -783,6 +794,11 @@ module Aws::AppSync
     #       },
     #     },
     #     max_batch_size: 1,
+    #     runtime: {
+    #       name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #       runtime_version: "String", # required
+    #     },
+    #     code: "Code",
     #   })
     #
     # @example Response structure
@@ -799,6 +815,9 @@ module Aws::AppSync
     #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #   resp.function_configuration.max_batch_size #=> Integer
+    #   resp.function_configuration.runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.function_configuration.runtime.runtime_version #=> String
+    #   resp.function_configuration.code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunction AWS API Documentation
     #
@@ -1002,6 +1021,16 @@ module Aws::AppSync
     # @option params [Integer] :max_batch_size
     #   The maximum batching size for a resolver.
     #
+    # @option params [Types::AppSyncRuntime] :runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be specified.
+    #
+    # @option params [String] :code
+    #   The `resolver` code that contains the request and response functions.
+    #   When code is used, the `runtime` is required. The `runtime` value must
+    #   be `APPSYNC_JS`.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -1031,6 +1060,11 @@ module Aws::AppSync
     #       caching_keys: ["String"],
     #     },
     #     max_batch_size: 1,
+    #     runtime: {
+    #       name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #       runtime_version: "String", # required
+    #     },
+    #     code: "Code",
     #   })
     #
     # @example Response structure
@@ -1051,6 +1085,9 @@ module Aws::AppSync
     #   resp.resolver.caching_config.caching_keys #=> Array
     #   resp.resolver.caching_config.caching_keys[0] #=> String
     #   resp.resolver.max_batch_size #=> Integer
+    #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.resolver.runtime.runtime_version #=> String
+    #   resp.resolver.code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -1330,6 +1367,72 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Evaluates the given code and returns the response. The code definition
+    # requirements depend on the specified runtime. For `APPSYNC_JS`
+    # runtimes, the code defines the request and response functions. The
+    # request function takes the incoming request after a GraphQL operation
+    # is parsed and converts it into a request configuration for the
+    # selected data source operation. The response function interprets
+    # responses from the data source and maps it to the shape of the GraphQL
+    # field output type.
+    #
+    # @option params [required, Types::AppSyncRuntime] :runtime
+    #   The runtime to be used when evaluating the code. Currently, only the
+    #   `APPSYNC_JS` runtime is supported.
+    #
+    # @option params [required, String] :code
+    #   The code definition to be evaluated. Note that `code` and `runtime`
+    #   are both required for this action. The `runtime` value must be
+    #   `APPSYNC_JS`.
+    #
+    # @option params [required, String] :context
+    #   The map that holds all of the contextual information for your resolver
+    #   invocation. A `context` is required for this action.
+    #
+    # @option params [String] :function
+    #   The function within the code to be evaluated. If provided, the valid
+    #   values are `request` and `response`.
+    #
+    # @return [Types::EvaluateCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EvaluateCodeResponse#evaluation_result #evaluation_result} => String
+    #   * {Types::EvaluateCodeResponse#error #error} => Types::EvaluateCodeErrorDetail
+    #   * {Types::EvaluateCodeResponse#logs #logs} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.evaluate_code({
+    #     runtime: { # required
+    #       name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #       runtime_version: "String", # required
+    #     },
+    #     code: "Code", # required
+    #     context: "Context", # required
+    #     function: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.evaluation_result #=> String
+    #   resp.error.message #=> String
+    #   resp.error.code_errors #=> Array
+    #   resp.error.code_errors[0].error_type #=> String
+    #   resp.error.code_errors[0].value #=> String
+    #   resp.error.code_errors[0].location.line #=> Integer
+    #   resp.error.code_errors[0].location.column #=> Integer
+    #   resp.error.code_errors[0].location.span #=> Integer
+    #   resp.logs #=> Array
+    #   resp.logs[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateCode AWS API Documentation
+    #
+    # @overload evaluate_code(params = {})
+    # @param [Hash] params ({})
+    def evaluate_code(params = {}, options = {})
+      req = build_request(:evaluate_code, params)
+      req.send_request(options)
+    end
+
     # Evaluates a given template and returns the response. The mapping
     # template can be a request or response template.
     #
@@ -1353,6 +1456,7 @@ module Aws::AppSync
     #
     #   * {Types::EvaluateMappingTemplateResponse#evaluation_result #evaluation_result} => String
     #   * {Types::EvaluateMappingTemplateResponse#error #error} => Types::ErrorDetail
+    #   * {Types::EvaluateMappingTemplateResponse#logs #logs} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1365,6 +1469,8 @@ module Aws::AppSync
     #
     #   resp.evaluation_result #=> String
     #   resp.error.message #=> String
+    #   resp.logs #=> Array
+    #   resp.logs[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplate AWS API Documentation
     #
@@ -1584,6 +1690,9 @@ module Aws::AppSync
     #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #   resp.function_configuration.max_batch_size #=> Integer
+    #   resp.function_configuration.runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.function_configuration.runtime.runtime_version #=> String
+    #   resp.function_configuration.code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunction AWS API Documentation
     #
@@ -1735,6 +1844,9 @@ module Aws::AppSync
     #   resp.resolver.caching_config.caching_keys #=> Array
     #   resp.resolver.caching_config.caching_keys[0] #=> String
     #   resp.resolver.max_batch_size #=> Integer
+    #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.resolver.runtime.runtime_version #=> String
+    #   resp.resolver.code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -2013,6 +2125,9 @@ module Aws::AppSync
     #   resp.functions[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.functions[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #   resp.functions[0].max_batch_size #=> Integer
+    #   resp.functions[0].runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.functions[0].runtime.runtime_version #=> String
+    #   resp.functions[0].code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctions AWS API Documentation
@@ -2145,6 +2260,9 @@ module Aws::AppSync
     #   resp.resolvers[0].caching_config.caching_keys #=> Array
     #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
     #   resp.resolvers[0].max_batch_size #=> Integer
+    #   resp.resolvers[0].runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.resolvers[0].runtime.runtime_version #=> String
+    #   resp.resolvers[0].code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -2205,6 +2323,9 @@ module Aws::AppSync
     #   resp.resolvers[0].caching_config.caching_keys #=> Array
     #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
     #   resp.resolvers[0].max_batch_size #=> Integer
+    #   resp.resolvers[0].runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.resolvers[0].runtime.runtime_version #=> String
+    #   resp.resolvers[0].code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
@@ -2713,9 +2834,10 @@ module Aws::AppSync
     # @option params [String] :response_mapping_template
     #   The `Function` request mapping template.
     #
-    # @option params [required, String] :function_version
+    # @option params [String] :function_version
     #   The `version` of the request mapping template. Currently, the
-    #   supported value is 2018-05-29.
+    #   supported value is 2018-05-29. Note that when using VTL and mapping
+    #   templates, the `functionVersion` is required.
     #
     # @option params [Types::SyncConfig] :sync_config
     #   Describes a Sync configuration for a resolver.
@@ -2725,6 +2847,16 @@ module Aws::AppSync
     #
     # @option params [Integer] :max_batch_size
     #   The maximum batching size for a resolver.
+    #
+    # @option params [Types::AppSyncRuntime] :runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be specified.
+    #
+    # @option params [String] :code
+    #   The `function` code that contains the request and response functions.
+    #   When code is used, the `runtime` is required. The `runtime` value must
+    #   be `APPSYNC_JS`.
     #
     # @return [Types::UpdateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2740,7 +2872,7 @@ module Aws::AppSync
     #     data_source_name: "ResourceName", # required
     #     request_mapping_template: "MappingTemplate",
     #     response_mapping_template: "MappingTemplate",
-    #     function_version: "String", # required
+    #     function_version: "String",
     #     sync_config: {
     #       conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
     #       conflict_detection: "VERSION", # accepts VERSION, NONE
@@ -2749,6 +2881,11 @@ module Aws::AppSync
     #       },
     #     },
     #     max_batch_size: 1,
+    #     runtime: {
+    #       name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #       runtime_version: "String", # required
+    #     },
+    #     code: "Code",
     #   })
     #
     # @example Response structure
@@ -2765,6 +2902,9 @@ module Aws::AppSync
     #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
     #   resp.function_configuration.max_batch_size #=> Integer
+    #   resp.function_configuration.runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.function_configuration.runtime.runtime_version #=> String
+    #   resp.function_configuration.code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunction AWS API Documentation
     #
@@ -2962,6 +3102,16 @@ module Aws::AppSync
     # @option params [Integer] :max_batch_size
     #   The maximum batching size for a resolver.
     #
+    # @option params [Types::AppSyncRuntime] :runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be specified.
+    #
+    # @option params [String] :code
+    #   The `resolver` code that contains the request and response functions.
+    #   When code is used, the `runtime` is required. The `runtime` value must
+    #   be `APPSYNC_JS`.
+    #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverResponse#resolver #resolver} => Types::Resolver
@@ -2991,6 +3141,11 @@ module Aws::AppSync
     #       caching_keys: ["String"],
     #     },
     #     max_batch_size: 1,
+    #     runtime: {
+    #       name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #       runtime_version: "String", # required
+    #     },
+    #     code: "Code",
     #   })
     #
     # @example Response structure
@@ -3011,6 +3166,9 @@ module Aws::AppSync
     #   resp.resolver.caching_config.caching_keys #=> Array
     #   resp.resolver.caching_config.caching_keys[0] #=> String
     #   resp.resolver.max_batch_size #=> Integer
+    #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
+    #   resp.resolver.runtime.runtime_version #=> String
+    #   resp.resolver.code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -3078,7 +3236,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

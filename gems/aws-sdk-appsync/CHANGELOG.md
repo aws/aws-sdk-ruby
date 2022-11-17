@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-11-17)
+------------------
+
+* Feature - This release introduces the APPSYNC_JS runtime, and adds support for JavaScript in AppSync functions and AppSync pipeline resolvers.
+
 1.54.0 (2022-10-25)
 ------------------
 

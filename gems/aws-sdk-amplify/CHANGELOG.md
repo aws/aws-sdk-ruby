@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-11-17)
+------------------
+
+* Feature - Adds a new value (WEB_COMPUTE) to the Platform enum that allows customers to create Amplify Apps with Server-Side Rendering support.
+
 1.42.0 (2022-10-25)
 ------------------
 

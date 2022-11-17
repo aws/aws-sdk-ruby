@@ -82,8 +82,18 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # A container for the account level Amazon S3 Storage Lens
+    # A container for the account-level Amazon S3 Storage Lens
     # configuration.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*. For a complete list of S3 Storage Lens metrics, see [S3
+    # Storage Lens metrics glossary][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
     # @note When making an API call, you may pass AccountLevel
     #   data as a hash:
@@ -106,27 +116,73 @@ module Aws::S3Control
     #               },
     #             },
     #           },
+    #           advanced_cost_optimization_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           advanced_data_protection_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           detailed_status_codes_metrics: {
+    #             is_enabled: false,
+    #           },
+    #         },
+    #         advanced_cost_optimization_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         advanced_data_protection_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         detailed_status_codes_metrics: {
+    #           is_enabled: false,
     #         },
     #       }
     #
     # @!attribute [rw] activity_metrics
-    #   A container for the S3 Storage Lens activity metrics.
+    #   A container for S3 Storage Lens activity metrics.
     #   @return [Types::ActivityMetrics]
     #
     # @!attribute [rw] bucket_level
     #   A container for the S3 Storage Lens bucket-level configuration.
     #   @return [Types::BucketLevel]
     #
+    # @!attribute [rw] advanced_cost_optimization_metrics
+    #   A container for S3 Storage Lens advanced cost-optimization metrics.
+    #   @return [Types::AdvancedCostOptimizationMetrics]
+    #
+    # @!attribute [rw] advanced_data_protection_metrics
+    #   A container for S3 Storage Lens advanced data-protection metrics.
+    #   @return [Types::AdvancedDataProtectionMetrics]
+    #
+    # @!attribute [rw] detailed_status_codes_metrics
+    #   A container for detailed status code metrics.
+    #   @return [Types::DetailedStatusCodesMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccountLevel AWS API Documentation
     #
     class AccountLevel < Struct.new(
       :activity_metrics,
-      :bucket_level)
+      :bucket_level,
+      :advanced_cost_optimization_metrics,
+      :advanced_data_protection_metrics,
+      :detailed_status_codes_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A container for the activity metrics.
+    # The container element for Amazon S3 Storage Lens activity metrics.
+    # Activity metrics show details about how your storage is requested,
+    # such as requests (for example, All requests, Get requests, Put
+    # requests), bytes uploaded or downloaded, and errors.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*. For a complete list of S3 Storage Lens metrics, see [S3
+    # Storage Lens metrics glossary][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
     #
     # @note When making an API call, you may pass ActivityMetrics
     #   data as a hash:
@@ -136,12 +192,83 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] is_enabled
-    #   A container for whether the activity metrics are enabled.
+    #   A container that indicates whether activity metrics are enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ActivityMetrics AWS API Documentation
     #
     class ActivityMetrics < Struct.new(
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container element for Amazon S3 Storage Lens advanced
+    # cost-optimization metrics. Advanced cost-optimization metrics provide
+    # insights that you can use to manage and optimize your storage costs,
+    # for example, lifecycle rule counts for transitions, expirations, and
+    # incomplete multipart uploads.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*. For a complete list of S3 Storage Lens metrics, see [S3
+    # Storage Lens metrics glossary][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+    #
+    # @note When making an API call, you may pass AdvancedCostOptimizationMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container that indicates whether advanced cost-optimization
+    #   metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AdvancedCostOptimizationMetrics AWS API Documentation
+    #
+    class AdvancedCostOptimizationMetrics < Struct.new(
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container element for Amazon S3 Storage Lens advanced
+    # data-protection metrics. Advanced data-protection metrics provide
+    # insights that you can use to perform audits and protect your data, for
+    # example replication rule counts within and across Regions.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*. For a complete list of S3 Storage Lens metrics, see [S3
+    # Storage Lens metrics glossary][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+    #
+    # @note When making an API call, you may pass AdvancedDataProtectionMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container that indicates whether advanced data-protection metrics
+    #   are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AdvancedDataProtectionMetrics AWS API Documentation
+    #
+    class AdvancedDataProtectionMetrics < Struct.new(
       :is_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -330,7 +457,16 @@ module Aws::S3Control
     #
     class BucketAlreadyOwnedByYou < Aws::EmptyStructure; end
 
-    # A container for the bucket-level configuration.
+    # A container for the bucket-level configuration for Amazon S3 Storage
+    # Lens.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
     #
     # @note When making an API call, you may pass BucketLevel
     #   data as a hash:
@@ -349,23 +485,49 @@ module Aws::S3Control
     #             },
     #           },
     #         },
+    #         advanced_cost_optimization_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         advanced_data_protection_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         detailed_status_codes_metrics: {
+    #           is_enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] activity_metrics
-    #   A container for the bucket-level activity metrics for Amazon S3
-    #   Storage Lens
+    #   A container for the bucket-level activity metrics for S3 Storage
+    #   Lens.
     #   @return [Types::ActivityMetrics]
     #
     # @!attribute [rw] prefix_level
-    #   A container for the bucket-level prefix-level metrics for S3 Storage
-    #   Lens
+    #   A container for the prefix-level metrics for S3 Storage Lens.
     #   @return [Types::PrefixLevel]
+    #
+    # @!attribute [rw] advanced_cost_optimization_metrics
+    #   A container for bucket-level advanced cost-optimization metrics for
+    #   S3 Storage Lens.
+    #   @return [Types::AdvancedCostOptimizationMetrics]
+    #
+    # @!attribute [rw] advanced_data_protection_metrics
+    #   A container for bucket-level advanced data-protection metrics for S3
+    #   Storage Lens.
+    #   @return [Types::AdvancedDataProtectionMetrics]
+    #
+    # @!attribute [rw] detailed_status_codes_metrics
+    #   A container for bucket-level detailed status code metrics for S3
+    #   Storage Lens.
+    #   @return [Types::DetailedStatusCodesMetrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/BucketLevel AWS API Documentation
     #
     class BucketLevel < Struct.new(
       :activity_metrics,
-      :prefix_level)
+      :prefix_level,
+      :advanced_cost_optimization_metrics,
+      :advanced_data_protection_metrics,
+      :detailed_status_codes_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1026,7 +1188,7 @@ module Aws::S3Control
     #   bucket or object public, see [The Meaning of "Public"][1] in the
     #   *Amazon S3 User Guide*.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This data type is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -1669,6 +1831,41 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # The container element for Amazon S3 Storage Lens detailed status code
+    # metrics. Detailed status code metrics generate metrics for HTTP status
+    # codes, such as `200 OK`, `403 Forbidden`, `503 Service Unavailable`
+    # and others.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*. For a complete list of S3 Storage Lens metrics, see [S3
+    # Storage Lens metrics glossary][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+    #
+    # @note When making an API call, you may pass DetailedStatusCodesMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container that indicates whether detailed status code metrics are
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DetailedStatusCodesMetrics AWS API Documentation
+    #
+    class DetailedStatusCodesMetrics < Struct.new(
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The last established access control policy for a Multi-Region Access
     # Point.
     #
@@ -2084,7 +2281,7 @@ module Aws::S3Control
     #   bucket or object public, see [The Meaning of "Public"][1] in the
     #   *Amazon S3 User Guide*.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This data type is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -3241,7 +3438,7 @@ module Aws::S3Control
     #   @return [Types::S3CopyObjectOperation]
     #
     # @!attribute [rw] s3_put_object_acl
-    #   Directs the specified job to run a PUT Object acl call on every
+    #   Directs the specified job to run a `PutObjectAcl` call on every
     #   object in the manifest.
     #   @return [Types::S3SetObjectAclOperation]
     #
@@ -3751,6 +3948,7 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] tag
+    #   A container for a key-value name pair.
     #   @return [Types::S3Tag]
     #
     # @!attribute [rw] and
@@ -4243,7 +4441,7 @@ module Aws::S3Control
     #   bucket or object public, see [The Meaning of "Public"][1] in the
     #   *Amazon S3 User Guide*.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This data type is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -4637,7 +4835,7 @@ module Aws::S3Control
     # bucket or object public, see [The Meaning of "Public"][1] in the
     # *Amazon S3 User Guide*.
     #
-    # This is not supported for Amazon S3 on Outposts.
+    # This data type is not supported for Amazon S3 on Outposts.
     #
     #
     #
@@ -4658,7 +4856,7 @@ module Aws::S3Control
     #   (ACLs) for buckets in this account. Setting this element to `TRUE`
     #   causes the following behavior:
     #
-    #   * PUT Bucket acl and PUT Object acl calls fail if the specified ACL
+    #   * `PutBucketAcl` and `PutObjectAcl` calls fail if the specified ACL
     #     is public.
     #
     #   * PUT Object calls fail if the request includes a public ACL.
@@ -4667,7 +4865,7 @@ module Aws::S3Control
     #
     #   Enabling this setting doesn't affect existing policies or ACLs.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This property is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @!attribute [rw] ignore_public_acls
@@ -4679,7 +4877,7 @@ module Aws::S3Control
     #   Enabling this setting doesn't affect the persistence of any
     #   existing ACLs and doesn't prevent new public ACLs from being set.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This property is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @!attribute [rw] block_public_policy
@@ -4690,7 +4888,7 @@ module Aws::S3Control
     #
     #   Enabling this setting doesn't affect existing bucket policies.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This property is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @!attribute [rw] restrict_public_buckets
@@ -4704,7 +4902,7 @@ module Aws::S3Control
     #   public bucket policy, including non-public delegation to specific
     #   accounts, is blocked.
     #
-    #   This is not supported for Amazon S3 on Outposts.
+    #   This property is not supported for Amazon S3 on Outposts.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PublicAccessBlockConfiguration AWS API Documentation
@@ -5271,6 +5469,24 @@ module Aws::S3Control
     #                   },
     #                 },
     #               },
+    #               advanced_cost_optimization_metrics: {
+    #                 is_enabled: false,
+    #               },
+    #               advanced_data_protection_metrics: {
+    #                 is_enabled: false,
+    #               },
+    #               detailed_status_codes_metrics: {
+    #                 is_enabled: false,
+    #               },
+    #             },
+    #             advanced_cost_optimization_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             advanced_data_protection_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             detailed_status_codes_metrics: {
+    #               is_enabled: false,
     #             },
     #           },
     #           include: {
@@ -5662,9 +5878,9 @@ module Aws::S3Control
     #
     # @!attribute [rw] target_resource
     #   Specifies the destination bucket ARN for the batch copy operation.
-    #   For example, to copy objects to a bucket named
-    #   "destinationBucket", set the TargetResource to
-    #   "arn:aws:s3:::destinationBucket".
+    #   For example, to copy objects to a bucket named `destinationBucket`,
+    #   set the `TargetResource` property to
+    #   `arn:aws:s3:::destinationBucket`.
     #   @return [String]
     #
     # @!attribute [rw] canned_access_control_list
@@ -6198,9 +6414,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object ACL operation.
-    # S3 Batch Operations passes every object to the underlying PUT Object
-    # acl API. For more information about the parameters for this operation,
-    # see [PUT Object acl][1].
+    # S3 Batch Operations passes every object to the underlying
+    # `PutObjectAcl` API. For more information about the parameters for this
+    # operation, see [ `PutObjectAcl` ][1].
     #
     #
     #
@@ -6353,6 +6569,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for a key-value name pair.
+    #
     # @note When making an API call, you may pass S3Tag
     #   data as a hash:
     #
@@ -6362,9 +6580,11 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] key
+    #   Key of the tag
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   Value of the tag
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Tag AWS API Documentation
@@ -6523,6 +6743,24 @@ module Aws::S3Control
     #                 },
     #               },
     #             },
+    #             advanced_cost_optimization_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             advanced_data_protection_metrics: {
+    #               is_enabled: false,
+    #             },
+    #             detailed_status_codes_metrics: {
+    #               is_enabled: false,
+    #             },
+    #           },
+    #           advanced_cost_optimization_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           advanced_data_protection_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           detailed_status_codes_metrics: {
+    #             is_enabled: false,
     #           },
     #         },
     #         include: {

@@ -1311,6 +1311,7 @@ module Aws::Personalize
     #           },
     #         ],
     #         import_mode: "FULL", # accepts FULL, INCREMENTAL
+    #         publish_attribution_metrics_to_s3: false,
     #       }
     #
     # @!attribute [rw] job_name
@@ -1351,6 +1352,11 @@ module Aws::Personalize
     #     the same ID with the new one.
     #   @return [String]
     #
+    # @!attribute [rw] publish_attribution_metrics_to_s3
+    #   If you created a metric attribution, specify whether to publish
+    #   metrics for this import job to Amazon S3
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDatasetImportJobRequest AWS API Documentation
     #
     class CreateDatasetImportJobRequest < Struct.new(
@@ -1359,7 +1365,8 @@ module Aws::Personalize
       :data_source,
       :role_arn,
       :tags,
-      :import_mode)
+      :import_mode,
+      :publish_attribution_metrics_to_s3)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1574,6 +1581,72 @@ module Aws::Personalize
     #
     class CreateFilterResponse < Struct.new(
       :filter_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMetricAttributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         dataset_group_arn: "Arn", # required
+    #         metrics: [ # required
+    #           {
+    #             event_type: "EventType", # required
+    #             metric_name: "MetricName", # required
+    #             expression: "MetricExpression", # required
+    #           },
+    #         ],
+    #         metrics_output_config: { # required
+    #           s3_data_destination: {
+    #             path: "S3Location", # required
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #           role_arn: "RoleArn", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name for the metric attribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the destination dataset group for
+    #   the metric attribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A list of metric attributes for the metric attribution. Each metric
+    #   attribute specifies an event type to track and a function. Available
+    #   functions are `SUM()` or `SAMPLECOUNT()`. For SUM() functions,
+    #   provide the dataset type (either Interactions or Items) and column
+    #   to sum as a parameter. For example SUM(Items.PRICE).
+    #   @return [Array<Types::MetricAttribute>]
+    #
+    # @!attribute [rw] metrics_output_config
+    #   The output configuration details for the metric attribution.
+    #   @return [Types::MetricAttributionOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateMetricAttributionRequest AWS API Documentation
+    #
+    class CreateMetricAttributionRequest < Struct.new(
+      :name,
+      :dataset_group_arn,
+      :metrics,
+      :metrics_output_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_attribution_arn
+    #   The Amazon Resource Name (ARN) for the new metric attribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateMetricAttributionResponse AWS API Documentation
+    #
+    class CreateMetricAttributionResponse < Struct.new(
+      :metric_attribution_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1862,6 +1935,7 @@ module Aws::Personalize
     #   data as a hash:
     #
     #       {
+    #         name: "Name",
     #         solution_arn: "Arn", # required
     #         training_mode: "FULL", # accepts FULL, UPDATE
     #         tags: [
@@ -1871,6 +1945,10 @@ module Aws::Personalize
     #           },
     #         ],
     #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the solution version.
+    #   @return [String]
     #
     # @!attribute [rw] solution_arn
     #   The Amazon Resource Name (ARN) of the solution containing the
@@ -1908,6 +1986,7 @@ module Aws::Personalize
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionVersionRequest AWS API Documentation
     #
     class CreateSolutionVersionRequest < Struct.new(
+      :name,
       :solution_arn,
       :training_mode,
       :tags)
@@ -2378,6 +2457,11 @@ module Aws::Personalize
     #   records.
     #   @return [String]
     #
+    # @!attribute [rw] publish_attribution_metrics_to_s3
+    #   Whether the job publishes metrics to Amazon S3 for a metric
+    #   attribution.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DatasetImportJob AWS API Documentation
     #
     class DatasetImportJob < Struct.new(
@@ -2390,7 +2474,8 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason,
-      :import_mode)
+      :import_mode,
+      :publish_attribution_metrics_to_s3)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2813,6 +2898,25 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteMetricAttributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_attribution_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] metric_attribution_arn
+    #   The metric attribution's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteMetricAttributionRequest AWS API Documentation
+    #
+    class DeleteMetricAttributionRequest < Struct.new(
+      :metric_attribution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRecommenderRequest
     #   data as a hash:
     #
@@ -3230,6 +3334,37 @@ module Aws::Personalize
     #
     class DescribeFilterResponse < Struct.new(
       :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMetricAttributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_attribution_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] metric_attribution_arn
+    #   The metric attribution's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeMetricAttributionRequest AWS API Documentation
+    #
+    class DescribeMetricAttributionRequest < Struct.new(
+      :metric_attribution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_attribution
+    #   The details of the metric attribution.
+    #   @return [Types::MetricAttribution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeMetricAttributionResponse AWS API Documentation
+    #
+    class DescribeMetricAttributionResponse < Struct.new(
+      :metric_attribution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4403,6 +4538,109 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMetricAttributionMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_attribution_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] metric_attribution_arn
+    #   The Amazon Resource Name (ARN) of the metric attribution to retrieve
+    #   attributes for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of metrics to return in one page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListMetricAttributionMetricsRequest AWS API Documentation
+    #
+    class ListMetricAttributionMetricsRequest < Struct.new(
+      :metric_attribution_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metrics
+    #   The metrics for the specified metric attribution.
+    #   @return [Array<Types::MetricAttribute>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous
+    #   `ListMetricAttributionMetricsResponse` request to retrieve the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListMetricAttributionMetricsResponse AWS API Documentation
+    #
+    class ListMetricAttributionMetricsResponse < Struct.new(
+      :metrics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMetricAttributionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_group_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The metric attributions' dataset group Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of metric attributions to return in one page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListMetricAttributionsRequest AWS API Documentation
+    #
+    class ListMetricAttributionsRequest < Struct.new(
+      :dataset_group_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_attributions
+    #   The list of metric attributions.
+    #   @return [Array<Types::MetricAttributionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListMetricAttributionsResponse AWS API Documentation
+    #
+    class ListMetricAttributionsResponse < Struct.new(
+      :metric_attributions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRecipesRequest
     #   data as a hash:
     #
@@ -4681,6 +4919,186 @@ module Aws::Personalize
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on a metric that a metric attribution reports on.
+    # For more information, see [Measuring impact of recommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
+    #
+    # @note When making an API call, you may pass MetricAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         event_type: "EventType", # required
+    #         metric_name: "MetricName", # required
+    #         expression: "MetricExpression", # required
+    #       }
+    #
+    # @!attribute [rw] event_type
+    #   The metric's event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The metric's name. The name helps you identify the metric in Amazon
+    #   CloudWatch or Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The attribute's expression. Available functions are `SUM()` or
+    #   `SAMPLECOUNT()`. For SUM() functions, provide the dataset type
+    #   (either Interactions or Items) and column to sum as a parameter. For
+    #   example SUM(Items.PRICE).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/MetricAttribute AWS API Documentation
+    #
+    class MetricAttribute < Struct.new(
+      :event_type,
+      :metric_name,
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on a metric attribution. A metric attribution
+    # creates reports on the data that you import into Amazon Personalize.
+    # Depending on how you import the data, you can view reports in Amazon
+    # CloudWatch or Amazon S3. For more information, see [Measuring impact
+    # of recommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
+    #
+    # @!attribute [rw] name
+    #   The metric attribution's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_attribution_arn
+    #   The metric attribution's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The metric attribution's dataset group Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics_output_config
+    #   The metric attribution's output configuration.
+    #   @return [Types::MetricAttributionOutput]
+    #
+    # @!attribute [rw] status
+    #   The metric attribution's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The metric attribution's creation date time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The metric attribution's last updated date time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The metric attribution's failure reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/MetricAttribution AWS API Documentation
+    #
+    class MetricAttribution < Struct.new(
+      :name,
+      :metric_attribution_arn,
+      :dataset_group_arn,
+      :metrics_output_config,
+      :status,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration details for a metric attribution.
+    #
+    # @note When making an API call, you may pass MetricAttributionOutput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_data_destination: {
+    #           path: "S3Location", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] s3_data_destination
+    #   The configuration details of an Amazon S3 input or output bucket.
+    #   @return [Types::S3DataConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM service role that has
+    #   permissions to add data to your output Amazon S3 bucket and add
+    #   metrics to Amazon CloudWatch. For more information, see [Measuring
+    #   impact of recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/MetricAttributionOutput AWS API Documentation
+    #
+    class MetricAttributionOutput < Struct.new(
+      :s3_data_destination,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the properties of a metric attribution. For a
+    # complete listing, call the [DescribeMetricAttribution][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeMetricAttribution.html
+    #
+    # @!attribute [rw] name
+    #   The name of the metric attribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_attribution_arn
+    #   The metric attribution's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The metric attribution's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The metric attribution's creation date time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The metric attribution's last updated date time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The metric attribution's failure reason.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/MetricAttributionSummary AWS API Documentation
+    #
+    class MetricAttributionSummary < Struct.new(
+      :name,
+      :metric_attribution_arn,
+      :status,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5368,6 +5786,10 @@ module Aws::Personalize
     #   The date and time (in Unix time) that the solution was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] recipe_arn
+    #   The Amazon Resource Name (ARN) of the recipe used by the solution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionSummary AWS API Documentation
     #
     class SolutionSummary < Struct.new(
@@ -5375,7 +5797,8 @@ module Aws::Personalize
       :solution_arn,
       :status,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :recipe_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5386,6 +5809,10 @@ module Aws::Personalize
     #
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_Solution.html
+    #
+    # @!attribute [rw] name
+    #   The name of the solution version.
+    #   @return [String]
     #
     # @!attribute [rw] solution_version_arn
     #   The ARN of the solution version.
@@ -5489,6 +5916,7 @@ module Aws::Personalize
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/SolutionVersion AWS API Documentation
     #
     class SolutionVersion < Struct.new(
+      :name,
       :solution_version_arn,
       :solution_arn,
       :perform_hpo,
@@ -5835,6 +6263,68 @@ module Aws::Personalize
     #
     class UpdateCampaignResponse < Struct.new(
       :campaign_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateMetricAttributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_metrics: [
+    #           {
+    #             event_type: "EventType", # required
+    #             metric_name: "MetricName", # required
+    #             expression: "MetricExpression", # required
+    #           },
+    #         ],
+    #         remove_metrics: ["MetricName"],
+    #         metrics_output_config: {
+    #           s3_data_destination: {
+    #             path: "S3Location", # required
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         metric_attribution_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] add_metrics
+    #   Add new metric attributes to the metric attribution.
+    #   @return [Array<Types::MetricAttribute>]
+    #
+    # @!attribute [rw] remove_metrics
+    #   Remove metric attributes from the metric attribution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] metrics_output_config
+    #   An output config for the metric attribution.
+    #   @return [Types::MetricAttributionOutput]
+    #
+    # @!attribute [rw] metric_attribution_arn
+    #   The Amazon Resource Name (ARN) for the metric attribution to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateMetricAttributionRequest AWS API Documentation
+    #
+    class UpdateMetricAttributionRequest < Struct.new(
+      :add_metrics,
+      :remove_metrics,
+      :metrics_output_config,
+      :metric_attribution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_attribution_arn
+    #   The Amazon Resource Name (ARN) for the metric attribution that you
+    #   updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateMetricAttributionResponse AWS API Documentation
+    #
+    class UpdateMetricAttributionResponse < Struct.new(
+      :metric_attribution_arn)
       SENSITIVE = []
       include Aws::Structure
     end

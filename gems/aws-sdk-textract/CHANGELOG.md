@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-11-17)
+------------------
+
+* Feature - This release adds support for specifying and extracting information from documents using the Signatures feature within Analyze Document API
+
 1.41.0 (2022-11-01)
 ------------------
 

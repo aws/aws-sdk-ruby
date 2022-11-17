@@ -92,6 +92,8 @@ module Aws::AppSync
             Aws::AppSync::Endpoints::DeleteType.build(context)
           when :disassociate_api
             Aws::AppSync::Endpoints::DisassociateApi.build(context)
+          when :evaluate_code
+            Aws::AppSync::Endpoints::EvaluateCode.build(context)
           when :evaluate_mapping_template
             Aws::AppSync::Endpoints::EvaluateMappingTemplate.build(context)
           when :flush_api_cache

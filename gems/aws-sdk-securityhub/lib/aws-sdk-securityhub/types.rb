@@ -14555,7 +14555,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details about a function's configuration.
+    # Details about an Lambda function's configuration.
     #
     # @note When making an API call, you may pass AwsLambdaFunctionDetails
     #   data as a hash:
@@ -14605,6 +14605,8 @@ module Aws::SecurityHub
     #           vpc_id: "NonEmptyString",
     #         },
     #         version: "NonEmptyString",
+    #         architectures: ["NonEmptyString"],
+    #         package_type: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] code
@@ -14690,6 +14692,17 @@ module Aws::SecurityHub
     #   The version of the Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] architectures
+    #   The instruction set architecture that the function uses. Valid
+    #   values are `x86_64` or `arm64`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] package_type
+    #   The type of deployment package that's used to deploy the function
+    #   code to Lambda. Set to `Image` for a container image and `Zip` for a
+    #   .zip file archive.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionDetails AWS API Documentation
     #
     class AwsLambdaFunctionDetails < Struct.new(
@@ -14710,7 +14723,9 @@ module Aws::SecurityHub
       :timeout,
       :tracing_config,
       :vpc_config,
-      :version)
+      :version,
+      :architectures,
+      :package_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22195,6 +22210,8 @@ module Aws::SecurityHub
     #                   vpc_id: "NonEmptyString",
     #                 },
     #                 version: "NonEmptyString",
+    #                 architectures: ["NonEmptyString"],
+    #                 package_type: "NonEmptyString",
     #               },
     #               aws_lambda_layer_version: {
     #                 version: 1,
@@ -23678,6 +23695,8 @@ module Aws::SecurityHub
     #                 file_path: "NonEmptyString",
     #                 fixed_in_version: "NonEmptyString",
     #                 remediation: "NonEmptyString",
+    #                 source_layer_hash: "NonEmptyString",
+    #                 source_layer_arn: "NonEmptyString",
     #               },
     #             ],
     #             cvss: [
@@ -28570,6 +28589,8 @@ module Aws::SecurityHub
     #                       vpc_id: "NonEmptyString",
     #                     },
     #                     version: "NonEmptyString",
+    #                     architectures: ["NonEmptyString"],
+    #                     package_type: "NonEmptyString",
     #                   },
     #                   aws_lambda_layer_version: {
     #                     version: 1,
@@ -30053,6 +30074,8 @@ module Aws::SecurityHub
     #                     file_path: "NonEmptyString",
     #                     fixed_in_version: "NonEmptyString",
     #                     remediation: "NonEmptyString",
+    #                     source_layer_hash: "NonEmptyString",
+    #                     source_layer_arn: "NonEmptyString",
     #                   },
     #                 ],
     #                 cvss: [
@@ -37847,6 +37870,8 @@ module Aws::SecurityHub
     #               vpc_id: "NonEmptyString",
     #             },
     #             version: "NonEmptyString",
+    #             architectures: ["NonEmptyString"],
+    #             package_type: "NonEmptyString",
     #           },
     #           aws_lambda_layer_version: {
     #             version: 1,
@@ -40780,6 +40805,8 @@ module Aws::SecurityHub
     #             vpc_id: "NonEmptyString",
     #           },
     #           version: "NonEmptyString",
+    #           architectures: ["NonEmptyString"],
+    #           package_type: "NonEmptyString",
     #         },
     #         aws_lambda_layer_version: {
     #           version: 1,
@@ -43946,6 +43973,8 @@ module Aws::SecurityHub
     #         file_path: "NonEmptyString",
     #         fixed_in_version: "NonEmptyString",
     #         remediation: "NonEmptyString",
+    #         source_layer_hash: "NonEmptyString",
+    #         source_layer_arn: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] name
@@ -43986,6 +44015,14 @@ module Aws::SecurityHub
     #   vulnerability in the software package.
     #   @return [String]
     #
+    # @!attribute [rw] source_layer_hash
+    #   The source layer hash of the vulnerable package.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_layer_arn
+    #   The Amazon Resource Name (ARN) of the source layer.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwarePackage AWS API Documentation
     #
     class SoftwarePackage < Struct.new(
@@ -43997,7 +44034,9 @@ module Aws::SecurityHub
       :package_manager,
       :file_path,
       :fixed_in_version,
-      :remediation)
+      :remediation,
+      :source_layer_hash,
+      :source_layer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46288,6 +46327,8 @@ module Aws::SecurityHub
     #             file_path: "NonEmptyString",
     #             fixed_in_version: "NonEmptyString",
     #             remediation: "NonEmptyString",
+    #             source_layer_hash: "NonEmptyString",
+    #             source_layer_arn: "NonEmptyString",
     #           },
     #         ],
     #         cvss: [

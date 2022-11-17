@@ -37,6 +37,8 @@ module Aws::CloudWatchRUM
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAppMonitorRequest = Shapes::StructureShape.new(name: 'CreateAppMonitorRequest')
     CreateAppMonitorResponse = Shapes::StructureShape.new(name: 'CreateAppMonitorResponse')
+    CustomEvents = Shapes::StructureShape.new(name: 'CustomEvents')
+    CustomEventsStatus = Shapes::StringShape.new(name: 'CustomEventsStatus')
     CwLog = Shapes::StructureShape.new(name: 'CwLog')
     DataStorage = Shapes::StructureShape.new(name: 'DataStorage')
     DeleteAppMonitorRequest = Shapes::StructureShape.new(name: 'DeleteAppMonitorRequest')
@@ -126,6 +128,7 @@ module Aws::CloudWatchRUM
 
     AppMonitor.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
     AppMonitor.add_member(:created, Shapes::ShapeRef.new(shape: ISOTimestampString, location_name: "Created"))
+    AppMonitor.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
     AppMonitor.add_member(:data_storage, Shapes::ShapeRef.new(shape: DataStorage, location_name: "DataStorage"))
     AppMonitor.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
     AppMonitor.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
@@ -211,6 +214,7 @@ module Aws::CloudWatchRUM
     ConflictException.struct_class = Types::ConflictException
 
     CreateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
+    CreateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
     CreateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
     CreateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, required: true, location_name: "Domain"))
     CreateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location_name: "Name"))
@@ -219,6 +223,9 @@ module Aws::CloudWatchRUM
 
     CreateAppMonitorResponse.add_member(:id, Shapes::ShapeRef.new(shape: AppMonitorId, location_name: "Id"))
     CreateAppMonitorResponse.struct_class = Types::CreateAppMonitorResponse
+
+    CustomEvents.add_member(:status, Shapes::ShapeRef.new(shape: CustomEventsStatus, location_name: "Status"))
+    CustomEvents.struct_class = Types::CustomEvents
 
     CwLog.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
     CwLog.add_member(:cw_log_group, Shapes::ShapeRef.new(shape: String, location_name: "CwLogGroup"))
@@ -393,6 +400,7 @@ module Aws::CloudWatchRUM
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAppMonitorRequest.add_member(:app_monitor_configuration, Shapes::ShapeRef.new(shape: AppMonitorConfiguration, location_name: "AppMonitorConfiguration"))
+    UpdateAppMonitorRequest.add_member(:custom_events, Shapes::ShapeRef.new(shape: CustomEvents, location_name: "CustomEvents"))
     UpdateAppMonitorRequest.add_member(:cw_log_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "CwLogEnabled"))
     UpdateAppMonitorRequest.add_member(:domain, Shapes::ShapeRef.new(shape: AppMonitorDomain, location_name: "Domain"))
     UpdateAppMonitorRequest.add_member(:name, Shapes::ShapeRef.new(shape: AppMonitorName, required: true, location: "uri", location_name: "Name"))

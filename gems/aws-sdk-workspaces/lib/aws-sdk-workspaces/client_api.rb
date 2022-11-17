@@ -37,6 +37,7 @@ module Aws::WorkSpaces
     BundleIdList = Shapes::ListShape.new(name: 'BundleIdList')
     BundleList = Shapes::ListShape.new(name: 'BundleList')
     BundleOwner = Shapes::StringShape.new(name: 'BundleOwner')
+    BundleType = Shapes::StringShape.new(name: 'BundleType')
     CertificateAuthorityArn = Shapes::StringShape.new(name: 'CertificateAuthorityArn')
     CertificateBasedAuthProperties = Shapes::StructureShape.new(name: 'CertificateBasedAuthProperties')
     CertificateBasedAuthStatusEnum = Shapes::StringShape.new(name: 'CertificateBasedAuthStatusEnum')
@@ -74,6 +75,8 @@ module Aws::WorkSpaces
     CreateConnectionAliasResult = Shapes::StructureShape.new(name: 'CreateConnectionAliasResult')
     CreateIpGroupRequest = Shapes::StructureShape.new(name: 'CreateIpGroupRequest')
     CreateIpGroupResult = Shapes::StructureShape.new(name: 'CreateIpGroupResult')
+    CreateStandbyWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateStandbyWorkspacesRequest')
+    CreateStandbyWorkspacesResult = Shapes::StructureShape.new(name: 'CreateStandbyWorkspacesResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateTagsResult = Shapes::StructureShape.new(name: 'CreateTagsResult')
     CreateUpdatedWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CreateUpdatedWorkspaceImageRequest')
@@ -160,6 +163,8 @@ module Aws::WorkSpaces
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     ExceptionErrorCode = Shapes::StringShape.new(name: 'ExceptionErrorCode')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    FailedCreateStandbyWorkspacesRequest = Shapes::StructureShape.new(name: 'FailedCreateStandbyWorkspacesRequest')
+    FailedCreateStandbyWorkspacesRequestList = Shapes::ListShape.new(name: 'FailedCreateStandbyWorkspacesRequestList')
     FailedCreateWorkspaceRequest = Shapes::StructureShape.new(name: 'FailedCreateWorkspaceRequest')
     FailedCreateWorkspaceRequests = Shapes::ListShape.new(name: 'FailedCreateWorkspaceRequests')
     FailedRebootWorkspaceRequests = Shapes::ListShape.new(name: 'FailedRebootWorkspaceRequests')
@@ -229,6 +234,8 @@ module Aws::WorkSpaces
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
     OperationNotSupportedException = Shapes::StructureShape.new(name: 'OperationNotSupportedException')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PendingCreateStandbyWorkspacesRequest = Shapes::StructureShape.new(name: 'PendingCreateStandbyWorkspacesRequest')
+    PendingCreateStandbyWorkspacesRequestList = Shapes::ListShape.new(name: 'PendingCreateStandbyWorkspacesRequestList')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
     RebootRequest = Shapes::StructureShape.new(name: 'RebootRequest')
@@ -244,6 +251,8 @@ module Aws::WorkSpaces
     RegisterWorkspaceDirectoryRequest = Shapes::StructureShape.new(name: 'RegisterWorkspaceDirectoryRequest')
     RegisterWorkspaceDirectoryResult = Shapes::StructureShape.new(name: 'RegisterWorkspaceDirectoryResult')
     RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
+    RelatedWorkspaceProperties = Shapes::StructureShape.new(name: 'RelatedWorkspaceProperties')
+    RelatedWorkspaces = Shapes::ListShape.new(name: 'RelatedWorkspaces')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceAssociatedException = Shapes::StructureShape.new(name: 'ResourceAssociatedException')
     ResourceCreationFailedException = Shapes::StructureShape.new(name: 'ResourceCreationFailedException')
@@ -266,6 +275,9 @@ module Aws::WorkSpaces
     SelfservicePermissions = Shapes::StructureShape.new(name: 'SelfservicePermissions')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
     SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
+    StandbyWorkspace = Shapes::StructureShape.new(name: 'StandbyWorkspace')
+    StandbyWorkspaceRelationshipType = Shapes::StringShape.new(name: 'StandbyWorkspaceRelationshipType')
+    StandbyWorkspacesList = Shapes::ListShape.new(name: 'StandbyWorkspacesList')
     StartRequest = Shapes::StructureShape.new(name: 'StartRequest')
     StartWorkspaceRequests = Shapes::ListShape.new(name: 'StartWorkspaceRequests')
     StartWorkspacesRequest = Shapes::StructureShape.new(name: 'StartWorkspacesRequest')
@@ -311,6 +323,7 @@ module Aws::WorkSpaces
     WorkspaceBundle = Shapes::StructureShape.new(name: 'WorkspaceBundle')
     WorkspaceBundleDescription = Shapes::StringShape.new(name: 'WorkspaceBundleDescription')
     WorkspaceBundleName = Shapes::StringShape.new(name: 'WorkspaceBundleName')
+    WorkspaceBundleState = Shapes::StringShape.new(name: 'WorkspaceBundleState')
     WorkspaceConnectionStatus = Shapes::StructureShape.new(name: 'WorkspaceConnectionStatus')
     WorkspaceConnectionStatusList = Shapes::ListShape.new(name: 'WorkspaceConnectionStatusList')
     WorkspaceCreationProperties = Shapes::StructureShape.new(name: 'WorkspaceCreationProperties')
@@ -462,6 +475,14 @@ module Aws::WorkSpaces
 
     CreateIpGroupResult.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, location_name: "GroupId"))
     CreateIpGroupResult.struct_class = Types::CreateIpGroupResult
+
+    CreateStandbyWorkspacesRequest.add_member(:primary_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "PrimaryRegion"))
+    CreateStandbyWorkspacesRequest.add_member(:standby_workspaces, Shapes::ShapeRef.new(shape: StandbyWorkspacesList, required: true, location_name: "StandbyWorkspaces"))
+    CreateStandbyWorkspacesRequest.struct_class = Types::CreateStandbyWorkspacesRequest
+
+    CreateStandbyWorkspacesResult.add_member(:failed_standby_requests, Shapes::ShapeRef.new(shape: FailedCreateStandbyWorkspacesRequestList, location_name: "FailedStandbyRequests"))
+    CreateStandbyWorkspacesResult.add_member(:pending_standby_requests, Shapes::ShapeRef.new(shape: PendingCreateStandbyWorkspacesRequestList, location_name: "PendingStandbyRequests"))
+    CreateStandbyWorkspacesResult.struct_class = Types::CreateStandbyWorkspacesResult
 
     CreateTagsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -740,6 +761,13 @@ module Aws::WorkSpaces
 
     DnsIpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
+    FailedCreateStandbyWorkspacesRequest.add_member(:standby_workspace_request, Shapes::ShapeRef.new(shape: StandbyWorkspace, location_name: "StandbyWorkspaceRequest"))
+    FailedCreateStandbyWorkspacesRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: WorkspaceErrorCode, location_name: "ErrorCode"))
+    FailedCreateStandbyWorkspacesRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
+    FailedCreateStandbyWorkspacesRequest.struct_class = Types::FailedCreateStandbyWorkspacesRequest
+
+    FailedCreateStandbyWorkspacesRequestList.member = Shapes::ShapeRef.new(shape: FailedCreateStandbyWorkspacesRequest)
+
     FailedCreateWorkspaceRequest.add_member(:workspace_request, Shapes::ShapeRef.new(shape: WorkspaceRequest, location_name: "WorkspaceRequest"))
     FailedCreateWorkspaceRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorCode"))
     FailedCreateWorkspaceRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
@@ -921,6 +949,14 @@ module Aws::WorkSpaces
     OperationNotSupportedException.add_member(:reason, Shapes::ShapeRef.new(shape: ExceptionErrorCode, location_name: "reason"))
     OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
+    PendingCreateStandbyWorkspacesRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
+    PendingCreateStandbyWorkspacesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    PendingCreateStandbyWorkspacesRequest.add_member(:state, Shapes::ShapeRef.new(shape: WorkspaceState, location_name: "State"))
+    PendingCreateStandbyWorkspacesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
+    PendingCreateStandbyWorkspacesRequest.struct_class = Types::PendingCreateStandbyWorkspacesRequest
+
+    PendingCreateStandbyWorkspacesRequestList.member = Shapes::ShapeRef.new(shape: PendingCreateStandbyWorkspacesRequest)
+
     ProtocolList.member = Shapes::ShapeRef.new(shape: Protocol)
 
     RebootRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
@@ -954,6 +990,14 @@ module Aws::WorkSpaces
     RegisterWorkspaceDirectoryRequest.struct_class = Types::RegisterWorkspaceDirectoryRequest
 
     RegisterWorkspaceDirectoryResult.struct_class = Types::RegisterWorkspaceDirectoryResult
+
+    RelatedWorkspaceProperties.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
+    RelatedWorkspaceProperties.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    RelatedWorkspaceProperties.add_member(:state, Shapes::ShapeRef.new(shape: WorkspaceState, location_name: "State"))
+    RelatedWorkspaceProperties.add_member(:type, Shapes::ShapeRef.new(shape: StandbyWorkspaceRelationshipType, location_name: "Type"))
+    RelatedWorkspaceProperties.struct_class = Types::RelatedWorkspaceProperties
+
+    RelatedWorkspaces.member = Shapes::ShapeRef.new(shape: RelatedWorkspaceProperties)
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
@@ -1007,6 +1051,14 @@ module Aws::WorkSpaces
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot)
+
+    StandbyWorkspace.add_member(:primary_workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "PrimaryWorkspaceId"))
+    StandbyWorkspace.add_member(:volume_encryption_key, Shapes::ShapeRef.new(shape: VolumeEncryptionKey, location_name: "VolumeEncryptionKey"))
+    StandbyWorkspace.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    StandbyWorkspace.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StandbyWorkspace.struct_class = Types::StandbyWorkspace
+
+    StandbyWorkspacesList.member = Shapes::ShapeRef.new(shape: StandbyWorkspace)
 
     StartRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
     StartRequest.struct_class = Types::StartRequest
@@ -1112,6 +1164,7 @@ module Aws::WorkSpaces
     Workspace.add_member(:root_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "RootVolumeEncryptionEnabled"))
     Workspace.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
     Workspace.add_member(:modification_states, Shapes::ShapeRef.new(shape: ModificationStateList, location_name: "ModificationStates"))
+    Workspace.add_member(:related_workspaces, Shapes::ShapeRef.new(shape: RelatedWorkspaces, location_name: "RelatedWorkspaces"))
     Workspace.struct_class = Types::Workspace
 
     WorkspaceAccessProperties.add_member(:device_type_windows, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeWindows"))
@@ -1134,6 +1187,8 @@ module Aws::WorkSpaces
     WorkspaceBundle.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "ComputeType"))
     WorkspaceBundle.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     WorkspaceBundle.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    WorkspaceBundle.add_member(:state, Shapes::ShapeRef.new(shape: WorkspaceBundleState, location_name: "State"))
+    WorkspaceBundle.add_member(:bundle_type, Shapes::ShapeRef.new(shape: BundleType, location_name: "BundleType"))
     WorkspaceBundle.struct_class = Types::WorkspaceBundle
 
     WorkspaceConnectionStatus.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
@@ -1336,6 +1391,19 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceCreationFailedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_standby_workspaces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStandbyWorkspaces"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateStandbyWorkspacesRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateStandbyWorkspacesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
       end)
 
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -1854,6 +1922,7 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:reboot_workspaces, Seahorse::Model::Operation.new.tap do |o|
@@ -1862,6 +1931,7 @@ module Aws::WorkSpaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RebootWorkspacesRequest)
         o.output = Shapes::ShapeRef.new(shape: RebootWorkspacesResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:rebuild_workspaces, Seahorse::Model::Operation.new.tap do |o|
@@ -1870,6 +1940,7 @@ module Aws::WorkSpaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RebuildWorkspacesRequest)
         o.output = Shapes::ShapeRef.new(shape: RebuildWorkspacesResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:register_workspace_directory, Seahorse::Model::Operation.new.tap do |o|
@@ -1897,6 +1968,7 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:revoke_ip_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -1984,6 +2056,7 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:update_workspace_image_permission, Seahorse::Model::Operation.new.tap do |o|

@@ -326,6 +326,37 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    # AppSync function. Specifies the name and version of the runtime to
+    # use. Note that if a runtime is specified, code must also be specified.
+    #
+    # @note When making an API call, you may pass AppSyncRuntime
+    #   data as a hash:
+    #
+    #       {
+    #         name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #         runtime_version: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The `name` of the runtime to use. Currently, the only allowed value
+    #   is `APPSYNC_JS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_version
+    #   The `version` of the runtime to use. Currently, the only allowed
+    #   version is `1.0.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AppSyncRuntime AWS API Documentation
+    #
+    class AppSyncRuntime < Struct.new(
+      :name,
+      :runtime_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateApiRequest
     #   data as a hash:
     #
@@ -426,16 +457,45 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Provides further details for the reason behind the bad request. For
+    # reason type `CODE_ERROR`, the detail will contain a list of code
+    # errors.
+    #
+    # @!attribute [rw] code_errors
+    #   Contains the list of errors in the request.
+    #   @return [Array<Types::CodeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/BadRequestDetail AWS API Documentation
+    #
+    class BadRequestDetail < Struct.new(
+      :code_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request is not well formed. For example, a value is invalid or a
     # required field is missing. Check the field values, and then try again.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Provides context for the cause of the bad request. The only
+    #   supported value is `CODE_ERROR`.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   Provides further details for the reason behind the bad request. For
+    #   reason type `CODE_ERROR`, the detail will contain a list of code
+    #   errors.
+    #   @return [Types::BadRequestDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/BadRequestException AWS API Documentation
     #
     class BadRequestException < Struct.new(
-      :message)
+      :message,
+      :reason,
+      :detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -468,6 +528,60 @@ module Aws::AppSync
     class CachingConfig < Struct.new(
       :ttl,
       :caching_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an AppSync error.
+    #
+    # @!attribute [rw] error_type
+    #   The type of code error.
+    #
+    #   Examples include, but aren't limited to: `LINT_ERROR`,
+    #   `PARSER_ERROR`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A user presentable error.
+    #
+    #   Examples include, but aren't limited to: `Parsing error:
+    #   Unterminated string literal`.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The line, column, and span location of the error in the code.
+    #   @return [Types::CodeErrorLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CodeError AWS API Documentation
+    #
+    class CodeError < Struct.new(
+      :error_type,
+      :value,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the location of the error in a code sample.
+    #
+    # @!attribute [rw] line
+    #   The line number in the code. Defaults to `0` if unknown.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] column
+    #   The column number in the code. Defaults to `0` if unknown.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] span
+    #   The span/length of the error. Defaults to `-1` if unknown.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CodeErrorLocation AWS API Documentation
+    #
+    class CodeErrorLocation < Struct.new(
+      :line,
+      :column,
+      :span)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -867,7 +981,7 @@ module Aws::AppSync
     #         data_source_name: "ResourceName", # required
     #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
-    #         function_version: "String", # required
+    #         function_version: "String",
     #         sync_config: {
     #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
     #           conflict_detection: "VERSION", # accepts VERSION, NONE
@@ -876,6 +990,11 @@ module Aws::AppSync
     #           },
     #         },
     #         max_batch_size: 1,
+    #         runtime: {
+    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #           runtime_version: "String", # required
+    #         },
+    #         code: "Code",
     #       }
     #
     # @!attribute [rw] api_id
@@ -905,7 +1024,8 @@ module Aws::AppSync
     #
     # @!attribute [rw] function_version
     #   The `version` of the request mapping template. Currently, the
-    #   supported value is 2018-05-29.
+    #   supported value is 2018-05-29. Note that when using VTL and mapping
+    #   templates, the `functionVersion` is required.
     #   @return [String]
     #
     # @!attribute [rw] sync_config
@@ -919,6 +1039,19 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #   @return [Integer]
     #
+    # @!attribute [rw] runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be
+    #   specified.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The `function` code that contains the request and response
+    #   functions. When code is used, the `runtime` is required. The
+    #   `runtime` value must be `APPSYNC_JS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -930,7 +1063,9 @@ module Aws::AppSync
       :response_mapping_template,
       :function_version,
       :sync_config,
-      :max_batch_size)
+      :max_batch_size,
+      :runtime,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1094,6 +1229,11 @@ module Aws::AppSync
     #           caching_keys: ["String"],
     #         },
     #         max_batch_size: 1,
+    #         runtime: {
+    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #           runtime_version: "String", # required
+    #         },
+    #         code: "Code",
     #       }
     #
     # @!attribute [rw] api_id
@@ -1157,6 +1297,19 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #   @return [Integer]
     #
+    # @!attribute [rw] runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be
+    #   specified.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The `resolver` code that contains the request and response
+    #   functions. When code is used, the `runtime` is required. The
+    #   `runtime` value must be `APPSYNC_JS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest AWS API Documentation
     #
     class CreateResolverRequest < Struct.new(
@@ -1170,7 +1323,9 @@ module Aws::AppSync
       :pipeline_config,
       :sync_config,
       :caching_config,
-      :max_batch_size)
+      :max_batch_size,
+      :runtime,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1723,8 +1878,8 @@ module Aws::AppSync
       include Aws::Structure
     end
 
-    # Contains the list of errors generated when attempting to evaluate a
-    # mapping template.
+    # Contains the list of errors generated. When using JavaScript, this
+    # will apply to the request or response function evaluation.
     #
     # @!attribute [rw] message
     #   The error payload.
@@ -1734,6 +1889,93 @@ module Aws::AppSync
     #
     class ErrorDetail < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the list of errors from a code evaluation response.
+    #
+    # @!attribute [rw] message
+    #   The error payload.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_errors
+    #   Contains the list of `CodeError` objects.
+    #   @return [Array<Types::CodeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateCodeErrorDetail AWS API Documentation
+    #
+    class EvaluateCodeErrorDetail < Struct.new(
+      :message,
+      :code_errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EvaluateCodeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         runtime: { # required
+    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #           runtime_version: "String", # required
+    #         },
+    #         code: "Code", # required
+    #         context: "Context", # required
+    #         function: "String",
+    #       }
+    #
+    # @!attribute [rw] runtime
+    #   The runtime to be used when evaluating the code. Currently, only the
+    #   `APPSYNC_JS` runtime is supported.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The code definition to be evaluated. Note that `code` and `runtime`
+    #   are both required for this action. The `runtime` value must be
+    #   `APPSYNC_JS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The map that holds all of the contextual information for your
+    #   resolver invocation. A `context` is required for this action.
+    #   @return [String]
+    #
+    # @!attribute [rw] function
+    #   The function within the code to be evaluated. If provided, the valid
+    #   values are `request` and `response`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateCodeRequest AWS API Documentation
+    #
+    class EvaluateCodeRequest < Struct.new(
+      :runtime,
+      :code,
+      :context,
+      :function)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_result
+    #   The result of the evaluation operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Contains the payload of the response error.
+    #   @return [Types::EvaluateCodeErrorDetail]
+    #
+    # @!attribute [rw] logs
+    #   A list of logs that were generated by calls to `util.log.info` and
+    #   `util.log.error` in the evaluated code.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateCodeResponse AWS API Documentation
+    #
+    class EvaluateCodeResponse < Struct.new(
+      :evaluation_result,
+      :error,
+      :logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,11 +2015,17 @@ module Aws::AppSync
     #   The `ErrorDetail` object.
     #   @return [Types::ErrorDetail]
     #
+    # @!attribute [rw] logs
+    #   A list of logs that were generated by calls to `util.log.info` and
+    #   `util.log.error` in the evaluated code.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EvaluateMappingTemplateResponse AWS API Documentation
     #
     class EvaluateMappingTemplateResponse < Struct.new(
       :evaluation_result,
-      :error)
+      :error,
+      :logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1857,6 +2105,19 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #   @return [Integer]
     #
+    # @!attribute [rw] runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be
+    #   specified.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The `function` code that contains the request and response
+    #   functions. When code is used, the `runtime` is required. The
+    #   `runtime` value must be `APPSYNC_JS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -1869,7 +2130,9 @@ module Aws::AppSync
       :response_mapping_template,
       :function_version,
       :sync_config,
-      :max_batch_size)
+      :max_batch_size,
+      :runtime,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3246,6 +3509,19 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #   @return [Integer]
     #
+    # @!attribute [rw] runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be
+    #   specified.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The `resolver` code that contains the request and response
+    #   functions. When code is used, the `runtime` is required. The
+    #   `runtime` value must be `APPSYNC_JS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver AWS API Documentation
     #
     class Resolver < Struct.new(
@@ -3259,7 +3535,9 @@ module Aws::AppSync
       :pipeline_config,
       :sync_config,
       :caching_config,
-      :max_batch_size)
+      :max_batch_size,
+      :runtime,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3793,7 +4071,7 @@ module Aws::AppSync
     #         data_source_name: "ResourceName", # required
     #         request_mapping_template: "MappingTemplate",
     #         response_mapping_template: "MappingTemplate",
-    #         function_version: "String", # required
+    #         function_version: "String",
     #         sync_config: {
     #           conflict_handler: "OPTIMISTIC_CONCURRENCY", # accepts OPTIMISTIC_CONCURRENCY, LAMBDA, AUTOMERGE, NONE
     #           conflict_detection: "VERSION", # accepts VERSION, NONE
@@ -3802,6 +4080,11 @@ module Aws::AppSync
     #           },
     #         },
     #         max_batch_size: 1,
+    #         runtime: {
+    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #           runtime_version: "String", # required
+    #         },
+    #         code: "Code",
     #       }
     #
     # @!attribute [rw] api_id
@@ -3835,7 +4118,8 @@ module Aws::AppSync
     #
     # @!attribute [rw] function_version
     #   The `version` of the request mapping template. Currently, the
-    #   supported value is 2018-05-29.
+    #   supported value is 2018-05-29. Note that when using VTL and mapping
+    #   templates, the `functionVersion` is required.
     #   @return [String]
     #
     # @!attribute [rw] sync_config
@@ -3849,6 +4133,19 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #   @return [Integer]
     #
+    # @!attribute [rw] runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be
+    #   specified.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The `function` code that contains the request and response
+    #   functions. When code is used, the `runtime` is required. The
+    #   `runtime` value must be `APPSYNC_JS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionRequest AWS API Documentation
     #
     class UpdateFunctionRequest < Struct.new(
@@ -3861,7 +4158,9 @@ module Aws::AppSync
       :response_mapping_template,
       :function_version,
       :sync_config,
-      :max_batch_size)
+      :max_batch_size,
+      :runtime,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4024,6 +4323,11 @@ module Aws::AppSync
     #           caching_keys: ["String"],
     #         },
     #         max_batch_size: 1,
+    #         runtime: {
+    #           name: "APPSYNC_JS", # required, accepts APPSYNC_JS
+    #           runtime_version: "String", # required
+    #         },
+    #         code: "Code",
     #       }
     #
     # @!attribute [rw] api_id
@@ -4087,6 +4391,19 @@ module Aws::AppSync
     #   The maximum batching size for a resolver.
     #   @return [Integer]
     #
+    # @!attribute [rw] runtime
+    #   Describes a runtime used by an AWS AppSync pipeline resolver or AWS
+    #   AppSync function. Specifies the name and version of the runtime to
+    #   use. Note that if a runtime is specified, code must also be
+    #   specified.
+    #   @return [Types::AppSyncRuntime]
+    #
+    # @!attribute [rw] code
+    #   The `resolver` code that contains the request and response
+    #   functions. When code is used, the `runtime` is required. The
+    #   `runtime` value must be `APPSYNC_JS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest AWS API Documentation
     #
     class UpdateResolverRequest < Struct.new(
@@ -4100,7 +4417,9 @@ module Aws::AppSync
       :pipeline_config,
       :sync_config,
       :caching_config,
-      :max_batch_size)
+      :max_batch_size,
+      :runtime,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end

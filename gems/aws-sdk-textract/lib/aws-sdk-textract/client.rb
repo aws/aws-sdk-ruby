@@ -397,6 +397,11 @@ module Aws::Textract
     #   document are returned (including text that doesn't have a
     #   relationship with the value of `FeatureTypes`).
     #
+    # * Signatures. A SIGNATURE `Block` object contains the location
+    #   information of a signature in a document. If used in conjunction
+    #   with forms or tables, a signature can be given a Key-Value pairing
+    #   or be detected in the cell of a table.
+    #
     # * Query. A QUERY Block object contains the query text, alias and link
     #   to the associated Query results block object.
     #
@@ -436,10 +441,13 @@ module Aws::Textract
     # @option params [required, Array<String>] :feature_types
     #   A list of the types of analysis to perform. Add TABLES to the list to
     #   return information about the tables that are detected in the input
-    #   document. Add FORMS to return detected form data. To perform both
-    #   types of analysis, add TABLES and FORMS to `FeatureTypes`. All lines
-    #   and words detected in the document are included in the response
-    #   (including text that isn't related to the value of `FeatureTypes`).
+    #   document. Add FORMS to return detected form data. Add SIGNATURES to
+    #   return the locations of detected signatures. To perform both forms and
+    #   table analysis, add TABLES and FORMS to `FeatureTypes`. To detect
+    #   signatures within form data and table data, add SIGNATURES to either
+    #   TABLES or FORMS. All lines and words detected in the document are
+    #   included in the response (including text that isn't related to the
+    #   value of `FeatureTypes`).
     #
     # @option params [Types::HumanLoopConfig] :human_loop_config
     #   Sets the configuration for the human in the loop workflow for
@@ -467,7 +475,7 @@ module Aws::Textract
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
+    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES
     #     human_loop_config: {
     #       human_loop_name: "HumanLoopName", # required
     #       flow_definition_arn: "FlowDefinitionArn", # required
@@ -490,7 +498,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -654,7 +662,7 @@ module Aws::Textract
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].types[0] #=> String
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].id #=> String
     #   resp.expense_documents[0].blocks #=> Array
-    #   resp.expense_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.expense_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.expense_documents[0].blocks[0].confidence #=> Float
     #   resp.expense_documents[0].blocks[0].text #=> String
     #   resp.expense_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -736,7 +744,7 @@ module Aws::Textract
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value_type #=> String, one of "DATE"
     #   resp.identity_documents[0].identity_document_fields[0].value_detection.confidence #=> Float
     #   resp.identity_documents[0].blocks #=> Array
-    #   resp.identity_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.identity_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.identity_documents[0].blocks[0].confidence #=> Float
     #   resp.identity_documents[0].blocks[0].text #=> String
     #   resp.identity_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -829,7 +837,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -974,7 +982,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -1096,7 +1104,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -1271,7 +1279,7 @@ module Aws::Textract
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].types[0] #=> String
     #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].group_properties[0].id #=> String
     #   resp.expense_documents[0].blocks #=> Array
-    #   resp.expense_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT"
+    #   resp.expense_documents[0].blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE", "QUERY", "QUERY_RESULT", "SIGNATURE"
     #   resp.expense_documents[0].blocks[0].confidence #=> Float
     #   resp.expense_documents[0].blocks[0].text #=> String
     #   resp.expense_documents[0].blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -1400,7 +1408,7 @@ module Aws::Textract
     #         version: "S3ObjectVersion",
     #       },
     #     },
-    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
+    #     feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES, SIGNATURES
     #     client_request_token: "ClientRequestToken",
     #     job_tag: "JobTag",
     #     notification_channel: {
@@ -1653,7 +1661,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

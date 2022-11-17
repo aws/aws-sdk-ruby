@@ -31,6 +31,7 @@ module Aws::Appflow
     #
     #       {
     #         aggregation_type: "None", # accepts None, SingleFile
+    #         target_file_size: 1,
     #       }
     #
     # @!attribute [rw] aggregation_type
@@ -38,10 +39,19 @@ module Aws::Appflow
     #   single file, or leave them unaggregated.
     #   @return [String]
     #
+    # @!attribute [rw] target_file_size
+    #   The desired file size, in MB, for each output file that Amazon
+    #   AppFlow writes to the flow destination. For each file, Amazon
+    #   AppFlow attempts to achieve the size that you specify. The actual
+    #   file sizes might differ from this target based on the number and
+    #   size of the records that each file contains.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/AggregationConfig AWS API Documentation
     #
     class AggregationConfig < Struct.new(
-      :aggregation_type)
+      :aggregation_type,
+      :target_file_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2082,9 +2092,11 @@ module Aws::Appflow
     #                   prefix_config: {
     #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #                   },
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
+    #                     target_file_size: 1,
     #                   },
     #                   preserve_source_data_typing: false,
     #                 },
@@ -2128,9 +2140,11 @@ module Aws::Appflow
     #                   prefix_config: { # required
     #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #                   },
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
+    #                     target_file_size: 1,
     #                   },
     #                 },
     #               },
@@ -2216,7 +2230,7 @@ module Aws::Appflow
     #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -2224,6 +2238,13 @@ module Aws::Appflow
     #         ],
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         metadata_catalog_config: {
+    #           glue_data_catalog: {
+    #             role_arn: "GlueDataCatalogIAMRole", # required
+    #             database_name: "GlueDataCatalogDatabaseName", # required
+    #             table_prefix: "GlueDataCatalogTablePrefix", # required
+    #           },
     #         },
     #       }
     #
@@ -2267,6 +2288,13 @@ module Aws::Appflow
     #   The tags used to organize, track, or control access for your flow.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] metadata_catalog_config
+    #   Specifies the configuration that Amazon AppFlow uses when it
+    #   catalogs the data that's transferred by the associated flow. When
+    #   Amazon AppFlow catalogs the data from a flow, it stores metadata in
+    #   a data catalog.
+    #   @return [Types::MetadataCatalogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -2277,7 +2305,8 @@ module Aws::Appflow
       :source_flow_config,
       :destination_flow_config_list,
       :tasks,
-      :tags)
+      :tags,
+      :metadata_catalog_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3081,6 +3110,30 @@ module Aws::Appflow
     #   The tags used to organize, track, or control access for your flow.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] metadata_catalog_config
+    #   Specifies the configuration that Amazon AppFlow uses when it
+    #   catalogs the data that's transferred by the associated flow. When
+    #   Amazon AppFlow catalogs the data from a flow, it stores metadata in
+    #   a data catalog.
+    #   @return [Types::MetadataCatalogConfig]
+    #
+    # @!attribute [rw] last_run_metadata_catalog_details
+    #   Describes the metadata catalog, metadata table, and data partitions
+    #   that Amazon AppFlow used for the associated flow run.
+    #   @return [Array<Types::MetadataCatalogDetail>]
+    #
+    # @!attribute [rw] schema_version
+    #   The version number of your data schema. Amazon AppFlow assigns this
+    #   version number. The version number increases by one when you change
+    #   any of the following settings in your flow configuration:
+    #
+    #   * Source-to-destination field mappings
+    #
+    #   * Field data types
+    #
+    #   * Partition keys
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeFlowResponse AWS API Documentation
     #
     class DescribeFlowResponse < Struct.new(
@@ -3099,7 +3152,10 @@ module Aws::Appflow
       :last_updated_at,
       :created_by,
       :last_updated_by,
-      :tags)
+      :tags,
+      :metadata_catalog_config,
+      :last_run_metadata_catalog_details,
+      :schema_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3129,9 +3185,11 @@ module Aws::Appflow
     #             prefix_config: {
     #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #               path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #             },
     #             aggregation_config: {
     #               aggregation_type: "None", # accepts None, SingleFile
+    #               target_file_size: 1,
     #             },
     #             preserve_source_data_typing: false,
     #           },
@@ -3175,9 +3233,11 @@ module Aws::Appflow
     #             prefix_config: { # required
     #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #               path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #             },
     #             aggregation_config: {
     #               aggregation_type: "None", # accepts None, SingleFile
+    #               target_file_size: 1,
     #             },
     #           },
     #         },
@@ -3388,9 +3448,11 @@ module Aws::Appflow
     #               prefix_config: {
     #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #               },
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
+    #                 target_file_size: 1,
     #               },
     #               preserve_source_data_typing: false,
     #             },
@@ -3434,9 +3496,11 @@ module Aws::Appflow
     #               prefix_config: { # required
     #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                 path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #               },
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
+    #                 target_file_size: 1,
     #               },
     #             },
     #           },
@@ -3761,6 +3825,11 @@ module Aws::Appflow
     #   transferred in the flow run.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata_catalog_details
+    #   Describes the metadata catalog, metadata table, and data partitions
+    #   that Amazon AppFlow used for the associated flow run.
+    #   @return [Array<Types::MetadataCatalogDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ExecutionRecord AWS API Documentation
     #
     class ExecutionRecord < Struct.new(
@@ -3770,7 +3839,8 @@ module Aws::Appflow
       :started_at,
       :last_updated_at,
       :data_pull_start_time,
-      :data_pull_end_time)
+      :data_pull_end_time,
+      :metadata_catalog_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3935,6 +4005,67 @@ module Aws::Appflow
       :last_updated_by,
       :tags,
       :last_run_execution_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration that Amazon AppFlow uses when it catalogs
+    # your data with the Glue Data Catalog. When Amazon AppFlow catalogs
+    # your data, it stores metadata in Data Catalog tables. This metadata
+    # represents the data that's transferred by the flow that you configure
+    # with these settings.
+    #
+    # <note markdown="1"> You can configure a flow with these settings only when the flow
+    # destination is Amazon S3.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass GlueDataCatalogConfig
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "GlueDataCatalogIAMRole", # required
+    #         database_name: "GlueDataCatalogDatabaseName", # required
+    #         table_prefix: "GlueDataCatalogTablePrefix", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that grants Amazon
+    #   AppFlow the permissions it needs to create Data Catalog tables,
+    #   databases, and partitions.
+    #
+    #   For an example IAM policy that has the required permissions, see
+    #   [Identity-based policy examples for Amazon AppFlow][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_id-based-policy-examples.html
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the Data Catalog database that stores the metadata
+    #   tables that Amazon AppFlow creates in your Amazon Web Services
+    #   account. These tables contain metadata for the data that's
+    #   transferred by the flow that you configure with this parameter.
+    #
+    #   <note markdown="1"> When you configure a new flow with this parameter, you must specify
+    #   an existing database.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] table_prefix
+    #   A naming prefix for each Data Catalog table that Amazon AppFlow
+    #   creates for the flow that you configure with this setting. Amazon
+    #   AppFlow adds the prefix to the beginning of the each table name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/GlueDataCatalogConfig AWS API Documentation
+    #
+    class GlueDataCatalogConfig < Struct.new(
+      :role_arn,
+      :database_name,
+      :table_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4600,6 +4731,79 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Specifies the configuration that Amazon AppFlow uses when it catalogs
+    # your data. When Amazon AppFlow catalogs your data, it stores metadata
+    # in a data catalog.
+    #
+    # @note When making an API call, you may pass MetadataCatalogConfig
+    #   data as a hash:
+    #
+    #       {
+    #         glue_data_catalog: {
+    #           role_arn: "GlueDataCatalogIAMRole", # required
+    #           database_name: "GlueDataCatalogDatabaseName", # required
+    #           table_prefix: "GlueDataCatalogTablePrefix", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] glue_data_catalog
+    #   Specifies the configuration that Amazon AppFlow uses when it
+    #   catalogs your data with the Glue Data Catalog.
+    #   @return [Types::GlueDataCatalogConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/MetadataCatalogConfig AWS API Documentation
+    #
+    class MetadataCatalogConfig < Struct.new(
+      :glue_data_catalog)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the metadata catalog, metadata table, and data partitions
+    # that Amazon AppFlow used for the associated flow run.
+    #
+    # @!attribute [rw] catalog_type
+    #   The type of metadata catalog that Amazon AppFlow used for the
+    #   associated flow run. This parameter returns the following value:
+    #
+    #   GLUE
+    #
+    #   : The metadata catalog is provided by the Glue Data Catalog. Glue
+    #     includes the Glue Data Catalog as a component.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table that stores the metadata for the associated
+    #   flow run. The table stores metadata that represents the data that
+    #   the flow transferred. Amazon AppFlow stores the table in the
+    #   metadata catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_registration_output
+    #   Describes the status of the attempt from Amazon AppFlow to register
+    #   the metadata table with the metadata catalog. Amazon AppFlow creates
+    #   or updates this table for the associated flow run.
+    #   @return [Types::RegistrationOutput]
+    #
+    # @!attribute [rw] partition_registration_output
+    #   Describes the status of the attempt from Amazon AppFlow to register
+    #   the data partitions with the metadata catalog. The data partitions
+    #   organize the flow output into a hierarchical path, such as a folder
+    #   path in an S3 bucket. Amazon AppFlow creates the partitions (if they
+    #   don't already exist) based on your flow configuration.
+    #   @return [Types::RegistrationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/MetadataCatalogDetail AWS API Documentation
+    #
+    class MetadataCatalogDetail < Struct.new(
+      :catalog_type,
+      :table_name,
+      :table_registration_output,
+      :partition_registration_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The OAuth 2.0 credentials required for OAuth 2.0 authentication.
     #
     # @note When making an API call, you may pass OAuth2Credentials
@@ -4857,9 +5061,8 @@ module Aws::Appflow
       include Aws::Structure
     end
 
-    # Determines the prefix that Amazon AppFlow applies to the destination
-    # folder name. You can name your destination folders according to the
-    # flow frequency and date.
+    # Specifies elements that Amazon AppFlow includes in the file and folder
+    # names in the flow destination.
     #
     # @note When making an API call, you may pass PrefixConfig
     #   data as a hash:
@@ -4867,6 +5070,7 @@ module Aws::Appflow
     #       {
     #         prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #         prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #         path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #       }
     #
     # @!attribute [rw] prefix_type
@@ -4875,14 +5079,37 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] prefix_format
-    #   Determines the level of granularity that's included in the prefix.
+    #   Determines the level of granularity for the date and time that's
+    #   included in the prefix.
     #   @return [String]
+    #
+    # @!attribute [rw] path_prefix_hierarchy
+    #   Specifies whether the destination file path includes either or both
+    #   of the following elements:
+    #
+    #   EXECUTION\_ID
+    #
+    #   : The ID that Amazon AppFlow assigns to the flow run.
+    #
+    #   SCHEMA\_VERSION
+    #
+    #   : The version number of your data schema. Amazon AppFlow assigns
+    #     this version number. The version number increases by one when you
+    #     change any of the following settings in your flow configuration:
+    #
+    #     * Source-to-destination field mappings
+    #
+    #     * Field data types
+    #
+    #     * Partition keys
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PrefixConfig AWS API Documentation
     #
     class PrefixConfig < Struct.new(
       :prefix_type,
-      :prefix_format)
+      :prefix_format,
+      :path_prefix_hierarchy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5111,6 +5338,41 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Describes the status of an attempt from Amazon AppFlow to register a
+    # resource.
+    #
+    # When you run a flow that you've configured to use a metadata catalog,
+    # Amazon AppFlow registers a metadata table and data partitions with
+    # that catalog. This operation provides the status of that registration
+    # attempt. The operation also indicates how many related resources
+    # Amazon AppFlow created or updated.
+    #
+    # @!attribute [rw] message
+    #   Explains the status of the registration attempt from Amazon AppFlow.
+    #   If the attempt fails, the message explains why.
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   Indicates the number of resources that Amazon AppFlow created or
+    #   updated. Possible resources include metadata tables and data
+    #   partitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the status of the registration attempt from Amazon
+    #   AppFlow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/RegistrationOutput AWS API Documentation
+    #
+    class RegistrationOutput < Struct.new(
+      :message,
+      :result,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource specified in the request (such as the source or
     # destination connector profile) is not found.
     #
@@ -5139,9 +5401,11 @@ module Aws::Appflow
     #           prefix_config: {
     #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #             path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #           },
     #           aggregation_config: {
     #             aggregation_type: "None", # accepts None, SingleFile
+    #             target_file_size: 1,
     #           },
     #           preserve_source_data_typing: false,
     #         },
@@ -5211,9 +5475,11 @@ module Aws::Appflow
     #         prefix_config: {
     #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #           path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #         },
     #         aggregation_config: {
     #           aggregation_type: "None", # accepts None, SingleFile
+    #           target_file_size: 1,
     #         },
     #         preserve_source_data_typing: false,
     #       }
@@ -6755,7 +7021,7 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -7400,9 +7666,11 @@ module Aws::Appflow
     #                   prefix_config: {
     #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #                   },
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
+    #                     target_file_size: 1,
     #                   },
     #                   preserve_source_data_typing: false,
     #                 },
@@ -7446,9 +7714,11 @@ module Aws::Appflow
     #                   prefix_config: { # required
     #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                     path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #                   },
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
+    #                     target_file_size: 1,
     #                   },
     #                 },
     #               },
@@ -7534,12 +7804,19 @@ module Aws::Appflow
     #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate, Partition
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
     #           },
     #         ],
+    #         metadata_catalog_config: {
+    #           glue_data_catalog: {
+    #             role_arn: "GlueDataCatalogIAMRole", # required
+    #             database_name: "GlueDataCatalogDatabaseName", # required
+    #             table_prefix: "GlueDataCatalogTablePrefix", # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] flow_name
@@ -7570,6 +7847,13 @@ module Aws::Appflow
     #   data in the flow run.
     #   @return [Array<Types::Task>]
     #
+    # @!attribute [rw] metadata_catalog_config
+    #   Specifies the configuration that Amazon AppFlow uses when it
+    #   catalogs the data that's transferred by the associated flow. When
+    #   Amazon AppFlow catalogs the data from a flow, it stores metadata in
+    #   a data catalog.
+    #   @return [Types::MetadataCatalogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpdateFlowRequest AWS API Documentation
     #
     class UpdateFlowRequest < Struct.new(
@@ -7578,7 +7862,8 @@ module Aws::Appflow
       :trigger_config,
       :source_flow_config,
       :destination_flow_config_list,
-      :tasks)
+      :tasks,
+      :metadata_catalog_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7609,9 +7894,11 @@ module Aws::Appflow
     #           prefix_config: { # required
     #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #             path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #           },
     #           aggregation_config: {
     #             aggregation_type: "None", # accepts None, SingleFile
+    #             target_file_size: 1,
     #           },
     #         },
     #       }
@@ -7658,9 +7945,11 @@ module Aws::Appflow
     #         prefix_config: { # required
     #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
     #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #           path_prefix_hierarchy: ["EXECUTION_ID"], # accepts EXECUTION_ID, SCHEMA_VERSION
     #         },
     #         aggregation_config: {
     #           aggregation_type: "None", # accepts None, SingleFile
+    #           target_file_size: 1,
     #         },
     #       }
     #
@@ -7670,9 +7959,8 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] prefix_config
-    #   Determines the prefix that Amazon AppFlow applies to the destination
-    #   folder name. You can name your destination folders according to the
-    #   flow frequency and date.
+    #   Specifies elements that Amazon AppFlow includes in the file and
+    #   folder names in the flow destination.
     #   @return [Types::PrefixConfig]
     #
     # @!attribute [rw] aggregation_config

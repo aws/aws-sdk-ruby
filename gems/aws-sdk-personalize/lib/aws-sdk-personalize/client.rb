@@ -1089,6 +1089,10 @@ module Aws::Personalize
     #     in your dataset. Amazon Personalize replaces any record with the
     #     same ID with the new one.
     #
+    # @option params [Boolean] :publish_attribution_metrics_to_s3
+    #   If you created a metric attribution, specify whether to publish
+    #   metrics for this import job to Amazon S3
+    #
     # @return [Types::CreateDatasetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetImportJobResponse#dataset_import_job_arn #dataset_import_job_arn} => String
@@ -1109,6 +1113,7 @@ module Aws::Personalize
     #       },
     #     ],
     #     import_mode: "FULL", # accepts FULL, INCREMENTAL
+    #     publish_attribution_metrics_to_s3: false,
     #   })
     #
     # @example Response structure
@@ -1273,6 +1278,71 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def create_filter(params = {}, options = {})
       req = build_request(:create_filter, params)
+      req.send_request(options)
+    end
+
+    # Creates a metric attribution. A metric attribution creates reports on
+    # the data that you import into Amazon Personalize. Depending on how you
+    # imported the data, you can view reports in Amazon CloudWatch or Amazon
+    # S3. For more information, see [Measuring impact of
+    # recommendations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html
+    #
+    # @option params [required, String] :name
+    #   A name for the metric attribution.
+    #
+    # @option params [required, String] :dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the destination dataset group for
+    #   the metric attribution.
+    #
+    # @option params [required, Array<Types::MetricAttribute>] :metrics
+    #   A list of metric attributes for the metric attribution. Each metric
+    #   attribute specifies an event type to track and a function. Available
+    #   functions are `SUM()` or `SAMPLECOUNT()`. For SUM() functions, provide
+    #   the dataset type (either Interactions or Items) and column to sum as a
+    #   parameter. For example SUM(Items.PRICE).
+    #
+    # @option params [required, Types::MetricAttributionOutput] :metrics_output_config
+    #   The output configuration details for the metric attribution.
+    #
+    # @return [Types::CreateMetricAttributionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMetricAttributionResponse#metric_attribution_arn #metric_attribution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_metric_attribution({
+    #     name: "Name", # required
+    #     dataset_group_arn: "Arn", # required
+    #     metrics: [ # required
+    #       {
+    #         event_type: "EventType", # required
+    #         metric_name: "MetricName", # required
+    #         expression: "MetricExpression", # required
+    #       },
+    #     ],
+    #     metrics_output_config: { # required
+    #       s3_data_destination: {
+    #         path: "S3Location", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #       role_arn: "RoleArn", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_attribution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateMetricAttribution AWS API Documentation
+    #
+    # @overload create_metric_attribution(params = {})
+    # @param [Hash] params ({})
+    def create_metric_attribution(params = {}, options = {})
+      req = build_request(:create_metric_attribution, params)
       req.send_request(options)
     end
 
@@ -1721,6 +1791,9 @@ module Aws::Personalize
     # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
     # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
     #
+    # @option params [String] :name
+    #   The name of the solution version.
+    #
     # @option params [required, String] :solution_arn
     #   The Amazon Resource Name (ARN) of the solution containing the training
     #   configuration information.
@@ -1757,6 +1830,7 @@ module Aws::Personalize
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_solution_version({
+    #     name: "Name",
     #     solution_arn: "Arn", # required
     #     training_mode: "FULL", # accepts FULL, UPDATE
     #     tags: [
@@ -1916,6 +1990,28 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def delete_filter(params = {}, options = {})
       req = build_request(:delete_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes a metric attribution.
+    #
+    # @option params [required, String] :metric_attribution_arn
+    #   The metric attribution's Amazon Resource Name (ARN).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_metric_attribution({
+    #     metric_attribution_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteMetricAttribution AWS API Documentation
+    #
+    # @overload delete_metric_attribution(params = {})
+    # @param [Hash] params ({})
+    def delete_metric_attribution(params = {}, options = {})
+      req = build_request(:delete_metric_attribution, params)
       req.send_request(options)
     end
 
@@ -2366,6 +2462,7 @@ module Aws::Personalize
     #   resp.dataset_import_job.last_updated_date_time #=> Time
     #   resp.dataset_import_job.failure_reason #=> String
     #   resp.dataset_import_job.import_mode #=> String, one of "FULL", "INCREMENTAL"
+    #   resp.dataset_import_job.publish_attribution_metrics_to_s3 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDatasetImportJob AWS API Documentation
     #
@@ -2484,6 +2581,43 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def describe_filter(params = {}, options = {})
       req = build_request(:describe_filter, params)
+      req.send_request(options)
+    end
+
+    # Describes a metric attribution.
+    #
+    # @option params [required, String] :metric_attribution_arn
+    #   The metric attribution's Amazon Resource Name (ARN).
+    #
+    # @return [Types::DescribeMetricAttributionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMetricAttributionResponse#metric_attribution #metric_attribution} => Types::MetricAttribution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_metric_attribution({
+    #     metric_attribution_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_attribution.name #=> String
+    #   resp.metric_attribution.metric_attribution_arn #=> String
+    #   resp.metric_attribution.dataset_group_arn #=> String
+    #   resp.metric_attribution.metrics_output_config.s3_data_destination.path #=> String
+    #   resp.metric_attribution.metrics_output_config.s3_data_destination.kms_key_arn #=> String
+    #   resp.metric_attribution.metrics_output_config.role_arn #=> String
+    #   resp.metric_attribution.status #=> String
+    #   resp.metric_attribution.creation_date_time #=> Time
+    #   resp.metric_attribution.last_updated_date_time #=> Time
+    #   resp.metric_attribution.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeMetricAttribution AWS API Documentation
+    #
+    # @overload describe_metric_attribution(params = {})
+    # @param [Hash] params ({})
+    def describe_metric_attribution(params = {}, options = {})
+      req = build_request(:describe_metric_attribution, params)
       req.send_request(options)
     end
 
@@ -2748,6 +2882,7 @@ module Aws::Personalize
     #
     # @example Response structure
     #
+    #   resp.solution_version.name #=> String
     #   resp.solution_version.solution_version_arn #=> String
     #   resp.solution_version.solution_arn #=> String
     #   resp.solution_version.perform_hpo #=> Boolean
@@ -3318,6 +3453,99 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Lists the metrics for the metric attribution.
+    #
+    # @option params [String] :metric_attribution_arn
+    #   The Amazon Resource Name (ARN) of the metric attribution to retrieve
+    #   attributes for.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of metrics to return in one page of results.
+    #
+    # @return [Types::ListMetricAttributionMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetricAttributionMetricsResponse#metrics #metrics} => Array&lt;Types::MetricAttribute&gt;
+    #   * {Types::ListMetricAttributionMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metric_attribution_metrics({
+    #     metric_attribution_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metrics #=> Array
+    #   resp.metrics[0].event_type #=> String
+    #   resp.metrics[0].metric_name #=> String
+    #   resp.metrics[0].expression #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListMetricAttributionMetrics AWS API Documentation
+    #
+    # @overload list_metric_attribution_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_metric_attribution_metrics(params = {}, options = {})
+      req = build_request(:list_metric_attribution_metrics, params)
+      req.send_request(options)
+    end
+
+    # Lists metric attributions.
+    #
+    # @option params [String] :dataset_group_arn
+    #   The metric attributions' dataset group Amazon Resource Name (ARN).
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of metric attributions to return in one page of
+    #   results.
+    #
+    # @return [Types::ListMetricAttributionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetricAttributionsResponse#metric_attributions #metric_attributions} => Array&lt;Types::MetricAttributionSummary&gt;
+    #   * {Types::ListMetricAttributionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metric_attributions({
+    #     dataset_group_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_attributions #=> Array
+    #   resp.metric_attributions[0].name #=> String
+    #   resp.metric_attributions[0].metric_attribution_arn #=> String
+    #   resp.metric_attributions[0].status #=> String
+    #   resp.metric_attributions[0].creation_date_time #=> Time
+    #   resp.metric_attributions[0].last_updated_date_time #=> Time
+    #   resp.metric_attributions[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListMetricAttributions AWS API Documentation
+    #
+    # @overload list_metric_attributions(params = {})
+    # @param [Hash] params ({})
+    def list_metric_attributions(params = {}, options = {})
+      req = build_request(:list_metric_attributions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of available recipes. The response provides the
     # properties for each recipe, including the recipe's Amazon Resource
     # Name (ARN).
@@ -3575,6 +3803,7 @@ module Aws::Personalize
     #   resp.solutions[0].status #=> String
     #   resp.solutions[0].creation_date_time #=> Time
     #   resp.solutions[0].last_updated_date_time #=> Time
+    #   resp.solutions[0].recipe_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListSolutions AWS API Documentation
@@ -3846,6 +4075,58 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Updates a metric attribution.
+    #
+    # @option params [Array<Types::MetricAttribute>] :add_metrics
+    #   Add new metric attributes to the metric attribution.
+    #
+    # @option params [Array<String>] :remove_metrics
+    #   Remove metric attributes from the metric attribution.
+    #
+    # @option params [Types::MetricAttributionOutput] :metrics_output_config
+    #   An output config for the metric attribution.
+    #
+    # @option params [String] :metric_attribution_arn
+    #   The Amazon Resource Name (ARN) for the metric attribution to update.
+    #
+    # @return [Types::UpdateMetricAttributionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMetricAttributionResponse#metric_attribution_arn #metric_attribution_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_metric_attribution({
+    #     add_metrics: [
+    #       {
+    #         event_type: "EventType", # required
+    #         metric_name: "MetricName", # required
+    #         expression: "MetricExpression", # required
+    #       },
+    #     ],
+    #     remove_metrics: ["MetricName"],
+    #     metrics_output_config: {
+    #       s3_data_destination: {
+    #         path: "S3Location", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     metric_attribution_arn: "Arn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_attribution_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/UpdateMetricAttribution AWS API Documentation
+    #
+    # @overload update_metric_attribution(params = {})
+    # @param [Hash] params ({})
+    def update_metric_attribution(params = {}, options = {})
+      req = build_request(:update_metric_attribution, params)
+      req.send_request(options)
+    end
+
     # Updates the recommender to modify the recommender configuration.
     #
     # @option params [required, String] :recommender_arn
@@ -3896,7 +4177,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

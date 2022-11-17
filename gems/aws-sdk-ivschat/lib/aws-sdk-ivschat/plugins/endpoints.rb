@@ -58,16 +58,24 @@ module Aws::Ivschat
           case context.operation_name
           when :create_chat_token
             Aws::Ivschat::Endpoints::CreateChatToken.build(context)
+          when :create_logging_configuration
+            Aws::Ivschat::Endpoints::CreateLoggingConfiguration.build(context)
           when :create_room
             Aws::Ivschat::Endpoints::CreateRoom.build(context)
+          when :delete_logging_configuration
+            Aws::Ivschat::Endpoints::DeleteLoggingConfiguration.build(context)
           when :delete_message
             Aws::Ivschat::Endpoints::DeleteMessage.build(context)
           when :delete_room
             Aws::Ivschat::Endpoints::DeleteRoom.build(context)
           when :disconnect_user
             Aws::Ivschat::Endpoints::DisconnectUser.build(context)
+          when :get_logging_configuration
+            Aws::Ivschat::Endpoints::GetLoggingConfiguration.build(context)
           when :get_room
             Aws::Ivschat::Endpoints::GetRoom.build(context)
+          when :list_logging_configurations
+            Aws::Ivschat::Endpoints::ListLoggingConfigurations.build(context)
           when :list_rooms
             Aws::Ivschat::Endpoints::ListRooms.build(context)
           when :list_tags_for_resource
@@ -78,6 +86,8 @@ module Aws::Ivschat
             Aws::Ivschat::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::Ivschat::Endpoints::UntagResource.build(context)
+          when :update_logging_configuration
+            Aws::Ivschat::Endpoints::UpdateLoggingConfiguration.build(context)
           when :update_room
             Aws::Ivschat::Endpoints::UpdateRoom.build(context)
           end

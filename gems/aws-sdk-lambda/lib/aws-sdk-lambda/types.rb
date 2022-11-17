@@ -395,7 +395,11 @@ module Aws::Lambda
     #   group ID must be unique among all your Kafka event sources. After
     #   creating a Kafka event source mapping with the consumer group ID
     #   specified, you cannot update this value. For more information, see
-    #   services-msk-consumer-group-id.
+    #   [Customizable consumer group ID][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AmazonManagedKafkaEventSourceConfig AWS API Documentation
@@ -866,14 +870,22 @@ module Aws::Lambda
     #   @return [Types::FilterCriteria]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
-    #   in seconds, that Lambda spends gathering records before invoking the
-    #   function.
+    #   The maximum amount of time, in seconds, that Lambda spends gathering
+    #   records before invoking the function. You can configure
+    #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
+    #   seconds in increments of seconds.
     #
-    #   Default: 0
+    #   For streams and Amazon SQS event sources, the default batching
+    #   window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and
+    #   Amazon MQ event sources, the default batching window is 500 ms. Note
+    #   that because you can only change `MaximumBatchingWindowInSeconds` in
+    #   increments of seconds, you cannot revert back to the 500 ms default
+    #   batching window after you have changed it. To restore the default
+    #   batching window, you must create a new event source mapping.
     #
-    #   Related setting: When you set `BatchSize` to a value greater than
-    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #   Related setting: For streams and Amazon SQS event sources, when you
+    #   set `BatchSize` to a value greater than 10, you must set
+    #   `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -983,7 +995,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
     #         role: "RoleArn", # required
     #         handler: "Handler",
     #         code: { # required
@@ -1937,7 +1949,7 @@ module Aws::Lambda
     # error.
     #
     # @!attribute [rw] variables
-    #   Environment variable key-value pairs.
+    #   Environment variable key-value pairs. Omitted from CloudTrail logs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error
@@ -2007,14 +2019,22 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
-    #   in seconds, that Lambda spends gathering records before invoking the
-    #   function.
+    #   The maximum amount of time, in seconds, that Lambda spends gathering
+    #   records before invoking the function. You can configure
+    #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
+    #   seconds in increments of seconds.
     #
-    #   Default: 0
+    #   For streams and Amazon SQS event sources, the default batching
+    #   window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and
+    #   Amazon MQ event sources, the default batching window is 500 ms. Note
+    #   that because you can only change `MaximumBatchingWindowInSeconds` in
+    #   increments of seconds, you cannot revert back to the 500 ms default
+    #   batching window after you have changed it. To restore the default
+    #   batching window, you must create a new event source mapping.
     #
-    #   Related setting: When you set `BatchSize` to a value greater than
-    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #   Related setting: For streams and Amazon SQS event sources, when you
+    #   set `BatchSize` to a value greater than 10, you must set
+    #   `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -2389,7 +2409,8 @@ module Aws::Lambda
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
-    #   The function's [environment variables][1].
+    #   The function's [environment variables][1]. Omitted from CloudTrail
+    #   logs.
     #
     #
     #
@@ -3350,7 +3371,10 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_provisioned_concurrent_executions
-    #   The amount of provisioned concurrency allocated.
+    #   The amount of provisioned concurrency allocated. When a weighted
+    #   alias is used during linear and canary deployments, this value
+    #   fluctuates depending on the amount of concurrency that is
+    #   provisioned for the function versions.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -4470,7 +4494,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
@@ -4535,7 +4559,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
     #         marker: "String",
     #         max_items: 1,
     #         compatible_architecture: "x86_64", # accepts x86_64, arm64
@@ -4846,7 +4870,10 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_provisioned_concurrent_executions
-    #   The amount of provisioned concurrency allocated.
+    #   The amount of provisioned concurrency allocated. When a weighted
+    #   alias is used during linear and canary deployments, this value
+    #   fluctuates depending on the amount of concurrency that is
+    #   provisioned for the function versions.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -4910,7 +4937,7 @@ module Aws::Lambda
     #           s3_object_version: "S3ObjectVersion",
     #           zip_file: "data",
     #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
     #         license_info: "LicenseInfo",
     #         compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #       }
@@ -5325,7 +5352,10 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_provisioned_concurrent_executions
-    #   The amount of provisioned concurrency allocated.
+    #   The amount of provisioned concurrency allocated. When a weighted
+    #   alias is used during linear and canary deployments, this value
+    #   fluctuates depending on the amount of concurrency that is
+    #   provisioned for the function versions.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -5590,7 +5620,11 @@ module Aws::Lambda
     #   group ID must be unique among all your Kafka event sources. After
     #   creating a Kafka event source mapping with the consumer group ID
     #   specified, you cannot update this value. For more information, see
-    #   services-msk-consumer-group-id.
+    #   [Customizable consumer group ID][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SelfManagedKafkaEventSourceConfig AWS API Documentation
@@ -5640,22 +5674,23 @@ module Aws::Lambda
     #     of your secret key used for SASL/PLAIN authentication of your
     #     Apache Kafka brokers.
     #
-    #   * `VPC_SUBNET` - The subnets associated with your VPC. Lambda
-    #     connects to these subnets to fetch data from your self-managed
-    #     Apache Kafka cluster.
+    #   * `VPC_SUBNET` - (Self-managed Apache Kafka) The subnets associated
+    #     with your VPC. Lambda connects to these subnets to fetch data from
+    #     your self-managed Apache Kafka cluster.
     #
-    #   * `VPC_SECURITY_GROUP` - The VPC security group used to manage
-    #     access to your self-managed Apache Kafka brokers.
-    #
-    #   * `SASL_SCRAM_256_AUTH` - The Secrets Manager ARN of your secret key
-    #     used for SASL SCRAM-256 authentication of your self-managed Apache
+    #   * `VPC_SECURITY_GROUP` - (Self-managed Apache Kafka) The VPC
+    #     security group used to manage access to your self-managed Apache
     #     Kafka brokers.
     #
-    #   * `SASL_SCRAM_512_AUTH` - The Secrets Manager ARN of your secret key
-    #     used for SASL SCRAM-512 authentication of your self-managed Apache
-    #     Kafka brokers.
+    #   * `SASL_SCRAM_256_AUTH` - (Self-managed Apache Kafka) The Secrets
+    #     Manager ARN of your secret key used for SASL SCRAM-256
+    #     authentication of your self-managed Apache Kafka brokers.
     #
-    #   * `VIRTUAL_HOST` - (Amazon MQ) The name of the virtual host in your
+    #   * `SASL_SCRAM_512_AUTH` - (Amazon MSK, Self-managed Apache Kafka)
+    #     The Secrets Manager ARN of your secret key used for SASL SCRAM-512
+    #     authentication of your self-managed Apache Kafka brokers.
+    #
+    #   * `VIRTUAL_HOST` - (RabbitMQ) The name of the virtual host in your
     #     RabbitMQ broker. Lambda uses this RabbitMQ host as the event
     #     source. This property cannot be specified in an
     #     UpdateEventSourceMapping API call.
@@ -6065,14 +6100,22 @@ module Aws::Lambda
     #   @return [Types::FilterCriteria]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
-    #   in seconds, that Lambda spends gathering records before invoking the
-    #   function.
+    #   The maximum amount of time, in seconds, that Lambda spends gathering
+    #   records before invoking the function. You can configure
+    #   `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300
+    #   seconds in increments of seconds.
     #
-    #   Default: 0
+    #   For streams and Amazon SQS event sources, the default batching
+    #   window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and
+    #   Amazon MQ event sources, the default batching window is 500 ms. Note
+    #   that because you can only change `MaximumBatchingWindowInSeconds` in
+    #   increments of seconds, you cannot revert back to the 500 ms default
+    #   batching window after you have changed it. To restore the default
+    #   batching window, you must create a new event source mapping.
     #
-    #   Related setting: When you set `BatchSize` to a value greater than
-    #   10, you must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #   Related setting: For streams and Amazon SQS event sources, when you
+    #   set `BatchSize` to a value greater than 10, you must set
+    #   `MaximumBatchingWindowInSeconds` to at least 1.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
@@ -6257,7 +6300,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, nodejs16.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, dotnet6, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2, nodejs18.x
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

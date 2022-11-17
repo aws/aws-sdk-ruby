@@ -79,6 +79,10 @@ module Aws::EMRServerless
     #   application.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] architecture
+    #   The CPU architecture of an application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -96,7 +100,8 @@ module Aws::EMRServerless
       :tags,
       :auto_start_configuration,
       :auto_stop_configuration,
-      :network_configuration)
+      :network_configuration,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -139,6 +144,10 @@ module Aws::EMRServerless
     #   The date and time when the application was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] architecture
+    #   The CPU architecture of an application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ApplicationSummary AWS API Documentation
     #
     class ApplicationSummary < Struct.new(
@@ -150,7 +159,8 @@ module Aws::EMRServerless
       :state,
       :state_details,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -399,6 +409,7 @@ module Aws::EMRServerless
     #           subnet_ids: ["SubnetString"],
     #           security_group_ids: ["SecurityGroupString"],
     #         },
+    #         architecture: "ARM64", # accepts ARM64, X86_64
     #       }
     #
     # @!attribute [rw] name
@@ -450,6 +461,10 @@ module Aws::EMRServerless
     #   The network configuration for customer VPC connectivity.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] architecture
+    #   The CPU architecture of an application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -462,7 +477,8 @@ module Aws::EMRServerless
       :tags,
       :auto_start_configuration,
       :auto_stop_configuration,
-      :network_configuration)
+      :network_configuration,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1558,6 +1574,7 @@ module Aws::EMRServerless
     #           subnet_ids: ["SubnetString"],
     #           security_group_ids: ["SecurityGroupString"],
     #         },
+    #         architecture: "ARM64", # accepts ARM64, X86_64
     #       }
     #
     # @!attribute [rw] application_id
@@ -1597,6 +1614,10 @@ module Aws::EMRServerless
     #   The network configuration for customer VPC connectivity.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] architecture
+    #   The CPU architecture of an application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1606,7 +1627,8 @@ module Aws::EMRServerless
       :maximum_capacity,
       :auto_start_configuration,
       :auto_stop_configuration,
-      :network_configuration)
+      :network_configuration,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end

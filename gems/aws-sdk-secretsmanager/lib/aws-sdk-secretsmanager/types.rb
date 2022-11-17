@@ -417,7 +417,7 @@ module Aws::SecretsManager
     #   to skip the normal recovery window before the permanent deletion
     #   that Secrets Manager would normally impose with the
     #   `RecoveryWindowInDays` parameter. If you delete a secret with the
-    #   `ForceDeleteWithouRecovery` parameter, then you have no opportunity
+    #   `ForceDeleteWithoutRecovery` parameter, then you have no opportunity
     #   to recover the secret. You lose the secret permanently.
     #   @return [Boolean]
     #
@@ -1166,7 +1166,7 @@ module Aws::SecretsManager
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort_order
-    #   Lists secrets in the requested order.
+    #   Secrets are listed by `CreatedDate`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecretsRequest AWS API Documentation
@@ -1821,16 +1821,20 @@ module Aws::SecretsManager
     #   the rotation schedule after every successful rotation. In
     #   `RotateSecret`, you can set the rotation schedule in `RotationRules`
     #   with `AutomaticallyAfterDays` or `ScheduleExpression`, but not both.
+    #   To set a rotation schedule in hours, use `ScheduleExpression`.
     #   @return [Integer]
     #
     # @!attribute [rw] duration
     #   The length of the rotation window in hours, for example `3h` for a
     #   three hour window. Secrets Manager rotates your secret at any time
-    #   during this window. The window must not go into the next UTC day. If
-    #   you don't specify this value, the window automatically ends at the
-    #   end of the UTC day. The window begins according to the
-    #   `ScheduleExpression`. For more information, including examples, see
-    #   [Schedule expressions in Secrets Manager rotation][1].
+    #   during this window. The window must not extend into the next
+    #   rotation window or the next UTC day. The window starts according to
+    #   the `ScheduleExpression`. If you don't specify a `Duration`, for a
+    #   `ScheduleExpression` in hours, the window automatically closes after
+    #   one hour. For a `ScheduleExpression` in days, the window
+    #   automatically closes at the end of the UTC day. For more
+    #   information, including examples, see [Schedule expressions in
+    #   Secrets Manager rotation][1] in the *Secrets Manager Users Guide*.
     #
     #
     #
@@ -1840,24 +1844,29 @@ module Aws::SecretsManager
     # @!attribute [rw] schedule_expression
     #   A `cron()` or `rate()` expression that defines the schedule for
     #   rotating your secret. Secrets Manager rotation schedules use UTC
-    #   time zone.
+    #   time zone. Secrets Manager rotates your secret any time during a
+    #   rotation window.
     #
-    #   Secrets Manager `rate()` expressions represent the interval in days
-    #   that you want to rotate your secret, for example `rate(10 days)`. If
-    #   you use a `rate()` expression, the rotation window opens at
-    #   midnight, and Secrets Manager rotates your secret any time that day
-    #   after midnight. You can set a `Duration` to shorten the rotation
-    #   window.
+    #   Secrets Manager `rate()` expressions represent the interval in hours
+    #   or days that you want to rotate your secret, for example `rate(12
+    #   hours)` or `rate(10 days)`. You can rotate a secret as often as
+    #   every four hours. If you use a `rate()` expression, the rotation
+    #   window starts at midnight. For a rate in hours, the default rotation
+    #   window closes after one hour. For a rate in days, the default
+    #   rotation window closes at the end of the day. You can set the
+    #   `Duration` to change the rotation window. The rotation window must
+    #   not extend into the next UTC day or into the next rotation window.
     #
-    #   You can use a `cron()` expression to create rotation schedules that
-    #   are more detailed than a rotation interval. For more information,
+    #   You can use a `cron()` expression to create a rotation schedule that
+    #   is more detailed than a rotation interval. For more information,
     #   including examples, see [Schedule expressions in Secrets Manager
-    #   rotation][1]. If you use a `cron()` expression, Secrets Manager
-    #   rotates your secret any time during that day after the window opens.
-    #   For example, `cron(0 8 1 * ? *)` represents a rotation window that
-    #   occurs on the first day of every month beginning at 8:00 AM UTC.
-    #   Secrets Manager rotates the secret any time that day after 8:00 AM.
-    #   You can set a `Duration` to shorten the rotation window.
+    #   rotation][1] in the *Secrets Manager Users Guide*. For a cron
+    #   expression that represents a schedule in hours, the default rotation
+    #   window closes after one hour. For a cron expression that represents
+    #   a schedule in days, the default rotation window closes at the end of
+    #   the day. You can set the `Duration` to change the rotation window.
+    #   The rotation window must not extend into the next UTC day or into
+    #   the next rotation window.
     #
     #
     #

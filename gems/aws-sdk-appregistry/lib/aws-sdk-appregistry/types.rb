@@ -10,6 +10,29 @@
 module Aws::AppRegistry
   module Types
 
+    # Includes all of the Service Catalog AppRegistry settings.
+    #
+    # @note When making an API call, you may pass AppRegistryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         tag_query_configuration: {
+    #           tag_key: "TagKeyConfig",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tag_query_configuration
+    #   Includes the definition of a `tagQuery`.
+    #   @return [Types::TagQueryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/AppRegistryConfiguration AWS API Documentation
+    #
+    class AppRegistryConfiguration < Struct.new(
+      :tag_query_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a Amazon Web Services Service Catalog AppRegistry
     # application that is the top-level node in a hierarchy of related cloud
     # resource abstractions.
@@ -154,7 +177,7 @@ module Aws::AppRegistry
     #
     #       {
     #         application: "ApplicationSpecifier", # required
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #         resource: "ResourceSpecifier", # required
     #       }
     #
@@ -261,6 +284,9 @@ module Aws::AppRegistry
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   This field is no longer supported. We recommend you don't use the
+    #   field when using `ListAttributeGroupsForApplication`.
+    #
     #   The name of the attribute group.
     #   @return [String]
     #
@@ -571,7 +597,7 @@ module Aws::AppRegistry
     #
     #       {
     #         application: "ApplicationSpecifier", # required
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #         resource: "ResourceSpecifier", # required
     #       }
     #
@@ -696,7 +722,7 @@ module Aws::AppRegistry
     #
     #       {
     #         application: "ApplicationSpecifier", # required
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #         resource: "ResourceSpecifier", # required
     #       }
     #
@@ -803,6 +829,18 @@ module Aws::AppRegistry
       :creation_time,
       :last_update_time,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   Retrieves `TagKey` configuration from an account.
+    #   @return [Types::AppRegistryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetConfigurationResponse AWS API Documentation
+    #
+    class GetConfigurationResponse < Struct.new(
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1019,7 +1057,7 @@ module Aws::AppRegistry
     end
 
     # @!attribute [rw] attribute_groups_details
-    #   The details related to a specific AttributeGroup.
+    #   The details related to a specific attribute group.
     #   @return [Array<Types::AttributeGroupDetails>]
     #
     # @!attribute [rw] next_token
@@ -1113,6 +1151,29 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration: { # required
+    #           tag_query_configuration: {
+    #             tag_key: "TagKeyConfig",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration
+    #   Associates a `TagKey` configuration to an account.
+    #   @return [Types::AppRegistryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/PutConfigurationRequest AWS API Documentation
+    #
+    class PutConfigurationRequest < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information about the resource.
     #
     # @!attribute [rw] name
@@ -1138,6 +1199,20 @@ module Aws::AppRegistry
       :arn,
       :association_time,
       :integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details related to the resource.
+    #
+    # @!attribute [rw] tag_value
+    #   The value of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ResourceDetails AWS API Documentation
+    #
+    class ResourceDetails < Struct.new(
+      :tag_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1191,11 +1266,22 @@ module Aws::AppRegistry
     #   services.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   Provides information about the Service Catalog App Registry resource
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_details
+    #   The details related to the resource.
+    #   @return [Types::ResourceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ResourceInfo AWS API Documentation
     #
     class ResourceInfo < Struct.new(
       :name,
-      :arn)
+      :arn,
+      :resource_type,
+      :resource_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1244,7 +1330,7 @@ module Aws::AppRegistry
     #   data as a hash:
     #
     #       {
-    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #         resource: "ResourceSpecifier", # required
     #       }
     #
@@ -1286,6 +1372,29 @@ module Aws::AppRegistry
       :application_arn,
       :resource_arn,
       :action_taken)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of `tagQuery`. Specifies which resources are associated
+    # with an application.
+    #
+    # @note When making an API call, you may pass TagQueryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         tag_key: "TagKeyConfig",
+    #       }
+    #
+    # @!attribute [rw] tag_key
+    #   Condition in the IAM policy that associates resources to an
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/TagQueryConfiguration AWS API Documentation
+    #
+    class TagQueryConfiguration < Struct.new(
+      :tag_key)
       SENSITIVE = []
       include Aws::Structure
     end

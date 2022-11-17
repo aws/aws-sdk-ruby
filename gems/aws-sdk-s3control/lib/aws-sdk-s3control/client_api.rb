@@ -20,6 +20,8 @@ module Aws::S3Control
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountLevel = Shapes::StructureShape.new(name: 'AccountLevel')
     ActivityMetrics = Shapes::StructureShape.new(name: 'ActivityMetrics')
+    AdvancedCostOptimizationMetrics = Shapes::StructureShape.new(name: 'AdvancedCostOptimizationMetrics')
+    AdvancedDataProtectionMetrics = Shapes::StructureShape.new(name: 'AdvancedDataProtectionMetrics')
     Alias = Shapes::StringShape.new(name: 'Alias')
     AsyncCreationTimestamp = Shapes::TimestampShape.new(name: 'AsyncCreationTimestamp')
     AsyncErrorDetails = Shapes::StructureShape.new(name: 'AsyncErrorDetails')
@@ -85,6 +87,7 @@ module Aws::S3Control
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
     DescribeMultiRegionAccessPointOperationRequest = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationRequest')
     DescribeMultiRegionAccessPointOperationResult = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationResult')
+    DetailedStatusCodesMetrics = Shapes::StructureShape.new(name: 'DetailedStatusCodesMetrics')
     Endpoints = Shapes::MapShape.new(name: 'Endpoints')
     EstablishedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'EstablishedMultiRegionAccessPointPolicy')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
@@ -383,10 +386,19 @@ module Aws::S3Control
 
     AccountLevel.add_member(:activity_metrics, Shapes::ShapeRef.new(shape: ActivityMetrics, location_name: "ActivityMetrics"))
     AccountLevel.add_member(:bucket_level, Shapes::ShapeRef.new(shape: BucketLevel, required: true, location_name: "BucketLevel"))
+    AccountLevel.add_member(:advanced_cost_optimization_metrics, Shapes::ShapeRef.new(shape: AdvancedCostOptimizationMetrics, location_name: "AdvancedCostOptimizationMetrics"))
+    AccountLevel.add_member(:advanced_data_protection_metrics, Shapes::ShapeRef.new(shape: AdvancedDataProtectionMetrics, location_name: "AdvancedDataProtectionMetrics"))
+    AccountLevel.add_member(:detailed_status_codes_metrics, Shapes::ShapeRef.new(shape: DetailedStatusCodesMetrics, location_name: "DetailedStatusCodesMetrics"))
     AccountLevel.struct_class = Types::AccountLevel
 
     ActivityMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     ActivityMetrics.struct_class = Types::ActivityMetrics
+
+    AdvancedCostOptimizationMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
+    AdvancedCostOptimizationMetrics.struct_class = Types::AdvancedCostOptimizationMetrics
+
+    AdvancedDataProtectionMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
+    AdvancedDataProtectionMetrics.struct_class = Types::AdvancedDataProtectionMetrics
 
     AsyncErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Code"))
     AsyncErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Message"))
@@ -424,6 +436,9 @@ module Aws::S3Control
 
     BucketLevel.add_member(:activity_metrics, Shapes::ShapeRef.new(shape: ActivityMetrics, location_name: "ActivityMetrics"))
     BucketLevel.add_member(:prefix_level, Shapes::ShapeRef.new(shape: PrefixLevel, location_name: "PrefixLevel"))
+    BucketLevel.add_member(:advanced_cost_optimization_metrics, Shapes::ShapeRef.new(shape: AdvancedCostOptimizationMetrics, location_name: "AdvancedCostOptimizationMetrics"))
+    BucketLevel.add_member(:advanced_data_protection_metrics, Shapes::ShapeRef.new(shape: AdvancedDataProtectionMetrics, location_name: "AdvancedDataProtectionMetrics"))
+    BucketLevel.add_member(:detailed_status_codes_metrics, Shapes::ShapeRef.new(shape: DetailedStatusCodesMetrics, location_name: "DetailedStatusCodesMetrics"))
     BucketLevel.struct_class = Types::BucketLevel
 
     Buckets.member = Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "Arn")
@@ -575,6 +590,9 @@ module Aws::S3Control
 
     DescribeMultiRegionAccessPointOperationResult.add_member(:async_operation, Shapes::ShapeRef.new(shape: AsyncOperation, location_name: "AsyncOperation"))
     DescribeMultiRegionAccessPointOperationResult.struct_class = Types::DescribeMultiRegionAccessPointOperationResult
+
+    DetailedStatusCodesMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
+    DetailedStatusCodesMetrics.struct_class = Types::DetailedStatusCodesMetrics
 
     Endpoints.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String)
     Endpoints.value = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)

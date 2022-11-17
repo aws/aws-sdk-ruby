@@ -907,9 +907,9 @@ module Aws::SecretsManager
     #   Use this parameter with caution. This parameter causes the operation
     #   to skip the normal recovery window before the permanent deletion that
     #   Secrets Manager would normally impose with the `RecoveryWindowInDays`
-    #   parameter. If you delete a secret with the `ForceDeleteWithouRecovery`
-    #   parameter, then you have no opportunity to recover the secret. You
-    #   lose the secret permanently.
+    #   parameter. If you delete a secret with the
+    #   `ForceDeleteWithoutRecovery` parameter, then you have no opportunity
+    #   to recover the secret. You lose the secret permanently.
     #
     # @return [Types::DeleteSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1575,7 +1575,7 @@ module Aws::SecretsManager
     #   The filters to apply to the list of secrets.
     #
     # @option params [String] :sort_order
-    #   Lists secrets in the requested order.
+    #   Secrets are listed by `CreatedDate`.
     #
     # @return [Types::ListSecretsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2171,16 +2171,20 @@ module Aws::SecretsManager
     # later invocation of `RotateSecret` assumes that a previous rotation
     # request is still in progress and returns an error.
     #
+    # When rotation is unsuccessful, the `AWSPENDING` staging label might be
+    # attached to an empty secret version. For more information, see
+    # [Troubleshoot rotation][7] in the *Secrets Manager User Guide*.
+    #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
     # because it might be logged. For more information, see [Logging Secrets
-    # Manager events with CloudTrail][7].
+    # Manager events with CloudTrail][8].
     #
     # <b>Required permissions: </b> `secretsmanager:RotateSecret`. For more
-    # information, see [ IAM policy actions for Secrets Manager][8] and
-    # [Authentication and access control in Secrets Manager][9]. You also
+    # information, see [ IAM policy actions for Secrets Manager][9] and
+    # [Authentication and access control in Secrets Manager][10]. You also
     # need `lambda:InvokeFunction` permissions on the rotation function. For
-    # more information, see [ Permissions for rotation][10].
+    # more information, see [ Permissions for rotation][11].
     #
     #
     #
@@ -2190,10 +2194,11 @@ module Aws::SecretsManager
     # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
     # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_available-rotation-templates.html
     # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets_strategies.html
-    # [7]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
-    # [8]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
-    # [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
+    # [7]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot_rotation.html
+    # [8]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [11]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to rotate.
@@ -3041,7 +3046,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

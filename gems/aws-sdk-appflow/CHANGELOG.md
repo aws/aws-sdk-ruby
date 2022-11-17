@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2022-11-17)
+------------------
+
+* Feature - AppFlow simplifies the preparation and cataloging of SaaS data into the AWS Glue Data Catalog where your data can be discovered and accessed by AWS analytics and ML services. AppFlow now also supports data field partitioning and file size optimization to improve query performance and reduce cost.
+
 1.29.0 (2022-10-25)
 ------------------
 

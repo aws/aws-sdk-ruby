@@ -64,6 +64,8 @@ module Aws::Personalize
     CreateEventTrackerResponse = Shapes::StructureShape.new(name: 'CreateEventTrackerResponse')
     CreateFilterRequest = Shapes::StructureShape.new(name: 'CreateFilterRequest')
     CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
+    CreateMetricAttributionRequest = Shapes::StructureShape.new(name: 'CreateMetricAttributionRequest')
+    CreateMetricAttributionResponse = Shapes::StructureShape.new(name: 'CreateMetricAttributionResponse')
     CreateRecommenderRequest = Shapes::StructureShape.new(name: 'CreateRecommenderRequest')
     CreateRecommenderResponse = Shapes::StructureShape.new(name: 'CreateRecommenderResponse')
     CreateSchemaRequest = Shapes::StructureShape.new(name: 'CreateSchemaRequest')
@@ -102,6 +104,7 @@ module Aws::Personalize
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
     DeleteEventTrackerRequest = Shapes::StructureShape.new(name: 'DeleteEventTrackerRequest')
     DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
+    DeleteMetricAttributionRequest = Shapes::StructureShape.new(name: 'DeleteMetricAttributionRequest')
     DeleteRecommenderRequest = Shapes::StructureShape.new(name: 'DeleteRecommenderRequest')
     DeleteSchemaRequest = Shapes::StructureShape.new(name: 'DeleteSchemaRequest')
     DeleteSolutionRequest = Shapes::StructureShape.new(name: 'DeleteSolutionRequest')
@@ -127,6 +130,8 @@ module Aws::Personalize
     DescribeFeatureTransformationResponse = Shapes::StructureShape.new(name: 'DescribeFeatureTransformationResponse')
     DescribeFilterRequest = Shapes::StructureShape.new(name: 'DescribeFilterRequest')
     DescribeFilterResponse = Shapes::StructureShape.new(name: 'DescribeFilterResponse')
+    DescribeMetricAttributionRequest = Shapes::StructureShape.new(name: 'DescribeMetricAttributionRequest')
+    DescribeMetricAttributionResponse = Shapes::StructureShape.new(name: 'DescribeMetricAttributionResponse')
     DescribeRecipeRequest = Shapes::StructureShape.new(name: 'DescribeRecipeRequest')
     DescribeRecipeResponse = Shapes::StructureShape.new(name: 'DescribeRecipeResponse')
     DescribeRecommenderRequest = Shapes::StructureShape.new(name: 'DescribeRecommenderRequest')
@@ -192,6 +197,10 @@ module Aws::Personalize
     ListEventTrackersResponse = Shapes::StructureShape.new(name: 'ListEventTrackersResponse')
     ListFiltersRequest = Shapes::StructureShape.new(name: 'ListFiltersRequest')
     ListFiltersResponse = Shapes::StructureShape.new(name: 'ListFiltersResponse')
+    ListMetricAttributionMetricsRequest = Shapes::StructureShape.new(name: 'ListMetricAttributionMetricsRequest')
+    ListMetricAttributionMetricsResponse = Shapes::StructureShape.new(name: 'ListMetricAttributionMetricsResponse')
+    ListMetricAttributionsRequest = Shapes::StructureShape.new(name: 'ListMetricAttributionsRequest')
+    ListMetricAttributionsResponse = Shapes::StructureShape.new(name: 'ListMetricAttributionsResponse')
     ListRecipesRequest = Shapes::StructureShape.new(name: 'ListRecipesRequest')
     ListRecipesResponse = Shapes::StructureShape.new(name: 'ListRecipesResponse')
     ListRecommendersRequest = Shapes::StructureShape.new(name: 'ListRecommendersRequest')
@@ -205,6 +214,14 @@ module Aws::Personalize
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MetricAttribute = Shapes::StructureShape.new(name: 'MetricAttribute')
+    MetricAttributes = Shapes::ListShape.new(name: 'MetricAttributes')
+    MetricAttributesNamesList = Shapes::ListShape.new(name: 'MetricAttributesNamesList')
+    MetricAttribution = Shapes::StructureShape.new(name: 'MetricAttribution')
+    MetricAttributionOutput = Shapes::StructureShape.new(name: 'MetricAttributionOutput')
+    MetricAttributionSummary = Shapes::StructureShape.new(name: 'MetricAttributionSummary')
+    MetricAttributions = Shapes::ListShape.new(name: 'MetricAttributions')
+    MetricExpression = Shapes::StringShape.new(name: 'MetricExpression')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricRegex = Shapes::StringShape.new(name: 'MetricRegex')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
@@ -269,6 +286,8 @@ module Aws::Personalize
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateCampaignRequest = Shapes::StructureShape.new(name: 'UpdateCampaignRequest')
     UpdateCampaignResponse = Shapes::StructureShape.new(name: 'UpdateCampaignResponse')
+    UpdateMetricAttributionRequest = Shapes::StructureShape.new(name: 'UpdateMetricAttributionRequest')
+    UpdateMetricAttributionResponse = Shapes::StructureShape.new(name: 'UpdateMetricAttributionResponse')
     UpdateRecommenderRequest = Shapes::StructureShape.new(name: 'UpdateRecommenderRequest')
     UpdateRecommenderResponse = Shapes::StructureShape.new(name: 'UpdateRecommenderResponse')
 
@@ -477,6 +496,7 @@ module Aws::Personalize
     CreateDatasetImportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateDatasetImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDatasetImportJobRequest.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "importMode"))
+    CreateDatasetImportJobRequest.add_member(:publish_attribution_metrics_to_s3, Shapes::ShapeRef.new(shape: Boolean, location_name: "publishAttributionMetricsToS3"))
     CreateDatasetImportJobRequest.struct_class = Types::CreateDatasetImportJobRequest
 
     CreateDatasetImportJobResponse.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetImportJobArn"))
@@ -510,6 +530,15 @@ module Aws::Personalize
     CreateFilterResponse.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     CreateFilterResponse.struct_class = Types::CreateFilterResponse
 
+    CreateMetricAttributionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateMetricAttributionRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
+    CreateMetricAttributionRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricAttributes, required: true, location_name: "metrics"))
+    CreateMetricAttributionRequest.add_member(:metrics_output_config, Shapes::ShapeRef.new(shape: MetricAttributionOutput, required: true, location_name: "metricsOutputConfig"))
+    CreateMetricAttributionRequest.struct_class = Types::CreateMetricAttributionRequest
+
+    CreateMetricAttributionResponse.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "metricAttributionArn"))
+    CreateMetricAttributionResponse.struct_class = Types::CreateMetricAttributionResponse
+
     CreateRecommenderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateRecommenderRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     CreateRecommenderRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recipeArn"))
@@ -541,6 +570,7 @@ module Aws::Personalize
     CreateSolutionResponse.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
     CreateSolutionResponse.struct_class = Types::CreateSolutionResponse
 
+    CreateSolutionVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     CreateSolutionVersionRequest.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionArn"))
     CreateSolutionVersionRequest.add_member(:training_mode, Shapes::ShapeRef.new(shape: TrainingMode, location_name: "trainingMode"))
     CreateSolutionVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -619,6 +649,7 @@ module Aws::Personalize
     DatasetImportJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     DatasetImportJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     DatasetImportJob.add_member(:import_mode, Shapes::ShapeRef.new(shape: ImportMode, location_name: "importMode"))
+    DatasetImportJob.add_member(:publish_attribution_metrics_to_s3, Shapes::ShapeRef.new(shape: Boolean, location_name: "publishAttributionMetricsToS3"))
     DatasetImportJob.struct_class = Types::DatasetImportJob
 
     DatasetImportJobSummary.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetImportJobArn"))
@@ -700,6 +731,9 @@ module Aws::Personalize
     DeleteFilterRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "filterArn"))
     DeleteFilterRequest.struct_class = Types::DeleteFilterRequest
 
+    DeleteMetricAttributionRequest.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "metricAttributionArn"))
+    DeleteMetricAttributionRequest.struct_class = Types::DeleteMetricAttributionRequest
+
     DeleteRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
     DeleteRecommenderRequest.struct_class = Types::DeleteRecommenderRequest
 
@@ -774,6 +808,12 @@ module Aws::Personalize
 
     DescribeFilterResponse.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
     DescribeFilterResponse.struct_class = Types::DescribeFilterResponse
+
+    DescribeMetricAttributionRequest.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "metricAttributionArn"))
+    DescribeMetricAttributionRequest.struct_class = Types::DescribeMetricAttributionRequest
+
+    DescribeMetricAttributionResponse.add_member(:metric_attribution, Shapes::ShapeRef.new(shape: MetricAttribution, location_name: "metricAttribution"))
+    DescribeMetricAttributionResponse.struct_class = Types::DescribeMetricAttributionResponse
 
     DescribeRecipeRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recipeArn"))
     DescribeRecipeRequest.struct_class = Types::DescribeRecipeRequest
@@ -984,6 +1024,24 @@ module Aws::Personalize
     ListFiltersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFiltersResponse.struct_class = Types::ListFiltersResponse
 
+    ListMetricAttributionMetricsRequest.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "metricAttributionArn"))
+    ListMetricAttributionMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMetricAttributionMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListMetricAttributionMetricsRequest.struct_class = Types::ListMetricAttributionMetricsRequest
+
+    ListMetricAttributionMetricsResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricAttributes, location_name: "metrics"))
+    ListMetricAttributionMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMetricAttributionMetricsResponse.struct_class = Types::ListMetricAttributionMetricsResponse
+
+    ListMetricAttributionsRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    ListMetricAttributionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMetricAttributionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListMetricAttributionsRequest.struct_class = Types::ListMetricAttributionsRequest
+
+    ListMetricAttributionsResponse.add_member(:metric_attributions, Shapes::ShapeRef.new(shape: MetricAttributions, location_name: "metricAttributions"))
+    ListMetricAttributionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMetricAttributionsResponse.struct_class = Types::ListMetricAttributionsResponse
+
     ListRecipesRequest.add_member(:recipe_provider, Shapes::ShapeRef.new(shape: RecipeProvider, location_name: "recipeProvider"))
     ListRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -1034,6 +1092,39 @@ module Aws::Personalize
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MetricAttribute.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "eventType"))
+    MetricAttribute.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "metricName"))
+    MetricAttribute.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpression, required: true, location_name: "expression"))
+    MetricAttribute.struct_class = Types::MetricAttribute
+
+    MetricAttributes.member = Shapes::ShapeRef.new(shape: MetricAttribute)
+
+    MetricAttributesNamesList.member = Shapes::ShapeRef.new(shape: MetricName)
+
+    MetricAttribution.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    MetricAttribution.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "metricAttributionArn"))
+    MetricAttribution.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    MetricAttribution.add_member(:metrics_output_config, Shapes::ShapeRef.new(shape: MetricAttributionOutput, location_name: "metricsOutputConfig"))
+    MetricAttribution.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    MetricAttribution.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    MetricAttribution.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    MetricAttribution.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    MetricAttribution.struct_class = Types::MetricAttribution
+
+    MetricAttributionOutput.add_member(:s3_data_destination, Shapes::ShapeRef.new(shape: S3DataConfig, location_name: "s3DataDestination"))
+    MetricAttributionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    MetricAttributionOutput.struct_class = Types::MetricAttributionOutput
+
+    MetricAttributionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    MetricAttributionSummary.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "metricAttributionArn"))
+    MetricAttributionSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    MetricAttributionSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    MetricAttributionSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    MetricAttributionSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    MetricAttributionSummary.struct_class = Types::MetricAttributionSummary
+
+    MetricAttributions.member = Shapes::ShapeRef.new(shape: MetricAttributionSummary)
 
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
@@ -1145,8 +1236,10 @@ module Aws::Personalize
     SolutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     SolutionSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     SolutionSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    SolutionSummary.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     SolutionSummary.struct_class = Types::SolutionSummary
 
+    SolutionVersion.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     SolutionVersion.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     SolutionVersion.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
     SolutionVersion.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: PerformHPO, location_name: "performHPO"))
@@ -1227,6 +1320,15 @@ module Aws::Personalize
 
     UpdateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     UpdateCampaignResponse.struct_class = Types::UpdateCampaignResponse
+
+    UpdateMetricAttributionRequest.add_member(:add_metrics, Shapes::ShapeRef.new(shape: MetricAttributes, location_name: "addMetrics"))
+    UpdateMetricAttributionRequest.add_member(:remove_metrics, Shapes::ShapeRef.new(shape: MetricAttributesNamesList, location_name: "removeMetrics"))
+    UpdateMetricAttributionRequest.add_member(:metrics_output_config, Shapes::ShapeRef.new(shape: MetricAttributionOutput, location_name: "metricsOutputConfig"))
+    UpdateMetricAttributionRequest.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "metricAttributionArn"))
+    UpdateMetricAttributionRequest.struct_class = Types::UpdateMetricAttributionRequest
+
+    UpdateMetricAttributionResponse.add_member(:metric_attribution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "metricAttributionArn"))
+    UpdateMetricAttributionResponse.struct_class = Types::UpdateMetricAttributionResponse
 
     UpdateRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
     UpdateRecommenderRequest.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, required: true, location_name: "recommenderConfig"))
@@ -1377,6 +1479,19 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
+      api.add_operation(:create_metric_attribution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMetricAttribution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMetricAttributionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMetricAttributionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_recommender, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRecommender"
         o.http_method = "POST"
@@ -1427,6 +1542,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:delete_campaign, Seahorse::Model::Operation.new.tap do |o|
@@ -1478,6 +1594,17 @@ module Aws::Personalize
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_metric_attribution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMetricAttribution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMetricAttributionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1623,6 +1750,16 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFilterRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_metric_attribution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetricAttribution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetricAttributionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetricAttributionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1831,6 +1968,38 @@ module Aws::Personalize
         )
       end)
 
+      api.add_operation(:list_metric_attribution_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMetricAttributionMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMetricAttributionMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMetricAttributionMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_metric_attributions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMetricAttributions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMetricAttributionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMetricAttributionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_recipes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRecipes"
         o.http_method = "POST"
@@ -1989,6 +2158,18 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_metric_attribution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMetricAttribution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMetricAttributionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMetricAttributionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:update_recommender, Seahorse::Model::Operation.new.tap do |o|

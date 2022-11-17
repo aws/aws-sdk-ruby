@@ -2290,6 +2290,8 @@ module Aws::SecurityHub
     #                   vpc_id: "NonEmptyString",
     #                 },
     #                 version: "NonEmptyString",
+    #                 architectures: ["NonEmptyString"],
+    #                 package_type: "NonEmptyString",
     #               },
     #               aws_lambda_layer_version: {
     #                 version: 1,
@@ -3773,6 +3775,8 @@ module Aws::SecurityHub
     #                 file_path: "NonEmptyString",
     #                 fixed_in_version: "NonEmptyString",
     #                 remediation: "NonEmptyString",
+    #                 source_layer_hash: "NonEmptyString",
+    #                 source_layer_arn: "NonEmptyString",
     #               },
     #             ],
     #             cvss: [
@@ -7607,6 +7611,9 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids[0] #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.architectures #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.architectures[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.package_type #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_layer_version.version #=> Integer
     #   resp.findings[0].resources[0].details.aws_lambda_layer_version.compatible_runtimes #=> Array
     #   resp.findings[0].resources[0].details.aws_lambda_layer_version.compatible_runtimes[0] #=> String
@@ -8612,6 +8619,8 @@ module Aws::SecurityHub
     #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].file_path #=> String
     #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].fixed_in_version #=> String
     #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].remediation #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].source_layer_hash #=> String
+    #   resp.findings[0].vulnerabilities[0].vulnerable_packages[0].source_layer_arn #=> String
     #   resp.findings[0].vulnerabilities[0].cvss #=> Array
     #   resp.findings[0].vulnerabilities[0].cvss[0].version #=> String
     #   resp.findings[0].vulnerabilities[0].cvss[0].base_score #=> Float
@@ -11133,7 +11142,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

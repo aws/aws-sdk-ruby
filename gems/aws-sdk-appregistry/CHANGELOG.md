@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-11-17)
+------------------
+
+* Feature - This release adds support for tagged resource associations, which allows you to associate a group of resources with a defined resource tag key and value to the application.
+
 1.17.0 (2022-10-25)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2022-11-17)
+------------------
+
+* Feature - Adds support for Internet Protocol Version 6 (IPv6) on DMS Replication Instances
+
 1.73.0 (2022-10-25)
 ------------------
 

@@ -70,6 +70,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::CreateConnectionAlias.build(context)
           when :create_ip_group
             Aws::WorkSpaces::Endpoints::CreateIpGroup.build(context)
+          when :create_standby_workspaces
+            Aws::WorkSpaces::Endpoints::CreateStandbyWorkspaces.build(context)
           when :create_tags
             Aws::WorkSpaces::Endpoints::CreateTags.build(context)
           when :create_updated_workspace_image

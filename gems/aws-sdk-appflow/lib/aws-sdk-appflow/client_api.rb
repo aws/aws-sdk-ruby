@@ -45,6 +45,7 @@ module Aws::Appflow
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
+    CatalogType = Shapes::StringShape.new(name: 'CatalogType')
     ClientCredentialsArn = Shapes::StringShape.new(name: 'ClientCredentialsArn')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientNumber = Shapes::StringShape.new(name: 'ClientNumber')
@@ -177,6 +178,10 @@ module Aws::Appflow
     FlowName = Shapes::StringShape.new(name: 'FlowName')
     FlowStatus = Shapes::StringShape.new(name: 'FlowStatus')
     FlowStatusMessage = Shapes::StringShape.new(name: 'FlowStatusMessage')
+    GlueDataCatalogConfig = Shapes::StructureShape.new(name: 'GlueDataCatalogConfig')
+    GlueDataCatalogDatabaseName = Shapes::StringShape.new(name: 'GlueDataCatalogDatabaseName')
+    GlueDataCatalogIAMRole = Shapes::StringShape.new(name: 'GlueDataCatalogIAMRole')
+    GlueDataCatalogTablePrefix = Shapes::StringShape.new(name: 'GlueDataCatalogTablePrefix')
     GoogleAnalyticsConnectorOperator = Shapes::StringShape.new(name: 'GoogleAnalyticsConnectorOperator')
     GoogleAnalyticsConnectorProfileCredentials = Shapes::StructureShape.new(name: 'GoogleAnalyticsConnectorProfileCredentials')
     GoogleAnalyticsConnectorProfileProperties = Shapes::StructureShape.new(name: 'GoogleAnalyticsConnectorProfileProperties')
@@ -221,6 +226,9 @@ module Aws::Appflow
     MarketoMetadata = Shapes::StructureShape.new(name: 'MarketoMetadata')
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MetadataCatalogConfig = Shapes::StructureShape.new(name: 'MetadataCatalogConfig')
+    MetadataCatalogDetail = Shapes::StructureShape.new(name: 'MetadataCatalogDetail')
+    MetadataCatalogDetails = Shapes::ListShape.new(name: 'MetadataCatalogDetails')
     MostRecentExecutionMessage = Shapes::StringShape.new(name: 'MostRecentExecutionMessage')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -242,6 +250,8 @@ module Aws::Appflow
     OperatorPropertiesKeys = Shapes::StringShape.new(name: 'OperatorPropertiesKeys')
     Operators = Shapes::StringShape.new(name: 'Operators')
     Password = Shapes::StringShape.new(name: 'Password')
+    PathPrefix = Shapes::StringShape.new(name: 'PathPrefix')
+    PathPrefixHierarchy = Shapes::ListShape.new(name: 'PathPrefixHierarchy')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PrefixConfig = Shapes::StructureShape.new(name: 'PrefixConfig')
     PrefixFormat = Shapes::StringShape.new(name: 'PrefixFormat')
@@ -267,6 +277,7 @@ module Aws::Appflow
     RegisterConnectorRequest = Shapes::StructureShape.new(name: 'RegisterConnectorRequest')
     RegisterConnectorResponse = Shapes::StructureShape.new(name: 'RegisterConnectorResponse')
     RegisteredBy = Shapes::StringShape.new(name: 'RegisteredBy')
+    RegistrationOutput = Shapes::StructureShape.new(name: 'RegistrationOutput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
@@ -392,6 +403,7 @@ module Aws::Appflow
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AggregationConfig.add_member(:aggregation_type, Shapes::ShapeRef.new(shape: AggregationType, location_name: "aggregationType"))
+    AggregationConfig.add_member(:target_file_size, Shapes::ShapeRef.new(shape: Long, location_name: "targetFileSize"))
     AggregationConfig.struct_class = Types::AggregationConfig
 
     AmplitudeConnectorProfileCredentials.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, required: true, location_name: "apiKey"))
@@ -659,6 +671,7 @@ module Aws::Appflow
     CreateFlowRequest.add_member(:destination_flow_config_list, Shapes::ShapeRef.new(shape: DestinationFlowConfigList, required: true, location_name: "destinationFlowConfigList"))
     CreateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
     CreateFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateFlowRequest.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
@@ -798,6 +811,9 @@ module Aws::Appflow
     DescribeFlowResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     DescribeFlowResponse.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "lastUpdatedBy"))
     DescribeFlowResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeFlowResponse.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
+    DescribeFlowResponse.add_member(:last_run_metadata_catalog_details, Shapes::ShapeRef.new(shape: MetadataCatalogDetails, location_name: "lastRunMetadataCatalogDetails"))
+    DescribeFlowResponse.add_member(:schema_version, Shapes::ShapeRef.new(shape: Long, location_name: "schemaVersion"))
     DescribeFlowResponse.struct_class = Types::DescribeFlowResponse
 
     DestinationConnectorProperties.add_member(:redshift, Shapes::ShapeRef.new(shape: RedshiftDestinationProperties, location_name: "Redshift"))
@@ -869,6 +885,7 @@ module Aws::Appflow
     ExecutionRecord.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedAt"))
     ExecutionRecord.add_member(:data_pull_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "dataPullStartTime"))
     ExecutionRecord.add_member(:data_pull_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "dataPullEndTime"))
+    ExecutionRecord.add_member(:metadata_catalog_details, Shapes::ShapeRef.new(shape: MetadataCatalogDetails, location_name: "metadataCatalogDetails"))
     ExecutionRecord.struct_class = Types::ExecutionRecord
 
     ExecutionResult.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "errorInfo"))
@@ -908,6 +925,11 @@ module Aws::Appflow
     FlowExecutionList.member = Shapes::ShapeRef.new(shape: ExecutionRecord)
 
     FlowList.member = Shapes::ShapeRef.new(shape: FlowDefinition)
+
+    GlueDataCatalogConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: GlueDataCatalogIAMRole, required: true, location_name: "roleArn"))
+    GlueDataCatalogConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueDataCatalogDatabaseName, required: true, location_name: "databaseName"))
+    GlueDataCatalogConfig.add_member(:table_prefix, Shapes::ShapeRef.new(shape: GlueDataCatalogTablePrefix, required: true, location_name: "tablePrefix"))
+    GlueDataCatalogConfig.struct_class = Types::GlueDataCatalogConfig
 
     GoogleAnalyticsConnectorProfileCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
     GoogleAnalyticsConnectorProfileCredentials.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, required: true, location_name: "clientSecret"))
@@ -1014,6 +1036,17 @@ module Aws::Appflow
     MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
     MarketoSourceProperties.struct_class = Types::MarketoSourceProperties
 
+    MetadataCatalogConfig.add_member(:glue_data_catalog, Shapes::ShapeRef.new(shape: GlueDataCatalogConfig, location_name: "glueDataCatalog"))
+    MetadataCatalogConfig.struct_class = Types::MetadataCatalogConfig
+
+    MetadataCatalogDetail.add_member(:catalog_type, Shapes::ShapeRef.new(shape: CatalogType, location_name: "catalogType"))
+    MetadataCatalogDetail.add_member(:table_name, Shapes::ShapeRef.new(shape: String, location_name: "tableName"))
+    MetadataCatalogDetail.add_member(:table_registration_output, Shapes::ShapeRef.new(shape: RegistrationOutput, location_name: "tableRegistrationOutput"))
+    MetadataCatalogDetail.add_member(:partition_registration_output, Shapes::ShapeRef.new(shape: RegistrationOutput, location_name: "partitionRegistrationOutput"))
+    MetadataCatalogDetail.struct_class = Types::MetadataCatalogDetail
+
+    MetadataCatalogDetails.member = Shapes::ShapeRef.new(shape: MetadataCatalogDetail)
+
     OAuth2Credentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     OAuth2Credentials.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecret, location_name: "clientSecret"))
     OAuth2Credentials.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
@@ -1060,8 +1093,11 @@ module Aws::Appflow
 
     OAuthScopeList.member = Shapes::ShapeRef.new(shape: OAuthScope)
 
+    PathPrefixHierarchy.member = Shapes::ShapeRef.new(shape: PathPrefix)
+
     PrefixConfig.add_member(:prefix_type, Shapes::ShapeRef.new(shape: PrefixType, location_name: "prefixType"))
     PrefixConfig.add_member(:prefix_format, Shapes::ShapeRef.new(shape: PrefixFormat, location_name: "prefixFormat"))
+    PrefixConfig.add_member(:path_prefix_hierarchy, Shapes::ShapeRef.new(shape: PathPrefixHierarchy, location_name: "pathPrefixHierarchy"))
     PrefixConfig.struct_class = Types::PrefixConfig
 
     PrivateConnectionProvisioningState.add_member(:status, Shapes::ShapeRef.new(shape: PrivateConnectionProvisioningStatus, location_name: "status"))
@@ -1104,6 +1140,11 @@ module Aws::Appflow
 
     RegisterConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "connectorArn"))
     RegisterConnectorResponse.struct_class = Types::RegisterConnectorResponse
+
+    RegistrationOutput.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RegistrationOutput.add_member(:result, Shapes::ShapeRef.new(shape: String, location_name: "result"))
+    RegistrationOutput.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "status"))
+    RegistrationOutput.struct_class = Types::RegistrationOutput
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1398,6 +1439,7 @@ module Aws::Appflow
     UpdateFlowRequest.add_member(:source_flow_config, Shapes::ShapeRef.new(shape: SourceFlowConfig, required: true, location_name: "sourceFlowConfig"))
     UpdateFlowRequest.add_member(:destination_flow_config_list, Shapes::ShapeRef.new(shape: DestinationFlowConfigList, required: true, location_name: "destinationFlowConfigList"))
     UpdateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
+    UpdateFlowRequest.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))

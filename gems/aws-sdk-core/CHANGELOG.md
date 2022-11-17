@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.168.0 (2022-11-17)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.167.0 (2022-11-09)
 ------------------
 

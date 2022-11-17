@@ -21,6 +21,7 @@ module Aws::EMRServerless
     ApplicationState = Shapes::StringShape.new(name: 'ApplicationState')
     ApplicationStateSet = Shapes::ListShape.new(name: 'ApplicationStateSet')
     ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
+    Architecture = Shapes::StringShape.new(name: 'Architecture')
     AutoStartConfig = Shapes::StructureShape.new(name: 'AutoStartConfig')
     AutoStopConfig = Shapes::StructureShape.new(name: 'AutoStopConfig')
     AutoStopConfigIdleTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'AutoStopConfigIdleTimeoutMinutesInteger')
@@ -138,6 +139,7 @@ module Aws::EMRServerless
     Application.add_member(:auto_start_configuration, Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
     Application.add_member(:auto_stop_configuration, Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
     Application.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    Application.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
     Application.struct_class = Types::Application
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -153,6 +155,7 @@ module Aws::EMRServerless
     ApplicationSummary.add_member(:state_details, Shapes::ShapeRef.new(shape: String256, location_name: "stateDetails"))
     ApplicationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "createdAt"))
     ApplicationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "updatedAt"))
+    ApplicationSummary.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
     ApplicationSummary.struct_class = Types::ApplicationSummary
 
     AutoStartConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -194,6 +197,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:auto_start_configuration, Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
     CreateApplicationRequest.add_member(:auto_stop_configuration, Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
     CreateApplicationRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    CreateApplicationRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -408,6 +412,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:auto_start_configuration, Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))
     UpdateApplicationRequest.add_member(:auto_stop_configuration, Shapes::ShapeRef.new(shape: AutoStopConfig, location_name: "autoStopConfiguration"))
     UpdateApplicationRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    UpdateApplicationRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, required: true, location_name: "application"))

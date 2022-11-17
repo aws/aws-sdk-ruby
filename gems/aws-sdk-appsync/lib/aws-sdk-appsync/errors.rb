@@ -118,6 +118,16 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
+      def detail
+        @data[:detail]
+      end
     end
 
     class ConcurrentModificationException < ServiceError

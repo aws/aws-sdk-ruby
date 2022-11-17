@@ -569,9 +569,9 @@ module Aws::DatabaseMigrationService
     #   The type of engine for the endpoint. Valid values, depending on the
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
     #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
-    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"docdb"`,
-    #   `"sqlserver"`, and `"neptune"`.
+    #   `"redshift"`, `"s3"`, `"db2"`, `"db2-zos"`, `"azuredb"`, `"sybase"`,
+    #   `"dynamodb"`, `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
+    #   `"docdb"`, `"sqlserver"`, `"neptune"`, and `"babelfish"`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -1773,6 +1773,11 @@ module Aws::DatabaseMigrationService
     #   don't specify a `ResourceIdentifier` value, DMS generates a default
     #   identifier value for the end of `EndpointArn`.
     #
+    # @option params [String] :network_type
+    #   The type of IP address protocol used by a replication instance, such
+    #   as IPv4 only or Dual-stack that supports both IPv4 and IPv6
+    #   addressing. IPv6 only is not yet supported.
+    #
     # @return [Types::CreateReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
@@ -1882,6 +1887,7 @@ module Aws::DatabaseMigrationService
     #     publicly_accessible: false,
     #     dns_name_servers: "String",
     #     resource_identifier: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -1903,11 +1909,14 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
     #   resp.replication_instance.pending_modified_values.engine_version #=> String
+    #   resp.replication_instance.pending_modified_values.network_type #=> String
     #   resp.replication_instance.multi_az #=> Boolean
     #   resp.replication_instance.engine_version #=> String
     #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
@@ -1919,10 +1928,13 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
+    #   resp.replication_instance.replication_instance_ipv_6_addresses #=> Array
+    #   resp.replication_instance.replication_instance_ipv_6_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
     #   resp.replication_instance.dns_name_servers #=> String
+    #   resp.replication_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance AWS API Documentation
     #
@@ -2013,6 +2025,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup AWS API Documentation
     #
@@ -2886,11 +2900,14 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
     #   resp.replication_instance.pending_modified_values.engine_version #=> String
+    #   resp.replication_instance.pending_modified_values.network_type #=> String
     #   resp.replication_instance.multi_az #=> Boolean
     #   resp.replication_instance.engine_version #=> String
     #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
@@ -2902,10 +2919,13 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
+    #   resp.replication_instance.replication_instance_ipv_6_addresses #=> Array
+    #   resp.replication_instance.replication_instance_ipv_6_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
     #   resp.replication_instance.dns_name_servers #=> String
+    #   resp.replication_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance AWS API Documentation
     #
@@ -4842,11 +4862,14 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_instances[0].replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_instances[0].replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_instances[0].replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_instances[0].replication_subnet_group.supported_network_types[0] #=> String
     #   resp.replication_instances[0].preferred_maintenance_window #=> String
     #   resp.replication_instances[0].pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instances[0].pending_modified_values.allocated_storage #=> Integer
     #   resp.replication_instances[0].pending_modified_values.multi_az #=> Boolean
     #   resp.replication_instances[0].pending_modified_values.engine_version #=> String
+    #   resp.replication_instances[0].pending_modified_values.network_type #=> String
     #   resp.replication_instances[0].multi_az #=> Boolean
     #   resp.replication_instances[0].engine_version #=> String
     #   resp.replication_instances[0].auto_minor_version_upgrade #=> Boolean
@@ -4858,10 +4881,13 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].replication_instance_public_ip_addresses[0] #=> String
     #   resp.replication_instances[0].replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instances[0].replication_instance_private_ip_addresses[0] #=> String
+    #   resp.replication_instances[0].replication_instance_ipv_6_addresses #=> Array
+    #   resp.replication_instances[0].replication_instance_ipv_6_addresses[0] #=> String
     #   resp.replication_instances[0].publicly_accessible #=> Boolean
     #   resp.replication_instances[0].secondary_availability_zone #=> String
     #   resp.replication_instances[0].free_until #=> Time
     #   resp.replication_instances[0].dns_name_servers #=> String
+    #   resp.replication_instances[0].network_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4958,6 +4984,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.replication_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_subnet_groups[0].subnets[0].subnet_status #=> String
+    #   resp.replication_subnet_groups[0].supported_network_types #=> Array
+    #   resp.replication_subnet_groups[0].supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups AWS API Documentation
     #
@@ -5460,6 +5488,10 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].deletes #=> Integer
     #   resp.table_statistics[0].updates #=> Integer
     #   resp.table_statistics[0].ddls #=> Integer
+    #   resp.table_statistics[0].applied_inserts #=> Integer
+    #   resp.table_statistics[0].applied_deletes #=> Integer
+    #   resp.table_statistics[0].applied_updates #=> Integer
+    #   resp.table_statistics[0].applied_ddls #=> Integer
     #   resp.table_statistics[0].full_load_rows #=> Integer
     #   resp.table_statistics[0].full_load_condtnl_chk_failed_rows #=> Integer
     #   resp.table_statistics[0].full_load_error_rows #=> Integer
@@ -5648,12 +5680,12 @@ module Aws::DatabaseMigrationService
     #   The type of endpoint. Valid values are `source` and `target`.
     #
     # @option params [String] :engine_name
-    #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
-    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
-    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
-    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
-    #   `"documentdb"`, `"sqlserver"`, and `"neptune"`.
+    #   The database engine name. Valid values, depending on the EndpointType,
+    #   include `"mysql"`, `"oracle"`, `"postgres"`, `"mariadb"`, `"aurora"`,
+    #   `"aurora-postgresql"`, `"redshift"`, `"s3"`, `"db2"`, `"db2-zos"`,
+    #   `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`, `"kinesis"`,
+    #   `"kafka"`, `"elasticsearch"`, `"documentdb"`, `"sqlserver"`,
+    #   `"neptune"`, and `"babelfish"`.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -6691,6 +6723,11 @@ module Aws::DatabaseMigrationService
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
     #
+    # @option params [String] :network_type
+    #   The type of IP address protocol used by a replication instance, such
+    #   as IPv4 only or Dual-stack that supports both IPv4 and IPv6
+    #   addressing. IPv6 only is not yet supported.
+    #
     # @return [Types::ModifyReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
@@ -6784,6 +6821,7 @@ module Aws::DatabaseMigrationService
     #     allow_major_version_upgrade: false,
     #     auto_minor_version_upgrade: false,
     #     replication_instance_identifier: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -6805,11 +6843,14 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
     #   resp.replication_instance.pending_modified_values.engine_version #=> String
+    #   resp.replication_instance.pending_modified_values.network_type #=> String
     #   resp.replication_instance.multi_az #=> Boolean
     #   resp.replication_instance.engine_version #=> String
     #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
@@ -6821,10 +6862,13 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
+    #   resp.replication_instance.replication_instance_ipv_6_addresses #=> Array
+    #   resp.replication_instance.replication_instance_ipv_6_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
     #   resp.replication_instance.dns_name_servers #=> String
+    #   resp.replication_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance AWS API Documentation
     #
@@ -6886,6 +6930,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup AWS API Documentation
     #
@@ -7164,11 +7210,14 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_instance.replication_subnet_group.supported_network_types #=> Array
+    #   resp.replication_instance.replication_subnet_group.supported_network_types[0] #=> String
     #   resp.replication_instance.preferred_maintenance_window #=> String
     #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
     #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
     #   resp.replication_instance.pending_modified_values.engine_version #=> String
+    #   resp.replication_instance.pending_modified_values.network_type #=> String
     #   resp.replication_instance.multi_az #=> Boolean
     #   resp.replication_instance.engine_version #=> String
     #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
@@ -7180,10 +7229,13 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
+    #   resp.replication_instance.replication_instance_ipv_6_addresses #=> Array
+    #   resp.replication_instance.replication_instance_ipv_6_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #   resp.replication_instance.free_until #=> Time
     #   resp.replication_instance.dns_name_servers #=> String
+    #   resp.replication_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstance AWS API Documentation
     #
@@ -7918,7 +7970,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

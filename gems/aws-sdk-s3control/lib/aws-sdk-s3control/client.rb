@@ -3211,11 +3211,13 @@ module Aws::S3Control
 
     # Gets the Amazon S3 Storage Lens configuration. For more information,
     # see [Assessing your storage activity and usage with Amazon S3 Storage
-    # Lens ][1] in the *Amazon S3 User Guide*.
+    # Lens ][1] in the *Amazon S3 User Guide*. For a complete list of S3
+    # Storage Lens metrics, see [S3 Storage Lens metrics glossary][2] in the
+    # *Amazon S3 User Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:GetStorageLensConfiguration` action. For more information, see
-    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # [Setting permissions to use Amazon S3 Storage Lens][3] in the *Amazon
     # S3 User Guide*.
     #
     #  </note>
@@ -3223,7 +3225,8 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
@@ -3251,6 +3254,12 @@ module Aws::S3Control
     #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.delimiter #=> String
     #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.max_depth #=> Integer
     #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.min_storage_bytes_percentage #=> Float
+    #   resp.storage_lens_configuration.account_level.bucket_level.advanced_cost_optimization_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.advanced_data_protection_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.detailed_status_codes_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.advanced_cost_optimization_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.advanced_data_protection_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.detailed_status_codes_metrics.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.include.buckets #=> Array
     #   resp.storage_lens_configuration.include.buckets[0] #=> String
     #   resp.storage_lens_configuration.include.regions #=> Array
@@ -4627,11 +4636,13 @@ module Aws::S3Control
 
     # Puts an Amazon S3 Storage Lens configuration. For more information
     # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
-    # the *Amazon S3 User Guide*.
+    # the *Amazon S3 User Guide*. For a complete list of S3 Storage Lens
+    # metrics, see [S3 Storage Lens metrics glossary][2] in the *Amazon S3
+    # User Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:PutStorageLensConfiguration` action. For more information, see
-    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # [Setting permissions to use Amazon S3 Storage Lens][3] in the *Amazon
     # S3 User Guide*.
     #
     #  </note>
@@ -4639,7 +4650,8 @@ module Aws::S3Control
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
@@ -4684,6 +4696,24 @@ module Aws::S3Control
     #               },
     #             },
     #           },
+    #           advanced_cost_optimization_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           advanced_data_protection_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           detailed_status_codes_metrics: {
+    #             is_enabled: false,
+    #           },
+    #         },
+    #         advanced_cost_optimization_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         advanced_data_protection_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         detailed_status_codes_metrics: {
+    #           is_enabled: false,
     #         },
     #       },
     #       include: {
@@ -4933,7 +4963,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

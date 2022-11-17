@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-11-17)
+------------------
+
+* Feature - Add two new neural voices - Ola (pl-PL) and Hala (ar-AE).
+
 1.60.0 (2022-11-08)
 ------------------
 

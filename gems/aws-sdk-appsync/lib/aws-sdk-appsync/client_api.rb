@@ -26,6 +26,7 @@ module Aws::AppSync
     ApiKeyValidityOutOfBoundsException = Shapes::StructureShape.new(name: 'ApiKeyValidityOutOfBoundsException')
     ApiKeys = Shapes::ListShape.new(name: 'ApiKeys')
     ApiLimitExceededException = Shapes::StructureShape.new(name: 'ApiLimitExceededException')
+    AppSyncRuntime = Shapes::StructureShape.new(name: 'AppSyncRuntime')
     AssociateApiRequest = Shapes::StructureShape.new(name: 'AssociateApiRequest')
     AssociateApiResponse = Shapes::StructureShape.new(name: 'AssociateApiResponse')
     AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
@@ -33,13 +34,22 @@ module Aws::AppSync
     AuthorizationConfig = Shapes::StructureShape.new(name: 'AuthorizationConfig')
     AuthorizationType = Shapes::StringShape.new(name: 'AuthorizationType')
     AwsIamConfig = Shapes::StructureShape.new(name: 'AwsIamConfig')
+    BadRequestDetail = Shapes::StructureShape.new(name: 'BadRequestDetail')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BadRequestReason = Shapes::StringShape.new(name: 'BadRequestReason')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     CachingConfig = Shapes::StructureShape.new(name: 'CachingConfig')
     CachingKeys = Shapes::ListShape.new(name: 'CachingKeys')
     CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
+    Code = Shapes::StringShape.new(name: 'Code')
+    CodeError = Shapes::StructureShape.new(name: 'CodeError')
+    CodeErrorColumn = Shapes::IntegerShape.new(name: 'CodeErrorColumn')
+    CodeErrorLine = Shapes::IntegerShape.new(name: 'CodeErrorLine')
+    CodeErrorLocation = Shapes::StructureShape.new(name: 'CodeErrorLocation')
+    CodeErrorSpan = Shapes::IntegerShape.new(name: 'CodeErrorSpan')
+    CodeErrors = Shapes::ListShape.new(name: 'CodeErrors')
     CognitoUserPoolConfig = Shapes::StructureShape.new(name: 'CognitoUserPoolConfig')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConflictDetectionType = Shapes::StringShape.new(name: 'ConflictDetectionType')
@@ -92,6 +102,9 @@ module Aws::AppSync
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    EvaluateCodeErrorDetail = Shapes::StructureShape.new(name: 'EvaluateCodeErrorDetail')
+    EvaluateCodeRequest = Shapes::StructureShape.new(name: 'EvaluateCodeRequest')
+    EvaluateCodeResponse = Shapes::StructureShape.new(name: 'EvaluateCodeResponse')
     EvaluateMappingTemplateRequest = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateRequest')
     EvaluateMappingTemplateResponse = Shapes::StructureShape.new(name: 'EvaluateMappingTemplateResponse')
     EvaluationResult = Shapes::StringShape.new(name: 'EvaluationResult')
@@ -149,6 +162,7 @@ module Aws::AppSync
     ListTypesRequest = Shapes::StructureShape.new(name: 'ListTypesRequest')
     ListTypesResponse = Shapes::StructureShape.new(name: 'ListTypesResponse')
     LogConfig = Shapes::StructureShape.new(name: 'LogConfig')
+    Logs = Shapes::ListShape.new(name: 'Logs')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapOfStringToString = Shapes::MapShape.new(name: 'MapOfStringToString')
     MappingTemplate = Shapes::StringShape.new(name: 'MappingTemplate')
@@ -168,6 +182,7 @@ module Aws::AppSync
     Resolvers = Shapes::ListShape.new(name: 'Resolvers')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    RuntimeName = Shapes::StringShape.new(name: 'RuntimeName')
     SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
     StartSchemaCreationRequest = Shapes::StructureShape.new(name: 'StartSchemaCreationRequest')
     StartSchemaCreationResponse = Shapes::StructureShape.new(name: 'StartSchemaCreationResponse')
@@ -247,6 +262,10 @@ module Aws::AppSync
     ApiLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ApiLimitExceededException.struct_class = Types::ApiLimitExceededException
 
+    AppSyncRuntime.add_member(:name, Shapes::ShapeRef.new(shape: RuntimeName, required: true, location_name: "name"))
+    AppSyncRuntime.add_member(:runtime_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "runtimeVersion"))
+    AppSyncRuntime.struct_class = Types::AppSyncRuntime
+
     AssociateApiRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
     AssociateApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "apiId"))
     AssociateApiRequest.struct_class = Types::AssociateApiRequest
@@ -262,7 +281,12 @@ module Aws::AppSync
     AwsIamConfig.add_member(:signing_service_name, Shapes::ShapeRef.new(shape: String, location_name: "signingServiceName"))
     AwsIamConfig.struct_class = Types::AwsIamConfig
 
+    BadRequestDetail.add_member(:code_errors, Shapes::ShapeRef.new(shape: CodeErrors, location_name: "codeErrors"))
+    BadRequestDetail.struct_class = Types::BadRequestDetail
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    BadRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: BadRequestReason, location_name: "reason"))
+    BadRequestException.add_member(:detail, Shapes::ShapeRef.new(shape: BadRequestDetail, location_name: "detail"))
     BadRequestException.struct_class = Types::BadRequestException
 
     CachingConfig.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
@@ -270,6 +294,18 @@ module Aws::AppSync
     CachingConfig.struct_class = Types::CachingConfig
 
     CachingKeys.member = Shapes::ShapeRef.new(shape: String)
+
+    CodeError.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "errorType"))
+    CodeError.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    CodeError.add_member(:location, Shapes::ShapeRef.new(shape: CodeErrorLocation, location_name: "location"))
+    CodeError.struct_class = Types::CodeError
+
+    CodeErrorLocation.add_member(:line, Shapes::ShapeRef.new(shape: CodeErrorLine, location_name: "line"))
+    CodeErrorLocation.add_member(:column, Shapes::ShapeRef.new(shape: CodeErrorColumn, location_name: "column"))
+    CodeErrorLocation.add_member(:span, Shapes::ShapeRef.new(shape: CodeErrorSpan, location_name: "span"))
+    CodeErrorLocation.struct_class = Types::CodeErrorLocation
+
+    CodeErrors.member = Shapes::ShapeRef.new(shape: CodeError)
 
     CognitoUserPoolConfig.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userPoolId"))
     CognitoUserPoolConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
@@ -328,9 +364,11 @@ module Aws::AppSync
     CreateFunctionRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "dataSourceName"))
     CreateFunctionRequest.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "requestMappingTemplate"))
     CreateFunctionRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
-    CreateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "functionVersion"))
+    CreateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, location_name: "functionVersion"))
     CreateFunctionRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     CreateFunctionRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    CreateFunctionRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
+    CreateFunctionRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
@@ -361,6 +399,8 @@ module Aws::AppSync
     CreateResolverRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     CreateResolverRequest.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
     CreateResolverRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    CreateResolverRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
+    CreateResolverRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     CreateResolverRequest.struct_class = Types::CreateResolverRequest
 
     CreateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -468,12 +508,28 @@ module Aws::AppSync
     ErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ErrorDetail.struct_class = Types::ErrorDetail
 
+    EvaluateCodeErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    EvaluateCodeErrorDetail.add_member(:code_errors, Shapes::ShapeRef.new(shape: CodeErrors, location_name: "codeErrors"))
+    EvaluateCodeErrorDetail.struct_class = Types::EvaluateCodeErrorDetail
+
+    EvaluateCodeRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, required: true, location_name: "runtime"))
+    EvaluateCodeRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, required: true, location_name: "code"))
+    EvaluateCodeRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, required: true, location_name: "context"))
+    EvaluateCodeRequest.add_member(:function, Shapes::ShapeRef.new(shape: String, location_name: "function"))
+    EvaluateCodeRequest.struct_class = Types::EvaluateCodeRequest
+
+    EvaluateCodeResponse.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "evaluationResult"))
+    EvaluateCodeResponse.add_member(:error, Shapes::ShapeRef.new(shape: EvaluateCodeErrorDetail, location_name: "error"))
+    EvaluateCodeResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
+    EvaluateCodeResponse.struct_class = Types::EvaluateCodeResponse
+
     EvaluateMappingTemplateRequest.add_member(:template, Shapes::ShapeRef.new(shape: Template, required: true, location_name: "template"))
     EvaluateMappingTemplateRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, required: true, location_name: "context"))
     EvaluateMappingTemplateRequest.struct_class = Types::EvaluateMappingTemplateRequest
 
     EvaluateMappingTemplateResponse.add_member(:evaluation_result, Shapes::ShapeRef.new(shape: EvaluationResult, location_name: "evaluationResult"))
     EvaluateMappingTemplateResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
+    EvaluateMappingTemplateResponse.add_member(:logs, Shapes::ShapeRef.new(shape: Logs, location_name: "logs"))
     EvaluateMappingTemplateResponse.struct_class = Types::EvaluateMappingTemplateResponse
 
     FlushApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
@@ -491,6 +547,8 @@ module Aws::AppSync
     FunctionConfiguration.add_member(:function_version, Shapes::ShapeRef.new(shape: String, location_name: "functionVersion"))
     FunctionConfiguration.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     FunctionConfiguration.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    FunctionConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
+    FunctionConfiguration.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     Functions.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
@@ -693,6 +751,8 @@ module Aws::AppSync
     LogConfig.add_member(:exclude_verbose_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludeVerboseContent"))
     LogConfig.struct_class = Types::LogConfig
 
+    Logs.member = Shapes::ShapeRef.new(shape: String)
+
     MapOfStringToString.key = Shapes::ShapeRef.new(shape: String)
     MapOfStringToString.value = Shapes::ShapeRef.new(shape: String)
 
@@ -734,6 +794,8 @@ module Aws::AppSync
     Resolver.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     Resolver.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
     Resolver.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    Resolver.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
+    Resolver.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     Resolver.struct_class = Types::Resolver
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
@@ -827,9 +889,11 @@ module Aws::AppSync
     UpdateFunctionRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "dataSourceName"))
     UpdateFunctionRequest.add_member(:request_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "requestMappingTemplate"))
     UpdateFunctionRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
-    UpdateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "functionVersion"))
+    UpdateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, location_name: "functionVersion"))
     UpdateFunctionRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     UpdateFunctionRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    UpdateFunctionRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
+    UpdateFunctionRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     UpdateFunctionRequest.struct_class = Types::UpdateFunctionRequest
 
     UpdateFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
@@ -860,6 +924,8 @@ module Aws::AppSync
     UpdateResolverRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     UpdateResolverRequest.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
     UpdateResolverRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    UpdateResolverRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: AppSyncRuntime, location_name: "runtime"))
+    UpdateResolverRequest.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     UpdateResolverRequest.struct_class = Types::UpdateResolverRequest
 
     UpdateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -1000,6 +1066,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:create_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1102,6 +1169,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:delete_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1128,6 +1196,17 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:evaluate_code, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EvaluateCode"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/dataplane-evaluatecode"
+        o.input = Shapes::ShapeRef.new(shape: EvaluateCodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: EvaluateCodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:evaluate_mapping_template, Seahorse::Model::Operation.new.tap do |o|
@@ -1515,6 +1594,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:update_type, Seahorse::Model::Operation.new.tap do |o|

@@ -1112,44 +1112,46 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. If the target group protocol is HTTP or HTTPS,
-    #   the default is 30 seconds. If the target group protocol is TCP, TLS,
-    #   UDP, or TCP\_UDP, the supported values are 10 and 30 seconds and the
-    #   default is 30 seconds. If the target group protocol is GENEVE, the
-    #   default is 10 seconds. If the target type is `lambda`, the default
-    #   is 35 seconds.
+    #   an individual target. The range is 5-300. If the target group
+    #   protocol is TCP, TLS, UDP, TCP\_UDP, HTTP or HTTPS, the default is
+    #   30 seconds. If the target group protocol is GENEVE, the default is
+    #   10 seconds. If the target type is `lambda`, the default is 35
+    #   seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a
-    #   target means a failed health check. For target groups with a
-    #   protocol of HTTP, HTTPS, or GENEVE, the default is 5 seconds. For
-    #   target groups with a protocol of TCP or TLS, this value must be 6
-    #   seconds for HTTP health checks and 10 seconds for TCP and HTTPS
-    #   health checks. If the target type is `lambda`, the default is 30
+    #   target means a failed health check. The range is 2–120 seconds. For
+    #   target groups with a protocol of HTTP, the default is 6 seconds. For
+    #   target groups with a protocol of TCP, TLS or HTTPS, the default is
+    #   10 seconds. For target groups with a protocol of GENEVE, the default
+    #   is 5 seconds. If the target type is `lambda`, the default is 30
     #   seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] healthy_threshold_count
-    #   The number of consecutive health checks successes required before
-    #   considering an unhealthy target healthy. For target groups with a
-    #   protocol of HTTP or HTTPS, the default is 5. For target groups with
-    #   a protocol of TCP, TLS, or GENEVE, the default is 3. If the target
-    #   type is `lambda`, the default is 5.
+    #   The number of consecutive health check successes required before
+    #   considering a target healthy. The range is 2-10. If the target group
+    #   protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the default is
+    #   5. For target groups with a protocol of GENEVE, the default is 3. If
+    #   the target type is `lambda`, the default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
-    #   considering a target unhealthy. If the target group protocol is HTTP
-    #   or HTTPS, the default is 2. If the target group protocol is TCP or
-    #   TLS, this value must be the same as the healthy threshold count. If
-    #   the target group protocol is GENEVE, the default is 3. If the target
-    #   type is `lambda`, the default is 2.
+    #   considering a target unhealthy. The range is 2-10. If the target
+    #   group protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the
+    #   default is 2. For target groups with a protocol of GENEVE, the
+    #   default is 3. If the target type is `lambda`, the default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
-    #   checking for a successful response from a target.
+    #   checking for a successful response from a target. For target groups
+    #   with a protocol of TCP, TCP\_UDP, UDP or TLS the range is 200-599.
+    #   For target groups with a protocol of HTTP or HTTPS, the range is
+    #   200-499. For target groups with a protocol of GENEVE, the range is
+    #   200-399.
     #   @return [Types::Matcher]
     #
     # @!attribute [rw] target_type
@@ -1944,8 +1946,8 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] target_groups
-    #   One or more target groups. For Network Load Balancers, you can
-    #   specify a single target group.
+    #   The target groups. For Network Load Balancers, you can specify a
+    #   single target group.
     #   @return [Array<Types::TargetGroupTuple>]
     #
     # @!attribute [rw] target_group_stickiness_config
@@ -1978,10 +1980,10 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] values
-    #   One or more host names. The maximum size of each name is 128
-    #   characters. The comparison is case insensitive. The following
-    #   wildcard characters are supported: * (matches 0 or more characters)
-    #   and ? (matches exactly 1 character).
+    #   The host names. The maximum size of each name is 128 characters. The
+    #   comparison is case insensitive. The following wildcard characters
+    #   are supported: * (matches 0 or more characters) and ? (matches
+    #   exactly 1 character).
     #
     #   If you specify multiple strings, the condition is satisfied if one
     #   of the strings matches the host name.
@@ -2018,8 +2020,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   One or more strings to compare against the value of the HTTP header.
-    #   The maximum size of each string is 128 characters. The comparison
+    #   The strings to compare against the value of the HTTP header. The
+    #   maximum size of each string is 128 characters. The comparison
     #   strings are case insensitive. The following wildcard characters are
     #   supported: * (matches 0 or more characters) and ? (matches exactly
     #   1 character).
@@ -2366,13 +2368,17 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] key
     #   The name of the attribute.
     #
-    #   The following attribute is supported by all load balancers:
+    #   The following attributes are supported by all load balancers:
     #
     #   * `deletion_protection.enabled` - Indicates whether deletion
     #     protection is enabled. The value is `true` or `false`. The default
     #     is `false`.
     #
-    #   ^
+    #   * `load_balancing.cross_zone.enabled` - Indicates whether cross-zone
+    #     load balancing is enabled. The possible values are `true` and
+    #     `false`. The default for Network Load Balancers and Gateway Load
+    #     Balancers is `false`. The default for Application Load Balancers
+    #     is `true`, and cannot be changed.
     #
     #   The following attributes are supported by both Application Load
     #   Balancers and Network Load Balancers:
@@ -2460,15 +2466,6 @@ module Aws::ElasticLoadBalancingV2
     #     load balancer to route requests to targets if it is unable to
     #     forward the request to Amazon Web Services WAF. The possible
     #     values are `true` and `false`. The default is `false`.
-    #
-    #   The following attribute is supported by Network Load Balancers and
-    #   Gateway Load Balancers:
-    #
-    #   * `load_balancing.cross_zone.enabled` - Indicates whether cross-zone
-    #     load balancing is enabled. The possible values are `true` and
-    #     `false`. The default is `false`.
-    #
-    #   ^
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2528,12 +2525,16 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] http_code
     #   For Application Load Balancers, you can specify values between 200
-    #   and 499, and the default value is 200. You can specify multiple
+    #   and 499, with the default value being 200. You can specify multiple
     #   values (for example, "200,202") or a range of values (for example,
     #   "200-299").
     #
-    #   For Network Load Balancers and Gateway Load Balancers, this must be
-    #   "200–399".
+    #   For Network Load Balancers, you can specify values between 200 and
+    #   599, with the default value being 200-399. You can specify multiple
+    #   values (for example, "200,202") or a range of values (for example,
+    #   "200-299").
+    #
+    #   For Gateway Load Balancers, this must be "200–399".
     #
     #   Note that when using shorthand syntax, some values such as commas
     #   need to be escaped.
@@ -2993,8 +2994,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For TCP health checks, the supported values
-    #   are 10 or 30 seconds.
+    #   an individual target.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
@@ -3009,14 +3009,16 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
-    #   considering the target unhealthy. For target groups with a protocol
-    #   of TCP or TLS, this value must be the same as the healthy threshold
-    #   count.
+    #   considering the target unhealthy.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
-    #   checking for a successful response from a target.
+    #   checking for a successful response from a target. For target groups
+    #   with a protocol of TCP, TCP\_UDP, UDP or TLS the range is 200-599.
+    #   For target groups with a protocol of HTTP or HTTPS, the range is
+    #   200-499. For target groups with a protocol of GENEVE, the range is
+    #   200-399.
     #   @return [Types::Matcher]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupInput AWS API Documentation
@@ -3064,9 +3066,9 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] values
-    #   One or more path patterns to compare against the request URL. The
-    #   maximum size of each string is 128 characters. The comparison is
-    #   case sensitive. The following wildcard characters are supported: *
+    #   The path patterns to compare against the request URL. The maximum
+    #   size of each string is 128 characters. The comparison is case
+    #   sensitive. The following wildcard characters are supported: *
     #   (matches 0 or more characters) and ? (matches exactly 1 character).
     #
     #   If you specify multiple strings, the condition is satisfied if one
@@ -3110,8 +3112,8 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] values
-    #   One or more key/value pairs or values to find in the query string.
-    #   The maximum size of each string is 128 characters. The comparison is
+    #   The key/value pairs or values to find in the query string. The
+    #   maximum size of each string is 128 characters. The comparison is
     #   case insensitive. The following wildcard characters are supported:
     #   * (matches 0 or more characters) and ? (matches exactly 1
     #   character). To search for a literal '*' or '?' character in a
@@ -3788,8 +3790,8 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] values
-    #   One or more source IP addresses, in CIDR format. You can use both
-    #   IPv4 and IPv6 addresses. Wildcards are not supported.
+    #   The source IP addresses, in CIDR format. You can use both IPv4 and
+    #   IPv6 addresses. Wildcards are not supported.
     #
     #   If you specify multiple addresses, the condition is satisfied if the
     #   source IP address of the request matches one of the CIDR blocks.
@@ -3961,6 +3963,11 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zone or from all enabled Availability Zones for the
     #   load balancer.
     #
+    #   For Application Load Balancer target groups, the specified
+    #   Availability Zone value is only applicable when cross-zone load
+    #   balancing is off. Otherwise the parameter is ignored and treated as
+    #   `all`.
+    #
     #   This parameter is not supported if the target type of the target
     #   group is `instance` or `alb`.
     #
@@ -3969,9 +3976,10 @@ module Aws::ElasticLoadBalancingV2
     #   detected and this parameter is optional. If the IP address is
     #   outside the VPC, this parameter is required.
     #
-    #   With an Application Load Balancer, if the target type is `ip` and
-    #   the IP address is outside the VPC for the target group, the only
-    #   supported value is `all`.
+    #   For Application Load Balancer target groups with cross-zone load
+    #   balancing off, if the target type is `ip` and the IP address is
+    #   outside of the VPC for the target group, this should be an
+    #   Availability Zone inside the VPC for the target group.
     #
     #   If the target type is `lambda`, this parameter is optional and the
     #   only supported value is `all`.
@@ -4121,18 +4129,13 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] key
     #   The name of the attribute.
     #
-    #   The following attribute is supported by all load balancers:
+    #   The following attributes are supported by all load balancers:
     #
     #   * `deregistration_delay.timeout_seconds` - The amount of time, in
     #     seconds, for Elastic Load Balancing to wait before changing the
     #     state of a deregistering target from `draining` to `unused`. The
     #     range is 0-3600 seconds. The default value is 300 seconds. If the
     #     target is a Lambda function, this attribute is not supported.
-    #
-    #   ^
-    #
-    #   The following attributes are supported by Application Load
-    #   Balancers, Network Load Balancers, and Gateway Load Balancers:
     #
     #   * `stickiness.enabled` - Indicates whether target stickiness is
     #     enabled. The value is `true` or `false`. The default is `false`.
@@ -4146,6 +4149,40 @@ module Aws::ElasticLoadBalancingV2
     #
     #     * `source_ip_dest_ip` and `source_ip_dest_ip_proto` for Gateway
     #       Load Balancers.
+    #
+    #   The following attributes are supported by Application Load Balancers
+    #   and Network Load Balancers:
+    #
+    #   * `load_balancing.cross_zone.enabled` - Indicates whether cross zone
+    #     load balancing is enabled. The value is `true`, `false` or
+    #     `use_load_balancer_configuration`. The default is
+    #     `use_load_balancer_configuration`.
+    #
+    #   * `target_group_health.dns_failover.minimum_healthy_targets.count` -
+    #     The minimum number of targets that must be healthy. If the number
+    #     of healthy targets is below this value, mark the zone as unhealthy
+    #     in DNS, so that traffic is routed only to healthy zones. The
+    #     possible values are `off` or an integer from 1 to the maximum
+    #     number of targets. The default is `off`.
+    #
+    #   * `target_group_health.dns_failover.minimum_healthy_targets.percentage`
+    #     - The minimum percentage of targets that must be healthy. If the
+    #     percentage of healthy targets is below this value, mark the zone
+    #     as unhealthy in DNS, so that traffic is routed only to healthy
+    #     zones. The possible values are `off` or an integer from 1 to 100.
+    #     The default is `off`.
+    #
+    #   * `target_group_health.unhealthy_state_routing.minimum_healthy_targets.count`
+    #     - The minimum number of targets that must be healthy. If the
+    #     number of healthy targets is below this value, send traffic to all
+    #     targets, including unhealthy targets. The possible values are 1 to
+    #     the maximum number of targets. The default is 1.
+    #
+    #   * `target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage`
+    #     - The minimum percentage of targets that must be healthy. If the
+    #     percentage of healthy targets is below this value, send traffic to
+    #     all targets, including unhealthy targets. The possible values are
+    #     `off` or an integer from 1 to 100. The default is `off`.
     #
     #   The following attributes are supported only if the load balancer is
     #   an Application Load Balancer and the target is an instance or an IP

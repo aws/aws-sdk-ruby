@@ -628,6 +628,60 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateStandbyWorkspacesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         primary_region: "Region", # required
+    #         standby_workspaces: [ # required
+    #           {
+    #             primary_workspace_id: "WorkspaceId", # required
+    #             volume_encryption_key: "VolumeEncryptionKey",
+    #             directory_id: "DirectoryId", # required
+    #             tags: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] primary_region
+    #   The Region of the primary WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] standby_workspaces
+    #   Information about the Standby WorkSpace to be created.
+    #   @return [Array<Types::StandbyWorkspace>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspacesRequest AWS API Documentation
+    #
+    class CreateStandbyWorkspacesRequest < Struct.new(
+      :primary_region,
+      :standby_workspaces)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_standby_requests
+    #   Information about the Standby WorkSpace that could not be created.
+    #   @return [Array<Types::FailedCreateStandbyWorkspacesRequest>]
+    #
+    # @!attribute [rw] pending_standby_requests
+    #   Information about the Standby WorkSpace that was created.
+    #   @return [Array<Types::PendingCreateStandbyWorkspacesRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateStandbyWorkspacesResult AWS API Documentation
+    #
+    class CreateStandbyWorkspacesResult < Struct.new(
+      :failed_standby_requests,
+      :pending_standby_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTagsRequest
     #   data as a hash:
     #
@@ -2227,6 +2281,32 @@ module Aws::WorkSpaces
     #
     class DisassociateIpGroupsResult < Aws::EmptyStructure; end
 
+    # Describes the Standby WorkSpace that could not be created.
+    #
+    # @!attribute [rw] standby_workspace_request
+    #   Information about the Standby WorkSpace that could not be created.
+    #   @return [Types::StandbyWorkspace]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that is returned if the Standby WorkSpace could not
+    #   be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message that is returned if the Standby
+    #   WorkSpace could not be created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedCreateStandbyWorkspacesRequest AWS API Documentation
+    #
+    class FailedCreateStandbyWorkspacesRequest < Struct.new(
+      :standby_workspace_request,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a WorkSpace that cannot be created.
     #
     # @!attribute [rw] workspace_request
@@ -3298,6 +3378,44 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Information about the Standby WorkSpace.
+    #
+    # @!attribute [rw] user_name
+    #   Describes the Standby WorkSpace that was created.
+    #
+    #   Because this operation is asynchronous, the identifier returned is
+    #   not immediately available for use with other operations. For
+    #   example, if you call [ DescribeWorkspaces][1] before the WorkSpace
+    #   is created, the information returned can be incomplete.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for the Standby WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The operational state of the Standby WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the Standby WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/PendingCreateStandbyWorkspacesRequest AWS API Documentation
+    #
+    class PendingCreateStandbyWorkspacesRequest < Struct.new(
+      :user_name,
+      :directory_id,
+      :state,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the information used to reboot a WorkSpace.
     #
     # @note When making an API call, you may pass RebootRequest
@@ -3491,6 +3609,37 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectoryResult AWS API Documentation
     #
     class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure; end
+
+    # Describes the related WorkSpace. The related WorkSpace could be a
+    # Standby WorkSpace or Primary WorkSpace related to the specified
+    # WorkSpace.
+    #
+    # @!attribute [rw] workspace_id
+    #   The identifier of the related WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Region of the related WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Indicates the state of the WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates the type of WorkSpace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RelatedWorkspaceProperties AWS API Documentation
+    #
+    class RelatedWorkspaceProperties < Struct.new(
+      :workspace_id,
+      :region,
+      :state,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The specified resource already exists.
     #
@@ -3783,6 +3932,50 @@ module Aws::WorkSpaces
     #
     class Snapshot < Struct.new(
       :snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Standby WorkSpace.
+    #
+    # @note When making an API call, you may pass StandbyWorkspace
+    #   data as a hash:
+    #
+    #       {
+    #         primary_workspace_id: "WorkspaceId", # required
+    #         volume_encryption_key: "VolumeEncryptionKey",
+    #         directory_id: "DirectoryId", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] primary_workspace_id
+    #   The identifier of the Standby WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_encryption_key
+    #   The volume encryption key of the Standby WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for the Standby WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the Standby WorkSpace.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspace AWS API Documentation
+    #
+    class StandbyWorkspace < Struct.new(
+      :primary_workspace_id,
+      :volume_encryption_key,
+      :directory_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4330,6 +4523,11 @@ module Aws::WorkSpaces
     #   The modification states of the WorkSpace.
     #   @return [Array<Types::ModificationState>]
     #
+    # @!attribute [rw] related_workspaces
+    #   The Standby WorkSpace or Primary WorkSpace related to the specified
+    #   WorkSpace.
+    #   @return [Array<Types::RelatedWorkspaceProperties>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace AWS API Documentation
     #
     class Workspace < Struct.new(
@@ -4347,7 +4545,8 @@ module Aws::WorkSpaces
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
       :workspace_properties,
-      :modification_states)
+      :modification_states,
+      :related_workspaces)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4477,6 +4676,14 @@ module Aws::WorkSpaces
     #   The time when the bundle was created.
     #   @return [Time]
     #
+    # @!attribute [rw] state
+    #   The state of the WorkSpace bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_type
+    #   The type of WorkSpace bundle.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceBundle AWS API Documentation
     #
     class WorkspaceBundle < Struct.new(
@@ -4489,7 +4696,9 @@ module Aws::WorkSpaces
       :user_storage,
       :compute_type,
       :last_updated_time,
-      :creation_time)
+      :creation_time,
+      :state,
+      :bundle_type)
       SENSITIVE = []
       include Aws::Structure
     end

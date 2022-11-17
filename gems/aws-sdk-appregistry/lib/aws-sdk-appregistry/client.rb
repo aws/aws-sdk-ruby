@@ -428,7 +428,7 @@ module Aws::AppRegistry
     #
     #   resp = client.associate_resource({
     #     application: "ApplicationSpecifier", # required
-    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #     resource: "ResourceSpecifier", # required
     #   })
     #
@@ -700,7 +700,7 @@ module Aws::AppRegistry
     #
     #   resp = client.disassociate_resource({
     #     application: "ApplicationSpecifier", # required
-    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #     resource: "ResourceSpecifier", # required
     #   })
     #
@@ -790,7 +790,7 @@ module Aws::AppRegistry
     #
     #   resp = client.get_associated_resource({
     #     application: "ApplicationSpecifier", # required
-    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #     resource: "ResourceSpecifier", # required
     #   })
     #
@@ -855,6 +855,25 @@ module Aws::AppRegistry
     # @param [Hash] params ({})
     def get_attribute_group(params = {}, options = {})
       req = build_request(:get_attribute_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a `TagKey` configuration from an account.
+    #
+    # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfigurationResponse#configuration #configuration} => Types::AppRegistryConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.tag_query_configuration.tag_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/GetConfiguration AWS API Documentation
+    #
+    # @overload get_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_configuration(params = {}, options = {})
+      req = build_request(:get_configuration, params)
       req.send_request(options)
     end
 
@@ -948,8 +967,15 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
-    # Lists all resources that are associated with specified application.
-    # Results are paginated.
+    # Lists all of the resources that are associated with the specified
+    # application. Results are paginated.
+    #
+    # <note markdown="1"> If you share an application, and a consumer account associates a tag
+    # query to the application, all of the users who can access the
+    # application can also view the tag values in all accounts that are
+    # associated with it using this API.
+    #
+    #  </note>
     #
     # @option params [required, String] :application
     #   The name or ID of the application.
@@ -983,6 +1009,8 @@ module Aws::AppRegistry
     #   resp.resources #=> Array
     #   resp.resources[0].name #=> String
     #   resp.resources[0].arn #=> String
+    #   resp.resources[0].resource_type #=> String, one of "CFN_STACK", "RESOURCE_TAG_VALUE"
+    #   resp.resources[0].resource_details.tag_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/ListAssociatedResources AWS API Documentation
@@ -1116,6 +1144,32 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
+    # Associates a `TagKey` configuration to an account.
+    #
+    # @option params [required, Types::AppRegistryConfiguration] :configuration
+    #   Associates a `TagKey` configuration to an account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_configuration({
+    #     configuration: { # required
+    #       tag_query_configuration: {
+    #         tag_key: "TagKeyConfig",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/PutConfiguration AWS API Documentation
+    #
+    # @overload put_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_configuration(params = {}, options = {})
+      req = build_request(:put_configuration, params)
+      req.send_request(options)
+    end
+
     # Syncs the resource with current AppRegistry records.
     #
     # Specifically, the resource’s AppRegistry system tags sync with its
@@ -1140,7 +1194,7 @@ module Aws::AppRegistry
     # @example Request syntax with placeholder values
     #
     #   resp = client.sync_resource({
-    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK, RESOURCE_TAG_VALUE
     #     resource: "ResourceSpecifier", # required
     #   })
     #
@@ -1332,7 +1386,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

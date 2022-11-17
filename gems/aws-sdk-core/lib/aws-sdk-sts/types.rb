@@ -70,12 +70,13 @@ module Aws::STS
     #   Web Services Service Namespaces][1] in the Amazon Web Services
     #   General Reference.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -116,12 +117,13 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -181,12 +183,13 @@ module Aws::STS
     #   values can’t exceed 256 characters. For these and additional limits,
     #   see [IAM and STS Character Limits][2] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -443,12 +446,13 @@ module Aws::STS
     #   Web Services Service Namespaces][1] in the Amazon Web Services
     #   General Reference.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -489,12 +493,13 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -733,12 +738,13 @@ module Aws::STS
     #   Web Services Service Namespaces][1] in the Amazon Web Services
     #   General Reference.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -779,12 +785,13 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -1187,8 +1194,8 @@ module Aws::STS
     #
     #   You must pass an inline or managed [session policy][1] to this
     #   operation. You can pass a single JSON policy document to use as an
-    #   inline session policy. You can also specify up to 10 managed
-    #   policies to use as managed session policies.
+    #   inline session policy. You can also specify up to 10 managed policy
+    #   Amazon Resource Names (ARNs) to use as managed session policies.
     #
     #   This parameter is optional. However, if you do not pass any session
     #   policies, then the resulting federated user session has no
@@ -1216,12 +1223,13 @@ module Aws::STS
     #   include the tab (\\u0009), linefeed (\\u000A), and carriage return
     #   (\\u000D) characters.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -1238,13 +1246,13 @@ module Aws::STS
     #
     #   You must pass an inline or managed [session policy][1] to this
     #   operation. You can pass a single JSON policy document to use as an
-    #   inline session policy. You can also specify up to 10 managed
-    #   policies to use as managed session policies. The plaintext that you
-    #   use for both inline and managed session policies can't exceed 2,048
-    #   characters. You can provide up to 10 managed policy ARNs. For more
-    #   information about ARNs, see [Amazon Resource Names (ARNs) and Amazon
-    #   Web Services Service Namespaces][2] in the Amazon Web Services
-    #   General Reference.
+    #   inline session policy. You can also specify up to 10 managed policy
+    #   Amazon Resource Names (ARNs) to use as managed session policies. The
+    #   plaintext that you use for both inline and managed session policies
+    #   can't exceed 2,048 characters. You can provide up to 10 managed
+    #   policy ARNs. For more information about ARNs, see [Amazon Resource
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][2] in the
+    #   Amazon Web Services General Reference.
     #
     #   This parameter is optional. However, if you do not pass any session
     #   policies, then the resulting federated user session has no
@@ -1265,12 +1273,13 @@ module Aws::STS
     #   are granted in addition to the permissions that are granted by the
     #   session policies.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #
@@ -1301,12 +1310,13 @@ module Aws::STS
     #   values can’t exceed 256 characters. For these and additional limits,
     #   see [IAM and STS Character Limits][2] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed session
-    #   policies and session tags into a packed binary format that has a
-    #   separate limit. Your request can fail for this limit even if your
-    #   plaintext meets the other requirements. The `PackedPolicySize`
-    #   response element indicates by percentage how close the policies and
-    #   tags for your request are to the upper size limit.
+    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline
+    #   session policy, managed policy ARNs, and session tags into a packed
+    #   binary format that has a separate limit. Your request can fail for
+    #   this limit even if your plaintext meets the other requirements. The
+    #   `PackedPolicySize` response element indicates by percentage how
+    #   close the policies and tags for your request are to the upper size
+    #   limit.
     #
     #    </note>
     #

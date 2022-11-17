@@ -242,6 +242,7 @@ module Aws::DatabaseMigrationService
     RemoveTagsFromResourceResponse = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResponse')
     ReplicationEndpointTypeValue = Shapes::StringShape.new(name: 'ReplicationEndpointTypeValue')
     ReplicationInstance = Shapes::StructureShape.new(name: 'ReplicationInstance')
+    ReplicationInstanceIpv6AddressList = Shapes::ListShape.new(name: 'ReplicationInstanceIpv6AddressList')
     ReplicationInstanceList = Shapes::ListShape.new(name: 'ReplicationInstanceList')
     ReplicationInstancePrivateIpAddressList = Shapes::ListShape.new(name: 'ReplicationInstancePrivateIpAddressList')
     ReplicationInstancePublicIpAddressList = Shapes::ListShape.new(name: 'ReplicationInstancePublicIpAddressList')
@@ -490,6 +491,7 @@ module Aws::DatabaseMigrationService
     CreateReplicationInstanceMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
     CreateReplicationInstanceMessage.add_member(:dns_name_servers, Shapes::ShapeRef.new(shape: String, location_name: "DnsNameServers"))
     CreateReplicationInstanceMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
+    CreateReplicationInstanceMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     CreateReplicationInstanceMessage.struct_class = Types::CreateReplicationInstanceMessage
 
     CreateReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
@@ -1193,6 +1195,7 @@ module Aws::DatabaseMigrationService
     ModifyReplicationInstanceMessage.add_member(:allow_major_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMajorVersionUpgrade"))
     ModifyReplicationInstanceMessage.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
     ModifyReplicationInstanceMessage.add_member(:replication_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceIdentifier"))
+    ModifyReplicationInstanceMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     ModifyReplicationInstanceMessage.struct_class = Types::ModifyReplicationInstanceMessage
 
     ModifyReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
@@ -1453,11 +1456,15 @@ module Aws::DatabaseMigrationService
     ReplicationInstance.add_member(:replication_instance_private_ip_address, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "ReplicationInstancePrivateIpAddress"))
     ReplicationInstance.add_member(:replication_instance_public_ip_addresses, Shapes::ShapeRef.new(shape: ReplicationInstancePublicIpAddressList, location_name: "ReplicationInstancePublicIpAddresses"))
     ReplicationInstance.add_member(:replication_instance_private_ip_addresses, Shapes::ShapeRef.new(shape: ReplicationInstancePrivateIpAddressList, location_name: "ReplicationInstancePrivateIpAddresses"))
+    ReplicationInstance.add_member(:replication_instance_ipv_6_addresses, Shapes::ShapeRef.new(shape: ReplicationInstanceIpv6AddressList, location_name: "ReplicationInstanceIpv6Addresses"))
     ReplicationInstance.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
     ReplicationInstance.add_member(:secondary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SecondaryAvailabilityZone"))
     ReplicationInstance.add_member(:free_until, Shapes::ShapeRef.new(shape: TStamp, location_name: "FreeUntil"))
     ReplicationInstance.add_member(:dns_name_servers, Shapes::ShapeRef.new(shape: String, location_name: "DnsNameServers"))
+    ReplicationInstance.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     ReplicationInstance.struct_class = Types::ReplicationInstance
+
+    ReplicationInstanceIpv6AddressList.member = Shapes::ShapeRef.new(shape: String)
 
     ReplicationInstanceList.member = Shapes::ShapeRef.new(shape: ReplicationInstance)
 
@@ -1476,6 +1483,7 @@ module Aws::DatabaseMigrationService
     ReplicationPendingModifiedValues.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     ReplicationPendingModifiedValues.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
     ReplicationPendingModifiedValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ReplicationPendingModifiedValues.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     ReplicationPendingModifiedValues.struct_class = Types::ReplicationPendingModifiedValues
 
     ReplicationSubnetGroup.add_member(:replication_subnet_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationSubnetGroupIdentifier"))
@@ -1483,6 +1491,7 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
     ReplicationSubnetGroup.add_member(:subnet_group_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupStatus"))
     ReplicationSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
+    ReplicationSubnetGroup.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
     ReplicationSubnetGroup.struct_class = Types::ReplicationSubnetGroup
 
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1744,6 +1753,10 @@ module Aws::DatabaseMigrationService
     TableStatistics.add_member(:deletes, Shapes::ShapeRef.new(shape: Long, location_name: "Deletes"))
     TableStatistics.add_member(:updates, Shapes::ShapeRef.new(shape: Long, location_name: "Updates"))
     TableStatistics.add_member(:ddls, Shapes::ShapeRef.new(shape: Long, location_name: "Ddls"))
+    TableStatistics.add_member(:applied_inserts, Shapes::ShapeRef.new(shape: LongOptional, location_name: "AppliedInserts"))
+    TableStatistics.add_member(:applied_deletes, Shapes::ShapeRef.new(shape: LongOptional, location_name: "AppliedDeletes"))
+    TableStatistics.add_member(:applied_updates, Shapes::ShapeRef.new(shape: LongOptional, location_name: "AppliedUpdates"))
+    TableStatistics.add_member(:applied_ddls, Shapes::ShapeRef.new(shape: LongOptional, location_name: "AppliedDdls"))
     TableStatistics.add_member(:full_load_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadRows"))
     TableStatistics.add_member(:full_load_condtnl_chk_failed_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadCondtnlChkFailedRows"))
     TableStatistics.add_member(:full_load_error_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadErrorRows"))

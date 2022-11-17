@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-11-17)
+------------------
+
+* Feature - Provides new target group attributes to turn on/off cross zone load balancing and configure target group health for Network Load Balancers and Application Load Balancers. Provides improvements to health check configuration for Network Load Balancers.
+
 1.81.0 (2022-10-25)
 ------------------
 

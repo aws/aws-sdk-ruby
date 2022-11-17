@@ -387,12 +387,28 @@ module Aws::CloudWatchRUM
     # The maximum number of metric definitions that you can specify in one
     # `BatchCreateRumMetricDefinitions` operation is 200.
     #
-    #      <p>The maximum number of metric definitions that one destination can contain is 2000.</p> <p>Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>You must have already created a destination for the metrics before you send them. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p> <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>
+    # The maximum number of metric definitions that one destination can
+    # contain is 2000.
+    #
+    # Extended metrics sent are charged as CloudWatch custom metrics. Each
+    # combination of additional dimension name and dimension value counts as
+    # a custom metric. For more information, see [Amazon CloudWatch
+    # Pricing][3].
+    #
+    # You must have already created a destination for the metrics before you
+    # send them. For more information, see [PutRumMetricsDestination][4].
+    #
+    # If some metric definitions specified in a
+    # `BatchCreateRumMetricDefinitions` operations are not valid, those
+    # metric definitions fail and return errors, but all valid metric
+    # definitions in the same operation still succeed.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html
+    # [3]: https://aws.amazon.com/cloudwatch/pricing/
+    # [4]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html
     #
     # @option params [required, String] :app_monitor_name
     #   The name of the CloudWatch RUM app monitor that is to send the
@@ -640,6 +656,17 @@ module Aws::CloudWatchRUM
     #
     #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
     #
+    # @option params [Types::CustomEvents] :custom_events
+    #   Specifies whether this app monitor allows the web client to define and
+    #   send custom events. If you omit this parameter, custom events are
+    #   `DISABLED`.
+    #
+    #   For more information about custom events, see [Send custom events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #
     # @option params [Boolean] :cw_log_enabled
     #   Data collected by RUM is kept by RUM for 30 days and then deleted.
     #   This parameter specifies whether RUM sends a copy of this telemetry
@@ -666,7 +693,13 @@ module Aws::CloudWatchRUM
     #   Tags don't have any semantic meaning to Amazon Web Services and are
     #   interpreted strictly as strings of characters.
     #
-    #        <p>You can associate as many as 50 tags with an app monitor.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   You can associate as many as 50 tags with an app monitor.
+    #
+    #   For more information, see [Tagging Amazon Web Services resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @return [Types::CreateAppMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -685,6 +718,9 @@ module Aws::CloudWatchRUM
     #       included_pages: ["Url"],
     #       session_sample_rate: 1.0,
     #       telemetries: ["errors"], # accepts errors, performance, http
+    #     },
+    #     custom_events: {
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     cw_log_enabled: false,
     #     domain: "AppMonitorDomain", # required
@@ -798,6 +834,7 @@ module Aws::CloudWatchRUM
     #   resp.app_monitor.app_monitor_configuration.telemetries #=> Array
     #   resp.app_monitor.app_monitor_configuration.telemetries[0] #=> String, one of "errors", "performance", "http"
     #   resp.app_monitor.created #=> String
+    #   resp.app_monitor.custom_events.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.app_monitor.data_storage.cw_log.cw_log_enabled #=> Boolean
     #   resp.app_monitor.data_storage.cw_log.cw_log_group #=> String
     #   resp.app_monitor.domain #=> String
@@ -1238,6 +1275,16 @@ module Aws::CloudWatchRUM
     #
     #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
     #
+    # @option params [Types::CustomEvents] :custom_events
+    #   Specifies whether this app monitor allows the web client to define and
+    #   send custom events. The default is for custom events to be `DISABLED`.
+    #
+    #   For more information about custom events, see [Send custom events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #
     # @option params [Boolean] :cw_log_enabled
     #   Data collected by RUM is kept by RUM for 30 days and then deleted.
     #   This parameter specifies whether RUM sends a copy of this telemetry
@@ -1267,6 +1314,9 @@ module Aws::CloudWatchRUM
     #       included_pages: ["Url"],
     #       session_sample_rate: 1.0,
     #       telemetries: ["errors"], # accepts errors, performance, http
+    #     },
+    #     custom_events: {
+    #       status: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     cw_log_enabled: false,
     #     domain: "AppMonitorDomain",
@@ -1362,7 +1412,7 @@ module Aws::CloudWatchRUM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
