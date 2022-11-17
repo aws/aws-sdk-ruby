@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Use Aws.shared_config when deciding on region in CredentialProviderChain.
 
 3.167.0 (2022-11-09)
 ------------------

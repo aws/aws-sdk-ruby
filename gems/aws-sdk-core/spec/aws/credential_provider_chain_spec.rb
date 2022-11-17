@@ -154,6 +154,17 @@ CREDS
         ENV['AWS_DEFAULT_PROFILE'] = 'BAD_PROFILE'
         validate_credentials(expected_creds)
       end
+
+      describe 'assume role' do
+        it 'uses the shared config region if present' do
+          allow(Aws.shared_config).to receive(:region).and_return('us-east-2')
+          expect(Aws.shared_config).to receive(:region).twice.and_return('us-east-2') #twice because each call below counts for 1
+
+
+          chain.send(:assume_role_with_profile, {}, 'default')
+          chain.send(:assume_role_web_identity_credentials, {})
+        end
+      end
     end
 
     describe 'with multiple sources of credentials' do
