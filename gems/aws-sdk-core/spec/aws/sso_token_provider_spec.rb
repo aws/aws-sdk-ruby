@@ -62,7 +62,9 @@ module Aws
 
       it 'constructs an client with passed arguments when not given' do
         expect(SSOOIDC::Client).to receive(:new)
-                                 .with({region: sso_region, credentials: nil})
+                                 .with({region: sso_region,
+                                        credentials: nil,
+                                        token_provider: nil})
                                  .and_return(client)
 
         mock_token_file(sso_session, cached_token)
@@ -79,7 +81,9 @@ module Aws
 
       it 'raises an InvalidSSOToken error when  token file is missing' do
         expect(SSOOIDC::Client).to receive(:new)
-                                     .with({region: sso_region, credentials: nil})
+                                     .with({region: sso_region,
+                                            credentials: nil,
+                                            token_provider: nil})
                                      .and_return(client)
 
         sso_session_sha1 = OpenSSL::Digest::SHA1.hexdigest(sso_session.encode('utf-8'))
