@@ -39,6 +39,7 @@ module Aws
 
       options[:region] = @sso_region
       options[:credentials] = nil
+      options[:token_provider] = nil
       @client = options[:client] || Aws::SSOOIDC::Client.new(options)
 
       super
