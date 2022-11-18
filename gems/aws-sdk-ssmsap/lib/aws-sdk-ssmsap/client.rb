@@ -368,6 +368,8 @@ module Aws::SsmSap
 
     # @!group API Operations
 
+    # Removes permissions associated with the target database.
+    #
     # @option params [String] :action_type
     #
     # @option params [String] :source_resource_arn
@@ -390,7 +392,7 @@ module Aws::SsmSap
     #
     #   resp.policy #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DeleteResourcePermission AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeleteResourcePermission AWS API Documentation
     #
     # @overload delete_resource_permission(params = {})
     # @param [Hash] params ({})
@@ -399,6 +401,10 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Deregister an SAP application with AWS Systems Manager for SAP. This
+    # action does not aﬀect the existing setup of your SAP workloads on
+    # Amazon EC2.
+    #
     # @option params [required, String] :application_id
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -409,7 +415,7 @@ module Aws::SsmSap
     #     application_id: "ApplicationId", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DeregisterApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeregisterApplication AWS API Documentation
     #
     # @overload deregister_application(params = {})
     # @param [Hash] params ({})
@@ -418,6 +424,9 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Gets an application registered with AWS Systems Manager for SAP. It
+    # also returns the components of the application.
+    #
     # @option params [String] :application_id
     #
     # @option params [String] :application_arn
@@ -448,7 +457,7 @@ module Aws::SsmSap
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetApplication AWS API Documentation
     #
     # @overload get_application(params = {})
     # @param [Hash] params ({})
@@ -457,6 +466,9 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Gets the component of an application registered with AWS Systems
+    # Manager for SAP.
+    #
     # @option params [required, String] :application_id
     #
     # @option params [required, String] :component_id
@@ -488,7 +500,7 @@ module Aws::SsmSap
     #   resp.component.primary_host #=> String
     #   resp.component.last_updated #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetComponent AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponent AWS API Documentation
     #
     # @overload get_component(params = {})
     # @param [Hash] params ({})
@@ -497,6 +509,9 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Gets the SAP HANA database of an application registered with AWS
+    # Systems Manager for SAP.
+    #
     # @option params [String] :application_id
     #
     # @option params [String] :component_id
@@ -538,7 +553,7 @@ module Aws::SsmSap
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetDatabase AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetDatabase AWS API Documentation
     #
     # @overload get_database(params = {})
     # @param [Hash] params ({})
@@ -547,6 +562,8 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Gets the details of an operation by specifying the operation ID.
+    #
     # @option params [required, String] :operation_id
     #
     # @return [Types::GetOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -574,7 +591,7 @@ module Aws::SsmSap
     #   resp.operation.end_time #=> Time
     #   resp.operation.last_updated_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetOperation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetOperation AWS API Documentation
     #
     # @overload get_operation(params = {})
     # @param [Hash] params ({})
@@ -583,6 +600,8 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Gets permissions associated with the target database.
+    #
     # @option params [String] :action_type
     #
     # @option params [required, String] :resource_arn
@@ -602,7 +621,7 @@ module Aws::SsmSap
     #
     #   resp.policy #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetResourcePermission AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetResourcePermission AWS API Documentation
     #
     # @overload get_resource_permission(params = {})
     # @param [Hash] params ({})
@@ -611,6 +630,9 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Lists all the applications registered with AWS Systems Manager for
+    # SAP.
+    #
     # @option params [String] :next_token
     #
     # @option params [Integer] :max_results
@@ -639,7 +661,7 @@ module Aws::SsmSap
     #   resp.applications[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListApplications AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListApplications AWS API Documentation
     #
     # @overload list_applications(params = {})
     # @param [Hash] params ({})
@@ -648,6 +670,8 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Lists all the components registered with AWS Systems Manager for SAP.
+    #
     # @option params [String] :application_id
     #
     # @option params [String] :next_token
@@ -679,7 +703,7 @@ module Aws::SsmSap
     #   resp.components[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListComponents AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListComponents AWS API Documentation
     #
     # @overload list_components(params = {})
     # @param [Hash] params ({})
@@ -688,6 +712,9 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Lists the SAP HANA databases of an application registered with AWS
+    # Systems Manager for SAP.
+    #
     # @option params [String] :application_id
     #
     # @option params [String] :component_id
@@ -724,7 +751,7 @@ module Aws::SsmSap
     #   resp.databases[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListDatabases AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListDatabases AWS API Documentation
     #
     # @overload list_databases(params = {})
     # @param [Hash] params ({})
@@ -733,6 +760,9 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Lists all tags on an SAP HANA application and/or database registered
+    # with AWS Systems Manager for SAP.
+    #
     # @option params [required, String] :resource_arn
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -750,7 +780,7 @@ module Aws::SsmSap
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListTagsForResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -759,6 +789,8 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Adds permissions to the target database.
+    #
     # @option params [required, String] :action_type
     #
     # @option params [required, String] :source_resource_arn
@@ -781,7 +813,7 @@ module Aws::SsmSap
     #
     #   resp.policy #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/PutResourcePermission AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/PutResourcePermission AWS API Documentation
     #
     # @overload put_resource_permission(params = {})
     # @param [Hash] params ({})
@@ -790,6 +822,18 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Register an SAP application with AWS Systems Manager for SAP. You must
+    # meet the following requirements before registering.
+    #
+    # The SAP application you want to register with AWS Systems Manager for
+    # SAP is running on Amazon EC2.
+    #
+    # AWS Systems Manager Agent must be setup on an Amazon EC2 instance
+    # along with the required IAM permissions.
+    #
+    # Amazon EC2 instance(s) must have access to the secrets created in AWS
+    # Secrets Manager to manage SAP applications and components.
+    #
     # @option params [required, String] :application_id
     #
     # @option params [required, String] :application_type
@@ -842,7 +886,7 @@ module Aws::SsmSap
     #   resp.application.status_message #=> String
     #   resp.operation_id #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/RegisterApplication AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RegisterApplication AWS API Documentation
     #
     # @overload register_application(params = {})
     # @param [Hash] params ({})
@@ -851,6 +895,8 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Creates tag for a resource by specifying the ARN.
+    #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Hash<String,String>] :tags
@@ -866,7 +912,7 @@ module Aws::SsmSap
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/TagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/TagResource AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -875,9 +921,13 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Delete the tags for a resource.
+    #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Array<String>] :tag_keys
+    #   Adds/updates or removes credentials for applications registered with
+    #   AWS Systems Manager for SAP.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -888,7 +938,7 @@ module Aws::SsmSap
     #     tag_keys: ["TagKey"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/UntagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -934,7 +984,7 @@ module Aws::SsmSap
     #   resp.operation_ids #=> Array
     #   resp.operation_ids[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/UpdateApplicationSettings AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UpdateApplicationSettings AWS API Documentation
     #
     # @overload update_application_settings(params = {})
     # @param [Hash] params ({})
@@ -956,7 +1006,7 @@ module Aws::SsmSap
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

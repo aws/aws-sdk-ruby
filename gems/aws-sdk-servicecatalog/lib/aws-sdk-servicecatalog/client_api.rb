@@ -49,6 +49,8 @@ module Aws::ServiceCatalog
     CloudWatchDashboard = Shapes::StructureShape.new(name: 'CloudWatchDashboard')
     CloudWatchDashboardName = Shapes::StringShape.new(name: 'CloudWatchDashboardName')
     CloudWatchDashboards = Shapes::ListShape.new(name: 'CloudWatchDashboards')
+    CodeStarConnectionArn = Shapes::StringShape.new(name: 'CodeStarConnectionArn')
+    CodeStarParameters = Shapes::StructureShape.new(name: 'CodeStarParameters')
     ConstraintDescription = Shapes::StringShape.new(name: 'ConstraintDescription')
     ConstraintDetail = Shapes::StructureShape.new(name: 'ConstraintDetail')
     ConstraintDetails = Shapes::ListShape.new(name: 'ConstraintDetails')
@@ -178,6 +180,11 @@ module Aws::ServiceCatalog
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     LastRequestId = Shapes::StringShape.new(name: 'LastRequestId')
+    LastSuccessfulSyncTime = Shapes::TimestampShape.new(name: 'LastSuccessfulSyncTime')
+    LastSync = Shapes::StructureShape.new(name: 'LastSync')
+    LastSyncStatus = Shapes::StringShape.new(name: 'LastSyncStatus')
+    LastSyncStatusMessage = Shapes::StringShape.new(name: 'LastSyncStatusMessage')
+    LastSyncTime = Shapes::TimestampShape.new(name: 'LastSyncTime')
     LaunchPath = Shapes::StructureShape.new(name: 'LaunchPath')
     LaunchPathSummaries = Shapes::ListShape.new(name: 'LaunchPathSummaries')
     LaunchPathSummary = Shapes::StructureShape.new(name: 'LaunchPathSummary')
@@ -352,6 +359,9 @@ module Aws::ServiceCatalog
     RejectPortfolioShareInput = Shapes::StructureShape.new(name: 'RejectPortfolioShareInput')
     RejectPortfolioShareOutput = Shapes::StructureShape.new(name: 'RejectPortfolioShareOutput')
     Replacement = Shapes::StringShape.new(name: 'Replacement')
+    Repository = Shapes::StringShape.new(name: 'Repository')
+    RepositoryArtifactPath = Shapes::StringShape.new(name: 'RepositoryArtifactPath')
+    RepositoryBranch = Shapes::StringShape.new(name: 'RepositoryBranch')
     RequiresRecreation = Shapes::StringShape.new(name: 'RequiresRecreation')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceAttribute = Shapes::StringShape.new(name: 'ResourceAttribute')
@@ -404,8 +414,13 @@ module Aws::ServiceCatalog
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SortField = Shapes::StringShape.new(name: 'SortField')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SourceConnection = Shapes::StructureShape.new(name: 'SourceConnection')
+    SourceConnectionDetail = Shapes::StructureShape.new(name: 'SourceConnectionDetail')
+    SourceConnectionParameters = Shapes::StructureShape.new(name: 'SourceConnectionParameters')
     SourceProvisioningArtifactProperties = Shapes::ListShape.new(name: 'SourceProvisioningArtifactProperties')
     SourceProvisioningArtifactPropertiesMap = Shapes::MapShape.new(name: 'SourceProvisioningArtifactPropertiesMap')
+    SourceRevision = Shapes::StringShape.new(name: 'SourceRevision')
+    SourceType = Shapes::StringShape.new(name: 'SourceType')
     StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
     StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
     StackInstances = Shapes::ListShape.new(name: 'StackInstances')
@@ -548,6 +563,12 @@ module Aws::ServiceCatalog
 
     CloudWatchDashboards.member = Shapes::ShapeRef.new(shape: CloudWatchDashboard)
 
+    CodeStarParameters.add_member(:connection_arn, Shapes::ShapeRef.new(shape: CodeStarConnectionArn, required: true, location_name: "ConnectionArn"))
+    CodeStarParameters.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "Repository"))
+    CodeStarParameters.add_member(:branch, Shapes::ShapeRef.new(shape: RepositoryBranch, required: true, location_name: "Branch"))
+    CodeStarParameters.add_member(:artifact_path, Shapes::ShapeRef.new(shape: RepositoryArtifactPath, required: true, location_name: "ArtifactPath"))
+    CodeStarParameters.struct_class = Types::CodeStarParameters
+
     ConstraintDetail.add_member(:constraint_id, Shapes::ShapeRef.new(shape: Id, location_name: "ConstraintId"))
     ConstraintDetail.add_member(:type, Shapes::ShapeRef.new(shape: ConstraintType, location_name: "Type"))
     ConstraintDetail.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
@@ -609,6 +630,7 @@ module Aws::ServiceCatalog
     CreatePortfolioShareInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     CreatePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
     CreatePortfolioShareInput.add_member(:share_tag_options, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShareTagOptions"))
+    CreatePortfolioShareInput.add_member(:share_principals, Shapes::ShapeRef.new(shape: Boolean, location_name: "SharePrincipals"))
     CreatePortfolioShareInput.struct_class = Types::CreatePortfolioShareInput
 
     CreatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
@@ -624,8 +646,9 @@ module Aws::ServiceCatalog
     CreateProductInput.add_member(:support_url, Shapes::ShapeRef.new(shape: SupportUrl, location_name: "SupportUrl"))
     CreateProductInput.add_member(:product_type, Shapes::ShapeRef.new(shape: ProductType, required: true, location_name: "ProductType"))
     CreateProductInput.add_member(:tags, Shapes::ShapeRef.new(shape: AddTags, location_name: "Tags"))
-    CreateProductInput.add_member(:provisioning_artifact_parameters, Shapes::ShapeRef.new(shape: ProvisioningArtifactProperties, required: true, location_name: "ProvisioningArtifactParameters"))
+    CreateProductInput.add_member(:provisioning_artifact_parameters, Shapes::ShapeRef.new(shape: ProvisioningArtifactProperties, location_name: "ProvisioningArtifactParameters"))
     CreateProductInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateProductInput.add_member(:source_connection, Shapes::ShapeRef.new(shape: SourceConnection, location_name: "SourceConnection"))
     CreateProductInput.struct_class = Types::CreateProductInput
 
     CreateProductOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))
@@ -910,6 +933,7 @@ module Aws::ServiceCatalog
     DisassociatePrincipalFromPortfolioInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DisassociatePrincipalFromPortfolioInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
     DisassociatePrincipalFromPortfolioInput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalARN, required: true, location_name: "PrincipalARN"))
+    DisassociatePrincipalFromPortfolioInput.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
     DisassociatePrincipalFromPortfolioInput.struct_class = Types::DisassociatePrincipalFromPortfolioInput
 
     DisassociatePrincipalFromPortfolioOutput.struct_class = Types::DisassociatePrincipalFromPortfolioOutput
@@ -1011,6 +1035,13 @@ module Aws::ServiceCatalog
     InvalidParametersException.struct_class = Types::InvalidParametersException
 
     InvalidStateException.struct_class = Types::InvalidStateException
+
+    LastSync.add_member(:last_sync_time, Shapes::ShapeRef.new(shape: LastSyncTime, location_name: "LastSyncTime"))
+    LastSync.add_member(:last_sync_status, Shapes::ShapeRef.new(shape: LastSyncStatus, location_name: "LastSyncStatus"))
+    LastSync.add_member(:last_sync_status_message, Shapes::ShapeRef.new(shape: LastSyncStatusMessage, location_name: "LastSyncStatusMessage"))
+    LastSync.add_member(:last_successful_sync_time, Shapes::ShapeRef.new(shape: LastSuccessfulSyncTime, location_name: "LastSuccessfulSyncTime"))
+    LastSync.add_member(:last_successful_sync_provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "LastSuccessfulSyncProvisioningArtifactId"))
+    LastSync.struct_class = Types::LastSync
 
     LaunchPath.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     LaunchPath.add_member(:name, Shapes::ShapeRef.new(shape: PortfolioName, location_name: "Name"))
@@ -1255,6 +1286,7 @@ module Aws::ServiceCatalog
     PortfolioShareDetail.add_member(:type, Shapes::ShapeRef.new(shape: DescribePortfolioShareType, location_name: "Type"))
     PortfolioShareDetail.add_member(:accepted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Accepted"))
     PortfolioShareDetail.add_member(:share_tag_options, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShareTagOptions"))
+    PortfolioShareDetail.add_member(:share_principals, Shapes::ShapeRef.new(shape: Boolean, location_name: "SharePrincipals"))
     PortfolioShareDetail.struct_class = Types::PortfolioShareDetail
 
     PortfolioShareDetails.member = Shapes::ShapeRef.new(shape: PortfolioShareDetail)
@@ -1278,6 +1310,7 @@ module Aws::ServiceCatalog
     ProductViewDetail.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     ProductViewDetail.add_member(:product_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ProductARN"))
     ProductViewDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
+    ProductViewDetail.add_member(:source_connection, Shapes::ShapeRef.new(shape: SourceConnectionDetail, location_name: "SourceConnection"))
     ProductViewDetail.struct_class = Types::ProductViewDetail
 
     ProductViewDetails.member = Shapes::ShapeRef.new(shape: ProductViewDetail)
@@ -1410,6 +1443,7 @@ module Aws::ServiceCatalog
     ProvisioningArtifactDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreatedTime"))
     ProvisioningArtifactDetail.add_member(:active, Shapes::ShapeRef.new(shape: ProvisioningArtifactActive, location_name: "Active"))
     ProvisioningArtifactDetail.add_member(:guidance, Shapes::ShapeRef.new(shape: ProvisioningArtifactGuidance, location_name: "Guidance"))
+    ProvisioningArtifactDetail.add_member(:source_revision, Shapes::ShapeRef.new(shape: SourceRevision, location_name: "SourceRevision"))
     ProvisioningArtifactDetail.struct_class = Types::ProvisioningArtifactDetail
 
     ProvisioningArtifactDetails.member = Shapes::ShapeRef.new(shape: ProvisioningArtifactDetail)
@@ -1439,7 +1473,7 @@ module Aws::ServiceCatalog
 
     ProvisioningArtifactProperties.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "Name"))
     ProvisioningArtifactProperties.add_member(:description, Shapes::ShapeRef.new(shape: ProvisioningArtifactDescription, location_name: "Description"))
-    ProvisioningArtifactProperties.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, required: true, location_name: "Info"))
+    ProvisioningArtifactProperties.add_member(:info, Shapes::ShapeRef.new(shape: ProvisioningArtifactInfo, location_name: "Info"))
     ProvisioningArtifactProperties.add_member(:type, Shapes::ShapeRef.new(shape: ProvisioningArtifactType, location_name: "Type"))
     ProvisioningArtifactProperties.add_member(:disable_template_validation, Shapes::ShapeRef.new(shape: DisableTemplateValidation, location_name: "DisableTemplateValidation"))
     ProvisioningArtifactProperties.struct_class = Types::ProvisioningArtifactProperties
@@ -1641,6 +1675,18 @@ module Aws::ServiceCatalog
 
     ShareErrors.member = Shapes::ShapeRef.new(shape: ShareError)
 
+    SourceConnection.add_member(:type, Shapes::ShapeRef.new(shape: SourceType, location_name: "Type"))
+    SourceConnection.add_member(:connection_parameters, Shapes::ShapeRef.new(shape: SourceConnectionParameters, required: true, location_name: "ConnectionParameters"))
+    SourceConnection.struct_class = Types::SourceConnection
+
+    SourceConnectionDetail.add_member(:type, Shapes::ShapeRef.new(shape: SourceType, location_name: "Type"))
+    SourceConnectionDetail.add_member(:connection_parameters, Shapes::ShapeRef.new(shape: SourceConnectionParameters, location_name: "ConnectionParameters"))
+    SourceConnectionDetail.add_member(:last_sync, Shapes::ShapeRef.new(shape: LastSync, location_name: "LastSync"))
+    SourceConnectionDetail.struct_class = Types::SourceConnectionDetail
+
+    SourceConnectionParameters.add_member(:code_star, Shapes::ShapeRef.new(shape: CodeStarParameters, location_name: "CodeStar"))
+    SourceConnectionParameters.struct_class = Types::SourceConnectionParameters
+
     SourceProvisioningArtifactProperties.member = Shapes::ShapeRef.new(shape: SourceProvisioningArtifactPropertiesMap)
 
     SourceProvisioningArtifactPropertiesMap.key = Shapes::ShapeRef.new(shape: ProvisioningArtifactPropertyName)
@@ -1726,6 +1772,7 @@ module Aws::ServiceCatalog
     UpdatePortfolioShareInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     UpdatePortfolioShareInput.add_member(:organization_node, Shapes::ShapeRef.new(shape: OrganizationNode, location_name: "OrganizationNode"))
     UpdatePortfolioShareInput.add_member(:share_tag_options, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ShareTagOptions"))
+    UpdatePortfolioShareInput.add_member(:share_principals, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "SharePrincipals"))
     UpdatePortfolioShareInput.struct_class = Types::UpdatePortfolioShareInput
 
     UpdatePortfolioShareOutput.add_member(:portfolio_share_token, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioShareToken"))
@@ -1743,6 +1790,7 @@ module Aws::ServiceCatalog
     UpdateProductInput.add_member(:support_url, Shapes::ShapeRef.new(shape: SupportUrl, location_name: "SupportUrl"))
     UpdateProductInput.add_member(:add_tags, Shapes::ShapeRef.new(shape: AddTags, location_name: "AddTags"))
     UpdateProductInput.add_member(:remove_tags, Shapes::ShapeRef.new(shape: TagKeys, location_name: "RemoveTags"))
+    UpdateProductInput.add_member(:source_connection, Shapes::ShapeRef.new(shape: SourceConnection, location_name: "SourceConnection"))
     UpdateProductInput.struct_class = Types::UpdateProductInput
 
     UpdateProductOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))

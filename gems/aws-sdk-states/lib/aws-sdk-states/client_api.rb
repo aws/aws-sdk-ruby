@@ -100,6 +100,7 @@ module Aws::States
     LogDestinationList = Shapes::ListShape.new(name: 'LogDestinationList')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
+    LongArn = Shapes::StringShape.new(name: 'LongArn')
     MapIterationEventDetails = Shapes::StructureShape.new(name: 'MapIterationEventDetails')
     MapStateStartedEventDetails = Shapes::StructureShape.new(name: 'MapStateStartedEventDetails')
     MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
@@ -143,6 +144,7 @@ module Aws::States
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaskCredentials = Shapes::StructureShape.new(name: 'TaskCredentials')
     TaskDoesNotExist = Shapes::StructureShape.new(name: 'TaskDoesNotExist')
     TaskFailedEventDetails = Shapes::StructureShape.new(name: 'TaskFailedEventDetails')
     TaskScheduledEventDetails = Shapes::StructureShape.new(name: 'TaskScheduledEventDetails')
@@ -438,6 +440,7 @@ module Aws::States
     LambdaFunctionScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     LambdaFunctionScheduledEventDetails.add_member(:input_details, Shapes::ShapeRef.new(shape: HistoryEventExecutionDataDetails, location_name: "inputDetails"))
     LambdaFunctionScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
+    LambdaFunctionScheduledEventDetails.add_member(:task_credentials, Shapes::ShapeRef.new(shape: TaskCredentials, location_name: "taskCredentials"))
     LambdaFunctionScheduledEventDetails.struct_class = Types::LambdaFunctionScheduledEventDetails
 
     LambdaFunctionStartFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
@@ -613,6 +616,9 @@ module Aws::States
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
+    TaskCredentials.add_member(:role_arn, Shapes::ShapeRef.new(shape: LongArn, location_name: "roleArn"))
+    TaskCredentials.struct_class = Types::TaskCredentials
+
     TaskDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TaskDoesNotExist.struct_class = Types::TaskDoesNotExist
 
@@ -628,6 +634,7 @@ module Aws::States
     TaskScheduledEventDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: ConnectorParameters, required: true, location_name: "parameters"))
     TaskScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
     TaskScheduledEventDetails.add_member(:heartbeat_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "heartbeatInSeconds", metadata: {"box"=>true}))
+    TaskScheduledEventDetails.add_member(:task_credentials, Shapes::ShapeRef.new(shape: TaskCredentials, location_name: "taskCredentials"))
     TaskScheduledEventDetails.struct_class = Types::TaskScheduledEventDetails
 
     TaskStartFailedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))

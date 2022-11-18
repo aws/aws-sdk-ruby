@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2022-11-18)
+------------------
+
+* Feature - Added DisableProfiler flag as a new field in ProfilerConfig
+
 1.152.0 (2022-11-03)
 ------------------
 

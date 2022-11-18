@@ -145,6 +145,14 @@ module Aws::QuickSight
     #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] termination_protection_enabled
+    #   A boolean value that determines whether or not an Amazon QuickSight
+    #   account can be deleted. A `True` value doesn't allow the account to
+    #   be deleted and results in an error message if a user tries to make a
+    #   `DeleteAccountSubsctiption` request. A `False` value will allow the
+    #   ccount to be deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
@@ -152,7 +160,8 @@ module Aws::QuickSight
       :edition,
       :default_namespace,
       :notification_email,
-      :public_sharing_enabled)
+      :public_sharing_enabled,
+      :termination_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -324,19 +333,63 @@ module Aws::QuickSight
     #   data as a hash:
     #
     #       {
-    #         operator: "StringEquals", # accepts StringEquals
-    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         operator: "StringEquals", # accepts StringEquals, StringLike
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER, QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, ANALYSIS_NAME
     #         value: "String",
     #       }
     #
     # @!attribute [rw] operator
     #   The comparison operator that you want to use as a filter, for
-    #   example `"Operator": "StringEquals"`.
+    #   example `"Operator": "StringEquals"`. Valid values are
+    #   `"StringEquals"` and `"StringLike"`.
+    #
+    #   If you set the operator value to `"StringEquals"`, you need to
+    #   provide an ownership related filter in the `"NAME"` field and the
+    #   arn of the user or group whose folders you want to search in the
+    #   `"Value"` field. For example, `"Name":"DIRECT_QUICKSIGHT_OWNER",
+    #   "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #
+    #   If you set the value to `"StringLike"`, you need to provide the name
+    #   of the folders you are searching for. For example,
+    #   `"Name":"ANALYSIS_NAME", "Operator": "StringLike", "Value": "Test"`.
+    #   The `"StringLike"` operator only supports the `NAME` value
+    #   `ANALYSIS_NAME`.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the value that you want to use as a filter, for example
-    #   `"Name": "QUICKSIGHT_USER"`.
+    #   `"Name": "QUICKSIGHT_OWNER"`.
+    #
+    #   Valid values are defined as follows:
+    #
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #     and any analyses with that ARN listed as one of the analysis'
+    #     owners or viewers are returned. Implicit permissions from folders
+    #     or groups are considered.
+    #
+    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #     analyses with that ARN listed as one of the owners of the analyses
+    #     are returned. Implicit permissions from folders or groups are
+    #     considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
+    #     group, and any analyses with that ARN listed as the only owner of
+    #     the analysis are returned. Implicit permissions from folders or
+    #     groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #     any analyses with that ARN listed as one of the owners of the
+    #     analyses are returned. Implicit permissions from folders or groups
+    #     are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #     group, and any analyses with that ARN listed as one of the owners
+    #     or viewers of the analyses are returned. Implicit permissions from
+    #     folders or groups are not considered.
+    #
+    #   * `ANALYSIS_NAME`\: Any analyses whose names have a substring match
+    #     to this value will be returned.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -534,6 +587,9 @@ module Aws::QuickSight
     #             visual_id: "RestrictiveResourceId", # required
     #           },
     #         },
+    #         q_search_bar: {
+    #           initial_topic_id: "RestrictiveResourceId", # required
+    #         },
     #       }
     #
     # @!attribute [rw] dashboard
@@ -546,11 +602,44 @@ module Aws::QuickSight
     #   visuals.
     #   @return [Types::AnonymousUserDashboardVisualEmbeddingConfiguration]
     #
+    # @!attribute [rw] q_search_bar
+    #   The Q search bar that you want to use for anonymous user embedding.
+    #   @return [Types::AnonymousUserQSearchBarEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class AnonymousUserEmbeddingExperienceConfiguration < Struct.new(
       :dashboard,
-      :dashboard_visual)
+      :dashboard_visual,
+      :q_search_bar)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings that you want to use with the Q search bar.
+    #
+    # @note When making an API call, you may pass AnonymousUserQSearchBarEmbeddingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         initial_topic_id: "RestrictiveResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] initial_topic_id
+    #   The QuickSight Q topic ID of the topic that you want the anonymous
+    #   user to see first. This ID is included in the output URL. When the
+    #   URL in response is accessed, Amazon QuickSight renders the Q search
+    #   bar with this topic pre-selected.
+    #
+    #   The Amazon Resource Name (ARN) of this Q topic must be included in
+    #   the `AuthorizedResourceArns` parameter. Otherwise, the request will
+    #   fail with `InvalidParameterValueException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserQSearchBarEmbeddingConfiguration AWS API Documentation
+    #
+    class AnonymousUserQSearchBarEmbeddingConfiguration < Struct.new(
+      :initial_topic_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -562,16 +651,28 @@ module Aws::QuickSight
     #
     #       {
     #         work_group: "WorkGroup",
+    #         role_arn: "RoleArn",
     #       }
     #
     # @!attribute [rw] work_group
     #   The workgroup that Amazon Athena uses.
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   Use the `RoleArn` structure to override an account-wide role for a
+    #   specific Athena data source. For example, say an account
+    #   administrator has turned off all Athena access with an account-wide
+    #   role. The administrator can then use `RoleArn` to bypass the
+    #   account-wide role and allow Athena access for the single Athena data
+    #   source that is specified in the structure, even if the account-wide
+    #   role forbidding Athena access is still active.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AthenaParameters AWS API Documentation
     #
     class AthenaParameters < Struct.new(
-      :work_group)
+      :work_group,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1998,13 +2099,14 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         data_source_id: "ResourceId", # required
     #         name: "ResourceName", # required
-    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL
+    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL, DATABRICKS
     #         data_source_parameters: {
     #           amazon_elasticsearch_parameters: {
     #             domain: "Domain", # required
     #           },
     #           athena_parameters: {
     #             work_group: "WorkGroup",
+    #             role_arn: "RoleArn",
     #           },
     #           aurora_parameters: {
     #             host: "Host", # required
@@ -2096,6 +2198,11 @@ module Aws::QuickSight
     #             host: "Host", # required
     #             port: 1, # required
     #           },
+    #           databricks_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             sql_endpoint_path: "SqlEndpointPath", # required
+    #           },
     #         },
     #         credentials: {
     #           credential_pair: {
@@ -2108,6 +2215,7 @@ module Aws::QuickSight
     #                 },
     #                 athena_parameters: {
     #                   work_group: "WorkGroup",
+    #                   role_arn: "RoleArn",
     #                 },
     #                 aurora_parameters: {
     #                   host: "Host", # required
@@ -2198,6 +2306,11 @@ module Aws::QuickSight
     #                 exasol_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
+    #                 },
+    #                 databricks_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   sql_endpoint_path: "SqlEndpointPath", # required
     #                 },
     #               },
     #             ],
@@ -3325,6 +3438,7 @@ module Aws::QuickSight
     #             },
     #             athena_parameters: {
     #               work_group: "WorkGroup",
+    #               role_arn: "RoleArn",
     #             },
     #             aurora_parameters: {
     #               host: "Host", # required
@@ -3415,6 +3529,11 @@ module Aws::QuickSight
     #             exasol_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
+    #             },
+    #             databricks_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
     #           },
     #         ],
@@ -3604,19 +3723,63 @@ module Aws::QuickSight
     #   data as a hash:
     #
     #       {
-    #         operator: "StringEquals", # required, accepts StringEquals
-    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER, QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DASHBOARD_NAME
     #         value: "String",
     #       }
     #
     # @!attribute [rw] operator
     #   The comparison operator that you want to use as a filter, for
-    #   example, `"Operator": "StringEquals"`.
+    #   example `"Operator": "StringEquals"`. Valid values are
+    #   `"StringEquals"` and `"StringLike"`.
+    #
+    #   If you set the operator value to `"StringEquals"`, you need to
+    #   provide an ownership related filter in the `"NAME"` field and the
+    #   arn of the user or group whose folders you want to search in the
+    #   `"Value"` field. For example, `"Name":"DIRECT_QUICKSIGHT_OWNER",
+    #   "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #
+    #   If you set the value to `"StringLike"`, you need to provide the name
+    #   of the folders you are searching for. For example,
+    #   `"Name":"DASHBOARD_NAME", "Operator": "StringLike", "Value":
+    #   "Test"`. The `"StringLike"` operator only supports the `NAME` value
+    #   `DASHBOARD_NAME`.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of the value that you want to use as a filter, for example,
-    #   `"Name": "QUICKSIGHT_USER"`.
+    #   `"Name": "QUICKSIGHT_OWNER"`.
+    #
+    #   Valid values are defined as follows:
+    #
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #     and any dashboards with that ARN listed as one of the
+    #     dashboards's owners or viewers are returned. Implicit permissions
+    #     from folders or groups are considered.
+    #
+    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #     dashboards with that ARN listed as one of the owners of the
+    #     dashboards are returned. Implicit permissions from folders or
+    #     groups are considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
+    #     group, and any dashboards with that ARN listed as the only owner
+    #     of the dashboard are returned. Implicit permissions from folders
+    #     or groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #     any dashboards with that ARN listed as one of the owners of the
+    #     dashboards are returned. Implicit permissions from folders or
+    #     groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #     group, and any dashboards with that ARN listed as one of the
+    #     owners or viewers of the dashboards are returned. Implicit
+    #     permissions from folders or groups are not considered.
+    #
+    #   * `DASHBOARD_NAME`\: Any dashboards whose names have a substring
+    #     match to this value will be returned.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4094,6 +4257,87 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A filter that you apply when searching for datasets.
+    #
+    # @note When making an API call, you may pass DataSetSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         name: "QUICKSIGHT_VIEWER_OR_OWNER", # required, accepts QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DATASET_NAME
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter, for
+    #   example `"Operator": "StringEquals"`. Valid values are
+    #   `"StringEquals"` and `"StringLike"`.
+    #
+    #   If you set the operator value to `"StringEquals"`, you need to
+    #   provide an ownership related filter in the `"NAME"` field and the
+    #   arn of the user or group whose datasets you want to search in the
+    #   `"Value"` field. For example, `"Name":"QUICKSIGHT_OWNER",
+    #   "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-
+    #   1:1:user/default/UserName1"`.
+    #
+    #   If you set the value to `"StringLike"`, you need to provide the name
+    #   of the datasets you are searching for. For example,
+    #   `"Name":"DATASET_NAME", "Operator": "StringLike", "Value": "Test"`.
+    #   The `"StringLike"` operator only supports the `NAME` value
+    #   `DATASET_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter, for example,
+    #   `"Name": "QUICKSIGHT_OWNER"`.
+    #
+    #   Valid values are defined as follows:
+    #
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #     and any datasets with that ARN listed as one of the dataset owners
+    #     or viewers are returned. Implicit permissions from folders or
+    #     groups are considered.
+    #
+    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #     datasets with that ARN listed as one of the owners of the dataset
+    #     are returned. Implicit permissions from folders or groups are
+    #     considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
+    #     group, and any datasets with that ARN listed as the only owner of
+    #     the dataset are returned. Implicit permissions from folders or
+    #     groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #     any datasets with that ARN listed as one of the owners if the
+    #     dataset are returned. Implicit permissions from folders or groups
+    #     are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #     group, and any datasets with that ARN listed as one of the owners
+    #     or viewers of the dataset are returned. Implicit permissions from
+    #     folders or groups are not considered.
+    #
+    #   * `DATASET_NAME`\: Any datasets whose names have a substring match
+    #     to this value will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item, in this case `QUICKSIGHT_OWNER`, that
+    #   you want to use as a filter, for example, `"Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSearchFilter AWS API Documentation
+    #
+    class DataSetSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Dataset summary.
     #
     # @!attribute [rw] arn
@@ -4290,6 +4534,7 @@ module Aws::QuickSight
     #               },
     #               athena_parameters: {
     #                 work_group: "WorkGroup",
+    #                 role_arn: "RoleArn",
     #               },
     #               aurora_parameters: {
     #                 host: "Host", # required
@@ -4381,6 +4626,11 @@ module Aws::QuickSight
     #                 host: "Host", # required
     #                 port: 1, # required
     #               },
+    #               databricks_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 sql_endpoint_path: "SqlEndpointPath", # required
+    #               },
     #             },
     #           ],
     #         },
@@ -4446,6 +4696,7 @@ module Aws::QuickSight
     #         },
     #         athena_parameters: {
     #           work_group: "WorkGroup",
+    #           role_arn: "RoleArn",
     #         },
     #         aurora_parameters: {
     #           host: "Host", # required
@@ -4537,6 +4788,11 @@ module Aws::QuickSight
     #           host: "Host", # required
     #           port: 1, # required
     #         },
+    #         databricks_parameters: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           sql_endpoint_path: "SqlEndpointPath", # required
+    #         },
     #       }
     #
     # @!attribute [rw] amazon_elasticsearch_parameters
@@ -4627,6 +4883,11 @@ module Aws::QuickSight
     #   The parameters for Exasol.
     #   @return [Types::ExasolParameters]
     #
+    # @!attribute [rw] databricks_parameters
+    #   The required parameters that are needed to connect to a Databricks
+    #   data source.
+    #   @return [Types::DatabricksParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
     class DataSourceParameters < Struct.new(
@@ -4651,7 +4912,154 @@ module Aws::QuickSight
       :teradata_parameters,
       :twitter_parameters,
       :amazon_open_search_parameters,
-      :exasol_parameters)
+      :exasol_parameters,
+      :databricks_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that you apply when searching for data sources.
+    #
+    # @note When making an API call, you may pass DataSourceSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         name: "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER", # required, accepts DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DATASOURCE_NAME
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter, for
+    #   example `"Operator": "StringEquals"`. Valid values are
+    #   `"StringEquals"` and `"StringLike"`.
+    #
+    #   If you set the operator value to `"StringEquals"`, you need to
+    #   provide an ownership related filter in the `"NAME"` field and the
+    #   arn of the user or group whose data sources you want to search in
+    #   the `"Value"` field. For example, `"Name":"DIRECT_QUICKSIGHT_OWNER",
+    #   "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #
+    #   If you set the value to `"StringLike"`, you need to provide the name
+    #   of the data sources you are searching for. For example,
+    #   `"Name":"DATASOURCE_NAME", "Operator": "StringLike", "Value":
+    #   "Test"`. The `"StringLike"` operator only supports the `NAME` value
+    #   `DATASOURCE_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter, for example,
+    #   `"Name": "DIRECT_QUICKSIGHT_OWNER"`.
+    #
+    #   Valid values are defined as follows:
+    #
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #     group, and any data sources with that ARN listed as one of the
+    #     owners or viewers of the data sources are returned. Implicit
+    #     permissions from folders or groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #     any data sources with that ARN listed as one of the owners if the
+    #     data source are returned. Implicit permissions from folders or
+    #     groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
+    #     group, and any data sources with that ARN listed as the only owner
+    #     of the data source are returned. Implicit permissions from folders
+    #     or groups are not considered.
+    #
+    #   * `DATASOURCE_NAME`\: Any data sources whose names have a substring
+    #     match to the provided value are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item, for example `DIRECT_QUICKSIGHT_OWNER`,
+    #   that you want to use as a filter, for example, `"Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceSearchFilter AWS API Documentation
+    #
+    class DataSourceSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `DataSourceSummary` object that returns a summary of a data source.
+    #
+    # @!attribute [rw] arn
+    #   The arn of the datasource.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_id
+    #   The unique ID of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the data source was created. This value is
+    #   expressed in MM-DD-YYYY HH:MM:SS format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time the data source was last updated. This value is
+    #   expressed in MM-DD-YYYY HH:MM:SS format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceSummary AWS API Documentation
+    #
+    class DataSourceSummary < Struct.new(
+      :arn,
+      :data_source_id,
+      :name,
+      :type,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The required parameters that are needed to connect to a Databricks
+    # data source.
+    #
+    # @note When making an API call, you may pass DatabricksParameters
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   The host name of the Databricks data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port for the Databricks data source.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sql_endpoint_path
+    #   The HTTP path of the Databricks data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DatabricksParameters AWS API Documentation
+    #
+    class DatabricksParameters < Struct.new(
+      :host,
+      :port,
+      :sql_endpoint_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4749,6 +5157,43 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountCustomizationResponse AWS API Documentation
     #
     class DeleteAccountCustomizationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAccountSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID of the account that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountSubscriptionRequest AWS API Documentation
+    #
+    class DeleteAccountSubscriptionRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountSubscriptionResponse AWS API Documentation
+    #
+    class DeleteAccountSubscriptionResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []
@@ -7415,25 +7860,74 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A filter to use to search a Amazon QuickSight folder.
+    # A filter to use to search an Amazon QuickSight folder.
     #
     # @note When making an API call, you may pass FolderSearchFilter
     #   data as a hash:
     #
     #       {
-    #         operator: "StringEquals", # accepts StringEquals
-    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #         operator: "StringEquals", # accepts StringEquals, StringLike
+    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, QUICKSIGHT_VIEWER_OR_OWNER, FOLDER_NAME
     #         value: "String",
     #       }
     #
     # @!attribute [rw] operator
-    #   The comparison operator that you want to use in the filter. For
-    #   example, `"Operator": "StringEquals"`.
+    #   The comparison operator that you want to use as a filter, for
+    #   example `"Operator": "StringEquals"`. Valid values are
+    #   `"StringEquals"` and `"StringLike"`.
+    #
+    #   If you set the operator value to `"StringEquals"`, you need to
+    #   provide an ownership related filter in the `"NAME"` field and the
+    #   arn of the user or group whose folders you want to search in the
+    #   `"Value"` field. For example, `"Name":"DIRECT_QUICKSIGHT_OWNER",
+    #   "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #
+    #   If you set the value to `"StringLike"`, you need to provide the name
+    #   of the folders you are searching for. For example,
+    #   `"Name":"FOLDER_NAME", "Operator": "StringLike", "Value": "Test"`.
+    #   The `"StringLike"` operator only supports the `NAME` value
+    #   `FOLDER_NAME`.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of a value that you want to use in the filter. For example,
-    #   `"Name": "PARENT_FOLDER_ARN"`.
+    #   `"Name": "QUICKSIGHT_OWNER"`.
+    #
+    #   Valid values are defined as follows:
+    #
+    #   * `QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or group,
+    #     and any folders with that ARN listed as one of the folder's
+    #     owners or viewers are returned. Implicit permissions from folders
+    #     or groups are considered.
+    #
+    #   * `QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and any
+    #     folders with that ARN listed as one of the owners of the folders
+    #     are returned. Implicit permissions from folders or groups are
+    #     considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_SOLE_OWNER`\: Provide an ARN of a user or
+    #     group, and any folders with that ARN listed as the only owner of
+    #     the folder are returned. Implicit permissions from folders or
+    #     groups are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_OWNER`\: Provide an ARN of a user or group, and
+    #     any folders with that ARN listed as one of the owners of the
+    #     folders are returned. Implicit permissions from folders or groups
+    #     are not considered.
+    #
+    #   * `DIRECT_QUICKSIGHT_VIEWER_OR_OWNER`\: Provide an ARN of a user or
+    #     group, and any folders with that ARN listed as one of the owners
+    #     or viewers of the folders are returned. Implicit permissions from
+    #     folders or groups are not considered.
+    #
+    #   * `FOLDER_NAME`\: Any folders whose names have a substring match to
+    #     this value will be returned.
+    #
+    #   * `PARENT_FOLDER_ARN`\: Provide an ARN of a folder, and any folders
+    #     that are directly under that parent folder are returned. If you
+    #     choose to use this option and leave the value blank, all
+    #     root-level folders in the account are returned.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -7515,6 +8009,9 @@ module Aws::QuickSight
     #               sheet_id: "RestrictiveResourceId", # required
     #               visual_id: "RestrictiveResourceId", # required
     #             },
+    #           },
+    #           q_search_bar: {
+    #             initial_topic_id: "RestrictiveResourceId", # required
     #           },
     #         },
     #         allowed_domains: ["String"],
@@ -7603,12 +8100,18 @@ module Aws::QuickSight
     #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
+    # @!attribute [rw] anonymous_user_arn
+    #   The Amazon Resource Name (ARN) to use for the anonymous Amazon
+    #   QuickSight user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserResponse AWS API Documentation
     #
     class GenerateEmbedUrlForAnonymousUserResponse < Struct.new(
       :embed_url,
       :status,
-      :request_id)
+      :request_id,
+      :anonymous_user_arn)
       SENSITIVE = [:embed_url]
       include Aws::Structure
     end
@@ -8326,6 +8829,25 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidParameterValueException AWS API Documentation
     #
     class InvalidParameterValueException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You don't have this feature activated for your account. To fix this
+    # issue, contact Amazon Web Services support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
       :message,
       :request_id)
       SENSITIVE = []
@@ -11572,8 +12094,8 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         filters: [ # required
     #           {
-    #             operator: "StringEquals", # accepts StringEquals
-    #             name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #             operator: "StringEquals", # accepts StringEquals, StringLike
+    #             name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER, QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, ANALYSIS_NAME
     #             value: "String",
     #           },
     #         ],
@@ -11644,8 +12166,8 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         filters: [ # required
     #           {
-    #             operator: "StringEquals", # required, accepts StringEquals
-    #             name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #             operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #             name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER, QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DASHBOARD_NAME
     #             value: "String",
     #           },
     #         ],
@@ -11714,6 +12236,147 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SearchDataSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #             name: "QUICKSIGHT_VIEWER_OR_OWNER", # required, accepts QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DATASET_NAME
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search.
+    #   @return [Array<Types::DataSetSearchFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDataSetsRequest AWS API Documentation
+    #
+    class SearchDataSetsRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_set_summaries
+    #   A `DataSetSummaries` object that returns a summary of a dataset.
+    #   @return [Array<Types::DataSetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDataSetsResponse AWS API Documentation
+    #
+    class SearchDataSetsResponse < Struct.new(
+      :data_set_summaries,
+      :next_token,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchDataSourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #             name: "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER", # required, accepts DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DATASOURCE_NAME
+    #             value: "String", # required
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search.
+    #   @return [Array<Types::DataSourceSearchFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDataSourcesRequest AWS API Documentation
+    #
+    class SearchDataSourcesRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_source_summaries
+    #   A `DataSourceSummaries` object that returns a summary of a data
+    #   source.
+    #   @return [Array<Types::DataSourceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDataSourcesResponse AWS API Documentation
+    #
+    class SearchDataSourcesResponse < Struct.new(
+      :data_source_summaries,
+      :next_token,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SearchFoldersRequest
     #   data as a hash:
     #
@@ -11721,8 +12384,8 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         filters: [ # required
     #           {
-    #             operator: "StringEquals", # accepts StringEquals
-    #             name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #             operator: "StringEquals", # accepts StringEquals, StringLike
+    #             name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, QUICKSIGHT_VIEWER_OR_OWNER, FOLDER_NAME
     #             value: "String",
     #           },
     #         ],
@@ -13476,6 +14139,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         default_namespace: "Namespace", # required
     #         notification_email: "String",
+    #         termination_protection_enabled: false,
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -13497,12 +14161,21 @@ module Aws::QuickSight
     #   Amazon QuickSight subscription.
     #   @return [String]
     #
+    # @!attribute [rw] termination_protection_enabled
+    #   A boolean value that determines whether or not an Amazon QuickSight
+    #   account can be deleted. A `True` value doesn't allow the account to
+    #   be deleted and results in an error message if a user tries to make a
+    #   `DeleteAccountSubscription` request. A `False` value will allow the
+    #   account to be deleted.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccountSettingsRequest AWS API Documentation
     #
     class UpdateAccountSettingsRequest < Struct.new(
       :aws_account_id,
       :default_namespace,
-      :notification_email)
+      :notification_email,
+      :termination_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14523,6 +15196,7 @@ module Aws::QuickSight
     #           },
     #           athena_parameters: {
     #             work_group: "WorkGroup",
+    #             role_arn: "RoleArn",
     #           },
     #           aurora_parameters: {
     #             host: "Host", # required
@@ -14614,6 +15288,11 @@ module Aws::QuickSight
     #             host: "Host", # required
     #             port: 1, # required
     #           },
+    #           databricks_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             sql_endpoint_path: "SqlEndpointPath", # required
+    #           },
     #         },
     #         credentials: {
     #           credential_pair: {
@@ -14626,6 +15305,7 @@ module Aws::QuickSight
     #                 },
     #                 athena_parameters: {
     #                   work_group: "WorkGroup",
+    #                   role_arn: "RoleArn",
     #                 },
     #                 aurora_parameters: {
     #                   host: "Host", # required
@@ -14716,6 +15396,11 @@ module Aws::QuickSight
     #                 exasol_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
+    #                 },
+    #                 databricks_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   sql_endpoint_path: "SqlEndpointPath", # required
     #                 },
     #               },
     #             ],

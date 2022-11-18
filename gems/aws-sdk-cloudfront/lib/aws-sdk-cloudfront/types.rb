@@ -1655,6 +1655,202 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # A continuous deployment policy.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the continuous deployment policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the continuous deployment policy was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] continuous_deployment_policy_config
+    #   Contains the configuration for a continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentPolicy AWS API Documentation
+    #
+    class ContinuousDeploymentPolicy < Struct.new(
+      :id,
+      :last_modified_time,
+      :continuous_deployment_policy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration for a continuous deployment policy.
+    #
+    # @note When making an API call, you may pass ContinuousDeploymentPolicyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         staging_distribution_dns_names: { # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         enabled: false, # required
+    #         traffic_config: {
+    #           single_weight_config: {
+    #             weight: 1.0, # required
+    #             session_stickiness_config: {
+    #               idle_ttl: 1, # required
+    #               maximum_ttl: 1, # required
+    #             },
+    #           },
+    #           single_header_config: {
+    #             header: "string", # required
+    #             value: "string", # required
+    #           },
+    #           type: "SingleWeight", # required, accepts SingleWeight, SingleHeader
+    #         },
+    #       }
+    #
+    # @!attribute [rw] staging_distribution_dns_names
+    #   The CloudFront domain name of the staging distribution. For example:
+    #   `d111111abcdef8.cloudfront.net`.
+    #   @return [Types::StagingDistributionDnsNames]
+    #
+    # @!attribute [rw] enabled
+    #   A Boolean that indicates whether this continuous deployment policy
+    #   is enabled (in effect). When this value is `true`, this policy is
+    #   enabled and in effect. When this value is `false`, this policy is
+    #   not enabled and has no effect.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] traffic_config
+    #   Contains the parameters for routing production traffic from your
+    #   primary to staging distributions.
+    #   @return [Types::TrafficConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentPolicyConfig AWS API Documentation
+    #
+    class ContinuousDeploymentPolicyConfig < Struct.new(
+      :staging_distribution_dns_names,
+      :enabled,
+      :traffic_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a list of continuous deployment policies.
+    #
+    # @!attribute [rw] next_marker
+    #   Indicates the next page of continuous deployment policies. To get
+    #   the next page of the list, use this value in the `Marker` field of
+    #   your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of continuous deployment policies that were
+    #   specified in your request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quantity
+    #   The total number of continuous deployment policies in your Amazon
+    #   Web Services account, regardless of the `MaxItems` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A list of continuous deployment policy items.
+    #   @return [Array<Types::ContinuousDeploymentPolicySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentPolicyList AWS API Documentation
+    #
+    class ContinuousDeploymentPolicyList < Struct.new(
+      :next_marker,
+      :max_items,
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the information about your continuous deployment
+    # policies.
+    #
+    # @!attribute [rw] continuous_deployment_policy
+    #   The continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentPolicySummary AWS API Documentation
+    #
+    class ContinuousDeploymentPolicySummary < Struct.new(
+      :continuous_deployment_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This configuration determines which HTTP requests are sent to the
+    # staging distribution. If the HTTP request contains a header and value
+    # that matches what you specify here, the request is sent to the staging
+    # distribution. Otherwise the request is sent to the primary
+    # distribution.
+    #
+    # @note When making an API call, you may pass ContinuousDeploymentSingleHeaderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         header: "string", # required
+    #         value: "string", # required
+    #       }
+    #
+    # @!attribute [rw] header
+    #   The request header name that you want CloudFront to send to your
+    #   staging distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The request header value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentSingleHeaderConfig AWS API Documentation
+    #
+    class ContinuousDeploymentSingleHeaderConfig < Struct.new(
+      :header,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the percentage of traffic to send to a staging distribution,
+    # expressed as a decimal number between 0 and 1.
+    #
+    # @note When making an API call, you may pass ContinuousDeploymentSingleWeightConfig
+    #   data as a hash:
+    #
+    #       {
+    #         weight: 1.0, # required
+    #         session_stickiness_config: {
+    #           idle_ttl: 1, # required
+    #           maximum_ttl: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] weight
+    #   The percentage of traffic to send to the staging distribution,
+    #   expressed as a decimal number between 0 and 1.
+    #   @return [Float]
+    #
+    # @!attribute [rw] session_stickiness_config
+    #   Session stickiness provides the ability to define multiple requests
+    #   from a single viewer as a single session. This prevents the
+    #   potentially inconsistent experience of sending some of a given
+    #   user's requests to your staging distribution, while others are sent
+    #   to your primary distribution. Define the session duration using TTL
+    #   values.
+    #   @return [Types::SessionStickinessConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ContinuousDeploymentSingleWeightConfig AWS API Documentation
+    #
+    class ContinuousDeploymentSingleWeightConfig < Struct.new(
+      :weight,
+      :session_stickiness_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a list of cookie names.
     #
     # @note When making an API call, you may pass CookieNames
@@ -1783,6 +1979,75 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         primary_distribution_id: "string", # required
+    #         staging: false,
+    #         if_match: "string",
+    #         caller_reference: "string", # required
+    #       }
+    #
+    # @!attribute [rw] primary_distribution_id
+    #   The identifier of the primary distribution whose configuration you
+    #   are copying. To get a distribution ID, use `ListDistributions`.
+    #   @return [String]
+    #
+    # @!attribute [rw] staging
+    #   The type of distribution that your primary distribution will be
+    #   copied to. The only valid value is `True`, indicating that you are
+    #   copying to a staging distribution.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] if_match
+    #   The version identifier of the primary distribution whose
+    #   configuration you are copying. This is the `ETag` value returned in
+    #   the response to `GetDistribution` and `GetDistributionConfig`.
+    #   @return [String]
+    #
+    # @!attribute [rw] caller_reference
+    #   A value that uniquely identifies a request to create a resource.
+    #   This helps to prevent CloudFront from creating a duplicate resource
+    #   if you accidentally resubmit an identical request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CopyDistributionRequest AWS API Documentation
+    #
+    class CopyDistributionRequest < Struct.new(
+      :primary_distribution_id,
+      :staging,
+      :if_match,
+      :caller_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] distribution
+    #   A distribution tells CloudFront where you want content to be
+    #   delivered from, and the details about how to track and manage
+    #   content delivery.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] location
+    #   The URL of the staging distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the staging
+    #   distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CopyDistributionResult AWS API Documentation
+    #
+    class CopyDistributionResult < Struct.new(
+      :distribution,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateCachePolicyRequest
     #   data as a hash:
     #
@@ -1907,6 +2172,68 @@ module Aws::CloudFront
     #
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
+      :location,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContinuousDeploymentPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         continuous_deployment_policy_config: { # required
+    #           staging_distribution_dns_names: { # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           enabled: false, # required
+    #           traffic_config: {
+    #             single_weight_config: {
+    #               weight: 1.0, # required
+    #               session_stickiness_config: {
+    #                 idle_ttl: 1, # required
+    #                 maximum_ttl: 1, # required
+    #               },
+    #             },
+    #             single_header_config: {
+    #               header: "string", # required
+    #               value: "string", # required
+    #             },
+    #             type: "SingleWeight", # required, accepts SingleWeight, SingleHeader
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] continuous_deployment_policy_config
+    #   Contains the configuration for a continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateContinuousDeploymentPolicyRequest AWS API Documentation
+    #
+    class CreateContinuousDeploymentPolicyRequest < Struct.new(
+      :continuous_deployment_policy_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_deployment_policy
+    #   A continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicy]
+    #
+    # @!attribute [rw] location
+    #   The location of the continuous deployment policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the continuous
+    #   deployment policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateContinuousDeploymentPolicyResult AWS API Documentation
+    #
+    class CreateContinuousDeploymentPolicyResult < Struct.new(
+      :continuous_deployment_policy,
       :location,
       :etag)
       SENSITIVE = []
@@ -2864,7 +3191,7 @@ module Aws::CloudFront
     #       {
     #         origin_access_control_config: { # required
     #           name: "string", # required
-    #           description: "string", # required
+    #           description: "string",
     #           signing_protocol: "sigv4", # required, accepts sigv4
     #           signing_behavior: "never", # required, accepts never, always, no-override
     #           origin_access_control_origin_type: "s3", # required, accepts s3
@@ -4073,6 +4400,33 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteContinuousDeploymentPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the continuous deployment policy that you are
+    #   deleting.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the continuous deployment
+    #   policy that you are deleting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteContinuousDeploymentPolicyRequest AWS API Documentation
+    #
+    class DeleteContinuousDeploymentPolicyRequest < Struct.new(
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This action deletes a web distribution. To delete a web distribution
     # using the CloudFront API, perform the following steps.
     #
@@ -4489,23 +4843,21 @@ module Aws::CloudFront
     # from, and the details about how to track and manage content delivery.
     #
     # @!attribute [rw] id
-    #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
+    #   The distribution’s identifier. For example: `E1U5RQF7T870K0`.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN (Amazon Resource Name) for the distribution. For example:
-    #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
-    #   where `123456789012` is your Amazon Web Services account ID.
+    #   The distribution’s Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   This response element indicates the current status of the
-    #   distribution. When the status is `Deployed`, the distribution's
-    #   information is fully propagated to all CloudFront edge locations.
+    #   The distribution’s status. When the status is `Deployed`, the
+    #   distribution’s information is fully propagated to all CloudFront
+    #   edge locations.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the distribution was last modified.
+    #   The date and time when the distribution was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] in_progress_invalidation_batches
@@ -4513,7 +4865,7 @@ module Aws::CloudFront
     #   @return [Integer]
     #
     # @!attribute [rw] domain_name
-    #   The domain name corresponding to the distribution, for example,
+    #   The distribution’s CloudFront domain name. For example:
     #   `d111111abcdef8.cloudfront.net`.
     #   @return [String]
     #
@@ -4537,9 +4889,7 @@ module Aws::CloudFront
     #   @return [Types::ActiveTrustedKeyGroups]
     #
     # @!attribute [rw] distribution_config
-    #   The current configuration information for the distribution. Send a
-    #   `GET` request to the `/CloudFront API version/distribution
-    #   ID/config` resource.
+    #   The distribution’s configuration.
     #   @return [Types::DistributionConfig]
     #
     # @!attribute [rw] alias_icp_recordals
@@ -4869,10 +5219,11 @@ module Aws::CloudFront
     # @!attribute [rw] default_root_object
     #   The object that you want CloudFront to request from your origin (for
     #   example, `index.html`) when a viewer requests the root URL for your
-    #   distribution (`http://www.example.com`) instead of an object in your
-    #   distribution (`http://www.example.com/product-description.html`).
-    #   Specifying a default root object avoids exposing the contents of
-    #   your distribution.
+    #   distribution (`https://www.example.com`) instead of an object in
+    #   your distribution
+    #   (`https://www.example.com/product-description.html`). Specifying a
+    #   default root object avoids exposing the contents of your
+    #   distribution.
     #
     #   Specify only the object name, for example, `index.html`. Don't add
     #   a `/` before the object name.
@@ -6800,6 +7151,82 @@ module Aws::CloudFront
     #
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContinuousDeploymentPolicyConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the continuous deployment policy whose
+    #   configuration you are getting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetContinuousDeploymentPolicyConfigRequest AWS API Documentation
+    #
+    class GetContinuousDeploymentPolicyConfigRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_deployment_policy_config
+    #   Contains the configuration for a continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicyConfig]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the continuous
+    #   deployment policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetContinuousDeploymentPolicyConfigResult AWS API Documentation
+    #
+    class GetContinuousDeploymentPolicyConfigResult < Struct.new(
+      :continuous_deployment_policy_config,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContinuousDeploymentPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the continuous deployment policy that you are
+    #   getting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetContinuousDeploymentPolicyRequest AWS API Documentation
+    #
+    class GetContinuousDeploymentPolicyRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_deployment_policy
+    #   A continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicy]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the continuous
+    #   deployment policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetContinuousDeploymentPolicyResult AWS API Documentation
+    #
+    class GetContinuousDeploymentPolicyResult < Struct.new(
+      :continuous_deployment_policy,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -8763,6 +9190,48 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListContinuousDeploymentPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of continuous deployment policies. The response includes
+    #   policies in the list that occur after the marker. To get the next
+    #   page of the list, set this field’s value to the value of
+    #   `NextMarker` from the current page’s response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of continuous deployment policies that you want
+    #   returned in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListContinuousDeploymentPoliciesRequest AWS API Documentation
+    #
+    class ListContinuousDeploymentPoliciesRequest < Struct.new(
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_deployment_policy_list
+    #   A list of continuous deployment policies.
+    #   @return [Types::ContinuousDeploymentPolicyList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListContinuousDeploymentPoliciesResult AWS API Documentation
+    #
+    class ListContinuousDeploymentPoliciesResult < Struct.new(
+      :continuous_deployment_policy_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDistributionsByCachePolicyIdRequest
     #   data as a hash:
     #
@@ -10223,7 +10692,7 @@ module Aws::CloudFront
     #
     #       {
     #         name: "string", # required
-    #         description: "string", # required
+    #         description: "string",
     #         signing_protocol: "sigv4", # required, accepts sigv4
     #         signing_behavior: "never", # required, accepts never, always, no-override
     #         origin_access_control_origin_type: "s3", # required, accepts s3
@@ -13137,6 +13606,45 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # Session stickiness provides the ability to define multiple requests
+    # from a single viewer as a single session. This prevents the
+    # potentially inconsistent experience of sending some of a given user's
+    # requests to your staging distribution, while others are sent to your
+    # primary distribution. Define the session duration using TTL values.
+    #
+    # @note When making an API call, you may pass SessionStickinessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         idle_ttl: 1, # required
+    #         maximum_ttl: 1, # required
+    #       }
+    #
+    # @!attribute [rw] idle_ttl
+    #   The amount of time after which you want sessions to cease if no
+    #   requests are received. Allowed values are 300–3600 seconds (5–60
+    #   minutes).
+    #
+    #   The value must be less than or equal to `MaximumTTL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_ttl
+    #   The maximum amount of time to consider requests from the viewer as
+    #   being part of the same session. Allowed values are 300–3600 seconds
+    #   (5–60 minutes).
+    #
+    #   The value must be less than or equal to `IdleTTL`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/SessionStickinessConfig AWS API Documentation
+    #
+    class SessionStickinessConfig < Struct.new(
+      :idle_ttl,
+      :maximum_ttl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of Amazon Web Services accounts and the active CloudFront key
     # pairs in each account that CloudFront can use to verify the signatures
     # of signed URLs and signed cookies.
@@ -13158,6 +13666,47 @@ module Aws::CloudFront
     class Signer < Struct.new(
       :aws_account_number,
       :key_pair_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CloudFront domain name of the staging distribution.
+    #
+    # @note When making an API call, you may pass StagingDistributionDnsNames
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of CloudFront domain names in your staging distribution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   The CloudFront domain name of the staging distribution.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StagingDistributionDnsNames AWS API Documentation
+    #
+    class StagingDistributionDnsNames < Struct.new(
+      :quantity,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A continuous deployment policy for this staging distribution already
+    # exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/StagingDistributionInUse AWS API Documentation
+    #
+    class StagingDistributionInUse < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14696,6 +15245,49 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The traffic configuration of your continuous deployment.
+    #
+    # @note When making an API call, you may pass TrafficConfig
+    #   data as a hash:
+    #
+    #       {
+    #         single_weight_config: {
+    #           weight: 1.0, # required
+    #           session_stickiness_config: {
+    #             idle_ttl: 1, # required
+    #             maximum_ttl: 1, # required
+    #           },
+    #         },
+    #         single_header_config: {
+    #           header: "string", # required
+    #           value: "string", # required
+    #         },
+    #         type: "SingleWeight", # required, accepts SingleWeight, SingleHeader
+    #       }
+    #
+    # @!attribute [rw] single_weight_config
+    #   Contains the percentage of traffic to send to the staging
+    #   distribution.
+    #   @return [Types::ContinuousDeploymentSingleWeightConfig]
+    #
+    # @!attribute [rw] single_header_config
+    #   Determines which HTTP requests are sent to the staging distribution.
+    #   @return [Types::ContinuousDeploymentSingleHeaderConfig]
+    #
+    # @!attribute [rw] type
+    #   The type of traffic configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrafficConfig AWS API Documentation
+    #
+    class TrafficConfig < Struct.new(
+      :single_weight_config,
+      :single_header_config,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified key group does not exist.
     #
     # @!attribute [rw] message
@@ -14971,6 +15563,77 @@ module Aws::CloudFront
     #
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContinuousDeploymentPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         continuous_deployment_policy_config: { # required
+    #           staging_distribution_dns_names: { # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           enabled: false, # required
+    #           traffic_config: {
+    #             single_weight_config: {
+    #               weight: 1.0, # required
+    #               session_stickiness_config: {
+    #                 idle_ttl: 1, # required
+    #                 maximum_ttl: 1, # required
+    #               },
+    #             },
+    #             single_header_config: {
+    #               header: "string", # required
+    #               value: "string", # required
+    #             },
+    #             type: "SingleWeight", # required, accepts SingleWeight, SingleHeader
+    #           },
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] continuous_deployment_policy_config
+    #   The continuous deployment policy configuration.
+    #   @return [Types::ContinuousDeploymentPolicyConfig]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the continuous deployment policy that you are
+    #   updating.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The current version (`ETag` value) of the continuous deployment
+    #   policy that you are updating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateContinuousDeploymentPolicyRequest AWS API Documentation
+    #
+    class UpdateContinuousDeploymentPolicyRequest < Struct.new(
+      :continuous_deployment_policy_config,
+      :id,
+      :if_match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_deployment_policy
+    #   A continuous deployment policy.
+    #   @return [Types::ContinuousDeploymentPolicy]
+    #
+    # @!attribute [rw] etag
+    #   The version identifier for the current version of the continuous
+    #   deployment policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateContinuousDeploymentPolicyResult AWS API Documentation
+    #
+    class UpdateContinuousDeploymentPolicyResult < Struct.new(
+      :continuous_deployment_policy,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -15551,7 +16214,7 @@ module Aws::CloudFront
     #       {
     #         origin_access_control_config: { # required
     #           name: "string", # required
-    #           description: "string", # required
+    #           description: "string",
     #           signing_protocol: "sigv4", # required, accepts sigv4
     #           signing_behavior: "never", # required, accepts never, always, no-override
     #           origin_access_control_origin_type: "s3", # required, accepts s3

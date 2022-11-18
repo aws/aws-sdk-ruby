@@ -672,7 +672,7 @@ module Aws::Transfer
     #       partner_profile_id: "ProfileId",
     #       message_subject: "MessageSubject",
     #       compression: "ZLIB", # accepts ZLIB, DISABLED
-    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
@@ -1014,8 +1014,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
     #   upload occurs when a file is open when the session disconnects.
     #
@@ -1191,7 +1191,19 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to authenticate
     #   the user to the server.
     #
+    #   The three standard SSH public key format elements are `<key type>`,
+    #   `<body base64>`, and an optional `<comment>`, with spaces between each
+    #   element.
+    #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+    #
+    #   * For RSA keys, the key type is `ssh-rsa`.
+    #
+    #   * For ED25519 keys, the key type is `ssh-ed25519`.
+    #
+    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
+    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
+    #     size of the key you generated.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for users. Tags
@@ -1865,7 +1877,7 @@ module Aws::Transfer
     #   resp.connector.as_2_config.partner_profile_id #=> String
     #   resp.connector.as_2_config.message_subject #=> String
     #   resp.connector.as_2_config.compression #=> String, one of "ZLIB", "DISABLED"
-    #   resp.connector.as_2_config.encryption_algorithm #=> String, one of "AES128_CBC", "AES192_CBC", "AES256_CBC"
+    #   resp.connector.as_2_config.encryption_algorithm #=> String, one of "AES128_CBC", "AES192_CBC", "AES256_CBC", "NONE"
     #   resp.connector.as_2_config.signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE"
     #   resp.connector.as_2_config.mdn_signing_algorithm #=> String, one of "SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"
     #   resp.connector.as_2_config.mdn_response #=> String, one of "SYNC", "NONE"
@@ -3674,7 +3686,7 @@ module Aws::Transfer
     #       partner_profile_id: "ProfileId",
     #       message_subject: "MessageSubject",
     #       compression: "ZLIB", # accepts ZLIB, DISABLED
-    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #       encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
     #       signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #       mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #       mdn_response: "SYNC", # accepts SYNC, NONE
@@ -3992,8 +4004,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A partial
     #   upload occurs when a file is open when the session disconnects.
     #
@@ -4225,7 +4237,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

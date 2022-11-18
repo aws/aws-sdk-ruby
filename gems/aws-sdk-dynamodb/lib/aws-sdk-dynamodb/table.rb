@@ -86,7 +86,8 @@ module Aws::DynamoDB
     #
     # * `CREATING` - The table is being created.
     #
-    # * `UPDATING` - The table is being updated.
+    # * `UPDATING` - The table/index configuration is being updated. The
+    #   table/index remains available for data operations when `UPDATING`.
     #
     # * `DELETING` - The table is being deleted.
     #

@@ -98,6 +98,8 @@ module Aws::Appflow
             Aws::Appflow::Endpoints::UntagResource.build(context)
           when :update_connector_profile
             Aws::Appflow::Endpoints::UpdateConnectorProfile.build(context)
+          when :update_connector_registration
+            Aws::Appflow::Endpoints::UpdateConnectorRegistration.build(context)
           when :update_flow
             Aws::Appflow::Endpoints::UpdateFlow.build(context)
           end

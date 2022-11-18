@@ -1200,7 +1200,7 @@ module Aws::DynamoDB
     #   A map of tables and requests against those tables that were not
     #   processed. The `UnprocessedItems` value is in the same form as
     #   `RequestItems`, so you can provide this value directly to a
-    #   subsequent `BatchGetItem` operation. For more information, see
+    #   subsequent `BatchWriteItem` operation. For more information, see
     #   `RequestItems` in the Request Parameters section.
     #
     #   Each `UnprocessedItems` entry consists of a table name and, for that
@@ -1279,7 +1279,18 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Contains the details for the read/write capacity mode.
+    # Contains the details for the read/write capacity mode. This page talks
+    # about `PROVISIONED` and `PAY_PER_REQUEST` billing modes. For more
+    # information about these modes, see [Read/write capacity mode][1].
+    #
+    # <note markdown="1"> You may need to switch to on-demand mode at least once in order to
+    # return a `BillingModeSummary` response.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html
     #
     # @!attribute [rw] billing_mode
     #   Controls how you are charged for read and write throughput and how
@@ -5619,15 +5630,18 @@ module Aws::DynamoDB
     # There is no limit to the number of daily on-demand backups that can be
     # taken.
     #
-    # Up to 500 simultaneous table operations are allowed per account. These
-    # operations include `CreateTable`, `UpdateTable`,
+    # For most purposes, up to 500 simultaneous table operations are allowed
+    # per account. These operations include `CreateTable`, `UpdateTable`,
     # `DeleteTable`,`UpdateTimeToLive`, `RestoreTableFromBackup`, and
     # `RestoreTableToPointInTime`.
     #
-    # The only exception is when you are creating a table with one or more
-    # secondary indexes. You can have up to 250 such requests running at a
-    # time; however, if the table or index specifications are complex,
-    # DynamoDB might temporarily reduce the number of concurrent operations.
+    # When you are creating a table with one or more secondary indexes, you
+    # can have up to 250 such requests running at a time. However, if the
+    # table or index specifications are complex, then DynamoDB might
+    # temporarily reduce the number of concurrent operations.
+    #
+    # When importing into DynamoDB, up to 50 simultaneous import table
+    # operations are allowed per account.
     #
     # There is a soft account quota of 2,500 tables.
     #
@@ -7722,7 +7736,8 @@ module Aws::DynamoDB
     #
     #   * `CREATING` - The index is being created.
     #
-    #   * `UPDATING` - The index is being updated.
+    #   * `UPDATING` - The table/index configuration is being updated. The
+    #     table/index remains available for data operations when `UPDATING`
     #
     #   * `DELETING` - The index is being deleted.
     #
@@ -9486,7 +9501,8 @@ module Aws::DynamoDB
     #
     #   * `CREATING` - The table is being created.
     #
-    #   * `UPDATING` - The table is being updated.
+    #   * `UPDATING` - The table/index configuration is being updated. The
+    #     table/index remains available for data operations when `UPDATING`.
     #
     #   * `DELETING` - The table is being deleted.
     #

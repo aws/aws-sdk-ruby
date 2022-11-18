@@ -1309,13 +1309,14 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_source_id: "ResourceId", # required
     #     name: "ResourceName", # required
-    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL
+    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL, DATABRICKS
     #     data_source_parameters: {
     #       amazon_elasticsearch_parameters: {
     #         domain: "Domain", # required
     #       },
     #       athena_parameters: {
     #         work_group: "WorkGroup",
+    #         role_arn: "RoleArn",
     #       },
     #       aurora_parameters: {
     #         host: "Host", # required
@@ -1407,6 +1408,11 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #       },
+    #       databricks_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -1419,6 +1425,7 @@ module Aws::QuickSight
     #             },
     #             athena_parameters: {
     #               work_group: "WorkGroup",
+    #               role_arn: "RoleArn",
     #             },
     #             aurora_parameters: {
     #               host: "Host", # required
@@ -1509,6 +1516,11 @@ module Aws::QuickSight
     #             exasol_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
+    #             },
+    #             databricks_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
     #           },
     #         ],
@@ -2378,6 +2390,43 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Use the `DeleteAccountSubscription` operation to delete an Amazon
+    # QuickSight account. This operation will result in an error message if
+    # you have configured your account termination protection settings to
+    # `True`. To change this setting and delete your account, call the
+    # `UpdateAccountSettings` API and set the value of the
+    # `TerminationProtectionEnabled` parameter to `False`, then make another
+    # call to the `DeleteAccountSubscription` API.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID of the account that you want to
+    #   delete.
+    #
+    # @return [Types::DeleteAccountSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountSubscriptionResponse#request_id #request_id} => String
+    #   * {Types::DeleteAccountSubscriptionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_subscription({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccountSubscription AWS API Documentation
+    #
+    # @overload delete_account_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_account_subscription(params = {}, options = {})
+      req = build_request(:delete_account_subscription, params)
+      req.send_request(options)
+    end
+
     # Deletes an analysis from Amazon QuickSight. You can optionally include
     # a recovery window during which you can restore the analysis. If you
     # don't specify a recovery window value, the operation defaults to 30
@@ -3230,6 +3279,7 @@ module Aws::QuickSight
     #   resp.account_settings.default_namespace #=> String
     #   resp.account_settings.notification_email #=> String
     #   resp.account_settings.public_sharing_enabled #=> Boolean
+    #   resp.account_settings.termination_protection_enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3243,7 +3293,7 @@ module Aws::QuickSight
     end
 
     # Use the DescribeAccountSubscription operation to receive a description
-    # of a Amazon QuickSight account's subscription. A successful API call
+    # of an Amazon QuickSight account's subscription. A successful API call
     # returns an `AccountInfo` object that includes an account's name,
     # subscription status, authentication type, edition, and notification
     # email address.
@@ -3699,12 +3749,13 @@ module Aws::QuickSight
     #   resp.data_source.arn #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.name #=> String
-    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL"
+    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS"
     #   resp.data_source.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_source.created_time #=> Time
     #   resp.data_source.last_updated_time #=> Time
     #   resp.data_source.data_source_parameters.amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.data_source_parameters.athena_parameters.work_group #=> String
+    #   resp.data_source.data_source_parameters.athena_parameters.role_arn #=> String
     #   resp.data_source.data_source_parameters.aurora_parameters.host #=> String
     #   resp.data_source.data_source_parameters.aurora_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.aurora_parameters.database #=> String
@@ -3753,9 +3804,13 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.amazon_open_search_parameters.domain #=> String
     #   resp.data_source.data_source_parameters.exasol_parameters.host #=> String
     #   resp.data_source.data_source_parameters.exasol_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.databricks_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.databricks_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
     #   resp.data_source.alternate_data_source_parameters #=> Array
     #   resp.data_source.alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.work_group #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].athena_parameters.role_arn #=> String
     #   resp.data_source.alternate_data_source_parameters[0].aurora_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].aurora_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].aurora_parameters.database #=> String
@@ -3804,6 +3859,9 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].amazon_open_search_parameters.domain #=> String
     #   resp.data_source.alternate_data_source_parameters[0].exasol_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].exasol_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
     #   resp.data_source.vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.ssl_properties.disable_ssl #=> Boolean
     #   resp.data_source.error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -4757,6 +4815,7 @@ module Aws::QuickSight
     #   * {Types::GenerateEmbedUrlForAnonymousUserResponse#embed_url #embed_url} => String
     #   * {Types::GenerateEmbedUrlForAnonymousUserResponse#status #status} => Integer
     #   * {Types::GenerateEmbedUrlForAnonymousUserResponse#request_id #request_id} => String
+    #   * {Types::GenerateEmbedUrlForAnonymousUserResponse#anonymous_user_arn #anonymous_user_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4782,6 +4841,9 @@ module Aws::QuickSight
     #           visual_id: "RestrictiveResourceId", # required
     #         },
     #       },
+    #       q_search_bar: {
+    #         initial_topic_id: "RestrictiveResourceId", # required
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -4791,6 +4853,7 @@ module Aws::QuickSight
     #   resp.embed_url #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
+    #   resp.anonymous_user_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUser AWS API Documentation
     #
@@ -5398,12 +5461,13 @@ module Aws::QuickSight
     #   resp.data_sources[0].arn #=> String
     #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].name #=> String
-    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL"
+    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS"
     #   resp.data_sources[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_sources[0].created_time #=> Time
     #   resp.data_sources[0].last_updated_time #=> Time
     #   resp.data_sources[0].data_source_parameters.amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].data_source_parameters.athena_parameters.work_group #=> String
+    #   resp.data_sources[0].data_source_parameters.athena_parameters.role_arn #=> String
     #   resp.data_sources[0].data_source_parameters.aurora_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.aurora_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.aurora_parameters.database #=> String
@@ -5452,9 +5516,13 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.amazon_open_search_parameters.domain #=> String
     #   resp.data_sources[0].data_source_parameters.exasol_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.exasol_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.databricks_parameters.sql_endpoint_path #=> String
     #   resp.data_sources[0].alternate_data_source_parameters #=> Array
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_elasticsearch_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.work_group #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].athena_parameters.role_arn #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].aurora_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].aurora_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].aurora_parameters.database #=> String
@@ -5503,6 +5571,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].amazon_open_search_parameters.domain #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].exasol_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].exasol_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].databricks_parameters.sql_endpoint_path #=> String
     #   resp.data_sources[0].vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].ssl_properties.disable_ssl #=> Boolean
     #   resp.data_sources[0].error_info.type #=> String, one of "ACCESS_DENIED", "COPY_SOURCE_NOT_FOUND", "TIMEOUT", "ENGINE_VERSION_NOT_SUPPORTED", "UNKNOWN_HOST", "GENERIC_SQL_FAILURE", "CONFLICT", "UNKNOWN"
@@ -6686,8 +6757,8 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     filters: [ # required
     #       {
-    #         operator: "StringEquals", # accepts StringEquals
-    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         operator: "StringEquals", # accepts StringEquals, StringLike
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER, QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, ANALYSIS_NAME
     #         value: "String",
     #       },
     #     ],
@@ -6756,8 +6827,8 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     filters: [ # required
     #       {
-    #         operator: "StringEquals", # required, accepts StringEquals
-    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER, QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DASHBOARD_NAME
     #         value: "String",
     #       },
     #     ],
@@ -6785,6 +6856,135 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def search_dashboards(params = {}, options = {})
       req = build_request(:search_dashboards, params)
+      req.send_request(options)
+    end
+
+    # Use the `SearchDataSets` operation to search for datasets that belong
+    # to an account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, Array<Types::DataSetSearchFilter>] :filters
+    #   The filters to apply to the search.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::SearchDataSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchDataSetsResponse#data_set_summaries #data_set_summaries} => Array&lt;Types::DataSetSummary&gt;
+    #   * {Types::SearchDataSetsResponse#next_token #next_token} => String
+    #   * {Types::SearchDataSetsResponse#status #status} => Integer
+    #   * {Types::SearchDataSetsResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_data_sets({
+    #     aws_account_id: "AwsAccountId", # required
+    #     filters: [ # required
+    #       {
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         name: "QUICKSIGHT_VIEWER_OR_OWNER", # required, accepts QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DATASET_NAME
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_set_summaries #=> Array
+    #   resp.data_set_summaries[0].arn #=> String
+    #   resp.data_set_summaries[0].data_set_id #=> String
+    #   resp.data_set_summaries[0].name #=> String
+    #   resp.data_set_summaries[0].created_time #=> Time
+    #   resp.data_set_summaries[0].last_updated_time #=> Time
+    #   resp.data_set_summaries[0].import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
+    #   resp.data_set_summaries[0].row_level_permission_data_set.namespace #=> String
+    #   resp.data_set_summaries[0].row_level_permission_data_set.arn #=> String
+    #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
+    #   resp.data_set_summaries[0].row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_set_summaries[0].row_level_permission_tag_configuration_applied #=> Boolean
+    #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDataSets AWS API Documentation
+    #
+    # @overload search_data_sets(params = {})
+    # @param [Hash] params ({})
+    def search_data_sets(params = {}, options = {})
+      req = build_request(:search_data_sets, params)
+      req.send_request(options)
+    end
+
+    # Use the `SearchDataSources` operation to search for data sources that
+    # belong to an account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [required, Array<Types::DataSourceSearchFilter>] :filters
+    #   The filters to apply to the search.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::SearchDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchDataSourcesResponse#data_source_summaries #data_source_summaries} => Array&lt;Types::DataSourceSummary&gt;
+    #   * {Types::SearchDataSourcesResponse#next_token #next_token} => String
+    #   * {Types::SearchDataSourcesResponse#status #status} => Integer
+    #   * {Types::SearchDataSourcesResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_data_sources({
+    #     aws_account_id: "AwsAccountId", # required
+    #     filters: [ # required
+    #       {
+    #         operator: "StringEquals", # required, accepts StringEquals, StringLike
+    #         name: "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER", # required, accepts DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DATASOURCE_NAME
+    #         value: "String", # required
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_source_summaries #=> Array
+    #   resp.data_source_summaries[0].arn #=> String
+    #   resp.data_source_summaries[0].data_source_id #=> String
+    #   resp.data_source_summaries[0].name #=> String
+    #   resp.data_source_summaries[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM", "AMAZON_OPENSEARCH", "EXASOL", "DATABRICKS"
+    #   resp.data_source_summaries[0].created_time #=> Time
+    #   resp.data_source_summaries[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDataSources AWS API Documentation
+    #
+    # @overload search_data_sources(params = {})
+    # @param [Hash] params ({})
+    def search_data_sources(params = {}, options = {})
+      req = build_request(:search_data_sources, params)
       req.send_request(options)
     end
 
@@ -6819,8 +7019,8 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     filters: [ # required
     #       {
-    #         operator: "StringEquals", # accepts StringEquals
-    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN
+    #         operator: "StringEquals", # accepts StringEquals, StringLike
+    #         name: "PARENT_FOLDER_ARN", # accepts PARENT_FOLDER_ARN, DIRECT_QUICKSIGHT_OWNER, DIRECT_QUICKSIGHT_SOLE_OWNER, DIRECT_QUICKSIGHT_VIEWER_OR_OWNER, QUICKSIGHT_OWNER, QUICKSIGHT_VIEWER_OR_OWNER, FOLDER_NAME
     #         value: "String",
     #       },
     #     ],
@@ -7094,6 +7294,13 @@ module Aws::QuickSight
     #   notifications to regarding your Amazon Web Services account or Amazon
     #   QuickSight subscription.
     #
+    # @option params [Boolean] :termination_protection_enabled
+    #   A boolean value that determines whether or not an Amazon QuickSight
+    #   account can be deleted. A `True` value doesn't allow the account to
+    #   be deleted and results in an error message if a user tries to make a
+    #   `DeleteAccountSubscription` request. A `False` value will allow the
+    #   account to be deleted.
+    #
     # @return [Types::UpdateAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAccountSettingsResponse#request_id #request_id} => String
@@ -7105,6 +7312,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     default_namespace: "Namespace", # required
     #     notification_email: "String",
+    #     termination_protection_enabled: false,
     #   })
     #
     # @example Response structure
@@ -7911,6 +8119,7 @@ module Aws::QuickSight
     #       },
     #       athena_parameters: {
     #         work_group: "WorkGroup",
+    #         role_arn: "RoleArn",
     #       },
     #       aurora_parameters: {
     #         host: "Host", # required
@@ -8002,6 +8211,11 @@ module Aws::QuickSight
     #         host: "Host", # required
     #         port: 1, # required
     #       },
+    #       databricks_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         sql_endpoint_path: "SqlEndpointPath", # required
+    #       },
     #     },
     #     credentials: {
     #       credential_pair: {
@@ -8014,6 +8228,7 @@ module Aws::QuickSight
     #             },
     #             athena_parameters: {
     #               work_group: "WorkGroup",
+    #               role_arn: "RoleArn",
     #             },
     #             aurora_parameters: {
     #               host: "Host", # required
@@ -8104,6 +8319,11 @@ module Aws::QuickSight
     #             exasol_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
+    #             },
+    #             databricks_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               sql_endpoint_path: "SqlEndpointPath", # required
     #             },
     #           },
     #         ],
@@ -9126,7 +9346,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

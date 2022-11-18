@@ -35,7 +35,7 @@ module Aws::Transfer
     #         partner_profile_id: "ProfileId",
     #         message_subject: "MessageSubject",
     #         compression: "ZLIB", # accepts ZLIB, DISABLED
-    #         encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #         encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
     #         signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #         mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #         mdn_response: "SYNC", # accepts SYNC, NONE
@@ -60,6 +60,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] encryption_algorithm
     #   The algorithm that is used to encrypt the file.
+    #
+    #   <note markdown="1"> You can only specify `NONE` if the URL for your connector uses
+    #   HTTPS. This ensures that no traffic is sent in clear text.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm
@@ -71,7 +76,7 @@ module Aws::Transfer
     #   The signing algorithm for the MDN response.
     #
     #   <note markdown="1"> If set to DEFAULT (or not set at all), the value for
-    #   `SigningAlogorithm` is used.
+    #   `SigningAlgorithm` is used.
     #
     #    </note>
     #   @return [String]
@@ -458,7 +463,7 @@ module Aws::Transfer
     #           partner_profile_id: "ProfileId",
     #           message_subject: "MessageSubject",
     #           compression: "ZLIB", # accepts ZLIB, DISABLED
-    #           encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #           encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
     #           signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #           mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #           mdn_response: "SYNC", # accepts SYNC, NONE
@@ -923,8 +928,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -1094,7 +1099,19 @@ module Aws::Transfer
     #   The public portion of the Secure Shell (SSH) key used to
     #   authenticate the user to the server.
     #
+    #   The three standard SSH public key format elements are `<key type>`,
+    #   `<body base64>`, and an optional `<comment>`, with spaces between
+    #   each element.
+    #
     #   Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+    #
+    #   * For RSA keys, the key type is `ssh-rsa`.
+    #
+    #   * For ED25519 keys, the key type is `ssh-ed25519`.
+    #
+    #   * For ECDSA keys, the key type is either `ecdsa-sha2-nistp256`,
+    #     `ecdsa-sha2-nistp384`, or `ecdsa-sha2-nistp521`, depending on the
+    #     size of the key you generated.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2788,8 +2805,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -5847,7 +5864,7 @@ module Aws::Transfer
     #           partner_profile_id: "ProfileId",
     #           message_subject: "MessageSubject",
     #           compression: "ZLIB", # accepts ZLIB, DISABLED
-    #           encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC
+    #           encryption_algorithm: "AES128_CBC", # accepts AES128_CBC, AES192_CBC, AES256_CBC, NONE
     #           signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE
     #           mdn_signing_algorithm: "SHA256", # accepts SHA256, SHA384, SHA512, SHA1, NONE, DEFAULT
     #           mdn_response: "SYNC", # accepts SYNC, NONE
@@ -6280,8 +6297,8 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role that's used for executing the workflow.
     #
-    #   In additon to a workflow to execute when a file is uploaded
-    #   completely, `WorkflowDeatails` can also contain a workflow ID (and
+    #   In addition to a workflow to execute when a file is uploaded
+    #   completely, `WorkflowDetails` can also contain a workflow ID (and
     #   execution role) for a workflow to execute on partial upload. A
     #   partial upload occurs when a file is open when the session
     #   disconnects.
@@ -6523,8 +6540,8 @@ module Aws::Transfer
     # Specifies the workflow ID for the workflow to assign and the execution
     # role that's used for executing the workflow.
     #
-    # In additon to a workflow to execute when a file is uploaded
-    # completely, `WorkflowDeatails` can also contain a workflow ID (and
+    # In addition to a workflow to execute when a file is uploaded
+    # completely, `WorkflowDetails` can also contain a workflow ID (and
     # execution role) for a workflow to execute on partial upload. A partial
     # upload occurs when a file is open when the session disconnects.
     #

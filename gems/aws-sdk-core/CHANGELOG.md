@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.168.1 (2022-11-18)
+------------------
+
 * Issue - Fix initialization of SSOTokenProvider when `AWS_PROFILE` is specified.
 
 3.168.0 (2022-11-17)

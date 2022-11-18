@@ -379,8 +379,8 @@ module Aws::States
     # @!group API Operations
 
     # Creates an activity. An activity is a task that you write in any
-    # programming language and host on any machine that has access to AWS
-    # Step Functions. Activities must poll Step Functions using the
+    # programming language and host on any machine that has access to Step
+    # Functions. Activities must poll Step Functions using the
     # `GetActivityTask` API action and respond using `SendTask*` API
     # actions. This function lets Step Functions know the existence of your
     # activity and returns an identifier for use in a state machine and when
@@ -403,9 +403,9 @@ module Aws::States
     #
     # @option params [required, String] :name
     #   The name of the activity to create. This name must be unique for your
-    #   AWS account and region for 90 days. For more information, see [ Limits
-    #   Related to State Machine Executions][1] in the *AWS Step Functions
-    #   Developer Guide*.
+    #   Amazon Web Services account and region for 90 days. For more
+    #   information, see [ Limits Related to State Machine Executions][1] in
+    #   the *Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -430,8 +430,8 @@ module Aws::States
     #   The list of tags to add to a resource.
     #
     #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*, and [Controlling Access Using IAM Tags][2].
     #
     #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
@@ -477,7 +477,7 @@ module Aws::States
     # transition next (`Choice` states), stop an execution with an error
     # (`Fail` states), and so on. State machines are specified using a
     # JSON-based, structured language. For more information, see [Amazon
-    # States Language][1] in the AWS Step Functions User Guide.
+    # States Language][1] in the Step Functions User Guide.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -539,7 +539,7 @@ module Aws::States
     #   logged.
     #
     #   <note markdown="1"> By default, the `level` is set to `OFF`. For more information see [Log
-    #   Levels][1] in the AWS Step Functions User Guide.
+    #   Levels][1] in the Step Functions User Guide.
     #
     #    </note>
     #
@@ -551,8 +551,8 @@ module Aws::States
     #   Tags to be added when creating a state machine.
     #
     #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*, and [Controlling Access Using IAM Tags][2].
     #
     #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
@@ -563,7 +563,7 @@ module Aws::States
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
     #
     # @option params [Types::TracingConfiguration] :tracing_configuration
-    #   Selects whether AWS X-Ray tracing is enabled.
+    #   Selects whether X-Ray tracing is enabled.
     #
     # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -639,7 +639,7 @@ module Aws::States
     # the state machine's status to `DELETING` and begins the deletion
     # process.
     #
-    # <note markdown="1"> For `EXPRESS`state machines, the deletion will happen eventually
+    # <note markdown="1"> For `EXPRESS` state machines, the deletion will happen eventually
     # (usually less than a minute). Running executions may emit logs after
     # `DeleteStateMachine` API is called.
     #
@@ -869,6 +869,10 @@ module Aws::States
     # task is available within 60 seconds, the poll returns a `taskToken`
     # with a null string.
     #
+    # <note markdown="1"> This API action isn't logged in CloudTrail.
+    #
+    #  </note>
+    #
     # Workers should set their client side socket timeout to at least 65
     # seconds (5 seconds higher than the maximum time the service may hold
     # the poll request).
@@ -1004,6 +1008,7 @@ module Aws::States
     #   resp.events[0].task_scheduled_event_details.parameters #=> String
     #   resp.events[0].task_scheduled_event_details.timeout_in_seconds #=> Integer
     #   resp.events[0].task_scheduled_event_details.heartbeat_in_seconds #=> Integer
+    #   resp.events[0].task_scheduled_event_details.task_credentials.role_arn #=> String
     #   resp.events[0].task_start_failed_event_details.resource_type #=> String
     #   resp.events[0].task_start_failed_event_details.resource #=> String
     #   resp.events[0].task_start_failed_event_details.error #=> String
@@ -1054,6 +1059,7 @@ module Aws::States
     #   resp.events[0].lambda_function_scheduled_event_details.input #=> String
     #   resp.events[0].lambda_function_scheduled_event_details.input_details.truncated #=> Boolean
     #   resp.events[0].lambda_function_scheduled_event_details.timeout_in_seconds #=> Integer
+    #   resp.events[0].lambda_function_scheduled_event_details.task_credentials.role_arn #=> String
     #   resp.events[0].lambda_function_start_failed_event_details.error #=> String
     #   resp.events[0].lambda_function_start_failed_event_details.cause #=> String
     #   resp.events[0].lambda_function_succeeded_event_details.output #=> String
@@ -1446,11 +1452,14 @@ module Aws::States
 
     # Starts a state machine execution.
     #
-    # <note markdown="1"> `StartExecution` is idempotent. If `StartExecution` is called with the
-    # same name and input as a running execution, the call will succeed and
-    # return the same response as the original request. If the execution is
-    # closed or if the input is different, it will return a 400
-    # `ExecutionAlreadyExists` error. Names can be reused after 90 days.
+    # <note markdown="1"> `StartExecution` is idempotent for `STANDARD` workflows. For a
+    # `STANDARD` workflow, if `StartExecution` is called with the same name
+    # and input as a running execution, the call will succeed and return the
+    # same response as the original request. If the execution is closed or
+    # if the input is different, it will return a `400
+    # ExecutionAlreadyExists` error. Names can be reused after 90 days.
+    #
+    #  `StartExecution` is not idempotent for `EXPRESS` workflows.
     #
     #  </note>
     #
@@ -1458,10 +1467,10 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the state machine to execute.
     #
     # @option params [String] :name
-    #   The name of the execution. This name must be unique for your AWS
-    #   account, region, and state machine for 90 days. For more information,
-    #   see [ Limits Related to State Machine Executions][1] in the *AWS Step
-    #   Functions Developer Guide*.
+    #   The name of the execution. This name must be unique for your Amazon
+    #   Web Services account, region, and state machine for 90 days. For more
+    #   information, see [ Limits Related to State Machine Executions][1] in
+    #   the *Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -1497,8 +1506,8 @@ module Aws::States
     #   bytes in UTF-8 encoding.
     #
     # @option params [String] :trace_header
-    #   Passes the AWS X-Ray trace header. The trace header can also be passed
-    #   in the request payload.
+    #   Passes the X-Ray trace header. The trace header can also be passed in
+    #   the request payload.
     #
     # @return [Types::StartExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1529,6 +1538,19 @@ module Aws::States
     end
 
     # Starts a Synchronous Express state machine execution.
+    # `StartSyncExecution` is not available for `STANDARD` workflows.
+    #
+    # <note markdown="1"> `StartSyncExecution` will return a `200 OK` response, even if your
+    # execution fails, because the status code in the API response doesn't
+    # reflect function errors. Error codes are reserved for errors that
+    # prevent your execution from running, such as permissions errors, limit
+    # errors, or issues with your state machine code and configuration.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> This API action isn't logged in CloudTrail.
+    #
+    #  </note>
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to execute.
@@ -1551,8 +1573,8 @@ module Aws::States
     #   bytes in UTF-8 encoding.
     #
     # @option params [String] :trace_header
-    #   Passes the AWS X-Ray trace header. The trace header can also be passed
-    #   in the request payload.
+    #   Passes the X-Ray trace header. The trace header can also be passed in
+    #   the request payload.
     #
     # @return [Types::StartSyncExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1648,8 +1670,8 @@ module Aws::States
     # Add a tag to a Step Functions resource.
     #
     # An array of key-value pairs. For more information, see [Using Cost
-    # Allocation Tags][1] in the *AWS Billing and Cost Management User
-    # Guide*, and [Controlling Access Using IAM Tags][2].
+    # Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    # Management User Guide*, and [Controlling Access Using IAM Tags][2].
     #
     # Tags may only contain Unicode letters, digits, white space, or these
     # symbols: `_ . : / = + - @`.
@@ -1751,7 +1773,7 @@ module Aws::States
     #   options.
     #
     # @option params [Types::TracingConfiguration] :tracing_configuration
-    #   Selects whether AWS X-Ray tracing is enabled.
+    #   Selects whether X-Ray tracing is enabled.
     #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1805,7 +1827,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

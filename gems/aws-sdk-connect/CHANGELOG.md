@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2022-11-18)
+------------------
+
+* Feature - Added AllowedAccessControlTags and TagRestrictedResource for Tag Based Access Control on Amazon Connect Webpage
+
 1.84.0 (2022-11-16)
 ------------------
 

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.664.0 (2022-11-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTRoboRunner`.
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKVoice`.
+
 1.663.0 (2022-11-17)
 ------------------
 

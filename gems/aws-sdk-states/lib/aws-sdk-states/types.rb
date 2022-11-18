@@ -290,9 +290,9 @@ module Aws::States
     #
     # @!attribute [rw] name
     #   The name of the activity to create. This name must be unique for
-    #   your AWS account and region for 90 days. For more information, see [
-    #   Limits Related to State Machine Executions][1] in the *AWS Step
-    #   Functions Developer Guide*.
+    #   your Amazon Web Services account and region for 90 days. For more
+    #   information, see [ Limits Related to State Machine Executions][1] in
+    #   the *Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -318,8 +318,8 @@ module Aws::States
     #   The list of tags to add to a resource.
     #
     #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*, and [Controlling Access Using IAM Tags][2].
     #
     #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
@@ -430,7 +430,7 @@ module Aws::States
     #   logged.
     #
     #   <note markdown="1"> By default, the `level` is set to `OFF`. For more information see
-    #   [Log Levels][1] in the AWS Step Functions User Guide.
+    #   [Log Levels][1] in the Step Functions User Guide.
     #
     #    </note>
     #
@@ -443,8 +443,8 @@ module Aws::States
     #   Tags to be added when creating a state machine.
     #
     #   An array of key-value pairs. For more information, see [Using Cost
-    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
-    #   Guide*, and [Controlling Access Using IAM Tags][2].
+    #   Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    #   Management User Guide*, and [Controlling Access Using IAM Tags][2].
     #
     #   Tags may only contain Unicode letters, digits, white space, or these
     #   symbols: `_ . : / = + - @`.
@@ -456,7 +456,7 @@ module Aws::States
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] tracing_configuration
-    #   Selects whether AWS X-Ray tracing is enabled.
+    #   Selects whether X-Ray tracing is enabled.
     #   @return [Types::TracingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
@@ -676,7 +676,7 @@ module Aws::States
     #   @return [Types::CloudWatchEventsExecutionDataDetails]
     #
     # @!attribute [rw] trace_header
-    #   The AWS X-Ray trace header that was passed to the execution.
+    #   The X-Ray trace header that was passed to the execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
@@ -752,7 +752,7 @@ module Aws::States
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] tracing_configuration
-    #   Selects whether AWS X-Ray tracing is enabled.
+    #   Selects whether X-Ray tracing is enabled.
     #   @return [Types::TracingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionOutput AWS API Documentation
@@ -827,7 +827,7 @@ module Aws::States
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used when creating
     #   this state machine. (The IAM role maintains security by granting
-    #   Step Functions access to AWS resources.)
+    #   Step Functions access to Amazon Web Services resources.)
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -844,7 +844,7 @@ module Aws::States
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] tracing_configuration
-    #   Selects whether AWS X-Ray tracing is enabled.
+    #   Selects whether X-Ray tracing is enabled.
     #   @return [Types::TracingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
@@ -1014,7 +1014,7 @@ module Aws::States
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used for executing
-    #   AWS Lambda tasks.
+    #   Lambda tasks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionStartedEventDetails AWS API Documentation
@@ -1314,17 +1314,17 @@ module Aws::States
     #   @return [Types::MapIterationEventDetails]
     #
     # @!attribute [rw] lambda_function_failed_event_details
-    #   Contains details about a lambda function that failed during an
+    #   Contains details about a Lambda function that failed during an
     #   execution.
     #   @return [Types::LambdaFunctionFailedEventDetails]
     #
     # @!attribute [rw] lambda_function_schedule_failed_event_details
-    #   Contains details about a failed lambda function schedule event that
+    #   Contains details about a failed Lambda function schedule event that
     #   occurred during an execution.
     #   @return [Types::LambdaFunctionScheduleFailedEventDetails]
     #
     # @!attribute [rw] lambda_function_scheduled_event_details
-    #   Contains details about a lambda function scheduled during an
+    #   Contains details about a Lambda function scheduled during an
     #   execution.
     #   @return [Types::LambdaFunctionScheduledEventDetails]
     #
@@ -1334,12 +1334,12 @@ module Aws::States
     #   @return [Types::LambdaFunctionStartFailedEventDetails]
     #
     # @!attribute [rw] lambda_function_succeeded_event_details
-    #   Contains details about a lambda function that terminated
+    #   Contains details about a Lambda function that terminated
     #   successfully during an execution.
     #   @return [Types::LambdaFunctionSucceededEventDetails]
     #
     # @!attribute [rw] lambda_function_timed_out_event_details
-    #   Contains details about a lambda function timeout that occurred
+    #   Contains details about a Lambda function timeout that occurred
     #   during an execution.
     #   @return [Types::LambdaFunctionTimedOutEventDetails]
     #
@@ -1512,7 +1512,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function that failed during an
+    # Contains details about a Lambda function that failed during an
     # execution.
     #
     # @!attribute [rw] error
@@ -1532,7 +1532,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a failed lambda function schedule event that
+    # Contains details about a failed Lambda function schedule event that
     # occurred during an execution.
     #
     # @!attribute [rw] error
@@ -1552,15 +1552,15 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function scheduled during an
+    # Contains details about a Lambda function scheduled during an
     # execution.
     #
     # @!attribute [rw] resource
-    #   The Amazon Resource Name (ARN) of the scheduled lambda function.
+    #   The Amazon Resource Name (ARN) of the scheduled Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   The JSON data input to the lambda function. Length constraints apply
+    #   The JSON data input to the Lambda function. Length constraints apply
     #   to the payload size, and are expressed as bytes in UTF-8 encoding.
     #   @return [String]
     #
@@ -1569,8 +1569,12 @@ module Aws::States
     #   @return [Types::HistoryEventExecutionDataDetails]
     #
     # @!attribute [rw] timeout_in_seconds
-    #   The maximum allowed duration of the lambda function.
+    #   The maximum allowed duration of the Lambda function.
     #   @return [Integer]
+    #
+    # @!attribute [rw] task_credentials
+    #   The credentials that Step Functions uses for the task.
+    #   @return [Types::TaskCredentials]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduledEventDetails AWS API Documentation
     #
@@ -1578,7 +1582,8 @@ module Aws::States
       :resource,
       :input,
       :input_details,
-      :timeout_in_seconds)
+      :timeout_in_seconds,
+      :task_credentials)
       SENSITIVE = [:input]
       include Aws::Structure
     end
@@ -1603,11 +1608,11 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function that successfully terminated
+    # Contains details about a Lambda function that successfully terminated
     # during an execution.
     #
     # @!attribute [rw] output
-    #   The JSON data output by the lambda function. Length constraints
+    #   The JSON data output by the Lambda function. Length constraints
     #   apply to the payload size, and are expressed as bytes in UTF-8
     #   encoding.
     #   @return [String]
@@ -1625,7 +1630,7 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Contains details about a lambda function timeout that occurred during
+    # Contains details about a Lambda function timeout that occurred during
     # an execution.
     #
     # @!attribute [rw] error
@@ -1875,7 +1880,7 @@ module Aws::States
     #
     # @!attribute [rw] cloud_watch_logs_log_group
     #   An object describing a CloudWatch log group. For more information,
-    #   see [AWS::Logs::LogGroup][1] in the AWS CloudFormation User Guide.
+    #   see [AWS::Logs::LogGroup][1] in the CloudFormation User Guide.
     #
     #
     #
@@ -2122,10 +2127,10 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the execution. This name must be unique for your AWS
-    #   account, region, and state machine for 90 days. For more
-    #   information, see [ Limits Related to State Machine Executions][1] in
-    #   the *AWS Step Functions Developer Guide*.
+    #   The name of the execution. This name must be unique for your Amazon
+    #   Web Services account, region, and state machine for 90 days. For
+    #   more information, see [ Limits Related to State Machine
+    #   Executions][1] in the *Step Functions Developer Guide*.
     #
     #   A name must *not* contain:
     #
@@ -2163,8 +2168,8 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] trace_header
-    #   Passes the AWS X-Ray trace header. The trace header can also be
-    #   passed in the request payload.
+    #   Passes the X-Ray trace header. The trace header can also be passed
+    #   in the request payload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput AWS API Documentation
@@ -2229,8 +2234,8 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] trace_header
-    #   Passes the AWS X-Ray trace header. The trace header can also be
-    #   passed in the request payload.
+    #   Passes the X-Ray trace header. The trace header can also be passed
+    #   in the request payload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartSyncExecutionInput AWS API Documentation
@@ -2301,7 +2306,7 @@ module Aws::States
     #   @return [Types::CloudWatchEventsExecutionDataDetails]
     #
     # @!attribute [rw] trace_header
-    #   The AWS X-Ray trace header that was passed to the execution.
+    #   The X-Ray trace header that was passed to the execution.
     #   @return [String]
     #
     # @!attribute [rw] billing_details
@@ -2551,8 +2556,8 @@ module Aws::States
     # state machines and activities.
     #
     # An array of key-value pairs. For more information, see [Using Cost
-    # Allocation Tags][1] in the *AWS Billing and Cost Management User
-    # Guide*, and [Controlling Access Using IAM Tags][2].
+    # Allocation Tags][1] in the *Amazon Web Services Billing and Cost
+    # Management User Guide*, and [Controlling Access Using IAM Tags][2].
     #
     # Tags may only contain Unicode letters, digits, white space, or these
     # symbols: `_ . : / = + - @`.
@@ -2625,6 +2630,22 @@ module Aws::States
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
+    # Contains details about the credentials that Step Functions uses for a
+    # task.
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM role that Step Functions assumes for the task. The
+    #   role can allow cross-account access to resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskCredentials AWS API Documentation
+    #
+    class TaskCredentials < Struct.new(
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -2639,11 +2660,11 @@ module Aws::States
     # Contains details about a task failure event.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -2668,11 +2689,11 @@ module Aws::States
     # Contains details about a task scheduled during an execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -2693,6 +2714,10 @@ module Aws::States
     #   The maximum allowed duration between two heartbeats for the task.
     #   @return [Integer]
     #
+    # @!attribute [rw] task_credentials
+    #   The credentials that Step Functions uses for the task.
+    #   @return [Types::TaskCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskScheduledEventDetails AWS API Documentation
     #
     class TaskScheduledEventDetails < Struct.new(
@@ -2701,7 +2726,8 @@ module Aws::States
       :region,
       :parameters,
       :timeout_in_seconds,
-      :heartbeat_in_seconds)
+      :heartbeat_in_seconds,
+      :task_credentials)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -2710,11 +2736,11 @@ module Aws::States
     # execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -2739,11 +2765,11 @@ module Aws::States
     # Contains details about the start of a task during an execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartedEventDetails AWS API Documentation
@@ -2759,11 +2785,11 @@ module Aws::States
     # execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -2788,11 +2814,11 @@ module Aws::States
     # Contains details about a task submitted to a resource .
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] output
@@ -2819,11 +2845,11 @@ module Aws::States
     # Contains details about the successful completion of a task state.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] output
@@ -2863,11 +2889,11 @@ module Aws::States
     # execution.
     #
     # @!attribute [rw] resource_type
-    #   The action of the resource called by a task state.
+    #   The service name of the resource in a task state.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The service name of the resource in a task state.
+    #   The action of the resource called by a task state.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -2890,7 +2916,7 @@ module Aws::States
     end
 
     # You've exceeded the number of tags allowed for a resource. See the [
-    # Limits Topic][1] in the AWS Step Functions Developer Guide.
+    # Limits Topic][1] in the Step Functions Developer Guide.
     #
     #
     #
@@ -2911,8 +2937,8 @@ module Aws::States
       include Aws::Structure
     end
 
-    # Selects whether or not the state machine's AWS X-Ray tracing is
-    # enabled. Default is `false`
+    # Selects whether or not the state machine's X-Ray tracing is enabled.
+    # Default is `false`
     #
     # @note When making an API call, you may pass TracingConfiguration
     #   data as a hash:
@@ -2922,7 +2948,7 @@ module Aws::States
     #       }
     #
     # @!attribute [rw] enabled
-    #   When set to `true`, AWS X-Ray tracing is enabled.
+    #   When set to `true`, X-Ray tracing is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TracingConfiguration AWS API Documentation
@@ -3009,7 +3035,7 @@ module Aws::States
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] tracing_configuration
-    #   Selects whether AWS X-Ray tracing is enabled.
+    #   Selects whether X-Ray tracing is enabled.
     #   @return [Types::TracingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput AWS API Documentation

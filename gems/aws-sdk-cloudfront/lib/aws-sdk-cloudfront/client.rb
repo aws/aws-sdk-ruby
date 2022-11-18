@@ -412,6 +412,246 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Creates a staging distribution using the configuration of the provided
+    # primary distribution. A staging distribution is a copy of an existing
+    # distribution (called the primary distribution) that you can use in a
+    # continuous deployment workflow.
+    #
+    # After you create a staging distribution, you can use
+    # `UpdateDistribution` to modify the staging distribution’s
+    # configuration. Then you can use `CreateContinuousDeploymentPolicy` to
+    # incrementally move traffic to the staging distribution.
+    #
+    # @option params [required, String] :primary_distribution_id
+    #   The identifier of the primary distribution whose configuration you are
+    #   copying. To get a distribution ID, use `ListDistributions`.
+    #
+    # @option params [Boolean] :staging
+    #   The type of distribution that your primary distribution will be copied
+    #   to. The only valid value is `True`, indicating that you are copying to
+    #   a staging distribution.
+    #
+    # @option params [String] :if_match
+    #   The version identifier of the primary distribution whose configuration
+    #   you are copying. This is the `ETag` value returned in the response to
+    #   `GetDistribution` and `GetDistributionConfig`.
+    #
+    # @option params [required, String] :caller_reference
+    #   A value that uniquely identifies a request to create a resource. This
+    #   helps to prevent CloudFront from creating a duplicate resource if you
+    #   accidentally resubmit an identical request.
+    #
+    # @return [Types::CopyDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyDistributionResult#distribution #distribution} => Types::Distribution
+    #   * {Types::CopyDistributionResult#location #location} => String
+    #   * {Types::CopyDistributionResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_distribution({
+    #     primary_distribution_id: "string", # required
+    #     staging: false,
+    #     if_match: "string",
+    #     caller_reference: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution.id #=> String
+    #   resp.distribution.arn #=> String
+    #   resp.distribution.status #=> String
+    #   resp.distribution.last_modified_time #=> Time
+    #   resp.distribution.in_progress_invalidation_batches #=> Integer
+    #   resp.distribution.domain_name #=> String
+    #   resp.distribution.active_trusted_signers.enabled #=> Boolean
+    #   resp.distribution.active_trusted_signers.quantity #=> Integer
+    #   resp.distribution.active_trusted_signers.items #=> Array
+    #   resp.distribution.active_trusted_signers.items[0].aws_account_number #=> String
+    #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.active_trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.active_trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_group_id #=> String
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.distribution_config.caller_reference #=> String
+    #   resp.distribution.distribution_config.aliases.quantity #=> Integer
+    #   resp.distribution.distribution_config.aliases.items #=> Array
+    #   resp.distribution.distribution_config.aliases.items[0] #=> String
+    #   resp.distribution.distribution_config.default_root_object #=> String
+    #   resp.distribution.distribution_config.origins.quantity #=> Integer
+    #   resp.distribution.distribution_config.origins.items #=> Array
+    #   resp.distribution.distribution_config.origins.items[0].id #=> String
+    #   resp.distribution.distribution_config.origins.items[0].domain_name #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_path #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.quantity #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.items #=> Array
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
+    #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
+    #   resp.distribution.distribution_config.origins.items[0].origin_access_control_id #=> String
+    #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].function_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
+    #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
+    #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].response_page_path #=> String
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].response_code #=> String
+    #   resp.distribution.distribution_config.custom_error_responses.items[0].error_caching_min_ttl #=> Integer
+    #   resp.distribution.distribution_config.comment #=> String
+    #   resp.distribution.distribution_config.logging.enabled #=> Boolean
+    #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
+    #   resp.distribution.distribution_config.logging.bucket #=> String
+    #   resp.distribution.distribution_config.logging.prefix #=> String
+    #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+    #   resp.distribution.distribution_config.enabled #=> Boolean
+    #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
+    #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
+    #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
+    #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip", "static-ip"
+    #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1", "TLSv1_2016", "TLSv1.1_2016", "TLSv1.2_2018", "TLSv1.2_2019", "TLSv1.2_2021"
+    #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
+    #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.quantity #=> Integer
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
+    #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
+    #   resp.distribution.distribution_config.web_acl_id #=> String
+    #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2", "http3", "http2and3"
+    #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.alias_icp_recordals #=> Array
+    #   resp.distribution.alias_icp_recordals[0].cname #=> String
+    #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CopyDistribution AWS API Documentation
+    #
+    # @overload copy_distribution(params = {})
+    # @param [Hash] params ({})
+    def copy_distribution(params = {}, options = {})
+      req = build_request(:copy_distribution, params)
+      req.send_request(options)
+    end
+
     # Creates a cache policy.
     #
     # After you create a cache policy, you can attach it to one or more
@@ -568,25 +808,81 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Creates a new web distribution. You create a CloudFront distribution
-    # to tell CloudFront where you want content to be delivered from, and
-    # the details about how to track and manage content delivery. Send a
-    # `POST` request to the `/CloudFront API
-    # version/distribution`/`distribution ID` resource.
+    # Creates a continuous deployment policy that distributes traffic for a
+    # custom domain name to two different CloudFront distributions.
     #
-    # When you update a distribution, there are more required fields than
-    # when you create a distribution. When you update your distribution by
-    # using [UpdateDistribution][1], follow the steps included in the
-    # documentation to get the current configuration and then make your
-    # updates. This helps to make sure that you include all of the required
-    # fields. To view a summary, see [Required Fields for Create
-    # Distribution and Update Distribution][2] in the *Amazon CloudFront
-    # Developer Guide*.
+    # To use a continuous deployment policy, first use `CopyDistribution` to
+    # create a staging distribution, then use `UpdateDistribution` to modify
+    # the staging distribution’s configuration.
     #
+    # After you create and update a staging distribution, you can use a
+    # continuous deployment policy to incrementally move traffic to the
+    # staging distribution. This workflow enables you to test changes to a
+    # distribution’s configuration before moving all of your domain’s
+    # production traffic to the new configuration.
     #
+    # @option params [required, Types::ContinuousDeploymentPolicyConfig] :continuous_deployment_policy_config
+    #   Contains the configuration for a continuous deployment policy.
     #
-    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
+    # @return [Types::CreateContinuousDeploymentPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContinuousDeploymentPolicyResult#continuous_deployment_policy #continuous_deployment_policy} => Types::ContinuousDeploymentPolicy
+    #   * {Types::CreateContinuousDeploymentPolicyResult#location #location} => String
+    #   * {Types::CreateContinuousDeploymentPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_continuous_deployment_policy({
+    #     continuous_deployment_policy_config: { # required
+    #       staging_distribution_dns_names: { # required
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       },
+    #       enabled: false, # required
+    #       traffic_config: {
+    #         single_weight_config: {
+    #           weight: 1.0, # required
+    #           session_stickiness_config: {
+    #             idle_ttl: 1, # required
+    #             maximum_ttl: 1, # required
+    #           },
+    #         },
+    #         single_header_config: {
+    #           header: "string", # required
+    #           value: "string", # required
+    #         },
+    #         type: "SingleWeight", # required, accepts SingleWeight, SingleHeader
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_deployment_policy.id #=> String
+    #   resp.continuous_deployment_policy.last_modified_time #=> Time
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.quantity #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items #=> Array
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items[0] #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.enabled #=> Boolean
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.weight #=> Float
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.idle_ttl #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.maximum_ttl #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.header #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.value #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.type #=> String, one of "SingleWeight", "SingleHeader"
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateContinuousDeploymentPolicy AWS API Documentation
+    #
+    # @overload create_continuous_deployment_policy(params = {})
+    # @param [Hash] params ({})
+    def create_continuous_deployment_policy(params = {}, options = {})
+      req = build_request(:create_continuous_deployment_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates a CloudFront distribution.
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -1910,7 +2206,7 @@ module Aws::CloudFront
     #   resp = client.create_origin_access_control({
     #     origin_access_control_config: { # required
     #       name: "string", # required
-    #       description: "string", # required
+    #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
     #       origin_access_control_origin_type: "s3", # required, accepts s3
@@ -2562,6 +2858,38 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def delete_cloud_front_origin_access_identity(params = {}, options = {})
       req = build_request(:delete_cloud_front_origin_access_identity, params)
+      req.send_request(options)
+    end
+
+    # Deletes a continuous deployment policy.
+    #
+    # You cannot delete a continuous deployment policy that’s attached to a
+    # primary distribution. First update your distribution to remove the
+    # continuous deployment policy, then you can delete the policy.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the continuous deployment policy that you are
+    #   deleting.
+    #
+    # @option params [String] :if_match
+    #   The current version (`ETag` value) of the continuous deployment policy
+    #   that you are deleting.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_continuous_deployment_policy({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteContinuousDeploymentPolicy AWS API Documentation
+    #
+    # @overload delete_continuous_deployment_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_continuous_deployment_policy(params = {}, options = {})
+      req = build_request(:delete_continuous_deployment_policy, params)
       req.send_request(options)
     end
 
@@ -3219,6 +3547,89 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def get_cloud_front_origin_access_identity_config(params = {}, options = {})
       req = build_request(:get_cloud_front_origin_access_identity_config, params)
+      req.send_request(options)
+    end
+
+    # Gets a continuous deployment policy, including metadata (the policy’s
+    # identifier and the date and time when the policy was last modified).
+    #
+    # @option params [required, String] :id
+    #   The identifier of the continuous deployment policy that you are
+    #   getting.
+    #
+    # @return [Types::GetContinuousDeploymentPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContinuousDeploymentPolicyResult#continuous_deployment_policy #continuous_deployment_policy} => Types::ContinuousDeploymentPolicy
+    #   * {Types::GetContinuousDeploymentPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_continuous_deployment_policy({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_deployment_policy.id #=> String
+    #   resp.continuous_deployment_policy.last_modified_time #=> Time
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.quantity #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items #=> Array
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items[0] #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.enabled #=> Boolean
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.weight #=> Float
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.idle_ttl #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.maximum_ttl #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.header #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.value #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.type #=> String, one of "SingleWeight", "SingleHeader"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetContinuousDeploymentPolicy AWS API Documentation
+    #
+    # @overload get_continuous_deployment_policy(params = {})
+    # @param [Hash] params ({})
+    def get_continuous_deployment_policy(params = {}, options = {})
+      req = build_request(:get_continuous_deployment_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets configuration information about a continuous deployment policy.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the continuous deployment policy whose configuration
+    #   you are getting.
+    #
+    # @return [Types::GetContinuousDeploymentPolicyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContinuousDeploymentPolicyConfigResult#continuous_deployment_policy_config #continuous_deployment_policy_config} => Types::ContinuousDeploymentPolicyConfig
+    #   * {Types::GetContinuousDeploymentPolicyConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_continuous_deployment_policy_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_deployment_policy_config.staging_distribution_dns_names.quantity #=> Integer
+    #   resp.continuous_deployment_policy_config.staging_distribution_dns_names.items #=> Array
+    #   resp.continuous_deployment_policy_config.staging_distribution_dns_names.items[0] #=> String
+    #   resp.continuous_deployment_policy_config.enabled #=> Boolean
+    #   resp.continuous_deployment_policy_config.traffic_config.single_weight_config.weight #=> Float
+    #   resp.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.idle_ttl #=> Integer
+    #   resp.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.maximum_ttl #=> Integer
+    #   resp.continuous_deployment_policy_config.traffic_config.single_header_config.header #=> String
+    #   resp.continuous_deployment_policy_config.traffic_config.single_header_config.value #=> String
+    #   resp.continuous_deployment_policy_config.traffic_config.type #=> String, one of "SingleWeight", "SingleHeader"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetContinuousDeploymentPolicyConfig AWS API Documentation
+    #
+    # @overload get_continuous_deployment_policy_config(params = {})
+    # @param [Hash] params ({})
+    def get_continuous_deployment_policy_config(params = {}, options = {})
+      req = build_request(:get_continuous_deployment_policy_config, params)
       req.send_request(options)
     end
 
@@ -4781,6 +5192,66 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_conflicting_aliases(params = {}, options = {})
       req = build_request(:list_conflicting_aliases, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the continuous deployment policies in your Amazon Web
+    # Services account.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of continuous deployment policies. The response includes
+    #   policies in the list that occur after the marker. To get the next page
+    #   of the list, set this field’s value to the value of `NextMarker` from
+    #   the current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of continuous deployment policies that you want
+    #   returned in the response.
+    #
+    # @return [Types::ListContinuousDeploymentPoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContinuousDeploymentPoliciesResult#continuous_deployment_policy_list #continuous_deployment_policy_list} => Types::ContinuousDeploymentPolicyList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_continuous_deployment_policies({
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_deployment_policy_list.next_marker #=> String
+    #   resp.continuous_deployment_policy_list.max_items #=> Integer
+    #   resp.continuous_deployment_policy_list.quantity #=> Integer
+    #   resp.continuous_deployment_policy_list.items #=> Array
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.id #=> String
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.last_modified_time #=> Time
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.quantity #=> Integer
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items #=> Array
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items[0] #=> String
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.enabled #=> Boolean
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.weight #=> Float
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.idle_ttl #=> Integer
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.maximum_ttl #=> Integer
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.header #=> String
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.value #=> String
+    #   resp.continuous_deployment_policy_list.items[0].continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.type #=> String, one of "SingleWeight", "SingleHeader"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListContinuousDeploymentPolicies AWS API Documentation
+    #
+    # @overload list_continuous_deployment_policies(params = {})
+    # @param [Hash] params ({})
+    def list_continuous_deployment_policies(params = {}, options = {})
+      req = build_request(:list_continuous_deployment_policies, params)
       req.send_request(options)
     end
 
@@ -6690,82 +7161,122 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Updates the configuration for a web distribution.
+    # Updates a continuous deployment policy. You can update a continuous
+    # deployment policy to enable or disable it, to change the percentage of
+    # traffic that it sends to the staging distribution, or to change the
+    # staging distribution that it sends traffic to.
     #
-    # When you update a distribution, there are more required fields than
-    # when you create a distribution. When you update your distribution by
-    # using this API action, follow the steps here to get the current
-    # configuration and then make your updates, to make sure that you
-    # include all of the required fields. To view a summary, see [Required
-    # Fields for Create Distribution and Update Distribution][1] in the
-    # *Amazon CloudFront Developer Guide*.
+    # When you update a continuous deployment policy configuration, all the
+    # fields are updated with the values that are provided in the request.
+    # You cannot update some fields independent of others. To update a
+    # continuous deployment policy configuration:
+    #
+    # 1.  Use `GetContinuousDeploymentPolicyConfig` to get the current
+    #     configuration.
+    #
+    # 2.  Locally modify the fields in the continuous deployment policy
+    #     configuration that you want to update.
+    #
+    # 3.  Use `UpdateContinuousDeploymentPolicy`, providing the entire
+    #     continuous deployment policy configuration, including the fields
+    #     that you modified and those that you didn’t.
+    #
+    # @option params [required, Types::ContinuousDeploymentPolicyConfig] :continuous_deployment_policy_config
+    #   The continuous deployment policy configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the continuous deployment policy that you are
+    #   updating.
+    #
+    # @option params [String] :if_match
+    #   The current version (`ETag` value) of the continuous deployment policy
+    #   that you are updating.
+    #
+    # @return [Types::UpdateContinuousDeploymentPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContinuousDeploymentPolicyResult#continuous_deployment_policy #continuous_deployment_policy} => Types::ContinuousDeploymentPolicy
+    #   * {Types::UpdateContinuousDeploymentPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_continuous_deployment_policy({
+    #     continuous_deployment_policy_config: { # required
+    #       staging_distribution_dns_names: { # required
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       },
+    #       enabled: false, # required
+    #       traffic_config: {
+    #         single_weight_config: {
+    #           weight: 1.0, # required
+    #           session_stickiness_config: {
+    #             idle_ttl: 1, # required
+    #             maximum_ttl: 1, # required
+    #           },
+    #         },
+    #         single_header_config: {
+    #           header: "string", # required
+    #           value: "string", # required
+    #         },
+    #         type: "SingleWeight", # required, accepts SingleWeight, SingleHeader
+    #       },
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_deployment_policy.id #=> String
+    #   resp.continuous_deployment_policy.last_modified_time #=> Time
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.quantity #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items #=> Array
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.staging_distribution_dns_names.items[0] #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.enabled #=> Boolean
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.weight #=> Float
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.idle_ttl #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config.maximum_ttl #=> Integer
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.header #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.single_header_config.value #=> String
+    #   resp.continuous_deployment_policy.continuous_deployment_policy_config.traffic_config.type #=> String, one of "SingleWeight", "SingleHeader"
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateContinuousDeploymentPolicy AWS API Documentation
+    #
+    # @overload update_continuous_deployment_policy(params = {})
+    # @param [Hash] params ({})
+    def update_continuous_deployment_policy(params = {}, options = {})
+      req = build_request(:update_continuous_deployment_policy, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration for a CloudFront distribution.
     #
     # The update process includes getting the current distribution
-    # configuration, updating the XML document that is returned to make your
-    # changes, and then submitting an `UpdateDistribution` request to make
-    # the updates.
-    #
-    # For information about updating a distribution using the CloudFront
-    # console instead, see [Creating a Distribution][2] in the *Amazon
-    # CloudFront Developer Guide*.
+    # configuration, updating it to make your changes, and then submitting
+    # an `UpdateDistribution` request to make the updates.
     #
     # **To update a web distribution using the CloudFront API**
     #
-    # 1.  Submit a [GetDistributionConfig][3] request to get the current
-    #     configuration and an `Etag` header for the distribution.
+    # 1.  Use `GetDistributionConfig` to get the current configuration,
+    #     including the version identifier (`ETag`).
     #
-    #     <note markdown="1"> If you update the distribution again, you must get a new `Etag`
-    #     header.
+    # 2.  Update the distribution configuration that was returned in the
+    #     response. Note the following important requirements and
+    #     restrictions:
     #
-    #      </note>
+    #     * You must rename the `ETag` field to `IfMatch`, leaving the value
+    #       unchanged. (Set the value of `IfMatch` to the value of `ETag`,
+    #       then remove the `ETag` field.)
     #
-    # 2.  Update the XML document that was returned in the response to your
-    #     `GetDistributionConfig` request to include your changes.
+    #     * You can’t change the value of `CallerReference`.
     #
-    #     When you edit the XML file, be aware of the following:
-    #
-    #      * You must strip out the ETag parameter that is returned.
-    #
-    #     * Additional fields are required when you update a distribution.
-    #       There may be fields included in the XML file for features that
-    #       you haven't configured for your distribution. This is expected
-    #       and required to successfully update the distribution.
-    #
-    #     * You can't change the value of `CallerReference`. If you try to
-    #       change this value, CloudFront returns an `IllegalUpdate` error.
-    #
-    #     * The new configuration replaces the existing configuration; the
-    #       values that you specify in an `UpdateDistribution` request are
-    #       not merged into your existing configuration. When you add,
-    #       delete, or replace values in an element that allows multiple
-    #       values (for example, `CNAME`), you must specify all of the
-    #       values that you want to appear in the updated distribution. In
-    #       addition, you must update the corresponding `Quantity` element.
-    #
-    # 3.  Submit an `UpdateDistribution` request to update the configuration
-    #     for your distribution:
-    #
-    #     * In the request body, include the XML document that you updated
-    #       in Step 2. The request body must include an XML document with a
-    #       `DistributionConfig` element.
-    #
-    #     * Set the value of the HTTP `If-Match` header to the value of the
-    #       `ETag` header that CloudFront returned when you submitted the
-    #       `GetDistributionConfig` request in Step 1.
-    #
-    # 4.  Review the response to the `UpdateDistribution` request to confirm
-    #     that the configuration was successfully updated.
-    #
-    # 5.  Optional: Submit a [GetDistribution][4] request to confirm that
-    #     your changes have propagated. When propagation is complete, the
-    #     value of `Status` is `Deployed`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
-    # [3]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html
-    # [4]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html
+    # 3.  Submit an `UpdateDistribution` request, providing the distribution
+    #     configuration. The new configuration replaces the existing
+    #     configuration. The values that you specify in an
+    #     `UpdateDistribution` request are not merged into your existing
+    #     configuration. Make sure to include all fields: the ones that you
+    #     modified and also the ones that you didn’t.
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -7535,7 +8046,7 @@ module Aws::CloudFront
     #   resp = client.update_origin_access_control({
     #     origin_access_control_config: { # required
     #       name: "string", # required
-    #       description: "string", # required
+    #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
     #       origin_access_control_origin_type: "s3", # required, accepts s3
@@ -8063,7 +8574,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.147.0 (2022-11-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotroborunner` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkvoice` gem.
+
 3.146.0 (2022-11-15)
 ------------------
 

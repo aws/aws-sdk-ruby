@@ -575,7 +575,33 @@ module Aws::AuditManager
     end
 
     # Uploads one or more pieces of evidence to a control in an Audit
-    # Manager assessment.
+    # Manager assessment. You can upload manual evidence from any Amazon
+    # Simple Storage Service (Amazon S3) bucket by specifying the S3 URI of
+    # the evidence.
+    #
+    # You must upload manual evidence to your S3 bucket before you can
+    # upload it to your assessment. For instructions, see [CreateBucket][1]
+    # and [PutObject][2] in the *Amazon Simple Storage Service API
+    # Reference.*
+    #
+    # The following restrictions apply to this action:
+    #
+    # * Maximum size of an individual evidence file: 100 MB
+    #
+    # * Number of daily manual evidence uploads per control: 100
+    #
+    # * Supported file formats: See [Supported file types for manual
+    #   evidence][3] in the *Audit Manager User Guide*
+    #
+    # For more information about Audit Manager service restrictions, see
+    # [Quotas and restrictions for Audit Manager][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html
     #
     # @option params [required, String] :assessment_id
     #   The identifier for the assessment.
@@ -885,6 +911,30 @@ module Aws::AuditManager
     # @option params [required, String] :assessment_id
     #   The identifier for the assessment.
     #
+    # @option params [String] :query_statement
+    #   A SQL statement that represents an evidence finder query.
+    #
+    #   Provide this parameter when you want to generate an assessment report
+    #   from the results of an evidence finder search query. When you use this
+    #   parameter, Audit Manager generates a one-time report using only the
+    #   evidence from the query output. This report does not include any
+    #   assessment evidence that was manually [added to a report using the
+    #   console][1], or [associated with a report using the API][2].
+    #
+    #   To use this parameter, the [enablementStatus][3] of evidence finder
+    #   must be `ENABLED`.
+    #
+    #   For examples and help resolving `queryStatement` validation
+    #   exceptions, see [Troubleshooting evidence finder issues][4] in the AWS
+    #   Audit Manager User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence
+    #   [2]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_BatchAssociateAssessmentReportEvidence.html
+    #   [3]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_EvidenceFinderSetup.html#auditmanager-Type-EvidenceFinderSetup-enablementStatus
+    #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions
+    #
     # @return [Types::CreateAssessmentReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssessmentReportResponse#assessment_report #assessment_report} => Types::AssessmentReport
@@ -895,6 +945,7 @@ module Aws::AuditManager
     #     name: "AssessmentReportName", # required
     #     description: "AssessmentReportDescription",
     #     assessment_id: "UUID", # required
+    #     query_statement: "QueryStatement",
     #   })
     #
     # @example Response structure
@@ -1227,48 +1278,65 @@ module Aws::AuditManager
     # Audit Manager will stop collecting and attaching evidence to that
     # delegated administrator account moving forward.
     #
-    # <note markdown="1"> When you deregister a delegated administrator account for Audit
+    # Keep in mind the following cleanup task if you use evidence finder:
+    #
+    #  Before you use your management account to remove a delegated
+    # administrator, make sure that the current delegated administrator
+    # account signs in to Audit Manager and disables evidence finder first.
+    # Disabling evidence finder automatically deletes the event data store
+    # that was created in their account when they enabled evidence finder.
+    # If this task isn’t completed, the event data store remains in their
+    # account. In this case, we recommend that the original delegated
+    # administrator goes to CloudTrail Lake and manually [deletes the event
+    # data store][1].
+    #
+    #  This cleanup task is necessary to ensure that you don't end up with
+    # multiple event data stores. Audit Manager will ignore an unused event
+    # data store after you remove or change a delegated administrator
+    # account. However, the unused event data store continues to incur
+    # storage costs from CloudTrail Lake if you don't delete it.
+    #
+    # When you deregister a delegated administrator account for Audit
     # Manager, the data for that account isn’t deleted. If you want to
     # delete resource data for a delegated administrator account, you must
     # perform that task separately before you deregister the account.
     # Either, you can do this in the Audit Manager console. Or, you can use
     # one of the delete API operations that are provided by Audit Manager.
     #
-    #  To delete your Audit Manager resource data, see the following
+    # To delete your Audit Manager resource data, see the following
     # instructions:
     #
-    #  * [DeleteAssessment][1] (see also: [Deleting an assessment][2] in the
+    # * [DeleteAssessment][2] (see also: [Deleting an assessment][3] in the
     #   *Audit Manager User Guide*)
     #
-    # * [DeleteAssessmentFramework][3] (see also: [Deleting a custom
-    #   framework][4] in the *Audit Manager User Guide*)
+    # * [DeleteAssessmentFramework][4] (see also: [Deleting a custom
+    #   framework][5] in the *Audit Manager User Guide*)
     #
-    # * [DeleteAssessmentFrameworkShare][5] (see also: [Deleting a share
-    #   request][6] in the *Audit Manager User Guide*)
+    # * [DeleteAssessmentFrameworkShare][6] (see also: [Deleting a share
+    #   request][7] in the *Audit Manager User Guide*)
     #
-    # * [DeleteAssessmentReport][7] (see also: [Deleting an assessment
-    #   report][8] in the *Audit Manager User Guide*)
+    # * [DeleteAssessmentReport][8] (see also: [Deleting an assessment
+    #   report][9] in the *Audit Manager User Guide*)
     #
-    # * [DeleteControl][9] (see also: [Deleting a custom control][10] in the
-    #   *Audit Manager User Guide*)
+    # * [DeleteControl][10] (see also: [Deleting a custom control][11] in
+    #   the *Audit Manager User Guide*)
     #
-    #  At this time, Audit Manager doesn't provide an option to delete
+    # At this time, Audit Manager doesn't provide an option to delete
     # evidence. All available delete operations are listed above.
     #
-    #  </note>
     #
     #
-    #
-    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
-    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
-    # [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
-    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
-    # [5]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
-    # [6]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
-    # [7]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
-    # [8]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
-    # [9]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
-    # [10]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
+    # [1]: https://docs.aws.amazon.com/userguide/awscloudtrail/latest/userguide/query-eds-disable-termination.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
+    # [5]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
+    # [6]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
+    # [7]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
+    # [8]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
+    # [9]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
+    # [10]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
+    # [11]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
     #
     # @option params [String] :admin_account_id
     #   The identifier for the administrator account.
@@ -1734,6 +1802,7 @@ module Aws::AuditManager
     #   resp.evidence.resources_included #=> Array
     #   resp.evidence.resources_included[0].arn #=> String
     #   resp.evidence.resources_included[0].value #=> String
+    #   resp.evidence.resources_included[0].compliance_check #=> String
     #   resp.evidence.attributes #=> Hash
     #   resp.evidence.attributes["EvidenceAttributeKey"] #=> String
     #   resp.evidence.iam_id #=> String
@@ -1801,6 +1870,7 @@ module Aws::AuditManager
     #   resp.evidence[0].resources_included #=> Array
     #   resp.evidence[0].resources_included[0].arn #=> String
     #   resp.evidence[0].resources_included[0].value #=> String
+    #   resp.evidence[0].resources_included[0].compliance_check #=> String
     #   resp.evidence[0].attributes #=> Hash
     #   resp.evidence[0].attributes["EvidenceAttributeKey"] #=> String
     #   resp.evidence[0].iam_id #=> String
@@ -2084,8 +2154,15 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns a list of the in-scope Amazon Web Services for the specified
-    # assessment.
+    # Returns a list of all of the Amazon Web Services that you can choose
+    # to include in your assessment. When you [create an assessment][1],
+    # specify which of these services you want to include to narrow the
+    # assessment's [scope][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html
     #
     # @return [Types::GetServicesInScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2120,7 +2197,7 @@ module Aws::AuditManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_settings({
-    #     attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS
+    #     attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS, EVIDENCE_FINDER_ENABLEMENT
     #   })
     #
     # @example Response structure
@@ -2133,6 +2210,10 @@ module Aws::AuditManager
     #   resp.settings.default_process_owners[0].role_type #=> String, one of "PROCESS_OWNER", "RESOURCE_OWNER"
     #   resp.settings.default_process_owners[0].role_arn #=> String
     #   resp.settings.kms_key #=> String
+    #   resp.settings.evidence_finder_enablement.event_data_store_arn #=> String
+    #   resp.settings.evidence_finder_enablement.enablement_status #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS"
+    #   resp.settings.evidence_finder_enablement.backfill_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.settings.evidence_finder_enablement.error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetSettings AWS API Documentation
     #
@@ -3603,6 +3684,26 @@ module Aws::AuditManager
     # @option params [String] :kms_key
     #   The KMS key details.
     #
+    # @option params [Boolean] :evidence_finder_enabled
+    #   Specifies whether the evidence finder feature is enabled. Change this
+    #   attribute to enable or disable evidence finder.
+    #
+    #   When you use this attribute to disable evidence finder, Audit Manager
+    #   deletes the event data store that’s used to query your evidence data.
+    #   As a result, you can’t re-enable evidence finder and use the feature
+    #   again. Your only alternative is to [deregister][1] and then
+    #   [re-register][2] Audit Manager.
+    #
+    #    Disabling evidence finder is permanent, so consider this decision
+    #   carefully before you proceed. If you’re using Audit Manager as a
+    #   delegated administrator, keep in mind that this action applies to all
+    #   member accounts in your organization.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
+    #
     # @return [Types::UpdateSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSettingsResponse#settings #settings} => Types::Settings
@@ -3622,6 +3723,7 @@ module Aws::AuditManager
     #       },
     #     ],
     #     kms_key: "KmsKey",
+    #     evidence_finder_enabled: false,
     #   })
     #
     # @example Response structure
@@ -3634,6 +3736,10 @@ module Aws::AuditManager
     #   resp.settings.default_process_owners[0].role_type #=> String, one of "PROCESS_OWNER", "RESOURCE_OWNER"
     #   resp.settings.default_process_owners[0].role_arn #=> String
     #   resp.settings.kms_key #=> String
+    #   resp.settings.evidence_finder_enablement.event_data_store_arn #=> String
+    #   resp.settings.evidence_finder_enablement.enablement_status #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS"
+    #   resp.settings.evidence_finder_enablement.backfill_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.settings.evidence_finder_enablement.error #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateSettings AWS API Documentation
     #
@@ -3695,7 +3801,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

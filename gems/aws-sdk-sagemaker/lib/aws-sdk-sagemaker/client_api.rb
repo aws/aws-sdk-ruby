@@ -6584,9 +6584,10 @@ module Aws::SageMaker
 
     ProductionVariantSummaryList.member = Shapes::ShapeRef.new(shape: ProductionVariantSummary)
 
-    ProfilerConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3OutputPath"))
+    ProfilerConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3OutputPath"))
     ProfilerConfig.add_member(:profiling_interval_in_milliseconds, Shapes::ShapeRef.new(shape: ProfilingIntervalInMilliseconds, location_name: "ProfilingIntervalInMilliseconds"))
     ProfilerConfig.add_member(:profiling_parameters, Shapes::ShapeRef.new(shape: ProfilingParameters, location_name: "ProfilingParameters"))
+    ProfilerConfig.add_member(:disable_profiler, Shapes::ShapeRef.new(shape: DisableProfiler, location_name: "DisableProfiler"))
     ProfilerConfig.struct_class = Types::ProfilerConfig
 
     ProfilerConfigForUpdate.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3OutputPath"))

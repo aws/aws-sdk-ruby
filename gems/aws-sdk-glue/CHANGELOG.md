@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2022-11-18)
+------------------
+
+* Feature - AWSGlue Crawler - Adding support for Table and Column level Comments with database level datatypes for JDBC based crawler.
+
 1.123.0 (2022-11-11)
 ------------------
 

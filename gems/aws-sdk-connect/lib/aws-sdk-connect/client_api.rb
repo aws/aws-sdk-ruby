@@ -35,6 +35,7 @@ module Aws::Connect
     AgentStatusTypes = Shapes::ListShape.new(name: 'AgentStatusTypes')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
+    AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
     AllowedMonitorCapabilities = Shapes::ListShape.new(name: 'AllowedMonitorCapabilities')
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
     ApproximateTotalCount = Shapes::IntegerShape.new(name: 'ApproximateTotalCount')
@@ -129,6 +130,7 @@ module Aws::Connect
     CreateQuickConnectResponse = Shapes::StructureShape.new(name: 'CreateQuickConnectResponse')
     CreateRoutingProfileRequest = Shapes::StructureShape.new(name: 'CreateRoutingProfileRequest')
     CreateRoutingProfileResponse = Shapes::StructureShape.new(name: 'CreateRoutingProfileResponse')
+    CreateSecurityProfileName = Shapes::StringShape.new(name: 'CreateSecurityProfileName')
     CreateSecurityProfileRequest = Shapes::StructureShape.new(name: 'CreateSecurityProfileRequest')
     CreateSecurityProfileResponse = Shapes::StructureShape.new(name: 'CreateSecurityProfileResponse')
     CreateTaskTemplateRequest = Shapes::StructureShape.new(name: 'CreateTaskTemplateRequest')
@@ -544,6 +546,8 @@ module Aws::Connect
     SecurityProfileIds = Shapes::ListShape.new(name: 'SecurityProfileIds')
     SecurityProfileName = Shapes::StringShape.new(name: 'SecurityProfileName')
     SecurityProfilePermission = Shapes::StringShape.new(name: 'SecurityProfilePermission')
+    SecurityProfilePolicyKey = Shapes::StringShape.new(name: 'SecurityProfilePolicyKey')
+    SecurityProfilePolicyValue = Shapes::StringShape.new(name: 'SecurityProfilePolicyValue')
     SecurityProfileSearchConditionList = Shapes::ListShape.new(name: 'SecurityProfileSearchConditionList')
     SecurityProfileSearchCriteria = Shapes::StructureShape.new(name: 'SecurityProfileSearchCriteria')
     SecurityProfileSearchSummary = Shapes::StructureShape.new(name: 'SecurityProfileSearchSummary')
@@ -591,6 +595,8 @@ module Aws::Connect
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagOrConditionList = Shapes::ListShape.new(name: 'TagOrConditionList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagRestrictedResourceList = Shapes::ListShape.new(name: 'TagRestrictedResourceList')
+    TagRestrictedResourceName = Shapes::StringShape.new(name: 'TagRestrictedResourceName')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaskTemplateArn = Shapes::StringShape.new(name: 'TaskTemplateArn')
     TaskTemplateConstraints = Shapes::StructureShape.new(name: 'TaskTemplateConstraints')
@@ -756,6 +762,9 @@ module Aws::Connect
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
 
     AgentStatusTypes.member = Shapes::ShapeRef.new(shape: AgentStatusType)
+
+    AllowedAccessControlTags.key = Shapes::ShapeRef.new(shape: SecurityProfilePolicyKey)
+    AllowedAccessControlTags.value = Shapes::ShapeRef.new(shape: SecurityProfilePolicyValue)
 
     AllowedMonitorCapabilities.member = Shapes::ShapeRef.new(shape: MonitorCapability)
 
@@ -1057,11 +1066,13 @@ module Aws::Connect
     CreateRoutingProfileResponse.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "RoutingProfileId"))
     CreateRoutingProfileResponse.struct_class = Types::CreateRoutingProfileResponse
 
-    CreateSecurityProfileRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, required: true, location_name: "SecurityProfileName"))
+    CreateSecurityProfileRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: CreateSecurityProfileName, required: true, location_name: "SecurityProfileName"))
     CreateSecurityProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
     CreateSecurityProfileRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionsList, location_name: "Permissions"))
     CreateSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateSecurityProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
+    CreateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
     CreateSecurityProfileResponse.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "SecurityProfileId"))
@@ -2416,6 +2427,8 @@ module Aws::Connect
     SecurityProfile.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "SecurityProfileName"))
     SecurityProfile.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
     SecurityProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    SecurityProfile.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
+    SecurityProfile.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     SecurityProfile.struct_class = Types::SecurityProfile
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
@@ -2569,6 +2582,8 @@ module Aws::Connect
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagRestrictedResourceList.member = Shapes::ShapeRef.new(shape: TagRestrictedResourceName)
 
     TaskTemplateConstraints.add_member(:required_fields, Shapes::ShapeRef.new(shape: RequiredTaskTemplateFields, location_name: "RequiredFields"))
     TaskTemplateConstraints.add_member(:read_only_fields, Shapes::ShapeRef.new(shape: ReadOnlyTaskTemplateFields, location_name: "ReadOnlyFields"))
@@ -2806,6 +2821,8 @@ module Aws::Connect
     UpdateSecurityProfileRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionsList, location_name: "Permissions"))
     UpdateSecurityProfileRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
     UpdateSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
+    UpdateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
     UpdateTaskTemplateRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location: "uri", location_name: "TaskTemplateId"))

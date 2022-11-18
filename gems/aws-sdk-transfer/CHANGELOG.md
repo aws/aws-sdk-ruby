@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2022-11-18)
+------------------
+
+* Feature - Adds a NONE encryption algorithm type to AS2 connectors, providing support for skipping encryption of the AS2 message body when a HTTPS URL is also specified.
+
 1.62.0 (2022-11-16)
 ------------------
 

@@ -3927,6 +3927,7 @@ module Aws::EC2
     CopyImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
     CopyImageRequest.add_member(:destination_outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationOutpostArn"))
     CopyImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CopyImageRequest.add_member(:copy_image_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "CopyImageTags"))
     CopyImageRequest.struct_class = Types::CopyImageRequest
 
     CopyImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))

@@ -6517,6 +6517,7 @@ module Aws::EC2
     #         source_region: "String", # required
     #         destination_outpost_arn: "String",
     #         dry_run: false,
+    #         copy_image_tags: false,
     #       }
     #
     # @!attribute [rw] client_token
@@ -6539,7 +6540,7 @@ module Aws::EC2
     #   snapshot, but you cannot create an unencrypted copy of an encrypted
     #   snapshot. The default KMS key for Amazon EBS is used unless you
     #   specify a non-default Key Management Service (KMS) KMS key using
-    #   `KmsKeyId`. For more information, see [Amazon EBS Encryption][1] in
+    #   `KmsKeyId`. For more information, see [Amazon EBS encryption][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -6594,7 +6595,7 @@ module Aws::EC2
     #   the destination Outpost. You cannot copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
-    #   For more information, see [ Copying AMIs from an Amazon Web Services
+    #   For more information, see [ Copy AMIs from an Amazon Web Services
     #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
@@ -6610,6 +6611,20 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] copy_image_tags
+    #   Indicates whether to include your user-defined AMI tags when copying
+    #   the AMI.
+    #
+    #   The following tags will not be copied:
+    #
+    #   * System tags (prefixed with `aws:`)
+    #
+    #   * For public and shared AMIs, user-defined tags that are attached by
+    #     other Amazon Web Services accounts
+    #
+    #   Default: Your user-defined AMI tags are not copied.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageRequest AWS API Documentation
     #
     class CopyImageRequest < Struct.new(
@@ -6621,7 +6636,8 @@ module Aws::EC2
       :source_image_id,
       :source_region,
       :destination_outpost_arn,
-      :dry_run)
+      :dry_run,
+      :copy_image_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21704,8 +21720,7 @@ module Aws::EC2
     #     recommend that you use the **Owner** request parameter instead of
     #     this filter.
     #
-    #   * `platform` - The platform. To only list Windows-based AMIs, use
-    #     `windows`.
+    #   * `platform` - The platform. The only supported value is `windows`.
     #
     #   * `product-code` - The product code.
     #
@@ -39698,8 +39713,8 @@ module Aws::EC2
     #
     # @!attribute [rw] platform_details
     #   The platform details associated with the billing code of the AMI.
-    #   For more information, see [Understanding AMI billing][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   For more information, see [Understand AMI billing information][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -62768,7 +62783,7 @@ module Aws::EC2
     # @!attribute [rw] aws_access_key_id
     #   The access key ID of the owner of the bucket. Before you specify a
     #   value for your access key ID, review and follow the guidance in
-    #   [Best Practices for Managing Amazon Web Services Access Keys][1].
+    #   [Best practices for managing Amazon Web Services access keys][1].
     #
     #
     #

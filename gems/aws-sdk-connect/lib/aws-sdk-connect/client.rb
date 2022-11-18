@@ -1492,6 +1492,14 @@ module Aws::Connect
     #   For example, \\\{ "tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
+    # @option params [Hash<String,String>] :allowed_access_control_tags
+    #   The list of tags that a security profile uses to restrict access to
+    #   resources in Amazon Connect.
+    #
+    # @option params [Array<String>] :tag_restricted_resources
+    #   The list of resources that a security profile applies tag restrictions
+    #   to in Amazon Connect.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_id #security_profile_id} => String
@@ -1500,13 +1508,17 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_security_profile({
-    #     security_profile_name: "SecurityProfileName", # required
+    #     security_profile_name: "CreateSecurityProfileName", # required
     #     description: "SecurityProfileDescription",
     #     permissions: ["SecurityProfilePermission"],
     #     instance_id: "InstanceId", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     allowed_access_control_tags: {
+    #       "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
+    #     },
+    #     tag_restricted_resources: ["TagRestrictedResourceName"],
     #   })
     #
     # @example Response structure
@@ -2986,6 +2998,10 @@ module Aws::Connect
     #   resp.security_profile.description #=> String
     #   resp.security_profile.tags #=> Hash
     #   resp.security_profile.tags["TagKey"] #=> String
+    #   resp.security_profile.allowed_access_control_tags #=> Hash
+    #   resp.security_profile.allowed_access_control_tags["SecurityProfilePolicyKey"] #=> String
+    #   resp.security_profile.tag_restricted_resources #=> Array
+    #   resp.security_profile.tag_restricted_resources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -8765,6 +8781,14 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
+    # @option params [Hash<String,String>] :allowed_access_control_tags
+    #   The list of tags that a security profile uses to restrict access to
+    #   resources in Amazon Connect.
+    #
+    # @option params [Array<String>] :tag_restricted_resources
+    #   The list of resources that a security profile applies tag restrictions
+    #   to in Amazon Connect.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -8774,6 +8798,10 @@ module Aws::Connect
     #     permissions: ["SecurityProfilePermission"],
     #     security_profile_id: "SecurityProfileId", # required
     #     instance_id: "InstanceId", # required
+    #     allowed_access_control_tags: {
+    #       "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
+    #     },
+    #     tag_restricted_resources: ["TagRestrictedResourceName"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
@@ -9238,7 +9266,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

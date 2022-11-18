@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.351.0 (2022-11-18)
+------------------
+
+* Feature - This release adds support for copying an Amazon Machine Image's tags when copying an AMI.
+
 1.350.0 (2022-11-17)
 ------------------
 

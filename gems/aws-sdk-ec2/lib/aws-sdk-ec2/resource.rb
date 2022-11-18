@@ -2129,8 +2129,7 @@ module Aws::EC2
     #     recommend that you use the **Owner** request parameter instead of
     #     this filter.
     #
-    #   * `platform` - The platform. To only list Windows-based AMIs, use
-    #     `windows`.
+    #   * `platform` - The platform. The only supported value is `windows`.
     #
     #   * `product-code` - The product code.
     #

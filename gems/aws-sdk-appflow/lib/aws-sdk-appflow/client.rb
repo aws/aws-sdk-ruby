@@ -1961,9 +1961,9 @@ module Aws::Appflow
       req.send_request(options)
     end
 
-    # Registers a new connector with your Amazon Web Services account.
-    # Before you can register the connector, you must deploy lambda in your
-    # account.
+    # Registers a new custom connector with your Amazon Web Services
+    # account. Before you can register the connector, you must deploy the
+    # associated AWS lambda function in your account.
     #
     # @option params [String] :connector_label
     #   The name of the connector. The name is unique for each
@@ -2107,7 +2107,7 @@ module Aws::Appflow
     end
 
     # Unregisters the custom connector registered in your account that
-    # matches the connectorLabel provided in the request.
+    # matches the connector label provided in the request.
     #
     # @option params [required, String] :connector_label
     #   The label of the connector. The label is unique for each
@@ -2416,6 +2416,54 @@ module Aws::Appflow
     # @param [Hash] params ({})
     def update_connector_profile(params = {}, options = {})
       req = build_request(:update_connector_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates a custom connector that you've previously registered. This
+    # operation updates the connector with one of the following:
+    #
+    # * The latest version of the AWS Lambda function that's assigned to
+    #   the connector
+    #
+    # * A new AWS Lambda function that you specify
+    #
+    # @option params [required, String] :connector_label
+    #   The name of the connector. The name is unique for each connector
+    #   registration in your AWS account.
+    #
+    # @option params [String] :description
+    #   A description about the update that you're applying to the connector.
+    #
+    # @option params [Types::ConnectorProvisioningConfig] :connector_provisioning_config
+    #   Contains information about the configuration of the connector being
+    #   registered.
+    #
+    # @return [Types::UpdateConnectorRegistrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectorRegistrationResponse#connector_arn #connector_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connector_registration({
+    #     connector_label: "ConnectorLabel", # required
+    #     description: "Description",
+    #     connector_provisioning_config: {
+    #       lambda: {
+    #         lambda_arn: "ARN", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpdateConnectorRegistration AWS API Documentation
+    #
+    # @overload update_connector_registration(params = {})
+    # @param [Hash] params ({})
+    def update_connector_registration(params = {}, options = {})
+      req = build_request(:update_connector_registration, params)
       req.send_request(options)
     end
 
@@ -2748,7 +2796,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

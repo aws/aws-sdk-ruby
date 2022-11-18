@@ -75,6 +75,7 @@ module Aws::AuditManager
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChangeLog = Shapes::StructureShape.new(name: 'ChangeLog')
     ChangeLogs = Shapes::ListShape.new(name: 'ChangeLogs')
+    CloudTrailArn = Shapes::StringShape.new(name: 'CloudTrailArn')
     ComplianceType = Shapes::StringShape.new(name: 'ComplianceType')
     Control = Shapes::StructureShape.new(name: 'Control')
     ControlComment = Shapes::StructureShape.new(name: 'ControlComment')
@@ -152,6 +153,9 @@ module Aws::AuditManager
     EvidenceAttributeKey = Shapes::StringShape.new(name: 'EvidenceAttributeKey')
     EvidenceAttributeValue = Shapes::StringShape.new(name: 'EvidenceAttributeValue')
     EvidenceAttributes = Shapes::MapShape.new(name: 'EvidenceAttributes')
+    EvidenceFinderBackfillStatus = Shapes::StringShape.new(name: 'EvidenceFinderBackfillStatus')
+    EvidenceFinderEnablement = Shapes::StructureShape.new(name: 'EvidenceFinderEnablement')
+    EvidenceFinderEnablementStatus = Shapes::StringShape.new(name: 'EvidenceFinderEnablementStatus')
     EvidenceIds = Shapes::ListShape.new(name: 'EvidenceIds')
     EvidenceInsights = Shapes::StructureShape.new(name: 'EvidenceInsights')
     EvidenceList = Shapes::ListShape.new(name: 'EvidenceList')
@@ -242,6 +246,7 @@ module Aws::AuditManager
     Notifications = Shapes::ListShape.new(name: 'Notifications')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     ObjectTypeEnum = Shapes::StringShape.new(name: 'ObjectTypeEnum')
+    QueryStatement = Shapes::StringShape.new(name: 'QueryStatement')
     Region = Shapes::StringShape.new(name: 'Region')
     RegisterAccountRequest = Shapes::StructureShape.new(name: 'RegisterAccountRequest')
     RegisterAccountResponse = Shapes::StructureShape.new(name: 'RegisterAccountResponse')
@@ -668,6 +673,7 @@ module Aws::AuditManager
     CreateAssessmentReportRequest.add_member(:name, Shapes::ShapeRef.new(shape: AssessmentReportName, required: true, location_name: "name"))
     CreateAssessmentReportRequest.add_member(:description, Shapes::ShapeRef.new(shape: AssessmentReportDescription, location_name: "description"))
     CreateAssessmentReportRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))
+    CreateAssessmentReportRequest.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryStatement, location_name: "queryStatement"))
     CreateAssessmentReportRequest.struct_class = Types::CreateAssessmentReportRequest
 
     CreateAssessmentReportResponse.add_member(:assessment_report, Shapes::ShapeRef.new(shape: AssessmentReport, location_name: "assessmentReport"))
@@ -806,6 +812,12 @@ module Aws::AuditManager
 
     EvidenceAttributes.key = Shapes::ShapeRef.new(shape: EvidenceAttributeKey)
     EvidenceAttributes.value = Shapes::ShapeRef.new(shape: EvidenceAttributeValue)
+
+    EvidenceFinderEnablement.add_member(:event_data_store_arn, Shapes::ShapeRef.new(shape: CloudTrailArn, location_name: "eventDataStoreArn"))
+    EvidenceFinderEnablement.add_member(:enablement_status, Shapes::ShapeRef.new(shape: EvidenceFinderEnablementStatus, location_name: "enablementStatus"))
+    EvidenceFinderEnablement.add_member(:backfill_status, Shapes::ShapeRef.new(shape: EvidenceFinderBackfillStatus, location_name: "backfillStatus"))
+    EvidenceFinderEnablement.add_member(:error, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "error"))
+    EvidenceFinderEnablement.struct_class = Types::EvidenceFinderEnablement
 
     EvidenceIds.member = Shapes::ShapeRef.new(shape: UUID)
 
@@ -1128,6 +1140,7 @@ module Aws::AuditManager
 
     Resource.add_member(:arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "arn"))
     Resource.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    Resource.add_member(:compliance_check, Shapes::ShapeRef.new(shape: String, location_name: "complianceCheck"))
     Resource.struct_class = Types::Resource
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1163,6 +1176,7 @@ module Aws::AuditManager
     Settings.add_member(:default_assessment_reports_destination, Shapes::ShapeRef.new(shape: AssessmentReportsDestination, location_name: "defaultAssessmentReportsDestination"))
     Settings.add_member(:default_process_owners, Shapes::ShapeRef.new(shape: Roles, location_name: "defaultProcessOwners"))
     Settings.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
+    Settings.add_member(:evidence_finder_enablement, Shapes::ShapeRef.new(shape: EvidenceFinderEnablement, location_name: "evidenceFinderEnablement"))
     Settings.struct_class = Types::Settings
 
     SourceKeyword.add_member(:keyword_input_type, Shapes::ShapeRef.new(shape: KeywordInputType, location_name: "keywordInputType"))
@@ -1280,6 +1294,7 @@ module Aws::AuditManager
     UpdateSettingsRequest.add_member(:default_assessment_reports_destination, Shapes::ShapeRef.new(shape: AssessmentReportsDestination, location_name: "defaultAssessmentReportsDestination"))
     UpdateSettingsRequest.add_member(:default_process_owners, Shapes::ShapeRef.new(shape: Roles, location_name: "defaultProcessOwners"))
     UpdateSettingsRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
+    UpdateSettingsRequest.add_member(:evidence_finder_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "evidenceFinderEnabled"))
     UpdateSettingsRequest.struct_class = Types::UpdateSettingsRequest
 
     UpdateSettingsResponse.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "settings"))

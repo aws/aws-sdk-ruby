@@ -348,6 +348,7 @@ module Aws::Glue
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeList = Shapes::ListShape.new(name: 'EdgeList')
+    EnableAdditionalMetadata = Shapes::ListShape.new(name: 'EnableAdditionalMetadata')
     EnableHybridValues = Shapes::StringShape.new(name: 'EnableHybridValues')
     EnclosedInStringProperties = Shapes::ListShape.new(name: 'EnclosedInStringProperties')
     EnclosedInStringPropertiesMinOne = Shapes::ListShape.new(name: 'EnclosedInStringPropertiesMinOne')
@@ -557,6 +558,7 @@ module Aws::Glue
     JDBCConnectorTarget = Shapes::StructureShape.new(name: 'JDBCConnectorTarget')
     JDBCDataType = Shapes::StringShape.new(name: 'JDBCDataType')
     JDBCDataTypeMapping = Shapes::MapShape.new(name: 'JDBCDataTypeMapping')
+    JdbcMetadataEntry = Shapes::StringShape.new(name: 'JdbcMetadataEntry')
     JdbcTarget = Shapes::StructureShape.new(name: 'JdbcTarget')
     JdbcTargetList = Shapes::ListShape.new(name: 'JdbcTargetList')
     Job = Shapes::StructureShape.new(name: 'Job')
@@ -2332,6 +2334,8 @@ module Aws::Glue
 
     EdgeList.member = Shapes::ShapeRef.new(shape: Edge)
 
+    EnableAdditionalMetadata.member = Shapes::ShapeRef.new(shape: JdbcMetadataEntry)
+
     EnclosedInStringProperties.member = Shapes::ShapeRef.new(shape: EnclosedInStringProperty)
 
     EnclosedInStringPropertiesMinOne.member = Shapes::ShapeRef.new(shape: EnclosedInStringProperty)
@@ -3128,6 +3132,7 @@ module Aws::Glue
     JdbcTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     JdbcTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
     JdbcTarget.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
+    JdbcTarget.add_member(:enable_additional_metadata, Shapes::ShapeRef.new(shape: EnableAdditionalMetadata, location_name: "EnableAdditionalMetadata"))
     JdbcTarget.struct_class = Types::JdbcTarget
 
     JdbcTargetList.member = Shapes::ShapeRef.new(shape: JdbcTarget)

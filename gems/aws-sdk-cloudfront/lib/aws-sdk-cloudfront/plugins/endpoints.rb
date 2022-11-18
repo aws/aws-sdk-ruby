@@ -58,10 +58,14 @@ module Aws::CloudFront
           case context.operation_name
           when :associate_alias
             Aws::CloudFront::Endpoints::AssociateAlias.build(context)
+          when :copy_distribution
+            Aws::CloudFront::Endpoints::CopyDistribution.build(context)
           when :create_cache_policy
             Aws::CloudFront::Endpoints::CreateCachePolicy.build(context)
           when :create_cloud_front_origin_access_identity
             Aws::CloudFront::Endpoints::CreateCloudFrontOriginAccessIdentity.build(context)
+          when :create_continuous_deployment_policy
+            Aws::CloudFront::Endpoints::CreateContinuousDeploymentPolicy.build(context)
           when :create_distribution
             Aws::CloudFront::Endpoints::CreateDistribution.build(context)
           when :create_distribution_with_tags
@@ -96,6 +100,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::DeleteCachePolicy.build(context)
           when :delete_cloud_front_origin_access_identity
             Aws::CloudFront::Endpoints::DeleteCloudFrontOriginAccessIdentity.build(context)
+          when :delete_continuous_deployment_policy
+            Aws::CloudFront::Endpoints::DeleteContinuousDeploymentPolicy.build(context)
           when :delete_distribution
             Aws::CloudFront::Endpoints::DeleteDistribution.build(context)
           when :delete_field_level_encryption_config
@@ -130,6 +136,10 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::GetCloudFrontOriginAccessIdentity.build(context)
           when :get_cloud_front_origin_access_identity_config
             Aws::CloudFront::Endpoints::GetCloudFrontOriginAccessIdentityConfig.build(context)
+          when :get_continuous_deployment_policy
+            Aws::CloudFront::Endpoints::GetContinuousDeploymentPolicy.build(context)
+          when :get_continuous_deployment_policy_config
+            Aws::CloudFront::Endpoints::GetContinuousDeploymentPolicyConfig.build(context)
           when :get_distribution
             Aws::CloudFront::Endpoints::GetDistribution.build(context)
           when :get_distribution_config
@@ -180,6 +190,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::ListCloudFrontOriginAccessIdentities.build(context)
           when :list_conflicting_aliases
             Aws::CloudFront::Endpoints::ListConflictingAliases.build(context)
+          when :list_continuous_deployment_policies
+            Aws::CloudFront::Endpoints::ListContinuousDeploymentPolicies.build(context)
           when :list_distributions
             Aws::CloudFront::Endpoints::ListDistributions.build(context)
           when :list_distributions_by_cache_policy_id
@@ -230,6 +242,8 @@ module Aws::CloudFront
             Aws::CloudFront::Endpoints::UpdateCachePolicy.build(context)
           when :update_cloud_front_origin_access_identity
             Aws::CloudFront::Endpoints::UpdateCloudFrontOriginAccessIdentity.build(context)
+          when :update_continuous_deployment_policy
+            Aws::CloudFront::Endpoints::UpdateContinuousDeploymentPolicy.build(context)
           when :update_distribution
             Aws::CloudFront::Endpoints::UpdateDistribution.build(context)
           when :update_field_level_encryption_config

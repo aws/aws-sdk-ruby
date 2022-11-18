@@ -6405,11 +6405,12 @@ module Aws::SageMaker
     #       trial_component_display_name: "ExperimentEntityName",
     #     },
     #     profiler_config: {
-    #       s3_output_path: "S3Uri", # required
+    #       s3_output_path: "S3Uri",
     #       profiling_interval_in_milliseconds: 1,
     #       profiling_parameters: {
     #         "ConfigKey" => "ConfigValue",
     #       },
+    #       disable_profiler: false,
     #     },
     #     profiler_rule_configurations: [
     #       {
@@ -11976,6 +11977,7 @@ module Aws::SageMaker
     #   resp.profiler_config.profiling_interval_in_milliseconds #=> Integer
     #   resp.profiler_config.profiling_parameters #=> Hash
     #   resp.profiler_config.profiling_parameters["ConfigKey"] #=> String
+    #   resp.profiler_config.disable_profiler #=> Boolean
     #   resp.profiler_rule_configurations #=> Array
     #   resp.profiler_rule_configurations[0].rule_configuration_name #=> String
     #   resp.profiler_rule_configurations[0].local_path #=> String
@@ -21092,7 +21094,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

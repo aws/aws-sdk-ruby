@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-11-18)
+------------------
+
+* Feature - Updated minor fixes for DynamoDB documentation.
+
 1.78.0 (2022-10-25)
 ------------------
 

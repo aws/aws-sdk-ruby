@@ -3639,9 +3639,9 @@ module Aws::EC2
     end
 
     # Removes your Amazon Web Services account from the launch permissions
-    # for the specified AMI. For more information, see [Cancel sharing an
-    # AMI with your Amazon Web Services account][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # for the specified AMI. For more information, see [Cancel having an AMI
+    # shared with your Amazon Web Services account][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -4079,8 +4079,8 @@ module Aws::EC2
     # Outposts][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copying an AMI][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # an AMI, see [Copy an AMI][3] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #
     #
@@ -4106,7 +4106,7 @@ module Aws::EC2
     #   you cannot create an unencrypted copy of an encrypted snapshot. The
     #   default KMS key for Amazon EBS is used unless you specify a
     #   non-default Key Management Service (KMS) KMS key using `KmsKeyId`. For
-    #   more information, see [Amazon EBS Encryption][1] in the *Amazon
+    #   more information, see [Amazon EBS encryption][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
     #
@@ -4156,7 +4156,7 @@ module Aws::EC2
     #   the destination Outpost. You cannot copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
-    #   For more information, see [ Copying AMIs from an Amazon Web Services
+    #   For more information, see [ Copy AMIs from an Amazon Web Services
     #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
     #   Guide*.
     #
@@ -4169,6 +4169,19 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :copy_image_tags
+    #   Indicates whether to include your user-defined AMI tags when copying
+    #   the AMI.
+    #
+    #   The following tags will not be copied:
+    #
+    #   * System tags (prefixed with `aws:`)
+    #
+    #   * For public and shared AMIs, user-defined tags that are attached by
+    #     other Amazon Web Services accounts
+    #
+    #   Default: Your user-defined AMI tags are not copied.
     #
     # @return [Types::CopyImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4203,6 +4216,7 @@ module Aws::EC2
     #     source_region: "String", # required
     #     destination_outpost_arn: "String",
     #     dry_run: false,
+    #     copy_image_tags: false,
     #   })
     #
     # @example Response structure
@@ -6498,7 +6512,7 @@ module Aws::EC2
     # launch an instance from this new AMI, the instance automatically
     # launches with those additional volumes.
     #
-    # For more information, see [Creating Amazon EBS-Backed Linux AMIs][1]
+    # For more information, see [Create an Amazon EBS-backed Linux AMI][1]
     # in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -17346,8 +17360,8 @@ module Aws::EC2
     #
     # If you deregister an AMI that matches a Recycle Bin retention rule,
     # the AMI is retained in the Recycle Bin for the specified retention
-    # period. For more information, see [Recycle Bin][1] in the Amazon
-    # Elastic Compute Cloud User Guide.
+    # period. For more information, see [Recycle Bin][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     # When you deregister an AMI, it doesn't affect any instances that
     # you've already launched from the AMI. You'll continue to incur usage
@@ -21527,8 +21541,7 @@ module Aws::EC2
     #     recommend that you use the **Owner** request parameter instead of
     #     this filter.
     #
-    #   * `platform` - The platform. To only list Windows-based AMIs, use
-    #     `windows`.
+    #   * `platform` - The platform. The only supported value is `windows`.
     #
     #   * `product-code` - The product code.
     #
@@ -46251,8 +46264,8 @@ module Aws::EC2
 
     # Registers an AMI. When you're creating an AMI, this is the final step
     # you must complete before you can launch an instance from the AMI. For
-    # more information about creating AMIs, see [Creating your own AMIs][1]
-    # in the *Amazon Elastic Compute Cloud User Guide*.
+    # more information about creating AMIs, see [Create your own AMI][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     # <note markdown="1"> For Amazon EBS-backed instances, CreateImage creates and registers the
     # AMI in a single request, so you don't have to register the AMI
@@ -46304,8 +46317,8 @@ module Aws::EC2
     # you purchase a Reserved Instance without the matching billing product
     # code, the Reserved Instance will not be applied to the On-Demand
     # Instance. For information about how to obtain the platform details and
-    # billing information of an AMI, see [Understanding AMI billing][4] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # billing information of an AMI, see [Understand AMI billing
+    # information][4] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -52590,7 +52603,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.350.0'
+      context[:gem_version] = '1.351.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

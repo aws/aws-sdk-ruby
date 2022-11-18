@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-11-18)
+------------------
+
+* Feature - CloudFront API support for staging distributions and associated traffic management policies.
+
 1.69.0 (2022-10-25)
 ------------------
 

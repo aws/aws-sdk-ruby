@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2022-11-18)
+------------------
+
+* Feature - AppFlow provides a new API called UpdateConnectorRegistration to update a custom connector that customers have previously registered. With this API, customers no longer need to unregister and then register a connector to make an update.
+
 1.30.0 (2022-11-17)
 ------------------
 

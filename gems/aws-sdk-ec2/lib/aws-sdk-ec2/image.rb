@@ -88,8 +88,8 @@ module Aws::EC2
     end
 
     # The platform details associated with the billing code of the AMI. For
-    # more information, see [Understanding AMI billing][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # more information, see [Understand AMI billing information][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #

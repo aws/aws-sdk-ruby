@@ -126,6 +126,9 @@
   "ChimeSDKMessaging": {
     "models": "chime-sdk-messaging/2021-05-15"
   },
+  "ChimeSDKVoice": {
+    "models": "chime-sdk-voice/2022-08-03"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },
@@ -514,6 +517,9 @@
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
+  },
+  "IoTRoboRunner": {
+    "models": "iot-roborunner/2018-05-10"
   },
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
@@ -1000,7 +1006,7 @@
     "models": "snowball/2016-06-30"
   },
   "SsmSap": {
-    "models": "ssmsap/2018-05-10"
+    "models": "ssm-sap/2018-05-10"
   },
   "States": {
     "models": "states/2016-11-23"

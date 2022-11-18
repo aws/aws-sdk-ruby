@@ -94,6 +94,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::CreateThemeAlias.build(context)
           when :delete_account_customization
             Aws::QuickSight::Endpoints::DeleteAccountCustomization.build(context)
+          when :delete_account_subscription
+            Aws::QuickSight::Endpoints::DeleteAccountSubscription.build(context)
           when :delete_analysis
             Aws::QuickSight::Endpoints::DeleteAnalysis.build(context)
           when :delete_dashboard
@@ -240,6 +242,10 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::SearchAnalyses.build(context)
           when :search_dashboards
             Aws::QuickSight::Endpoints::SearchDashboards.build(context)
+          when :search_data_sets
+            Aws::QuickSight::Endpoints::SearchDataSets.build(context)
+          when :search_data_sources
+            Aws::QuickSight::Endpoints::SearchDataSources.build(context)
           when :search_folders
             Aws::QuickSight::Endpoints::SearchFolders.build(context)
           when :search_groups

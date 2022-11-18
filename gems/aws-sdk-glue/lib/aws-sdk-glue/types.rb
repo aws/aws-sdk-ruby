@@ -4164,11 +4164,11 @@ module Aws::Glue
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Include and Exclude Patterns][1].
+    #   information, see [Setting crawler configuration options][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] crawler_security_configuration
@@ -4397,6 +4397,7 @@ module Aws::Glue
     #             connection_name: "ConnectionName",
     #             path: "Path",
     #             exclusions: ["Path"],
+    #             enable_additional_metadata: ["COMMENTS"], # accepts COMMENTS, RAWTYPES
     #           },
     #         ],
     #         mongo_db_targets: [
@@ -4716,6 +4717,7 @@ module Aws::Glue
     #               connection_name: "ConnectionName",
     #               path: "Path",
     #               exclusions: ["Path"],
+    #               enable_additional_metadata: ["COMMENTS"], # accepts COMMENTS, RAWTYPES
     #             },
     #           ],
     #           mongo_db_targets: [
@@ -4836,7 +4838,7 @@ module Aws::Glue
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   information, see [Setting crawler configuration options][1].
     #
     #
     #
@@ -14618,6 +14620,7 @@ module Aws::Glue
     #         connection_name: "ConnectionName",
     #         path: "Path",
     #         exclusions: ["Path"],
+    #         enable_additional_metadata: ["COMMENTS"], # accepts COMMENTS, RAWTYPES
     #       }
     #
     # @!attribute [rw] connection_name
@@ -14637,12 +14640,22 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enable_additional_metadata
+    #   Specify a value of `RAWTYPES` or `COMMENTS` to enable additional
+    #   metadata in table responses. `RAWTYPES` provides the native-level
+    #   datatype. `COMMENTS` provides comments associated with a column or
+    #   table in the database.
+    #
+    #   If you do not need additional metadata, keep the field empty.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JdbcTarget AWS API Documentation
     #
     class JdbcTarget < Struct.new(
       :connection_name,
       :path,
-      :exclusions)
+      :exclusions,
+      :enable_additional_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24454,6 +24467,7 @@ module Aws::Glue
     #               connection_name: "ConnectionName",
     #               path: "Path",
     #               exclusions: ["Path"],
+    #               enable_additional_metadata: ["COMMENTS"], # accepts COMMENTS, RAWTYPES
     #             },
     #           ],
     #           mongo_db_targets: [
@@ -24571,7 +24585,7 @@ module Aws::Glue
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
-    #   information, see [Configuring a Crawler][1].
+    #   information, see [Setting crawler configuration options][1].
     #
     #
     #

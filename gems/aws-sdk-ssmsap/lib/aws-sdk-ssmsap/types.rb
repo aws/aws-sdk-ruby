@@ -34,7 +34,7 @@ module Aws::SsmSap
     # @!attribute [rw] status_message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/Application AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Application AWS API Documentation
     #
     class Application < Struct.new(
       :id,
@@ -67,7 +67,7 @@ module Aws::SsmSap
     # @!attribute [rw] secret_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ApplicationCredential AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ApplicationCredential AWS API Documentation
     #
     class ApplicationCredential < Struct.new(
       :database_name,
@@ -89,7 +89,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ApplicationSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ApplicationSummary AWS API Documentation
     #
     class ApplicationSummary < Struct.new(
       :id,
@@ -124,7 +124,7 @@ module Aws::SsmSap
     # @!attribute [rw] last_updated
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/Component AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Component AWS API Documentation
     #
     class Component < Struct.new(
       :component_id,
@@ -151,7 +151,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ComponentSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ComponentSummary AWS API Documentation
     #
     class ComponentSummary < Struct.new(
       :application_id,
@@ -165,7 +165,7 @@ module Aws::SsmSap
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ConflictException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
       :message)
@@ -206,7 +206,7 @@ module Aws::SsmSap
     # @!attribute [rw] last_updated
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/Database AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Database AWS API Documentation
     #
     class Database < Struct.new(
       :application_id,
@@ -242,7 +242,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DatabaseSummary AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DatabaseSummary AWS API Documentation
     #
     class DatabaseSummary < Struct.new(
       :application_id,
@@ -273,7 +273,7 @@ module Aws::SsmSap
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DeleteResourcePermissionInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeleteResourcePermissionInput AWS API Documentation
     #
     class DeleteResourcePermissionInput < Struct.new(
       :action_type,
@@ -286,7 +286,7 @@ module Aws::SsmSap
     # @!attribute [rw] policy
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DeleteResourcePermissionOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeleteResourcePermissionOutput AWS API Documentation
     #
     class DeleteResourcePermissionOutput < Struct.new(
       :policy)
@@ -304,7 +304,7 @@ module Aws::SsmSap
     # @!attribute [rw] application_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DeregisterApplicationInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeregisterApplicationInput AWS API Documentation
     #
     class DeregisterApplicationInput < Struct.new(
       :application_id)
@@ -312,7 +312,7 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/DeregisterApplicationOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/DeregisterApplicationOutput AWS API Documentation
     #
     class DeregisterApplicationOutput < Aws::EmptyStructure; end
 
@@ -330,7 +330,7 @@ module Aws::SsmSap
     # @!attribute [rw] application_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetApplicationInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetApplicationInput AWS API Documentation
     #
     class GetApplicationInput < Struct.new(
       :application_id,
@@ -345,7 +345,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetApplicationOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetApplicationOutput AWS API Documentation
     #
     class GetApplicationOutput < Struct.new(
       :application,
@@ -368,7 +368,7 @@ module Aws::SsmSap
     # @!attribute [rw] component_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetComponentInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponentInput AWS API Documentation
     #
     class GetComponentInput < Struct.new(
       :application_id,
@@ -380,7 +380,7 @@ module Aws::SsmSap
     # @!attribute [rw] component
     #   @return [Types::Component]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetComponentOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetComponentOutput AWS API Documentation
     #
     class GetComponentOutput < Struct.new(
       :component)
@@ -410,7 +410,7 @@ module Aws::SsmSap
     # @!attribute [rw] database_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetDatabaseInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetDatabaseInput AWS API Documentation
     #
     class GetDatabaseInput < Struct.new(
       :application_id,
@@ -427,7 +427,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetDatabaseOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetDatabaseOutput AWS API Documentation
     #
     class GetDatabaseOutput < Struct.new(
       :database,
@@ -446,7 +446,7 @@ module Aws::SsmSap
     # @!attribute [rw] operation_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetOperationInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetOperationInput AWS API Documentation
     #
     class GetOperationInput < Struct.new(
       :operation_id)
@@ -457,7 +457,7 @@ module Aws::SsmSap
     # @!attribute [rw] operation
     #   @return [Types::Operation]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetOperationOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetOperationOutput AWS API Documentation
     #
     class GetOperationOutput < Struct.new(
       :operation)
@@ -479,7 +479,7 @@ module Aws::SsmSap
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetResourcePermissionInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetResourcePermissionInput AWS API Documentation
     #
     class GetResourcePermissionInput < Struct.new(
       :action_type,
@@ -491,7 +491,7 @@ module Aws::SsmSap
     # @!attribute [rw] policy
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/GetResourcePermissionOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetResourcePermissionOutput AWS API Documentation
     #
     class GetResourcePermissionOutput < Struct.new(
       :policy)
@@ -511,7 +511,7 @@ module Aws::SsmSap
     # @!attribute [rw] instance_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/Host AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Host AWS API Documentation
     #
     class Host < Struct.new(
       :host_name,
@@ -525,7 +525,7 @@ module Aws::SsmSap
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/InternalServerException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
       :message)
@@ -547,7 +547,7 @@ module Aws::SsmSap
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListApplicationsInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListApplicationsInput AWS API Documentation
     #
     class ListApplicationsInput < Struct.new(
       :next_token,
@@ -562,7 +562,7 @@ module Aws::SsmSap
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListApplicationsOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListApplicationsOutput AWS API Documentation
     #
     class ListApplicationsOutput < Struct.new(
       :applications,
@@ -589,7 +589,7 @@ module Aws::SsmSap
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListComponentsInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListComponentsInput AWS API Documentation
     #
     class ListComponentsInput < Struct.new(
       :application_id,
@@ -605,7 +605,7 @@ module Aws::SsmSap
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListComponentsOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListComponentsOutput AWS API Documentation
     #
     class ListComponentsOutput < Struct.new(
       :components,
@@ -636,7 +636,7 @@ module Aws::SsmSap
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListDatabasesInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListDatabasesInput AWS API Documentation
     #
     class ListDatabasesInput < Struct.new(
       :application_id,
@@ -653,7 +653,7 @@ module Aws::SsmSap
     # @!attribute [rw] next_token
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListDatabasesOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListDatabasesOutput AWS API Documentation
     #
     class ListDatabasesOutput < Struct.new(
       :databases,
@@ -672,7 +672,7 @@ module Aws::SsmSap
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListTagsForResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
@@ -683,7 +683,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ListTagsForResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
@@ -724,7 +724,7 @@ module Aws::SsmSap
     # @!attribute [rw] last_updated_time
     #   @return [Time]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/Operation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/Operation AWS API Documentation
     #
     class Operation < Struct.new(
       :id,
@@ -760,7 +760,7 @@ module Aws::SsmSap
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/PutResourcePermissionInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/PutResourcePermissionInput AWS API Documentation
     #
     class PutResourcePermissionInput < Struct.new(
       :action_type,
@@ -773,7 +773,7 @@ module Aws::SsmSap
     # @!attribute [rw] policy
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/PutResourcePermissionOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/PutResourcePermissionOutput AWS API Documentation
     #
     class PutResourcePermissionOutput < Struct.new(
       :policy)
@@ -823,7 +823,7 @@ module Aws::SsmSap
     # @!attribute [rw] credentials
     #   @return [Array<Types::ApplicationCredential>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/RegisterApplicationInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RegisterApplicationInput AWS API Documentation
     #
     class RegisterApplicationInput < Struct.new(
       :application_id,
@@ -843,7 +843,7 @@ module Aws::SsmSap
     # @!attribute [rw] operation_id
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/RegisterApplicationOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RegisterApplicationOutput AWS API Documentation
     #
     class RegisterApplicationOutput < Struct.new(
       :application,
@@ -855,7 +855,7 @@ module Aws::SsmSap
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ResourceNotFoundException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
       :message)
@@ -879,7 +879,7 @@ module Aws::SsmSap
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/TagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/TagResourceRequest AWS API Documentation
     #
     class TagResourceRequest < Struct.new(
       :resource_arn,
@@ -888,7 +888,7 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/TagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
@@ -904,9 +904,11 @@ module Aws::SsmSap
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
+    #   Adds/updates or removes credentials for applications registered with
+    #   AWS Systems Manager for SAP.
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/UntagResourceRequest AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource_arn,
@@ -915,7 +917,7 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/UntagResourceResponse AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
@@ -949,7 +951,7 @@ module Aws::SsmSap
     # @!attribute [rw] credentials_to_remove
     #   @return [Array<Types::ApplicationCredential>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/UpdateApplicationSettingsInput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UpdateApplicationSettingsInput AWS API Documentation
     #
     class UpdateApplicationSettingsInput < Struct.new(
       :application_id,
@@ -965,7 +967,7 @@ module Aws::SsmSap
     # @!attribute [rw] operation_ids
     #   @return [Array<String>]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/UpdateApplicationSettingsOutput AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/UpdateApplicationSettingsOutput AWS API Documentation
     #
     class UpdateApplicationSettingsOutput < Struct.new(
       :message,
@@ -977,7 +979,7 @@ module Aws::SsmSap
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ssmsap-2018-05-10/ValidationException AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
       :message)

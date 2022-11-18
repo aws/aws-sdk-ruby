@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2022-11-18)
+------------------
+
+* Feature - This release introduces a new feature for Audit Manager: Evidence finder. You can now use evidence finder to quickly query your evidence, and add the matching evidence results to an assessment report.
+
 1.27.0 (2022-10-25)
 ------------------
 

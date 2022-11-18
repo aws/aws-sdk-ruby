@@ -375,6 +375,8 @@ module Aws::Appflow
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateConnectorProfileRequest = Shapes::StructureShape.new(name: 'UpdateConnectorProfileRequest')
     UpdateConnectorProfileResponse = Shapes::StructureShape.new(name: 'UpdateConnectorProfileResponse')
+    UpdateConnectorRegistrationRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRegistrationRequest')
+    UpdateConnectorRegistrationResponse = Shapes::StructureShape.new(name: 'UpdateConnectorRegistrationResponse')
     UpdateFlowRequest = Shapes::StructureShape.new(name: 'UpdateFlowRequest')
     UpdateFlowResponse = Shapes::StructureShape.new(name: 'UpdateFlowResponse')
     UpdatedBy = Shapes::StringShape.new(name: 'UpdatedBy')
@@ -1433,6 +1435,14 @@ module Aws::Appflow
     UpdateConnectorProfileResponse.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
     UpdateConnectorProfileResponse.struct_class = Types::UpdateConnectorProfileResponse
 
+    UpdateConnectorRegistrationRequest.add_member(:connector_label, Shapes::ShapeRef.new(shape: ConnectorLabel, required: true, location_name: "connectorLabel"))
+    UpdateConnectorRegistrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateConnectorRegistrationRequest.add_member(:connector_provisioning_config, Shapes::ShapeRef.new(shape: ConnectorProvisioningConfig, location_name: "connectorProvisioningConfig"))
+    UpdateConnectorRegistrationRequest.struct_class = Types::UpdateConnectorRegistrationRequest
+
+    UpdateConnectorRegistrationResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "connectorArn"))
+    UpdateConnectorRegistrationResponse.struct_class = Types::UpdateConnectorRegistrationResponse
+
     UpdateFlowRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
     UpdateFlowRequest.add_member(:description, Shapes::ShapeRef.new(shape: FlowDescription, location_name: "description"))
     UpdateFlowRequest.add_member(:trigger_config, Shapes::ShapeRef.new(shape: TriggerConfig, required: true, location_name: "triggerConfig"))
@@ -1789,6 +1799,23 @@ module Aws::Appflow
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ConnectorAuthenticationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_connector_registration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectorRegistration"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-connector-registration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectorRegistrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectorRegistrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConnectorServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConnectorAuthenticationException)
       end)
 
       api.add_operation(:update_flow, Seahorse::Model::Operation.new.tap do |o|

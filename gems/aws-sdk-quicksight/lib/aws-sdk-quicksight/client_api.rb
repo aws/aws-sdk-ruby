@@ -40,6 +40,7 @@ module Aws::QuickSight
     AnonymousUserDashboardEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardEmbeddingConfiguration')
     AnonymousUserDashboardVisualEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserDashboardVisualEmbeddingConfiguration')
     AnonymousUserEmbeddingExperienceConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserEmbeddingExperienceConfiguration')
+    AnonymousUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'AnonymousUserQSearchBarEmbeddingConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssignmentStatus = Shapes::StringShape.new(name: 'AssignmentStatus')
@@ -148,11 +149,14 @@ module Aws::QuickSight
     DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
     DataSetConfiguration = Shapes::StructureShape.new(name: 'DataSetConfiguration')
     DataSetConfigurationList = Shapes::ListShape.new(name: 'DataSetConfigurationList')
+    DataSetFilterAttribute = Shapes::StringShape.new(name: 'DataSetFilterAttribute')
     DataSetImportMode = Shapes::StringShape.new(name: 'DataSetImportMode')
     DataSetName = Shapes::StringShape.new(name: 'DataSetName')
     DataSetReference = Shapes::StructureShape.new(name: 'DataSetReference')
     DataSetReferenceList = Shapes::ListShape.new(name: 'DataSetReferenceList')
     DataSetSchema = Shapes::StructureShape.new(name: 'DataSetSchema')
+    DataSetSearchFilter = Shapes::StructureShape.new(name: 'DataSetSearchFilter')
+    DataSetSearchFilterList = Shapes::ListShape.new(name: 'DataSetSearchFilterList')
     DataSetSummary = Shapes::StructureShape.new(name: 'DataSetSummary')
     DataSetSummaryList = Shapes::ListShape.new(name: 'DataSetSummaryList')
     DataSetUsageConfiguration = Shapes::StructureShape.new(name: 'DataSetUsageConfiguration')
@@ -160,17 +164,25 @@ module Aws::QuickSight
     DataSourceCredentials = Shapes::StructureShape.new(name: 'DataSourceCredentials')
     DataSourceErrorInfo = Shapes::StructureShape.new(name: 'DataSourceErrorInfo')
     DataSourceErrorInfoType = Shapes::StringShape.new(name: 'DataSourceErrorInfoType')
+    DataSourceFilterAttribute = Shapes::StringShape.new(name: 'DataSourceFilterAttribute')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceParameters = Shapes::StructureShape.new(name: 'DataSourceParameters')
     DataSourceParametersList = Shapes::ListShape.new(name: 'DataSourceParametersList')
+    DataSourceSearchFilter = Shapes::StructureShape.new(name: 'DataSourceSearchFilter')
+    DataSourceSearchFilterList = Shapes::ListShape.new(name: 'DataSourceSearchFilterList')
+    DataSourceSummary = Shapes::StructureShape.new(name: 'DataSourceSummary')
+    DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Database = Shapes::StringShape.new(name: 'Database')
+    DatabricksParameters = Shapes::StructureShape.new(name: 'DatabricksParameters')
     DateTimeParameter = Shapes::StructureShape.new(name: 'DateTimeParameter')
     DateTimeParameterList = Shapes::ListShape.new(name: 'DateTimeParameterList')
     DecimalParameter = Shapes::StructureShape.new(name: 'DecimalParameter')
     DecimalParameterList = Shapes::ListShape.new(name: 'DecimalParameterList')
     DeleteAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationRequest')
     DeleteAccountCustomizationResponse = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationResponse')
+    DeleteAccountSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteAccountSubscriptionRequest')
+    DeleteAccountSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteAccountSubscriptionResponse')
     DeleteAnalysisRequest = Shapes::StructureShape.new(name: 'DeleteAnalysisRequest')
     DeleteAnalysisResponse = Shapes::StructureShape.new(name: 'DeleteAnalysisResponse')
     DeleteDashboardRequest = Shapes::StructureShape.new(name: 'DeleteDashboardRequest')
@@ -344,6 +356,7 @@ module Aws::QuickSight
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
+    InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IpRestrictionRuleDescription = Shapes::StringShape.new(name: 'IpRestrictionRuleDescription')
     IpRestrictionRuleMap = Shapes::MapShape.new(name: 'IpRestrictionRuleMap')
     JiraParameters = Shapes::StructureShape.new(name: 'JiraParameters')
@@ -467,6 +480,7 @@ module Aws::QuickSight
     RestoreAnalysisRequest = Shapes::StructureShape.new(name: 'RestoreAnalysisRequest')
     RestoreAnalysisResponse = Shapes::StructureShape.new(name: 'RestoreAnalysisResponse')
     RestrictiveResourceId = Shapes::StringShape.new(name: 'RestrictiveResourceId')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleName = Shapes::StringShape.new(name: 'RoleName')
     RoleSessionName = Shapes::StringShape.new(name: 'RoleSessionName')
     RowInfo = Shapes::StructureShape.new(name: 'RowInfo')
@@ -485,6 +499,10 @@ module Aws::QuickSight
     SearchAnalysesResponse = Shapes::StructureShape.new(name: 'SearchAnalysesResponse')
     SearchDashboardsRequest = Shapes::StructureShape.new(name: 'SearchDashboardsRequest')
     SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
+    SearchDataSetsRequest = Shapes::StructureShape.new(name: 'SearchDataSetsRequest')
+    SearchDataSetsResponse = Shapes::StructureShape.new(name: 'SearchDataSetsResponse')
+    SearchDataSourcesRequest = Shapes::StructureShape.new(name: 'SearchDataSourcesRequest')
+    SearchDataSourcesResponse = Shapes::StructureShape.new(name: 'SearchDataSourcesResponse')
     SearchFoldersRequest = Shapes::StructureShape.new(name: 'SearchFoldersRequest')
     SearchFoldersResponse = Shapes::StructureShape.new(name: 'SearchFoldersResponse')
     SearchGroupsRequest = Shapes::StructureShape.new(name: 'SearchGroupsRequest')
@@ -505,6 +523,7 @@ module Aws::QuickSight
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
     SparkParameters = Shapes::StructureShape.new(name: 'SparkParameters')
+    SqlEndpointPath = Shapes::StringShape.new(name: 'SqlEndpointPath')
     SqlQuery = Shapes::StringShape.new(name: 'SqlQuery')
     SqlServerParameters = Shapes::StructureShape.new(name: 'SqlServerParameters')
     SslProperties = Shapes::StructureShape.new(name: 'SslProperties')
@@ -651,6 +670,7 @@ module Aws::QuickSight
     AccountSettings.add_member(:default_namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "DefaultNamespace"))
     AccountSettings.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
     AccountSettings.add_member(:public_sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PublicSharingEnabled"))
+    AccountSettings.add_member(:termination_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtectionEnabled"))
     AccountSettings.struct_class = Types::AccountSettings
 
     ActionList.member = Shapes::ShapeRef.new(shape: String)
@@ -722,11 +742,16 @@ module Aws::QuickSight
 
     AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard, Shapes::ShapeRef.new(shape: AnonymousUserDashboardEmbeddingConfiguration, location_name: "Dashboard"))
     AnonymousUserEmbeddingExperienceConfiguration.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: AnonymousUserDashboardVisualEmbeddingConfiguration, location_name: "DashboardVisual"))
+    AnonymousUserEmbeddingExperienceConfiguration.add_member(:q_search_bar, Shapes::ShapeRef.new(shape: AnonymousUserQSearchBarEmbeddingConfiguration, location_name: "QSearchBar"))
     AnonymousUserEmbeddingExperienceConfiguration.struct_class = Types::AnonymousUserEmbeddingExperienceConfiguration
+
+    AnonymousUserQSearchBarEmbeddingConfiguration.add_member(:initial_topic_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location_name: "InitialTopicId"))
+    AnonymousUserQSearchBarEmbeddingConfiguration.struct_class = Types::AnonymousUserQSearchBarEmbeddingConfiguration
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     AthenaParameters.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
+    AthenaParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     AthenaParameters.struct_class = Types::AthenaParameters
 
     AuroraParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
@@ -1215,6 +1240,13 @@ module Aws::QuickSight
     DataSetSchema.add_member(:column_schema_list, Shapes::ShapeRef.new(shape: ColumnSchemaList, location_name: "ColumnSchemaList"))
     DataSetSchema.struct_class = Types::DataSetSchema
 
+    DataSetSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
+    DataSetSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: DataSetFilterAttribute, required: true, location_name: "Name"))
+    DataSetSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    DataSetSearchFilter.struct_class = Types::DataSetSearchFilter
+
+    DataSetSearchFilterList.member = Shapes::ShapeRef.new(shape: DataSetSearchFilter)
+
     DataSetSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DataSetSummary.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DataSetId"))
     DataSetSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -1280,9 +1312,32 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:twitter_parameters, Shapes::ShapeRef.new(shape: TwitterParameters, location_name: "TwitterParameters"))
     DataSourceParameters.add_member(:amazon_open_search_parameters, Shapes::ShapeRef.new(shape: AmazonOpenSearchParameters, location_name: "AmazonOpenSearchParameters"))
     DataSourceParameters.add_member(:exasol_parameters, Shapes::ShapeRef.new(shape: ExasolParameters, location_name: "ExasolParameters"))
+    DataSourceParameters.add_member(:databricks_parameters, Shapes::ShapeRef.new(shape: DatabricksParameters, location_name: "DatabricksParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
+
+    DataSourceSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
+    DataSourceSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceFilterAttribute, required: true, location_name: "Name"))
+    DataSourceSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    DataSourceSearchFilter.struct_class = Types::DataSourceSearchFilter
+
+    DataSourceSearchFilterList.member = Shapes::ShapeRef.new(shape: DataSourceSearchFilter)
+
+    DataSourceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DataSourceSummary.add_member(:data_source_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DataSourceId"))
+    DataSourceSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    DataSourceSummary.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "Type"))
+    DataSourceSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    DataSourceSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    DataSourceSummary.struct_class = Types::DataSourceSummary
+
+    DataSourceSummaryList.member = Shapes::ShapeRef.new(shape: DataSourceSummary)
+
+    DatabricksParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    DatabricksParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    DatabricksParameters.add_member(:sql_endpoint_path, Shapes::ShapeRef.new(shape: SqlEndpointPath, required: true, location_name: "SqlEndpointPath"))
+    DatabricksParameters.struct_class = Types::DatabricksParameters
 
     DateTimeParameter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
     DateTimeParameter.add_member(:values, Shapes::ShapeRef.new(shape: TimestampList, required: true, location_name: "Values"))
@@ -1303,6 +1358,13 @@ module Aws::QuickSight
     DeleteAccountCustomizationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteAccountCustomizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteAccountCustomizationResponse.struct_class = Types::DeleteAccountCustomizationResponse
+
+    DeleteAccountSubscriptionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAccountSubscriptionRequest.struct_class = Types::DeleteAccountSubscriptionRequest
+
+    DeleteAccountSubscriptionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteAccountSubscriptionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DeleteAccountSubscriptionResponse.struct_class = Types::DeleteAccountSubscriptionResponse
 
     DeleteAnalysisRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "AnalysisId"))
@@ -1819,6 +1881,7 @@ module Aws::QuickSight
     GenerateEmbedUrlForAnonymousUserResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, required: true, location_name: "EmbedUrl"))
     GenerateEmbedUrlForAnonymousUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, required: true, location: "statusCode", location_name: "Status"))
     GenerateEmbedUrlForAnonymousUserResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    GenerateEmbedUrlForAnonymousUserResponse.add_member(:anonymous_user_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnonymousUserArn"))
     GenerateEmbedUrlForAnonymousUserResponse.struct_class = Types::GenerateEmbedUrlForAnonymousUserResponse
 
     GenerateEmbedUrlForRegisteredUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -1953,6 +2016,10 @@ module Aws::QuickSight
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidParameterValueException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidRequestException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     IpRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: CIDR)
     IpRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: IpRestrictionRuleDescription)
@@ -2489,6 +2556,30 @@ module Aws::QuickSight
     SearchDashboardsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SearchDashboardsResponse.struct_class = Types::SearchDashboardsResponse
 
+    SearchDataSetsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchDataSetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DataSetSearchFilterList, required: true, location_name: "Filters"))
+    SearchDataSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchDataSetsRequest.struct_class = Types::SearchDataSetsRequest
+
+    SearchDataSetsResponse.add_member(:data_set_summaries, Shapes::ShapeRef.new(shape: DataSetSummaryList, location_name: "DataSetSummaries"))
+    SearchDataSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchDataSetsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchDataSetsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchDataSetsResponse.struct_class = Types::SearchDataSetsResponse
+
+    SearchDataSourcesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchDataSourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DataSourceSearchFilterList, required: true, location_name: "Filters"))
+    SearchDataSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchDataSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchDataSourcesRequest.struct_class = Types::SearchDataSourcesRequest
+
+    SearchDataSourcesResponse.add_member(:data_source_summaries, Shapes::ShapeRef.new(shape: DataSourceSummaryList, location_name: "DataSourceSummaries"))
+    SearchDataSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchDataSourcesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchDataSourcesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchDataSourcesResponse.struct_class = Types::SearchDataSourcesResponse
+
     SearchFoldersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchFoldersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FolderSearchFilterList, required: true, location_name: "Filters"))
     SearchFoldersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -2796,6 +2887,7 @@ module Aws::QuickSight
     UpdateAccountSettingsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateAccountSettingsRequest.add_member(:default_namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "DefaultNamespace"))
     UpdateAccountSettingsRequest.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
+    UpdateAccountSettingsRequest.add_member(:termination_protection_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtectionEnabled"))
     UpdateAccountSettingsRequest.struct_class = Types::UpdateAccountSettingsRequest
 
     UpdateAccountSettingsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -3448,6 +3540,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:delete_account_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountSubscription"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/account/{AwsAccountId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountSubscriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
@@ -4587,6 +4694,46 @@ module Aws::QuickSight
         )
       end)
 
+      api.add_operation(:search_data_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchDataSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/search/data-sets"
+        o.input = Shapes::ShapeRef.new(shape: SearchDataSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchDataSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_data_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchDataSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/search/data-sources"
+        o.input = Shapes::ShapeRef.new(shape: SearchDataSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchDataSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_folders, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchFolders"
         o.http_method = "POST"
@@ -4599,6 +4746,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

@@ -691,19 +691,19 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # An error entity for the `AssessmentReportEvidence` API. This is used
-    # to provide more meaningful errors than a simple string message.
+    # An error entity for assessment report evidence errors. This is used to
+    # provide more meaningful errors than a simple string message.
     #
     # @!attribute [rw] evidence_id
     #   The identifier for the evidence.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code that the `AssessmentReportEvidence` API returned.
+    #   The error code that was returned.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message that the `AssessmentReportEvidence` API returned.
+    #   The error message that was returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentReportEvidenceError AWS API Documentation
@@ -1224,7 +1224,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The data source that determines where Audit Manager collects
+    #   The data source types that determine where Audit Manager collects
     #   evidence from for the control.
     #   @return [String]
     #
@@ -1702,6 +1702,7 @@ module Aws::AuditManager
     #         name: "AssessmentReportName", # required
     #         description: "AssessmentReportDescription",
     #         assessment_id: "UUID", # required
+    #         query_statement: "QueryStatement",
     #       }
     #
     # @!attribute [rw] name
@@ -1716,12 +1717,39 @@ module Aws::AuditManager
     #   The identifier for the assessment.
     #   @return [String]
     #
+    # @!attribute [rw] query_statement
+    #   A SQL statement that represents an evidence finder query.
+    #
+    #   Provide this parameter when you want to generate an assessment
+    #   report from the results of an evidence finder search query. When you
+    #   use this parameter, Audit Manager generates a one-time report using
+    #   only the evidence from the query output. This report does not
+    #   include any assessment evidence that was manually [added to a report
+    #   using the console][1], or [associated with a report using the
+    #   API][2].
+    #
+    #   To use this parameter, the [enablementStatus][3] of evidence finder
+    #   must be `ENABLED`.
+    #
+    #   For examples and help resolving `queryStatement` validation
+    #   exceptions, see [Troubleshooting evidence finder issues][4] in the
+    #   AWS Audit Manager User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/userguide/generate-assessment-report.html#generate-assessment-report-include-evidence
+    #   [2]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_BatchAssociateAssessmentReportEvidence.html
+    #   [3]: https://docs.aws.amazon.com/APIReference-evidenceFinder/API_EvidenceFinderSetup.html#auditmanager-Type-EvidenceFinderSetup-enablementStatus
+    #   [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-finder-issues.html#querystatement-exceptions
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentReportRequest AWS API Documentation
     #
     class CreateAssessmentReportRequest < Struct.new(
       :name,
       :description,
-      :assessment_id)
+      :assessment_id,
+      :query_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2413,10 +2441,24 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] compliance_check
-    #   The evaluation status for evidence that falls under the compliance
-    #   check category. For evidence collected from Security Hub, a *Pass*
-    #   or *Fail* result is shown. For evidence collected from Config, a
-    #   *Compliant* or *Noncompliant* result is shown.
+    #   The evaluation status for automated evidence that falls under the
+    #   compliance check category.
+    #
+    #   * Audit Manager classes evidence as non-compliant if Security Hub
+    #     reports a *Fail* result, or if Config reports a *Non-compliant*
+    #     result.
+    #
+    #   * Audit Manager classes evidence as compliant if Security Hub
+    #     reports a *Pass* result, or if Config reports a *Compliant*
+    #     result.
+    #
+    #   * If a compliance check isn't available or applicable, then no
+    #     compliance evaluation can be made for that evidence. This is the
+    #     case if the evidence uses Config or Security Hub as the underlying
+    #     data source type, but those services aren't enabled. This is also
+    #     the case if the evidence uses an underlying data source type that
+    #     doesn't support compliance checks (such as manual evidence,
+    #     Amazon Web Services API calls, or CloudTrail).
     #   @return [String]
     #
     # @!attribute [rw] aws_organization
@@ -2458,6 +2500,73 @@ module Aws::AuditManager
       :evidence_folder_id,
       :id,
       :assessment_report_selection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings object that specifies whether evidence finder is enabled.
+    # This object also describes the related event data store, and the
+    # backfill status for populating the event data store with evidence
+    # data.
+    #
+    # @!attribute [rw] event_data_store_arn
+    #   The Amazon Resource Name (ARN) of the CloudTrail Lake event data
+    #   store that’s used by evidence finder. The event data store is the
+    #   lake of evidence data that evidence finder runs queries against.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   The current status of the evidence finder feature and the related
+    #   event data store.
+    #
+    #   * `ENABLE_IN_PROGRESS` means that you requested to enable evidence
+    #     finder. An event data store is currently being created to support
+    #     evidence finder queries.
+    #
+    #   * `ENABLED` means that an event data store was successfully created
+    #     and evidence finder is enabled. We recommend that you wait 24
+    #     hours until the event data store is backfilled with your past
+    #     evidence data. You can use evidence finder in the meantime, but
+    #     not all data might be available until the backfill is complete.
+    #
+    #   * `DISABLE_IN_PROGRESS` means that you requested to disable evidence
+    #     finder, and your request is pending the deletion of the event data
+    #     store.
+    #
+    #   * `DISABLED` means that you have permanently disabled evidence
+    #     finder and the event data store has been deleted. You can't
+    #     re-enable evidence finder after this point.
+    #   @return [String]
+    #
+    # @!attribute [rw] backfill_status
+    #   The current status of the evidence data backfill process.
+    #
+    #   The backfill starts after you enable evidence finder. During this
+    #   task, Audit Manager populates an event data store with your past
+    #   evidence data so that your evidence can be queried.
+    #
+    #   * `NOT_STARTED` means that the backfill hasn’t started yet.
+    #
+    #   * `IN_PROGRESS` means that the backfill is in progress. This can
+    #     take up to 24 hours to complete, depending on the amount of
+    #     evidence data.
+    #
+    #   * `COMPLETED` means that the backfill is complete. All of your past
+    #     evidence is now queryable.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Represents any errors that occurred when enabling or disabling
+    #   evidence finder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/EvidenceFinderEnablement AWS API Documentation
+    #
+    class EvidenceFinderEnablement < Struct.new(
+      :event_data_store_arn,
+      :enablement_status,
+      :backfill_status,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3240,7 +3349,7 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
-    #         attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS
+    #         attribute: "ALL", # required, accepts ALL, IS_AWS_ORG_ENABLED, SNS_TOPIC, DEFAULT_ASSESSMENT_REPORTS_DESTINATION, DEFAULT_PROCESS_OWNERS, EVIDENCE_FINDER_ENABLEMENT
     #       }
     #
     # @!attribute [rw] attribute
@@ -4171,11 +4280,34 @@ module Aws::AuditManager
     #   The value of the resource.
     #   @return [String]
     #
+    # @!attribute [rw] compliance_check
+    #   The evaluation status for a resource that was assessed when
+    #   collecting compliance check evidence.
+    #
+    #   * Audit Manager classes the resource as non-compliant if Security
+    #     Hub reports a *Fail* result, or if Config reports a
+    #     *Non-compliant* result.
+    #
+    #   * Audit Manager classes the resource as compliant if Security Hub
+    #     reports a *Pass* result, or if Config reports a *Compliant*
+    #     result.
+    #
+    #   * If a compliance check isn't available or applicable, then no
+    #     compliance evaluation can be made for that resource. This is the
+    #     case if a resource assessment uses Config or Security Hub as the
+    #     underlying data source type, but those services aren't enabled.
+    #     This is also the case if the resource assessment uses an
+    #     underlying data source type that doesn't support compliance
+    #     checks (such as manual evidence, Amazon Web Services API calls, or
+    #     CloudTrail).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Resource AWS API Documentation
     #
     class Resource < Struct.new(
       :arn,
-      :value)
+      :value,
+      :compliance_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4356,6 +4488,10 @@ module Aws::AuditManager
     #   The KMS key details.
     #   @return [String]
     #
+    # @!attribute [rw] evidence_finder_enablement
+    #   The current evidence finder status and event data store details.
+    #   @return [Types::EvidenceFinderEnablement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Settings AWS API Documentation
     #
     class Settings < Struct.new(
@@ -4363,7 +4499,8 @@ module Aws::AuditManager
       :sns_topic,
       :default_assessment_reports_destination,
       :default_process_owners,
-      :kms_key)
+      :kms_key,
+      :evidence_finder_enablement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4435,11 +4572,6 @@ module Aws::AuditManager
     #       CustomRuleForAccount-conformance-pack-szsm1uv0w
     #
     #       `keywordValue`\: `Custom_CustomRuleForAccount-conformance-pack`
-    #
-    #     * Service-linked rule name:
-    #       securityhub-api-gw-cache-encrypted-101104e1
-    #
-    #       `keywordValue`\: `Custom_securityhub-api-gw-cache-encrypted`
     #
     #     * Service-linked rule name:
     #       OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba
@@ -5084,6 +5216,7 @@ module Aws::AuditManager
     #           },
     #         ],
     #         kms_key: "KmsKey",
+    #         evidence_finder_enabled: false,
     #       }
     #
     # @!attribute [rw] sns_topic
@@ -5103,13 +5236,35 @@ module Aws::AuditManager
     #   The KMS key details.
     #   @return [String]
     #
+    # @!attribute [rw] evidence_finder_enabled
+    #   Specifies whether the evidence finder feature is enabled. Change
+    #   this attribute to enable or disable evidence finder.
+    #
+    #   When you use this attribute to disable evidence finder, Audit
+    #   Manager deletes the event data store that’s used to query your
+    #   evidence data. As a result, you can’t re-enable evidence finder and
+    #   use the feature again. Your only alternative is to [deregister][1]
+    #   and then [re-register][2] Audit Manager.
+    #
+    #    Disabling evidence finder is permanent, so consider this decision
+    #   carefully before you proceed. If you’re using Audit Manager as a
+    #   delegated administrator, keep in mind that this action applies to
+    #   all member accounts in your organization.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
+    #   [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateSettingsRequest AWS API Documentation
     #
     class UpdateSettingsRequest < Struct.new(
       :sns_topic,
       :default_assessment_reports_destination,
       :default_process_owners,
-      :kms_key)
+      :kms_key,
+      :evidence_finder_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

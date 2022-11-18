@@ -395,6 +395,7 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT FleetWise                                     | Aws::IoTFleetWise                        | aws-sdk-iotfleetwise                        | 2021-06-17  |
 | AWS IoT Greengrass V2                                 | Aws::GreengrassV2                        | aws-sdk-greengrassv2                        | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                    | aws-sdk-iotjobsdataplane                    | 2017-09-29  |
+| AWS IoT RoboRunner                                    | Aws::IoTRoboRunner                       | aws-sdk-iotroborunner                       | 2018-05-10  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling                  | aws-sdk-iotsecuretunneling                  | 2018-10-05  |
 | AWS IoT SiteWise                                      | Aws::IoTSiteWise                         | aws-sdk-iotsitewise                         | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                      | aws-sdk-iotthingsgraph                      | 2018-09-06  |
@@ -483,6 +484,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Chime SDK Media Pipelines                      | Aws::ChimeSDKMediaPipelines              | aws-sdk-chimesdkmediapipelines              | 2021-07-15  |
 | Amazon Chime SDK Meetings                             | Aws::ChimeSDKMeetings                    | aws-sdk-chimesdkmeetings                    | 2021-07-15  |
 | Amazon Chime SDK Messaging                            | Aws::ChimeSDKMessaging                   | aws-sdk-chimesdkmessaging                   | 2021-05-15  |
+| Amazon Chime SDK Voice                                | Aws::ChimeSDKVoice                       | aws-sdk-chimesdkvoice                       | 2022-08-03  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                      | aws-sdk-clouddirectory                      | 2017-01-11  |
 | Amazon CloudFront                                     | Aws::CloudFront                          | aws-sdk-cloudfront                          | 2020-05-31  |
 | Amazon CloudHSM                                       | Aws::CloudHSM                            | aws-sdk-cloudhsm                            | 2014-05-30  |

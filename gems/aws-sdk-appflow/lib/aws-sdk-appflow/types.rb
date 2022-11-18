@@ -6026,7 +6026,7 @@ module Aws::Appflow
     #     option, you ensure that your flow writes consistent output, but
     #     you decrease performance for large data transfers that are better
     #     suited for Bulk API 2.0. In some cases, if your flow attempts to
-    #     transfer a vary large set of data, it might fail with a timed out
+    #     transfer a vary large set of data, it might fail wituh a timed out
     #     error.
     #   @return [String]
     #
@@ -7545,6 +7545,56 @@ module Aws::Appflow
     #
     class UpdateConnectorProfileResponse < Struct.new(
       :connector_profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateConnectorRegistrationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connector_label: "ConnectorLabel", # required
+    #         description: "Description",
+    #         connector_provisioning_config: {
+    #           lambda: {
+    #             lambda_arn: "ARN", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] connector_label
+    #   The name of the connector. The name is unique for each connector
+    #   registration in your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the update that you're applying to the
+    #   connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_provisioning_config
+    #   Contains information about the configuration of the connector being
+    #   registered.
+    #   @return [Types::ConnectorProvisioningConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpdateConnectorRegistrationRequest AWS API Documentation
+    #
+    class UpdateConnectorRegistrationRequest < Struct.new(
+      :connector_label,
+      :description,
+      :connector_provisioning_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The ARN of the connector being updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpdateConnectorRegistrationResponse AWS API Documentation
+    #
+    class UpdateConnectorRegistrationResponse < Struct.new(
+      :connector_arn)
       SENSITIVE = []
       include Aws::Structure
     end

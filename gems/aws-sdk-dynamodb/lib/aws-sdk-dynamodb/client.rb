@@ -781,8 +781,11 @@ module Aws::DynamoDB
     # the API call. For more details on this distinction, see [Naming Rules
     # and Data Types][1].
     #
-    # <note markdown="1"> `BatchWriteItem` cannot update items. To update items, use the
-    # `UpdateItem` action.
+    # <note markdown="1"> `BatchWriteItem` cannot update items. If you perform a
+    # `BatchWriteItem` operation on an existing item, that item's values
+    # will be overwritten by the operation and it will appear like it was
+    # updated. To update items, we recommend you use the `UpdateItem`
+    # action.
     #
     #  </note>
     #
@@ -4178,7 +4181,7 @@ module Aws::DynamoDB
     # `ReturnValues` parameter.
     #
     # When you add an item, the primary key attributes are the only required
-    # attributes. Attribute values cannot be null.
+    # attributes.
     #
     # Empty String and Binary attribute values are allowed. Attribute values
     # of type String and Binary must have a length greater than zero if the
@@ -7645,7 +7648,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -454,6 +454,29 @@ module Aws::ServiceCatalog
 
     # Associates the specified principal ARN with the specified portfolio.
     #
+    # If you share the portfolio with principal name sharing enabled, the
+    # `PrincipalARN` association is included in the share.
+    #
+    # The `PortfolioID`, `PrincipalARN`, and `PrincipalType` parameters are
+    # required.
+    #
+    # You can associate a maximum of 10 Principals with a portfolio using
+    # `PrincipalType` as `IAM_PATTERN`
+    #
+    # <note markdown="1"> When you associate a principal with portfolio, a potential privilege
+    # escalation path may occur when that portfolio is then shared with
+    # other accounts. For a user in a recipient account who is *not* an
+    # Service Catalog Admin, but still has the ability to create Principals
+    # (Users/Groups/Roles), that user could create a role that matches a
+    # principal name association for the portfolio. Although this user may
+    # not know which principal names are associated through Service Catalog,
+    # they may be able to guess the user. If this potential escalation path
+    # is a concern, then Service Catalog recommends using `PrincipalType` as
+    # `IAM`. With this configuration, the `PrincipalARN` must already exist
+    # in the recipient account before it can be associated.
+    #
+    #  </note>
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -467,10 +490,17 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN of the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group). This field allows
+    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #
+    #   You can associate multiple `IAM` patterns even if the account has no
+    #   principal with that name. This is useful in Principal Name Sharing if
+    #   you want to share a principal without creating it in the account that
+    #   owns the portfolio.
     #
     # @option params [required, String] :principal_type
-    #   The principal type. The supported value is `IAM`.
+    #   The principal type. The supported value is `IAM` if you use a fully
+    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -480,7 +510,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
     #     principal_arn: "PrincipalARN", # required
-    #     principal_type: "IAM", # required, accepts IAM
+    #     principal_type: "IAM", # required, accepts IAM, IAM_PATTERN
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolio AWS API Documentation
@@ -1035,6 +1065,20 @@ module Aws::ServiceCatalog
     # error. To update an existing share, you must use the `
     # UpdatePortfolioShare` API instead.
     #
+    # <note markdown="1"> When you associate a principal with portfolio, a potential privilege
+    # escalation path may occur when that portfolio is then shared with
+    # other accounts. For a user in a recipient account who is *not* an
+    # Service Catalog Admin, but still has the ability to create Principals
+    # (Users/Groups/Roles), that user could create a role that matches a
+    # principal name association for the portfolio. Although this user may
+    # not know which principal names are associated through Service Catalog,
+    # they may be able to guess the user. If this potential escalation path
+    # is a concern, then Service Catalog recommends using `PrincipalType` as
+    # `IAM`. With this configuration, the `PrincipalARN` must already exist
+    # in the recipient account before it can be associated.
+    #
+    #  </note>
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -1062,6 +1106,18 @@ module Aws::ServiceCatalog
     #   Enables or disables `TagOptions ` sharing when creating the portfolio
     #   share. If this flag is not provided, TagOptions sharing is disabled.
     #
+    # @option params [Boolean] :share_principals
+    #   Enables or disables `Principal` sharing when creating the portfolio
+    #   share. If this flag is not provided, principal sharing is disabled.
+    #
+    #   When you enable Principal Name Sharing for a portfolio share, the
+    #   share recipient account end users with a principal that matches any of
+    #   the associated IAM patterns can provision products from the portfolio.
+    #   Once shared, the share recipient can view associations of
+    #   `PrincipalType`\: `IAM_PATTERN` on their portfolio. You can create the
+    #   principals in the recipient account before or after creating the
+    #   share.
+    #
     # @return [Types::CreatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePortfolioShareOutput#portfolio_share_token #portfolio_share_token} => String
@@ -1077,6 +1133,7 @@ module Aws::ServiceCatalog
     #       value: "OrganizationNodeValue",
     #     },
     #     share_tag_options: false,
+    #     share_principals: false,
     #   })
     #
     # @example Response structure
@@ -1139,7 +1196,7 @@ module Aws::ServiceCatalog
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags.
     #
-    # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
+    # @option params [Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
     #   The configuration of the provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
@@ -1149,6 +1206,16 @@ module Aws::ServiceCatalog
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::SourceConnection] :source_connection
+    #   Specifies connection details for the created product and syncs the
+    #   product to the connection source artifact. This automatically manages
+    #   the product's artifacts based on changes to the source. The
+    #   `SourceConnection` parameter consists of the following sub-fields.
+    #
+    #   * `Type`
+    #
+    #   * `ConnectionParamters`
     #
     # @return [Types::CreateProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1174,16 +1241,27 @@ module Aws::ServiceCatalog
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     provisioning_artifact_parameters: { # required
+    #     provisioning_artifact_parameters: {
     #       name: "ProvisioningArtifactName",
     #       description: "ProvisioningArtifactDescription",
-    #       info: { # required
+    #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
     #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
+    #     source_connection: {
+    #       type: "CODESTAR", # accepts CODESTAR
+    #       connection_parameters: { # required
+    #         code_star: {
+    #           connection_arn: "CodeStarConnectionArn", # required
+    #           repository: "Repository", # required
+    #           branch: "RepositoryBranch", # required
+    #           artifact_path: "RepositoryArtifactPath", # required
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1202,6 +1280,16 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #   resp.product_view_detail.product_arn #=> String
     #   resp.product_view_detail.created_time #=> Time
+    #   resp.product_view_detail.source_connection.type #=> String, one of "CODESTAR"
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.connection_arn #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.repository #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.branch #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.artifact_path #=> String
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_time #=> Time
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_status_message #=> String
+    #   resp.product_view_detail.source_connection.last_sync.last_successful_sync_time #=> Time
+    #   resp.product_view_detail.source_connection.last_sync.last_successful_sync_provisioning_artifact_id #=> String
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
@@ -1209,6 +1297,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
+    #   resp.provisioning_artifact_detail.source_revision #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1391,7 +1480,7 @@ module Aws::ServiceCatalog
     #     parameters: { # required
     #       name: "ProvisioningArtifactName",
     #       description: "ProvisioningArtifactDescription",
-    #       info: { # required
+    #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
     #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
@@ -1409,6 +1498,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
+    #   resp.provisioning_artifact_detail.source_revision #=> String
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -2106,6 +2196,7 @@ module Aws::ServiceCatalog
     #   resp.portfolio_share_details[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATIONAL_UNIT", "ORGANIZATION_MEMBER_ACCOUNT"
     #   resp.portfolio_share_details[0].accepted #=> Boolean
     #   resp.portfolio_share_details[0].share_tag_options #=> Boolean
+    #   resp.portfolio_share_details[0].share_principals #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShares AWS API Documentation
     #
@@ -2243,6 +2334,16 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #   resp.product_view_detail.product_arn #=> String
     #   resp.product_view_detail.created_time #=> Time
+    #   resp.product_view_detail.source_connection.type #=> String, one of "CODESTAR"
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.connection_arn #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.repository #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.branch #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.artifact_path #=> String
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_time #=> Time
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_status_message #=> String
+    #   resp.product_view_detail.source_connection.last_sync.last_successful_sync_time #=> Time
+    #   resp.product_view_detail.source_connection.last_sync.last_successful_sync_provisioning_artifact_id #=> String
     #   resp.provisioning_artifact_summaries #=> Array
     #   resp.provisioning_artifact_summaries[0].id #=> String
     #   resp.provisioning_artifact_summaries[0].name #=> String
@@ -2529,6 +2630,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
+    #   resp.provisioning_artifact_detail.source_revision #=> String
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -2924,6 +3026,17 @@ module Aws::ServiceCatalog
     # Disassociates a previously associated principal ARN from a specified
     # portfolio.
     #
+    # The `PrincipalType` and `PrincipalARN` must match the
+    # `AssociatePrincipalWithPortfolio` call request details. For example,
+    # to disassociate an association created with a `PrincipalARN` of
+    # `PrincipalType` IAM you must use the `PrincipalType` IAM when calling
+    # `DisassociatePrincipalFromPortfolio`.
+    #
+    # For portfolios that have been shared with principal name sharing
+    # enabled: after disassociating a principal, share recipient accounts
+    # will no longer be able to provision products in this portfolio using a
+    # role matching the name of the associated principal.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -2937,7 +3050,12 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN of the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group). This field allows
+    #   an ARN with no `accountID` if `PrincipalType` is `IAM_PATTERN`.
+    #
+    # @option params [String] :principal_type
+    #   The supported value is `IAM` if you use a fully defined ARN, or
+    #   `IAM_PATTERN` if you use no `accountID`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2947,6 +3065,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
     #     principal_arn: "PrincipalARN", # required
+    #     principal_type: "IAM", # accepts IAM, IAM_PATTERN
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolio AWS API Documentation
@@ -3328,11 +3447,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Requests the import of a resource as a Amazon Web Services Service
-    # Catalog provisioned product that is associated to a Amazon Web
-    # Services Service Catalog product and provisioning artifact. Once
-    # imported, all supported Amazon Web Services Service Catalog governance
-    # actions are supported on the provisioned product.
+    # Requests the import of a resource as an Service Catalog provisioned
+    # product that is associated to an Service Catalog product and
+    # provisioning artifact. Once imported, all supported Service Catalog
+    # governance actions are supported on the provisioned product.
     #
     # Resource import only supports CloudFormation stack ARNs.
     # CloudFormation StackSets and non-root nested stacks are not supported.
@@ -3343,8 +3461,7 @@ module Aws::ServiceCatalog
     # `IMPORT_ROLLBACK_COMPLETE`.
     #
     # Import of the resource requires that the CloudFormation stack template
-    # matches the associated Amazon Web Services Service Catalog product
-    # provisioning artifact.
+    # matches the associated Service Catalog product provisioning artifact.
     #
     # The user or role that performs this operation must have the
     # `cloudformation:GetTemplate` and `cloudformation:DescribeStacks` IAM
@@ -3913,7 +4030,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists all principal ARNs associated with the specified portfolio.
+    # Lists all `PrincipalARN`s and corresponding `PrincipalType`s
+    # associated with the specified portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -3954,7 +4072,7 @@ module Aws::ServiceCatalog
     #
     #   resp.principals #=> Array
     #   resp.principals[0].principal_arn #=> String
-    #   resp.principals[0].principal_type #=> String, one of "IAM"
+    #   resp.principals[0].principal_type #=> String, one of "IAM", "IAM_PATTERN"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolio AWS API Documentation
@@ -4066,6 +4184,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.provisioning_artifact_details[0].active #=> Boolean
     #   resp.provisioning_artifact_details[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
+    #   resp.provisioning_artifact_details[0].source_revision #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts AWS API Documentation
@@ -4903,6 +5022,16 @@ module Aws::ServiceCatalog
     #   resp.product_view_details[0].status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #   resp.product_view_details[0].product_arn #=> String
     #   resp.product_view_details[0].created_time #=> Time
+    #   resp.product_view_details[0].source_connection.type #=> String, one of "CODESTAR"
+    #   resp.product_view_details[0].source_connection.connection_parameters.code_star.connection_arn #=> String
+    #   resp.product_view_details[0].source_connection.connection_parameters.code_star.repository #=> String
+    #   resp.product_view_details[0].source_connection.connection_parameters.code_star.branch #=> String
+    #   resp.product_view_details[0].source_connection.connection_parameters.code_star.artifact_path #=> String
+    #   resp.product_view_details[0].source_connection.last_sync.last_sync_time #=> Time
+    #   resp.product_view_details[0].source_connection.last_sync.last_sync_status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.product_view_details[0].source_connection.last_sync.last_sync_status_message #=> String
+    #   resp.product_view_details[0].source_connection.last_sync.last_successful_sync_time #=> Time
+    #   resp.product_view_details[0].source_connection.last_sync.last_successful_sync_provisioning_artifact_id #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdmin AWS API Documentation
@@ -5317,9 +5446,10 @@ module Aws::ServiceCatalog
     end
 
     # Updates the specified portfolio share. You can use this API to enable
-    # or disable TagOptions sharing for an existing portfolio share.
+    # or disable `TagOptions` sharing or Principal sharing for an existing
+    # portfolio share.
     #
-    # The portfolio share cannot be updated if the ` CreatePortfolioShare`
+    # The portfolio share cannot be updated if the `CreatePortfolioShare`
     # operation is `IN_PROGRESS`, as the share is not available to recipient
     # entities. In this case, you must wait for the portfolio share to be
     # COMPLETED.
@@ -5333,6 +5463,20 @@ module Aws::ServiceCatalog
     #
     # This API cannot be used for removing the portfolio share. You must use
     # `DeletePortfolioShare` API for that action.
+    #
+    # <note markdown="1"> When you associate a principal with portfolio, a potential privilege
+    # escalation path may occur when that portfolio is then shared with
+    # other accounts. For a user in a recipient account who is *not* an
+    # Service Catalog Admin, but still has the ability to create Principals
+    # (Users/Groups/Roles), that user could create a role that matches a
+    # principal name association for the portfolio. Although this user may
+    # not know which principal names are associated through Service Catalog,
+    # they may be able to guess the user. If this potential escalation path
+    # is a concern, then Service Catalog recommends using `PrincipalType` as
+    # `IAM`. With this configuration, the `PrincipalARN` must already exist
+    # in the recipient account before it can be associated.
+    #
+    #  </note>
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -5356,8 +5500,13 @@ module Aws::ServiceCatalog
     #   Information about the organization node.
     #
     # @option params [Boolean] :share_tag_options
-    #   A flag to enable or disable TagOptions sharing for the portfolio
-    #   share. If this field is not provided, the current state of TagOptions
+    #   Enables or disables `TagOptions` sharing for the portfolio share. If
+    #   this field is not provided, the current state of TagOptions sharing on
+    #   the portfolio share will not be modified.
+    #
+    # @option params [Boolean] :share_principals
+    #   A flag to enables or disables `Principals` sharing in the portfolio.
+    #   If this field is not provided, the current state of the `Principals`
     #   sharing on the portfolio share will not be modified.
     #
     # @return [Types::UpdatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5376,6 +5525,7 @@ module Aws::ServiceCatalog
     #       value: "OrganizationNodeValue",
     #     },
     #     share_tag_options: false,
+    #     share_principals: false,
     #   })
     #
     # @example Response structure
@@ -5433,6 +5583,16 @@ module Aws::ServiceCatalog
     # @option params [Array<String>] :remove_tags
     #   The tags to remove from the product.
     #
+    # @option params [Types::SourceConnection] :source_connection
+    #   Specifies connection details for the updated product and syncs the
+    #   product to the connection source artifact. This automatically manages
+    #   the product's artifacts based on changes to the source. The
+    #   `SourceConnection` parameter consists of the following sub-fields.
+    #
+    #   * `Type`
+    #
+    #   * `ConnectionParamters`
+    #
     # @return [Types::UpdateProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProductOutput#product_view_detail #product_view_detail} => Types::ProductViewDetail
@@ -5457,6 +5617,17 @@ module Aws::ServiceCatalog
     #       },
     #     ],
     #     remove_tags: ["TagKey"],
+    #     source_connection: {
+    #       type: "CODESTAR", # accepts CODESTAR
+    #       connection_parameters: { # required
+    #         code_star: {
+    #           connection_arn: "CodeStarConnectionArn", # required
+    #           repository: "Repository", # required
+    #           branch: "RepositoryBranch", # required
+    #           artifact_path: "RepositoryArtifactPath", # required
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -5475,6 +5646,16 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #   resp.product_view_detail.product_arn #=> String
     #   resp.product_view_detail.created_time #=> Time
+    #   resp.product_view_detail.source_connection.type #=> String, one of "CODESTAR"
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.connection_arn #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.repository #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.branch #=> String
+    #   resp.product_view_detail.source_connection.connection_parameters.code_star.artifact_path #=> String
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_time #=> Time
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_status #=> String, one of "SUCCEEDED", "FAILED"
+    #   resp.product_view_detail.source_connection.last_sync.last_sync_status_message #=> String
+    #   resp.product_view_detail.source_connection.last_sync.last_successful_sync_time #=> Time
+    #   resp.product_view_detail.source_connection.last_sync.last_successful_sync_provisioning_artifact_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -5790,6 +5971,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
+    #   resp.provisioning_artifact_detail.source_revision #=> String
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -5913,7 +6095,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

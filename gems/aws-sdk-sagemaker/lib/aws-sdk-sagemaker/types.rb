@@ -10193,11 +10193,12 @@ module Aws::SageMaker
     #           trial_component_display_name: "ExperimentEntityName",
     #         },
     #         profiler_config: {
-    #           s3_output_path: "S3Uri", # required
+    #           s3_output_path: "S3Uri",
     #           profiling_interval_in_milliseconds: 1,
     #           profiling_parameters: {
     #             "ConfigKey" => "ConfigValue",
     #           },
+    #           disable_profiler: false,
     #         },
     #         profiler_rule_configurations: [
     #           {
@@ -35856,11 +35857,12 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         s3_output_path: "S3Uri", # required
+    #         s3_output_path: "S3Uri",
     #         profiling_interval_in_milliseconds: 1,
     #         profiling_parameters: {
     #           "ConfigKey" => "ConfigValue",
     #         },
+    #         disable_profiler: false,
     #       }
     #
     # @!attribute [rw] s3_output_path
@@ -35889,12 +35891,17 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] disable_profiler
+    #   To disable system monitoring and profiling, set to `True`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProfilerConfig AWS API Documentation
     #
     class ProfilerConfig < Struct.new(
       :s3_output_path,
       :profiling_interval_in_milliseconds,
-      :profiling_parameters)
+      :profiling_parameters,
+      :disable_profiler)
       SENSITIVE = []
       include Aws::Structure
     end

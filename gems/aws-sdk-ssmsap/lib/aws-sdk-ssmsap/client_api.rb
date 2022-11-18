@@ -357,10 +357,10 @@ module Aws::SsmSap
         "protocol" => "rest-json",
         "serviceAbbreviation" => "SsmSap",
         "serviceFullName" => "AWS Systems Manager for SAP",
-        "serviceId" => "SsmSap",
+        "serviceId" => "Ssm Sap",
         "signatureVersion" => "v4",
         "signingName" => "ssm-sap",
-        "uid" => "ssmsap-2018-05-10",
+        "uid" => "ssm-sap-2018-05-10",
       }
 
       api.add_operation(:delete_resource_permission, Seahorse::Model::Operation.new.tap do |o|

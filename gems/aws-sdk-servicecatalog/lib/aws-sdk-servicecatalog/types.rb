@@ -135,7 +135,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
     #         principal_arn: "PrincipalARN", # required
-    #         principal_type: "IAM", # required, accepts IAM
+    #         principal_type: "IAM", # required, accepts IAM, IAM_PATTERN
     #       }
     #
     # @!attribute [rw] accept_language
@@ -153,11 +153,19 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group). This field
+    #   allows an ARN with no `accountID` if `PrincipalType` is
+    #   `IAM_PATTERN`.
+    #
+    #   You can associate multiple `IAM` patterns even if the account has no
+    #   principal with that name. This is useful in Principal Name Sharing
+    #   if you want to share a principal without creating it in the account
+    #   that owns the portfolio.
     #   @return [String]
     #
     # @!attribute [rw] principal_type
-    #   The principal type. The supported value is `IAM`.
+    #   The principal type. The supported value is `IAM` if you use a fully
+    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioInput AWS API Documentation
@@ -426,6 +434,48 @@ module Aws::ServiceCatalog
     #
     class CloudWatchDashboard < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The subtype containing details about the Codestar connection `Type`.
+    #
+    # @note When making an API call, you may pass CodeStarParameters
+    #   data as a hash:
+    #
+    #       {
+    #         connection_arn: "CodeStarConnectionArn", # required
+    #         repository: "Repository", # required
+    #         branch: "RepositoryBranch", # required
+    #         artifact_path: "RepositoryArtifactPath", # required
+    #       }
+    #
+    # @!attribute [rw] connection_arn
+    #   The CodeStar ARN, which is the connection between Service Catalog
+    #   and the external repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The specific repository where the product’s artifact-to-be-synced
+    #   resides, formatted as "Account/Repo."
+    #   @return [String]
+    #
+    # @!attribute [rw] branch
+    #   The specific branch where the artifact resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_path
+    #   The absolute path wehre the artifact resides within the repo and
+    #   branch, formatted as "folder/file.json."
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CodeStarParameters AWS API Documentation
+    #
+    class CodeStarParameters < Struct.new(
+      :connection_arn,
+      :repository,
+      :branch,
+      :artifact_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -859,6 +909,7 @@ module Aws::ServiceCatalog
     #           value: "OrganizationNodeValue",
     #         },
     #         share_tag_options: false,
+    #         share_principals: false,
     #       }
     #
     # @!attribute [rw] accept_language
@@ -894,6 +945,19 @@ module Aws::ServiceCatalog
     #   disabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] share_principals
+    #   Enables or disables `Principal` sharing when creating the portfolio
+    #   share. If this flag is not provided, principal sharing is disabled.
+    #
+    #   When you enable Principal Name Sharing for a portfolio share, the
+    #   share recipient account end users with a principal that matches any
+    #   of the associated IAM patterns can provision products from the
+    #   portfolio. Once shared, the share recipient can view associations of
+    #   `PrincipalType`\: `IAM_PATTERN` on their portfolio. You can create
+    #   the principals in the recipient account before or after creating the
+    #   share.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
     #
     class CreatePortfolioShareInput < Struct.new(
@@ -901,7 +965,8 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :account_id,
       :organization_node,
-      :share_tag_options)
+      :share_tag_options,
+      :share_principals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -938,16 +1003,27 @@ module Aws::ServiceCatalog
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         provisioning_artifact_parameters: { # required
+    #         provisioning_artifact_parameters: {
     #           name: "ProvisioningArtifactName",
     #           description: "ProvisioningArtifactDescription",
-    #           info: { # required
+    #           info: {
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
     #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
     #           disable_template_validation: false,
     #         },
     #         idempotency_token: "IdempotencyToken", # required
+    #         source_connection: {
+    #           type: "CODESTAR", # accepts CODESTAR
+    #           connection_parameters: { # required
+    #             code_star: {
+    #               connection_arn: "CodeStarConnectionArn", # required
+    #               repository: "Repository", # required
+    #               branch: "RepositoryBranch", # required
+    #               artifact_path: "RepositoryArtifactPath", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1011,6 +1087,17 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] source_connection
+    #   Specifies connection details for the created product and syncs the
+    #   product to the connection source artifact. This automatically
+    #   manages the product's artifacts based on changes to the source. The
+    #   `SourceConnection` parameter consists of the following sub-fields.
+    #
+    #   * `Type`
+    #
+    #   * `ConnectionParamters`
+    #   @return [Types::SourceConnection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProductInput AWS API Documentation
     #
     class CreateProductInput < Struct.new(
@@ -1025,7 +1112,8 @@ module Aws::ServiceCatalog
       :product_type,
       :tags,
       :provisioning_artifact_parameters,
-      :idempotency_token)
+      :idempotency_token,
+      :source_connection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1205,7 +1293,7 @@ module Aws::ServiceCatalog
     #         parameters: { # required
     #           name: "ProvisioningArtifactName",
     #           description: "ProvisioningArtifactDescription",
-    #           info: { # required
+    #           info: {
     #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #           },
     #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
@@ -1261,13 +1349,13 @@ module Aws::ServiceCatalog
     #   not both. Keys accepted: \[ `LoadTemplateFromURL`,
     #   `ImportFromPhysicalId` \].
     #
-    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
-    #   Services CodeCommit, or GitHub in JSON format.
+    #   Use the URL of the CloudFormation template in Amazon S3 or GitHub in
+    #   JSON format.
     #
     #   `LoadTemplateFromURL`
     #
-    #   Use the URL of the CloudFormation template in Amazon S3, Amazon Web
-    #   Services CodeCommit, or GitHub in JSON format.
+    #   Use the URL of the CloudFormation template in Amazon S3 or GitHub in
+    #   JSON format.
     #
     #   `ImportFromPhysicalId`
     #
@@ -2418,8 +2506,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
-    #   Services CodeCommit, or GitHub in JSON format.
+    #   The URL of the CloudFormation template in Amazon S3 or GitHub in
+    #   JSON format.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -2791,6 +2879,7 @@ module Aws::ServiceCatalog
     #         accept_language: "AcceptLanguage",
     #         portfolio_id: "Id", # required
     #         principal_arn: "PrincipalARN", # required
+    #         principal_type: "IAM", # accepts IAM, IAM_PATTERN
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2808,7 +2897,14 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group). This field
+    #   allows an ARN with no `accountID` if `PrincipalType` is
+    #   `IAM_PATTERN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   The supported value is `IAM` if you use a fully defined ARN, or
+    #   `IAM_PATTERN` if you use no `accountID`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioInput AWS API Documentation
@@ -2816,7 +2912,8 @@ module Aws::ServiceCatalog
     class DisassociatePrincipalFromPortfolioInput < Struct.new(
       :accept_language,
       :portfolio_id,
-      :principal_arn)
+      :principal_arn,
+      :principal_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3335,6 +3432,55 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidStateException AWS API Documentation
     #
     class InvalidStateException < Aws::EmptyStructure; end
+
+    # Provides details about the product's connection sync and contains the
+    # following sub-fields.
+    #
+    # * `LastSyncTime`
+    #
+    # * `LastSyncStatus`
+    #
+    # * `LastSyncStatusMessage`
+    #
+    # * `LastSuccessfulSyncTime`
+    #
+    # * `LastSuccessfulSyncProvisioningArtifactID`
+    #
+    # @!attribute [rw] last_sync_time
+    #   The time of the last attempted sync from the repository to the
+    #   Service Catalog product.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_sync_status
+    #   The current status of the sync. Responses include `SUCCEEDED` or
+    #   `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_sync_status_message
+    #   The sync's status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_successful_sync_time
+    #   The time of the latest successful sync from the source repo artifact
+    #   to the Service Catalog product.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_sync_provisioning_artifact_id
+    #   The ProvisioningArtifactID of the ProvisioningArtifact created from
+    #   the latest successful sync.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LastSync AWS API Documentation
+    #
+    class LastSync < Struct.new(
+      :last_sync_time,
+      :last_sync_status,
+      :last_sync_status_message,
+      :last_successful_sync_time,
+      :last_successful_sync_provisioning_artifact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A launch path object.
     #
@@ -3966,7 +4112,8 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] principals
-    #   The IAM principals (users or roles) associated with the portfolio.
+    #   The `PrincipalARN`s and corresponding `PrincipalType`s associated
+    #   with the portfolio.
     #   @return [Array<Types::Principal>]
     #
     # @!attribute [rw] next_page_token
@@ -4750,7 +4897,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] principal_id
     #   The identifier of the recipient entity that received the portfolio
-    #   share. The recipient entities can be one of the following:
+    #   share. The recipient entity can be one of the following:
     #
     #   1\. An external account.
     #
@@ -4777,13 +4924,19 @@ module Aws::ServiceCatalog
     #   portfolio share.
     #   @return [Boolean]
     #
+    # @!attribute [rw] share_principals
+    #   Indicates if `Principal` sharing is enabled or disabled for the
+    #   portfolio share.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/PortfolioShareDetail AWS API Documentation
     #
     class PortfolioShareDetail < Struct.new(
       :principal_id,
       :type,
       :accepted,
-      :share_tag_options)
+      :share_tag_options,
+      :share_principals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4791,11 +4944,14 @@ module Aws::ServiceCatalog
     # Information about a principal.
     #
     # @!attribute [rw] principal_arn
-    #   The ARN of the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group). This field
+    #   allows for an ARN with no `accountID` if the `PrincipalType` is an
+    #   `IAM_PATTERN`.
     #   @return [String]
     #
     # @!attribute [rw] principal_type
-    #   The principal type. The supported value is `IAM`.
+    #   The principal type. The supported value is `IAM` if you use a fully
+    #   defined ARN, or `IAM_PATTERN` if you use an ARN with no `accountID`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal AWS API Documentation
@@ -4852,13 +5008,23 @@ module Aws::ServiceCatalog
     #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
+    # @!attribute [rw] source_connection
+    #   A top level `ProductViewDetail` response containing details about
+    #   the product’s connection. Service Catalog returns this field for the
+    #   `CreateProduct`, `UpdateProduct`, `DescribeProductAsAdmin`, and
+    #   `SearchProductAsAdmin` APIs. This response contains the same fields
+    #   as the `ConnectionParameters` request, with the addition of the
+    #   `LastSync` response.
+    #   @return [Types::SourceConnectionDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewDetail AWS API Documentation
     #
     class ProductViewDetail < Struct.new(
       :product_view_summary,
       :status,
       :product_arn,
-      :created_time)
+      :created_time,
+      :source_connection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5398,7 +5564,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] updated_time
-    #   The time when the plan was last updated.
+    #   The UTC time stamp when the plan was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] notification_arns
@@ -5555,6 +5721,19 @@ module Aws::ServiceCatalog
     #   users about which provisioning artifacts to use.
     #   @return [String]
     #
+    # @!attribute [rw] source_revision
+    #   Specifies the revision of the external artifact that was used to
+    #   automatically sync the Service Catalog product and create the
+    #   provisioning artifact. Service Catalog includes this response
+    #   parameter as a high level field to the existing
+    #   `ProvisioningArtifactDetail` type, which is returned as part of the
+    #   response for `CreateProduct`, `UpdateProduct`,
+    #   `DescribeProductAsAdmin`, `DescribeProvisioningArtifact`,
+    #   `ListProvisioningArtifact`, and `UpdateProvisioningArticat` APIs.
+    #
+    #   This field only exists for Repo-Synced products.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail AWS API Documentation
     #
     class ProvisioningArtifactDetail < Struct.new(
@@ -5564,7 +5743,8 @@ module Aws::ServiceCatalog
       :type,
       :created_time,
       :active,
-      :guidance)
+      :guidance,
+      :source_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5677,7 +5857,7 @@ module Aws::ServiceCatalog
     #       {
     #         name: "ProvisioningArtifactName",
     #         description: "ProvisioningArtifactDescription",
-    #         info: { # required
+    #         info: {
     #           "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #         },
     #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
@@ -5699,9 +5879,8 @@ module Aws::ServiceCatalog
     #   not both. Keys accepted: \[ `LoadTemplateFromURL`,
     #   `ImportFromPhysicalId` \]
     #
-    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
-    #   Services CodeCommit, or GitHub in JSON format. Specify the URL in
-    #   JSON format as follows:
+    #   The URL of the CloudFormation template in Amazon S3 or GitHub in
+    #   JSON format. Specify the URL in JSON format as follows:
     #
     #   `"LoadTemplateFromURL":
     #   "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."`
@@ -5725,8 +5904,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] disable_template_validation
-    #   If set to true, Amazon Web Services Service Catalog stops validating
-    #   the specified provisioning artifact even if it is invalid.
+    #   If set to true, Service Catalog stops validating the specified
+    #   provisioning artifact even if it is invalid.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
@@ -6797,6 +6976,106 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # A top level `ProductViewDetail` response containing details about the
+    # product’s connection. Service Catalog returns this field for the
+    # `CreateProduct`, `UpdateProduct`, `DescribeProductAsAdmin`, and
+    # `SearchProductAsAdmin` APIs. This response contains the same fields as
+    # the `ConnectionParameters` request, with the addition of the
+    # `LastSync` response.
+    #
+    # @note When making an API call, you may pass SourceConnection
+    #   data as a hash:
+    #
+    #       {
+    #         type: "CODESTAR", # accepts CODESTAR
+    #         connection_parameters: { # required
+    #           code_star: {
+    #             connection_arn: "CodeStarConnectionArn", # required
+    #             repository: "Repository", # required
+    #             branch: "RepositoryBranch", # required
+    #             artifact_path: "RepositoryArtifactPath", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The only supported `SourceConnection` type is Codestar.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_parameters
+    #   The connection details based on the connection `Type`.
+    #   @return [Types::SourceConnectionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SourceConnection AWS API Documentation
+    #
+    class SourceConnection < Struct.new(
+      :type,
+      :connection_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the configured `SourceConnection`.
+    #
+    # @!attribute [rw] type
+    #   The only supported `SourceConnection` type is Codestar.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_parameters
+    #   The connection details based on the connection `Type`.
+    #   @return [Types::SourceConnectionParameters]
+    #
+    # @!attribute [rw] last_sync
+    #   Provides details about the product's connection sync and contains
+    #   the following sub-fields.
+    #
+    #   * `LastSyncTime`
+    #
+    #   * `LastSyncStatus`
+    #
+    #   * `LastSyncStatusMessage`
+    #
+    #   * `LastSuccessfulSyncTime`
+    #
+    #   * `LastSuccessfulSyncProvisioningArtifactID`
+    #   @return [Types::LastSync]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SourceConnectionDetail AWS API Documentation
+    #
+    class SourceConnectionDetail < Struct.new(
+      :type,
+      :connection_parameters,
+      :last_sync)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides connection details.
+    #
+    # @note When making an API call, you may pass SourceConnectionParameters
+    #   data as a hash:
+    #
+    #       {
+    #         code_star: {
+    #           connection_arn: "CodeStarConnectionArn", # required
+    #           repository: "Repository", # required
+    #           branch: "RepositoryBranch", # required
+    #           artifact_path: "RepositoryArtifactPath", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] code_star
+    #   Provides `ConnectionType` details.
+    #   @return [Types::CodeStarParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SourceConnectionParameters AWS API Documentation
+    #
+    class SourceConnectionParameters < Struct.new(
+      :code_star)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An CloudFormation stack, in a specific account and Region, that's
     # part of a stack set operation. A stack instance is a reference to an
     # attempted or actual stack in a given account within a given Region. A
@@ -7251,6 +7530,7 @@ module Aws::ServiceCatalog
     #           value: "OrganizationNodeValue",
     #         },
     #         share_tag_options: false,
+    #         share_principals: false,
     #       }
     #
     # @!attribute [rw] accept_language
@@ -7279,9 +7559,15 @@ module Aws::ServiceCatalog
     #   @return [Types::OrganizationNode]
     #
     # @!attribute [rw] share_tag_options
-    #   A flag to enable or disable TagOptions sharing for the portfolio
-    #   share. If this field is not provided, the current state of
-    #   TagOptions sharing on the portfolio share will not be modified.
+    #   Enables or disables `TagOptions` sharing for the portfolio share. If
+    #   this field is not provided, the current state of TagOptions sharing
+    #   on the portfolio share will not be modified.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] share_principals
+    #   A flag to enables or disables `Principals` sharing in the portfolio.
+    #   If this field is not provided, the current state of the `Principals`
+    #   sharing on the portfolio share will not be modified.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioShareInput AWS API Documentation
@@ -7291,7 +7577,8 @@ module Aws::ServiceCatalog
       :portfolio_id,
       :account_id,
       :organization_node,
-      :share_tag_options)
+      :share_tag_options,
+      :share_principals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7336,6 +7623,17 @@ module Aws::ServiceCatalog
     #           },
     #         ],
     #         remove_tags: ["TagKey"],
+    #         source_connection: {
+    #           type: "CODESTAR", # accepts CODESTAR
+    #           connection_parameters: { # required
+    #             code_star: {
+    #               connection_arn: "CodeStarConnectionArn", # required
+    #               repository: "Repository", # required
+    #               branch: "RepositoryBranch", # required
+    #               artifact_path: "RepositoryArtifactPath", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] accept_language
@@ -7388,6 +7686,17 @@ module Aws::ServiceCatalog
     #   The tags to remove from the product.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] source_connection
+    #   Specifies connection details for the updated product and syncs the
+    #   product to the connection source artifact. This automatically
+    #   manages the product's artifacts based on changes to the source. The
+    #   `SourceConnection` parameter consists of the following sub-fields.
+    #
+    #   * `Type`
+    #
+    #   * `ConnectionParamters`
+    #   @return [Types::SourceConnection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductInput AWS API Documentation
     #
     class UpdateProductInput < Struct.new(
@@ -7401,7 +7710,8 @@ module Aws::ServiceCatalog
       :support_email,
       :support_url,
       :add_tags,
-      :remove_tags)
+      :remove_tags,
+      :source_connection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7750,8 +8060,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   The URL of the CloudFormation template in Amazon S3, Amazon Web
-    #   Services CodeCommit, or GitHub in JSON format.
+    #   The URL of the CloudFormation template in Amazon S3 or GitHub in
+    #   JSON format.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status

@@ -1995,13 +1995,17 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         security_profile_name: "SecurityProfileName", # required
+    #         security_profile_name: "CreateSecurityProfileName", # required
     #         description: "SecurityProfileDescription",
     #         permissions: ["SecurityProfilePermission"],
     #         instance_id: "InstanceId", # required
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         allowed_access_control_tags: {
+    #           "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
+    #         },
+    #         tag_restricted_resources: ["TagRestrictedResourceName"],
     #       }
     #
     # @!attribute [rw] security_profile_name
@@ -2032,6 +2036,16 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] allowed_access_control_tags
+    #   The list of tags that a security profile uses to restrict access to
+    #   resources in Amazon Connect.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tag_restricted_resources
+    #   The list of resources that a security profile applies tag
+    #   restrictions to in Amazon Connect.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
     #
     class CreateSecurityProfileRequest < Struct.new(
@@ -2039,7 +2053,9 @@ module Aws::Connect
       :description,
       :permissions,
       :instance_id,
-      :tags)
+      :tags,
+      :allowed_access_control_tags,
+      :tag_restricted_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10202,6 +10218,16 @@ module Aws::Connect
     #   "key2":"value2"\\} \\}.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] allowed_access_control_tags
+    #   The list of tags that a security profile uses to restrict access to
+    #   resources in Amazon Connect.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tag_restricted_resources
+    #   The list of resources that a security profile applies tag
+    #   restrictions to in Amazon Connect.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
     #
     class SecurityProfile < Struct.new(
@@ -10210,7 +10236,9 @@ module Aws::Connect
       :arn,
       :security_profile_name,
       :description,
-      :tags)
+      :tags,
+      :allowed_access_control_tags,
+      :tag_restricted_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12721,6 +12749,10 @@ module Aws::Connect
     #         permissions: ["SecurityProfilePermission"],
     #         security_profile_id: "SecurityProfileId", # required
     #         instance_id: "InstanceId", # required
+    #         allowed_access_control_tags: {
+    #           "SecurityProfilePolicyKey" => "SecurityProfilePolicyValue",
+    #         },
+    #         tag_restricted_resources: ["TagRestrictedResourceName"],
     #       }
     #
     # @!attribute [rw] description
@@ -12745,13 +12777,25 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_access_control_tags
+    #   The list of tags that a security profile uses to restrict access to
+    #   resources in Amazon Connect.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tag_restricted_resources
+    #   The list of resources that a security profile applies tag
+    #   restrictions to in Amazon Connect.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation
     #
     class UpdateSecurityProfileRequest < Struct.new(
       :description,
       :permissions,
       :security_profile_id,
-      :instance_id)
+      :instance_id,
+      :allowed_access_control_tags,
+      :tag_restricted_resources)
       SENSITIVE = []
       include Aws::Structure
     end
