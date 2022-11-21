@@ -100,7 +100,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #         name: "AlarmName", # required
     #       }
     #
@@ -562,7 +562,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #           vpc_id: "VPCId",
     #         },
     #         comment: "AssociateVPCComment",
@@ -622,7 +622,7 @@ module Aws::Route53
     #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, af-south-1, eu-south-1, eu-south-2
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
     #           geo_location: {
     #             continent_code: "GeoLocationContinentCode",
     #             country_code: "GeoLocationCountryCode",
@@ -704,7 +704,7 @@ module Aws::Route53
     #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
-    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, af-south-1, eu-south-1, eu-south-2
+    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
     #               geo_location: {
     #                 continent_code: "GeoLocationContinentCode",
     #                 country_code: "GeoLocationCountryCode",
@@ -881,7 +881,7 @@ module Aws::Route53
     #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
-    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, af-south-1, eu-south-1, eu-south-2
+    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
     #                 geo_location: {
     #                   continent_code: "GeoLocationContinentCode",
     #                   country_code: "GeoLocationCountryCode",
@@ -1424,7 +1424,7 @@ module Aws::Route53
     #           enable_sni: false,
     #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #           alarm_identifier: {
-    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
+    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #             name: "AlarmName", # required
     #           },
     #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -1499,7 +1499,7 @@ module Aws::Route53
     #       {
     #         name: "DNSName", # required
     #         vpc: {
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #           vpc_id: "VPCId",
     #         },
     #         caller_reference: "Nonce", # required
@@ -2053,7 +2053,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -2548,7 +2548,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -2645,7 +2645,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #           vpc_id: "VPCId",
     #         },
     #         comment: "DisassociateVPCComment",
@@ -3709,7 +3709,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -5444,7 +5444,7 @@ module Aws::Route53
     #
     #       {
     #         vpc_id: "VPCId", # required
-    #         vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #         vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #         max_items: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -6979,7 +6979,7 @@ module Aws::Route53
     #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, af-south-1, eu-south-1, eu-south-2
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, af-south-1, eu-south-1, eu-south-2
     #         geo_location: {
     #           continent_code: "GeoLocationContinentCode",
     #           country_code: "GeoLocationCountryCode",
@@ -8258,7 +8258,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, me-central-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, eu-south-2, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -8821,7 +8821,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
+    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-central-2, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, me-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-south-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1, eu-south-2
     #         vpc_id: "VPCId",
     #       }
     #

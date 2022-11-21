@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-11-21)
+------------------
+
+* Feature - Amazon Route 53 now supports the Asia Pacific (Hyderabad) Region (ap-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 1.68.0 (2022-11-15)
 ------------------
 
