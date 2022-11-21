@@ -410,7 +410,7 @@ module Aws
       end
 
       def yield_messages(config, messages, stats, &block)
-        if config.request_params[:max_number_of_messages] == 1
+        if config.request_params[:max_number_of_messages].to_i <= 1
           messages.each do |msg|
             yield(msg, stats)
           end

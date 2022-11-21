@@ -127,6 +127,30 @@ module Aws
           expect(yielded.map(&:body)).to eq(%w(body-1 body-2))
         end
 
+        it 'yields single messages when max messages is 0' do
+          client.stub_responses(:receive_message, [
+            { messages: [sample_message] },
+            { messages: [] },
+          ])
+          yielded = nil
+          poller.poll(idle_timeout: 0, max_number_of_messages: 0) do |msg|
+            yielded = msg
+          end
+          expect(yielded.body).to eq('body')
+        end
+
+        it 'yields single messages when max messages is nil' do
+          client.stub_responses(:receive_message, [
+            { messages: [sample_message] },
+            { messages: [] },
+          ])
+          yielded = nil
+          poller.poll(idle_timeout: 0, max_number_of_messages: nil) do |msg|
+            yielded = msg
+          end
+          expect(yielded.body).to eq('body')
+        end
+
         describe 'message deletion' do
 
           it 'deletes the message at the end of the block' do
