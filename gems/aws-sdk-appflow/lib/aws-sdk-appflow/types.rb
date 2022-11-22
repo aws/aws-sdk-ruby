@@ -953,10 +953,15 @@ module Aws::Appflow
     #             instance_url: "InstanceUrl", # required
     #           },
     #           redshift: {
-    #             database_url: "DatabaseUrl", # required
+    #             database_url: "DatabaseUrl",
     #             bucket_name: "BucketName", # required
     #             bucket_prefix: "BucketPrefix",
     #             role_arn: "RoleArn", # required
+    #             data_api_role_arn: "DataApiRoleArn",
+    #             is_redshift_serverless: false,
+    #             cluster_identifier: "ClusterIdentifier",
+    #             workgroup_name: "WorkgroupName",
+    #             database_name: "DatabaseName",
     #           },
     #           salesforce: {
     #             instance_url: "InstanceUrl",
@@ -1013,7 +1018,7 @@ module Aws::Appflow
     #             },
     #           },
     #         },
-    #         connector_profile_credentials: { # required
+    #         connector_profile_credentials: {
     #           amplitude: {
     #             api_key: "ApiKey", # required
     #             secret_key: "SecretKey", # required
@@ -1059,8 +1064,8 @@ module Aws::Appflow
     #             },
     #           },
     #           redshift: {
-    #             username: "Username", # required
-    #             password: "Password", # required
+    #             username: "String",
+    #             password: "Password",
     #           },
     #           salesforce: {
     #             access_token: "AccessToken",
@@ -1221,8 +1226,8 @@ module Aws::Appflow
     #           },
     #         },
     #         redshift: {
-    #           username: "Username", # required
-    #           password: "Password", # required
+    #           username: "String",
+    #           password: "Password",
     #         },
     #         salesforce: {
     #           access_token: "AccessToken",
@@ -1441,10 +1446,15 @@ module Aws::Appflow
     #           instance_url: "InstanceUrl", # required
     #         },
     #         redshift: {
-    #           database_url: "DatabaseUrl", # required
+    #           database_url: "DatabaseUrl",
     #           bucket_name: "BucketName", # required
     #           bucket_prefix: "BucketPrefix",
     #           role_arn: "RoleArn", # required
+    #           data_api_role_arn: "DataApiRoleArn",
+    #           is_redshift_serverless: false,
+    #           cluster_identifier: "ClusterIdentifier",
+    #           workgroup_name: "WorkgroupName",
+    #           database_name: "DatabaseName",
     #         },
     #         salesforce: {
     #           instance_url: "InstanceUrl",
@@ -1714,10 +1724,15 @@ module Aws::Appflow
     #               instance_url: "InstanceUrl", # required
     #             },
     #             redshift: {
-    #               database_url: "DatabaseUrl", # required
+    #               database_url: "DatabaseUrl",
     #               bucket_name: "BucketName", # required
     #               bucket_prefix: "BucketPrefix",
     #               role_arn: "RoleArn", # required
+    #               data_api_role_arn: "DataApiRoleArn",
+    #               is_redshift_serverless: false,
+    #               cluster_identifier: "ClusterIdentifier",
+    #               workgroup_name: "WorkgroupName",
+    #               database_name: "DatabaseName",
     #             },
     #             salesforce: {
     #               instance_url: "InstanceUrl",
@@ -1774,7 +1789,7 @@ module Aws::Appflow
     #               },
     #             },
     #           },
-    #           connector_profile_credentials: { # required
+    #           connector_profile_credentials: {
     #             amplitude: {
     #               api_key: "ApiKey", # required
     #               secret_key: "SecretKey", # required
@@ -1820,8 +1835,8 @@ module Aws::Appflow
     #               },
     #             },
     #             redshift: {
-    #               username: "Username", # required
-    #               password: "Password", # required
+    #               username: "String",
+    #               password: "Password",
     #             },
     #             salesforce: {
     #               access_token: "AccessToken",
@@ -5164,8 +5179,8 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         username: "Username", # required
-    #         password: "Password", # required
+    #         username: "String",
+    #         password: "Password",
     #       }
     #
     # @!attribute [rw] username
@@ -5191,10 +5206,15 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         database_url: "DatabaseUrl", # required
+    #         database_url: "DatabaseUrl",
     #         bucket_name: "BucketName", # required
     #         bucket_prefix: "BucketPrefix",
     #         role_arn: "RoleArn", # required
+    #         data_api_role_arn: "DataApiRoleArn",
+    #         is_redshift_serverless: false,
+    #         cluster_identifier: "ClusterIdentifier",
+    #         workgroup_name: "WorkgroupName",
+    #         database_name: "DatabaseName",
     #       }
     #
     # @!attribute [rw] database_url
@@ -5211,7 +5231,43 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role.
+    #   The Amazon Resource Name (ARN) of IAM role that grants Amazon
+    #   Redshift read-only access to Amazon S3. For more information, and
+    #   for the polices that you attach to this role, see [Allow Amazon
+    #   Redshift to access your Amazon AppFlow data in Amazon S3][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#redshift-access-s3
+    #   @return [String]
+    #
+    # @!attribute [rw] data_api_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that permits Amazon
+    #   AppFlow to access your Amazon Redshift database through the Data
+    #   API. For more information, and for the polices that you attach to
+    #   this role, see [Allow Amazon AppFlow to access Amazon Redshift
+    #   databases with the Data API][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#access-redshift
+    #   @return [String]
+    #
+    # @!attribute [rw] is_redshift_serverless
+    #   Indicates whether the connector profile defines a connection to an
+    #   Amazon Redshift Serverless data warehouse.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique ID that's assigned to an Amazon Redshift cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] workgroup_name
+    #   The name of an Amazon Redshift workgroup.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of an Amazon Redshift database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/RedshiftConnectorProfileProperties AWS API Documentation
@@ -5220,7 +5276,12 @@ module Aws::Appflow
       :database_url,
       :bucket_name,
       :bucket_prefix,
-      :role_arn)
+      :role_arn,
+      :data_api_role_arn,
+      :is_redshift_serverless,
+      :cluster_identifier,
+      :workgroup_name,
+      :database_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7312,10 +7373,15 @@ module Aws::Appflow
     #               instance_url: "InstanceUrl", # required
     #             },
     #             redshift: {
-    #               database_url: "DatabaseUrl", # required
+    #               database_url: "DatabaseUrl",
     #               bucket_name: "BucketName", # required
     #               bucket_prefix: "BucketPrefix",
     #               role_arn: "RoleArn", # required
+    #               data_api_role_arn: "DataApiRoleArn",
+    #               is_redshift_serverless: false,
+    #               cluster_identifier: "ClusterIdentifier",
+    #               workgroup_name: "WorkgroupName",
+    #               database_name: "DatabaseName",
     #             },
     #             salesforce: {
     #               instance_url: "InstanceUrl",
@@ -7372,7 +7438,7 @@ module Aws::Appflow
     #               },
     #             },
     #           },
-    #           connector_profile_credentials: { # required
+    #           connector_profile_credentials: {
     #             amplitude: {
     #               api_key: "ApiKey", # required
     #               secret_key: "SecretKey", # required
@@ -7418,8 +7484,8 @@ module Aws::Appflow
     #               },
     #             },
     #             redshift: {
-    #               username: "Username", # required
-    #               password: "Password", # required
+    #               username: "String",
+    #               password: "Password",
     #             },
     #             salesforce: {
     #               access_token: "AccessToken",

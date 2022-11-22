@@ -50,6 +50,7 @@ module Aws::Appflow
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientNumber = Shapes::StringShape.new(name: 'ClientNumber')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
+    ClusterIdentifier = Shapes::StringShape.new(name: 'ClusterIdentifier')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionMode = Shapes::StringShape.new(name: 'ConnectionMode')
     ConnectorAuthenticationException = Shapes::StructureShape.new(name: 'ConnectorAuthenticationException')
@@ -113,7 +114,9 @@ module Aws::Appflow
     CustomPropertyValue = Shapes::StringShape.new(name: 'CustomPropertyValue')
     CustomerProfilesDestinationProperties = Shapes::StructureShape.new(name: 'CustomerProfilesDestinationProperties')
     CustomerProfilesMetadata = Shapes::StructureShape.new(name: 'CustomerProfilesMetadata')
+    DataApiRoleArn = Shapes::StringShape.new(name: 'DataApiRoleArn')
     DataPullMode = Shapes::StringShape.new(name: 'DataPullMode')
+    DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DatabaseUrl = Shapes::StringShape.new(name: 'DatabaseUrl')
     DatadogConnectorOperator = Shapes::StringShape.new(name: 'DatadogConnectorOperator')
     DatadogConnectorProfileCredentials = Shapes::StructureShape.new(name: 'DatadogConnectorProfileCredentials')
@@ -393,6 +396,7 @@ module Aws::Appflow
     VeevaMetadata = Shapes::StructureShape.new(name: 'VeevaMetadata')
     VeevaSourceProperties = Shapes::StructureShape.new(name: 'VeevaSourceProperties')
     Warehouse = Shapes::StringShape.new(name: 'Warehouse')
+    WorkgroupName = Shapes::StringShape.new(name: 'WorkgroupName')
     WriteOperationType = Shapes::StringShape.new(name: 'WriteOperationType')
     ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
     ZendeskConnectorProfileCredentials = Shapes::StructureShape.new(name: 'ZendeskConnectorProfileCredentials')
@@ -584,7 +588,7 @@ module Aws::Appflow
     ConnectorProfile.struct_class = Types::ConnectorProfile
 
     ConnectorProfileConfig.add_member(:connector_profile_properties, Shapes::ShapeRef.new(shape: ConnectorProfileProperties, required: true, location_name: "connectorProfileProperties"))
-    ConnectorProfileConfig.add_member(:connector_profile_credentials, Shapes::ShapeRef.new(shape: ConnectorProfileCredentials, required: true, location_name: "connectorProfileCredentials"))
+    ConnectorProfileConfig.add_member(:connector_profile_credentials, Shapes::ShapeRef.new(shape: ConnectorProfileCredentials, location_name: "connectorProfileCredentials"))
     ConnectorProfileConfig.struct_class = Types::ConnectorProfileConfig
 
     ConnectorProfileCredentials.add_member(:amplitude, Shapes::ShapeRef.new(shape: AmplitudeConnectorProfileCredentials, location_name: "Amplitude"))
@@ -1114,14 +1118,19 @@ module Aws::Appflow
     Range.add_member(:minimum, Shapes::ShapeRef.new(shape: Double, location_name: "minimum"))
     Range.struct_class = Types::Range
 
-    RedshiftConnectorProfileCredentials.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "username"))
-    RedshiftConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "password"))
+    RedshiftConnectorProfileCredentials.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    RedshiftConnectorProfileCredentials.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "password"))
     RedshiftConnectorProfileCredentials.struct_class = Types::RedshiftConnectorProfileCredentials
 
-    RedshiftConnectorProfileProperties.add_member(:database_url, Shapes::ShapeRef.new(shape: DatabaseUrl, required: true, location_name: "databaseUrl"))
+    RedshiftConnectorProfileProperties.add_member(:database_url, Shapes::ShapeRef.new(shape: DatabaseUrl, location_name: "databaseUrl"))
     RedshiftConnectorProfileProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
     RedshiftConnectorProfileProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
     RedshiftConnectorProfileProperties.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    RedshiftConnectorProfileProperties.add_member(:data_api_role_arn, Shapes::ShapeRef.new(shape: DataApiRoleArn, location_name: "dataApiRoleArn"))
+    RedshiftConnectorProfileProperties.add_member(:is_redshift_serverless, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRedshiftServerless"))
+    RedshiftConnectorProfileProperties.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifier, location_name: "clusterIdentifier"))
+    RedshiftConnectorProfileProperties.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    RedshiftConnectorProfileProperties.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
     RedshiftConnectorProfileProperties.struct_class = Types::RedshiftConnectorProfileProperties
 
     RedshiftDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))

@@ -1461,6 +1461,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_application_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|

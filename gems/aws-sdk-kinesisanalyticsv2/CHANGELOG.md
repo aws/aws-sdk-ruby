@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-11-22)
+------------------
+
+* Feature - Support for Apache Flink 1.15 in Kinesis Data Analytics.
+
 1.41.0 (2022-10-25)
 ------------------
 

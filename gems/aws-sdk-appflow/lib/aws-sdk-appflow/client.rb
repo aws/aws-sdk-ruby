@@ -436,10 +436,15 @@ module Aws::Appflow
     #           instance_url: "InstanceUrl", # required
     #         },
     #         redshift: {
-    #           database_url: "DatabaseUrl", # required
+    #           database_url: "DatabaseUrl",
     #           bucket_name: "BucketName", # required
     #           bucket_prefix: "BucketPrefix",
     #           role_arn: "RoleArn", # required
+    #           data_api_role_arn: "DataApiRoleArn",
+    #           is_redshift_serverless: false,
+    #           cluster_identifier: "ClusterIdentifier",
+    #           workgroup_name: "WorkgroupName",
+    #           database_name: "DatabaseName",
     #         },
     #         salesforce: {
     #           instance_url: "InstanceUrl",
@@ -496,7 +501,7 @@ module Aws::Appflow
     #           },
     #         },
     #       },
-    #       connector_profile_credentials: { # required
+    #       connector_profile_credentials: {
     #         amplitude: {
     #           api_key: "ApiKey", # required
     #           secret_key: "SecretKey", # required
@@ -542,8 +547,8 @@ module Aws::Appflow
     #           },
     #         },
     #         redshift: {
-    #           username: "Username", # required
-    #           password: "Password", # required
+    #           username: "String",
+    #           password: "Password",
     #         },
     #         salesforce: {
     #           access_token: "AccessToken",
@@ -1299,6 +1304,11 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.redshift.bucket_name #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.redshift.bucket_prefix #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.redshift.role_arn #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.redshift.data_api_role_arn #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.redshift.is_redshift_serverless #=> Boolean
+    #   resp.connector_profile_details[0].connector_profile_properties.redshift.cluster_identifier #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.redshift.workgroup_name #=> String
+    #   resp.connector_profile_details[0].connector_profile_properties.redshift.database_name #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.salesforce.instance_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.salesforce.is_sandbox_environment #=> Boolean
     #   resp.connector_profile_details[0].connector_profile_properties.service_now.instance_url #=> String
@@ -2205,10 +2215,15 @@ module Aws::Appflow
     #           instance_url: "InstanceUrl", # required
     #         },
     #         redshift: {
-    #           database_url: "DatabaseUrl", # required
+    #           database_url: "DatabaseUrl",
     #           bucket_name: "BucketName", # required
     #           bucket_prefix: "BucketPrefix",
     #           role_arn: "RoleArn", # required
+    #           data_api_role_arn: "DataApiRoleArn",
+    #           is_redshift_serverless: false,
+    #           cluster_identifier: "ClusterIdentifier",
+    #           workgroup_name: "WorkgroupName",
+    #           database_name: "DatabaseName",
     #         },
     #         salesforce: {
     #           instance_url: "InstanceUrl",
@@ -2265,7 +2280,7 @@ module Aws::Appflow
     #           },
     #         },
     #       },
-    #       connector_profile_credentials: { # required
+    #       connector_profile_credentials: {
     #         amplitude: {
     #           api_key: "ApiKey", # required
     #           secret_key: "SecretKey", # required
@@ -2311,8 +2326,8 @@ module Aws::Appflow
     #           },
     #         },
     #         redshift: {
-    #           username: "Username", # required
-    #           password: "Password", # required
+    #           username: "String",
+    #           password: "Password",
     #         },
     #         salesforce: {
     #           access_token: "AccessToken",
@@ -2796,7 +2811,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

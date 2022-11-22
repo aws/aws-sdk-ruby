@@ -1133,8 +1133,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
-    #   `FLINK-1_8`, or `FLINK-1_11`).
+    #   The runtime environment for the application.
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -2039,7 +2038,7 @@ module Aws::KinesisAnalyticsV2
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0, FLINK-1_15
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {
@@ -2238,8 +2237,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1_0`, `FLINK-1_6`,
-    #   `FLINK-1_8`, or `FLINK-1_11`).
+    #   The runtime environment for the application.
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -2270,9 +2268,9 @@ module Aws::KinesisAnalyticsV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] application_mode
-    #   Use the `STREAMING` mode to create a Kinesis Data Analytics Studio
-    #   notebook. To create a Kinesis Data Analytics Studio notebook, use
-    #   the `INTERACTIVE` mode.
+    #   Use the `STREAMING` mode to create a Kinesis Data Analytics For
+    #   Flink application. To create a Kinesis Data Analytics Studio
+    #   notebook, use the `INTERACTIVE` mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationRequest AWS API Documentation
