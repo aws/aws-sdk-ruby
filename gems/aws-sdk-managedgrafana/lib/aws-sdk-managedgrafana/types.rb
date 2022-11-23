@@ -124,13 +124,13 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] aws_sso
     #   A structure containing information about how this workspace works
-    #   with Amazon Web Services SSO.
+    #   with IAM Identity Center.
     #   @return [Types::AwsSsoAuthentication]
     #
     # @!attribute [rw] providers
-    #   Specifies whether this workspace uses Amazon Web Services SSO, SAML,
-    #   or both methods to authenticate users to use the Grafana console in
-    #   the Amazon Managed Grafana workspace.
+    #   Specifies whether this workspace uses IAM Identity Center, SAML, or
+    #   both methods to authenticate users to use the Grafana console in the
+    #   Amazon Managed Grafana workspace.
     #   @return [Array<String>]
     #
     # @!attribute [rw] saml
@@ -149,13 +149,13 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
-    # A structure that describes whether the workspace uses SAML, Amazon Web
-    # Services SSO, or both methods for user authentication, and whether
+    # A structure that describes whether the workspace uses SAML, IAM
+    # Identity Center, or both methods for user authentication, and whether
     # that authentication is fully configured.
     #
     # @!attribute [rw] providers
-    #   Specifies whether the workspace uses SAML, Amazon Web Services SSO,
-    #   or both methods for user authentication.
+    #   Specifies whether the workspace uses SAML, IAM Identity Center, or
+    #   both methods for user authentication.
     #   @return [Array<String>]
     #
     # @!attribute [rw] saml_configuration_status
@@ -173,10 +173,10 @@ module Aws::ManagedGrafana
     end
 
     # A structure containing information about how this workspace works with
-    # Amazon Web Services SSO.
+    # IAM Identity Center.
     #
     # @!attribute [rw] sso_client_id
-    #   The ID of the Amazon Web Services SSO-managed application that is
+    #   The ID of the IAM Identity Center-managed application that is
     #   created by Amazon Managed Grafana.
     #   @return [String]
     #
@@ -224,14 +224,14 @@ module Aws::ManagedGrafana
     #       }
     #
     # @!attribute [rw] key_name
-    #   Specifies the name of the key to create. Key names must be unique to
-    #   the workspace.
+    #   Specifies the name of the key. Keynames must be unique to the
+    #   workspace.
     #   @return [String]
     #
     # @!attribute [rw] key_role
     #   Specifies the permission level of the key.
     #
-    #   Valid Values: `VIEWER` \| `EDITOR` \| `ADMIN`
+    #   Valid values: `VIEWER`\|`EDITOR`\|`ADMIN`
     #   @return [String]
     #
     # @!attribute [rw] seconds_to_live
@@ -240,7 +240,7 @@ module Aws::ManagedGrafana
     #   @return [Integer]
     #
     # @!attribute [rw] workspace_id
-    #   The ID of the workspace in which to create an API key.
+    #   The ID of the workspace to create an API key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKeyRequest AWS API Documentation
@@ -255,8 +255,8 @@ module Aws::ManagedGrafana
     end
 
     # @!attribute [rw] key
-    #   The key token that was created. Use this value as a bearer token to
-    #   authenticate HTTP requests to the workspace.
+    #   The key token. Use this value as a bearer token to authenticate HTTP
+    #   requests to the workspace.
     #   @return [String]
     #
     # @!attribute [rw] key_name
@@ -284,13 +284,18 @@ module Aws::ManagedGrafana
     #         account_access_type: "CURRENT_ACCOUNT", # required, accepts CURRENT_ACCOUNT, ORGANIZATION
     #         authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #         client_token: "ClientToken",
+    #         configuration: "OverridableConfigurationJson",
     #         organization_role_name: "OrganizationRoleName",
     #         permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #         stack_set_name: "StackSetName",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
-    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
+    #         vpc_configuration: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnet_ids: ["SubnetId"], # required
+    #         },
+    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
     #         workspace_description: "Description",
     #         workspace_name: "WorkspaceName",
     #         workspace_notification_destinations: ["SNS"], # accepts SNS
@@ -308,10 +313,10 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, Amazon Web Services
-    #   Single Sign On, or both to authenticate users for using the Grafana
-    #   console within a workspace. For more information, see [User
-    #   authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
+    #   (successor to Single Sign-On), or both to authenticate users for
+    #   using the Grafana console within a workspace. For more information,
+    #   see [User authentication in Amazon Managed Grafana][1].
     #
     #
     #
@@ -326,6 +331,16 @@ module Aws::ManagedGrafana
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   The configuration string for the workspace that you create. For more
+    #   information about the format and configuration options available,
+    #   see [Working in your Grafana workspace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #   @return [String]
+    #
     # @!attribute [rw] organization_role_name
     #   The name of an IAM role that already exists to use with
     #   Organizations to access Amazon Web Services data sources and
@@ -336,9 +351,12 @@ module Aws::ManagedGrafana
     #   If you specify `SERVICE_MANAGED` on AWS Grafana console, Amazon
     #   Managed Grafana automatically creates the IAM roles and provisions
     #   the permissions that the workspace needs to use Amazon Web Services
-    #   data sources and notification channels. In CLI mode, the
+    #   data sources and notification channels. In the CLI mode, the
     #   permissionType `SERVICE_MANAGED` will not create the IAM role for
-    #   you.
+    #   you. The ability for the Amazon Managed Grafana to create the IAM
+    #   role on behalf of the user is supported only in the Amazon Managed
+    #   Grafana AWS console. Use only the `CUSTOMER_MANAGED` permission type
+    #   when creating a workspace in the CLI.
     #
     #   If you specify `CUSTOMER_MANAGED`, you will manage those roles and
     #   permissions yourself. If you are creating this workspace in a member
@@ -364,6 +382,11 @@ module Aws::ManagedGrafana
     # @!attribute [rw] tags
     #   The list of tags associated with the workspace.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
+    #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] workspace_data_sources
     #   Specify the Amazon Web Services data sources that you want to be
@@ -415,10 +438,12 @@ module Aws::ManagedGrafana
       :account_access_type,
       :authentication_providers,
       :client_token,
+      :configuration,
       :organization_role_name,
       :permission_type,
       :stack_set_name,
       :tags,
+      :vpc_configuration,
       :workspace_data_sources,
       :workspace_description,
       :workspace_name,
@@ -467,7 +492,7 @@ module Aws::ManagedGrafana
     end
 
     # @!attribute [rw] key_name
-    #   The name of the API key that was deleted.
+    #   The name of the key that was deleted.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -547,6 +572,43 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeWorkspaceConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to get configuration information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspaceConfigurationRequest AWS API Documentation
+    #
+    class DescribeWorkspaceConfigurationRequest < Struct.new(
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   The configuration string for the workspace that you requested. For
+    #   more information about the format and configuration options
+    #   available, see [Working in your Grafana workspace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspaceConfigurationResponse AWS API Documentation
+    #
+    class DescribeWorkspaceConfigurationResponse < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeWorkspaceRequest
     #   data as a hash:
     #
@@ -620,18 +682,18 @@ module Aws::ManagedGrafana
     # integrate the identity provider with this workspace. You can specify
     # the metadata either by providing a URL to its location in the `url`
     # parameter, or by specifying the full metadata in XML format in the
-    # `xml` parameter.
+    # `xml` parameter. Specifying both will cause an error.
     #
     # @note IdpMetadata is a union - when making an API calls you must set exactly one of the members.
     #
     # @note IdpMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IdpMetadata corresponding to the set member.
     #
     # @!attribute [rw] url
-    #   The URL of the location containing the metadata.
+    #   The URL of the location containing the IdP metadata.
     #   @return [String]
     #
     # @!attribute [rw] xml
-    #   The actual full metadata file, in XML format.
+    #   The full IdP metadata, in XML format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/IdpMetadata AWS API Documentation
@@ -700,9 +762,8 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] user_type
     #   (Optional) If you specify `SSO_USER`, then only the permissions of
-    #   Amazon Web Services SSO users are returned. If you specify
-    #   `SSO_GROUP`, only the permissions of Amazon Web Services SSO groups
-    #   are returned.
+    #   IAM Identity Center users are returned. If you specify `SSO_GROUP`,
+    #   only the permissions of IAM Identity Center groups are returned.
     #   @return [String]
     #
     # @!attribute [rw] workspace_id
@@ -817,11 +878,11 @@ module Aws::ManagedGrafana
     end
 
     # A structure containing the identity of one user or group and the
-    # `Admin` or `Editor` role that they have.
+    # `Admin`, `Editor`, or `Viewer` role that they have.
     #
     # @!attribute [rw] role
-    #   Specifies whether the user or group has the `Admin` or `Editor`
-    #   role.
+    #   Specifies whether the user or group has the `Admin`, `Editor`, or
+    #   `Viewer` role.
     #   @return [String]
     #
     # @!attribute [rw] user
@@ -863,7 +924,8 @@ module Aws::ManagedGrafana
 
     # This structure defines which groups defined in the SAML assertion
     # attribute are to be mapped to the Grafana `Admin` and `Editor` roles
-    # in the workspace.
+    # in the workspace. SAML authenticated users not part of `Admin` or
+    # `Editor` role groups have `Viewer` permission over the workspace.
     #
     # @note When making an API call, you may pass RoleValues
     #   data as a hash:
@@ -1258,10 +1320,10 @@ module Aws::ManagedGrafana
     #       }
     #
     # @!attribute [rw] authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, Amazon Web Services
-    #   Single Sign On, or both to authenticate users for using the Grafana
-    #   console within a workspace. For more information, see [User
-    #   authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
+    #   (successor to Single Sign-On), or both to authenticate users for
+    #   using the Grafana console within a workspace. For more information,
+    #   see [User authentication in Amazon Managed Grafana][1].
     #
     #
     #
@@ -1302,6 +1364,41 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateWorkspaceConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration: "OverridableConfigurationJson", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] configuration
+    #   The new configuration string for the workspace. For more information
+    #   about the format and configuration options available, see [Working
+    #   in your Grafana workspace][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceConfigurationRequest AWS API Documentation
+    #
+    class UpdateWorkspaceConfigurationRequest < Struct.new(
+      :configuration,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceConfigurationResponse AWS API Documentation
+    #
+    class UpdateWorkspaceConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateWorkspaceRequest
     #   data as a hash:
     #
@@ -1309,8 +1406,13 @@ module Aws::ManagedGrafana
     #         account_access_type: "CURRENT_ACCOUNT", # accepts CURRENT_ACCOUNT, ORGANIZATION
     #         organization_role_name: "OrganizationRoleName",
     #         permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
+    #         remove_vpc_configuration: false,
     #         stack_set_name: "StackSetName",
-    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
+    #         vpc_configuration: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnet_ids: ["SubnetId"], # required
+    #         },
+    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
     #         workspace_description: "Description",
     #         workspace_id: "WorkspaceId", # required
     #         workspace_name: "WorkspaceName",
@@ -1355,10 +1457,22 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
     #   @return [String]
     #
+    # @!attribute [rw] remove_vpc_configuration
+    #   Whether to remove the VPC configuration from the workspace.
+    #
+    #   Setting this to `true` and providing a `vpcConfiguration` to set
+    #   will return an error.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] stack_set_name
     #   The name of the CloudFormation stack set to use to generate IAM
     #   roles to be used for this workspace.
     #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
+    #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] workspace_data_sources
     #   Specify the Amazon Web Services data sources that you want to be
@@ -1415,7 +1529,9 @@ module Aws::ManagedGrafana
       :account_access_type,
       :organization_role_name,
       :permission_type,
+      :remove_vpc_configuration,
       :stack_set_name,
+      :vpc_configuration,
       :workspace_data_sources,
       :workspace_description,
       :workspace_id,
@@ -1513,6 +1629,36 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # The configuration settings for an Amazon VPC that contains data
+    # sources for your Grafana workspace to connect to.
+    #
+    # @note When making an API call, you may pass VpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnet_ids: ["SubnetId"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   The list of Amazon EC2 security group IDs attached to the Amazon VPC
+    #   for your Grafana workspace to connect.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The list of Amazon EC2 subnet IDs created in the Amazon VPC for your
+    #   Grafana workspace to connect.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :security_group_ids,
+      :subnet_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing information about an Amazon Managed Grafana
     # workspace in your account.
     #
@@ -1526,8 +1672,8 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] authentication
-    #   A structure that describes whether the workspace uses SAML, Amazon
-    #   Web Services SSO, or both methods for user authentication.
+    #   A structure that describes whether the workspace uses SAML, IAM
+    #   Identity Center, or both methods for user authentication.
     #   @return [Types::AuthenticationSummary]
     #
     # @!attribute [rw] created
@@ -1637,6 +1783,11 @@ module Aws::ManagedGrafana
     #   The list of tags associated with the workspace.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The configuration for connecting to data sources in a private VPC
+    #   (Amazon Virtual Private Cloud).
+    #   @return [Types::VpcConfiguration]
+    #
     # @!attribute [rw] workspace_role_arn
     #   The IAM role that grants permissions to the Amazon Web Services
     #   resources that the workspace will view data from. This role must
@@ -1667,6 +1818,7 @@ module Aws::ManagedGrafana
       :stack_set_name,
       :status,
       :tags,
+      :vpc_configuration,
       :workspace_role_arn)
       SENSITIVE = [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
       include Aws::Structure

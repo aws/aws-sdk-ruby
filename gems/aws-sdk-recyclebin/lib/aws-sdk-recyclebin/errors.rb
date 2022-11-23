@@ -27,6 +27,7 @@ module Aws::RecycleBin
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -37,6 +38,26 @@ module Aws::RecycleBin
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RecycleBin::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+    end
 
     class InternalServerException < ServiceError
 

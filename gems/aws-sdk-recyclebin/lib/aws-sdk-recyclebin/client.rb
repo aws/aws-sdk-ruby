@@ -410,6 +410,9 @@ module Aws::RecycleBin
     #   Region in which the rule is created, even if the resources are not
     #   tagged.
     #
+    # @option params [Types::LockConfiguration] :lock_configuration
+    #   Information about the retention rule lock configuration.
+    #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleResponse#identifier #identifier} => String
@@ -419,6 +422,8 @@ module Aws::RecycleBin
     #   * {Types::CreateRuleResponse#resource_type #resource_type} => String
     #   * {Types::CreateRuleResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::CreateRuleResponse#status #status} => String
+    #   * {Types::CreateRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
+    #   * {Types::CreateRuleResponse#lock_state #lock_state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -441,6 +446,12 @@ module Aws::RecycleBin
     #         resource_tag_value: "ResourceTagValue",
     #       },
     #     ],
+    #     lock_configuration: {
+    #       unlock_delay: { # required
+    #         unlock_delay_value: 1, # required
+    #         unlock_delay_unit: "DAYS", # required, accepts DAYS
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -457,6 +468,9 @@ module Aws::RecycleBin
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
     #   resp.status #=> String, one of "pending", "available"
+    #   resp.lock_configuration.unlock_delay.unlock_delay_value #=> Integer
+    #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
+    #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/CreateRule AWS API Documentation
     #
@@ -508,6 +522,9 @@ module Aws::RecycleBin
     #   * {Types::GetRuleResponse#retention_period #retention_period} => Types::RetentionPeriod
     #   * {Types::GetRuleResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::GetRuleResponse#status #status} => String
+    #   * {Types::GetRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
+    #   * {Types::GetRuleResponse#lock_state #lock_state} => String
+    #   * {Types::GetRuleResponse#lock_end_time #lock_end_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -526,6 +543,10 @@ module Aws::RecycleBin
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
     #   resp.status #=> String, one of "pending", "available"
+    #   resp.lock_configuration.unlock_delay.unlock_delay_value #=> Integer
+    #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
+    #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #   resp.lock_end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/GetRule AWS API Documentation
     #
@@ -557,6 +578,10 @@ module Aws::RecycleBin
     #   Information about the resource tags used to identify resources that
     #   are retained by the retention rule.
     #
+    # @option params [String] :lock_state
+    #   The lock state of the retention rules to list. Only retention rules
+    #   with the specified lock state are returned.
+    #
     # @return [Types::ListRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRulesResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
@@ -576,6 +601,7 @@ module Aws::RecycleBin
     #         resource_tag_value: "ResourceTagValue",
     #       },
     #     ],
+    #     lock_state: "locked", # accepts locked, pending_unlock, unlocked
     #   })
     #
     # @example Response structure
@@ -585,6 +611,7 @@ module Aws::RecycleBin
     #   resp.rules[0].description #=> String
     #   resp.rules[0].retention_period.retention_period_value #=> Integer
     #   resp.rules[0].retention_period.retention_period_unit #=> String, one of "DAYS"
+    #   resp.rules[0].lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/ListRules AWS API Documentation
@@ -626,6 +653,62 @@ module Aws::RecycleBin
       req.send_request(options)
     end
 
+    # Locks a retention rule. A locked retention rule can't be modified or
+    # deleted.
+    #
+    # @option params [required, String] :identifier
+    #   The unique ID of the retention rule.
+    #
+    # @option params [required, Types::LockConfiguration] :lock_configuration
+    #   Information about the retention rule lock configuration.
+    #
+    # @return [Types::LockRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::LockRuleResponse#identifier #identifier} => String
+    #   * {Types::LockRuleResponse#description #description} => String
+    #   * {Types::LockRuleResponse#resource_type #resource_type} => String
+    #   * {Types::LockRuleResponse#retention_period #retention_period} => Types::RetentionPeriod
+    #   * {Types::LockRuleResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
+    #   * {Types::LockRuleResponse#status #status} => String
+    #   * {Types::LockRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
+    #   * {Types::LockRuleResponse#lock_state #lock_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.lock_rule({
+    #     identifier: "RuleIdentifier", # required
+    #     lock_configuration: { # required
+    #       unlock_delay: { # required
+    #         unlock_delay_value: 1, # required
+    #         unlock_delay_unit: "DAYS", # required, accepts DAYS
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identifier #=> String
+    #   resp.description #=> String
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.retention_period.retention_period_value #=> Integer
+    #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].resource_tag_key #=> String
+    #   resp.resource_tags[0].resource_tag_value #=> String
+    #   resp.status #=> String, one of "pending", "available"
+    #   resp.lock_configuration.unlock_delay.unlock_delay_value #=> Integer
+    #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
+    #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/LockRule AWS API Documentation
+    #
+    # @overload lock_rule(params = {})
+    # @param [Hash] params ({})
+    def lock_rule(params = {}, options = {})
+      req = build_request(:lock_rule, params)
+      req.send_request(options)
+    end
+
     # Assigns tags to the specified retention rule.
     #
     # @option params [required, String] :resource_arn
@@ -657,6 +740,55 @@ module Aws::RecycleBin
       req.send_request(options)
     end
 
+    # Unlocks a retention rule. After a retention rule is unlocked, it can
+    # be modified or deleted only after the unlock delay period expires.
+    #
+    # @option params [required, String] :identifier
+    #   The unique ID of the retention rule.
+    #
+    # @return [Types::UnlockRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UnlockRuleResponse#identifier #identifier} => String
+    #   * {Types::UnlockRuleResponse#description #description} => String
+    #   * {Types::UnlockRuleResponse#resource_type #resource_type} => String
+    #   * {Types::UnlockRuleResponse#retention_period #retention_period} => Types::RetentionPeriod
+    #   * {Types::UnlockRuleResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
+    #   * {Types::UnlockRuleResponse#status #status} => String
+    #   * {Types::UnlockRuleResponse#lock_configuration #lock_configuration} => Types::LockConfiguration
+    #   * {Types::UnlockRuleResponse#lock_state #lock_state} => String
+    #   * {Types::UnlockRuleResponse#lock_end_time #lock_end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unlock_rule({
+    #     identifier: "RuleIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identifier #=> String
+    #   resp.description #=> String
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.retention_period.retention_period_value #=> Integer
+    #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].resource_tag_key #=> String
+    #   resp.resource_tags[0].resource_tag_value #=> String
+    #   resp.status #=> String, one of "pending", "available"
+    #   resp.lock_configuration.unlock_delay.unlock_delay_value #=> Integer
+    #   resp.lock_configuration.unlock_delay.unlock_delay_unit #=> String, one of "DAYS"
+    #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #   resp.lock_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UnlockRule AWS API Documentation
+    #
+    # @overload unlock_rule(params = {})
+    # @param [Hash] params ({})
+    def unlock_rule(params = {}, options = {})
+      req = build_request(:unlock_rule, params)
+      req.send_request(options)
+    end
+
     # Unassigns a tag from a retention rule.
     #
     # @option params [required, String] :resource_arn
@@ -684,9 +816,12 @@ module Aws::RecycleBin
       req.send_request(options)
     end
 
-    # Updates an existing Recycle Bin retention rule. For more information,
-    # see [ Update Recycle Bin retention rules][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # Updates an existing Recycle Bin retention rule. You can update a
+    # retention rule's description, resource tags, and retention period at
+    # any time after creation. You can't update a retention rule's
+    # resource type after creation. For more information, see [ Update
+    # Recycle Bin retention rules][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     #
     #
@@ -703,10 +838,10 @@ module Aws::RecycleBin
     #   The retention rule description.
     #
     # @option params [String] :resource_type
-    #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To retain
-    #   snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs, specify
-    #   `EC2_IMAGE`.
+    #   <note markdown="1"> This parameter is currently not supported. You can't update a
+    #   retention rule's resource type after creation.
+    #
+    #    </note>
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
     #   Specifies the resource tags to use to identify resources that are to
@@ -734,6 +869,8 @@ module Aws::RecycleBin
     #   * {Types::UpdateRuleResponse#resource_type #resource_type} => String
     #   * {Types::UpdateRuleResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::UpdateRuleResponse#status #status} => String
+    #   * {Types::UpdateRuleResponse#lock_state #lock_state} => String
+    #   * {Types::UpdateRuleResponse#lock_end_time #lock_end_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -764,6 +901,8 @@ module Aws::RecycleBin
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
     #   resp.status #=> String, one of "pending", "available"
+    #   resp.lock_state #=> String, one of "locked", "pending_unlock", "unlocked"
+    #   resp.lock_end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UpdateRule AWS API Documentation
     #
@@ -787,7 +926,7 @@ module Aws::RecycleBin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-recyclebin'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

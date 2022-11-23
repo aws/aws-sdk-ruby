@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2022-11-23)
+------------------
+
+* Feature - This release includes support for configuring a Grafana workspace to connect to a datasource within a VPC as well as new APIs for configuring Grafana settings.
+
 1.9.0 (2022-10-25)
 ------------------
 

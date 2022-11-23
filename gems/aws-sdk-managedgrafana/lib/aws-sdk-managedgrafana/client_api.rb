@@ -44,6 +44,8 @@ module Aws::ManagedGrafana
     DeleteWorkspaceResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceResponse')
     DescribeWorkspaceAuthenticationRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceAuthenticationRequest')
     DescribeWorkspaceAuthenticationResponse = Shapes::StructureShape.new(name: 'DescribeWorkspaceAuthenticationResponse')
+    DescribeWorkspaceConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceConfigurationRequest')
+    DescribeWorkspaceConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeWorkspaceConfigurationResponse')
     DescribeWorkspaceRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceRequest')
     DescribeWorkspaceResponse = Shapes::StructureShape.new(name: 'DescribeWorkspaceResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -71,6 +73,7 @@ module Aws::ManagedGrafana
     OrganizationRoleName = Shapes::StringShape.new(name: 'OrganizationRoleName')
     OrganizationalUnit = Shapes::StringShape.new(name: 'OrganizationalUnit')
     OrganizationalUnitList = Shapes::ListShape.new(name: 'OrganizationalUnitList')
+    OverridableConfigurationJson = Shapes::StringShape.new(name: 'OverridableConfigurationJson')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PermissionEntry = Shapes::StructureShape.new(name: 'PermissionEntry')
     PermissionEntryList = Shapes::ListShape.new(name: 'PermissionEntryList')
@@ -84,10 +87,14 @@ module Aws::ManagedGrafana
     SamlAuthentication = Shapes::StructureShape.new(name: 'SamlAuthentication')
     SamlConfiguration = Shapes::StructureShape.new(name: 'SamlConfiguration')
     SamlConfigurationStatus = Shapes::StringShape.new(name: 'SamlConfigurationStatus')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SsoId = Shapes::StringShape.new(name: 'SsoId')
     StackSetName = Shapes::StringShape.new(name: 'StackSetName')
     String = Shapes::StringShape.new(name: 'String')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -108,6 +115,8 @@ module Aws::ManagedGrafana
     UpdatePermissionsResponse = Shapes::StructureShape.new(name: 'UpdatePermissionsResponse')
     UpdateWorkspaceAuthenticationRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceAuthenticationRequest')
     UpdateWorkspaceAuthenticationResponse = Shapes::StructureShape.new(name: 'UpdateWorkspaceAuthenticationResponse')
+    UpdateWorkspaceConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceConfigurationRequest')
+    UpdateWorkspaceConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateWorkspaceConfigurationResponse')
     UpdateWorkspaceRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceRequest')
     UpdateWorkspaceResponse = Shapes::StructureShape.new(name: 'UpdateWorkspaceResponse')
     User = Shapes::StructureShape.new(name: 'User')
@@ -117,6 +126,7 @@ module Aws::ManagedGrafana
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     WorkspaceDescription = Shapes::StructureShape.new(name: 'WorkspaceDescription')
     WorkspaceId = Shapes::StringShape.new(name: 'WorkspaceId')
     WorkspaceList = Shapes::ListShape.new(name: 'WorkspaceList')
@@ -177,10 +187,12 @@ module Aws::ManagedGrafana
     CreateWorkspaceRequest.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, required: true, location_name: "accountAccessType"))
     CreateWorkspaceRequest.add_member(:authentication_providers, Shapes::ShapeRef.new(shape: AuthenticationProviders, required: true, location_name: "authenticationProviders"))
     CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkspaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, location_name: "configuration", metadata: {"jsonvalue"=>true}))
     CreateWorkspaceRequest.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
     CreateWorkspaceRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, required: true, location_name: "permissionType"))
     CreateWorkspaceRequest.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, location_name: "stackSetName"))
     CreateWorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorkspaceRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     CreateWorkspaceRequest.add_member(:workspace_data_sources, Shapes::ShapeRef.new(shape: DataSourceTypesList, location_name: "workspaceDataSources"))
     CreateWorkspaceRequest.add_member(:workspace_description, Shapes::ShapeRef.new(shape: Description, location_name: "workspaceDescription"))
     CreateWorkspaceRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "workspaceName"))
@@ -213,6 +225,12 @@ module Aws::ManagedGrafana
 
     DescribeWorkspaceAuthenticationResponse.add_member(:authentication, Shapes::ShapeRef.new(shape: AuthenticationDescription, required: true, location_name: "authentication"))
     DescribeWorkspaceAuthenticationResponse.struct_class = Types::DescribeWorkspaceAuthenticationResponse
+
+    DescribeWorkspaceConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DescribeWorkspaceConfigurationRequest.struct_class = Types::DescribeWorkspaceConfigurationRequest
+
+    DescribeWorkspaceConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    DescribeWorkspaceConfigurationResponse.struct_class = Types::DescribeWorkspaceConfigurationResponse
 
     DescribeWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DescribeWorkspaceRequest.struct_class = Types::DescribeWorkspaceRequest
@@ -297,12 +315,16 @@ module Aws::ManagedGrafana
     SamlConfiguration.add_member(:role_values, Shapes::ShapeRef.new(shape: RoleValues, location_name: "roleValues"))
     SamlConfiguration.struct_class = Types::SamlConfiguration
 
+    SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -356,10 +378,18 @@ module Aws::ManagedGrafana
     UpdateWorkspaceAuthenticationResponse.add_member(:authentication, Shapes::ShapeRef.new(shape: AuthenticationDescription, required: true, location_name: "authentication"))
     UpdateWorkspaceAuthenticationResponse.struct_class = Types::UpdateWorkspaceAuthenticationResponse
 
+    UpdateWorkspaceConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    UpdateWorkspaceConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    UpdateWorkspaceConfigurationRequest.struct_class = Types::UpdateWorkspaceConfigurationRequest
+
+    UpdateWorkspaceConfigurationResponse.struct_class = Types::UpdateWorkspaceConfigurationResponse
+
     UpdateWorkspaceRequest.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, location_name: "accountAccessType"))
     UpdateWorkspaceRequest.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
     UpdateWorkspaceRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, location_name: "permissionType"))
+    UpdateWorkspaceRequest.add_member(:remove_vpc_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "removeVpcConfiguration"))
     UpdateWorkspaceRequest.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, location_name: "stackSetName"))
+    UpdateWorkspaceRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     UpdateWorkspaceRequest.add_member(:workspace_data_sources, Shapes::ShapeRef.new(shape: DataSourceTypesList, location_name: "workspaceDataSources"))
     UpdateWorkspaceRequest.add_member(:workspace_description, Shapes::ShapeRef.new(shape: Description, location_name: "workspaceDescription"))
     UpdateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
@@ -389,6 +419,10 @@ module Aws::ManagedGrafana
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    VpcConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "securityGroupIds"))
+    VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
     WorkspaceDescription.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, location_name: "accountAccessType"))
     WorkspaceDescription.add_member(:authentication, Shapes::ShapeRef.new(shape: AuthenticationSummary, required: true, location_name: "authentication"))
     WorkspaceDescription.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "created"))
@@ -410,6 +444,7 @@ module Aws::ManagedGrafana
     WorkspaceDescription.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, location_name: "stackSetName"))
     WorkspaceDescription.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceStatus, required: true, location_name: "status"))
     WorkspaceDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    WorkspaceDescription.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     WorkspaceDescription.add_member(:workspace_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "workspaceRoleArn"))
     WorkspaceDescription.struct_class = Types::WorkspaceDescription
 
@@ -542,6 +577,18 @@ module Aws::ManagedGrafana
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_workspace_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorkspaceConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/workspaces/{workspaceId}/configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorkspaceConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorkspaceConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:disassociate_license, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateLicense"
         o.http_method = "DELETE"
@@ -663,6 +710,20 @@ module Aws::ManagedGrafana
         o.http_request_uri = "/workspaces/{workspaceId}/authentication"
         o.input = Shapes::ShapeRef.new(shape: UpdateWorkspaceAuthenticationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateWorkspaceAuthenticationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_workspace_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWorkspaceConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/workspaces/{workspaceId}/configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWorkspaceConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWorkspaceConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

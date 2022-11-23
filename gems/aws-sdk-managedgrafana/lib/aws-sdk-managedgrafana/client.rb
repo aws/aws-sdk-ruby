@@ -401,7 +401,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -422,6 +422,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.vpc_configuration.security_group_ids #=> Array
+    #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.workspace.vpc_configuration.subnet_ids #=> Array
+    #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssociateLicense AWS API Documentation
@@ -454,10 +458,10 @@ module Aws::ManagedGrafana
     #   `workspaceOrganizationalUnits` parameter.
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, Amazon Web Services
-    #   Single Sign On, or both to authenticate users for using the Grafana
-    #   console within a workspace. For more information, see [User
-    #   authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
+    #   (successor to Single Sign-On), or both to authenticate users for using
+    #   the Grafana console within a workspace. For more information, see
+    #   [User authentication in Amazon Managed Grafana][1].
     #
     #
     #
@@ -470,6 +474,19 @@ module Aws::ManagedGrafana
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :configuration
+    #   The configuration string for the workspace that you create. For more
+    #   information about the format and configuration options available, see
+    #   [Working in your Grafana workspace][1].
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #
     # @option params [String] :organization_role_name
     #   The name of an IAM role that already exists to use with Organizations
     #   to access Amazon Web Services data sources and notification channels
@@ -479,8 +496,12 @@ module Aws::ManagedGrafana
     #   If you specify `SERVICE_MANAGED` on AWS Grafana console, Amazon
     #   Managed Grafana automatically creates the IAM roles and provisions the
     #   permissions that the workspace needs to use Amazon Web Services data
-    #   sources and notification channels. In CLI mode, the permissionType
-    #   `SERVICE_MANAGED` will not create the IAM role for you.
+    #   sources and notification channels. In the CLI mode, the permissionType
+    #   `SERVICE_MANAGED` will not create the IAM role for you. The ability
+    #   for the Amazon Managed Grafana to create the IAM role on behalf of the
+    #   user is supported only in the Amazon Managed Grafana AWS console. Use
+    #   only the `CUSTOMER_MANAGED` permission type when creating a workspace
+    #   in the CLI.
     #
     #   If you specify `CUSTOMER_MANAGED`, you will manage those roles and
     #   permissions yourself. If you are creating this workspace in a member
@@ -503,6 +524,10 @@ module Aws::ManagedGrafana
     #
     # @option params [Hash<String,String>] :tags
     #   The list of tags associated with the workspace.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
     #
     # @option params [Array<String>] :workspace_data_sources
     #   Specify the Amazon Web Services data sources that you want to be
@@ -551,13 +576,18 @@ module Aws::ManagedGrafana
     #     account_access_type: "CURRENT_ACCOUNT", # required, accepts CURRENT_ACCOUNT, ORGANIZATION
     #     authentication_providers: ["AWS_SSO"], # required, accepts AWS_SSO, SAML
     #     client_token: "ClientToken",
+    #     configuration: "OverridableConfigurationJson",
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #     stack_set_name: "StackSetName",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
+    #     vpc_configuration: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnet_ids: ["SubnetId"], # required
+    #     },
+    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
     #     workspace_description: "Description",
     #     workspace_name: "WorkspaceName",
     #     workspace_notification_destinations: ["SNS"], # accepts SNS
@@ -573,7 +603,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -594,6 +624,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.vpc_configuration.security_group_ids #=> Array
+    #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.workspace.vpc_configuration.subnet_ids #=> Array
+    #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspace AWS API Documentation
@@ -605,27 +639,30 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
-    # Creates an API key for the workspace. This key can be used to
-    # authenticate requests sent to the workspace's HTTP API. See [
-    # https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html](
-    # https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
+    # Creates a Grafana API key for the workspace. This key can be used to
+    # authenticate requests sent to the workspace's HTTP API. See
+    # [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html][1]
     # for available APIs and example requests.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
+    #
     # @option params [required, String] :key_name
-    #   Specifies the name of the key to create. Key names must be unique to
-    #   the workspace.
+    #   Specifies the name of the key. Keynames must be unique to the
+    #   workspace.
     #
     # @option params [required, String] :key_role
     #   Specifies the permission level of the key.
     #
-    #   Valid Values: `VIEWER` \| `EDITOR` \| `ADMIN`
+    #   Valid values: `VIEWER`\|`EDITOR`\|`ADMIN`
     #
     # @option params [required, Integer] :seconds_to_live
     #   Specifies the time in seconds until the key expires. Keys can be valid
     #   for up to 30 days.
     #
     # @option params [required, String] :workspace_id
-    #   The ID of the workspace in which to create an API key.
+    #   The ID of the workspace to create an API key.
     #
     # @return [Types::CreateWorkspaceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -680,7 +717,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -701,6 +738,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.vpc_configuration.security_group_ids #=> Array
+    #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.workspace.vpc_configuration.subnet_ids #=> Array
+    #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspace AWS API Documentation
@@ -712,7 +753,7 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
-    # Deletes an API key for a workspace.
+    # Deletes a Grafana API key for the workspace.
     #
     # @option params [required, String] :key_name
     #   The name of the API key to delete.
@@ -769,7 +810,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -790,6 +831,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.vpc_configuration.security_group_ids #=> Array
+    #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.workspace.vpc_configuration.subnet_ids #=> Array
+    #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspace AWS API Documentation
@@ -848,6 +893,34 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Gets the current configuration string for the given workspace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to get configuration information for.
+    #
+    # @return [Types::DescribeWorkspaceConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeWorkspaceConfigurationResponse#configuration #configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_workspace_configuration({
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspaceConfiguration AWS API Documentation
+    #
+    # @overload describe_workspace_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_workspace_configuration(params = {}, options = {})
+      req = build_request(:describe_workspace_configuration, params)
+      req.send_request(options)
+    end
+
     # Removes the Grafana Enterprise license from a workspace.
     #
     # @option params [required, String] :license_type
@@ -875,7 +948,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -896,6 +969,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.vpc_configuration.security_group_ids #=> Array
+    #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.workspace.vpc_configuration.subnet_ids #=> Array
+    #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DisassociateLicense AWS API Documentation
@@ -928,10 +1005,9 @@ module Aws::ManagedGrafana
     #   (Optional) Limits the results to only the user that matches this ID.
     #
     # @option params [String] :user_type
-    #   (Optional) If you specify `SSO_USER`, then only the permissions of
-    #   Amazon Web Services SSO users are returned. If you specify
-    #   `SSO_GROUP`, only the permissions of Amazon Web Services SSO groups
-    #   are returned.
+    #   (Optional) If you specify `SSO_USER`, then only the permissions of IAM
+    #   Identity Center users are returned. If you specify `SSO_GROUP`, only
+    #   the permissions of IAM Identity Center groups are returned.
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to list permissions for. This parameter is
@@ -1182,7 +1258,7 @@ module Aws::ManagedGrafana
     # those parameters are not changed.
     #
     # To modify the user authentication methods that the workspace uses,
-    # such as SAML or Amazon Web Services SSO, use
+    # such as SAML or IAM Identity Center, use
     # [UpdateWorkspaceAuthentication][1].
     #
     # To modify which users in the workspace have the `Admin` and `Editor`
@@ -1226,9 +1302,19 @@ module Aws::ManagedGrafana
     #
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
     #
+    # @option params [Boolean] :remove_vpc_configuration
+    #   Whether to remove the VPC configuration from the workspace.
+    #
+    #   Setting this to `true` and providing a `vpcConfiguration` to set will
+    #   return an error.
+    #
     # @option params [String] :stack_set_name
     #   The name of the CloudFormation stack set to use to generate IAM roles
     #   to be used for this workspace.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   The configuration settings for an Amazon VPC that contains data
+    #   sources for your Grafana workspace to connect to.
     #
     # @option params [Array<String>] :workspace_data_sources
     #   Specify the Amazon Web Services data sources that you want to be
@@ -1280,8 +1366,13 @@ module Aws::ManagedGrafana
     #     account_access_type: "CURRENT_ACCOUNT", # accepts CURRENT_ACCOUNT, ORGANIZATION
     #     organization_role_name: "OrganizationRoleName",
     #     permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
+    #     remove_vpc_configuration: false,
     #     stack_set_name: "StackSetName",
-    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
+    #     vpc_configuration: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnet_ids: ["SubnetId"], # required
+    #     },
+    #     workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT, TWINMAKER
     #     workspace_description: "Description",
     #     workspace_id: "WorkspaceId", # required
     #     workspace_name: "WorkspaceName",
@@ -1298,7 +1389,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.authentication.saml_configuration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
     #   resp.workspace.created #=> Time
     #   resp.workspace.data_sources #=> Array
-    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT"
+    #   resp.workspace.data_sources[0] #=> String, one of "AMAZON_OPENSEARCH_SERVICE", "CLOUDWATCH", "PROMETHEUS", "XRAY", "TIMESTREAM", "SITEWISE", "ATHENA", "REDSHIFT", "TWINMAKER"
     #   resp.workspace.description #=> String
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
@@ -1319,6 +1410,10 @@ module Aws::ManagedGrafana
     #   resp.workspace.status #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "UPDATING", "UPGRADING", "DELETION_FAILED", "CREATION_FAILED", "UPDATE_FAILED", "UPGRADE_FAILED", "LICENSE_REMOVAL_FAILED"
     #   resp.workspace.tags #=> Hash
     #   resp.workspace.tags["TagKey"] #=> String
+    #   resp.workspace.vpc_configuration.security_group_ids #=> Array
+    #   resp.workspace.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.workspace.vpc_configuration.subnet_ids #=> Array
+    #   resp.workspace.vpc_configuration.subnet_ids[0] #=> String
     #   resp.workspace.workspace_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspace AWS API Documentation
@@ -1337,10 +1432,10 @@ module Aws::ManagedGrafana
     # roles in the workspace.
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, Amazon Web Services
-    #   Single Sign On, or both to authenticate users for using the Grafana
-    #   console within a workspace. For more information, see [User
-    #   authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
+    #   (successor to Single Sign-On), or both to authenticate users for using
+    #   the Grafana console within a workspace. For more information, see
+    #   [User authentication in Amazon Managed Grafana][1].
     #
     #
     #
@@ -1417,6 +1512,42 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Updates the configuration string for the given workspace
+    #
+    # @option params [required, String] :configuration
+    #   The new configuration string for the workspace. For more information
+    #   about the format and configuration options available, see [Working in
+    #   your Grafana workspace][1].
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_configuration({
+    #     configuration: "OverridableConfigurationJson", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceConfiguration AWS API Documentation
+    #
+    # @overload update_workspace_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_configuration(params = {}, options = {})
+      req = build_request(:update_workspace_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1430,7 +1561,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

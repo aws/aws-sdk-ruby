@@ -70,6 +70,8 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::DescribeWorkspace.build(context)
           when :describe_workspace_authentication
             Aws::ManagedGrafana::Endpoints::DescribeWorkspaceAuthentication.build(context)
+          when :describe_workspace_configuration
+            Aws::ManagedGrafana::Endpoints::DescribeWorkspaceConfiguration.build(context)
           when :disassociate_license
             Aws::ManagedGrafana::Endpoints::DisassociateLicense.build(context)
           when :list_permissions
@@ -88,6 +90,8 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::UpdateWorkspace.build(context)
           when :update_workspace_authentication
             Aws::ManagedGrafana::Endpoints::UpdateWorkspaceAuthentication.build(context)
+          when :update_workspace_configuration
+            Aws::ManagedGrafana::Endpoints::UpdateWorkspaceConfiguration.build(context)
           end
         end
       end

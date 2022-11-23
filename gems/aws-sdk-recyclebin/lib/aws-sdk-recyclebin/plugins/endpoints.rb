@@ -66,8 +66,12 @@ module Aws::RecycleBin
             Aws::RecycleBin::Endpoints::ListRules.build(context)
           when :list_tags_for_resource
             Aws::RecycleBin::Endpoints::ListTagsForResource.build(context)
+          when :lock_rule
+            Aws::RecycleBin::Endpoints::LockRule.build(context)
           when :tag_resource
             Aws::RecycleBin::Endpoints::TagResource.build(context)
+          when :unlock_rule
+            Aws::RecycleBin::Endpoints::UnlockRule.build(context)
           when :untag_resource
             Aws::RecycleBin::Endpoints::UntagResource.build(context)
           when :update_rule
