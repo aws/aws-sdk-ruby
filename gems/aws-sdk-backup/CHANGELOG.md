@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-11-28)
+------------------
+
+* Feature - AWS Backup introduces support for legal hold and application stack backups. AWS Backup Audit Manager introduces support for cross-Region, cross-account reports.
+
 1.46.0 (2022-10-25)
 ------------------
 

@@ -387,7 +387,7 @@ module Aws::CloudWatch
     # the rule of one of the composite alarms in the cycle to remove a
     # dependency that creates the cycle. The simplest change to make to
     # break a cycle is to change the `AlarmRule` of one of the alarms to
-    # `False`.
+    # `false`.
     #
     #  Additionally, the evaluation of composite alarms stops if CloudWatch
     # detects a cycle in the evaluation path.
@@ -1680,7 +1680,7 @@ module Aws::CloudWatch
     #   resp.metric_data_results[0].timestamps[0] #=> Time
     #   resp.metric_data_results[0].values #=> Array
     #   resp.metric_data_results[0].values[0] #=> Float
-    #   resp.metric_data_results[0].status_code #=> String, one of "Complete", "InternalError", "PartialData"
+    #   resp.metric_data_results[0].status_code #=> String, one of "Complete", "InternalError", "PartialData", "Forbidden"
     #   resp.metric_data_results[0].messages #=> Array
     #   resp.metric_data_results[0].messages[0].code #=> String
     #   resp.metric_data_results[0].messages[0].value #=> String
@@ -2204,15 +2204,20 @@ module Aws::CloudWatch
     end
 
     # List the specified metrics. You can use the returned metrics with
-    # [GetMetricData][1] or [GetMetricStatistics][2] to obtain statistical
+    # [GetMetricData][1] or [GetMetricStatistics][2] to get statistical
     # data.
     #
     # Up to 500 results are returned for any one call. To retrieve
     # additional results, use the returned token with subsequent calls.
     #
-    # After you create a metric, allow up to 15 minutes before the metric
-    # appears. You can see statistics about the metric sooner by using
-    # [GetMetricData][1] or [GetMetricStatistics][2].
+    # After you create a metric, allow up to 15 minutes for the metric to
+    # appear. To see metric statistics sooner, use [GetMetricData][1] or
+    # [GetMetricStatistics][2].
+    #
+    # If you are using CloudWatch cross-account observability, you can use
+    # this operation in a monitoring account and view metrics from the
+    # linked source accounts. For more information, see [CloudWatch
+    # cross-account observability][3].
     #
     # `ListMetrics` doesn't return information about metrics if those
     # metrics haven't reported data in the past two weeks. To retrieve
@@ -2222,6 +2227,7 @@ module Aws::CloudWatch
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
     # @option params [String] :namespace
     #   The metric namespace to filter against. Only the namespace that
@@ -2249,10 +2255,23 @@ module Aws::CloudWatch
     #   metrics with last published data as much as 40 minutes more than the
     #   specified time interval.
     #
+    # @option params [Boolean] :include_linked_accounts
+    #   If you are using this operation in a monitoring account, specify
+    #   `true` to include metrics from source accounts in the returned data.
+    #
+    #   The default is `false`.
+    #
+    # @option params [String] :owning_account
+    #   When you use this operation in a monitoring account, use this field to
+    #   return metrics only from one source account. To do so, specify that
+    #   source account ID in this field, and also specify `true` for
+    #   `IncludeLinkedAccounts`.
+    #
     # @return [Types::ListMetricsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMetricsOutput#metrics #metrics} => Array&lt;Types::Metric&gt;
     #   * {Types::ListMetricsOutput#next_token #next_token} => String
+    #   * {Types::ListMetricsOutput#owning_accounts #owning_accounts} => Array&lt;String&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -2269,6 +2288,8 @@ module Aws::CloudWatch
     #     ],
     #     next_token: "NextToken",
     #     recently_active: "PT3H", # accepts PT3H
+    #     include_linked_accounts: false,
+    #     owning_account: "AccountId",
     #   })
     #
     # @example Response structure
@@ -2280,6 +2301,8 @@ module Aws::CloudWatch
     #   resp.metrics[0].dimensions[0].name #=> String
     #   resp.metrics[0].dimensions[0].value #=> String
     #   resp.next_token #=> String
+    #   resp.owning_accounts #=> Array
+    #   resp.owning_accounts[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics AWS API Documentation
     #
@@ -2508,7 +2531,7 @@ module Aws::CloudWatch
     # the rule of one of the composite alarms in the cycle to remove a
     # dependency that creates the cycle. The simplest change to make to
     # break a cycle is to change the `AlarmRule` of one of the alarms to
-    # `False`.
+    # `false`.
     #
     #  Additionally, the evaluation of composite alarms stops if CloudWatch
     # detects a cycle in the evaluation path.
@@ -3383,12 +3406,12 @@ module Aws::CloudWatch
     end
 
     # Creates or updates a metric stream. Metric streams can automatically
-    # stream CloudWatch metrics to Amazon Web Services destinations
-    # including Amazon S3 and to many third-party solutions.
+    # stream CloudWatch metrics to Amazon Web Services destinations,
+    # including Amazon S3, and to many third-party solutions.
     #
     # For more information, see [ Using Metric Streams][1].
     #
-    # To create a metric stream, you must be logged on to an account that
+    # To create a metric stream, you must be signed in to an account that
     # has the `iam:PassRole` permission and either the
     # `CloudWatchFullAccess` policy or the `cloudwatch:PutMetricStream`
     # permission.
@@ -3407,7 +3430,7 @@ module Aws::CloudWatch
     # By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
     # `SAMPLECOUNT` statistics for each metric that is streamed. You can use
     # the `StatisticsConfigurations` parameter to have the metric stream
-    # also send additional statistics in the stream. Streaming additional
+    # send additional statistics in the stream. Streaming additional
     # statistics incurs additional costs. For more information, see [Amazon
     # CloudWatch Pricing][2].
     #
@@ -3445,15 +3468,16 @@ module Aws::CloudWatch
     #   operation.
     #
     # @option params [required, String] :firehose_arn
-    #   The ARN of the Amazon Kinesis Firehose delivery stream to use for this
-    #   metric stream. This Amazon Kinesis Firehose delivery stream must
-    #   already exist and must be in the same account as the metric stream.
+    #   The ARN of the Amazon Kinesis Data Firehose delivery stream to use for
+    #   this metric stream. This Amazon Kinesis Data Firehose delivery stream
+    #   must already exist and must be in the same account as the metric
+    #   stream.
     #
     # @option params [required, String] :role_arn
     #   The ARN of an IAM role that this metric stream will use to access
-    #   Amazon Kinesis Firehose resources. This IAM role must already exist
-    #   and must be in the same account as the metric stream. This IAM role
-    #   must include the following permissions:
+    #   Amazon Kinesis Data Firehose resources. This IAM role must already
+    #   exist and must be in the same account as the metric stream. This IAM
+    #   role must include the following permissions:
     #
     #   * firehose:PutRecord
     #
@@ -3500,7 +3524,7 @@ module Aws::CloudWatch
     #   additional statistic that is supported by CloudWatch, listed in [
     #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
     #   `opentelemetry0.7`, you can stream percentile statistics such as p95,
-    #   p99.9 and so on.
+    #   p99.9, and so on.
     #
     #
     #
@@ -3789,7 +3813,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

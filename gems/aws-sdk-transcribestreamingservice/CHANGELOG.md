@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-11-28)
+------------------
+
+* Feature - This release adds support for real-time (streaming) and post-call Call Analytics within Amazon Transcribe.
+
 1.44.0 (2022-11-09)
 ------------------
 

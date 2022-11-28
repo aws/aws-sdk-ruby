@@ -19,6 +19,8 @@ module Aws::Drs
     AccountID = Shapes::StringShape.new(name: 'AccountID')
     AccountIDs = Shapes::ListShape.new(name: 'AccountIDs')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
+    AwsAvailabilityZone = Shapes::StringShape.new(name: 'AwsAvailabilityZone')
+    AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
     CPU = Shapes::StructureShape.new(name: 'CPU')
@@ -76,6 +78,7 @@ module Aws::Drs
     EbsSnapshotsList = Shapes::ListShape.new(name: 'EbsSnapshotsList')
     EbsVolumeID = Shapes::StringShape.new(name: 'EbsVolumeID')
     ExtensionStatus = Shapes::StringShape.new(name: 'ExtensionStatus')
+    FailbackLaunchType = Shapes::StringShape.new(name: 'FailbackLaunchType')
     FailbackReplicationError = Shapes::StringShape.new(name: 'FailbackReplicationError')
     FailbackState = Shapes::StringShape.new(name: 'FailbackState')
     GetFailbackReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetFailbackReplicationConfigurationRequest')
@@ -120,6 +123,7 @@ module Aws::Drs
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     OS = Shapes::StructureShape.new(name: 'OS')
+    OriginEnvironment = Shapes::StringShape.new(name: 'OriginEnvironment')
     PITPolicy = Shapes::ListShape.new(name: 'PITPolicy')
     PITPolicyRule = Shapes::StructureShape.new(name: 'PITPolicyRule')
     PITPolicyRuleUnits = Shapes::StringShape.new(name: 'PITPolicyRuleUnits')
@@ -160,12 +164,16 @@ module Aws::Drs
     ReplicationConfigurationTemplateID = Shapes::StringShape.new(name: 'ReplicationConfigurationTemplateID')
     ReplicationConfigurationTemplateIDs = Shapes::ListShape.new(name: 'ReplicationConfigurationTemplateIDs')
     ReplicationConfigurationTemplates = Shapes::ListShape.new(name: 'ReplicationConfigurationTemplates')
+    ReplicationDirection = Shapes::StringShape.new(name: 'ReplicationDirection')
     ReplicationServersSecurityGroupsIDs = Shapes::ListShape.new(name: 'ReplicationServersSecurityGroupsIDs')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryDataReplicationRequest = Shapes::StructureShape.new(name: 'RetryDataReplicationRequest')
+    ReverseReplicationRequest = Shapes::StructureShape.new(name: 'ReverseReplicationRequest')
+    ReverseReplicationResponse = Shapes::StructureShape.new(name: 'ReverseReplicationResponse')
     SecurityGroupID = Shapes::StringShape.new(name: 'SecurityGroupID')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
+    SourceCloudProperties = Shapes::StructureShape.new(name: 'SourceCloudProperties')
     SourceProperties = Shapes::StructureShape.new(name: 'SourceProperties')
     SourceServer = Shapes::StructureShape.new(name: 'SourceServer')
     SourceServerARN = Shapes::StringShape.new(name: 'SourceServerARN')
@@ -182,7 +190,11 @@ module Aws::Drs
     StartRecoveryRequestSourceServer = Shapes::StructureShape.new(name: 'StartRecoveryRequestSourceServer')
     StartRecoveryRequestSourceServers = Shapes::ListShape.new(name: 'StartRecoveryRequestSourceServers')
     StartRecoveryResponse = Shapes::StructureShape.new(name: 'StartRecoveryResponse')
+    StartReplicationRequest = Shapes::StructureShape.new(name: 'StartReplicationRequest')
+    StartReplicationResponse = Shapes::StructureShape.new(name: 'StartReplicationResponse')
     StopFailbackRequest = Shapes::StructureShape.new(name: 'StopFailbackRequest')
+    StopReplicationRequest = Shapes::StructureShape.new(name: 'StopReplicationRequest')
+    StopReplicationResponse = Shapes::StructureShape.new(name: 'StopReplicationResponse')
     StrictlyPositiveInteger = Shapes::IntegerShape.new(name: 'StrictlyPositiveInteger')
     SubnetID = Shapes::StringShape.new(name: 'SubnetID')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -550,6 +562,7 @@ module Aws::Drs
     RecoveryInstance.add_member(:failback, Shapes::ShapeRef.new(shape: RecoveryInstanceFailback, location_name: "failback"))
     RecoveryInstance.add_member(:is_drill, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDrill"))
     RecoveryInstance.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, location_name: "jobID"))
+    RecoveryInstance.add_member(:origin_environment, Shapes::ShapeRef.new(shape: OriginEnvironment, location_name: "originEnvironment"))
     RecoveryInstance.add_member(:point_in_time_snapshot_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "pointInTimeSnapshotDateTime"))
     RecoveryInstance.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, location_name: "recoveryInstanceID"))
     RecoveryInstance.add_member(:recovery_instance_properties, Shapes::ShapeRef.new(shape: RecoveryInstanceProperties, location_name: "recoveryInstanceProperties"))
@@ -601,6 +614,7 @@ module Aws::Drs
     RecoveryInstanceFailback.add_member(:failback_client_last_seen_by_service_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "failbackClientLastSeenByServiceDateTime"))
     RecoveryInstanceFailback.add_member(:failback_initiation_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "failbackInitiationTime"))
     RecoveryInstanceFailback.add_member(:failback_job_id, Shapes::ShapeRef.new(shape: JobID, location_name: "failbackJobID"))
+    RecoveryInstanceFailback.add_member(:failback_launch_type, Shapes::ShapeRef.new(shape: FailbackLaunchType, location_name: "failbackLaunchType"))
     RecoveryInstanceFailback.add_member(:failback_to_original_server, Shapes::ShapeRef.new(shape: Boolean, location_name: "failbackToOriginalServer"))
     RecoveryInstanceFailback.add_member(:first_byte_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "firstByteDateTime"))
     RecoveryInstanceFailback.add_member(:state, Shapes::ShapeRef.new(shape: FailbackState, location_name: "state"))
@@ -689,6 +703,12 @@ module Aws::Drs
     RetryDataReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     RetryDataReplicationRequest.struct_class = Types::RetryDataReplicationRequest
 
+    ReverseReplicationRequest.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, required: true, location_name: "recoveryInstanceID"))
+    ReverseReplicationRequest.struct_class = Types::ReverseReplicationRequest
+
+    ReverseReplicationResponse.add_member(:reversed_direction_source_server_arn, Shapes::ShapeRef.new(shape: SourceServerARN, location_name: "reversedDirectionSourceServerArn"))
+    ReverseReplicationResponse.struct_class = Types::ReverseReplicationResponse
+
     ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "quotaCode"))
@@ -696,6 +716,11 @@ module Aws::Drs
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "serviceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SourceCloudProperties.add_member(:origin_account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "originAccountID"))
+    SourceCloudProperties.add_member(:origin_availability_zone, Shapes::ShapeRef.new(shape: AwsAvailabilityZone, location_name: "originAvailabilityZone"))
+    SourceCloudProperties.add_member(:origin_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "originRegion"))
+    SourceCloudProperties.struct_class = Types::SourceCloudProperties
 
     SourceProperties.add_member(:cpus, Shapes::ShapeRef.new(shape: Cpus, location_name: "cpus"))
     SourceProperties.add_member(:disks, Shapes::ShapeRef.new(shape: Disks, location_name: "disks"))
@@ -712,6 +737,9 @@ module Aws::Drs
     SourceServer.add_member(:last_launch_result, Shapes::ShapeRef.new(shape: LastLaunchResult, location_name: "lastLaunchResult"))
     SourceServer.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "lifeCycle"))
     SourceServer.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, location_name: "recoveryInstanceId"))
+    SourceServer.add_member(:replication_direction, Shapes::ShapeRef.new(shape: ReplicationDirection, location_name: "replicationDirection"))
+    SourceServer.add_member(:reversed_direction_source_server_arn, Shapes::ShapeRef.new(shape: SourceServerARN, location_name: "reversedDirectionSourceServerArn"))
+    SourceServer.add_member(:source_cloud_properties, Shapes::ShapeRef.new(shape: SourceCloudProperties, location_name: "sourceCloudProperties"))
     SourceServer.add_member(:source_properties, Shapes::ShapeRef.new(shape: SourceProperties, location_name: "sourceProperties"))
     SourceServer.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
     SourceServer.add_member(:staging_area, Shapes::ShapeRef.new(shape: StagingArea, location_name: "stagingArea"))
@@ -758,8 +786,20 @@ module Aws::Drs
     StartRecoveryResponse.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "job"))
     StartRecoveryResponse.struct_class = Types::StartRecoveryResponse
 
+    StartReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    StartReplicationRequest.struct_class = Types::StartReplicationRequest
+
+    StartReplicationResponse.add_member(:source_server, Shapes::ShapeRef.new(shape: SourceServer, location_name: "sourceServer"))
+    StartReplicationResponse.struct_class = Types::StartReplicationResponse
+
     StopFailbackRequest.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, required: true, location_name: "recoveryInstanceID"))
     StopFailbackRequest.struct_class = Types::StopFailbackRequest
+
+    StopReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    StopReplicationRequest.struct_class = Types::StopReplicationRequest
+
+    StopReplicationResponse.add_member(:source_server, Shapes::ShapeRef.new(shape: SourceServer, location_name: "sourceServer"))
+    StopReplicationResponse.struct_class = Types::StopReplicationResponse
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -1208,6 +1248,21 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
+      api.add_operation(:reverse_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReverseReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/ReverseReplication"
+        o.input = Shapes::ShapeRef.new(shape: ReverseReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReverseReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
       api.add_operation(:start_failback_launch, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartFailbackLaunch"
         o.http_method = "POST"
@@ -1235,6 +1290,19 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
+      api.add_operation(:start_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartReplication"
+        o.input = Shapes::ShapeRef.new(shape: StartReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
       api.add_operation(:stop_failback, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopFailback"
         o.http_method = "POST"
@@ -1243,6 +1311,19 @@ module Aws::Drs
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
+
+      api.add_operation(:stop_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/StopReplication"
+        o.input = Shapes::ShapeRef.new(shape: StopReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)

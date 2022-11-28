@@ -56,6 +56,8 @@ module Aws::TranscribeStreamingService
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :start_call_analytics_stream_transcription
+            Aws::TranscribeStreamingService::Endpoints::StartCallAnalyticsStreamTranscription.build(context)
           when :start_medical_stream_transcription
             Aws::TranscribeStreamingService::Endpoints::StartMedicalStreamTranscription.build(context)
           when :start_stream_transcription

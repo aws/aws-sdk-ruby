@@ -23,10 +23,10 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. This must be a symmetric CMK. For more information, see
-    #   [Amazon Resource Names - Key Management Service][1] and [Using
-    #   Symmetric and Asymmetric Keys][2].
+    #   The Amazon Resource Name (ARN) of the KMS key to use when encrypting
+    #   log data. This must be a symmetric KMS key. For more information,
+    #   see [Amazon Resource Names][1] and [Using Symmetric and Asymmetric
+    #   Keys][2].
     #
     #
     #
@@ -90,13 +90,13 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   of milliseconds after `Jan 1, 1970 00:00:00 UTC`. Events with a
     #   timestamp earlier than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
     #   The end time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   of milliseconds after `Jan 1, 1970 00:00:00 UTC`. Events with a
     #   timestamp later than this time are not exported.
     #
     #   You must specify a time that is not earlier than when this log group
@@ -105,7 +105,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] destination
     #   The name of S3 bucket for the exported log data. The bucket must be
-    #   in the same Amazon Web Services region.
+    #   in the same Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] destination_prefix
@@ -155,9 +155,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - Key
-    #   Management Service][1].
+    #   The Amazon Resource Name (ARN) of the KMS key to use when encrypting
+    #   log data. For more information, see [Amazon Resource Names][1].
     #
     #
     #
@@ -222,6 +221,26 @@ module Aws::CloudWatchLogs
     #
     class DataAlreadyAcceptedException < Struct.new(
       :expected_sequence_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDataProtectionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_identifier: "LogGroupIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_identifier
+    #   The name or ARN of the log group that you want to delete the data
+    #   protection policy for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDataProtectionPolicyRequest AWS API Documentation
+    #
+    class DeleteDataProtectionPolicyRequest < Struct.new(
+      :log_group_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -479,7 +498,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] task_id
     #   The ID of the export task. Specifying a task ID filters the results
-    #   to zero or one export tasks.
+    #   to one or zero export tasks.
     #   @return [String]
     #
     # @!attribute [rw] status_code
@@ -530,13 +549,40 @@ module Aws::CloudWatchLogs
     #   data as a hash:
     #
     #       {
+    #         account_identifiers: ["AccountId"],
     #         log_group_name_prefix: "LogGroupName",
+    #         log_group_name_pattern: "LogGroupNamePattern",
     #         next_token: "NextToken",
     #         limit: 1,
+    #         include_linked_accounts: false,
     #       }
+    #
+    # @!attribute [rw] account_identifiers
+    #   When `includeLinkedAccounts` is set to `True`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as
+    #   20 account IDs in the array.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] log_group_name_prefix
     #   The prefix to match.
+    #
+    #   <note markdown="1"> `logGroupNamePrefix` and `logGroupNamePattern` are mutually
+    #   exclusive. Only one of these parameters can be passed.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name_pattern
+    #   If you specify a string for this parameter, the operation returns
+    #   only log groups that have names that match the string based on a
+    #   case-sensitive substring search. For example, if you specify `Foo`,
+    #   log groups named `FooBar`, `aws/Foo`, and `GroupFoo` would match,
+    #   but `foo`, `F/o/o` and `Froo` would not match.
+    #
+    #   <note markdown="1"> `logGroupNamePattern` and `logGroupNamePrefix` are mutually
+    #   exclusive. Only one of these parameters can be passed.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -549,12 +595,32 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_linked_accounts
+    #   If you are using a monitoring account, set this to `True` to have
+    #   the operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains
+    #   a null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   <note markdown="1"> If you specify `includeLinkedAccounts` in your request, then
+    #   `metricFilterCount`, `retentionInDays`, and `storedBytes` are not
+    #   included in the response.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroupsRequest AWS API Documentation
     #
     class DescribeLogGroupsRequest < Struct.new(
+      :account_identifiers,
       :log_group_name_prefix,
+      :log_group_name_pattern,
       :next_token,
-      :limit)
+      :limit,
+      :include_linked_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -563,7 +629,7 @@ module Aws::CloudWatchLogs
     #   The log groups.
     #
     #   If the `retentionInDays` value is not included for a log group, then
-    #   that log group is set to have its events never expire.
+    #   that log group's events do not expire.
     #   @return [Array<Types::LogGroup>]
     #
     # @!attribute [rw] next_token
@@ -585,6 +651,7 @@ module Aws::CloudWatchLogs
     #
     #       {
     #         log_group_name: "LogGroupName", # required
+    #         log_group_identifier: "LogGroupIdentifier",
     #         log_stream_name_prefix: "LogStreamName",
     #         order_by: "LogStreamName", # accepts LogStreamName, LastEventTime
     #         descending: false,
@@ -594,6 +661,22 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
+    #
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifier
+    #   Specify either the name or ARN of the log group to view. If the log
+    #   group is in a source account and you are using a monitoring account,
+    #   you must use the log group ARN.
+    #
+    #   If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name_prefix
@@ -612,7 +695,7 @@ module Aws::CloudWatchLogs
     #
     #   `lastEventTimestamp` represents the time of the most recent log
     #   event in the log stream in CloudWatch Logs. This number is expressed
-    #   as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   `lastEventTimestamp` updates on an eventual consistency basis. It
     #   typically updates in less than an hour from ingestion, but in rare
     #   situations might take longer.
@@ -638,6 +721,7 @@ module Aws::CloudWatchLogs
     #
     class DescribeLogStreamsRequest < Struct.new(
       :log_group_name,
+      :log_group_identifier,
       :log_stream_name_prefix,
       :order_by,
       :descending,
@@ -682,8 +766,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] filter_name_prefix
-    #   The prefix to match. CloudWatch Logs uses the value you set here
-    #   only if you also include the `logGroupName` parameter in your
+    #   The prefix to match. CloudWatch Logs uses the value that you set
+    #   here only if you also include the `logGroupName` parameter in your
     #   request.
     #   @return [String]
     #
@@ -1032,14 +1116,14 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] from
-    #   The start time, expressed as the number of milliseconds after Jan 1,
-    #   1970 00:00:00 UTC. Events with a timestamp before this time are not
-    #   exported.
+    #   The start time, expressed as the number of milliseconds after `Jan
+    #   1, 1970 00:00:00 UTC`. Events with a timestamp before this time are
+    #   not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
-    #   The end time, expressed as the number of milliseconds after Jan 1,
-    #   1970 00:00:00 UTC. Events with a timestamp later than this time are
+    #   The end time, expressed as the number of milliseconds after `Jan 1,
+    #   1970 00:00:00 UTC`. Events with a timestamp later than this time are
     #   not exported.
     #   @return [Integer]
     #
@@ -1080,12 +1164,12 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the export task, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_time
     #   The completion time of the export task, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskExecutionInfo AWS API Documentation
@@ -1121,6 +1205,7 @@ module Aws::CloudWatchLogs
     #
     #       {
     #         log_group_name: "LogGroupName", # required
+    #         log_group_identifier: "LogGroupIdentifier",
     #         log_stream_names: ["LogStreamName"],
     #         log_stream_name_prefix: "LogStreamName",
     #         start_time: 1,
@@ -1129,10 +1214,27 @@ module Aws::CloudWatchLogs
     #         next_token: "NextToken",
     #         limit: 1,
     #         interleaved: false,
+    #         unmask: false,
     #       }
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
+    #
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifier
+    #   Specify either the name or ARN of the log group to view log events
+    #   from. If the log group is in a source account and you are using a
+    #   monitoring account, you must use the log group ARN.
+    #
+    #   If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_names
@@ -1155,13 +1257,13 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
-    #   time are not returned.
+    #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp before
+    #   this time are not returned.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp later than
     #   this time are not returned.
     #   @return [Integer]
     #
@@ -1187,23 +1289,30 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] interleaved
-    #   If the value is true, the operation makes a best effort to provide
-    #   responses that contain events from multiple log streams within the
-    #   log group, interleaved in a single response. If the value is false,
-    #   all the matched log events in the first log stream are searched
-    #   first, then those in the next log stream, and so on. The default is
-    #   false.
+    #   If the value is true, the operation attempts to provide responses
+    #   that contain events from multiple log streams within the log group,
+    #   interleaved in a single response. If the value is false, all the
+    #   matched log events in the first log stream are searched first, then
+    #   those in the next log stream, and so on.
     #
-    #   **Important:** Starting on June 17, 2019, this parameter is ignored
-    #   and the value is assumed to be true. The response from this
-    #   operation always interleaves events from multiple log streams within
-    #   a log group.
+    #   **Important** As of June 17, 2019, this parameter is ignored and the
+    #   value is assumed to be true. The response from this operation always
+    #   interleaves events from multiple log streams within a log group.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] unmask
+    #   Specify `true` to display the log event fields with all sensitive
+    #   data unmasked and visible. The default is `false`.
+    #
+    #   To use this operation with this parameter, you must be signed into
+    #   an account with the `logs:Unmask` permission.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
     #
     class FilterLogEventsRequest < Struct.new(
       :log_group_name,
+      :log_group_identifier,
       :log_stream_names,
       :log_stream_name_prefix,
       :start_time,
@@ -1211,7 +1320,8 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :next_token,
       :limit,
-      :interleaved)
+      :interleaved,
+      :unmask)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1221,9 +1331,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::FilteredLogEvent>]
     #
     # @!attribute [rw] searched_log_streams
-    #   **IMPORTANT** Starting on May 15, 2020, this parameter will be
-    #   deprecated. This parameter will be an empty list after the
-    #   deprecation occurs.
+    #   **Important** As of May 15, 2020, this parameter is no longer
+    #   supported. This parameter returns an empty list.
     #
     #   Indicates which log streams have been searched and whether each has
     #   been searched completely.
@@ -1252,7 +1361,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC.
+    #   after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1261,7 +1370,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] ingestion_time
     #   The time the event was ingested, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] event_id
@@ -1280,21 +1389,81 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDataProtectionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_identifier: "LogGroupIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_identifier
+    #   The name or ARN of the log group that contains the data protection
+    #   policy that you want to see.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDataProtectionPolicyRequest AWS API Documentation
+    #
+    class GetDataProtectionPolicyRequest < Struct.new(
+      :log_group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_group_identifier
+    #   The log group name or ARN that you specified in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The data protection policy document for this log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time that this policy was most recently updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDataProtectionPolicyResponse AWS API Documentation
+    #
+    class GetDataProtectionPolicyResponse < Struct.new(
+      :log_group_identifier,
+      :policy_document,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetLogEventsRequest
     #   data as a hash:
     #
     #       {
     #         log_group_name: "LogGroupName", # required
+    #         log_group_identifier: "LogGroupIdentifier",
     #         log_stream_name: "LogStreamName", # required
     #         start_time: 1,
     #         end_time: 1,
     #         next_token: "NextToken",
     #         limit: 1,
     #         start_from_head: false,
+    #         unmask: false,
     #       }
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
+    #
+    #   <note markdown="1"> If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifier
+    #   Specify either the name or ARN of the log group to view events from.
+    #   If the log group is in a source account and you are using a
+    #   monitoring account, you must use the log group ARN.
+    #
+    #   If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
@@ -1303,15 +1472,15 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to
+    #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp equal to
     #   this time or later than this time are included. Events with a
     #   timestamp earlier than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or
-    #   later than this time are not included.
+    #   after `Jan 1, 1970 00:00:00 UTC`. Events with a timestamp equal to
+    #   or later than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1321,8 +1490,8 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] limit
     #   The maximum number of log events returned. If you don't specify a
-    #   value, the maximum is as many log events as can fit in a response
-    #   size of 1 MB, up to 10,000 log events.
+    #   limit, the default is as many log events as can fit in a response
+    #   size of 1 MB (up to 10,000 log events).
     #   @return [Integer]
     #
     # @!attribute [rw] start_from_head
@@ -1335,16 +1504,26 @@ module Aws::CloudWatchLogs
     #   `startFromHead`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] unmask
+    #   Specify `true` to display the log event fields with all sensitive
+    #   data unmasked and visible. The default is `false`.
+    #
+    #   To use this operation with this parameter, you must be signed into
+    #   an account with the `logs:Unmask` permission.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
     #
     class GetLogEventsRequest < Struct.new(
       :log_group_name,
+      :log_group_identifier,
       :log_stream_name,
       :start_time,
       :end_time,
       :next_token,
       :limit,
-      :start_from_head)
+      :start_from_head,
+      :unmask)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1361,7 +1540,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] next_backward_token
     #   The token for the next set of items in the backward direction. The
-    #   token expires after 24 hours. This token is never null. If you have
+    #   token expires after 24 hours. This token is not null. If you have
     #   reached the end of the stream, it returns the same token you passed
     #   in.
     #   @return [String]
@@ -1382,26 +1561,42 @@ module Aws::CloudWatchLogs
     #       {
     #         log_group_name: "LogGroupName", # required
     #         time: 1,
+    #         log_group_identifier: "LogGroupIdentifier",
     #       }
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
+    #
+    #   If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
     #   @return [String]
     #
     # @!attribute [rw] time
     #   The time to set as the center of the query. If you specify `time`,
-    #   the 15 minutes before this time are queries. If you omit `time` the
+    #   the 15 minutes before this time are queries. If you omit `time`, the
     #   8 minutes before and 8 minutes after this time are searched.
     #
-    #   The `time` value is specified as epoch time, the number of seconds
-    #   since January 1, 1970, 00:00:00 UTC.
+    #   The `time` value is specified as epoch time, which is the number of
+    #   seconds since `January 1, 1970, 00:00:00 UTC`.
     #   @return [Integer]
+    #
+    # @!attribute [rw] log_group_identifier
+    #   Specify either the name or ARN of the log group to view. If the log
+    #   group is in a source account and you are using a monitoring account,
+    #   you must specify the ARN.
+    #
+    #   If you specify values for both `logGroupName` and
+    #   `logGroupIdentifier`, the action returns an
+    #   `InvalidParameterException` error.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFieldsRequest AWS API Documentation
     #
     class GetLogGroupFieldsRequest < Struct.new(
       :log_group_name,
-      :time)
+      :time,
+      :log_group_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1425,6 +1620,7 @@ module Aws::CloudWatchLogs
     #
     #       {
     #         log_record_pointer: "LogRecordPointer", # required
+    #         unmask: false,
     #       }
     #
     # @!attribute [rw] log_record_pointer
@@ -1435,10 +1631,19 @@ module Aws::CloudWatchLogs
     #   complete log event record.
     #   @return [String]
     #
+    # @!attribute [rw] unmask
+    #   Specify `true` to display the log event fields with all sensitive
+    #   data unmasked and visible. The default is `false`.
+    #
+    #   To use this operation with this parameter, you must be signed into
+    #   an account with the `logs:Unmask` permission.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecordRequest AWS API Documentation
     #
     class GetLogRecordRequest < Struct.new(
-      :log_record_pointer)
+      :log_record_pointer,
+      :unmask)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1495,7 +1700,7 @@ module Aws::CloudWatchLogs
     #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`,
     #   `Timeout`, and `Unknown`.
     #
-    #   Queries time out after 15 minutes of execution. To avoid having your
+    #   Queries time out after 15 minutes of runtime. To avoid having your
     #   queries time out, reduce the time range being searched or partition
     #   your query into a number of queries.
     #   @return [String]
@@ -1523,7 +1728,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC.
+    #   after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1663,7 +1868,7 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
-    #   To set a log group to never have log events expire, use
+    #   To set a log group so that its log events do not expire, use
     #   [DeleteRetentionPolicy][1].
     #
     #
@@ -1684,8 +1889,18 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data.
+    #   The Amazon Resource Name (ARN) of the KMS key to use when encrypting
+    #   log data.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_protection_status
+    #   Displays whether this log group has a protection policy, or whether
+    #   it had one in the past. For more information, see
+    #   [PutDataProtectionPolicy][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
@@ -1697,7 +1912,8 @@ module Aws::CloudWatchLogs
       :metric_filter_count,
       :arn,
       :stored_bytes,
-      :kms_key_id)
+      :kms_key_id,
+      :data_protection_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1732,18 +1948,18 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the stream, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] first_event_timestamp
     #   The time of the first event, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC.
+    #   after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] last_event_timestamp
     #   The time of the most recent log event in the log stream in
     #   CloudWatch Logs. This number is expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC. The `lastEventTime`
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`. The `lastEventTime`
     #   value updates on an eventual consistency basis. It typically updates
     #   in less than an hour from ingestion, but in rare situations might
     #   take longer.
@@ -1751,7 +1967,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] last_ingestion_time
     #   The ingestion time, expressed as the number of milliseconds after
-    #   Jan 1, 1970 00:00:00 UTC.
+    #   `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] upload_sequence_token
@@ -1765,10 +1981,10 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
     #
-    #   **Important:** On June 17, 2019, this parameter was deprecated for
-    #   log streams, and is always reported as zero. This change applies
-    #   only to log streams. The `storedBytes` parameter for log groups is
-    #   not affected.
+    #   **Important:** As of June 17, 2019, this parameter is no longer
+    #   supported for log streams, and is always reported as zero. This
+    #   change applies only to log streams. The `storedBytes` parameter for
+    #   log groups is not affected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
@@ -1831,7 +2047,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the metric filter, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] log_group_name
@@ -1925,9 +2141,10 @@ module Aws::CloudWatchLogs
     #   different value found for a dimension is treated as a separate
     #   metric and accrues charges as a separate custom metric.
     #
-    #    To help prevent accidental high charges, Amazon disables a metric
-    #   filter if it generates 1000 different name/value pairs for the
-    #   dimensions that you have specified within a certain amount of time.
+    #    CloudWatch Logs disables a metric filter if it generates 1000
+    #   different name/value pairs for your specified dimensions within a
+    #   certain amount of time. This helps to prevent accidental high
+    #   charges.
     #
     #    You can also set up a billing alarm to alert you if your charges
     #   are
@@ -1968,7 +2185,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC.
+    #   after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1977,7 +2194,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] ingestion_time
     #   The time the event was ingested, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OutputLogEvent AWS API Documentation
@@ -1986,6 +2203,87 @@ module Aws::CloudWatchLogs
       :timestamp,
       :message,
       :ingestion_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutDataProtectionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_identifier: "LogGroupIdentifier", # required
+    #         policy_document: "DataProtectionPolicyDocument", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_identifier
+    #   Specify either the log group name or log group ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   Specify the data protection policy, in JSON.
+    #
+    #   This policy must include two JSON blocks:
+    #
+    #   * The first block must include both a `DataIdentifer` array and an
+    #     `Operation` property with an `Audit` action. The `DataIdentifer`
+    #     array lists the types of sensitive data that you want to mask. For
+    #     more information about the available options, see [Types of data
+    #     that you can mask][1].
+    #
+    #     The `Operation` property with an `Audit` action is required to
+    #     find the sensitive data terms. This `Audit` action must contain a
+    #     `FindingsDestination` object. You can optionally use that
+    #     `FindingsDestination` object to list one or more destinations to
+    #     send audit findings to. If you specify destinations such as log
+    #     groups, Kinesis Data Firehose streams, and S3 buckets, they must
+    #     already exist.
+    #
+    #   * The second block must include both a `DataIdentifer` array and an
+    #     `Operation` property with an `Deidentify` action. The
+    #     `DataIdentifer` array must exactly match the `DataIdentifer` array
+    #     in the first block of the policy.
+    #
+    #     The `Operation` property with the `Deidentify` action is what
+    #     actually masks the data, and it must contain the ` "MaskConfig":
+    #     \{\}` object. The ` "MaskConfig": \{\}` object must be empty.
+    #
+    #   For an example data protection policy, see the **Examples** section
+    #   on this page.
+    #
+    #   The contents of two `DataIdentifer` arrays must match exactly.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDataProtectionPolicyRequest AWS API Documentation
+    #
+    class PutDataProtectionPolicyRequest < Struct.new(
+      :log_group_identifier,
+      :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_group_identifier
+    #   The log group name or ARN that you specified in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The data protection policy used for this log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time that this policy was most recently updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDataProtectionPolicyResponse AWS API Documentation
+    #
+    class PutDataProtectionPolicyResponse < Struct.new(
+      :log_group_identifier,
+      :policy_document,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2228,10 +2526,10 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] name
-    #   A name for the query definition. If you are saving a lot of query
-    #   definitions, we recommend that you name them so that you can easily
-    #   find the ones you want by using the first part of the name as a
-    #   filter in the `queryDefinitionNamePrefix` parameter of
+    #   A name for the query definition. If you are saving numerous query
+    #   definitions, we recommend that you name them. This way, you can find
+    #   the ones you want by using the first part of the name as a filter in
+    #   the `queryDefinitionNamePrefix` parameter of
     #   [DescribeQueryDefinitions][1].
     #
     #
@@ -2321,8 +2619,8 @@ module Aws::CloudWatchLogs
     #
     #   In the example resource policy, you would replace the value of
     #   `SourceArn` with the resource making the call from Route 53 to
-    #   CloudWatch Logs and replace the value of `SourceAccount` with the
-    #   Amazon Web Services account ID making that call.
+    #   CloudWatch Logs. You would also replace the value of `SourceAccount`
+    #   with the Amazon Web Services account ID making that call.
     #
     #
     #
@@ -2378,7 +2676,7 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.
     #
-    #   To set a log group to never have log events expire, use
+    #   To set a log group so that its log events do not expire, use
     #   [DeleteRetentionPolicy][1].
     #
     #
@@ -2436,12 +2734,12 @@ module Aws::CloudWatchLogs
     #   * A logical destination (specified using an ARN) belonging to a
     #     different account, for cross-account delivery.
     #
-    #     If you are setting up a cross-account subscription, the
-    #     destination must have an IAM policy associated with it that allows
-    #     the sender to send logs to the destination. For more information,
-    #     see [PutDestinationPolicy][1].
+    #     If you're setting up a cross-account subscription, the
+    #     destination must have an IAM policy associated with it. The IAM
+    #     policy must allow the sender to send logs to the destination. For
+    #     more information, see [PutDestinationPolicy][1].
     #
-    #   * An Amazon Kinesis Firehose delivery stream belonging to the same
+    #   * A Kinesis Data Firehose delivery stream belonging to the same
     #     account as the subscription filter, for same-account delivery.
     #
     #   * A Lambda function belonging to the same account as the
@@ -2463,7 +2761,7 @@ module Aws::CloudWatchLogs
     #   The method used to distribute log data to the destination. By
     #   default, log data is grouped by log stream, but the grouping can be
     #   set to random for a more even distribution. This property is only
-    #   applicable when the destination is an Amazon Kinesis stream.
+    #   applicable when the destination is an Amazon Kinesis data stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterRequest AWS API Documentation
@@ -2628,7 +2926,7 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] too_old_log_event_end_index
-    #   The log events that are too old.
+    #   The log events that are dated too far in the past.
     #   @return [Integer]
     #
     # @!attribute [rw] expired_log_event_end_index
@@ -2670,7 +2968,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] last_updated_time
     #   Timestamp showing when this policy was last updated, expressed as
-    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourcePolicy AWS API Documentation
@@ -2741,6 +3039,7 @@ module Aws::CloudWatchLogs
     #       {
     #         log_group_name: "LogGroupName",
     #         log_group_names: ["LogGroupName"],
+    #         log_group_identifiers: ["LogGroupIdentifier"],
     #         start_time: 1, # required
     #         end_time: 1, # required
     #         query_string: "QueryString", # required
@@ -2750,29 +3049,51 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The log group on which to perform the query.
     #
-    #   A `StartQuery` operation must include a `logGroupNames` or a
-    #   `logGroupName` parameter, but not both.
+    #   <note markdown="1"> A `StartQuery` operation must include exactly one of the following
+    #   parameters: `logGroupName`, `logGroupNames` or
+    #   `logGroupIdentifiers`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] log_group_names
-    #   The list of log groups to be queried. You can include up to 20 log
+    #   The list of log groups to be queried. You can include up to 50 log
     #   groups.
     #
-    #   A `StartQuery` operation must include a `logGroupNames` or a
-    #   `logGroupName` parameter, but not both.
+    #   <note markdown="1"> A `StartQuery` operation must include exactly one of the following
+    #   parameters: `logGroupName`, `logGroupNames` or
+    #   `logGroupIdentifiers`.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_group_identifiers
+    #   The list of log groups to query. You can include up to 50 log
+    #   groups.
+    #
+    #   You can specify them by the log group name or ARN. If a log group
+    #   that you're querying is in a source account and you're using a
+    #   monitoring account, you must specify the ARN of the log group here.
+    #   The query definition must also be defined in the monitoring account.
+    #
+    #   If you specify an ARN, the ARN can't end with an asterisk (*).
+    #
+    #   A `StartQuery` operation must include exactly one of the following
+    #   parameters: `logGroupName`, `logGroupNames` or
+    #   `logGroupIdentifiers`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
     #   The beginning of the time range to query. The range is inclusive, so
     #   the specified start time is included in the query. Specified as
-    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
-    #   UTC.
+    #   epoch time, the number of seconds since `January 1, 1970, 00:00:00
+    #   UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range to query. The range is inclusive, so the
     #   specified end time is included in the query. Specified as epoch
-    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #   time, the number of seconds since `January 1, 1970, 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @!attribute [rw] query_string
@@ -2795,6 +3116,7 @@ module Aws::CloudWatchLogs
     class StartQueryRequest < Struct.new(
       :log_group_name,
       :log_group_names,
+      :log_group_identifiers,
       :start_time,
       :end_time,
       :query_string,
@@ -2878,7 +3200,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] creation_time
     #   The creation time of the subscription filter, expressed as the
-    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter AWS API Documentation
@@ -3020,8 +3342,8 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # The most likely cause is an invalid Amazon Web Services access key ID
-    # or secret key.
+    # The most likely cause is an Amazon Web Services access key ID or
+    # secret key that's not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UnrecognizedClientException AWS API Documentation
     #

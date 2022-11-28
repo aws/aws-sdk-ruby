@@ -74,6 +74,7 @@ module Aws::TranscribeService
     GetVocabularyResponse = Shapes::StructureShape.new(name: 'GetVocabularyResponse')
     IdentifiedLanguageScore = Shapes::FloatShape.new(name: 'IdentifiedLanguageScore')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
+    InputType = Shapes::StringShape.new(name: 'InputType')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InterruptionFilter = Shapes::StructureShape.new(name: 'InterruptionFilter')
     JobExecutionSettings = Shapes::StructureShape.new(name: 'JobExecutionSettings')
@@ -249,6 +250,7 @@ module Aws::TranscribeService
     CategoryProperties.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, location_name: "Rules"))
     CategoryProperties.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
     CategoryProperties.add_member(:last_update_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastUpdateTime"))
+    CategoryProperties.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     CategoryProperties.struct_class = Types::CategoryProperties
 
     CategoryPropertiesList.member = Shapes::ShapeRef.new(shape: CategoryProperties)
@@ -269,6 +271,7 @@ module Aws::TranscribeService
 
     CreateCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
     CreateCallAnalyticsCategoryRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "Rules"))
+    CreateCallAnalyticsCategoryRequest.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     CreateCallAnalyticsCategoryRequest.struct_class = Types::CreateCallAnalyticsCategoryRequest
 
     CreateCallAnalyticsCategoryResponse.add_member(:category_properties, Shapes::ShapeRef.new(shape: CategoryProperties, location_name: "CategoryProperties"))
@@ -809,6 +812,7 @@ module Aws::TranscribeService
 
     UpdateCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
     UpdateCallAnalyticsCategoryRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "Rules"))
+    UpdateCallAnalyticsCategoryRequest.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     UpdateCallAnalyticsCategoryRequest.struct_class = Types::UpdateCallAnalyticsCategoryRequest
 
     UpdateCallAnalyticsCategoryResponse.add_member(:category_properties, Shapes::ShapeRef.new(shape: CategoryProperties, location_name: "CategoryProperties"))

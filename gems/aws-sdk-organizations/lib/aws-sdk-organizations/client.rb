@@ -381,8 +381,8 @@ module Aws::Organizations
     # Sends a response to the originator of a handshake agreeing to the
     # action proposed by the handshake request.
     #
-    # This operation can be called only by the following principals when
-    # they also have the relevant IAM permissions:
+    # You can only call this operation by the following principals when they
+    # also have the relevant IAM permissions:
     #
     # * **Invitation to join** or **Approve all features request**
     #   handshakes: only a principal from the member account.
@@ -804,7 +804,7 @@ module Aws::Organizations
     # few minutes before you can successfully access the account. To check
     # the status of the request, do one of the following:
     #
-    # * Use the `Id` member of the `CreateAccountStatus` response element
+    # * Use the `Id` value of the `CreateAccountStatus` response element
     #   from this operation to provide as a parameter to the
     #   DescribeCreateAccountStatus operation.
     #
@@ -918,8 +918,6 @@ module Aws::Organizations
     #   The friendly name of the member account.
     #
     # @option params [String] :role_name
-    #   (Optional)
-    #
     #   The name of an IAM role that Organizations automatically preconfigures
     #   in the new member account. This role trusts the management account,
     #   allowing users in the management account to assume the role, as
@@ -1030,7 +1028,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT", "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -1317,7 +1315,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT", "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
     #
@@ -1923,6 +1921,22 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Deletes the resource policy from your organization.
+    #
+    # You can only call this operation from the organization's management
+    # account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Removes the specified member Amazon Web Services account as a
     # delegated administrator for the specified Amazon Web Services service.
     #
@@ -2102,7 +2116,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT", "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -2487,6 +2501,31 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Retrieves information about a resource policy.
+    #
+    # You can only call this operation from the organization's management
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
+    #
+    # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePolicyResponse#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.resource_policy_summary.id #=> String
+    #   resp.resource_policy.resource_policy_summary.arn #=> String
+    #   resp.resource_policy.content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeResourcePolicy AWS API Documentation
+    #
+    # @overload describe_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_policy(params = {}, options = {})
+      req = build_request(:describe_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Detaches a policy from a target root, organizational unit (OU), or
     # account.
     #
@@ -2792,7 +2831,7 @@ module Aws::Organizations
     # Organizations, see [Integrating Organizations with Other Amazon Web
     # Services Services][2] in the *Organizations User Guide.*
     #
-    # This operation can be called only from the organization's management
+    # You can only call this operation from the organization's management
     # account and only if the organization has [enabled all features][3].
     #
     #
@@ -3821,7 +3860,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
     #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS", "MISSING_BUSINESS_VALIDATION", "FAILED_BUSINESS_VALIDATION", "PENDING_BUSINESS_VALIDATION", "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION", "UNKNOWN_BUSINESS_VALIDATION", "MISSING_PAYMENT_INSTRUMENT", "INVALID_PAYMENT_INSTRUMENT", "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -5152,6 +5191,70 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Creates or updates a resource policy.
+    #
+    # You can only call this operation from the organization's management
+    # account.
+    #
+    # @option params [required, String] :content
+    #   If provided, the new content for the resource policy. The text must be
+    #   correctly formatted JSON that complies with the syntax for the
+    #   resource policy's type. For more information, see [Service Control
+    #   Policy Syntax][1] in the *Organizations User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Updates the list of tags that you want to attach to the newly-created
+    #   resource policy. For each tag in the list, you must specify both a tag
+    #   key and a value. You can set the value to an empty string, but you
+    #   can't set it to `null`. For more information about tagging, see
+    #   [Tagging Organizations resources][1] in the Organizations User Guide.
+    #
+    #   <note markdown="1"> Calls with tags apply to the initial creation of the resource policy,
+    #   otherwise an exception is thrown. If any one of the tags is invalid or
+    #   if you exceed the allowed number of tags for the resource policy, then
+    #   the entire request fails and the resource policy is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#resource_policy #resource_policy} => Types::ResourcePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     content: "ResourcePolicyContent", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy.resource_policy_summary.id #=> String
+    #   resp.resource_policy.resource_policy_summary.arn #=> String
+    #   resp.resource_policy.content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Enables the specified member account to administer the Organizations
     # features of the specified Amazon Web Services service. It grants
     # read-only access to Organizations service data. The account still
@@ -5608,7 +5711,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1011,6 +1011,10 @@ module Aws::IoTWireless
     #   The tags to attach to the new wireless device. Tags are metadata that
     #   you can use to manage a resource.
     #
+    # @option params [String] :positioning
+    #   FPort values for the GNSS, stream, and ClockSync functions of the
+    #   positioning information.
+    #
     # @return [Types::CreateWirelessDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWirelessDeviceResponse#arn #arn} => String
@@ -1065,6 +1069,13 @@ module Aws::IoTWireless
     #           stream: 1,
     #           gnss: 1,
     #         },
+    #         applications: [
+    #           {
+    #             f_port: 1,
+    #             type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #             destination_name: "DestinationName",
+    #           },
+    #         ],
     #       },
     #     },
     #     tags: [
@@ -1073,6 +1084,7 @@ module Aws::IoTWireless
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     positioning: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -1988,6 +2000,14 @@ module Aws::IoTWireless
 
     # Get the position information for a given resource.
     #
+    # This action is no longer supported. Calls to retrieve the position
+    # information should use the [GetResourcePosition][1] API operation
+    # instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html
+    #
     # @option params [required, String] :resource_identifier
     #   Resource identifier used to retrieve the position information.
     #
@@ -2031,6 +2051,14 @@ module Aws::IoTWireless
 
     # Get position configuration for a given resource.
     #
+    # This action is no longer supported. Calls to retrieve the position
+    # configuration should use the [GetResourcePosition][1] API operation
+    # instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html
+    #
     # @option params [required, String] :resource_identifier
     #   Resource identifier used in a position configuration.
     #
@@ -2063,6 +2091,195 @@ module Aws::IoTWireless
     def get_position_configuration(params = {}, options = {})
       req = build_request(:get_position_configuration, params)
       req.send_request(options)
+    end
+
+    # Get estimated position information as a payload in GeoJSON format. The
+    # payload measurement data is resolved using solvers that are provided
+    # by third-party vendors.
+    #
+    # @option params [Array<Types::WiFiAccessPoint>] :wi_fi_access_points
+    #   Retrieves an estimated device position by resolving WLAN measurement
+    #   data. The position is resolved using HERE's Wi-Fi based solver.
+    #
+    # @option params [Types::CellTowers] :cell_towers
+    #   Retrieves an estimated device position by resolving measurement data
+    #   from cellular radio towers. The position is resolved using HERE's
+    #   cellular-based solver.
+    #
+    # @option params [Types::Ip] :ip
+    #   Retrieves an estimated device position by resolving the IP address
+    #   information from the device. The position is resolved using MaxMind's
+    #   IP-based solver.
+    #
+    # @option params [Types::Gnss] :gnss
+    #   Retrieves an estimated device position by resolving the global
+    #   navigation satellite system (GNSS) scan data. The position is resolved
+    #   using the GNSS solver powered by LoRa Cloud.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :timestamp
+    #   Optional information that specifies the time when the position
+    #   information will be resolved. It uses the UNIX timestamp format. If
+    #   not specified, the time at which the request was received will be
+    #   used.
+    #
+    # @return [Types::GetPositionEstimateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPositionEstimateResponse#geo_json_payload #geo_json_payload} => IO
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_position_estimate({
+    #     wi_fi_access_points: [
+    #       {
+    #         mac_address: "MacAddress", # required
+    #         rss: 1, # required
+    #       },
+    #     ],
+    #     cell_towers: {
+    #       gsm: [
+    #         {
+    #           mcc: 1, # required
+    #           mnc: 1, # required
+    #           lac: 1, # required
+    #           geran_cid: 1, # required
+    #           gsm_local_id: {
+    #             bsic: 1, # required
+    #             bcch: 1, # required
+    #           },
+    #           gsm_timing_advance: 1,
+    #           rx_level: 1,
+    #           gsm_nmr: [
+    #             {
+    #               bsic: 1, # required
+    #               bcch: 1, # required
+    #               rx_level: 1,
+    #               global_identity: {
+    #                 lac: 1, # required
+    #                 geran_cid: 1, # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       wcdma: [
+    #         {
+    #           mcc: 1, # required
+    #           mnc: 1, # required
+    #           lac: 1,
+    #           utran_cid: 1, # required
+    #           wcdma_local_id: {
+    #             uarfcndl: 1, # required
+    #             psc: 1, # required
+    #           },
+    #           rscp: 1,
+    #           path_loss: 1,
+    #           wcdma_nmr: [
+    #             {
+    #               uarfcndl: 1, # required
+    #               psc: 1, # required
+    #               utran_cid: 1, # required
+    #               rscp: 1,
+    #               path_loss: 1,
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       tdscdma: [
+    #         {
+    #           mcc: 1, # required
+    #           mnc: 1, # required
+    #           lac: 1,
+    #           utran_cid: 1, # required
+    #           tdscdma_local_id: {
+    #             uarfcn: 1, # required
+    #             cell_params: 1, # required
+    #           },
+    #           tdscdma_timing_advance: 1,
+    #           rscp: 1,
+    #           path_loss: 1,
+    #           tdscdma_nmr: [
+    #             {
+    #               uarfcn: 1, # required
+    #               cell_params: 1, # required
+    #               utran_cid: 1,
+    #               rscp: 1,
+    #               path_loss: 1,
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       lte: [
+    #         {
+    #           mcc: 1, # required
+    #           mnc: 1, # required
+    #           eutran_cid: 1, # required
+    #           tac: 1,
+    #           lte_local_id: {
+    #             pci: 1, # required
+    #             earfcn: 1, # required
+    #           },
+    #           lte_timing_advance: 1,
+    #           rsrp: 1,
+    #           rsrq: 1.0,
+    #           nr_capable: false,
+    #           lte_nmr: [
+    #             {
+    #               pci: 1, # required
+    #               earfcn: 1, # required
+    #               eutran_cid: 1, # required
+    #               rsrp: 1,
+    #               rsrq: 1.0,
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       cdma: [
+    #         {
+    #           system_id: 1, # required
+    #           network_id: 1, # required
+    #           base_station_id: 1, # required
+    #           registration_zone: 1,
+    #           cdma_local_id: {
+    #             pn_offset: 1, # required
+    #             cdma_channel: 1, # required
+    #           },
+    #           pilot_power: 1,
+    #           base_lat: 1.0,
+    #           base_lng: 1.0,
+    #           cdma_nmr: [
+    #             {
+    #               pn_offset: 1, # required
+    #               cdma_channel: 1, # required
+    #               pilot_power: 1,
+    #               base_station_id: 1,
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     ip: {
+    #       ip_address: "IPAddress", # required
+    #     },
+    #     gnss: {
+    #       payload: "GnssNav", # required
+    #       capture_time: 1.0,
+    #       capture_time_accuracy: 1.0,
+    #       assist_position: [1.0],
+    #       assist_altitude: 1.0,
+    #       use_2_d_solver: false,
+    #     },
+    #     timestamp: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.geo_json_payload #=> IO
+    #
+    # @overload get_position_estimate(params = {})
+    # @param [Hash] params ({})
+    def get_position_estimate(params = {}, options = {}, &block)
+      req = build_request(:get_position_estimate, params)
+      req.send_request(options, &block)
     end
 
     # Get the event configuration for a particular resource identifier.
@@ -2147,6 +2364,45 @@ module Aws::IoTWireless
     def get_resource_log_level(params = {}, options = {})
       req = build_request(:get_resource_log_level, params)
       req.send_request(options)
+    end
+
+    # Get the position information for a given wireless device or a wireless
+    # gateway resource. The postion information uses the [ World Geodetic
+    # System (WGS84)][1].
+    #
+    #
+    #
+    # [1]: https://gisgeography.com/wgs84-world-geodetic-system/
+    #
+    # @option params [required, String] :resource_identifier
+    #   The identifier of the resource for which position information is
+    #   retrieved. It can be the wireless device ID or the wireless gateway ID
+    #   depending on the resource type.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource for which position information is retrieved,
+    #   which can be a wireless device or a wireless gateway.
+    #
+    # @return [Types::GetResourcePositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePositionResponse#geo_json_payload #geo_json_payload} => IO
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_position({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.geo_json_payload #=> IO
+    #
+    # @overload get_resource_position(params = {})
+    # @param [Hash] params ({})
+    def get_resource_position(params = {}, options = {}, &block)
+      req = build_request(:get_resource_position, params)
+      req.send_request(options, &block)
     end
 
     # Gets the account-specific endpoint for Configuration and Update Server
@@ -2253,6 +2509,7 @@ module Aws::IoTWireless
     #   * {Types::GetWirelessDeviceResponse#thing_arn #thing_arn} => String
     #   * {Types::GetWirelessDeviceResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANDevice
     #   * {Types::GetWirelessDeviceResponse#sidewalk #sidewalk} => Types::SidewalkDevice
+    #   * {Types::GetWirelessDeviceResponse#positioning #positioning} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2296,12 +2553,17 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.f_ports.positioning.clock_sync #=> Integer
     #   resp.lo_ra_wan.f_ports.positioning.stream #=> Integer
     #   resp.lo_ra_wan.f_ports.positioning.gnss #=> Integer
+    #   resp.lo_ra_wan.f_ports.applications #=> Array
+    #   resp.lo_ra_wan.f_ports.applications[0].f_port #=> Integer
+    #   resp.lo_ra_wan.f_ports.applications[0].type #=> String, one of "SemtechGeolocation"
+    #   resp.lo_ra_wan.f_ports.applications[0].destination_name #=> String
     #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.sidewalk_id #=> String
     #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
     #   resp.sidewalk.device_certificates #=> Array
     #   resp.sidewalk.device_certificates[0].signing_alg #=> String, one of "Ed25519", "P256r1"
     #   resp.sidewalk.device_certificates[0].value #=> String
+    #   resp.positioning #=> String, one of "Enabled", "Disabled"
     #
     # @overload get_wireless_device(params = {})
     # @param [Hash] params ({})
@@ -2899,6 +3161,14 @@ module Aws::IoTWireless
     # List position configurations for a given resource, such as positioning
     # solvers.
     #
+    # This action is no longer supported. Calls to retrieve position
+    # information should use the [GetResourcePosition][1] API operation
+    # instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html
+    #
     # @option params [String] :resource_type
     #   Resource type for which position configurations are listed.
     #
@@ -3246,6 +3516,14 @@ module Aws::IoTWireless
     end
 
     # Put position configuration for a given resource.
+    #
+    # This action is no longer supported. Calls to update the position
+    # configuration should use the [UpdateResourcePosition][1] API operation
+    # instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html
     #
     # @option params [required, String] :resource_identifier
     #   Resource identifier used to update the position configuration.
@@ -3983,6 +4261,14 @@ module Aws::IoTWireless
 
     # Update the position information of a resource.
     #
+    # This action is no longer supported. Calls to update the position
+    # information should use the [UpdateResourcePosition][1] API operation
+    # instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html
+    #
     # @option params [required, String] :resource_identifier
     #   Resource identifier of the resource for which position is updated.
     #
@@ -4084,6 +4370,50 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update the position information of a given wireless device or a
+    # wireless gateway resource. The postion coordinates are based on the [
+    # World Geodetic System (WGS84)][1].
+    #
+    #
+    #
+    # [1]: https://gisgeography.com/wgs84-world-geodetic-system/
+    #
+    # @option params [required, String] :resource_identifier
+    #   The identifier of the resource for which position information is
+    #   updated. It can be the wireless device ID or the wireless gateway ID
+    #   depending on the resource type.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource for which position information is updated, which
+    #   can be a wireless device or a wireless gateway.
+    #
+    # @option params [String, StringIO, File] :geo_json_payload
+    #   The position information of the resource, displayed as a JSON payload.
+    #   The payload uses the GeoJSON format, which a format that's used to
+    #   encode geographic data structures. For more information, see
+    #   [GeoJSON][1].
+    #
+    #
+    #
+    #   [1]: https://geojson.org/
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_position({
+    #     resource_identifier: "PositionResourceIdentifier", # required
+    #     resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #     geo_json_payload: "data",
+    #   })
+    #
+    # @overload update_resource_position(params = {})
+    # @param [Hash] params ({})
+    def update_resource_position(params = {}, options = {})
+      req = build_request(:update_resource_position, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a wireless device.
     #
     # @option params [required, String] :id
@@ -4100,6 +4430,10 @@ module Aws::IoTWireless
     #
     # @option params [Types::LoRaWANUpdateDevice] :lo_ra_wan
     #   The updated wireless device's configuration.
+    #
+    # @option params [String] :positioning
+    #   FPort values for the GNSS, stream, and ClockSync functions of the
+    #   positioning information.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4125,8 +4459,16 @@ module Aws::IoTWireless
     #           stream: 1,
     #           gnss: 1,
     #         },
+    #         applications: [
+    #           {
+    #             f_port: 1,
+    #             type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #             destination_name: "DestinationName",
+    #           },
+    #         ],
     #       },
     #     },
+    #     positioning: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @overload update_wireless_device(params = {})
@@ -4188,7 +4530,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

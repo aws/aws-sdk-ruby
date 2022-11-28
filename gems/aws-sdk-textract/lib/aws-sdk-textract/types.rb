@@ -567,6 +567,21 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # A structure that holds information regarding a detected signature on a
+    # page.
+    #
+    # @!attribute [rw] page
+    #   The page a detected signature was found on.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectedSignature AWS API Documentation
+    #
+    class DetectedSignature < Struct.new(
+      :page)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input document, either as bytes or as an S3 object.
     #
     # You pass image bytes to an Amazon Textract API operation by using the
@@ -626,8 +641,39 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Summary information about documents grouped by the same document type.
+    #
+    # @!attribute [rw] type
+    #   The type of document that Amazon Textract has detected. See LINK for
+    #   a list of all types returned by Textract.
+    #   @return [String]
+    #
+    # @!attribute [rw] split_documents
+    #   An array that contains information about the pages of a document,
+    #   defined by logical boundary.
+    #   @return [Array<Types::SplitDocument>]
+    #
+    # @!attribute [rw] detected_signatures
+    #   A list of the detected signatures found in a document group.
+    #   @return [Array<Types::DetectedSignature>]
+    #
+    # @!attribute [rw] undetected_signatures
+    #   A list of any expected signatures not found in a document group.
+    #   @return [Array<Types::UndetectedSignature>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentGroup AWS API Documentation
+    #
+    class DocumentGroup < Struct.new(
+      :type,
+      :split_documents,
+      :detected_signatures,
+      :undetected_signatures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 bucket that contains the document to be processed. It's
-    # used by asynchronous operations such as StartDocumentTextDetection.
+    # used by asynchronous operations.
     #
     # The input document can be an image file in JPEG or PNG format. It can
     # also be a file in PDF format.
@@ -863,6 +909,33 @@ module Aws::Textract
     class ExpenseType < Struct.new(
       :text,
       :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information extracted by an analysis operation after using
+    # StartLendingAnalysis.
+    #
+    # @!attribute [rw] lending_document
+    #   Holds the structured data returned by AnalyzeDocument for lending
+    #   documents.
+    #   @return [Types::LendingDocument]
+    #
+    # @!attribute [rw] expense_document
+    #   The structure holding all the information returned by AnalyzeExpense
+    #   @return [Types::ExpenseDocument]
+    #
+    # @!attribute [rw] identity_document
+    #   The structure that lists each document processed in an AnalyzeID
+    #   operation.
+    #   @return [Types::IdentityDocument]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Extraction AWS API Documentation
+    #
+    class Extraction < Struct.new(
+      :lending_document,
+      :expense_document,
+      :identity_document)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1149,6 +1222,151 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLendingAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   A unique identifier for the lending or text-detection job. The
+    #   `JobId` is returned from `StartLendingAnalysis`. A `JobId` value is
+    #   only valid for 7 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value that you can specify is 30. If you specify a value
+    #   greater than 30, a maximum of 30 results is returned. The default
+    #   value is 30.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete, Amazon Textract returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of lending results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetLendingAnalysisRequest AWS API Documentation
+    #
+    class GetLendingAnalysisRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_metadata
+    #   Information about the input document.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the lending analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Textract returns this token.
+    #   You can use this token in the subsequent request to retrieve the
+    #   next set of lending results.
+    #   @return [String]
+    #
+    # @!attribute [rw] results
+    #   Holds the information returned by one of AmazonTextract's document
+    #   analysis operations for the pinstripe.
+    #   @return [Array<Types::LendingResult>]
+    #
+    # @!attribute [rw] warnings
+    #   A list of warnings that occurred during the lending analysis
+    #   operation.
+    #   @return [Array<Types::Warning>]
+    #
+    # @!attribute [rw] status_message
+    #   Returns if the lending analysis job could not be completed. Contains
+    #   explanation for what error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] analyze_lending_model_version
+    #   The current model version of the Analyze Lending API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetLendingAnalysisResponse AWS API Documentation
+    #
+    class GetLendingAnalysisResponse < Struct.new(
+      :document_metadata,
+      :job_status,
+      :next_token,
+      :results,
+      :warnings,
+      :status_message,
+      :analyze_lending_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLendingAnalysisSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   A unique identifier for the lending or text-detection job. The
+    #   `JobId` is returned from StartLendingAnalysis. A `JobId` value is
+    #   only valid for 7 days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetLendingAnalysisSummaryRequest AWS API Documentation
+    #
+    class GetLendingAnalysisSummaryRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_metadata
+    #   Information about the input document.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the lending analysis job.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   Contains summary information for documents grouped by type.
+    #   @return [Types::LendingSummary]
+    #
+    # @!attribute [rw] warnings
+    #   A list of warnings that occurred during the lending analysis
+    #   operation.
+    #   @return [Array<Types::Warning>]
+    #
+    # @!attribute [rw] status_message
+    #   Returns if the lending analysis could not be completed. Contains
+    #   explanation for what error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] analyze_lending_model_version
+    #   The current model version of the Analyze Lending API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetLendingAnalysisSummaryResponse AWS API Documentation
+    #
+    class GetLendingAnalysisSummaryResponse < Struct.new(
+      :document_metadata,
+      :job_status,
+      :summary,
+      :warnings,
+      :status_message,
+      :analyze_lending_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Shows the results of the human in the loop evaluation. If there is no
     # HumanLoopArn, the input did not trigger human review.
     #
@@ -1325,8 +1543,8 @@ module Aws::Textract
     #
     class InternalServerError < Aws::EmptyStructure; end
 
-    # An invalid job identifier was passed to GetDocumentAnalysis or to
-    # GetDocumentAnalysis.
+    # An invalid job identifier was passed to an asynchronous analysis
+    # operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidJobIdException AWS API Documentation
     #
@@ -1361,6 +1579,130 @@ module Aws::Textract
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidS3ObjectException AWS API Documentation
     #
     class InvalidS3ObjectException < Aws::EmptyStructure; end
+
+    # The results extracted for a lending document.
+    #
+    # @!attribute [rw] text
+    #   The text extracted for a detected value in a lending document.
+    #   @return [String]
+    #
+    # @!attribute [rw] selection_status
+    #   The selection status of a selection element, such as an option
+    #   button or check box.
+    #   @return [String]
+    #
+    # @!attribute [rw] geometry
+    #   Information about where the following items are located on a
+    #   document page: detected page, text, key-value pairs, tables, table
+    #   cells, and selection elements.
+    #   @return [Types::Geometry]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence level for the text of a detected value in a lending
+    #   document.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LendingDetection AWS API Documentation
+    #
+    class LendingDetection < Struct.new(
+      :text,
+      :selection_status,
+      :geometry,
+      :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Holds the structured data returned by AnalyzeDocument for lending
+    # documents.
+    #
+    # @!attribute [rw] lending_fields
+    #   An array of LendingField objects.
+    #   @return [Array<Types::LendingField>]
+    #
+    # @!attribute [rw] signature_detections
+    #   A list of signatures detected in a lending document.
+    #   @return [Array<Types::SignatureDetection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LendingDocument AWS API Documentation
+    #
+    class LendingDocument < Struct.new(
+      :lending_fields,
+      :signature_detections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Holds the normalized key-value pairs returned by AnalyzeDocument,
+    # including the document type, detected text, and geometry.
+    #
+    # @!attribute [rw] type
+    #   The type of the lending document.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_detection
+    #   The results extracted for a lending document.
+    #   @return [Types::LendingDetection]
+    #
+    # @!attribute [rw] value_detections
+    #   An array of LendingDetection objects.
+    #   @return [Array<Types::LendingDetection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LendingField AWS API Documentation
+    #
+    class LendingField < Struct.new(
+      :type,
+      :key_detection,
+      :value_detections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the detections for each page analyzed through the Analyze
+    # Lending API.
+    #
+    # @!attribute [rw] page
+    #   The page number for a page, with regard to whole submission.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_classification
+    #   The classifier result for a given page.
+    #   @return [Types::PageClassification]
+    #
+    # @!attribute [rw] extractions
+    #   An array of Extraction to hold structured data. e.g. normalized key
+    #   value pairs instead of raw OCR detections .
+    #   @return [Array<Types::Extraction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LendingResult AWS API Documentation
+    #
+    class LendingResult < Struct.new(
+      :page,
+      :page_classification,
+      :extractions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information regarding DocumentGroups and
+    # UndetectedDocumentTypes.
+    #
+    # @!attribute [rw] document_groups
+    #   Contains an array of all DocumentGroup objects.
+    #   @return [Array<Types::DocumentGroup>]
+    #
+    # @!attribute [rw] undetected_document_types
+    #   UndetectedDocumentTypes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LendingSummary AWS API Documentation
+    #
+    class LendingSummary < Struct.new(
+      :document_groups,
+      :undetected_document_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An Amazon Textract service limit was exceeded. For example, if you
     # start too many asynchronous jobs concurrently, calls to start
@@ -1433,7 +1775,7 @@ module Aws::Textract
 
     # The Amazon Simple Notification Service (Amazon SNS) topic to which
     # Amazon Textract publishes the completion status of an asynchronous
-    # document operation, such as StartDocumentTextDetection.
+    # document operation.
     #
     # @note When making an API call, you may pass NotificationChannel
     #   data as a hash:
@@ -1468,9 +1810,9 @@ module Aws::Textract
     # `OutputConfig` is an optional parameter which lets you adjust where
     # your output will be placed. By default, Amazon Textract will store the
     # results internally and can only be accessed by the Get API operations.
-    # With OutputConfig enabled, you can set the name of the bucket the
-    # output will be sent to and the file prefix of the results where you
-    # can download your results. Additionally, you can set the `KMSKeyID`
+    # With `OutputConfig` enabled, you can set the name of the bucket the
+    # output will be sent to the file prefix of the results where you can
+    # download your results. Additionally, you can set the `KMSKeyID`
     # parameter to a customer master key (CMK) to encrypt your output.
     # Without this parameter set Amazon Textract will encrypt server-side
     # using the AWS managed CMK for Amazon S3.
@@ -1516,6 +1858,30 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # The class assigned to a Page object detected in an input document.
+    # Contains information regarding the predicted type/class of a
+    # document's page and the page number that the Page object was detected
+    # on.
+    #
+    # @!attribute [rw] page_type
+    #   The class, or document type, assigned to a detected Page object. The
+    #   class, or document type, assigned to a detected Page object.
+    #   @return [Array<Types::Prediction>]
+    #
+    # @!attribute [rw] page_number
+    #   The page number the value was detected on, relative to Amazon
+    #   Textract's starting position.
+    #   @return [Array<Types::Prediction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/PageClassification AWS API Documentation
+    #
+    class PageClassification < Struct.new(
+      :page_type,
+      :page_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The X and Y coordinates of a point on a document page. The X and Y
     # values that are returned are ratios of the overall document page size.
     # For example, if the input document is 700 x 200 and the operation
@@ -1540,6 +1906,27 @@ module Aws::Textract
     class Point < Struct.new(
       :x,
       :y)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information regarding predicted values returned by Amazon
+    # Textract operations, including the predicted value and the confidence
+    # in the predicted value.
+    #
+    # @!attribute [rw] value
+    #   The predicted value of a detected object.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   Amazon Textract's confidence in its predicted value.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Prediction AWS API Documentation
+    #
+    class Prediction < Struct.new(
+      :value,
+      :confidence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1696,6 +2083,50 @@ module Aws::Textract
       :bucket,
       :name,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information regarding a detected signature on a page.
+    #
+    # @!attribute [rw] confidence
+    #   The confidence, from 0 to 100, in the predicted values for a
+    #   detected signature.
+    #   @return [Float]
+    #
+    # @!attribute [rw] geometry
+    #   Information about where the following items are located on a
+    #   document page: detected page, text, key-value pairs, tables, table
+    #   cells, and selection elements.
+    #   @return [Types::Geometry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/SignatureDetection AWS API Documentation
+    #
+    class SignatureDetection < Struct.new(
+      :confidence,
+      :geometry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the pages of a document, defined by logical
+    # boundary.
+    #
+    # @!attribute [rw] index
+    #   The index for a given document in a DocumentGroup of a specific
+    #   Type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pages
+    #   An array of page numbers for a for a given document, ordered by
+    #   logical boundary.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/SplitDocument AWS API Documentation
+    #
+    class SplitDocument < Struct.new(
+      :index,
+      :pages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2008,12 +2439,151 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartLendingAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_location: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         job_tag: "JobTag",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         output_config: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_prefix: "S3ObjectName",
+    #         },
+    #         kms_key_id: "KMSKeyId",
+    #       }
+    #
+    # @!attribute [rw] document_location
+    #   The Amazon S3 bucket that contains the document to be processed.
+    #   It's used by asynchronous operations.
+    #
+    #   The input document can be an image file in JPEG or PNG format. It
+    #   can also be a file in PDF format.
+    #   @return [Types::DocumentLocation]
+    #
+    # @!attribute [rw] client_request_token
+    #   The idempotent token that you use to identify the start request. If
+    #   you use the same token with multiple `StartLendingAnalysis`
+    #   requests, the same `JobId` is returned. Use `ClientRequestToken` to
+    #   prevent the same job from being accidentally started more than once.
+    #   For more information, see [Calling Amazon Textract Asynchronous
+    #   Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/textract/latest/dg/api-sync.html
+    #   @return [String]
+    #
+    # @!attribute [rw] job_tag
+    #   An identifier that you specify to be included in the completion
+    #   notification published to the Amazon SNS topic. For example, you can
+    #   use `JobTag` to identify the type of document that the completion
+    #   notification corresponds to (such as a tax form or a receipt).
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon Simple Notification Service (Amazon SNS) topic to which
+    #   Amazon Textract publishes the completion status of an asynchronous
+    #   document operation.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] output_config
+    #   Sets whether or not your output will go to a user created bucket.
+    #   Used to set the name of the bucket, and the prefix on the output
+    #   file.
+    #
+    #   `OutputConfig` is an optional parameter which lets you adjust where
+    #   your output will be placed. By default, Amazon Textract will store
+    #   the results internally and can only be accessed by the Get API
+    #   operations. With `OutputConfig` enabled, you can set the name of the
+    #   bucket the output will be sent to the file prefix of the results
+    #   where you can download your results. Additionally, you can set the
+    #   `KMSKeyID` parameter to a customer master key (CMK) to encrypt your
+    #   output. Without this parameter set Amazon Textract will encrypt
+    #   server-side using the AWS managed CMK for Amazon S3.
+    #
+    #   Decryption of Customer Content is necessary for processing of the
+    #   documents by Amazon Textract. If your account is opted out under an
+    #   AI services opt out policy then all unencrypted Customer Content is
+    #   immediately and permanently deleted after the Customer Content has
+    #   been processed by the service. No copy of of the output is retained
+    #   by Amazon Textract. For information about how to opt out, see [
+    #   Managing AI services opt-out policy. ][1]
+    #
+    #   For more information on data privacy, see the [Data Privacy FAQ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [2]: https://aws.amazon.com/compliance/data-privacy-faq/
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the
+    #   KMS key will be used for server-side encryption of the objects in
+    #   the customer bucket. When this parameter is not enabled, the result
+    #   will be encrypted server side, using SSE-S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartLendingAnalysisRequest AWS API Documentation
+    #
+    class StartLendingAnalysisRequest < Struct.new(
+      :document_location,
+      :client_request_token,
+      :job_tag,
+      :notification_channel,
+      :output_config,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   A unique identifier for the lending or text-detection job. The
+    #   `JobId` is returned from `StartLendingAnalysis`. A `JobId` value is
+    #   only valid for 7 days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartLendingAnalysisResponse AWS API Documentation
+    #
+    class StartLendingAnalysisResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon Textract is temporarily unable to process the request. Try your
     # call again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Aws::EmptyStructure; end
+
+    # A structure containing information about an undetected signature on a
+    # page where it was expected but not found.
+    #
+    # @!attribute [rw] page
+    #   The page where a signature was expected but not found.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UndetectedSignature AWS API Documentation
+    #
+    class UndetectedSignature < Struct.new(
+      :page)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The format of the input document isn't supported. Documents for
     # operations can be in PNG, JPEG, PDF, or TIFF format.

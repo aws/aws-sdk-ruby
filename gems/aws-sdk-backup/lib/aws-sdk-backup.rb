@@ -32,7 +32,7 @@ require_relative 'aws-sdk-backup/customizations'
 # structure.
 #
 #     backup = Aws::Backup::Client.new
-#     resp = backup.create_backup_plan(params)
+#     resp = backup.cancel_legal_hold(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-backup/customizations'
 # @!group service
 module Aws::Backup
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.47.0'
 
 end

@@ -68,8 +68,9 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # One or more arguments to the `StartStreamTranscription` or
-    # `StartMedicalStreamTranscription` operation was not valid. For
+    # One or more arguments to the `StartStreamTranscription`,
+    # `StartMedicalStreamTranscription`, or
+    # `StartCallAnalyticsStreamTranscription` operation was not valid. For
     # example, `MediaEncoding` or `LanguageCode` used not valid values.
     # Check the specified parameters and try your request again.
     #
@@ -80,6 +81,235 @@ module Aws::TranscribeStreamingService
     #
     class BadRequestException < Struct.new(
       :message,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains entities identified as personally identifiable information
+    # (PII) in your transcription output, along with various associated
+    # attributes. Examples include category, confidence score, content,
+    # type, and start and end times.
+    #
+    # @!attribute [rw] begin_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the start of the identified entity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the end of the identified entity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] category
+    #   The category of information identified. For example, `PII`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of PII identified. For example, `NAME` or
+    #   `CREDIT_DEBIT_NUMBER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The word or words that represent the identified entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence score associated with the identification of an entity
+    #   in your transcript.
+    #
+    #   Confidence scores are values between 0 and 1. A larger value
+    #   indicates a higher probability that the identified entity correctly
+    #   matches the entity spoken in your media.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/CallAnalyticsEntity AWS API Documentation
+    #
+    class CallAnalyticsEntity < Struct.new(
+      :begin_offset_millis,
+      :end_offset_millis,
+      :category,
+      :type,
+      :content,
+      :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A word, phrase, or punctuation mark in your Call Analytics
+    # transcription output, along with various associated attributes, such
+    # as confidence score, type, and start and end times.
+    #
+    # @!attribute [rw] begin_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the start of the identified item.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the end of the identified item.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   The type of item identified. Options are: `PRONUNCIATION` (spoken
+    #   words) and `PUNCTUATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The word or punctuation that was transcribed.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence score associated with a word or phrase in your
+    #   transcript.
+    #
+    #   Confidence scores are values between 0 and 1. A larger value
+    #   indicates a higher probability that the identified item correctly
+    #   matches the item spoken in your media.
+    #   @return [Float]
+    #
+    # @!attribute [rw] vocabulary_filter_match
+    #   Indicates whether the specified item matches a word in the
+    #   vocabulary filter included in your Call Analytics request. If
+    #   `true`, there is a vocabulary filter match.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] stable
+    #   If partial result stabilization is enabled, `Stable` indicates
+    #   whether the specified item is stable (`true`) or if it may change
+    #   when the segment is complete (`false`).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/CallAnalyticsItem AWS API Documentation
+    #
+    class CallAnalyticsItem < Struct.new(
+      :begin_offset_millis,
+      :end_offset_millis,
+      :type,
+      :content,
+      :confidence,
+      :vocabulary_filter_match,
+      :stable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on any `TranscriptFilterType` categories that
+    # matched your transcription output. Matches are identified for each
+    # segment upon completion of that segment.
+    #
+    # @!attribute [rw] matched_categories
+    #   Lists the categories that were matched in your audio segment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] matched_details
+    #   Contains information about the matched categories, including
+    #   category names and timestamps.
+    #   @return [Hash<String,Types::PointsOfInterest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/CategoryEvent AWS API Documentation
+    #
+    class CategoryEvent < Struct.new(
+      :matched_categories,
+      :matched_details,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Makes it possible to specify which speaker is on which audio channel.
+    # For example, if your agent is the first participant to speak, you
+    # would set `ChannelId` to `0` (to indicate the first channel) and
+    # `ParticipantRole` to `AGENT` (to indicate that it's the agent
+    # speaking).
+    #
+    # @note When making an API call, you may pass ChannelDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         channel_id: 1, # required
+    #         participant_role: "AGENT", # required, accepts AGENT, CUSTOMER
+    #       }
+    #
+    # @!attribute [rw] channel_id
+    #   Specify the audio channel you want to define.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] participant_role
+    #   Specify the speaker you want to define. Omitting this parameter is
+    #   equivalent to specifying both participants.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ChannelDefinition AWS API Documentation
+    #
+    class ChannelDefinition < Struct.new(
+      :channel_id,
+      :participant_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the location, using character count, in your transcript where
+    # a match is identified. For example, the location of an issue or a
+    # category match within a segment.
+    #
+    # @!attribute [rw] begin
+    #   Provides the character count of the first character where a match is
+    #   identified. For example, the first character associated with an
+    #   issue or a category match in a segment transcript.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   Provides the character count of the last character where a match is
+    #   identified. For example, the last character associated with an issue
+    #   or a category match in a segment transcript.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/CharacterOffsets AWS API Documentation
+    #
+    class CharacterOffsets < Struct.new(
+      :begin,
+      :end)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to set audio channel definitions and post-call analytics
+    # settings.
+    #
+    # @note When making an API call, you may pass ConfigurationEvent
+    #   data as a hash:
+    #
+    #       {
+    #         channel_definitions: [
+    #           {
+    #             channel_id: 1, # required
+    #             participant_role: "AGENT", # required, accepts AGENT, CUSTOMER
+    #           },
+    #         ],
+    #         post_call_analytics_settings: {
+    #           output_location: "String", # required
+    #           data_access_role_arn: "String", # required
+    #           content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
+    #           output_encryption_kms_key_id: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_definitions
+    #   Indicates which speaker is on which audio channel.
+    #   @return [Array<Types::ChannelDefinition>]
+    #
+    # @!attribute [rw] post_call_analytics_settings
+    #   Provides additional optional settings for your Call Analytics
+    #   post-call request, including encryption and output locations for
+    #   your redacted and unredacted transcript.
+    #   @return [Types::PostCallAnalyticsSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ConfigurationEvent AWS API Documentation
+    #
+    class ConfigurationEvent < Struct.new(
+      :channel_definitions,
+      :post_call_analytics_settings,
       :event_type)
       SENSITIVE = []
       include Aws::Structure
@@ -161,6 +391,21 @@ module Aws::TranscribeStreamingService
     class InternalFailureException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists the issues that were identified in your audio segment.
+    #
+    # @!attribute [rw] character_offsets
+    #   Provides the timestamps that identify when in an audio segment the
+    #   specified issue occurs.
+    #   @return [Types::CharacterOffsets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/IssueDetected AWS API Documentation
+    #
+    class IssueDetected < Struct.new(
+      :character_offsets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -486,6 +731,122 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # Contains the timestamps of matched categories.
+    #
+    # @!attribute [rw] timestamp_ranges
+    #   Contains the timestamp ranges (start time through end time) of
+    #   matched categories and rules.
+    #   @return [Array<Types::TimestampRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/PointsOfInterest AWS API Documentation
+    #
+    class PointsOfInterest < Struct.new(
+      :timestamp_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to specify additional settings for your streaming Call
+    # Analytics post-call request, including output locations for your
+    # redacted and unredacted transcript, which IAM role to use, and,
+    # optionally, which encryption key to use.
+    #
+    # `ContentRedactionOutput`, `DataAccessRoleArn`, and `OutputLocation`
+    # are required fields.
+    #
+    # @note When making an API call, you may pass PostCallAnalyticsSettings
+    #   data as a hash:
+    #
+    #       {
+    #         output_location: "String", # required
+    #         data_access_role_arn: "String", # required
+    #         content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
+    #         output_encryption_kms_key_id: "String",
+    #       }
+    #
+    # @!attribute [rw] output_location
+    #   The Amazon S3 location where you want your Call Analytics post-call
+    #   transcription output stored. You can use any of the following
+    #   formats to specify the output location:
+    #
+    #   1.  s3://DOC-EXAMPLE-BUCKET
+    #
+    #   2.  s3://DOC-EXAMPLE-BUCKET/my-output-folder/
+    #
+    #   3.  s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
+    #   to access the Amazon S3 bucket that contains your input files. If
+    #   the role that you specify doesn’t have the appropriate permissions
+    #   to access the specified Amazon S3 location, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`. For more information, see
+    #   [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction_output
+    #   Specify whether you want only a redacted transcript or both a
+    #   redacted and an unredacted transcript. If you choose redacted and
+    #   unredacted, two JSON files are generated and stored in the Amazon S3
+    #   output location you specify.
+    #
+    #   Note that to include `ContentRedactionOutput` in your request, you
+    #   must enable content redaction (`ContentRedactionType`).
+    #   @return [String]
+    #
+    # @!attribute [rw] output_encryption_kms_key_id
+    #   The KMS key you want to use to encrypt your Call Analytics post-call
+    #   output.
+    #
+    #   If using a key located in the **current** Amazon Web Services
+    #   account, you can specify your KMS key in one of four ways:
+    #
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
+    #
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a **different** Amazon Web Services
+    #   account than the current Amazon Web Services account, you can
+    #   specify your KMS key in one of two ways:
+    #
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   Note that the user making the request must have permission to use
+    #   the specified KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/PostCallAnalyticsSettings AWS API Documentation
+    #
+    class PostCallAnalyticsSettings < Struct.new(
+      :output_location,
+      :data_access_role_arn,
+      :content_redaction_output,
+      :output_encryption_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `Result` associated with a ``.
     #
     # Contains a set of transcription results from one or more audio
@@ -520,7 +881,7 @@ module Aws::TranscribeStreamingService
     #   @return [Array<Types::Alternative>]
     #
     # @!attribute [rw] channel_id
-    #   Indicates the channel identified for the `Result`.
+    #   Indicates which audio channel is associated with the `Result`.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -561,6 +922,342 @@ module Aws::TranscribeStreamingService
     class ServiceUnavailableException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartCallAnalyticsStreamTranscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR
+    #         media_sample_rate_hertz: 1, # required
+    #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
+    #         vocabulary_name: "VocabularyName",
+    #         session_id: "SessionId",
+    #         input_event_stream_hander: EventStreams::AudioStream.new,
+    #         vocabulary_filter_name: "VocabularyFilterName",
+    #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
+    #         language_model_name: "ModelName",
+    #         enable_partial_results_stabilization: false,
+    #         partial_results_stability: "high", # accepts high, medium, low
+    #         content_identification_type: "PII", # accepts PII
+    #         content_redaction_type: "PII", # accepts PII
+    #         pii_entity_types: "PiiEntityTypes",
+    #       }
+    #
+    # @!attribute [rw] language_code
+    #   Specify the language code that represents the language spoken in
+    #   your audio.
+    #
+    #   If you're unsure of the language spoken in your audio, consider
+    #   using `IdentifyLanguage` to enable automatic language
+    #   identification.
+    #
+    #   For a list of languages supported with streaming Call Analytics,
+    #   refer to the [Supported languages][1] table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate of the input audio (in hertz). Low-quality audio,
+    #   such as telephone audio, is typically around 8,000 Hz. High-quality
+    #   audio typically ranges from 16,000 Hz to 48,000 Hz. Note that the
+    #   sample rate you specify must match that of your audio.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_encoding
+    #   Specify the encoding of your input audio. Supported formats are:
+    #
+    #   * FLAC
+    #
+    #   * OPUS-encoded audio in an Ogg container
+    #
+    #   * PCM (only signed 16-bit little-endian audio formats, which does
+    #     not include WAV)
+    #
+    #   For more information, see [Media formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   Specify the name of the custom vocabulary that you want to use when
+    #   processing your transcription. Note that vocabulary names are case
+    #   sensitive.
+    #
+    #   If the language of the specified custom vocabulary doesn't match
+    #   the language identified in your media, the custom vocabulary is not
+    #   applied to your transcription.
+    #
+    #   For more information, see [Custom vocabularies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   Specify a name for your Call Analytics transcription session. If you
+    #   don't include this parameter in your request, Amazon Transcribe
+    #   generates an ID and returns it in the response.
+    #
+    #   You can use a session ID to retry a streaming session.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_stream
+    #   An encoded stream of audio blobs. Audio streams are encoded as
+    #   either HTTP/2 or WebSocket data frames.
+    #
+    #   For more information, see [Transcribing streaming audio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
+    #   @return [Types::AudioStream]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   Specify the name of the custom vocabulary filter that you want to
+    #   use when processing your transcription. Note that vocabulary filter
+    #   names are case sensitive.
+    #
+    #   If the language of the specified custom vocabulary filter doesn't
+    #   match the language identified in your media, the vocabulary filter
+    #   is not applied to your transcription.
+    #
+    #   For more information, see [Using vocabulary filtering with unwanted
+    #   words][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   Specify how you want your vocabulary filter applied to your
+    #   transcript.
+    #
+    #   To replace words with `***`, choose `mask`.
+    #
+    #   To delete words, choose `remove`.
+    #
+    #   To flag words without changing them, choose `tag`.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_model_name
+    #   Specify the name of the custom language model that you want to use
+    #   when processing your transcription. Note that language model names
+    #   are case sensitive.
+    #
+    #   The language of the specified language model must match the language
+    #   code you specify in your transcription request. If the languages
+    #   don't match, the custom language model isn't applied. There are no
+    #   errors or warnings associated with a language mismatch.
+    #
+    #   For more information, see [Custom language models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_partial_results_stabilization
+    #   Enables partial result stabilization for your transcription. Partial
+    #   result stabilization can reduce latency in your output, but may
+    #   impact accuracy. For more information, see [Partial-result
+    #   stabilization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] partial_results_stability
+    #   Specify the level of stability to use when you enable partial
+    #   results stabilization (`EnablePartialResultsStabilization`).
+    #
+    #   Low stability provides the highest accuracy. High stability
+    #   transcribes faster, but with slightly lower accuracy.
+    #
+    #   For more information, see [Partial-result stabilization][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization
+    #   @return [String]
+    #
+    # @!attribute [rw] content_identification_type
+    #   Labels all personally identifiable information (PII) identified in
+    #   your transcript.
+    #
+    #   Content identification is performed at the segment level; PII
+    #   specified in `PiiEntityTypes` is flagged upon complete transcription
+    #   of an audio segment.
+    #
+    #   You can’t set `ContentIdentificationType` and `ContentRedactionType`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
+    #
+    #   For more information, see [Redacting or identifying personally
+    #   identifiable information][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction_type
+    #   Redacts all personally identifiable information (PII) identified in
+    #   your transcript.
+    #
+    #   Content redaction is performed at the segment level; PII specified
+    #   in `PiiEntityTypes` is redacted upon complete transcription of an
+    #   audio segment.
+    #
+    #   You can’t set `ContentRedactionType` and `ContentIdentificationType`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
+    #
+    #   For more information, see [Redacting or identifying personally
+    #   identifiable information][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html
+    #   @return [String]
+    #
+    # @!attribute [rw] pii_entity_types
+    #   Specify which types of personally identifiable information (PII) you
+    #   want to redact in your transcript. You can include as many types as
+    #   you'd like, or you can select `ALL`.
+    #
+    #   To include `PiiEntityTypes` in your Call Analytics request, you must
+    #   also include either `ContentIdentificationType` or
+    #   `ContentRedactionType`.
+    #
+    #   Values must be comma-separated and can include:
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
+    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
+    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, or `ALL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartCallAnalyticsStreamTranscriptionRequest AWS API Documentation
+    #
+    class StartCallAnalyticsStreamTranscriptionRequest < Struct.new(
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_encoding,
+      :vocabulary_name,
+      :session_id,
+      :audio_stream,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method,
+      :language_model_name,
+      :enable_partial_results_stabilization,
+      :partial_results_stability,
+      :content_identification_type,
+      :content_redaction_type,
+      :pii_entity_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   Provides the identifier for your Call Analytics streaming request.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   Provides the language code that you specified in your Call Analytics
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   Provides the sample rate that you specified in your Call Analytics
+    #   request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_encoding
+    #   Provides the media encoding you specified in your Call Analytics
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   Provides the name of the custom vocabulary that you specified in
+    #   your Call Analytics request.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   Provides the identifier for your Call Analytics transcription
+    #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_analytics_transcript_result_stream
+    #   Provides detailed information about your Call Analytics streaming
+    #   session.
+    #   @return [Types::CallAnalyticsTranscriptResultStream]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   Provides the name of the custom vocabulary filter that you specified
+    #   in your Call Analytics request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   Provides the vocabulary filtering method used in your Call Analytics
+    #   transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_model_name
+    #   Provides the name of the custom language model that you specified in
+    #   your Call Analytics request.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_partial_results_stabilization
+    #   Shows whether partial results stabilization was enabled for your
+    #   Call Analytics transcription.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] partial_results_stability
+    #   Provides the stabilization level used for your transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_identification_type
+    #   Shows whether content identification was enabled for your Call
+    #   Analytics transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction_type
+    #   Shows whether content redaction was enabled for your Call Analytics
+    #   transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] pii_entity_types
+    #   Lists the PII entity types you specified in your Call Analytics
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartCallAnalyticsStreamTranscriptionResponse AWS API Documentation
+    #
+    class StartCallAnalyticsStreamTranscriptionResponse < Struct.new(
+      :request_id,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_encoding,
+      :vocabulary_name,
+      :session_id,
+      :call_analytics_transcript_result_stream,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method,
+      :language_model_name,
+      :enable_partial_results_stabilization,
+      :partial_results_stability,
+      :content_identification_type,
+      :content_redaction_type,
+      :pii_entity_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -847,8 +1544,7 @@ module Aws::TranscribeStreamingService
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
-    #   Specify the encoding used for the input audio. Supported formats
-    #   are:
+    #   Specify the encoding of your input audio. Supported formats are:
     #
     #   * FLAC
     #
@@ -870,7 +1566,8 @@ module Aws::TranscribeStreamingService
     #   sensitive.
     #
     #   If the language of the specified custom vocabulary doesn't match
-    #   the language identified in your media, your job fails.
+    #   the language identified in your media, the custom vocabulary is not
+    #   applied to your transcription.
     #
     #   This parameter is **not** intended for use with the
     #   `IdentifyLanguage` parameter. If you're including
@@ -910,7 +1607,8 @@ module Aws::TranscribeStreamingService
     #   names are case sensitive.
     #
     #   If the language of the specified custom vocabulary filter doesn't
-    #   match the language identified in your media, your job fails.
+    #   match the language identified in your media, the vocabulary filter
+    #   is not applied to your transcription.
     #
     #   This parameter is **not** intended for use with the
     #   `IdentifyLanguage` parameter. If you're including
@@ -1058,8 +1756,8 @@ module Aws::TranscribeStreamingService
     #
     #   The language of the specified language model must match the language
     #   code you specify in your transcription request. If the languages
-    #   don't match, the language model isn't applied. There are no errors
-    #   or warnings associated with a language mismatch.
+    #   don't match, the custom language model isn't applied. There are no
+    #   errors or warnings associated with a language mismatch.
     #
     #   For more information, see [Custom language models][1].
     #
@@ -1329,6 +2027,28 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # Contains the timestamp range (start time through end time) of a
+    # matched category.
+    #
+    # @!attribute [rw] begin_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the start of the category match.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the end of the category match.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/TimestampRange AWS API Documentation
+    #
+    class TimestampRange < Struct.new(
+      :begin_offset_millis,
+      :end_offset_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `Transcript` associated with a `.</p>  Transcript contains
     # Results, which contains a set of transcription results from one or
     # more audio segments, along with additional information per your
@@ -1376,6 +2096,76 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # Contains set of transcription results from one or more audio segments,
+    # along with additional information about the parameters included in
+    # your request. For example, channel definitions, partial result
+    # stabilization, sentiment, and issue detection.
+    #
+    # @!attribute [rw] utterance_id
+    #   The unique identifier that is associated with the specified
+    #   `UtteranceEvent`.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_partial
+    #   Indicates whether the segment in the `UtteranceEvent` is complete
+    #   (`FALSE`) or partial (`TRUE`).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] participant_role
+    #   Provides the role of the speaker for each audio channel, either
+    #   `CUSTOMER` or `AGENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the start of the `UtteranceEvent`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset_millis
+    #   The time, in milliseconds, from the beginning of the audio stream to
+    #   the start of the `UtteranceEvent`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transcript
+    #   Contains transcribed text.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Contains words, phrases, or punctuation marks that are associated
+    #   with the specified `UtteranceEvent`.
+    #   @return [Array<Types::CallAnalyticsItem>]
+    #
+    # @!attribute [rw] entities
+    #   Contains entities identified as personally identifiable information
+    #   (PII) in your transcription output.
+    #   @return [Array<Types::CallAnalyticsEntity>]
+    #
+    # @!attribute [rw] sentiment
+    #   Provides the sentiment that was detected in the specified segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] issues_detected
+    #   Provides the issue that was detected in the specified segment.
+    #   @return [Array<Types::IssueDetected>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/UtteranceEvent AWS API Documentation
+    #
+    class UtteranceEvent < Struct.new(
+      :utterance_id,
+      :is_partial,
+      :participant_role,
+      :begin_offset_millis,
+      :end_offset_millis,
+      :transcript,
+      :items,
+      :entities,
+      :sentiment,
+      :issues_detected,
+      :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An encoded stream of audio blobs. Audio streams are encoded as either
     # HTTP/2 or WebSocket data frames.
     #
@@ -1392,6 +2182,20 @@ module Aws::TranscribeStreamingService
     #         audio_event: {
     #           audio_chunk: "data",
     #         },
+    #         configuration_event: {
+    #           channel_definitions: [
+    #             {
+    #               channel_id: 1, # required
+    #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER
+    #             },
+    #           ],
+    #           post_call_analytics_settings: {
+    #             output_location: "String", # required
+    #             data_access_role_arn: "String", # required
+    #             content_redaction_output: "redacted", # accepts redacted, redacted_and_unredacted
+    #             output_encryption_kms_key_id: "String",
+    #           },
+    #         },
     #       }
     #
     # EventStream is an Enumerator of Events.
@@ -1403,7 +2207,33 @@ module Aws::TranscribeStreamingService
 
       def event_types
         [
-          :audio_event
+          :audio_event,
+          :configuration_event
+        ]
+      end
+
+    end
+
+    # Contains detailed information about your Call Analytics streaming
+    # session. These details are provided in the `UtteranceEvent` and
+    # `CategoryEvent` objects.
+    #
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/CallAnalyticsTranscriptResultStream AWS API Documentation
+    #
+    class CallAnalyticsTranscriptResultStream < Enumerator
+
+      def event_types
+        [
+          :utterance_event,
+          :category_event,
+          :bad_request_exception,
+          :limit_exceeded_exception,
+          :internal_failure_exception,
+          :conflict_exception,
+          :service_unavailable_exception
         ]
       end
 

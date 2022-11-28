@@ -56,6 +56,8 @@ module Aws::Backup
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :cancel_legal_hold
+            Aws::Backup::Endpoints::CancelLegalHold.build(context)
           when :create_backup_plan
             Aws::Backup::Endpoints::CreateBackupPlan.build(context)
           when :create_backup_selection
@@ -64,6 +66,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::CreateBackupVault.build(context)
           when :create_framework
             Aws::Backup::Endpoints::CreateFramework.build(context)
+          when :create_legal_hold
+            Aws::Backup::Endpoints::CreateLegalHold.build(context)
           when :create_report_plan
             Aws::Backup::Endpoints::CreateReportPlan.build(context)
           when :delete_backup_plan
@@ -108,6 +112,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::DescribeRestoreJob.build(context)
           when :disassociate_recovery_point
             Aws::Backup::Endpoints::DisassociateRecoveryPoint.build(context)
+          when :disassociate_recovery_point_from_parent
+            Aws::Backup::Endpoints::DisassociateRecoveryPointFromParent.build(context)
           when :export_backup_plan_template
             Aws::Backup::Endpoints::ExportBackupPlanTemplate.build(context)
           when :get_backup_plan
@@ -122,6 +128,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::GetBackupVaultAccessPolicy.build(context)
           when :get_backup_vault_notifications
             Aws::Backup::Endpoints::GetBackupVaultNotifications.build(context)
+          when :get_legal_hold
+            Aws::Backup::Endpoints::GetLegalHold.build(context)
           when :get_recovery_point_restore_metadata
             Aws::Backup::Endpoints::GetRecoveryPointRestoreMetadata.build(context)
           when :get_supported_resource_types
@@ -142,10 +150,14 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListCopyJobs.build(context)
           when :list_frameworks
             Aws::Backup::Endpoints::ListFrameworks.build(context)
+          when :list_legal_holds
+            Aws::Backup::Endpoints::ListLegalHolds.build(context)
           when :list_protected_resources
             Aws::Backup::Endpoints::ListProtectedResources.build(context)
           when :list_recovery_points_by_backup_vault
             Aws::Backup::Endpoints::ListRecoveryPointsByBackupVault.build(context)
+          when :list_recovery_points_by_legal_hold
+            Aws::Backup::Endpoints::ListRecoveryPointsByLegalHold.build(context)
           when :list_recovery_points_by_resource
             Aws::Backup::Endpoints::ListRecoveryPointsByResource.build(context)
           when :list_report_jobs

@@ -82,6 +82,8 @@ module Aws::Organizations
             Aws::Organizations::Endpoints::DeleteOrganizationalUnit.build(context)
           when :delete_policy
             Aws::Organizations::Endpoints::DeletePolicy.build(context)
+          when :delete_resource_policy
+            Aws::Organizations::Endpoints::DeleteResourcePolicy.build(context)
           when :deregister_delegated_administrator
             Aws::Organizations::Endpoints::DeregisterDelegatedAdministrator.build(context)
           when :describe_account
@@ -98,6 +100,8 @@ module Aws::Organizations
             Aws::Organizations::Endpoints::DescribeOrganizationalUnit.build(context)
           when :describe_policy
             Aws::Organizations::Endpoints::DescribePolicy.build(context)
+          when :describe_resource_policy
+            Aws::Organizations::Endpoints::DescribeResourcePolicy.build(context)
           when :detach_policy
             Aws::Organizations::Endpoints::DetachPolicy.build(context)
           when :disable_aws_service_access
@@ -148,6 +152,8 @@ module Aws::Organizations
             Aws::Organizations::Endpoints::ListTargetsForPolicy.build(context)
           when :move_account
             Aws::Organizations::Endpoints::MoveAccount.build(context)
+          when :put_resource_policy
+            Aws::Organizations::Endpoints::PutResourcePolicy.build(context)
           when :register_delegated_administrator
             Aws::Organizations::Endpoints::RegisterDelegatedAdministrator.build(context)
           when :remove_account_from_organization

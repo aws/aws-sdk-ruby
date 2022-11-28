@@ -20,11 +20,11 @@ module Aws::TranscribeService
     # if you include one, you must include both.
     #
     # You can use also `First` to search from the start of the audio until
-    # the time you specify, or `Last` to search from the time you specify
-    # until the end of the audio. For example, setting `First` to 50000 only
-    # searches for your specified criteria in the audio contained between
-    # the start of the media file to the 50,000 millisecond mark. You can
-    # use `First` and `Last` independently of each other.
+    # the time that you specify, or `Last` to search from the time that you
+    # specify until the end of the audio. For example, setting `First` to
+    # 50000 only searches for your specified criteria in the audio contained
+    # between the start of the media file to the 50,000 millisecond mark.
+    # You can use `First` and `Last` independently of each other.
     #
     # If you prefer to use percentage instead of milliseconds, see .
     #
@@ -52,14 +52,14 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] first
     #   The time, in milliseconds, from the start of your media file until
-    #   the value you specify in which Amazon Transcribe searches for your
-    #   specified criteria.
+    #   the specified value. Amazon Transcribe searches for your specified
+    #   criteria in this time segment.
     #   @return [Integer]
     #
     # @!attribute [rw] last
-    #   The time, in milliseconds, from the value you specify until the end
-    #   of your media file in which Amazon Transcribe searches for your
-    #   specified criteria.
+    #   The time, in milliseconds, from the specified value until the end of
+    #   your media file. Amazon Transcribe searches for your specified
+    #   criteria in this time segment.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/AbsoluteTimeRange AWS API Documentation
@@ -137,7 +137,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in your input media
+    #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #   @return [Integer]
     #
@@ -146,8 +146,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media
-    #   Describes the Amazon S3 location of the media file you want to use
-    #   in your request.
+    #   Provides the Amazon S3 location of the media file you used in your
+    #   Call Analytics request.
     #   @return [Types::Media]
     #
     # @!attribute [rw] transcript
@@ -204,7 +204,7 @@ module Aws::TranscribeService
     #   * `Invalid sample rate for audio file`.
     #
     #     The sample rate specified in `MediaSampleRateHertz` isn't valid.
-    #     The sample rate must be between 8,000 and 48,000 Hertz.
+    #     The sample rate must be between 8,000 and 48,000 hertz.
     #
     #   * `The sample rate provided does not match the detected sample
     #     rate`.
@@ -231,20 +231,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that has permissions
-    #   to access the Amazon S3 bucket that contains your input files. If
-    #   the role you specify doesn’t have the appropriate permissions to
-    #   access the specified Amazon S3 location, your request fails.
-    #
-    #   IAM role ARNs have the format
-    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
-    #   `arn:aws:iam::111122223333:role/Admin`.
-    #
-    #   For more information, see [IAM ARNs][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   The Amazon Resource Name (ARN) you included in your request.
     #   @return [String]
     #
     # @!attribute [rw] identified_language_score
@@ -257,18 +244,13 @@ module Aws::TranscribeService
     #   @return [Float]
     #
     # @!attribute [rw] settings
-    #   Allows additional optional settings in your request, including
-    #   content redaction; allows you to apply custom language models,
-    #   vocabulary filters, and custom vocabularies to your Call Analytics
-    #   job.
+    #   Provides information on any additional settings that were included
+    #   in your request. Additional settings include content redaction and
+    #   language identification settings.
     #   @return [Types::CallAnalyticsJobSettings]
     #
     # @!attribute [rw] channel_definitions
-    #   Allows you to specify which speaker is on which channel in your Call
-    #   Analytics job request. For example, if your agent is the first
-    #   participant to speak, you would set `ChannelId` to `0` (to indicate
-    #   the first channel) and `ParticipantRole` to `AGENT` (to indicate
-    #   that it's the agent speaking).
+    #   Indicates which speaker is on which channel.
     #   @return [Array<Types::ChannelDefinition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJob AWS API Documentation
@@ -295,7 +277,7 @@ module Aws::TranscribeService
 
     # Provides additional optional settings for your request, including
     # content redaction, automatic language identification; allows you to
-    # apply custom language models, vocabulary filters, and custom
+    # apply custom language models, custom vocabulary filters, and custom
     # vocabularies.
     #
     # @note When making an API call, you may pass CallAnalyticsJobSettings
@@ -323,21 +305,21 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to include in your Call
-    #   Analytics transcription request. Vocabulary names are case
+    #   Analytics transcription request. Custom vocabulary names are case
     #   sensitive.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the custom vocabulary filter you want to include in your
-    #   Call Analytics transcription request. Vocabulary filter names are
-    #   case sensitive.
+    #   Call Analytics transcription request. Custom vocabulary filter names
+    #   are case sensitive.
     #
     #   Note that if you include `VocabularyFilterName` in your request, you
     #   must also include `VocabularyFilterMethod`.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
-    #   Specify how you want your vocabulary filter applied to your
+    #   Specify how you want your custom vocabulary filter applied to your
     #   transcript.
     #
     #   To replace words with `***`, choose `mask`.
@@ -349,25 +331,25 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_model_name
     #   The name of the custom language model you want to use when
-    #   processing your Call Analytics job. Note that language model names
-    #   are case sensitive.
+    #   processing your Call Analytics job. Note that custom language model
+    #   names are case sensitive.
     #
-    #   The language of the specified language model must match the language
-    #   code you specify in your transcription request. If the languages
-    #   don't match, the language model isn't applied. There are no errors
-    #   or warnings associated with a language mismatch.
+    #   The language of the specified custom language model must match the
+    #   language code that you specify in your transcription request. If the
+    #   languages don't match, the custom language model isn't applied.
+    #   There are no errors or warnings associated with a language mismatch.
     #   @return [String]
     #
     # @!attribute [rw] content_redaction
-    #   Allows you to redact or flag specified personally identifiable
-    #   information (PII) in your transcript. If you use `ContentRedaction`,
-    #   you must also include the sub-parameters: `PiiEntityTypes`,
-    #   `RedactionOutput`, and `RedactionType`.
+    #   Makes it possible to redact or flag specified personally
+    #   identifiable information (PII) in your transcript. If you use
+    #   `ContentRedaction`, you must also include the sub-parameters:
+    #   `PiiEntityTypes`, `RedactionOutput`, and `RedactionType`.
     #   @return [Types::ContentRedaction]
     #
     # @!attribute [rw] language_options
     #   You can specify two or more language codes that represent the
-    #   languages you think may be present in your media; including more
+    #   languages you think may be present in your media. Including more
     #   than five is not recommended. If you're unsure what languages are
     #   present, do not include this parameter.
     #
@@ -377,40 +359,44 @@ module Aws::TranscribeService
     #   For a list of languages supported with Call Analytics, refer to the
     #   [Supported languages][1] table.
     #
+    #   To transcribe speech in Modern Standard Arabic (`ar-SA`), your media
+    #   file must be encoded at a sample rate of 16,000 Hz or higher.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_id_settings
-    #   If using automatic language identification (`IdentifyLanguage`) in
-    #   your request and you want to apply a custom language model, a custom
-    #   vocabulary, or a custom vocabulary filter, include
-    #   `LanguageIdSettings` with the relevant sub-parameters
-    #   (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
+    #   If using automatic language identification in your request and you
+    #   want to apply a custom language model, a custom vocabulary, or a
+    #   custom vocabulary filter, include `LanguageIdSettings` with the
+    #   relevant sub-parameters (`VocabularyName`, `LanguageModelName`, and
+    #   `VocabularyFilterName`).
     #
-    #   You can specify two or more language codes that represent the
-    #   languages you think may be present in your media; including more
-    #   than five is not recommended. Each language code you include can
-    #   have an associated custom language model, custom vocabulary, and
-    #   custom vocabulary filter. The languages you specify must match the
-    #   languages of the specified custom language models, custom
-    #   vocabularies, and custom vocabulary filters.
+    #   `LanguageIdSettings` supports two to five language codes. Each
+    #   language code you include can have an associated custom language
+    #   model, custom vocabulary, and custom vocabulary filter. The language
+    #   codes that you specify must match the languages of the associated
+    #   custom language models, custom vocabularies, and custom vocabulary
+    #   filters.
     #
-    #   To include language options using `IdentifyLanguage` **without**
-    #   including a custom language model, a custom vocabulary, or a custom
-    #   vocabulary filter, use `LanguageOptions` instead of
-    #   `LanguageIdSettings`. Including language options can improve the
-    #   accuracy of automatic language identification.
+    #   It's recommended that you include `LanguageOptions` when using
+    #   `LanguageIdSettings` to ensure that the correct language dialect is
+    #   identified. For example, if you specify a custom vocabulary that is
+    #   in `en-US` but Amazon Transcribe determines that the language spoken
+    #   in your media is `en-AU`, your custom vocabulary *is not* applied to
+    #   your transcription. If you include `LanguageOptions` and include
+    #   `en-US` as the only English language dialect, your custom vocabulary
+    #   *is* applied to your transcription.
     #
-    #   If you want to include a custom language model with your request but
-    #   **do not** want to use automatic language identification, use
-    #   instead the ` parameter with the LanguageModelName
-    #   sub-parameter.</p> If you want to include a custom vocabulary or a
-    #   custom vocabulary filter (or both) with your request but do not want
-    #   to use automatic language identification, use instead the  parameter
-    #   with the VocabularyName or VocabularyFilterName (or both)
-    #   sub-parameter.</p>
+    #   If you want to include a custom language model, custom vocabulary,
+    #   or custom vocabulary filter with your request but **do not** want to
+    #   use automatic language identification, use instead the ` parameter
+    #   with the LanguageModelName, VocabularyName, or VocabularyFilterName
+    #   sub-parameters.</p> For a list of languages supported with Call
+    #   Analytics, refer to Supported languages and language-specific
+    #   features.
     #   `
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
@@ -532,20 +518,28 @@ module Aws::TranscribeService
     #   UTC-7 on May 5, 2022.
     #   @return [Time]
     #
+    # @!attribute [rw] input_type
+    #   The input type associated with the specified category. `POST_CALL`
+    #   refers to a category that is applied to batch transcriptions;
+    #   `REAL_TIME` refers to a category that is applied to streaming
+    #   transcriptions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CategoryProperties AWS API Documentation
     #
     class CategoryProperties < Struct.new(
       :category_name,
       :rules,
       :create_time,
-      :last_update_time)
+      :last_update_time,
+      :input_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Allows you to specify which speaker is on which channel. For example,
-    # if your agent is the first participant to speak, you would set
-    # `ChannelId` to `0` (to indicate the first channel) and
+    # Makes it possible to specify which speaker is on which channel. For
+    # example, if your agent is the first participant to speak, you would
+    # set `ChannelId` to `0` (to indicate the first channel) and
     # `ParticipantRole` to `AGENT` (to indicate that it's the agent
     # speaking).
     #
@@ -589,7 +583,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Allows you to redact or flag specified personally identifiable
+    # Makes it possible to redact or flag specified personally identifiable
     # information (PII) in your transcript. If you use `ContentRedaction`,
     # you must also include the sub-parameters: `PiiEntityTypes`,
     # `RedactionOutput`, and `RedactionType`.
@@ -714,6 +708,7 @@ module Aws::TranscribeService
     #             },
     #           },
     #         ],
+    #         input_type: "REAL_TIME", # accepts REAL_TIME, POST_CALL
     #       }
     #
     # @!attribute [rw] category_name
@@ -727,19 +722,36 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] rules
-    #   Rules define a Call Analytics category. When creating a new Call
-    #   Analytics category, you must create between 1 and 20 rules for that
-    #   category. For each rule, you specify a filter you want applied to
-    #   the attributes of a call. For example, you can choose a sentiment
-    #   filter that detects if a customer's sentiment was positive during
-    #   the last 30 seconds of the call.
+    #   Rules define a Call Analytics category. When creating a new
+    #   category, you must create between 1 and 20 rules for that category.
+    #   For each rule, you specify a filter you want applied to the
+    #   attributes of a call. For example, you can choose a sentiment filter
+    #   that detects if a customer's sentiment was positive during the last
+    #   30 seconds of the call.
     #   @return [Array<Types::Rule>]
+    #
+    # @!attribute [rw] input_type
+    #   Choose whether you want to create a streaming or a batch category
+    #   for your Call Analytics transcription.
+    #
+    #   Specifying `POST_CALL` assigns your category to batch
+    #   transcriptions; categories with this input type cannot be applied to
+    #   streaming (real-time) transcriptions.
+    #
+    #   Specifying `REAL_TIME` assigns your category to streaming
+    #   transcriptions; categories with this input type cannot be applied to
+    #   batch (post-call) transcriptions.
+    #
+    #   If you do not include `InputType`, your category is created as a
+    #   batch category by default.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateCallAnalyticsCategoryRequest AWS API Documentation
     #
     class CreateCallAnalyticsCategoryRequest < Struct.new(
       :category_name,
-      :rules)
+      :rules,
+      :input_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -779,19 +791,19 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code that represents the language of your model. Each
-    #   language model must contain terms in only one language, and the
-    #   language you select for your model must match the language of your
-    #   training and tuning data.
+    #   custom language model must contain terms in only one language, and
+    #   the language you select for your custom language model must match
+    #   the language of your training and tuning data.
     #
     #   For a list of supported languages and their associated language
-    #   codes, refer to the [Supported languages][1] table. Note that U.S.
+    #   codes, refer to the [Supported languages][1] table. Note that US
     #   English (`en-US`) is the only language supported with Amazon
     #   Transcribe Medical.
     #
     #   A custom language model can only be used to transcribe files in the
-    #   same language as the model. For example, if you create a language
-    #   model using US English (`en-US`), you can only apply this model to
-    #   files that contain English audio.
+    #   same language as the model. For example, if you create a custom
+    #   language model using US English (`en-US`), you can only apply this
+    #   model to files that contain English audio.
     #
     #
     #
@@ -813,8 +825,8 @@ module Aws::TranscribeService
     #
     #   This name is case sensitive, cannot contain spaces, and must be
     #   unique within an Amazon Web Services account. If you try to create a
-    #   new language model with the same name as an existing language model,
-    #   you get a `ConflictException` error.
+    #   new custom language model with the same name as an existing custom
+    #   language model, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
@@ -914,8 +926,8 @@ module Aws::TranscribeService
     #
     #   This name is case sensitive, cannot contain spaces, and must be
     #   unique within an Amazon Web Services account. If you try to create a
-    #   new medical vocabulary with the same name as an existing medical
-    #   vocabulary, you get a `ConflictException` error.
+    #   new custom medical vocabulary with the same name as an existing
+    #   custom medical vocabulary, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -935,8 +947,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] tags
     #   Adds one or more custom tags, each in the form of a key:value pair,
-    #   to a new medical vocabulary at the time you create this new
-    #   vocabulary.
+    #   to a new custom medical vocabulary at the time you create this new
+    #   custom vocabulary.
     #
     #   To learn more about using tags with Amazon Transcribe, refer to
     #   [Tagging resources][1].
@@ -962,14 +974,14 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you selected for your medical vocabulary. US
-    #   English (`en-US`) is the only language supported with Amazon
+    #   The language code you selected for your custom medical vocabulary.
+    #   US English (`en-US`) is the only language supported with Amazon
     #   Transcribe Medical.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom medical vocabulary. If the state
-    #   is `READY`, you can use the vocabulary in a
+    #   is `READY`, you can use the custom vocabulary in a
     #   `StartMedicalTranscriptionJob` request.
     #   @return [String]
     #
@@ -1024,19 +1036,19 @@ module Aws::TranscribeService
     #
     #   This name is case sensitive, cannot contain spaces, and must be
     #   unique within an Amazon Web Services account. If you try to create a
-    #   new vocabulary filter with the same name as an existing vocabulary
-    #   filter, you get a `ConflictException` error.
+    #   new custom vocabulary filter with the same name as an existing
+    #   custom vocabulary filter, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
     #   The language code that represents the language of the entries in
-    #   your vocabulary filter. Each vocabulary filter must contain terms in
-    #   only one language.
+    #   your vocabulary filter. Each custom vocabulary filter must contain
+    #   terms in only one language.
     #
-    #   A vocabulary filter can only be used to transcribe files in the same
-    #   language as the filter. For example, if you create a vocabulary
-    #   filter using US English (`en-US`), you can only apply this filter to
-    #   files that contain English audio.
+    #   A custom vocabulary filter can only be used to transcribe files in
+    #   the same language as the filter. For example, if you create a custom
+    #   vocabulary filter using US English (`en-US`), you can only apply
+    #   this filter to files that contain English audio.
     #
     #   For a list of supported languages and their associated language
     #   codes, refer to the [Supported languages][1] table.
@@ -1047,11 +1059,11 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] words
-    #   Use this parameter if you want to create your vocabulary filter by
-    #   including all desired terms, as comma-separated values, within your
-    #   request. The other option for creating your vocabulary filter is to
-    #   save your entries in a text file and upload them to an Amazon S3
-    #   bucket, then specify the location of your file using the
+    #   Use this parameter if you want to create your custom vocabulary
+    #   filter by including all desired terms, as comma-separated values,
+    #   within your request. The other option for creating your vocabulary
+    #   filter is to save your entries in a text file and upload them to an
+    #   Amazon S3 bucket, then specify the location of your file using the
     #   `VocabularyFilterFileUri` parameter.
     #
     #   Note that if you include `Words` in your request, you cannot use
@@ -1059,7 +1071,7 @@ module Aws::TranscribeService
     #
     #   Each language has a character set that contains all allowed
     #   characters for that specific language. If you use unsupported
-    #   characters, your vocabulary filter request fails. Refer to
+    #   characters, your custom vocabulary filter request fails. Refer to
     #   [Character Sets for Custom Vocabularies][1] to get the character set
     #   for your language.
     #
@@ -1083,7 +1095,7 @@ module Aws::TranscribeService
     # @!attribute [rw] tags
     #   Adds one or more custom tags, each in the form of a key:value pair,
     #   to a new custom vocabulary filter at the time you create this new
-    #   filter.
+    #   vocabulary filter.
     #
     #   To learn more about using tags with Amazon Transcribe, refer to
     #   [Tagging resources][1].
@@ -1110,11 +1122,11 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you selected for your vocabulary filter.
+    #   The language code you selected for your custom vocabulary filter.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time you created your vocabulary filter.
+    #   The date and time you created your custom vocabulary filter.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -1152,19 +1164,19 @@ module Aws::TranscribeService
     #
     #   This name is case sensitive, cannot contain spaces, and must be
     #   unique within an Amazon Web Services account. If you try to create a
-    #   new vocabulary with the same name as an existing vocabulary, you get
-    #   a `ConflictException` error.
+    #   new custom vocabulary with the same name as an existing custom
+    #   vocabulary, you get a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
     #   The language code that represents the language of the entries in
-    #   your custom vocabulary. Each vocabulary must contain terms in only
-    #   one language.
+    #   your custom vocabulary. Each custom vocabulary must contain terms in
+    #   only one language.
     #
     #   A custom vocabulary can only be used to transcribe files in the same
-    #   language as the vocabulary. For example, if you create a vocabulary
-    #   using US English (`en-US`), you can only apply this vocabulary to
-    #   files that contain English audio.
+    #   language as the custom vocabulary. For example, if you create a
+    #   custom vocabulary using US English (`en-US`), you can only apply
+    #   this custom vocabulary to files that contain English audio.
     #
     #   For a list of supported languages and their associated language
     #   codes, refer to the [Supported languages][1] table.
@@ -1175,19 +1187,19 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] phrases
-    #   Use this parameter if you want to create your vocabulary by
+    #   Use this parameter if you want to create your custom vocabulary by
     #   including all desired terms, as comma-separated values, within your
-    #   request. The other option for creating your vocabulary is to save
-    #   your entries in a text file and upload them to an Amazon S3 bucket,
-    #   then specify the location of your file using the `VocabularyFileUri`
-    #   parameter.
+    #   request. The other option for creating your custom vocabulary is to
+    #   save your entries in a text file and upload them to an Amazon S3
+    #   bucket, then specify the location of your file using the
+    #   `VocabularyFileUri` parameter.
     #
     #   Note that if you include `Phrases` in your request, you cannot use
     #   `VocabularyFileUri`; you must choose one or the other.
     #
     #   Each language has a character set that contains all allowed
     #   characters for that specific language. If you use unsupported
-    #   characters, your vocabulary filter request fails. Refer to
+    #   characters, your custom vocabulary filter request fails. Refer to
     #   [Character Sets for Custom Vocabularies][1] to get the character set
     #   for your language.
     #
@@ -1210,7 +1222,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] tags
     #   Adds one or more custom tags, each in the form of a key:value pair,
-    #   to a new custom vocabulary at the time you create this new
+    #   to a new custom vocabulary at the time you create this new custom
     #   vocabulary.
     #
     #   To learn more about using tags with Amazon Transcribe, refer to
@@ -1243,8 +1255,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom vocabulary. If the state is
-    #   `READY`, you can use the vocabulary in a `StartTranscriptionJob`
-    #   request.
+    #   `READY`, you can use the custom vocabulary in a
+    #   `StartTranscriptionJob` request.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -1257,8 +1269,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] failure_reason
     #   If `VocabularyState` is `FAILED`, `FailureReason` contains
-    #   information about why the vocabulary request failed. See also:
-    #   [Common Errors][1].
+    #   information about why the custom vocabulary request failed. See
+    #   also: [Common Errors][1].
     #
     #
     #
@@ -1373,8 +1385,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the custom medical vocabulary you want to delete.
-    #   Vocabulary names are case sensitive.
+    #   The name of the custom medical vocabulary you want to delete. Custom
+    #   medical vocabulary names are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteMedicalVocabularyRequest AWS API Documentation
@@ -1413,8 +1425,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_filter_name
-    #   The name of the custom vocabulary filter you want to delete.
-    #   Vocabulary filter names are case sensitive.
+    #   The name of the custom vocabulary filter you want to delete. Custom
+    #   vocabulary filter names are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyFilterRequest AWS API Documentation
@@ -1433,8 +1445,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the custom vocabulary you want to delete. Vocabulary
-    #   names are case sensitive.
+    #   The name of the custom vocabulary you want to delete. Custom
+    #   vocabulary names are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyRequest AWS API Documentation
@@ -1595,7 +1607,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom medical vocabulary you want information
-    #   about. Vocabulary names are case sensitive.
+    #   about. Custom medical vocabulary names are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalVocabularyRequest AWS API Documentation
@@ -1612,14 +1624,14 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you selected for your medical vocabulary. US
-    #   English (`en-US`) is the only language supported with Amazon
+    #   The language code you selected for your custom medical vocabulary.
+    #   US English (`en-US`) is the only language supported with Amazon
     #   Transcribe Medical.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom medical vocabulary. If the state
-    #   is `READY`, you can use the vocabulary in a
+    #   is `READY`, you can use the custom vocabulary in a
     #   `StartMedicalTranscriptionJob` request.
     #   @return [String]
     #
@@ -1634,8 +1646,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] failure_reason
     #   If `VocabularyState` is `FAILED`, `FailureReason` contains
-    #   information about why the medical vocabulary request failed. See
-    #   also: [Common Errors][1].
+    #   information about why the custom medical vocabulary request failed.
+    #   See also: [Common Errors][1].
     #
     #
     #
@@ -1643,8 +1655,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] download_uri
-    #   The S3 location where the specified medical vocabulary is stored;
-    #   use this URI to view or download the vocabulary.
+    #   The S3 location where the specified custom medical vocabulary is
+    #   stored; use this URI to view or download the custom vocabulary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalVocabularyResponse AWS API Documentation
@@ -1702,7 +1714,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the custom vocabulary filter you want information about.
-    #   Vocabulary filter names are case sensitive.
+    #   Custom vocabulary filter names are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyFilterRequest AWS API Documentation
@@ -1719,11 +1731,12 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you selected for your vocabulary filter.
+    #   The language code you selected for your custom vocabulary filter.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified vocabulary filter was last modified.
+    #   The date and time the specified custom vocabulary filter was last
+    #   modified.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -1731,8 +1744,8 @@ module Aws::TranscribeService
     #   @return [Time]
     #
     # @!attribute [rw] download_uri
-    #   The Amazon S3 location where the vocabulary filter is stored; use
-    #   this URI to view or download the vocabulary filter.
+    #   The Amazon S3 location where the custom vocabulary filter is stored;
+    #   use this URI to view or download the custom vocabulary filter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyFilterResponse AWS API Documentation
@@ -1754,8 +1767,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the custom vocabulary you want information about.
-    #   Vocabulary names are case sensitive.
+    #   The name of the custom vocabulary you want information about. Custom
+    #   vocabulary names are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyRequest AWS API Documentation
@@ -1776,12 +1789,12 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom vocabulary. If the state is
-    #   `READY`, you can use the vocabulary in a `StartTranscriptionJob`
-    #   request.
+    #   `READY`, you can use the custom vocabulary in a
+    #   `StartTranscriptionJob` request.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified vocabulary was last modified.
+    #   The date and time the specified custom vocabulary was last modified.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -1790,8 +1803,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] failure_reason
     #   If `VocabularyState` is `FAILED`, `FailureReason` contains
-    #   information about why the vocabulary request failed. See also:
-    #   [Common Errors][1].
+    #   information about why the custom vocabulary request failed. See
+    #   also: [Common Errors][1].
     #
     #
     #
@@ -1799,8 +1812,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] download_uri
-    #   The S3 location where the vocabulary is stored; use this URI to view
-    #   or download the vocabulary.
+    #   The S3 location where the custom vocabulary is stored; use this URI
+    #   to view or download the custom vocabulary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyResponse AWS API Documentation
@@ -1852,8 +1865,8 @@ module Aws::TranscribeService
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions
     #   to access the Amazon S3 bucket that contains your input files. If
-    #   the role you specify doesn’t have the appropriate permissions to
-    #   access the specified Amazon S3 location, your request fails.
+    #   the role that you specify doesn’t have the appropriate permissions
+    #   to access the specified Amazon S3 location, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -1903,11 +1916,11 @@ module Aws::TranscribeService
     #
     # * A lack of interruptions
     #
-    # See [Rule criteria][1] for usage examples.
+    # See [Rule criteria for batch categories][1] for usage examples.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
     #
     # @note When making an API call, you may pass InterruptionFilter
     #   data as a hash:
@@ -1932,25 +1945,25 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] threshold
     #   Specify the duration of the interruptions in milliseconds. For
-    #   example, you can flag speech that contains more than 10000
+    #   example, you can flag speech that contains more than 10,000
     #   milliseconds of interruptions.
     #   @return [Integer]
     #
     # @!attribute [rw] participant_role
-    #   Specify the interrupter you want to flag. Omitting this parameter is
-    #   equivalent to specifying both participants.
+    #   Specify the interrupter that you want to flag. Omitting this
+    #   parameter is equivalent to specifying both participants.
     #   @return [String]
     #
     # @!attribute [rw] absolute_time_range
-    #   Allows you to specify a time range (in milliseconds) in your audio,
-    #   during which you want to search for an interruption. See for more
-    #   detail.
+    #   Makes it possible to specify a time range (in milliseconds) in your
+    #   audio, during which you want to search for an interruption. See for
+    #   more detail.
     #   @return [Types::AbsoluteTimeRange]
     #
     # @!attribute [rw] relative_time_range
-    #   Allows you to specify a time range (in percentage) in your media
-    #   file, during which you want to search for an interruption. See for
-    #   more detail.
+    #   Makes it possible to specify a time range (in percentage) in your
+    #   media file, during which you want to search for an interruption. See
+    #   for more detail.
     #   @return [Types::RelativeTimeRange]
     #
     # @!attribute [rw] negate
@@ -1970,7 +1983,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Allows you to control how your transcription job is processed.
+    # Makes it possible to control how your transcription job is processed.
     # Currently, the only `JobExecutionSettings` modification you can choose
     # is enabling job queueing using the `AllowDeferredExecution`
     # sub-parameter.
@@ -1988,8 +2001,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] allow_deferred_execution
-    #   Allows you to enable job queuing when your concurrent request limit
-    #   is exceeded. When `AllowDeferredExecution` is set to `true`,
+    #   Makes it possible to enable job queuing when your concurrent request
+    #   limit is exceeded. When `AllowDeferredExecution` is set to `true`,
     #   transcription job requests are placed in a queue until the number of
     #   jobs falls below the concurrent request limit. If
     #   `AllowDeferredExecution` is set to `false` and the number of
@@ -2005,8 +2018,8 @@ module Aws::TranscribeService
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions
     #   to access the Amazon S3 bucket that contains your input files. If
-    #   the role you specify doesn’t have the appropriate permissions to
-    #   access the specified Amazon S3 location, your request fails.
+    #   the role that you specify doesn’t have the appropriate permissions
+    #   to access the specified Amazon S3 location, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -2054,31 +2067,34 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # If using automatic language identification (`IdentifyLanguage`) in
-    # your request and you want to apply a custom language model, a custom
-    # vocabulary, or a custom vocabulary filter, include
-    # `LanguageIdSettings` with the relevant sub-parameters
-    # (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
+    # If using automatic language identification in your request and you
+    # want to apply a custom language model, a custom vocabulary, or a
+    # custom vocabulary filter, include `LanguageIdSettings` with the
+    # relevant sub-parameters (`VocabularyName`, `LanguageModelName`, and
+    # `VocabularyFilterName`). Note that multi-language identification
+    # (`IdentifyMultipleLanguages`) doesn't support custom language models.
     #
-    # You can specify two or more language codes that represent the
-    # languages you think may be present in your media; including more than
-    # five is not recommended. Each language code you include can have an
-    # associated custom language model, custom vocabulary, and custom
-    # vocabulary filter. The languages you specify must match the languages
-    # of the specified custom language models, custom vocabularies, and
-    # custom vocabulary filters.
+    # `LanguageIdSettings` supports two to five language codes. Each
+    # language code you include can have an associated custom language
+    # model, custom vocabulary, and custom vocabulary filter. The language
+    # codes that you specify must match the languages of the associated
+    # custom language models, custom vocabularies, and custom vocabulary
+    # filters.
     #
-    # To include language options using `IdentifyLanguage` **without**
-    # including a custom language model, a custom vocabulary, or a custom
-    # vocabulary filter, use `LanguageOptions` instead of
-    # `LanguageIdSettings`. Including language options can improve the
-    # accuracy of automatic language identification.
+    # It's recommended that you include `LanguageOptions` when using
+    # `LanguageIdSettings` to ensure that the correct language dialect is
+    # identified. For example, if you specify a custom vocabulary that is in
+    # `en-US` but Amazon Transcribe determines that the language spoken in
+    # your media is `en-AU`, your custom vocabulary *is not* applied to your
+    # transcription. If you include `LanguageOptions` and include `en-US` as
+    # the only English language dialect, your custom vocabulary *is* applied
+    # to your transcription.
     #
     # If you want to include a custom language model with your request but
     # **do not** want to use automatic language identification, use instead
-    # the ` parameter with the LanguageModelName sub-parameter.</p> If you
-    # want to include a custom vocabulary or a custom vocabulary filter (or
-    # both) with your request but do not want to use automatic language
+    # the ` parameter with the LanguageModelName sub-parameter. If you want
+    # to include a custom vocabulary or a custom vocabulary filter (or both)
+    # with your request but do not want to use automatic language
     # identification, use instead the  parameter with the VocabularyName or
     # VocabularyFilterName (or both) sub-parameter.</p>
     # `
@@ -2094,23 +2110,24 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to use when processing
-    #   your transcription job. Vocabulary names are case sensitive.
+    #   your transcription job. Custom vocabulary names are case sensitive.
     #
-    #   The language of the specified vocabulary must match the language
-    #   code you specify in your transcription request. If the languages
-    #   don't match, the vocabulary isn't applied. There are no errors or
-    #   warnings associated with a language mismatch.
+    #   The language of the specified custom vocabulary must match the
+    #   language code that you specify in your transcription request. If the
+    #   languages don't match, the custom vocabulary isn't applied. There
+    #   are no errors or warnings associated with a language mismatch.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the custom vocabulary filter you want to use when
-    #   processing your transcription job. Vocabulary filter names are case
-    #   sensitive.
+    #   processing your transcription job. Custom vocabulary filter names
+    #   are case sensitive.
     #
-    #   The language of the specified vocabulary filter must match the
-    #   language code you specify in your transcription request. If the
-    #   languages don't match, the vocabulary filter isn't applied. There
-    #   are no errors or warnings associated with a language mismatch.
+    #   The language of the specified custom vocabulary filter must match
+    #   the language code that you specify in your transcription request. If
+    #   the languages don't match, the custom vocabulary filter isn't
+    #   applied. There are no errors or warnings associated with a language
+    #   mismatch.
     #
     #   Note that if you include `VocabularyFilterName` in your request, you
     #   must also include `VocabularyFilterMethod`.
@@ -2118,13 +2135,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_model_name
     #   The name of the custom language model you want to use when
-    #   processing your transcription job. Note that language model names
-    #   are case sensitive.
+    #   processing your transcription job. Note that custom language model
+    #   names are case sensitive.
     #
-    #   The language of the specified language model must match the language
-    #   code you specify in your transcription request. If the languages
-    #   don't match, the language model isn't applied. There are no errors
-    #   or warnings associated with a language mismatch.
+    #   The language of the specified custom language model must match the
+    #   language code that you specify in your transcription request. If the
+    #   languages don't match, the custom language model isn't applied.
+    #   There are no errors or warnings associated with a language mismatch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/LanguageIdSettings AWS API Documentation
@@ -2159,7 +2176,8 @@ module Aws::TranscribeService
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified language model was last modified.
+    #   The date and time the specified custom language model was last
+    #   modified.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -2168,9 +2186,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code used to create your custom language model. Each
-    #   language model must contain terms in only one language, and the
-    #   language you select for your model must match the language of your
-    #   training and tuning data.
+    #   custom language model must contain terms in only one language, and
+    #   the language you select for your custom language model must match
+    #   the language of your training and tuning data.
     #
     #   For a list of supported languages and their associated language
     #   codes, refer to the [Supported languages][1] table. Note that U.S.
@@ -2196,8 +2214,8 @@ module Aws::TranscribeService
     #   Shows if a more current base model is available for use with the
     #   specified custom language model.
     #
-    #   If `false`, your language model is using the most up-to-date base
-    #   model.
+    #   If `false`, your custom language model is using the most up-to-date
+    #   base model.
     #
     #   If `true`, there is a newer base model available than the one your
     #   language model is using.
@@ -2272,7 +2290,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of Call Analytics categories to return in each
-    #   page of results. If there are fewer results than the value you
+    #   page of results. If there are fewer results than the value that you
     #   specify, only the actual results are returned. If you don't specify
     #   a value, a default of 5 is used.
     #   @return [Integer]
@@ -2340,9 +2358,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of Call Analytics jobs to return in each page of
-    #   results. If there are fewer results than the value you specify, only
-    #   the actual results are returned. If you don't specify a value, a
-    #   default of 5 is used.
+    #   results. If there are fewer results than the value that you specify,
+    #   only the actual results are returned. If you don't specify a value,
+    #   a default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListCallAnalyticsJobsRequest AWS API Documentation
@@ -2417,9 +2435,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of custom language models to return in each page
-    #   of results. If there are fewer results than the value you specify,
-    #   only the actual results are returned. If you don't specify a value,
-    #   a default of 5 is used.
+    #   of results. If there are fewer results than the value that you
+    #   specify, only the actual results are returned. If you don't specify
+    #   a value, a default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListLanguageModelsRequest AWS API Documentation
@@ -2488,7 +2506,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of medical transcription jobs to return in each
-    #   page of results. If there are fewer results than the value you
+    #   page of results. If there are fewer results than the value that you
     #   specify, only the actual results are returned. If you don't specify
     #   a value, a default of 5 is used.
     #   @return [Integer]
@@ -2553,14 +2571,14 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of custom medical vocabularies to return in each
-    #   page of results. If there are fewer results than the value you
+    #   page of results. If there are fewer results than the value that you
     #   specify, only the actual results are returned. If you don't specify
     #   a value, a default of 5 is used.
     #   @return [Integer]
     #
     # @!attribute [rw] state_equals
     #   Returns only custom medical vocabularies with the specified state.
-    #   Vocabularies are ordered by creation date, with the newest
+    #   Custom vocabularies are ordered by creation date, with the newest
     #   vocabulary first. If you don't include `StateEquals`, all custom
     #   medical vocabularies are returned.
     #   @return [String]
@@ -2583,8 +2601,8 @@ module Aws::TranscribeService
 
     # @!attribute [rw] status
     #   Lists all custom medical vocabularies that have the status specified
-    #   in your request. Vocabularies are ordered by creation date, with the
-    #   newest vocabulary first.
+    #   in your request. Custom vocabularies are ordered by creation date,
+    #   with the newest vocabulary first.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2624,7 +2642,7 @@ module Aws::TranscribeService
     #   `arn:partition:service:region:account-id:resource-type/resource-id`.
     #
     #   For example,
-    #   `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+    #   `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
     #
     #   Valid values for `resource-type` are: `transcription-job`,
     #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
@@ -2688,9 +2706,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of transcription jobs to return in each page of
-    #   results. If there are fewer results than the value you specify, only
-    #   the actual results are returned. If you don't specify a value, a
-    #   default of 5 is used.
+    #   results. If there are fewer results than the value that you specify,
+    #   only the actual results are returned. If you don't specify a value,
+    #   a default of 5 is used.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobsRequest AWS API Documentation
@@ -2753,9 +2771,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of custom vocabularies to return in each page of
-    #   results. If there are fewer results than the value you specify, only
-    #   the actual results are returned. If you don't specify a value, a
-    #   default of 5 is used.
+    #   results. If there are fewer results than the value that you specify,
+    #   only the actual results are returned. If you don't specify a value,
+    #   a default of 5 is used.
     #   @return [Integer]
     #
     # @!attribute [rw] state_equals
@@ -2830,7 +2848,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] max_results
     #   The maximum number of custom vocabulary filters to return in each
-    #   page of results. If there are fewer results than the value you
+    #   page of results. If there are fewer results than the value that you
     #   specify, only the actual results are returned. If you don't specify
     #   a value, a default of 5 is used.
     #   @return [Integer]
@@ -2876,6 +2894,15 @@ module Aws::TranscribeService
     # Describes the Amazon S3 location of the media file you want to use in
     # your request.
     #
+    # For information on supported media formats, refer to the
+    # [MediaFormat][1] parameter or the [Media formats][2] section in the
+    # Amazon S3 Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
+    #
     # @note When making an API call, you may pass Media
     #   data as a hash:
     #
@@ -2909,7 +2936,8 @@ module Aws::TranscribeService
     #   be located in the same Amazon Web Services Region where you're
     #   making your transcription request.
     #
-    #   `RedactedMediaFileUri` is only supported for Call Analytics
+    #   `RedactedMediaFileUri` produces a redacted audio file in addition to
+    #   a redacted transcript. It is only supported for Call Analytics
     #   (`StartCallAnalyticsJob`) transcription requests.
     #   @return [String]
     #
@@ -2929,22 +2957,8 @@ module Aws::TranscribeService
     #   The Amazon S3 location of your transcript. You can use this URI to
     #   access or download your transcript.
     #
-    #   If you included `OutputBucketName` in your transcription job
-    #   request, this is the URI of that bucket. If you also included
-    #   `OutputKey` in your request, your output is located in the path you
-    #   specified in your request.
-    #
-    #   If you didn't include `OutputBucketName` in your transcription job
-    #   request, your transcript is stored in a service-managed bucket, and
-    #   `TranscriptFileUri` provides you with a temporary URI you can use
-    #   for secure access to your transcript.
-    #
-    #   <note markdown="1"> Temporary URIs for service-managed Amazon S3 buckets are only valid
-    #   for 15 minutes. If you get an `AccesDenied` error, you can get a new
-    #   temporary URI by running a `GetTranscriptionJob` or
-    #   `ListTranscriptionJob` request.
-    #
-    #    </note>
+    #   Note that this is the Amazon S3 location you specified in your
+    #   request using the `OutputBucketName` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscript AWS API Documentation
@@ -2984,7 +2998,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in your input media
+    #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #   @return [Integer]
     #
@@ -2995,6 +3009,15 @@ module Aws::TranscribeService
     # @!attribute [rw] media
     #   Describes the Amazon S3 location of the media file you want to use
     #   in your request.
+    #
+    #   For information on supported media formats, refer to the
+    #   [MediaFormat][1] parameter or the [Media formats][2] section in the
+    #   Amazon S3 Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
     #   @return [Types::Media]
     #
     # @!attribute [rw] transcript
@@ -3053,7 +3076,7 @@ module Aws::TranscribeService
     #   * `Invalid sample rate for audio file`.
     #
     #     The sample rate specified in `MediaSampleRateHertz` isn't valid.
-    #     The sample rate must be between 16,000 and 48,000 Hertz.
+    #     The sample rate must be between 16,000 and 48,000 hertz.
     #
     #   * `The sample rate provided does not match the detected sample
     #     rate`.
@@ -3080,20 +3103,15 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Specify additional optional settings in your request, including
-    #   channel identification, alternative transcriptions, and speaker
-    #   labeling; allows you to apply custom vocabularies to your medical
-    #   transcription job.
+    #   Provides information on any additional settings that were included
+    #   in your request. Additional settings include channel identification,
+    #   alternative transcriptions, speaker partitioning, custom
+    #   vocabularies, and custom vocabulary filters.
     #   @return [Types::MedicalTranscriptionSetting]
     #
     # @!attribute [rw] content_identification_type
-    #   Labels all personal health information (PHI) identified in your
-    #   transcript. For more information, see [Identifying personal health
-    #   information (PHI) in a transcription][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html
+    #   Indicates whether content identification was enabled for your
+    #   transcription request.
     #   @return [String]
     #
     # @!attribute [rw] specialty
@@ -3247,9 +3265,9 @@ module Aws::TranscribeService
     end
 
     # Allows additional optional settings in your request, including channel
-    # identification, alternative transcriptions, and speaker labeling;
-    # allows you to apply custom vocabularies to your medical transcription
-    # job.
+    # identification, alternative transcriptions, and speaker partitioning.
+    # You can use that to apply custom vocabularies to your medical
+    # transcription job.
     #
     # @note When making an API call, you may pass MedicalTranscriptionSetting
     #   data as a hash:
@@ -3264,18 +3282,18 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] show_speaker_labels
-    #   Enables speaker identification (diarization) in your transcription
-    #   output. Speaker identification labels the speech from individual
+    #   Enables speaker partitioning (diarization) in your transcription
+    #   output. Speaker partitioning labels the speech from individual
     #   speakers in your media file.
     #
     #   If you enable `ShowSpeakerLabels` in your request, you must also
     #   include `MaxSpeakerLabels`.
     #
-    #   You can't include both `ShowSpeakerLabels` and
-    #   `ChannelIdentification` in the same request. Including both
-    #   parameters returns a `BadRequestException`.
+    #   You can't include `ShowSpeakerLabels` and `ChannelIdentification`
+    #   in the same request. Including both parameters returns a
+    #   `BadRequestException`.
     #
-    #   For more information, see [Identifying speakers (diarization)][1].
+    #   For more information, see [Partitioning speakers (diarization)][1].
     #
     #
     #
@@ -3283,11 +3301,11 @@ module Aws::TranscribeService
     #   @return [Boolean]
     #
     # @!attribute [rw] max_speaker_labels
-    #   Specify the maximum number of speakers you want to identify in your
+    #   Specify the maximum number of speakers you want to partition in your
     #   media.
     #
     #   Note that if your media contains more speakers than the specified
-    #   number, multiple speakers will be identified as a single speaker.
+    #   number, multiple speakers are treated as a single speaker.
     #
     #   If you specify the `MaxSpeakerLabels` field, you must set the
     #   `ShowSpeakerLabels` field to true.
@@ -3350,13 +3368,15 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the custom vocabulary you want to use when processing
-    #   your medical transcription job. Vocabulary names are case sensitive.
+    #   your medical transcription job. Custom vocabulary names are case
+    #   sensitive.
     #
-    #   The language of the specified vocabulary must match the language
-    #   code you specify in your transcription request. If the languages
-    #   don't match, the vocabulary isn't applied. There are no errors or
-    #   warnings associated with a language mismatch. US English (`en-US`)
-    #   is the only valid language for Amazon Transcribe Medical.
+    #   The language of the specified custom vocabulary must match the
+    #   language code that you specify in your transcription request. If the
+    #   languages don't match, the custom vocabulary isn't applied. There
+    #   are no errors or warnings associated with a language mismatch. US
+    #   English (`en-US`) is the only valid language for Amazon Transcribe
+    #   Medical.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionSetting AWS API Documentation
@@ -3390,13 +3410,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_model_name
     #   The name of the custom language model you want to use when
-    #   processing your transcription job. Note that language model names
-    #   are case sensitive.
+    #   processing your transcription job. Note that custom language model
+    #   names are case sensitive.
     #
-    #   The language of the specified language model must match the language
-    #   code you specify in your transcription request. If the languages
-    #   don't match, the language model isn't applied. There are no errors
-    #   or warnings associated with a language mismatch.
+    #   The language of the specified custom language model must match the
+    #   language code that you specify in your transcription request. If the
+    #   languages don't match, the custom language model isn't applied.
+    #   There are no errors or warnings associated with a language mismatch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ModelSettings AWS API Documentation
@@ -3416,11 +3436,11 @@ module Aws::TranscribeService
     #
     # * The presence of speech at specified periods throughout the call
     #
-    # See [Rule criteria][1] for usage examples.
+    # See [Rule criteria for batch categories][1] for usage examples.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
     #
     # @note When making an API call, you may pass NonTalkTimeFilter
     #   data as a hash:
@@ -3443,21 +3463,21 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] threshold
-    #   Specify the duration, in milliseconds, of the period of silence you
-    #   want to flag. For example, you can flag a silent period that lasts
-    #   30000 milliseconds.
+    #   Specify the duration, in milliseconds, of the period of silence that
+    #   you want to flag. For example, you can flag a silent period that
+    #   lasts 30,000 milliseconds.
     #   @return [Integer]
     #
     # @!attribute [rw] absolute_time_range
-    #   Allows you to specify a time range (in milliseconds) in your audio,
-    #   during which you want to search for a period of silence. See for
-    #   more detail.
+    #   Makes it possible to specify a time range (in milliseconds) in your
+    #   audio, during which you want to search for a period of silence. See
+    #   for more detail.
     #   @return [Types::AbsoluteTimeRange]
     #
     # @!attribute [rw] relative_time_range
-    #   Allows you to specify a time range (in percentage) in your media
-    #   file, during which you want to search for a period of silence. See
-    #   for more detail.
+    #   Makes it possible to specify a time range (in percentage) in your
+    #   media file, during which you want to search for a period of silence.
+    #   See for more detail.
     #   @return [Types::RelativeTimeRange]
     #
     # @!attribute [rw] negate
@@ -3499,10 +3519,10 @@ module Aws::TranscribeService
     # your media file.
     #
     # You can use also `First` to search from the start of the media file
-    # until the time you specify, or `Last` to search from the time you
-    # specify until the end of the media file. For example, setting `First`
-    # to 10 only searches for your specified criteria in the audio contained
-    # in the first 10 percent of the media file.
+    # until the time that you specify. Or use `Last` to search from the time
+    # that you specify until the end of the media file. For example, setting
+    # `First` to 10 only searches for your specified criteria in the audio
+    # contained in the first 10 percent of the media file.
     #
     # If you prefer to use milliseconds instead of percentage, see .
     #
@@ -3532,14 +3552,14 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] first
     #   The time, in percentage, from the start of your media file until the
-    #   value you specify in which Amazon Transcribe searches for your
-    #   specified criteria.
+    #   specified value. Amazon Transcribe searches for your specified
+    #   criteria in this time segment.
     #   @return [Integer]
     #
     # @!attribute [rw] last
-    #   The time, in percentage, from the value you specify until the end of
-    #   your media file in which Amazon Transcribe searches for your
-    #   specified criteria.
+    #   The time, in percentage, from the specified value until the end of
+    #   your media file. Amazon Transcribe searches for your specified
+    #   criteria in this time segment.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/RelativeTimeRange AWS API Documentation
@@ -3553,22 +3573,22 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # A rule is a set of criteria you can specify to flag an attribute in
-    # your Call Analytics output. Rules define a Call Analytics category.
+    # A rule is a set of criteria that you can specify to flag an attribute
+    # in your Call Analytics output. Rules define a Call Analytics category.
     #
-    # Rules can include these parameters: , , , and . To learn more about
-    # these parameters, refer to [Rule criteria][1].
+    # Rules can include these parameters: , , , and .
     #
-    # To learn more about Call Analytics categories, see [Creating
-    # categories][2].
+    # To learn more about Call Analytics rules and categories, see [Creating
+    # categories for batch transcriptions][1] and [Creating categories for
+    # streaming transcriptions][2].
     #
     # To learn more about Call Analytics, see [Analyzing call center audio
     # with Call Analytics][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules
-    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html
     # [3]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html
     #
     # @note Rule is a union - when making an API calls you must set exactly one of the members.
@@ -3631,11 +3651,11 @@ module Aws::TranscribeService
     # * The presence or absence of a mixed sentiment felt by the customer,
     #   the agent, or both at specified points in the call
     #
-    # See [Rule criteria][1] for examples.
+    # See [Rule criteria for batch categories][1] for usage examples.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
     #
     # @note When making an API call, you may pass SentimentFilter
     #   data as a hash:
@@ -3659,30 +3679,30 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] sentiments
-    #   Specify the sentiments you want to flag.
+    #   Specify the sentiments that you want to flag.
     #   @return [Array<String>]
     #
     # @!attribute [rw] absolute_time_range
-    #   Allows you to specify a time range (in milliseconds) in your audio,
-    #   during which you want to search for the specified sentiments. See
-    #   for more detail.
+    #   Makes it possible to specify a time range (in milliseconds) in your
+    #   audio, during which you want to search for the specified sentiments.
+    #   See for more detail.
     #   @return [Types::AbsoluteTimeRange]
     #
     # @!attribute [rw] relative_time_range
-    #   Allows you to specify a time range (in percentage) in your media
-    #   file, during which you want to search for the specified sentiments.
-    #   See for more detail.
+    #   Makes it possible to specify a time range (in percentage) in your
+    #   media file, during which you want to search for the specified
+    #   sentiments. See for more detail.
     #   @return [Types::RelativeTimeRange]
     #
     # @!attribute [rw] participant_role
-    #   Specify the participant you want to flag. Omitting this parameter is
-    #   equivalent to specifying both participants.
+    #   Specify the participant that you want to flag. Omitting this
+    #   parameter is equivalent to specifying both participants.
     #   @return [String]
     #
     # @!attribute [rw] negate
-    #   Set to `TRUE` to flag the sentiments you didn't include in your
-    #   request. Set to `FALSE` to flag the sentiments you specified in your
-    #   request.
+    #   Set to `TRUE` to flag the sentiments that you didn't include in
+    #   your request. Set to `FALSE` to flag the sentiments that you
+    #   specified in your request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SentimentFilter AWS API Documentation
@@ -3698,8 +3718,9 @@ module Aws::TranscribeService
     end
 
     # Allows additional optional settings in your request, including channel
-    # identification, alternative transcriptions, and speaker labeling;
-    # allows you to apply custom vocabularies to your transcription job.
+    # identification, alternative transcriptions, and speaker partitioning.
+    # You can use that to apply custom vocabularies to your transcription
+    # job.
     #
     # @note When making an API call, you may pass Settings
     #   data as a hash:
@@ -3723,8 +3744,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] show_speaker_labels
-    #   Enables speaker identification (diarization) in your transcription
-    #   output. Speaker identification labels the speech from individual
+    #   Enables speaker partitioning (diarization) in your transcription
+    #   output. Speaker partitioning labels the speech from individual
     #   speakers in your media file.
     #
     #   If you enable `ShowSpeakerLabels` in your request, you must also
@@ -3734,7 +3755,7 @@ module Aws::TranscribeService
     #   `ChannelIdentification` in the same request. Including both
     #   parameters returns a `BadRequestException`.
     #
-    #   For more information, see [Identifying speakers (diarization)][1].
+    #   For more information, see [Partitioning speakers (diarization)][1].
     #
     #
     #
@@ -3742,11 +3763,11 @@ module Aws::TranscribeService
     #   @return [Boolean]
     #
     # @!attribute [rw] max_speaker_labels
-    #   Specify the maximum number of speakers you want to identify in your
+    #   Specify the maximum number of speakers you want to partition in your
     #   media.
     #
     #   Note that if your media contains more speakers than the specified
-    #   number, multiple speakers will be identified as a single speaker.
+    #   number, multiple speakers are treated as a single speaker.
     #
     #   If you specify the `MaxSpeakerLabels` field, you must set the
     #   `ShowSpeakerLabels` field to true.
@@ -3818,7 +3839,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
-    #   Specify how you want your vocabulary filter applied to your
+    #   Specify how you want your custom vocabulary filter applied to your
     #   transcript.
     #
     #   To replace words with `***`, choose `mask`.
@@ -3893,7 +3914,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] media
     #   Describes the Amazon S3 location of the media file you want to use
-    #   in your request.
+    #   in your Call Analytics request.
     #   @return [Types::Media]
     #
     # @!attribute [rw] output_location
@@ -3963,8 +3984,8 @@ module Aws::TranscribeService
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions
     #   to access the Amazon S3 bucket that contains your input files. If
-    #   the role you specify doesn’t have the appropriate permissions to
-    #   access the specified Amazon S3 location, your request fails.
+    #   the role that you specify doesn’t have the appropriate permissions
+    #   to access the specified Amazon S3 location, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -3985,7 +4006,7 @@ module Aws::TranscribeService
     #   @return [Types::CallAnalyticsJobSettings]
     #
     # @!attribute [rw] channel_definitions
-    #   Allows you to specify which speaker is on which channel. For
+    #   Makes it possible to specify which speaker is on which channel. For
     #   example, if your agent is the first participant to speak, you would
     #   set `ChannelId` to `0` (to indicate the first channel) and
     #   `ParticipantRole` to `AGENT` (to indicate that it's the agent
@@ -4058,7 +4079,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] medical_transcription_job_name
     #   A unique name, chosen by you, for your medical transcription job.
-    #   The name you specify is also used as the default name of your
+    #   The name that you specify is also used as the default name of your
     #   transcription output file. If you want to specify a different name
     #   for your transcription output, use the `OutputKey` parameter.
     #
@@ -4076,13 +4097,13 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in your input media
+    #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #
     #   If you don't specify the media sample rate, Amazon Transcribe
     #   Medical determines it for you. If you specify the sample rate, it
     #   must match the rate detected by Amazon Transcribe Medical; if
-    #   there's a mismatch between the value you specify and the value
+    #   there's a mismatch between the value that you specify and the value
     #   detected, your job fails. Therefore, in most cases, it's advised to
     #   omit `MediaSampleRateHertz` and let Amazon Transcribe Medical
     #   determine the sample rate.
@@ -4095,6 +4116,15 @@ module Aws::TranscribeService
     # @!attribute [rw] media
     #   Describes the Amazon S3 location of the media file you want to use
     #   in your request.
+    #
+    #   For information on supported media formats, refer to the
+    #   [MediaFormat][1] parameter or the [Media formats][2] section in the
+    #   Amazon S3 Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
     #   @return [Types::Media]
     #
     # @!attribute [rw] output_bucket_name
@@ -4116,10 +4146,6 @@ module Aws::TranscribeService
     #   specified location. You can change Amazon S3 permissions using the
     #   [Amazon Web Services Management Console][1]. See also [Permissions
     #   Required for IAM User Roles][2].
-    #
-    #   If you don't specify `OutputBucketName`, your transcript is placed
-    #   in a service-managed Amazon S3 bucket and you are provided with a
-    #   URI to access your transcript.
     #
     #
     #
@@ -4216,7 +4242,7 @@ module Aws::TranscribeService
     # @!attribute [rw] settings
     #   Specify additional optional settings in your request, including
     #   channel identification, alternative transcriptions, and speaker
-    #   labeling; allows you to apply custom vocabularies to your
+    #   partitioning. You can use that to apply custom vocabularies to your
     #   transcription job.
     #   @return [Types::MedicalTranscriptionSetting]
     #
@@ -4359,9 +4385,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] transcription_job_name
     #   A unique name, chosen by you, for your transcription job. The name
-    #   you specify is also used as the default name of your transcription
-    #   output file. If you want to specify a different name for your
-    #   transcription output, use the `OutputKey` parameter.
+    #   that you specify is also used as the default name of your
+    #   transcription output file. If you want to specify a different name
+    #   for your transcription output, use the `OutputKey` parameter.
     #
     #   This name is case sensitive, cannot contain spaces, and must be
     #   unique within an Amazon Web Services account. If you try to create a
@@ -4396,16 +4422,15 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in your input media
+    #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #
     #   If you don't specify the media sample rate, Amazon Transcribe
     #   determines it for you. If you specify the sample rate, it must match
-    #   the rate detected by Amazon Transcribe; if there's a mismatch
-    #   between the value you specify and the value detected, your job
-    #   fails. Therefore, in most cases, it's advised to omit
-    #   `MediaSampleRateHertz` and let Amazon Transcribe determine the
-    #   sample rate.
+    #   the rate detected by Amazon Transcribe. If there's a mismatch
+    #   between the value that you specify and the value detected, your job
+    #   fails. In most cases, you can omit `MediaSampleRateHertz` and let
+    #   Amazon Transcribe determine the sample rate.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -4535,8 +4560,8 @@ module Aws::TranscribeService
     # @!attribute [rw] settings
     #   Specify additional optional settings in your request, including
     #   channel identification, alternative transcriptions, speaker
-    #   labeling; allows you to apply custom vocabularies and vocabulary
-    #   filters.
+    #   partitioning. You can use that to apply custom vocabularies and
+    #   vocabulary filters.
     #
     #   If you want to include a custom vocabulary or a custom vocabulary
     #   filter (or both) with your request but **do not** want to use
@@ -4564,10 +4589,10 @@ module Aws::TranscribeService
     #   @return [Types::ModelSettings]
     #
     # @!attribute [rw] job_execution_settings
-    #   Allows you to control how your transcription job is processed.
-    #   Currently, the only `JobExecutionSettings` modification you can
-    #   choose is enabling job queueing using the `AllowDeferredExecution`
-    #   sub-parameter.
+    #   Makes it possible to control how your transcription job is
+    #   processed. Currently, the only `JobExecutionSettings` modification
+    #   you can choose is enabling job queueing using the
+    #   `AllowDeferredExecution` sub-parameter.
     #
     #   If you include `JobExecutionSettings` in your request, you must also
     #   include the sub-parameters: `AllowDeferredExecution` and
@@ -4575,26 +4600,30 @@ module Aws::TranscribeService
     #   @return [Types::JobExecutionSettings]
     #
     # @!attribute [rw] content_redaction
-    #   Allows you to redact or flag specified personally identifiable
-    #   information (PII) in your transcript. If you use `ContentRedaction`,
-    #   you must also include the sub-parameters: `PiiEntityTypes`,
-    #   `RedactionOutput`, and `RedactionType`.
+    #   Makes it possible to redact or flag specified personally
+    #   identifiable information (PII) in your transcript. If you use
+    #   `ContentRedaction`, you must also include the sub-parameters:
+    #   `PiiEntityTypes`, `RedactionOutput`, and `RedactionType`.
     #   @return [Types::ContentRedaction]
     #
     # @!attribute [rw] identify_language
     #   Enables automatic language identification in your transcription job
-    #   request.
+    #   request. Use this parameter if your media file contains only one
+    #   language. If your media contains multiple languages, use
+    #   `IdentifyMultipleLanguages` instead.
     #
     #   If you include `IdentifyLanguage`, you can optionally include a list
     #   of language codes, using `LanguageOptions`, that you think may be
-    #   present in your media file. Including language options can improve
-    #   transcription accuracy.
+    #   present in your media file. Including `LanguageOptions` restricts
+    #   `IdentifyLanguage` to only the language options that you specify,
+    #   which can improve transcription accuracy.
     #
     #   If you want to apply a custom language model, a custom vocabulary,
     #   or a custom vocabulary filter to your automatic language
     #   identification request, include `LanguageIdSettings` with the
     #   relevant sub-parameters (`VocabularyName`, `LanguageModelName`, and
-    #   `VocabularyFilterName`).
+    #   `VocabularyFilterName`). If you include `LanguageIdSettings`, also
+    #   include `LanguageOptions`.
     #
     #   Note that you must include one of `LanguageCode`,
     #   `IdentifyLanguage`, or `IdentifyMultipleLanguages` in your request.
@@ -4605,17 +4634,20 @@ module Aws::TranscribeService
     # @!attribute [rw] identify_multiple_languages
     #   Enables automatic multi-language identification in your
     #   transcription job request. Use this parameter if your media file
-    #   contains more than one language.
+    #   contains more than one language. If your media contains only one
+    #   language, use `IdentifyLanguage` instead.
     #
     #   If you include `IdentifyMultipleLanguages`, you can optionally
     #   include a list of language codes, using `LanguageOptions`, that you
-    #   think may be present in your media file. Including language options
-    #   can improve transcription accuracy.
+    #   think may be present in your media file. Including `LanguageOptions`
+    #   restricts `IdentifyLanguage` to only the language options that you
+    #   specify, which can improve transcription accuracy.
     #
     #   If you want to apply a custom vocabulary or a custom vocabulary
     #   filter to your automatic language identification request, include
     #   `LanguageIdSettings` with the relevant sub-parameters
-    #   (`VocabularyName` and `VocabularyFilterName`).
+    #   (`VocabularyName` and `VocabularyFilterName`). If you include
+    #   `LanguageIdSettings`, also include `LanguageOptions`.
     #
     #   Note that you must include one of `LanguageCode`,
     #   `IdentifyLanguage`, or `IdentifyMultipleLanguages` in your request.
@@ -4625,7 +4657,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_options
     #   You can specify two or more language codes that represent the
-    #   languages you think may be present in your media; including more
+    #   languages you think may be present in your media. Including more
     #   than five is not recommended. If you're unsure what languages are
     #   present, do not include this parameter.
     #
@@ -4660,34 +4692,37 @@ module Aws::TranscribeService
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] language_id_settings
-    #   If using automatic language identification (`IdentifyLanguage`) in
-    #   your request and you want to apply a custom language model, a custom
-    #   vocabulary, or a custom vocabulary filter, include
-    #   `LanguageIdSettings` with the relevant sub-parameters
-    #   (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
+    #   If using automatic language identification in your request and you
+    #   want to apply a custom language model, a custom vocabulary, or a
+    #   custom vocabulary filter, include `LanguageIdSettings` with the
+    #   relevant sub-parameters (`VocabularyName`, `LanguageModelName`, and
+    #   `VocabularyFilterName`). Note that multi-language identification
+    #   (`IdentifyMultipleLanguages`) doesn't support custom language
+    #   models.
     #
-    #   You can specify two or more language codes that represent the
-    #   languages you think may be present in your media; including more
-    #   than five is not recommended. Each language code you include can
-    #   have an associated custom language model, custom vocabulary, and
-    #   custom vocabulary filter. The languages you specify must match the
-    #   languages of the specified custom language models, custom
-    #   vocabularies, and custom vocabulary filters.
+    #   `LanguageIdSettings` supports two to five language codes. Each
+    #   language code you include can have an associated custom language
+    #   model, custom vocabulary, and custom vocabulary filter. The language
+    #   codes that you specify must match the languages of the associated
+    #   custom language models, custom vocabularies, and custom vocabulary
+    #   filters.
     #
-    #   To include language options using `IdentifyLanguage` **without**
-    #   including a custom language model, a custom vocabulary, or a custom
-    #   vocabulary filter, use `LanguageOptions` instead of
-    #   `LanguageIdSettings`. Including language options can improve the
-    #   accuracy of automatic language identification.
+    #   It's recommended that you include `LanguageOptions` when using
+    #   `LanguageIdSettings` to ensure that the correct language dialect is
+    #   identified. For example, if you specify a custom vocabulary that is
+    #   in `en-US` but Amazon Transcribe determines that the language spoken
+    #   in your media is `en-AU`, your custom vocabulary *is not* applied to
+    #   your transcription. If you include `LanguageOptions` and include
+    #   `en-US` as the only English language dialect, your custom vocabulary
+    #   *is* applied to your transcription.
     #
     #   If you want to include a custom language model with your request but
     #   **do not** want to use automatic language identification, use
-    #   instead the ` parameter with the LanguageModelName
-    #   sub-parameter.</p> If you want to include a custom vocabulary or a
-    #   custom vocabulary filter (or both) with your request but do not want
-    #   to use automatic language identification, use instead the  parameter
-    #   with the VocabularyName or VocabularyFilterName (or both)
-    #   sub-parameter.</p>
+    #   instead the ` parameter with the LanguageModelName sub-parameter. If
+    #   you want to include a custom vocabulary or a custom vocabulary
+    #   filter (or both) with your request but do not want to use automatic
+    #   language identification, use instead the  parameter with the
+    #   VocabularyName or VocabularyFilterName (or both) sub-parameter.</p>
     #   `
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
@@ -4886,7 +4921,7 @@ module Aws::TranscribeService
     #   `arn:partition:service:region:account-id:resource-type/resource-id`.
     #
     #   For example,
-    #   `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+    #   `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
     #
     #   Valid values for `resource-type` are: `transcription-job`,
     #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
@@ -4986,11 +5021,13 @@ module Aws::TranscribeService
     #
     # * Custom words or phrases that occur at a specific time frame
     #
-    # See [Rule criteria][1] for examples.
+    # See [Rule criteria for batch categories][1] and [Rule criteria for
+    # streaming categories][2] for usage examples.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream
     #
     # @note When making an API call, you may pass TranscriptFilter
     #   data as a hash:
@@ -5015,8 +5052,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] transcript_filter_type
-    #   Flag the presence or absence of an exact match to the phrases you
-    #   specify. For example, if you specify the phrase "speak to a
+    #   Flag the presence or absence of an exact match to the phrases that
+    #   you specify. For example, if you specify the phrase "speak to a
     #   manager" as your `Targets` value, only that exact phrase is
     #   flagged.
     #
@@ -5026,30 +5063,30 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] absolute_time_range
-    #   Allows you to specify a time range (in milliseconds) in your audio,
-    #   during which you want to search for the specified key words or
-    #   phrases. See for more detail.
+    #   Makes it possible to specify a time range (in milliseconds) in your
+    #   audio, during which you want to search for the specified key words
+    #   or phrases. See for more detail.
     #   @return [Types::AbsoluteTimeRange]
     #
     # @!attribute [rw] relative_time_range
-    #   Allows you to specify a time range (in percentage) in your media
-    #   file, during which you want to search for the specified key words or
-    #   phrases. See for more detail.
+    #   Makes it possible to specify a time range (in percentage) in your
+    #   media file, during which you want to search for the specified key
+    #   words or phrases. See for more detail.
     #   @return [Types::RelativeTimeRange]
     #
     # @!attribute [rw] participant_role
-    #   Specify the participant you want to flag. Omitting this parameter is
-    #   equivalent to specifying both participants.
+    #   Specify the participant that you want to flag. Omitting this
+    #   parameter is equivalent to specifying both participants.
     #   @return [String]
     #
     # @!attribute [rw] negate
-    #   Set to `TRUE` to flag the absence of the phrase you specified in
-    #   your request. Set to `FALSE` to flag the presence of the phrase you
-    #   specified in your request.
+    #   Set to `TRUE` to flag the absence of the phrase that you specified
+    #   in your request. Set to `FALSE` to flag the presence of the phrase
+    #   that you specified in your request.
     #   @return [Boolean]
     #
     # @!attribute [rw] targets
-    #   Specify the phrases you want to flag.
+    #   Specify the phrases that you want to flag.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptFilter AWS API Documentation
@@ -5092,22 +5129,14 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code used to create your transcription job. For a list
-    #   of supported languages and their associated language codes, refer to
-    #   the [Supported languages][1] table.
-    #
-    #   Note that you must include one of `LanguageCode`,
-    #   `IdentifyLanguage`, or `IdentifyMultipleLanguages` in your request.
-    #   If you include more than one of these parameters, your transcription
-    #   job fails.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    #   The language code used to create your transcription job. This
+    #   parameter is used with single-language identification. For
+    #   multi-language identification requests, refer to the plural version
+    #   of this parameter, `LanguageCodes`.
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in your input media
+    #   The sample rate, in hertz, of the audio track in your input media
     #   file.
     #   @return [Integer]
     #
@@ -5116,8 +5145,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media
-    #   Describes the Amazon S3 location of the media file you want to use
-    #   in your request.
+    #   Provides the Amazon S3 location of the media file you used in your
+    #   request.
     #   @return [Types::Media]
     #
     # @!attribute [rw] transcript
@@ -5174,7 +5203,7 @@ module Aws::TranscribeService
     #   * `Invalid sample rate for audio file`.
     #
     #     The sample rate specified in `MediaSampleRateHertz` isn't valid.
-    #     The sample rate must be between 8,000 and 48,000 Hertz.
+    #     The sample rate must be between 8,000 and 48,000 hertz.
     #
     #   * `The sample rate provided does not match the detected sample
     #     rate`.
@@ -5201,39 +5230,25 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Specify additional optional settings in your request, including
-    #   channel identification, alternative transcriptions, speaker
-    #   labeling; allows you to apply custom vocabularies and vocabulary
-    #   filters.
-    #
-    #   If you want to include a custom vocabulary or a custom vocabulary
-    #   filter (or both) with your request but **do not** want to use
-    #   automatic language identification, use `Settings` with the
-    #   `VocabularyName` or `VocabularyFilterName` (or both) sub-parameter.
-    #
-    #   If you're using automatic language identification with your request
-    #   and want to include a custom language model, a custom vocabulary, or
-    #   a custom vocabulary filter, do not use the `Settings` parameter; use
-    #   instead the ` parameter with the LanguageModelName, VocabularyName
-    #   or VocabularyFilterName sub-parameters.</p>
-    #   `
+    #   Provides information on any additional settings that were included
+    #   in your request. Additional settings include channel identification,
+    #   alternative transcriptions, speaker partitioning, custom
+    #   vocabularies, and custom vocabulary filters.
     #   @return [Types::Settings]
     #
     # @!attribute [rw] model_settings
-    #   The custom language model you want to include with your
-    #   transcription job. If you include `ModelSettings` in your request,
-    #   you must include the `LanguageModelName` sub-parameter.
+    #   Provides information on the custom language model you included in
+    #   your request.
     #   @return [Types::ModelSettings]
     #
     # @!attribute [rw] job_execution_settings
-    #   Provides information about how your transcription job is being
-    #   processed. This parameter shows if your request is queued and what
-    #   data access role is being used.
+    #   Provides information about how your transcription job was processed.
+    #   This parameter shows if your request was queued and what data access
+    #   role was used.
     #   @return [Types::JobExecutionSettings]
     #
     # @!attribute [rw] content_redaction
-    #   Redacts or flags specified personally identifiable information (PII)
-    #   in your transcript.
+    #   Indicates whether redaction was enabled in your transcript.
     #   @return [Types::ContentRedaction]
     #
     # @!attribute [rw] identify_language
@@ -5247,22 +5262,7 @@ module Aws::TranscribeService
     #   @return [Boolean]
     #
     # @!attribute [rw] language_options
-    #   You can specify two or more language codes that represent the
-    #   languages you think may be present in your media; including more
-    #   than five is not recommended. If you're unsure what languages are
-    #   present, do not include this parameter.
-    #
-    #   If you include `LanguageOptions` in your request, you must also
-    #   include `IdentifyLanguage`.
-    #
-    #   For more information, refer to [Supported languages][1].
-    #
-    #   To transcribe speech in Modern Standard Arabic (`ar-SA`), your media
-    #   file must be encoded at a sample rate of 16,000 Hz or higher.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
+    #   Provides the language codes you specified in your request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] identified_language_score
@@ -5279,62 +5279,21 @@ module Aws::TranscribeService
     #   parameter is used with multi-language identification. For
     #   single-language identification requests, refer to the singular
     #   version of this parameter, `LanguageCode`.
-    #
-    #   For a list of supported languages and their associated language
-    #   codes, refer to the [Supported languages][1] table.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #   @return [Array<Types::LanguageCodeItem>]
     #
     # @!attribute [rw] tags
-    #   Adds one or more custom tags, each in the form of a key:value pair,
-    #   to a new transcription job at the time you start this new job.
-    #
-    #   To learn more about using tags with Amazon Transcribe, refer to
-    #   [Tagging resources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
+    #   The tags, each in the form of a key:value pair, assigned to the
+    #   specified transcription job.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] subtitles
-    #   Generate subtitles for your media file with your transcription
-    #   request.
+    #   Indicates whether subtitles were generated with your transcription.
     #   @return [Types::SubtitlesOutput]
     #
     # @!attribute [rw] language_id_settings
-    #   If using automatic language identification (`IdentifyLanguage`) in
-    #   your request and you want to apply a custom language model, a custom
-    #   vocabulary, or a custom vocabulary filter, include
-    #   `LanguageIdSettings` with the relevant sub-parameters
-    #   (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
-    #
-    #   You can specify two or more language codes that represent the
-    #   languages you think may be present in your media; including more
-    #   than five is not recommended. Each language code you include can
-    #   have an associated custom language model, custom vocabulary, and
-    #   custom vocabulary filter. The languages you specify must match the
-    #   languages of the specified custom language models, custom
-    #   vocabularies, and custom vocabulary filters.
-    #
-    #   To include language options using `IdentifyLanguage` **without**
-    #   including a custom language model, a custom vocabulary, or a custom
-    #   vocabulary filter, use `LanguageOptions` instead of
-    #   `LanguageIdSettings`. Including language options can improve the
-    #   accuracy of automatic language identification.
-    #
-    #   If you want to include a custom language model with your request but
-    #   **do not** want to use automatic language identification, use
-    #   instead the ` parameter with the LanguageModelName
-    #   sub-parameter.</p> If you want to include a custom vocabulary or a
-    #   custom vocabulary filter (or both) with your request but do not want
-    #   to use automatic language identification, use instead the  parameter
-    #   with the VocabularyName or VocabularyFilterName (or both)
-    #   sub-parameter.</p>
-    #   `
+    #   Provides the name and language of all custom language models, custom
+    #   vocabularies, and custom vocabulary filters that you included in
+    #   your request.
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
@@ -5516,7 +5475,7 @@ module Aws::TranscribeService
     #   `arn:partition:service:region:account-id:resource-type/resource-id`.
     #
     #   For example,
-    #   `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+    #   `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
     #
     #   Valid values for `resource-type` are: `transcription-job`,
     #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
@@ -5618,6 +5577,7 @@ module Aws::TranscribeService
     #             },
     #           },
     #         ],
+    #         input_type: "REAL_TIME", # accepts REAL_TIME, POST_CALL
     #       }
     #
     # @!attribute [rw] category_name
@@ -5631,11 +5591,20 @@ module Aws::TranscribeService
     #   used in the specified category.
     #   @return [Array<Types::Rule>]
     #
+    # @!attribute [rw] input_type
+    #   Choose whether you want to update a streaming or a batch Call
+    #   Analytics category. The input type you specify must match the input
+    #   type specified when the category was created. For example, if you
+    #   created a category with the `POST_CALL` input type, you must use
+    #   `POST_CALL` as the input type when updating this category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateCallAnalyticsCategoryRequest AWS API Documentation
     #
     class UpdateCallAnalyticsCategoryRequest < Struct.new(
       :category_name,
-      :rules)
+      :rules,
+      :input_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5663,8 +5632,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the custom medical vocabulary you want to update.
-    #   Vocabulary names are case sensitive.
+    #   The name of the custom medical vocabulary you want to update. Custom
+    #   medical vocabulary names are case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -5697,8 +5666,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you selected for your medical vocabulary. US
-    #   English (`en-US`) is the only language supported with Amazon
+    #   The language code you selected for your custom medical vocabulary.
+    #   US English (`en-US`) is the only language supported with Amazon
     #   Transcribe Medical.
     #   @return [String]
     #
@@ -5713,7 +5682,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom medical vocabulary. If the state
-    #   is `READY`, you can use the vocabulary in a
+    #   is `READY`, you can use the custom vocabulary in a
     #   `StartMedicalTranscriptionJob` request.
     #   @return [String]
     #
@@ -5738,16 +5707,16 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_filter_name
-    #   The name of the custom vocabulary filter you want to update.
-    #   Vocabulary filter names are case sensitive.
+    #   The name of the custom vocabulary filter you want to update. Custom
+    #   vocabulary filter names are case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] words
-    #   Use this parameter if you want to update your vocabulary filter by
-    #   including all desired terms, as comma-separated values, within your
-    #   request. The other option for updating your vocabulary filter is to
-    #   save your entries in a text file and upload them to an Amazon S3
-    #   bucket, then specify the location of your file using the
+    #   Use this parameter if you want to update your custom vocabulary
+    #   filter by including all desired terms, as comma-separated values,
+    #   within your request. The other option for updating your vocabulary
+    #   filter is to save your entries in a text file and upload them to an
+    #   Amazon S3 bucket, then specify the location of your file using the
     #   `VocabularyFilterFileUri` parameter.
     #
     #   Note that if you include `Words` in your request, you cannot use
@@ -5755,7 +5724,7 @@ module Aws::TranscribeService
     #
     #   Each language has a character set that contains all allowed
     #   characters for that specific language. If you use unsupported
-    #   characters, your vocabulary filter request fails. Refer to
+    #   characters, your custom vocabulary filter request fails. Refer to
     #   [Character Sets for Custom Vocabularies][1] to get the character set
     #   for your language.
     #
@@ -5791,11 +5760,12 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code you selected for your vocabulary filter.
+    #   The language code you selected for your custom vocabulary filter.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified vocabulary filter was last updated.
+    #   The date and time the specified custom vocabulary filter was last
+    #   updated.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -5823,19 +5793,19 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the custom vocabulary you want to update. Vocabulary
-    #   names are case sensitive.
+    #   The name of the custom vocabulary you want to update. Custom
+    #   vocabulary names are case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] language_code
     #   The language code that represents the language of the entries in the
-    #   custom vocabulary you want to update. Each vocabulary must contain
-    #   terms in only one language.
+    #   custom vocabulary you want to update. Each custom vocabulary must
+    #   contain terms in only one language.
     #
     #   A custom vocabulary can only be used to transcribe files in the same
-    #   language as the vocabulary. For example, if you create a vocabulary
-    #   using US English (`en-US`), you can only apply this vocabulary to
-    #   files that contain English audio.
+    #   language as the custom vocabulary. For example, if you create a
+    #   custom vocabulary using US English (`en-US`), you can only apply
+    #   this custom vocabulary to files that contain English audio.
     #
     #   For a list of supported languages and their associated language
     #   codes, refer to the [Supported languages][1] table.
@@ -5846,19 +5816,19 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] phrases
-    #   Use this parameter if you want to update your vocabulary by
+    #   Use this parameter if you want to update your custom vocabulary by
     #   including all desired terms, as comma-separated values, within your
-    #   request. The other option for updating your vocabulary is to save
-    #   your entries in a text file and upload them to an Amazon S3 bucket,
-    #   then specify the location of your file using the `VocabularyFileUri`
-    #   parameter.
+    #   request. The other option for updating your custom vocabulary is to
+    #   save your entries in a text file and upload them to an Amazon S3
+    #   bucket, then specify the location of your file using the
+    #   `VocabularyFileUri` parameter.
     #
     #   Note that if you include `Phrases` in your request, you cannot use
     #   `VocabularyFileUri`; you must choose one or the other.
     #
     #   Each language has a character set that contains all allowed
     #   characters for that specific language. If you use unsupported
-    #   characters, your vocabulary filter request fails. Refer to
+    #   characters, your custom vocabulary filter request fails. Refer to
     #   [Character Sets for Custom Vocabularies][1] to get the character set
     #   for your language.
     #
@@ -5899,7 +5869,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified vocabulary was last updated.
+    #   The date and time the specified custom vocabulary was last updated.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -5908,8 +5878,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom vocabulary. If the state is
-    #   `READY`, you can use the vocabulary in a `StartTranscriptionJob`
-    #   request.
+    #   `READY`, you can use the custom vocabulary in a
+    #   `StartTranscriptionJob` request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyResponse AWS API Documentation
@@ -5923,8 +5893,8 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Provides information about a vocabulary filter, including the language
-    # of the filter, when it was last modified, and its name.
+    # Provides information about a custom vocabulary filter, including the
+    # language of the filter, when it was last modified, and its name.
     #
     # @!attribute [rw] vocabulary_filter_name
     #   A unique name, chosen by you, for your custom vocabulary filter.
@@ -5934,13 +5904,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code that represents the language of the entries in
-    #   your vocabulary filter. Each vocabulary filter must contain terms in
-    #   only one language.
+    #   your vocabulary filter. Each custom vocabulary filter must contain
+    #   terms in only one language.
     #
-    #   A vocabulary filter can only be used to transcribe files in the same
-    #   language as the filter. For example, if you create a vocabulary
-    #   filter using US English (`en-US`), you can only apply this filter to
-    #   files that contain English audio.
+    #   A custom vocabulary filter can only be used to transcribe files in
+    #   the same language as the filter. For example, if you create a custom
+    #   vocabulary filter using US English (`en-US`), you can only apply
+    #   this filter to files that contain English audio.
     #
     #   For a list of supported languages and their associated language
     #   codes, refer to the [Supported languages][1] table.
@@ -5951,7 +5921,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified vocabulary filter was last modified.
+    #   The date and time the specified custom vocabulary filter was last
+    #   modified.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -5969,7 +5940,7 @@ module Aws::TranscribeService
     end
 
     # Provides information about a custom vocabulary, including the language
-    # of the vocabulary, when it was last modified, its name, and the
+    # of the custom vocabulary, when it was last modified, its name, and the
     # processing state.
     #
     # @!attribute [rw] vocabulary_name
@@ -5979,17 +5950,17 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code used to create your custom vocabulary. Each
+    #   The language code used to create your custom vocabulary. Each custom
     #   vocabulary must contain terms in only one language.
     #
     #   A custom vocabulary can only be used to transcribe files in the same
-    #   language as the vocabulary. For example, if you create a vocabulary
-    #   using US English (`en-US`), you can only apply this vocabulary to
-    #   files that contain English audio.
+    #   language as the custom vocabulary. For example, if you create a
+    #   custom vocabulary using US English (`en-US`), you can only apply
+    #   this custom vocabulary to files that contain English audio.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The date and time the specified vocabulary was last modified.
+    #   The date and time the specified custom vocabulary was last modified.
     #
     #   Timestamps are in the format `YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC`. For
     #   example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM
@@ -5998,8 +5969,8 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_state
     #   The processing state of your custom vocabulary. If the state is
-    #   `READY`, you can use the vocabulary in a `StartTranscriptionJob`
-    #   request.
+    #   `READY`, you can use the custom vocabulary in a
+    #   `StartTranscriptionJob` request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyInfo AWS API Documentation

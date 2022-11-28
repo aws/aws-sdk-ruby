@@ -14,6 +14,8 @@ module Aws::IoTDataPlane
     include Seahorse::Model
 
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CorrelationData = Shapes::StringShape.new(name: 'CorrelationData')
     DeleteThingShadowRequest = Shapes::StructureShape.new(name: 'DeleteThingShadowRequest')
     DeleteThingShadowResponse = Shapes::StructureShape.new(name: 'DeleteThingShadowResponse')
     GetRetainedMessageRequest = Shapes::StructureShape.new(name: 'GetRetainedMessageRequest')
@@ -28,16 +30,19 @@ module Aws::IoTDataPlane
     ListRetainedMessagesRequest = Shapes::StructureShape.new(name: 'ListRetainedMessagesRequest')
     ListRetainedMessagesResponse = Shapes::StructureShape.new(name: 'ListRetainedMessagesResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MessageExpiry = Shapes::IntegerShape.new(name: 'MessageExpiry')
     MethodNotAllowedException = Shapes::StructureShape.new(name: 'MethodNotAllowedException')
     NamedShadowList = Shapes::ListShape.new(name: 'NamedShadowList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Payload = Shapes::BlobShape.new(name: 'Payload')
+    PayloadFormatIndicator = Shapes::StringShape.new(name: 'PayloadFormatIndicator')
     PayloadSize = Shapes::IntegerShape.new(name: 'PayloadSize')
     PublishRequest = Shapes::StructureShape.new(name: 'PublishRequest')
     Qos = Shapes::IntegerShape.new(name: 'Qos')
     RequestEntityTooLargeException = Shapes::StructureShape.new(name: 'RequestEntityTooLargeException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResponseTopic = Shapes::StringShape.new(name: 'ResponseTopic')
     Retain = Shapes::BooleanShape.new(name: 'Retain')
     RetainedMessageList = Shapes::ListShape.new(name: 'RetainedMessageList')
     RetainedMessageSummary = Shapes::StructureShape.new(name: 'RetainedMessageSummary')
@@ -51,6 +56,7 @@ module Aws::IoTDataPlane
     UnsupportedDocumentEncodingException = Shapes::StructureShape.new(name: 'UnsupportedDocumentEncodingException')
     UpdateThingShadowRequest = Shapes::StructureShape.new(name: 'UpdateThingShadowRequest')
     UpdateThingShadowResponse = Shapes::StructureShape.new(name: 'UpdateThingShadowResponse')
+    UserProperties = Shapes::StringShape.new(name: 'UserProperties')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -116,6 +122,12 @@ module Aws::IoTDataPlane
     PublishRequest.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location: "querystring", location_name: "qos"))
     PublishRequest.add_member(:retain, Shapes::ShapeRef.new(shape: Retain, location: "querystring", location_name: "retain"))
     PublishRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
+    PublishRequest.add_member(:user_properties, Shapes::ShapeRef.new(shape: UserProperties, location: "header", location_name: "x-amz-mqtt5-user-properties", metadata: {"jsonvalue"=>true}))
+    PublishRequest.add_member(:payload_format_indicator, Shapes::ShapeRef.new(shape: PayloadFormatIndicator, location: "header", location_name: "x-amz-mqtt5-payload-format-indicator"))
+    PublishRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "querystring", location_name: "contentType"))
+    PublishRequest.add_member(:response_topic, Shapes::ShapeRef.new(shape: ResponseTopic, location: "querystring", location_name: "responseTopic"))
+    PublishRequest.add_member(:correlation_data, Shapes::ShapeRef.new(shape: CorrelationData, location: "header", location_name: "x-amz-mqtt5-correlation-data"))
+    PublishRequest.add_member(:message_expiry, Shapes::ShapeRef.new(shape: MessageExpiry, location: "querystring", location_name: "messageExpiry"))
     PublishRequest.struct_class = Types::PublishRequest
     PublishRequest[:payload] = :payload
     PublishRequest[:payload_member] = PublishRequest.member(:payload)
@@ -266,6 +278,7 @@ module Aws::IoTDataPlane
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_thing_shadow, Seahorse::Model::Operation.new.tap do |o|

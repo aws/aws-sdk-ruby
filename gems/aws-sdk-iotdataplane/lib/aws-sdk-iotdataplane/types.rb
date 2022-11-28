@@ -283,6 +283,12 @@ module Aws::IoTDataPlane
     #         qos: 1,
     #         retain: false,
     #         payload: "data",
+    #         user_properties: "UserProperties",
+    #         payload_format_indicator: "UNSPECIFIED_BYTES", # accepts UNSPECIFIED_BYTES, UTF8_DATA
+    #         content_type: "ContentType",
+    #         response_topic: "ResponseTopic",
+    #         correlation_data: "CorrelationData",
+    #         message_expiry: 1,
     #       }
     #
     # @!attribute [rw] topic
@@ -290,7 +296,7 @@ module Aws::IoTDataPlane
     #   @return [String]
     #
     # @!attribute [rw] qos
-    #   The Quality of Service (QoS) level.
+    #   The Quality of Service (QoS) level. The default QoS level is 0.
     #   @return [Integer]
     #
     # @!attribute [rw] retain
@@ -314,11 +320,67 @@ module Aws::IoTDataPlane
     #   Services IoT Core.
     #   @return [String]
     #
+    # @!attribute [rw] user_properties
+    #   A JSON string that contains an array of JSON objects. If you don’t
+    #   use Amazon Web Services SDK or CLI, you must encode the JSON string
+    #   to base64 format before adding it to the HTTP header.
+    #   `userProperties` is an HTTP header value in the API.
+    #
+    #   The following example `userProperties` parameter is a JSON string
+    #   which represents two User Properties. Note that it needs to be
+    #   base64-encoded:
+    #
+    #   `[\{"deviceName": "alpha"\}, \{"deviceCnt": "45"\}]`
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format_indicator
+    #   An `Enum` string value that indicates whether the payload is
+    #   formatted as UTF-8. `payloadFormatIndicator` is an HTTP header value
+    #   in the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A UTF-8 encoded string that describes the content of the publishing
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_topic
+    #   A UTF-8 encoded string that's used as the topic name for a response
+    #   message. The response topic is used to describe the topic which the
+    #   receiver should publish to as part of the request-response flow. The
+    #   topic must not contain wildcard characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] correlation_data
+    #   The base64-encoded binary data used by the sender of the request
+    #   message to identify which request the response message is for when
+    #   it's received. `correlationData` is an HTTP header value in the
+    #   API.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_expiry
+    #   A user-defined integer value that represents the message expiry
+    #   interval in seconds. If absent, the message doesn't expire. For
+    #   more information about the limits of `messageExpiry`, see [Amazon
+    #   Web Services IoT Core message broker and protocol limits and quotas
+    #   ][1] from the Amazon Web Services Reference Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/iot-core.html#message-broker-limits
+    #   @return [Integer]
+    #
     class PublishRequest < Struct.new(
       :topic,
       :qos,
       :retain,
-      :payload)
+      :payload,
+      :user_properties,
+      :payload_format_indicator,
+      :content_type,
+      :response_topic,
+      :correlation_data,
+      :message_expiry)
       SENSITIVE = []
       include Aws::Structure
     end

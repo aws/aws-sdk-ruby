@@ -15,6 +15,26 @@ module Aws::Mgn
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ActionID = Shapes::StringShape.new(name: 'ActionID')
+    ActionIDs = Shapes::ListShape.new(name: 'ActionIDs')
+    ActionName = Shapes::StringShape.new(name: 'ActionName')
+    Application = Shapes::StructureShape.new(name: 'Application')
+    ApplicationAggregatedStatus = Shapes::StructureShape.new(name: 'ApplicationAggregatedStatus')
+    ApplicationDescription = Shapes::StringShape.new(name: 'ApplicationDescription')
+    ApplicationHealthStatus = Shapes::StringShape.new(name: 'ApplicationHealthStatus')
+    ApplicationID = Shapes::StringShape.new(name: 'ApplicationID')
+    ApplicationIDs = Shapes::ListShape.new(name: 'ApplicationIDs')
+    ApplicationIDsFilter = Shapes::ListShape.new(name: 'ApplicationIDsFilter')
+    ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
+    ApplicationProgressStatus = Shapes::StringShape.new(name: 'ApplicationProgressStatus')
+    ApplicationsList = Shapes::ListShape.new(name: 'ApplicationsList')
+    ArchiveApplicationRequest = Shapes::StructureShape.new(name: 'ArchiveApplicationRequest')
+    ArchiveWaveRequest = Shapes::StructureShape.new(name: 'ArchiveWaveRequest')
+    AssociateApplicationsRequest = Shapes::StructureShape.new(name: 'AssociateApplicationsRequest')
+    AssociateApplicationsResponse = Shapes::StructureShape.new(name: 'AssociateApplicationsResponse')
+    AssociateSourceServersRequest = Shapes::StructureShape.new(name: 'AssociateSourceServersRequest')
+    AssociateSourceServersRequestSourceServerIDs = Shapes::ListShape.new(name: 'AssociateSourceServersRequestSourceServerIDs')
+    AssociateSourceServersResponse = Shapes::StructureShape.new(name: 'AssociateSourceServersResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BootMode = Shapes::StringShape.new(name: 'BootMode')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
@@ -26,8 +46,10 @@ module Aws::Mgn
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionErrors = Shapes::ListShape.new(name: 'ConflictExceptionErrors')
     Cpus = Shapes::ListShape.new(name: 'Cpus')
+    CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateRequest')
     CreateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateReplicationConfigurationTemplateRequest')
+    CreateWaveRequest = Shapes::StructureShape.new(name: 'CreateWaveRequest')
     DataReplicationError = Shapes::StructureShape.new(name: 'DataReplicationError')
     DataReplicationErrorString = Shapes::StringShape.new(name: 'DataReplicationErrorString')
     DataReplicationInfo = Shapes::StructureShape.new(name: 'DataReplicationInfo')
@@ -39,6 +61,8 @@ module Aws::Mgn
     DataReplicationInitiationStepStatus = Shapes::StringShape.new(name: 'DataReplicationInitiationStepStatus')
     DataReplicationInitiationSteps = Shapes::ListShape.new(name: 'DataReplicationInitiationSteps')
     DataReplicationState = Shapes::StringShape.new(name: 'DataReplicationState')
+    DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
+    DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
     DeleteLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateRequest')
@@ -48,6 +72,8 @@ module Aws::Mgn
     DeleteSourceServerRequest = Shapes::StructureShape.new(name: 'DeleteSourceServerRequest')
     DeleteSourceServerResponse = Shapes::StructureShape.new(name: 'DeleteSourceServerResponse')
     DeleteVcenterClientRequest = Shapes::StructureShape.new(name: 'DeleteVcenterClientRequest')
+    DeleteWaveRequest = Shapes::StructureShape.new(name: 'DeleteWaveRequest')
+    DeleteWaveResponse = Shapes::StructureShape.new(name: 'DeleteWaveResponse')
     DescribeJobLogItemsRequest = Shapes::StructureShape.new(name: 'DescribeJobLogItemsRequest')
     DescribeJobLogItemsResponse = Shapes::StructureShape.new(name: 'DescribeJobLogItemsResponse')
     DescribeJobsRequest = Shapes::StructureShape.new(name: 'DescribeJobsRequest')
@@ -59,16 +85,24 @@ module Aws::Mgn
     DescribeReplicationConfigurationTemplatesRequest = Shapes::StructureShape.new(name: 'DescribeReplicationConfigurationTemplatesRequest')
     DescribeReplicationConfigurationTemplatesResponse = Shapes::StructureShape.new(name: 'DescribeReplicationConfigurationTemplatesResponse')
     DescribeSourceServersRequest = Shapes::StructureShape.new(name: 'DescribeSourceServersRequest')
+    DescribeSourceServersRequestApplicationIDs = Shapes::ListShape.new(name: 'DescribeSourceServersRequestApplicationIDs')
     DescribeSourceServersRequestFilters = Shapes::StructureShape.new(name: 'DescribeSourceServersRequestFilters')
     DescribeSourceServersRequestFiltersIDs = Shapes::ListShape.new(name: 'DescribeSourceServersRequestFiltersIDs')
     DescribeSourceServersResponse = Shapes::StructureShape.new(name: 'DescribeSourceServersResponse')
     DescribeVcenterClientsRequest = Shapes::StructureShape.new(name: 'DescribeVcenterClientsRequest')
     DescribeVcenterClientsResponse = Shapes::StructureShape.new(name: 'DescribeVcenterClientsResponse')
+    DisassociateApplicationsRequest = Shapes::StructureShape.new(name: 'DisassociateApplicationsRequest')
+    DisassociateApplicationsResponse = Shapes::StructureShape.new(name: 'DisassociateApplicationsResponse')
+    DisassociateSourceServersRequest = Shapes::StructureShape.new(name: 'DisassociateSourceServersRequest')
+    DisassociateSourceServersRequestSourceServerIDs = Shapes::ListShape.new(name: 'DisassociateSourceServersRequestSourceServerIDs')
+    DisassociateSourceServersResponse = Shapes::StructureShape.new(name: 'DisassociateSourceServersResponse')
     DisconnectFromServiceRequest = Shapes::StructureShape.new(name: 'DisconnectFromServiceRequest')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     Disks = Shapes::ListShape.new(name: 'Disks')
+    DocumentVersion = Shapes::StringShape.new(name: 'DocumentVersion')
     EC2InstanceID = Shapes::StringShape.new(name: 'EC2InstanceID')
     EC2InstanceType = Shapes::StringShape.new(name: 'EC2InstanceType')
+    EC2LaunchConfigurationTemplateID = Shapes::StringShape.new(name: 'EC2LaunchConfigurationTemplateID')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     FinalizeCutoverRequest = Shapes::StructureShape.new(name: 'FinalizeCutoverRequest')
     FirstBoot = Shapes::StringShape.new(name: 'FirstBoot')
@@ -100,6 +134,7 @@ module Aws::Mgn
     LaunchConfigurationTemplates = Shapes::ListShape.new(name: 'LaunchConfigurationTemplates')
     LaunchDisposition = Shapes::StringShape.new(name: 'LaunchDisposition')
     LaunchStatus = Shapes::StringShape.new(name: 'LaunchStatus')
+    LaunchTemplateDiskConf = Shapes::StructureShape.new(name: 'LaunchTemplateDiskConf')
     LaunchedInstance = Shapes::StructureShape.new(name: 'LaunchedInstance')
     Licensing = Shapes::StructureShape.new(name: 'Licensing')
     LifeCycle = Shapes::StructureShape.new(name: 'LifeCycle')
@@ -113,12 +148,25 @@ module Aws::Mgn
     LifeCycleLastTestReverted = Shapes::StructureShape.new(name: 'LifeCycleLastTestReverted')
     LifeCycleState = Shapes::StringShape.new(name: 'LifeCycleState')
     LifeCycleStates = Shapes::ListShape.new(name: 'LifeCycleStates')
+    ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
+    ListApplicationsRequestFilters = Shapes::StructureShape.new(name: 'ListApplicationsRequestFilters')
+    ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    ListSourceServerActionsRequest = Shapes::StructureShape.new(name: 'ListSourceServerActionsRequest')
+    ListSourceServerActionsResponse = Shapes::StructureShape.new(name: 'ListSourceServerActionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTemplateActionsRequest = Shapes::StructureShape.new(name: 'ListTemplateActionsRequest')
+    ListTemplateActionsResponse = Shapes::StructureShape.new(name: 'ListTemplateActionsResponse')
+    ListWavesRequest = Shapes::StructureShape.new(name: 'ListWavesRequest')
+    ListWavesRequestFilters = Shapes::StructureShape.new(name: 'ListWavesRequestFilters')
+    ListWavesResponse = Shapes::StructureShape.new(name: 'ListWavesResponse')
     MarkAsArchivedRequest = Shapes::StructureShape.new(name: 'MarkAsArchivedRequest')
+    MaxResultsType = Shapes::IntegerShape.new(name: 'MaxResultsType')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     OS = Shapes::StructureShape.new(name: 'OS')
+    OperatingSystemString = Shapes::StringShape.new(name: 'OperatingSystemString')
+    OrderType = Shapes::IntegerShape.new(name: 'OrderType')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParticipatingServer = Shapes::StructureShape.new(name: 'ParticipatingServer')
     ParticipatingServers = Shapes::ListShape.new(name: 'ParticipatingServers')
@@ -128,6 +176,12 @@ module Aws::Mgn
     PostLaunchActionsDeploymentType = Shapes::StringShape.new(name: 'PostLaunchActionsDeploymentType')
     PostLaunchActionsLaunchStatusList = Shapes::ListShape.new(name: 'PostLaunchActionsLaunchStatusList')
     PostLaunchActionsStatus = Shapes::StructureShape.new(name: 'PostLaunchActionsStatus')
+    PutSourceServerActionRequest = Shapes::StructureShape.new(name: 'PutSourceServerActionRequest')
+    PutTemplateActionRequest = Shapes::StructureShape.new(name: 'PutTemplateActionRequest')
+    RemoveSourceServerActionRequest = Shapes::StructureShape.new(name: 'RemoveSourceServerActionRequest')
+    RemoveSourceServerActionResponse = Shapes::StructureShape.new(name: 'RemoveSourceServerActionResponse')
+    RemoveTemplateActionRequest = Shapes::StructureShape.new(name: 'RemoveTemplateActionRequest')
+    RemoveTemplateActionResponse = Shapes::StructureShape.new(name: 'RemoveTemplateActionResponse')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationConfigurationDataPlaneRouting = Shapes::StringShape.new(name: 'ReplicationConfigurationDataPlaneRouting')
     ReplicationConfigurationDefaultLargeStagingDiskType = Shapes::StringShape.new(name: 'ReplicationConfigurationDefaultLargeStagingDiskType')
@@ -150,6 +204,9 @@ module Aws::Mgn
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
     SourceProperties = Shapes::StructureShape.new(name: 'SourceProperties')
     SourceServer = Shapes::StructureShape.new(name: 'SourceServer')
+    SourceServerActionDocument = Shapes::StructureShape.new(name: 'SourceServerActionDocument')
+    SourceServerActionDocuments = Shapes::ListShape.new(name: 'SourceServerActionDocuments')
+    SourceServerActionsRequestFilters = Shapes::StructureShape.new(name: 'SourceServerActionsRequestFilters')
     SourceServerID = Shapes::StringShape.new(name: 'SourceServerID')
     SourceServersList = Shapes::ListShape.new(name: 'SourceServersList')
     SsmDocument = Shapes::StructureShape.new(name: 'SsmDocument')
@@ -177,17 +234,24 @@ module Aws::Mgn
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     TargetInstanceTypeRightSizingMethod = Shapes::StringShape.new(name: 'TargetInstanceTypeRightSizingMethod')
+    TemplateActionDocument = Shapes::StructureShape.new(name: 'TemplateActionDocument')
+    TemplateActionDocuments = Shapes::ListShape.new(name: 'TemplateActionDocuments')
+    TemplateActionsRequestFilters = Shapes::StructureShape.new(name: 'TemplateActionsRequestFilters')
     TerminateTargetInstancesRequest = Shapes::StructureShape.new(name: 'TerminateTargetInstancesRequest')
     TerminateTargetInstancesRequestSourceServerIDs = Shapes::ListShape.new(name: 'TerminateTargetInstancesRequestSourceServerIDs')
     TerminateTargetInstancesResponse = Shapes::StructureShape.new(name: 'TerminateTargetInstancesResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UnarchiveApplicationRequest = Shapes::StructureShape.new(name: 'UnarchiveApplicationRequest')
+    UnarchiveWaveRequest = Shapes::StructureShape.new(name: 'UnarchiveWaveRequest')
     UninitializedAccountException = Shapes::StructureShape.new(name: 'UninitializedAccountException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationRequest')
     UpdateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateRequest')
     UpdateReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationRequest')
     UpdateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationTemplateRequest')
     UpdateSourceServerReplicationTypeRequest = Shapes::StructureShape.new(name: 'UpdateSourceServerReplicationTypeRequest')
+    UpdateWaveRequest = Shapes::StructureShape.new(name: 'UpdateWaveRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -195,10 +259,66 @@ module Aws::Mgn
     VcenterClient = Shapes::StructureShape.new(name: 'VcenterClient')
     VcenterClientID = Shapes::StringShape.new(name: 'VcenterClientID')
     VcenterClientList = Shapes::ListShape.new(name: 'VcenterClientList')
+    VolumeType = Shapes::StringShape.new(name: 'VolumeType')
+    Wave = Shapes::StructureShape.new(name: 'Wave')
+    WaveAggregatedStatus = Shapes::StructureShape.new(name: 'WaveAggregatedStatus')
+    WaveDescription = Shapes::StringShape.new(name: 'WaveDescription')
+    WaveHealthStatus = Shapes::StringShape.new(name: 'WaveHealthStatus')
+    WaveID = Shapes::StringShape.new(name: 'WaveID')
+    WaveIDsFilter = Shapes::ListShape.new(name: 'WaveIDsFilter')
+    WaveName = Shapes::StringShape.new(name: 'WaveName')
+    WaveProgressStatus = Shapes::StringShape.new(name: 'WaveProgressStatus')
+    WavesList = Shapes::ListShape.new(name: 'WavesList')
 
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ActionIDs.member = Shapes::ShapeRef.new(shape: ActionID)
+
+    Application.add_member(:application_aggregated_status, Shapes::ShapeRef.new(shape: ApplicationAggregatedStatus, location_name: "applicationAggregatedStatus"))
+    Application.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, location_name: "applicationID"))
+    Application.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    Application.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "creationDateTime"))
+    Application.add_member(:description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "description"))
+    Application.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
+    Application.add_member(:last_modified_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastModifiedDateTime"))
+    Application.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    Application.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    Application.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, location_name: "waveID"))
+    Application.struct_class = Types::Application
+
+    ApplicationAggregatedStatus.add_member(:health_status, Shapes::ShapeRef.new(shape: ApplicationHealthStatus, location_name: "healthStatus"))
+    ApplicationAggregatedStatus.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastUpdateDateTime"))
+    ApplicationAggregatedStatus.add_member(:progress_status, Shapes::ShapeRef.new(shape: ApplicationProgressStatus, location_name: "progressStatus"))
+    ApplicationAggregatedStatus.add_member(:total_source_servers, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "totalSourceServers"))
+    ApplicationAggregatedStatus.struct_class = Types::ApplicationAggregatedStatus
+
+    ApplicationIDs.member = Shapes::ShapeRef.new(shape: ApplicationID)
+
+    ApplicationIDsFilter.member = Shapes::ShapeRef.new(shape: ApplicationID)
+
+    ApplicationsList.member = Shapes::ShapeRef.new(shape: Application)
+
+    ArchiveApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, required: true, location_name: "applicationID"))
+    ArchiveApplicationRequest.struct_class = Types::ArchiveApplicationRequest
+
+    ArchiveWaveRequest.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, required: true, location_name: "waveID"))
+    ArchiveWaveRequest.struct_class = Types::ArchiveWaveRequest
+
+    AssociateApplicationsRequest.add_member(:application_i_ds, Shapes::ShapeRef.new(shape: ApplicationIDs, required: true, location_name: "applicationIDs"))
+    AssociateApplicationsRequest.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, required: true, location_name: "waveID"))
+    AssociateApplicationsRequest.struct_class = Types::AssociateApplicationsRequest
+
+    AssociateApplicationsResponse.struct_class = Types::AssociateApplicationsResponse
+
+    AssociateSourceServersRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, required: true, location_name: "applicationID"))
+    AssociateSourceServersRequest.add_member(:source_server_i_ds, Shapes::ShapeRef.new(shape: AssociateSourceServersRequestSourceServerIDs, required: true, location_name: "sourceServerIDs"))
+    AssociateSourceServersRequest.struct_class = Types::AssociateSourceServersRequest
+
+    AssociateSourceServersRequestSourceServerIDs.member = Shapes::ShapeRef.new(shape: SourceServerID)
+
+    AssociateSourceServersResponse.struct_class = Types::AssociateSourceServersResponse
 
     CPU.add_member(:cores, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "cores"))
     CPU.add_member(:model_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "modelName"))
@@ -222,8 +342,25 @@ module Aws::Mgn
 
     Cpus.member = Shapes::ShapeRef.new(shape: CPU)
 
+    CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "description"))
+    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "name"))
+    CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
+
+    CreateLaunchConfigurationTemplateRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootMode, location_name: "bootMode"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:large_volume_conf, Shapes::ShapeRef.new(shape: LaunchTemplateDiskConf, location_name: "largeVolumeConf"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
     CreateLaunchConfigurationTemplateRequest.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:small_volume_conf, Shapes::ShapeRef.new(shape: LaunchTemplateDiskConf, location_name: "smallVolumeConf"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:small_volume_max_size, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "smallVolumeMaxSize"))
     CreateLaunchConfigurationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     CreateLaunchConfigurationTemplateRequest.struct_class = Types::CreateLaunchConfigurationTemplateRequest
 
     CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "associateDefaultSecurityGroup"))
@@ -240,6 +377,11 @@ module Aws::Mgn
     CreateReplicationConfigurationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateReplicationConfigurationTemplateRequest.add_member(:use_dedicated_replication_server, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "useDedicatedReplicationServer"))
     CreateReplicationConfigurationTemplateRequest.struct_class = Types::CreateReplicationConfigurationTemplateRequest
+
+    CreateWaveRequest.add_member(:description, Shapes::ShapeRef.new(shape: WaveDescription, location_name: "description"))
+    CreateWaveRequest.add_member(:name, Shapes::ShapeRef.new(shape: WaveName, required: true, location_name: "name"))
+    CreateWaveRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateWaveRequest.struct_class = Types::CreateWaveRequest
 
     DataReplicationError.add_member(:error, Shapes::ShapeRef.new(shape: DataReplicationErrorString, location_name: "error"))
     DataReplicationError.add_member(:raw_error, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "rawError"))
@@ -274,6 +416,11 @@ module Aws::Mgn
 
     DataReplicationInitiationSteps.member = Shapes::ShapeRef.new(shape: DataReplicationInitiationStep)
 
+    DeleteApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, required: true, location_name: "applicationID"))
+    DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
+
+    DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
+
     DeleteJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, required: true, location_name: "jobID"))
     DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
@@ -297,8 +444,13 @@ module Aws::Mgn
     DeleteVcenterClientRequest.add_member(:vcenter_client_id, Shapes::ShapeRef.new(shape: VcenterClientID, required: true, location_name: "vcenterClientID"))
     DeleteVcenterClientRequest.struct_class = Types::DeleteVcenterClientRequest
 
+    DeleteWaveRequest.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, required: true, location_name: "waveID"))
+    DeleteWaveRequest.struct_class = Types::DeleteWaveRequest
+
+    DeleteWaveResponse.struct_class = Types::DeleteWaveResponse
+
     DescribeJobLogItemsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, required: true, location_name: "jobID"))
-    DescribeJobLogItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
+    DescribeJobLogItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     DescribeJobLogItemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeJobLogItemsRequest.struct_class = Types::DescribeJobLogItemsRequest
 
@@ -307,7 +459,7 @@ module Aws::Mgn
     DescribeJobLogItemsResponse.struct_class = Types::DescribeJobLogItemsResponse
 
     DescribeJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeJobsRequestFilters, location_name: "filters"))
-    DescribeJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
+    DescribeJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     DescribeJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeJobsRequest.struct_class = Types::DescribeJobsRequest
 
@@ -323,7 +475,7 @@ module Aws::Mgn
     DescribeJobsResponse.struct_class = Types::DescribeJobsResponse
 
     DescribeLaunchConfigurationTemplatesRequest.add_member(:launch_configuration_template_i_ds, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateIDs, location_name: "launchConfigurationTemplateIDs"))
-    DescribeLaunchConfigurationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
+    DescribeLaunchConfigurationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     DescribeLaunchConfigurationTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeLaunchConfigurationTemplatesRequest.struct_class = Types::DescribeLaunchConfigurationTemplatesRequest
 
@@ -331,7 +483,7 @@ module Aws::Mgn
     DescribeLaunchConfigurationTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeLaunchConfigurationTemplatesResponse.struct_class = Types::DescribeLaunchConfigurationTemplatesResponse
 
-    DescribeReplicationConfigurationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
+    DescribeReplicationConfigurationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     DescribeReplicationConfigurationTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeReplicationConfigurationTemplatesRequest.add_member(:replication_configuration_template_i_ds, Shapes::ShapeRef.new(shape: ReplicationConfigurationTemplateIDs, location_name: "replicationConfigurationTemplateIDs"))
     DescribeReplicationConfigurationTemplatesRequest.struct_class = Types::DescribeReplicationConfigurationTemplatesRequest
@@ -341,10 +493,13 @@ module Aws::Mgn
     DescribeReplicationConfigurationTemplatesResponse.struct_class = Types::DescribeReplicationConfigurationTemplatesResponse
 
     DescribeSourceServersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeSourceServersRequestFilters, location_name: "filters"))
-    DescribeSourceServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
+    DescribeSourceServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     DescribeSourceServersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeSourceServersRequest.struct_class = Types::DescribeSourceServersRequest
 
+    DescribeSourceServersRequestApplicationIDs.member = Shapes::ShapeRef.new(shape: ApplicationID)
+
+    DescribeSourceServersRequestFilters.add_member(:application_i_ds, Shapes::ShapeRef.new(shape: DescribeSourceServersRequestApplicationIDs, location_name: "applicationIDs"))
     DescribeSourceServersRequestFilters.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
     DescribeSourceServersRequestFilters.add_member(:life_cycle_states, Shapes::ShapeRef.new(shape: LifeCycleStates, location_name: "lifeCycleStates"))
     DescribeSourceServersRequestFilters.add_member(:replication_types, Shapes::ShapeRef.new(shape: ReplicationTypes, location_name: "replicationTypes"))
@@ -357,13 +512,27 @@ module Aws::Mgn
     DescribeSourceServersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeSourceServersResponse.struct_class = Types::DescribeSourceServersResponse
 
-    DescribeVcenterClientsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location: "querystring", location_name: "maxResults"))
+    DescribeVcenterClientsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location: "querystring", location_name: "maxResults"))
     DescribeVcenterClientsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     DescribeVcenterClientsRequest.struct_class = Types::DescribeVcenterClientsRequest
 
     DescribeVcenterClientsResponse.add_member(:items, Shapes::ShapeRef.new(shape: VcenterClientList, location_name: "items"))
     DescribeVcenterClientsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeVcenterClientsResponse.struct_class = Types::DescribeVcenterClientsResponse
+
+    DisassociateApplicationsRequest.add_member(:application_i_ds, Shapes::ShapeRef.new(shape: ApplicationIDs, required: true, location_name: "applicationIDs"))
+    DisassociateApplicationsRequest.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, required: true, location_name: "waveID"))
+    DisassociateApplicationsRequest.struct_class = Types::DisassociateApplicationsRequest
+
+    DisassociateApplicationsResponse.struct_class = Types::DisassociateApplicationsResponse
+
+    DisassociateSourceServersRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, required: true, location_name: "applicationID"))
+    DisassociateSourceServersRequest.add_member(:source_server_i_ds, Shapes::ShapeRef.new(shape: DisassociateSourceServersRequestSourceServerIDs, required: true, location_name: "sourceServerIDs"))
+    DisassociateSourceServersRequest.struct_class = Types::DisassociateSourceServersRequest
+
+    DisassociateSourceServersRequestSourceServerIDs.member = Shapes::ShapeRef.new(shape: SourceServerID)
+
+    DisassociateSourceServersResponse.struct_class = Types::DisassociateSourceServersResponse
 
     DisconnectFromServiceRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     DisconnectFromServiceRequest.struct_class = Types::DisconnectFromServiceRequest
@@ -443,8 +612,10 @@ module Aws::Mgn
     LaunchConfiguration.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
     LaunchConfiguration.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
     LaunchConfiguration.add_member(:ec2_launch_template_id, Shapes::ShapeRef.new(shape: BoundedString, location_name: "ec2LaunchTemplateID"))
+    LaunchConfiguration.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     LaunchConfiguration.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
     LaunchConfiguration.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    LaunchConfiguration.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
     LaunchConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
     LaunchConfiguration.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     LaunchConfiguration.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
@@ -452,14 +623,32 @@ module Aws::Mgn
     LaunchConfiguration.struct_class = Types::LaunchConfiguration
 
     LaunchConfigurationTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    LaunchConfigurationTemplate.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
+    LaunchConfigurationTemplate.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootMode, location_name: "bootMode"))
+    LaunchConfigurationTemplate.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
+    LaunchConfigurationTemplate.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    LaunchConfigurationTemplate.add_member(:ec2_launch_template_id, Shapes::ShapeRef.new(shape: EC2LaunchConfigurationTemplateID, location_name: "ec2LaunchTemplateID"))
+    LaunchConfigurationTemplate.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
+    LaunchConfigurationTemplate.add_member(:large_volume_conf, Shapes::ShapeRef.new(shape: LaunchTemplateDiskConf, location_name: "largeVolumeConf"))
     LaunchConfigurationTemplate.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    LaunchConfigurationTemplate.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    LaunchConfigurationTemplate.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    LaunchConfigurationTemplate.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
     LaunchConfigurationTemplate.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
+    LaunchConfigurationTemplate.add_member(:small_volume_conf, Shapes::ShapeRef.new(shape: LaunchTemplateDiskConf, location_name: "smallVolumeConf"))
+    LaunchConfigurationTemplate.add_member(:small_volume_max_size, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "smallVolumeMaxSize"))
     LaunchConfigurationTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    LaunchConfigurationTemplate.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     LaunchConfigurationTemplate.struct_class = Types::LaunchConfigurationTemplate
 
     LaunchConfigurationTemplateIDs.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID)
 
     LaunchConfigurationTemplates.member = Shapes::ShapeRef.new(shape: LaunchConfigurationTemplate)
+
+    LaunchTemplateDiskConf.add_member(:iops, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "iops"))
+    LaunchTemplateDiskConf.add_member(:throughput, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "throughput"))
+    LaunchTemplateDiskConf.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    LaunchTemplateDiskConf.struct_class = Types::LaunchTemplateDiskConf
 
     LaunchedInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "ec2InstanceID"))
     LaunchedInstance.add_member(:first_boot, Shapes::ShapeRef.new(shape: FirstBoot, location_name: "firstBoot"))
@@ -510,11 +699,58 @@ module Aws::Mgn
 
     LifeCycleStates.member = Shapes::ShapeRef.new(shape: LifeCycleState)
 
+    ListApplicationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListApplicationsRequestFilters, location_name: "filters"))
+    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
+
+    ListApplicationsRequestFilters.add_member(:application_i_ds, Shapes::ShapeRef.new(shape: ApplicationIDsFilter, location_name: "applicationIDs"))
+    ListApplicationsRequestFilters.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
+    ListApplicationsRequestFilters.add_member(:wave_i_ds, Shapes::ShapeRef.new(shape: WaveIDsFilter, location_name: "waveIDs"))
+    ListApplicationsRequestFilters.struct_class = Types::ListApplicationsRequestFilters
+
+    ListApplicationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ApplicationsList, location_name: "items"))
+    ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
+
+    ListSourceServerActionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SourceServerActionsRequestFilters, location_name: "filters"))
+    ListSourceServerActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListSourceServerActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSourceServerActionsRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    ListSourceServerActionsRequest.struct_class = Types::ListSourceServerActionsRequest
+
+    ListSourceServerActionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: SourceServerActionDocuments, location_name: "items"))
+    ListSourceServerActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSourceServerActionsResponse.struct_class = Types::ListSourceServerActionsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTemplateActionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: TemplateActionsRequestFilters, location_name: "filters"))
+    ListTemplateActionsRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    ListTemplateActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListTemplateActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTemplateActionsRequest.struct_class = Types::ListTemplateActionsRequest
+
+    ListTemplateActionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: TemplateActionDocuments, location_name: "items"))
+    ListTemplateActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListTemplateActionsResponse.struct_class = Types::ListTemplateActionsResponse
+
+    ListWavesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListWavesRequestFilters, location_name: "filters"))
+    ListWavesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListWavesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWavesRequest.struct_class = Types::ListWavesRequest
+
+    ListWavesRequestFilters.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
+    ListWavesRequestFilters.add_member(:wave_i_ds, Shapes::ShapeRef.new(shape: WaveIDsFilter, location_name: "waveIDs"))
+    ListWavesRequestFilters.struct_class = Types::ListWavesRequestFilters
+
+    ListWavesResponse.add_member(:items, Shapes::ShapeRef.new(shape: WavesList, location_name: "items"))
+    ListWavesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWavesResponse.struct_class = Types::ListWavesResponse
 
     MarkAsArchivedRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     MarkAsArchivedRequest.struct_class = Types::MarkAsArchivedRequest
@@ -549,6 +785,43 @@ module Aws::Mgn
     PostLaunchActionsStatus.add_member(:post_launch_actions_launch_status_list, Shapes::ShapeRef.new(shape: PostLaunchActionsLaunchStatusList, location_name: "postLaunchActionsLaunchStatusList"))
     PostLaunchActionsStatus.add_member(:ssm_agent_discovery_datetime, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "ssmAgentDiscoveryDatetime"))
     PostLaunchActionsStatus.struct_class = Types::PostLaunchActionsStatus
+
+    PutSourceServerActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
+    PutSourceServerActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
+    PutSourceServerActionRequest.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    PutSourceServerActionRequest.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "documentIdentifier"))
+    PutSourceServerActionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    PutSourceServerActionRequest.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
+    PutSourceServerActionRequest.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, required: true, location_name: "order"))
+    PutSourceServerActionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
+    PutSourceServerActionRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    PutSourceServerActionRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "timeoutSeconds"))
+    PutSourceServerActionRequest.struct_class = Types::PutSourceServerActionRequest
+
+    PutTemplateActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
+    PutTemplateActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "actionName"))
+    PutTemplateActionRequest.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    PutTemplateActionRequest.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "documentIdentifier"))
+    PutTemplateActionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    PutTemplateActionRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    PutTemplateActionRequest.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
+    PutTemplateActionRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
+    PutTemplateActionRequest.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, required: true, location_name: "order"))
+    PutTemplateActionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
+    PutTemplateActionRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "timeoutSeconds"))
+    PutTemplateActionRequest.struct_class = Types::PutTemplateActionRequest
+
+    RemoveSourceServerActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
+    RemoveSourceServerActionRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    RemoveSourceServerActionRequest.struct_class = Types::RemoveSourceServerActionRequest
+
+    RemoveSourceServerActionResponse.struct_class = Types::RemoveSourceServerActionResponse
+
+    RemoveTemplateActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
+    RemoveTemplateActionRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    RemoveTemplateActionRequest.struct_class = Types::RemoveTemplateActionRequest
+
+    RemoveTemplateActionResponse.struct_class = Types::RemoveTemplateActionResponse
 
     ReplicationConfiguration.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
     ReplicationConfiguration.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "bandwidthThrottling"))
@@ -629,6 +902,7 @@ module Aws::Mgn
     SourceProperties.add_member(:recommended_instance_type, Shapes::ShapeRef.new(shape: EC2InstanceType, location_name: "recommendedInstanceType"))
     SourceProperties.struct_class = Types::SourceProperties
 
+    SourceServer.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, location_name: "applicationID"))
     SourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     SourceServer.add_member(:data_replication_info, Shapes::ShapeRef.new(shape: DataReplicationInfo, location_name: "dataReplicationInfo"))
     SourceServer.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
@@ -640,6 +914,22 @@ module Aws::Mgn
     SourceServer.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     SourceServer.add_member(:vcenter_client_id, Shapes::ShapeRef.new(shape: VcenterClientID, location_name: "vcenterClientID"))
     SourceServer.struct_class = Types::SourceServer
+
+    SourceServerActionDocument.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, location_name: "actionID"))
+    SourceServerActionDocument.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, location_name: "actionName"))
+    SourceServerActionDocument.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    SourceServerActionDocument.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, location_name: "documentIdentifier"))
+    SourceServerActionDocument.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    SourceServerActionDocument.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
+    SourceServerActionDocument.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, location_name: "order"))
+    SourceServerActionDocument.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
+    SourceServerActionDocument.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "timeoutSeconds"))
+    SourceServerActionDocument.struct_class = Types::SourceServerActionDocument
+
+    SourceServerActionDocuments.member = Shapes::ShapeRef.new(shape: SourceServerActionDocument)
+
+    SourceServerActionsRequestFilters.add_member(:action_i_ds, Shapes::ShapeRef.new(shape: ActionIDs, location_name: "actionIDs"))
+    SourceServerActionsRequestFilters.struct_class = Types::SourceServerActionsRequestFilters
 
     SourceServersList.member = Shapes::ShapeRef.new(shape: SourceServer)
 
@@ -691,6 +981,23 @@ module Aws::Mgn
     TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    TemplateActionDocument.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, location_name: "actionID"))
+    TemplateActionDocument.add_member(:action_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "actionName"))
+    TemplateActionDocument.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
+    TemplateActionDocument.add_member(:document_identifier, Shapes::ShapeRef.new(shape: BoundedString, location_name: "documentIdentifier"))
+    TemplateActionDocument.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "documentVersion"))
+    TemplateActionDocument.add_member(:must_succeed_for_cutover, Shapes::ShapeRef.new(shape: Boolean, location_name: "mustSucceedForCutover"))
+    TemplateActionDocument.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
+    TemplateActionDocument.add_member(:order, Shapes::ShapeRef.new(shape: OrderType, location_name: "order"))
+    TemplateActionDocument.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
+    TemplateActionDocument.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "timeoutSeconds"))
+    TemplateActionDocument.struct_class = Types::TemplateActionDocument
+
+    TemplateActionDocuments.member = Shapes::ShapeRef.new(shape: TemplateActionDocument)
+
+    TemplateActionsRequestFilters.add_member(:action_i_ds, Shapes::ShapeRef.new(shape: ActionIDs, location_name: "actionIDs"))
+    TemplateActionsRequestFilters.struct_class = Types::TemplateActionsRequestFilters
+
     TerminateTargetInstancesRequest.add_member(:source_server_i_ds, Shapes::ShapeRef.new(shape: TerminateTargetInstancesRequestSourceServerIDs, required: true, location_name: "sourceServerIDs"))
     TerminateTargetInstancesRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     TerminateTargetInstancesRequest.struct_class = Types::TerminateTargetInstancesRequest
@@ -706,6 +1013,12 @@ module Aws::Mgn
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UnarchiveApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, required: true, location_name: "applicationID"))
+    UnarchiveApplicationRequest.struct_class = Types::UnarchiveApplicationRequest
+
+    UnarchiveWaveRequest.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, required: true, location_name: "waveID"))
+    UnarchiveWaveRequest.struct_class = Types::UnarchiveWaveRequest
+
     UninitializedAccountException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     UninitializedAccountException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     UninitializedAccountException.struct_class = Types::UninitializedAccountException
@@ -714,19 +1027,38 @@ module Aws::Mgn
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
+    UpdateApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationID, required: true, location_name: "applicationID"))
+    UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "description"))
+    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
+
     UpdateLaunchConfigurationRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootMode, location_name: "bootMode"))
     UpdateLaunchConfigurationRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
     UpdateLaunchConfigurationRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    UpdateLaunchConfigurationRequest.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     UpdateLaunchConfigurationRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
     UpdateLaunchConfigurationRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    UpdateLaunchConfigurationRequest.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
     UpdateLaunchConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
     UpdateLaunchConfigurationRequest.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     UpdateLaunchConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     UpdateLaunchConfigurationRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     UpdateLaunchConfigurationRequest.struct_class = Types::UpdateLaunchConfigurationRequest
 
+    UpdateLaunchConfigurationTemplateRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootMode, location_name: "bootMode"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:large_volume_conf, Shapes::ShapeRef.new(shape: LaunchTemplateDiskConf, location_name: "largeVolumeConf"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:licensing, Shapes::ShapeRef.new(shape: Licensing, location_name: "licensing"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:small_volume_conf, Shapes::ShapeRef.new(shape: LaunchTemplateDiskConf, location_name: "smallVolumeConf"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:small_volume_max_size, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "smallVolumeMaxSize"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     UpdateLaunchConfigurationTemplateRequest.struct_class = Types::UpdateLaunchConfigurationTemplateRequest
 
     UpdateReplicationConfigurationRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateDefaultSecurityGroup"))
@@ -766,6 +1098,11 @@ module Aws::Mgn
     UpdateSourceServerReplicationTypeRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     UpdateSourceServerReplicationTypeRequest.struct_class = Types::UpdateSourceServerReplicationTypeRequest
 
+    UpdateWaveRequest.add_member(:description, Shapes::ShapeRef.new(shape: WaveDescription, location_name: "description"))
+    UpdateWaveRequest.add_member(:name, Shapes::ShapeRef.new(shape: WaveName, location_name: "name"))
+    UpdateWaveRequest.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, required: true, location_name: "waveID"))
+    UpdateWaveRequest.struct_class = Types::UpdateWaveRequest
+
     ValidationException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
@@ -790,6 +1127,28 @@ module Aws::Mgn
 
     VcenterClientList.member = Shapes::ShapeRef.new(shape: VcenterClient)
 
+    Wave.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    Wave.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "creationDateTime"))
+    Wave.add_member(:description, Shapes::ShapeRef.new(shape: WaveDescription, location_name: "description"))
+    Wave.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
+    Wave.add_member(:last_modified_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastModifiedDateTime"))
+    Wave.add_member(:name, Shapes::ShapeRef.new(shape: WaveName, location_name: "name"))
+    Wave.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    Wave.add_member(:wave_aggregated_status, Shapes::ShapeRef.new(shape: WaveAggregatedStatus, location_name: "waveAggregatedStatus"))
+    Wave.add_member(:wave_id, Shapes::ShapeRef.new(shape: WaveID, location_name: "waveID"))
+    Wave.struct_class = Types::Wave
+
+    WaveAggregatedStatus.add_member(:health_status, Shapes::ShapeRef.new(shape: WaveHealthStatus, location_name: "healthStatus"))
+    WaveAggregatedStatus.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastUpdateDateTime"))
+    WaveAggregatedStatus.add_member(:progress_status, Shapes::ShapeRef.new(shape: WaveProgressStatus, location_name: "progressStatus"))
+    WaveAggregatedStatus.add_member(:replication_started_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "replicationStartedDateTime"))
+    WaveAggregatedStatus.add_member(:total_applications, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "totalApplications"))
+    WaveAggregatedStatus.struct_class = Types::WaveAggregatedStatus
+
+    WaveIDsFilter.member = Shapes::ShapeRef.new(shape: WaveID)
+
+    WavesList.member = Shapes::ShapeRef.new(shape: Wave)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -809,6 +1168,54 @@ module Aws::Mgn
         "uid" => "mgn-2020-02-26",
       }
 
+      api.add_operation(:archive_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ArchiveApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/ArchiveApplication"
+        o.input = Shapes::ShapeRef.new(shape: ArchiveApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Application)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:archive_wave, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ArchiveWave"
+        o.http_method = "POST"
+        o.http_request_uri = "/ArchiveWave"
+        o.input = Shapes::ShapeRef.new(shape: ArchiveWaveRequest)
+        o.output = Shapes::ShapeRef.new(shape: Wave)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:associate_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/AssociateApplications"
+        o.input = Shapes::ShapeRef.new(shape: AssociateApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:associate_source_servers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSourceServers"
+        o.http_method = "POST"
+        o.http_request_uri = "/AssociateSourceServers"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSourceServersRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSourceServersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:change_server_life_cycle_state, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ChangeServerLifeCycleState"
         o.http_method = "POST"
@@ -818,6 +1225,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateApplication"
+        o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Application)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -841,6 +1259,28 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_wave, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWave"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateWave"
+        o.input = Shapes::ShapeRef.new(shape: CreateWaveRequest)
+        o.output = Shapes::ShapeRef.new(shape: Wave)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteApplication"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_job, Seahorse::Model::Operation.new.tap do |o|
@@ -896,6 +1336,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_wave, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWave"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteWave"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWaveRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWaveResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:describe_job_log_items, Seahorse::Model::Operation.new.tap do |o|
@@ -997,6 +1448,28 @@ module Aws::Mgn
         )
       end)
 
+      api.add_operation(:disassociate_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/DisassociateApplications"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:disassociate_source_servers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSourceServers"
+        o.http_method = "POST"
+        o.http_request_uri = "/DisassociateSourceServers"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSourceServersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSourceServersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:disconnect_from_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisconnectFromService"
         o.http_method = "POST"
@@ -1050,6 +1523,37 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListApplications"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_source_server_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSourceServerActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListSourceServerActions"
+        o.input = Shapes::ShapeRef.new(shape: ListSourceServerActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSourceServerActionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1063,6 +1567,37 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_template_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTemplateActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListTemplateActions"
+        o.input = Shapes::ShapeRef.new(shape: ListTemplateActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTemplateActionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_waves, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWaves"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListWaves"
+        o.input = Shapes::ShapeRef.new(shape: ListWavesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWavesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:mark_as_archived, Seahorse::Model::Operation.new.tap do |o|
         o.name = "MarkAsArchived"
         o.http_method = "POST"
@@ -1072,6 +1607,52 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_source_server_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSourceServerAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/PutSourceServerAction"
+        o.input = Shapes::ShapeRef.new(shape: PutSourceServerActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: SourceServerActionDocument)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_template_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutTemplateAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/PutTemplateAction"
+        o.input = Shapes::ShapeRef.new(shape: PutTemplateActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: TemplateActionDocument)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:remove_source_server_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveSourceServerAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/RemoveSourceServerAction"
+        o.input = Shapes::ShapeRef.new(shape: RemoveSourceServerActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveSourceServerActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:remove_template_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveTemplateAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/RemoveTemplateAction"
+        o.input = Shapes::ShapeRef.new(shape: RemoveTemplateActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveTemplateActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:retry_data_replication, Seahorse::Model::Operation.new.tap do |o|
@@ -1144,6 +1725,28 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:unarchive_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnarchiveApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/UnarchiveApplication"
+        o.input = Shapes::ShapeRef.new(shape: UnarchiveApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Application)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:unarchive_wave, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnarchiveWave"
+        o.http_method = "POST"
+        o.http_request_uri = "/UnarchiveWave"
+        o.input = Shapes::ShapeRef.new(shape: UnarchiveWaveRequest)
+        o.output = Shapes::ShapeRef.new(shape: Wave)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UntagResource"
         o.http_method = "DELETE"
@@ -1155,6 +1758,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateApplication"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Application)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_launch_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1215,6 +1829,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_wave, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWave"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateWave"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWaveRequest)
+        o.output = Shapes::ShapeRef.new(shape: Wave)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end

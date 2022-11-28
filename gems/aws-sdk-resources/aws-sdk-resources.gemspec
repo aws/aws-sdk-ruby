@@ -239,6 +239,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-networkfirewall', '~> 1')
   spec.add_dependency('aws-sdk-networkmanager', '~> 1')
   spec.add_dependency('aws-sdk-nimblestudio', '~> 1')
+  spec.add_dependency('aws-sdk-oam', '~> 1')
   spec.add_dependency('aws-sdk-opensearchservice', '~> 1')
   spec.add_dependency('aws-sdk-opsworks', '~> 1')
   spec.add_dependency('aws-sdk-opsworkscm', '~> 1')

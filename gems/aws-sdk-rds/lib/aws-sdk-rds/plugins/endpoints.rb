@@ -82,6 +82,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::CopyDBSnapshot.build(context)
           when :copy_option_group
             Aws::RDS::Endpoints::CopyOptionGroup.build(context)
+          when :create_blue_green_deployment
+            Aws::RDS::Endpoints::CreateBlueGreenDeployment.build(context)
           when :create_custom_db_engine_version
             Aws::RDS::Endpoints::CreateCustomDBEngineVersion.build(context)
           when :create_db_cluster
@@ -114,6 +116,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::CreateGlobalCluster.build(context)
           when :create_option_group
             Aws::RDS::Endpoints::CreateOptionGroup.build(context)
+          when :delete_blue_green_deployment
+            Aws::RDS::Endpoints::DeleteBlueGreenDeployment.build(context)
           when :delete_custom_db_engine_version
             Aws::RDS::Endpoints::DeleteCustomDBEngineVersion.build(context)
           when :delete_db_cluster
@@ -150,6 +154,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::DeregisterDBProxyTargets.build(context)
           when :describe_account_attributes
             Aws::RDS::Endpoints::DescribeAccountAttributes.build(context)
+          when :describe_blue_green_deployments
+            Aws::RDS::Endpoints::DescribeBlueGreenDeployments.build(context)
           when :describe_certificates
             Aws::RDS::Endpoints::DescribeCertificates.build(context)
           when :describe_db_cluster_backtracks
@@ -328,6 +334,8 @@ module Aws::RDS
             Aws::RDS::Endpoints::StopDBInstance.build(context)
           when :stop_db_instance_automated_backups_replication
             Aws::RDS::Endpoints::StopDBInstanceAutomatedBackupsReplication.build(context)
+          when :switchover_blue_green_deployment
+            Aws::RDS::Endpoints::SwitchoverBlueGreenDeployment.build(context)
           when :switchover_read_replica
             Aws::RDS::Endpoints::SwitchoverReadReplica.build(context)
           end

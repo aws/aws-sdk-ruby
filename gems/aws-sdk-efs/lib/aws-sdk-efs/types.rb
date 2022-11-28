@@ -378,7 +378,7 @@ module Aws::EFS
     #         performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
     #         encrypted: false,
     #         kms_key_id: "KmsKeyId",
-    #         throughput_mode: "bursting", # accepts bursting, provisioned
+    #         throughput_mode: "bursting", # accepts bursting, provisioned, elastic
     #         provisioned_throughput_in_mibps: 1.0,
     #         availability_zone_name: "AvailabilityZoneName",
     #         backup: false,
@@ -449,15 +449,14 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
-    #   Specifies the throughput mode for the file system, either `bursting`
-    #   or `provisioned`. If you set `ThroughputMode` to `provisioned`, you
-    #   must also set a value for `ProvisionedThroughputInMibps`. After you
-    #   create the file system, you can decrease your file system's
-    #   throughput in Provisioned Throughput mode or change between the
-    #   throughput modes, as long as it’s been more than 24 hours since the
-    #   last decrease or throughput mode change. For more information, see
-    #   [Specifying throughput with provisioned mode][1] in the *Amazon EFS
-    #   User Guide*.
+    #   Specifies the throughput mode for the file system. The mode can be
+    #   `bursting`, `provisioned`, or `elastic`. If you set `ThroughputMode`
+    #   to `provisioned`, you must also set a value for
+    #   `ProvisionedThroughputInMibps`. After you create the file system,
+    #   you can decrease your file system's throughput in Provisioned
+    #   Throughput mode or change between the throughput modes, with certain
+    #   time restrictions. For more information, see [Specifying throughput
+    #   with provisioned mode][1] in the *Amazon EFS User Guide*.
     #
     #   Default is `bursting`.
     #
@@ -1935,7 +1934,7 @@ module Aws::EFS
     #   data as a hash:
     #
     #       {
-    #         transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #         transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_1_DAY
     #         transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
     #       }
     #
@@ -2421,7 +2420,7 @@ module Aws::EFS
     #         file_system_id: "FileSystemId", # required
     #         lifecycle_policies: [ # required
     #           {
-    #             transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS
+    #             transition_to_ia: "AFTER_7_DAYS", # accepts AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_1_DAY
     #             transition_to_primary_storage_class: "AFTER_1_ACCESS", # accepts AFTER_1_ACCESS
     #           },
     #         ],
@@ -2749,8 +2748,12 @@ module Aws::EFS
     end
 
     # Returned when the `CreateAccessPoint` API action is called too quickly
-    # and the number of Access Points in the account is nearing the limit of
-    # 120.
+    # and the number of Access Points on the file system is nearing the
+    # [limit of 120][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -2893,7 +2896,7 @@ module Aws::EFS
     #
     #       {
     #         file_system_id: "FileSystemId", # required
-    #         throughput_mode: "bursting", # accepts bursting, provisioned
+    #         throughput_mode: "bursting", # accepts bursting, provisioned, elastic
     #         provisioned_throughput_in_mibps: 1.0,
     #       }
     #

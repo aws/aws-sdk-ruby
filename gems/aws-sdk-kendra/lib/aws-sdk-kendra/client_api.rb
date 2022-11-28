@@ -378,6 +378,7 @@ module Aws::Kendra
     QueryIdentifiersEnclosingOption = Shapes::StringShape.new(name: 'QueryIdentifiersEnclosingOption')
     QueryRequest = Shapes::StructureShape.new(name: 'QueryRequest')
     QueryResult = Shapes::StructureShape.new(name: 'QueryResult')
+    QueryResultFormat = Shapes::StringShape.new(name: 'QueryResultFormat')
     QueryResultItem = Shapes::StructureShape.new(name: 'QueryResultItem')
     QueryResultItemList = Shapes::ListShape.new(name: 'QueryResultItemList')
     QueryResultType = Shapes::StringShape.new(name: 'QueryResultType')
@@ -482,7 +483,12 @@ module Aws::Kendra
     SuggestionQueryText = Shapes::StringShape.new(name: 'SuggestionQueryText')
     SuggestionTextWithHighlights = Shapes::StructureShape.new(name: 'SuggestionTextWithHighlights')
     SuggestionValue = Shapes::StructureShape.new(name: 'SuggestionValue')
+    TableCell = Shapes::StructureShape.new(name: 'TableCell')
+    TableCellList = Shapes::ListShape.new(name: 'TableCellList')
+    TableExcerpt = Shapes::StructureShape.new(name: 'TableExcerpt')
     TableName = Shapes::StringShape.new(name: 'TableName')
+    TableRow = Shapes::StructureShape.new(name: 'TableRow')
+    TableRowList = Shapes::ListShape.new(name: 'TableRowList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -1720,6 +1726,7 @@ module Aws::Kendra
 
     QueryResultItem.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
     QueryResultItem.add_member(:type, Shapes::ShapeRef.new(shape: QueryResultType, location_name: "Type"))
+    QueryResultItem.add_member(:format, Shapes::ShapeRef.new(shape: QueryResultFormat, location_name: "Format"))
     QueryResultItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: AdditionalResultAttributeList, location_name: "AdditionalAttributes"))
     QueryResultItem.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, location_name: "DocumentId"))
     QueryResultItem.add_member(:document_title, Shapes::ShapeRef.new(shape: TextWithHighlights, location_name: "DocumentTitle"))
@@ -1728,6 +1735,7 @@ module Aws::Kendra
     QueryResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
     QueryResultItem.add_member(:score_attributes, Shapes::ShapeRef.new(shape: ScoreAttributes, location_name: "ScoreAttributes"))
     QueryResultItem.add_member(:feedback_token, Shapes::ShapeRef.new(shape: FeedbackToken, location_name: "FeedbackToken"))
+    QueryResultItem.add_member(:table_excerpt, Shapes::ShapeRef.new(shape: TableExcerpt, location_name: "TableExcerpt"))
     QueryResultItem.struct_class = Types::QueryResultItem
 
     QueryResultItemList.member = Shapes::ShapeRef.new(shape: QueryResultItem)
@@ -2006,6 +2014,23 @@ module Aws::Kendra
 
     SuggestionValue.add_member(:text, Shapes::ShapeRef.new(shape: SuggestionTextWithHighlights, location_name: "Text"))
     SuggestionValue.struct_class = Types::SuggestionValue
+
+    TableCell.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    TableCell.add_member(:top_answer, Shapes::ShapeRef.new(shape: Boolean, location_name: "TopAnswer"))
+    TableCell.add_member(:highlighted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Highlighted"))
+    TableCell.add_member(:header, Shapes::ShapeRef.new(shape: Boolean, location_name: "Header"))
+    TableCell.struct_class = Types::TableCell
+
+    TableCellList.member = Shapes::ShapeRef.new(shape: TableCell)
+
+    TableExcerpt.add_member(:rows, Shapes::ShapeRef.new(shape: TableRowList, location_name: "Rows"))
+    TableExcerpt.add_member(:total_number_of_rows, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalNumberOfRows"))
+    TableExcerpt.struct_class = Types::TableExcerpt
+
+    TableRow.add_member(:cells, Shapes::ShapeRef.new(shape: TableCellList, location_name: "Cells"))
+    TableRow.struct_class = Types::TableRow
+
+    TableRowList.member = Shapes::ShapeRef.new(shape: TableRow)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))

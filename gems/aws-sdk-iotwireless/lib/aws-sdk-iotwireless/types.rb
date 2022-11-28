@@ -98,16 +98,55 @@ module Aws::IoTWireless
     # computed by solver.
     #
     # @!attribute [rw] horizontal_accuracy
-    #   The horizontal accuracy of the estimated position in meters.
+    #   The horizontal accuracy of the estimated position, which is the
+    #   difference between the estimated location and the actual device
+    #   location.
     #   @return [Float]
     #
     # @!attribute [rw] vertical_accuracy
-    #   The vertical accuracy of the estimated position in meters.
+    #   The vertical accuracy of the estimated position, which is the
+    #   difference between the estimated altitude and actual device latitude
+    #   in meters.
     #   @return [Float]
     #
     class Accuracy < Struct.new(
       :horizontal_accuracy,
       :vertical_accuracy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LoRaWAN application configuration, which can be used to perform
+    # geolocation.
+    #
+    # @note When making an API call, you may pass ApplicationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         f_port: 1,
+    #         type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #         destination_name: "DestinationName",
+    #       }
+    #
+    # @!attribute [rw] f_port
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   Application type, which can be specified to obtain real-time
+    #   position information of your LoRaWAN device.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_name
+    #   The name of the position data destination that describes the AWS IoT
+    #   rule that processes the device's position data for use by AWS IoT
+    #   Core for LoRaWAN.
+    #   @return [String]
+    #
+    class ApplicationConfig < Struct.new(
+      :f_port,
+      :type,
+      :destination_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -372,6 +411,308 @@ module Aws::IoTWireless
     end
 
     class CancelMulticastGroupSessionResponse < Aws::EmptyStructure; end
+
+    # CDMA local ID information, which corresponds to the local
+    # identification parameters of a CDMA cell.
+    #
+    # @note When making an API call, you may pass CdmaLocalId
+    #   data as a hash:
+    #
+    #       {
+    #         pn_offset: 1, # required
+    #         cdma_channel: 1, # required
+    #       }
+    #
+    # @!attribute [rw] pn_offset
+    #   Pseudo-noise offset, which is a characteristic of the signal from a
+    #   cell on a radio tower.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cdma_channel
+    #   CDMA channel information.
+    #   @return [Integer]
+    #
+    class CdmaLocalId < Struct.new(
+      :pn_offset,
+      :cdma_channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # CDMA object for network measurement reports.
+    #
+    # @note When making an API call, you may pass CdmaNmrObj
+    #   data as a hash:
+    #
+    #       {
+    #         pn_offset: 1, # required
+    #         cdma_channel: 1, # required
+    #         pilot_power: 1,
+    #         base_station_id: 1,
+    #       }
+    #
+    # @!attribute [rw] pn_offset
+    #   Pseudo-noise offset, which is a characteristic of the signal from a
+    #   cell on a radio tower.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cdma_channel
+    #   CDMA channel information.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pilot_power
+    #   Transmit power level of the pilot signal, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] base_station_id
+    #   CDMA base station ID (BSID).
+    #   @return [Integer]
+    #
+    class CdmaNmrObj < Struct.new(
+      :pn_offset,
+      :cdma_channel,
+      :pilot_power,
+      :base_station_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # CDMA (Code-division multiple access) object.
+    #
+    # @note When making an API call, you may pass CdmaObj
+    #   data as a hash:
+    #
+    #       {
+    #         system_id: 1, # required
+    #         network_id: 1, # required
+    #         base_station_id: 1, # required
+    #         registration_zone: 1,
+    #         cdma_local_id: {
+    #           pn_offset: 1, # required
+    #           cdma_channel: 1, # required
+    #         },
+    #         pilot_power: 1,
+    #         base_lat: 1.0,
+    #         base_lng: 1.0,
+    #         cdma_nmr: [
+    #           {
+    #             pn_offset: 1, # required
+    #             cdma_channel: 1, # required
+    #             pilot_power: 1,
+    #             base_station_id: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] system_id
+    #   CDMA system ID (SID).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_id
+    #   CDMA network ID (NID).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] base_station_id
+    #   CDMA base station ID (BSID).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registration_zone
+    #   CDMA registration zone (RZ).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cdma_local_id
+    #   CDMA local identification (local ID) parameters.
+    #   @return [Types::CdmaLocalId]
+    #
+    # @!attribute [rw] pilot_power
+    #   Transmit power level of the pilot signal, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] base_lat
+    #   CDMA base station latitude in degrees.
+    #   @return [Float]
+    #
+    # @!attribute [rw] base_lng
+    #   CDMA base station longtitude in degrees.
+    #   @return [Float]
+    #
+    # @!attribute [rw] cdma_nmr
+    #   CDMA network measurement reports.
+    #   @return [Array<Types::CdmaNmrObj>]
+    #
+    class CdmaObj < Struct.new(
+      :system_id,
+      :network_id,
+      :base_station_id,
+      :registration_zone,
+      :cdma_local_id,
+      :pilot_power,
+      :base_lat,
+      :base_lng,
+      :cdma_nmr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cell towers that were used to perform the measurements.
+    #
+    # @note When making an API call, you may pass CellTowers
+    #   data as a hash:
+    #
+    #       {
+    #         gsm: [
+    #           {
+    #             mcc: 1, # required
+    #             mnc: 1, # required
+    #             lac: 1, # required
+    #             geran_cid: 1, # required
+    #             gsm_local_id: {
+    #               bsic: 1, # required
+    #               bcch: 1, # required
+    #             },
+    #             gsm_timing_advance: 1,
+    #             rx_level: 1,
+    #             gsm_nmr: [
+    #               {
+    #                 bsic: 1, # required
+    #                 bcch: 1, # required
+    #                 rx_level: 1,
+    #                 global_identity: {
+    #                   lac: 1, # required
+    #                   geran_cid: 1, # required
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         wcdma: [
+    #           {
+    #             mcc: 1, # required
+    #             mnc: 1, # required
+    #             lac: 1,
+    #             utran_cid: 1, # required
+    #             wcdma_local_id: {
+    #               uarfcndl: 1, # required
+    #               psc: 1, # required
+    #             },
+    #             rscp: 1,
+    #             path_loss: 1,
+    #             wcdma_nmr: [
+    #               {
+    #                 uarfcndl: 1, # required
+    #                 psc: 1, # required
+    #                 utran_cid: 1, # required
+    #                 rscp: 1,
+    #                 path_loss: 1,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         tdscdma: [
+    #           {
+    #             mcc: 1, # required
+    #             mnc: 1, # required
+    #             lac: 1,
+    #             utran_cid: 1, # required
+    #             tdscdma_local_id: {
+    #               uarfcn: 1, # required
+    #               cell_params: 1, # required
+    #             },
+    #             tdscdma_timing_advance: 1,
+    #             rscp: 1,
+    #             path_loss: 1,
+    #             tdscdma_nmr: [
+    #               {
+    #                 uarfcn: 1, # required
+    #                 cell_params: 1, # required
+    #                 utran_cid: 1,
+    #                 rscp: 1,
+    #                 path_loss: 1,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         lte: [
+    #           {
+    #             mcc: 1, # required
+    #             mnc: 1, # required
+    #             eutran_cid: 1, # required
+    #             tac: 1,
+    #             lte_local_id: {
+    #               pci: 1, # required
+    #               earfcn: 1, # required
+    #             },
+    #             lte_timing_advance: 1,
+    #             rsrp: 1,
+    #             rsrq: 1.0,
+    #             nr_capable: false,
+    #             lte_nmr: [
+    #               {
+    #                 pci: 1, # required
+    #                 earfcn: 1, # required
+    #                 eutran_cid: 1, # required
+    #                 rsrp: 1,
+    #                 rsrq: 1.0,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         cdma: [
+    #           {
+    #             system_id: 1, # required
+    #             network_id: 1, # required
+    #             base_station_id: 1, # required
+    #             registration_zone: 1,
+    #             cdma_local_id: {
+    #               pn_offset: 1, # required
+    #               cdma_channel: 1, # required
+    #             },
+    #             pilot_power: 1,
+    #             base_lat: 1.0,
+    #             base_lng: 1.0,
+    #             cdma_nmr: [
+    #               {
+    #                 pn_offset: 1, # required
+    #                 cdma_channel: 1, # required
+    #                 pilot_power: 1,
+    #                 base_station_id: 1,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] gsm
+    #   GSM object information.
+    #   @return [Array<Types::GsmObj>]
+    #
+    # @!attribute [rw] wcdma
+    #   WCDMA object information.
+    #   @return [Array<Types::WcdmaObj>]
+    #
+    # @!attribute [rw] tdscdma
+    #   TD-SCDMA object information.
+    #   @return [Array<Types::TdscdmaObj>]
+    #
+    # @!attribute [rw] lte
+    #   LTE object information.
+    #   @return [Array<Types::LteObj>]
+    #
+    # @!attribute [rw] cdma
+    #   CDMA object information.
+    #   @return [Array<Types::CdmaObj>]
+    #
+    class CellTowers < Struct.new(
+      :gsm,
+      :wcdma,
+      :tdscdma,
+      :lte,
+      :cdma)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # List of sidewalk certificates.
     #
@@ -986,6 +1327,13 @@ module Aws::IoTWireless
     #               stream: 1,
     #               gnss: 1,
     #             },
+    #             applications: [
+    #               {
+    #                 f_port: 1,
+    #                 type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #                 destination_name: "DestinationName",
+    #               },
+    #             ],
     #           },
     #         },
     #         tags: [
@@ -994,6 +1342,7 @@ module Aws::IoTWireless
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         positioning: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] type
@@ -1032,6 +1381,11 @@ module Aws::IoTWireless
     #   that you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] positioning
+    #   FPort values for the GNSS, stream, and ClockSync functions of the
+    #   positioning information.
+    #   @return [String]
+    #
     class CreateWirelessDeviceRequest < Struct.new(
       :type,
       :name,
@@ -1039,7 +1393,8 @@ module Aws::IoTWireless
       :destination_name,
       :client_request_token,
       :lo_ra_wan,
-      :tags)
+      :tags,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1868,6 +2223,13 @@ module Aws::IoTWireless
     #           stream: 1,
     #           gnss: 1,
     #         },
+    #         applications: [
+    #           {
+    #             f_port: 1,
+    #             type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #             destination_name: "DestinationName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] fuota
@@ -1887,11 +2249,17 @@ module Aws::IoTWireless
     #   positioning information.
     #   @return [Types::Positioning]
     #
+    # @!attribute [rw] applications
+    #   Optional LoRaWAN application information, which can be used for
+    #   geolocation.
+    #   @return [Array<Types::ApplicationConfig>]
+    #
     class FPorts < Struct.new(
       :fuota,
       :multicast,
       :clock_sync,
-      :positioning)
+      :positioning,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2389,6 +2757,209 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPositionEstimateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         wi_fi_access_points: [
+    #           {
+    #             mac_address: "MacAddress", # required
+    #             rss: 1, # required
+    #           },
+    #         ],
+    #         cell_towers: {
+    #           gsm: [
+    #             {
+    #               mcc: 1, # required
+    #               mnc: 1, # required
+    #               lac: 1, # required
+    #               geran_cid: 1, # required
+    #               gsm_local_id: {
+    #                 bsic: 1, # required
+    #                 bcch: 1, # required
+    #               },
+    #               gsm_timing_advance: 1,
+    #               rx_level: 1,
+    #               gsm_nmr: [
+    #                 {
+    #                   bsic: 1, # required
+    #                   bcch: 1, # required
+    #                   rx_level: 1,
+    #                   global_identity: {
+    #                     lac: 1, # required
+    #                     geran_cid: 1, # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           wcdma: [
+    #             {
+    #               mcc: 1, # required
+    #               mnc: 1, # required
+    #               lac: 1,
+    #               utran_cid: 1, # required
+    #               wcdma_local_id: {
+    #                 uarfcndl: 1, # required
+    #                 psc: 1, # required
+    #               },
+    #               rscp: 1,
+    #               path_loss: 1,
+    #               wcdma_nmr: [
+    #                 {
+    #                   uarfcndl: 1, # required
+    #                   psc: 1, # required
+    #                   utran_cid: 1, # required
+    #                   rscp: 1,
+    #                   path_loss: 1,
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           tdscdma: [
+    #             {
+    #               mcc: 1, # required
+    #               mnc: 1, # required
+    #               lac: 1,
+    #               utran_cid: 1, # required
+    #               tdscdma_local_id: {
+    #                 uarfcn: 1, # required
+    #                 cell_params: 1, # required
+    #               },
+    #               tdscdma_timing_advance: 1,
+    #               rscp: 1,
+    #               path_loss: 1,
+    #               tdscdma_nmr: [
+    #                 {
+    #                   uarfcn: 1, # required
+    #                   cell_params: 1, # required
+    #                   utran_cid: 1,
+    #                   rscp: 1,
+    #                   path_loss: 1,
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           lte: [
+    #             {
+    #               mcc: 1, # required
+    #               mnc: 1, # required
+    #               eutran_cid: 1, # required
+    #               tac: 1,
+    #               lte_local_id: {
+    #                 pci: 1, # required
+    #                 earfcn: 1, # required
+    #               },
+    #               lte_timing_advance: 1,
+    #               rsrp: 1,
+    #               rsrq: 1.0,
+    #               nr_capable: false,
+    #               lte_nmr: [
+    #                 {
+    #                   pci: 1, # required
+    #                   earfcn: 1, # required
+    #                   eutran_cid: 1, # required
+    #                   rsrp: 1,
+    #                   rsrq: 1.0,
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           cdma: [
+    #             {
+    #               system_id: 1, # required
+    #               network_id: 1, # required
+    #               base_station_id: 1, # required
+    #               registration_zone: 1,
+    #               cdma_local_id: {
+    #                 pn_offset: 1, # required
+    #                 cdma_channel: 1, # required
+    #               },
+    #               pilot_power: 1,
+    #               base_lat: 1.0,
+    #               base_lng: 1.0,
+    #               cdma_nmr: [
+    #                 {
+    #                   pn_offset: 1, # required
+    #                   cdma_channel: 1, # required
+    #                   pilot_power: 1,
+    #                   base_station_id: 1,
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         ip: {
+    #           ip_address: "IPAddress", # required
+    #         },
+    #         gnss: {
+    #           payload: "GnssNav", # required
+    #           capture_time: 1.0,
+    #           capture_time_accuracy: 1.0,
+    #           assist_position: [1.0],
+    #           assist_altitude: 1.0,
+    #           use_2_d_solver: false,
+    #         },
+    #         timestamp: Time.now,
+    #       }
+    #
+    # @!attribute [rw] wi_fi_access_points
+    #   Retrieves an estimated device position by resolving WLAN measurement
+    #   data. The position is resolved using HERE's Wi-Fi based solver.
+    #   @return [Array<Types::WiFiAccessPoint>]
+    #
+    # @!attribute [rw] cell_towers
+    #   Retrieves an estimated device position by resolving measurement data
+    #   from cellular radio towers. The position is resolved using HERE's
+    #   cellular-based solver.
+    #   @return [Types::CellTowers]
+    #
+    # @!attribute [rw] ip
+    #   Retrieves an estimated device position by resolving the IP address
+    #   information from the device. The position is resolved using
+    #   MaxMind's IP-based solver.
+    #   @return [Types::Ip]
+    #
+    # @!attribute [rw] gnss
+    #   Retrieves an estimated device position by resolving the global
+    #   navigation satellite system (GNSS) scan data. The position is
+    #   resolved using the GNSS solver powered by LoRa Cloud.
+    #   @return [Types::Gnss]
+    #
+    # @!attribute [rw] timestamp
+    #   Optional information that specifies the time when the position
+    #   information will be resolved. It uses the UNIX timestamp format. If
+    #   not specified, the time at which the request was received will be
+    #   used.
+    #   @return [Time]
+    #
+    class GetPositionEstimateRequest < Struct.new(
+      :wi_fi_access_points,
+      :cell_towers,
+      :ip,
+      :gnss,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] geo_json_payload
+    #   The position information of the resource, displayed as a JSON
+    #   payload. The payload uses the GeoJSON format, which a format that's
+    #   used to encode geographic data structures. For more information, see
+    #   [GeoJSON][1].
+    #
+    #
+    #
+    #   [1]: https://geojson.org/
+    #   @return [String]
+    #
+    class GetPositionEstimateResponse < Struct.new(
+      :geo_json_payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPositionRequest
     #   data as a hash:
     #
@@ -2551,6 +3122,49 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourcePositionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "PositionResourceIdentifier", # required
+    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier of the resource for which position information is
+    #   retrieved. It can be the wireless device ID or the wireless gateway
+    #   ID depending on the resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource for which position information is retrieved,
+    #   which can be a wireless device or a wireless gateway.
+    #   @return [String]
+    #
+    class GetResourcePositionRequest < Struct.new(
+      :resource_identifier,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] geo_json_payload
+    #   The position information of the resource, displayed as a JSON
+    #   payload. The payload uses the GeoJSON format, which a format that's
+    #   used to encode geographic data structures. For more information, see
+    #   [GeoJSON][1].
+    #
+    #
+    #
+    #   [1]: https://geojson.org/
+    #   @return [String]
+    #
+    class GetResourcePositionResponse < Struct.new(
+      :geo_json_payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetServiceEndpointRequest
     #   data as a hash:
     #
@@ -2697,6 +3311,11 @@ module Aws::IoTWireless
     #   Sidewalk device object.
     #   @return [Types::SidewalkDevice]
     #
+    # @!attribute [rw] positioning
+    #   FPort values for the GNSS, stream, and ClockSync functions of the
+    #   positioning information.
+    #   @return [String]
+    #
     class GetWirelessDeviceResponse < Struct.new(
       :type,
       :name,
@@ -2707,7 +3326,8 @@ module Aws::IoTWireless
       :thing_name,
       :thing_arn,
       :lo_ra_wan,
-      :sidewalk)
+      :sidewalk,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3006,6 +3626,235 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Global identity information.
+    #
+    # @note When making an API call, you may pass GlobalIdentity
+    #   data as a hash:
+    #
+    #       {
+    #         lac: 1, # required
+    #         geran_cid: 1, # required
+    #       }
+    #
+    # @!attribute [rw] lac
+    #   Location area code of the global identity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] geran_cid
+    #   GERAN (GSM EDGE Radio Access Network) cell global identifier.
+    #   @return [Integer]
+    #
+    class GlobalIdentity < Struct.new(
+      :lac,
+      :geran_cid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Global navigation satellite system (GNSS) object used for positioning.
+    #
+    # @note When making an API call, you may pass Gnss
+    #   data as a hash:
+    #
+    #       {
+    #         payload: "GnssNav", # required
+    #         capture_time: 1.0,
+    #         capture_time_accuracy: 1.0,
+    #         assist_position: [1.0],
+    #         assist_altitude: 1.0,
+    #         use_2_d_solver: false,
+    #       }
+    #
+    # @!attribute [rw] payload
+    #   Payload that contains the GNSS scan result, or NAV message, in
+    #   hexadecimal notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] capture_time
+    #   Optional parameter that gives an estimate of the time when the GNSS
+    #   scan information is taken, in seconds GPS time (GPST). If capture
+    #   time is not specified, the local server time is used.
+    #   @return [Float]
+    #
+    # @!attribute [rw] capture_time_accuracy
+    #   Optional value that gives the capture time estimate accuracy, in
+    #   seconds. If capture time accuracy is not specified, default value of
+    #   300 is used.
+    #   @return [Float]
+    #
+    # @!attribute [rw] assist_position
+    #   Optional assistance position information, specified using latitude
+    #   and longitude values in degrees. The co-ordinates are inside the
+    #   WGS84 reference frame.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] assist_altitude
+    #   Optional assistance altitude, which is the altitude of the device at
+    #   capture time, specified in meters above the WGS84 reference
+    #   ellipsoid.
+    #   @return [Float]
+    #
+    # @!attribute [rw] use_2_d_solver
+    #   Optional parameter that forces 2D solve, which modifies the
+    #   positioning algorithm to a 2D solution problem. When this parameter
+    #   is specified, the assistance altitude should have an accuracy of at
+    #   least 10 meters.
+    #   @return [Boolean]
+    #
+    class Gnss < Struct.new(
+      :payload,
+      :capture_time,
+      :capture_time_accuracy,
+      :assist_position,
+      :assist_altitude,
+      :use_2_d_solver)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # GSM local ID information, which corresponds to the local
+    # identification parameters of a GSM cell.
+    #
+    # @note When making an API call, you may pass GsmLocalId
+    #   data as a hash:
+    #
+    #       {
+    #         bsic: 1, # required
+    #         bcch: 1, # required
+    #       }
+    #
+    # @!attribute [rw] bsic
+    #   GSM base station identity code (BSIC).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bcch
+    #   GSM broadcast control channel.
+    #   @return [Integer]
+    #
+    class GsmLocalId < Struct.new(
+      :bsic,
+      :bcch)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # GSM object for network measurement reports.
+    #
+    # @note When making an API call, you may pass GsmNmrObj
+    #   data as a hash:
+    #
+    #       {
+    #         bsic: 1, # required
+    #         bcch: 1, # required
+    #         rx_level: 1,
+    #         global_identity: {
+    #           lac: 1, # required
+    #           geran_cid: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bsic
+    #   GSM base station identity code (BSIC).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bcch
+    #   GSM broadcast control channel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rx_level
+    #   Rx level, which is the received signal power, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] global_identity
+    #   Global identity information of the GSM object.
+    #   @return [Types::GlobalIdentity]
+    #
+    class GsmNmrObj < Struct.new(
+      :bsic,
+      :bcch,
+      :rx_level,
+      :global_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # GSM object.
+    #
+    # @note When making an API call, you may pass GsmObj
+    #   data as a hash:
+    #
+    #       {
+    #         mcc: 1, # required
+    #         mnc: 1, # required
+    #         lac: 1, # required
+    #         geran_cid: 1, # required
+    #         gsm_local_id: {
+    #           bsic: 1, # required
+    #           bcch: 1, # required
+    #         },
+    #         gsm_timing_advance: 1,
+    #         rx_level: 1,
+    #         gsm_nmr: [
+    #           {
+    #             bsic: 1, # required
+    #             bcch: 1, # required
+    #             rx_level: 1,
+    #             global_identity: {
+    #               lac: 1, # required
+    #               geran_cid: 1, # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] mcc
+    #   Mobile Country Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mnc
+    #   Mobile Network Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lac
+    #   Location area code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] geran_cid
+    #   GERAN (GSM EDGE Radio Access Network) Cell Global Identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gsm_local_id
+    #   GSM local identification (local ID) information.
+    #   @return [Types::GsmLocalId]
+    #
+    # @!attribute [rw] gsm_timing_advance
+    #   Timing advance value, which corresponds to the length of time a
+    #   signal takes to reach the base station from a mobile phone.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rx_level
+    #   Rx level, which is the received signal power, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gsm_nmr
+    #   GSM object for network measurement reports.
+    #   @return [Array<Types::GsmNmrObj>]
+    #
+    class GsmObj < Struct.new(
+      :mcc,
+      :mnc,
+      :lac,
+      :geran_cid,
+      :gsm_local_id,
+      :gsm_timing_advance,
+      :rx_level,
+      :gsm_nmr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An unexpected error occurred while processing a request.
     #
     # @!attribute [rw] message
@@ -3013,6 +3862,25 @@ module Aws::IoTWireless
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # IP address used for resolving device location.
+    #
+    # @note When making an API call, you may pass Ip
+    #   data as a hash:
+    #
+    #       {
+    #         ip_address: "IPAddress", # required
+    #       }
+    #
+    # @!attribute [rw] ip_address
+    #   IP address information.
+    #   @return [String]
+    #
+    class Ip < Struct.new(
+      :ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3842,6 +4710,13 @@ module Aws::IoTWireless
     #             stream: 1,
     #             gnss: 1,
     #           },
+    #           applications: [
+    #             {
+    #               f_port: 1,
+    #               type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #               destination_name: "DestinationName",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4586,6 +5461,13 @@ module Aws::IoTWireless
     #             stream: 1,
     #             gnss: 1,
     #           },
+    #           applications: [
+    #             {
+    #               f_port: 1,
+    #               type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #               destination_name: "DestinationName",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4681,6 +5563,167 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # LTE local identification (local ID) information.
+    #
+    # @note When making an API call, you may pass LteLocalId
+    #   data as a hash:
+    #
+    #       {
+    #         pci: 1, # required
+    #         earfcn: 1, # required
+    #       }
+    #
+    # @!attribute [rw] pci
+    #   Physical cell ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] earfcn
+    #   Evolved universal terrestrial radio access (E-UTRA) absolute radio
+    #   frequency channel number (FCN).
+    #   @return [Integer]
+    #
+    class LteLocalId < Struct.new(
+      :pci,
+      :earfcn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LTE object for network measurement reports.
+    #
+    # @note When making an API call, you may pass LteNmrObj
+    #   data as a hash:
+    #
+    #       {
+    #         pci: 1, # required
+    #         earfcn: 1, # required
+    #         eutran_cid: 1, # required
+    #         rsrp: 1,
+    #         rsrq: 1.0,
+    #       }
+    #
+    # @!attribute [rw] pci
+    #   Physical cell ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] earfcn
+    #   E-UTRA (Evolved universal terrestrial Radio Access) absolute radio
+    #   frequency channel Number (EARFCN).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] eutran_cid
+    #   E-UTRAN (Evolved Universal Terrestrial Radio Access Network) cell
+    #   global identifier (EUTRANCID).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrp
+    #   Signal power of the reference signal received, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrq
+    #   Signal quality of the reference Signal received, measured in
+    #   decibels (dB).
+    #   @return [Float]
+    #
+    class LteNmrObj < Struct.new(
+      :pci,
+      :earfcn,
+      :eutran_cid,
+      :rsrp,
+      :rsrq)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LTE object.
+    #
+    # @note When making an API call, you may pass LteObj
+    #   data as a hash:
+    #
+    #       {
+    #         mcc: 1, # required
+    #         mnc: 1, # required
+    #         eutran_cid: 1, # required
+    #         tac: 1,
+    #         lte_local_id: {
+    #           pci: 1, # required
+    #           earfcn: 1, # required
+    #         },
+    #         lte_timing_advance: 1,
+    #         rsrp: 1,
+    #         rsrq: 1.0,
+    #         nr_capable: false,
+    #         lte_nmr: [
+    #           {
+    #             pci: 1, # required
+    #             earfcn: 1, # required
+    #             eutran_cid: 1, # required
+    #             rsrp: 1,
+    #             rsrq: 1.0,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] mcc
+    #   Mobile Country Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mnc
+    #   Mobile Network Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] eutran_cid
+    #   E-UTRAN (Evolved Universal Terrestrial Radio Access Network) Cell
+    #   Global Identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tac
+    #   LTE tracking area code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lte_local_id
+    #   LTE local identification (local ID) information.
+    #   @return [Types::LteLocalId]
+    #
+    # @!attribute [rw] lte_timing_advance
+    #   LTE timing advance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrp
+    #   Signal power of the reference signal received, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrq
+    #   Signal quality of the reference Signal received, measured in
+    #   decibels (dB).
+    #   @return [Float]
+    #
+    # @!attribute [rw] nr_capable
+    #   Parameter that determines whether the LTE object is capable of
+    #   supporting NR (new radio).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lte_nmr
+    #   LTE object for network measurement reports.
+    #   @return [Array<Types::LteNmrObj>]
+    #
+    class LteObj < Struct.new(
+      :mcc,
+      :mnc,
+      :eutran_cid,
+      :tac,
+      :lte_local_id,
+      :lte_timing_advance,
+      :rsrp,
+      :rsrq,
+      :nr_capable,
+      :lte_nmr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Message delivery status event configuration object for enabling and
     # disabling relevant topics.
     #
@@ -4700,8 +5743,8 @@ module Aws::IoTWireless
     #   @return [Types::SidewalkEventNotificationConfigurations]
     #
     # @!attribute [rw] wireless_device_id_event_topic
-    #   Denotes whether the wireless device ID device registration state
-    #   event topic is enabled or disabled.
+    #   Denotes whether the wireless device ID message delivery status event
+    #   topic is enabled or disabled.
     #   @return [String]
     #
     class MessageDeliveryStatusEventConfiguration < Struct.new(
@@ -5630,8 +6673,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] ack_mode_retry_duration_secs
-    #   The duration of time in seconds for which you want to retry sending
-    #   the ACK.
+    #   The duration of time in seconds to retry sending the ACK.
     #   @return [Integer]
     #
     class SidewalkSendDataToDevice < Struct.new(
@@ -5849,6 +6891,160 @@ module Aws::IoTWireless
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # TD-SCDMA local identification (local Id) information.
+    #
+    # @note When making an API call, you may pass TdscdmaLocalId
+    #   data as a hash:
+    #
+    #       {
+    #         uarfcn: 1, # required
+    #         cell_params: 1, # required
+    #       }
+    #
+    # @!attribute [rw] uarfcn
+    #   TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute
+    #   RF channel number (UARFCN).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cell_params
+    #   Cell parameters for TD-SCDMA.
+    #   @return [Integer]
+    #
+    class TdscdmaLocalId < Struct.new(
+      :uarfcn,
+      :cell_params)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # TD-SCDMA object for network measurement reports.
+    #
+    # @note When making an API call, you may pass TdscdmaNmrObj
+    #   data as a hash:
+    #
+    #       {
+    #         uarfcn: 1, # required
+    #         cell_params: 1, # required
+    #         utran_cid: 1,
+    #         rscp: 1,
+    #         path_loss: 1,
+    #       }
+    #
+    # @!attribute [rw] uarfcn
+    #   TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute
+    #   RF channel number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cell_params
+    #   Cell parameters for TD-SCDMA network measurement reports object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utran_cid
+    #   UTRAN (UMTS Terrestrial Radio Access Network) cell global
+    #   identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rscp
+    #   Code power of the received signal, measured in decibel-milliwatts
+    #   (dBm).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path_loss
+    #   Path loss, or path attenuation, is the reduction in power density of
+    #   an electromagnetic wave as it propagates through space.
+    #   @return [Integer]
+    #
+    class TdscdmaNmrObj < Struct.new(
+      :uarfcn,
+      :cell_params,
+      :utran_cid,
+      :rscp,
+      :path_loss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # TD-SCDMA object.
+    #
+    # @note When making an API call, you may pass TdscdmaObj
+    #   data as a hash:
+    #
+    #       {
+    #         mcc: 1, # required
+    #         mnc: 1, # required
+    #         lac: 1,
+    #         utran_cid: 1, # required
+    #         tdscdma_local_id: {
+    #           uarfcn: 1, # required
+    #           cell_params: 1, # required
+    #         },
+    #         tdscdma_timing_advance: 1,
+    #         rscp: 1,
+    #         path_loss: 1,
+    #         tdscdma_nmr: [
+    #           {
+    #             uarfcn: 1, # required
+    #             cell_params: 1, # required
+    #             utran_cid: 1,
+    #             rscp: 1,
+    #             path_loss: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] mcc
+    #   Mobile Country Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mnc
+    #   Mobile Network Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lac
+    #   Location Area Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utran_cid
+    #   UTRAN (UMTS Terrestrial Radio Access Network) Cell Global
+    #   Identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tdscdma_local_id
+    #   TD-SCDMA local identification (local ID) information.
+    #   @return [Types::TdscdmaLocalId]
+    #
+    # @!attribute [rw] tdscdma_timing_advance
+    #   TD-SCDMA Timing advance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rscp
+    #   Signal power of the received signal (Received Signal Code Power),
+    #   measured in decibel-milliwatts (dBm).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path_loss
+    #   Path loss, or path attenuation, is the reduction in power density of
+    #   an electromagnetic wave as it propagates through space.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tdscdma_nmr
+    #   TD-SCDMA object for network measurement reports.
+    #   @return [Array<Types::TdscdmaNmrObj>]
+    #
+    class TdscdmaObj < Struct.new(
+      :mcc,
+      :mnc,
+      :lac,
+      :utran_cid,
+      :tdscdma_local_id,
+      :tdscdma_timing_advance,
+      :rscp,
+      :path_loss,
+      :tdscdma_nmr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass TestWirelessDeviceRequest
     #   data as a hash:
@@ -6119,14 +7315,27 @@ module Aws::IoTWireless
     #           stream: 1,
     #           gnss: 1,
     #         },
+    #         applications: [
+    #           {
+    #             f_port: 1,
+    #             type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #             destination_name: "DestinationName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] positioning
     #   Positioning FPorts for the ClockSync, Stream, and GNSS functions.
     #   @return [Types::Positioning]
     #
+    # @!attribute [rw] applications
+    #   LoRaWAN application, which can be used for geolocation by activating
+    #   positioning.
+    #   @return [Array<Types::ApplicationConfig>]
+    #
     class UpdateFPorts < Struct.new(
-      :positioning)
+      :positioning,
+      :applications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6497,6 +7706,47 @@ module Aws::IoTWireless
 
     class UpdateResourceEventConfigurationResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateResourcePositionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_identifier: "PositionResourceIdentifier", # required
+    #         resource_type: "WirelessDevice", # required, accepts WirelessDevice, WirelessGateway
+    #         geo_json_payload: "data",
+    #       }
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier of the resource for which position information is
+    #   updated. It can be the wireless device ID or the wireless gateway ID
+    #   depending on the resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource for which position information is updated,
+    #   which can be a wireless device or a wireless gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_json_payload
+    #   The position information of the resource, displayed as a JSON
+    #   payload. The payload uses the GeoJSON format, which a format that's
+    #   used to encode geographic data structures. For more information, see
+    #   [GeoJSON][1].
+    #
+    #
+    #
+    #   [1]: https://geojson.org/
+    #   @return [String]
+    #
+    class UpdateResourcePositionRequest < Struct.new(
+      :resource_identifier,
+      :resource_type,
+      :geo_json_payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateResourcePositionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateWirelessDeviceRequest
     #   data as a hash:
     #
@@ -6520,8 +7770,16 @@ module Aws::IoTWireless
     #               stream: 1,
     #               gnss: 1,
     #             },
+    #             applications: [
+    #               {
+    #                 f_port: 1,
+    #                 type: "SemtechGeolocation", # accepts SemtechGeolocation
+    #                 destination_name: "DestinationName",
+    #               },
+    #             ],
     #           },
     #         },
+    #         positioning: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] id
@@ -6544,12 +7802,18 @@ module Aws::IoTWireless
     #   The updated wireless device's configuration.
     #   @return [Types::LoRaWANUpdateDevice]
     #
+    # @!attribute [rw] positioning
+    #   FPort values for the GNSS, stream, and ClockSync functions of the
+    #   positioning information.
+    #   @return [String]
+    #
     class UpdateWirelessDeviceRequest < Struct.new(
       :id,
       :destination_name,
       :name,
       :description,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6675,6 +7939,175 @@ module Aws::IoTWireless
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # WCDMA local identification (local ID) information.
+    #
+    # @note When making an API call, you may pass WcdmaLocalId
+    #   data as a hash:
+    #
+    #       {
+    #         uarfcndl: 1, # required
+    #         psc: 1, # required
+    #       }
+    #
+    # @!attribute [rw] uarfcndl
+    #   WCDMA UTRA Absolute RF Channel Number downlink.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] psc
+    #   Primary Scrambling Code.
+    #   @return [Integer]
+    #
+    class WcdmaLocalId < Struct.new(
+      :uarfcndl,
+      :psc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Network Measurement Reports.
+    #
+    # @note When making an API call, you may pass WcdmaNmrObj
+    #   data as a hash:
+    #
+    #       {
+    #         uarfcndl: 1, # required
+    #         psc: 1, # required
+    #         utran_cid: 1, # required
+    #         rscp: 1,
+    #         path_loss: 1,
+    #       }
+    #
+    # @!attribute [rw] uarfcndl
+    #   WCDMA UTRA Absolute RF Channel Number downlink.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] psc
+    #   Primary Scrambling Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utran_cid
+    #   UTRAN (UMTS Terrestrial Radio Access Network) Cell Global
+    #   Identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rscp
+    #   Received Signal Code Power (signal power) (dBm)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path_loss
+    #   Path loss, or path attenuation, is the reduction in power density of
+    #   an electromagnetic wave as it propagates through space.
+    #   @return [Integer]
+    #
+    class WcdmaNmrObj < Struct.new(
+      :uarfcndl,
+      :psc,
+      :utran_cid,
+      :rscp,
+      :path_loss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # WCDMA.
+    #
+    # @note When making an API call, you may pass WcdmaObj
+    #   data as a hash:
+    #
+    #       {
+    #         mcc: 1, # required
+    #         mnc: 1, # required
+    #         lac: 1,
+    #         utran_cid: 1, # required
+    #         wcdma_local_id: {
+    #           uarfcndl: 1, # required
+    #           psc: 1, # required
+    #         },
+    #         rscp: 1,
+    #         path_loss: 1,
+    #         wcdma_nmr: [
+    #           {
+    #             uarfcndl: 1, # required
+    #             psc: 1, # required
+    #             utran_cid: 1, # required
+    #             rscp: 1,
+    #             path_loss: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] mcc
+    #   Mobile Country Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mnc
+    #   Mobile Network Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lac
+    #   Location Area Code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utran_cid
+    #   UTRAN (UMTS Terrestrial Radio Access Network) Cell Global
+    #   Identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wcdma_local_id
+    #   WCDMA local ID information.
+    #   @return [Types::WcdmaLocalId]
+    #
+    # @!attribute [rw] rscp
+    #   Received Signal Code Power (signal power) (dBm).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path_loss
+    #   Path loss, or path attenuation, is the reduction in power density of
+    #   an electromagnetic wave as it propagates through space.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wcdma_nmr
+    #   WCDMA object for network measurement reports.
+    #   @return [Array<Types::WcdmaNmrObj>]
+    #
+    class WcdmaObj < Struct.new(
+      :mcc,
+      :mnc,
+      :lac,
+      :utran_cid,
+      :wcdma_local_id,
+      :rscp,
+      :path_loss,
+      :wcdma_nmr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Wi-Fi access point.
+    #
+    # @note When making an API call, you may pass WiFiAccessPoint
+    #   data as a hash:
+    #
+    #       {
+    #         mac_address: "MacAddress", # required
+    #         rss: 1, # required
+    #       }
+    #
+    # @!attribute [rw] mac_address
+    #   Wi-Fi MAC Address.
+    #   @return [String]
+    #
+    # @!attribute [rw] rss
+    #   Recived signal strength of the WLAN measurement data.
+    #   @return [Integer]
+    #
+    class WiFiAccessPoint < Struct.new(
+      :mac_address,
+      :rss)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -711,8 +711,6 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   (Optional)
-    #
     #   The name of an IAM role that Organizations automatically
     #   preconfigures in the new member account. This role trusts the
     #   management account, allowing users in the management account to
@@ -1834,6 +1832,18 @@ module Aws::Organizations
     #
     class DescribePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   A structure that contains details about the resource policy.
+    #   @return [Types::ResourcePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeResourcePolicyResponse AWS API Documentation
+    #
+    class DescribeResourcePolicyResponse < Struct.new(
+      :resource_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4603,6 +4613,72 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         content: "ResourcePolicyContent", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] content
+    #   If provided, the new content for the resource policy. The text must
+    #   be correctly formatted JSON that complies with the syntax for the
+    #   resource policy's type. For more information, see [Service Control
+    #   Policy Syntax][1] in the *Organizations User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Updates the list of tags that you want to attach to the
+    #   newly-created resource policy. For each tag in the list, you must
+    #   specify both a tag key and a value. You can set the value to an
+    #   empty string, but you can't set it to `null`. For more information
+    #   about tagging, see [Tagging Organizations resources][1] in the
+    #   Organizations User Guide.
+    #
+    #   <note markdown="1"> Calls with tags apply to the initial creation of the resource
+    #   policy, otherwise an exception is thrown. If any one of the tags is
+    #   invalid or if you exceed the allowed number of tags for the resource
+    #   policy, then the entire request fails and the resource policy is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   A structure that contains details about the resource policy.
+    #   @return [Types::ResourcePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterDelegatedAdministratorRequest
     #   data as a hash:
     #
@@ -4653,6 +4729,60 @@ module Aws::Organizations
     #
     class RemoveAccountFromOrganizationRequest < Struct.new(
       :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains details about a resource policy.
+    #
+    # @!attribute [rw] resource_policy_summary
+    #   A structure that contains resource policy ID and Amazon Resource
+    #   Name (ARN).
+    #   @return [Types::ResourcePolicySummary]
+    #
+    # @!attribute [rw] content
+    #   The policy text of the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ResourcePolicy AWS API Documentation
+    #
+    class ResourcePolicy < Struct.new(
+      :resource_policy_summary,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # We can't find a resource policy request with the parameter that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ResourcePolicyNotFoundException AWS API Documentation
+    #
+    class ResourcePolicyNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains resource policy ID and Amazon Resource Name
+    # (ARN).
+    #
+    # @!attribute [rw] id
+    #   The unique identifier (ID) of the resource policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ResourcePolicySummary AWS API Documentation
+    #
+    class ResourcePolicySummary < Struct.new(
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

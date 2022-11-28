@@ -722,6 +722,9 @@
   "NimbleStudio": {
     "models": "nimble/2020-08-01"
   },
+  "OAM": {
+    "models": "oam/2022-06-10"
+  },
   "OpenSearchService": {
     "models": "opensearch/2021-01-01"
   },

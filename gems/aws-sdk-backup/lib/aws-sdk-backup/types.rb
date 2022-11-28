@@ -228,6 +228,16 @@ module Aws::Backup
     #   Represents the type of backup for a backup job.
     #   @return [String]
     #
+    # @!attribute [rw] parent_job_id
+    #   This uniquely identifies a request to Backup to back up a resource.
+    #   The return will be the parent (composite) job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_parent
+    #   This is a boolean value indicating this is a parent (composite)
+    #   backup job.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob AWS API Documentation
     #
     class BackupJob < Struct.new(
@@ -250,7 +260,9 @@ module Aws::Backup
       :resource_type,
       :bytes_transferred,
       :backup_options,
-      :backup_type)
+      :backup_type,
+      :parent_job_id,
+      :is_parent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -478,6 +490,8 @@ module Aws::Backup
     # @!attribute [rw] start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
     #   canceled if it doesn't start successfully. This value is optional.
+    #   If this value is included, it must be at least 60 minutes to avoid
+    #   errors.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_window_minutes
@@ -596,6 +610,8 @@ module Aws::Backup
     # @!attribute [rw] start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
     #   canceled if it doesn't start successfully. This value is optional.
+    #   If this value is included, it must be at least 60 minutes to avoid
+    #   errors.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_window_minutes
@@ -994,6 +1010,43 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelLegalHoldInput
+    #   data as a hash:
+    #
+    #       {
+    #         legal_hold_id: "string", # required
+    #         cancel_description: "string", # required
+    #         retain_record_in_days: 1,
+    #       }
+    #
+    # @!attribute [rw] legal_hold_id
+    #   Legal hold ID required to remove the specified legal hold on a
+    #   recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancel_description
+    #   String describing the reason for removing the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] retain_record_in_days
+    #   The integer amount in days specifying amount of days after this API
+    #   operation to remove legal hold.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CancelLegalHoldInput AWS API Documentation
+    #
+    class CancelLegalHoldInput < Struct.new(
+      :legal_hold_id,
+      :cancel_description,
+      :retain_record_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CancelLegalHoldOutput AWS API Documentation
+    #
+    class CancelLegalHoldOutput < Aws::EmptyStructure; end
+
     # Contains an array of triplets made up of a condition type (such as
     # `StringEquals`), a key, and a value. Used to filter resources using
     # their tags and assign them to a backup plan. Case sensitive.
@@ -1378,6 +1431,36 @@ module Aws::Backup
     #   Relational Database Service (Amazon RDS) database.
     #   @return [String]
     #
+    # @!attribute [rw] parent_job_id
+    #   This uniquely identifies a request to Backup to copy a resource. The
+    #   return will be the parent (composite) job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_parent
+    #   This is a boolean value indicating this is a parent (composite) copy
+    #   job.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] composite_member_identifier
+    #   This is the identifier of a resource within a composite group, such
+    #   as nested (child) recovery point belonging to a composite (parent)
+    #   stack. The ID is transferred from the [ logical ID][1] within a
+    #   stack.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_child_jobs
+    #   This is the number of child (nested) copy jobs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] child_jobs_in_state
+    #   This returns the statistics of the included child (nested) copy
+    #   jobs.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJob AWS API Documentation
     #
     class CopyJob < Struct.new(
@@ -1395,7 +1478,12 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :created_by,
-      :resource_type)
+      :resource_type,
+      :parent_job_id,
+      :is_parent,
+      :composite_member_identifier,
+      :number_of_child_jobs,
+      :child_jobs_in_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1793,6 +1881,111 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLegalHoldInput
+    #   data as a hash:
+    #
+    #       {
+    #         title: "string", # required
+    #         description: "string", # required
+    #         idempotency_token: "string",
+    #         recovery_point_selection: {
+    #           vault_names: ["string"],
+    #           resource_identifiers: ["string"],
+    #           date_range: {
+    #             from_date: Time.now, # required
+    #             to_date: Time.now, # required
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] title
+    #   This is the string title of the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   This is the string description of the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   This is a user-chosen string used to distinguish between otherwise
+    #   identical calls. Retrying a successful request with the same
+    #   idempotency token results in a success message with no action taken.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_selection
+    #   This specifies criteria to assign a set of resources, such as
+    #   resource types or backup vaults.
+    #   @return [Types::RecoveryPointSelection]
+    #
+    # @!attribute [rw] tags
+    #   Optional tags to include. A tag is a key-value pair you can use to
+    #   manage, filter, and search for your resources. Allowed characters
+    #   include UTF-8 letters, numbers, spaces, and the following
+    #   characters: + - = . \_ : /.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateLegalHoldInput AWS API Documentation
+    #
+    class CreateLegalHoldInput < Struct.new(
+      :title,
+      :description,
+      :idempotency_token,
+      :recovery_point_selection,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] title
+    #   This is the string title of the legal hold returned after creating
+    #   the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   This displays the status of the legal hold returned after creating
+    #   the legal hold. Statuses can be `ACTIVE`, `PENDING`, `CANCELED`,
+    #   `CANCELING`, or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   This is the returned string description of the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_hold_id
+    #   Legal hold ID returned for the specified legal hold on a recovery
+    #   point.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_hold_arn
+    #   This is the ARN (Amazon Resource Number) of the created legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   Time in number format when legal hold was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recovery_point_selection
+    #   This specifies criteria to assign a set of resources, such as
+    #   resource types or backup vaults.
+    #   @return [Types::RecoveryPointSelection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateLegalHoldOutput AWS API Documentation
+    #
+    class CreateLegalHoldOutput < Struct.new(
+      :title,
+      :status,
+      :description,
+      :legal_hold_id,
+      :legal_hold_arn,
+      :creation_date,
+      :recovery_point_selection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateReportPlanInput
     #   data as a hash:
     #
@@ -1808,6 +2001,9 @@ module Aws::Backup
     #           report_template: "string", # required
     #           framework_arns: ["string"],
     #           number_of_frameworks: 1,
+    #           accounts: ["string"],
+    #           organization_units: ["string"],
+    #           regions: ["string"],
     #         },
     #         report_plan_tags: {
     #           "string" => "string",
@@ -1894,6 +2090,48 @@ module Aws::Backup
       :report_plan_name,
       :report_plan_arn,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is a resource filter containing FromDate: DateTime and ToDate:
+    # DateTime. Both values are required. Future DateTime values are not
+    # permitted.
+    #
+    # The date and time are in Unix format and Coordinated Universal Time
+    # (UTC), and it is accurate to milliseconds ((milliseconds are
+    # optional). For example, the value 1516925490.087 represents Friday,
+    # January 26, 2018 12:11:30.087 AM.
+    #
+    # @note When making an API call, you may pass DateRange
+    #   data as a hash:
+    #
+    #       {
+    #         from_date: Time.now, # required
+    #         to_date: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] from_date
+    #   This value is the beginning date, inclusive.
+    #
+    #   The date and time are in Unix format and Coordinated Universal Time
+    #   (UTC), and it is accurate to milliseconds (milliseconds are
+    #   optional).
+    #   @return [Time]
+    #
+    # @!attribute [rw] to_date
+    #   This value is the end date, inclusive.
+    #
+    #   The date and time are in Unix format and Coordinated Universal Time
+    #   (UTC), and it is accurate to milliseconds (milliseconds are
+    #   optional).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DateRange AWS API Documentation
+    #
+    class DateRange < Struct.new(
+      :from_date,
+      :to_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2290,6 +2528,24 @@ module Aws::Backup
     #   `BackupType` is empty, then the backup type was a regular backup.
     #   @return [String]
     #
+    # @!attribute [rw] parent_job_id
+    #   This returns the parent (composite) resource backup job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_parent
+    #   This returns the boolean value that a backup job is a parent
+    #   (composite) job.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] number_of_child_jobs
+    #   This returns the number of child (nested) backup jobs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] child_jobs_in_state
+    #   This returns the statistics of the included child (nested) backup
+    #   jobs.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
     #
     class DescribeBackupJobOutput < Struct.new(
@@ -2312,7 +2568,11 @@ module Aws::Backup
       :expected_completion_date,
       :start_by,
       :backup_options,
-      :backup_type)
+      :backup_type,
+      :parent_job_id,
+      :is_parent,
+      :number_of_child_jobs,
+      :child_jobs_in_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2512,10 +2772,10 @@ module Aws::Backup
     #   @return [Array<Types::FrameworkControl>]
     #
     # @!attribute [rw] creation_time
-    #   The date and time that a framework is created, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationTime` is
-    #   accurate to milliseconds. For example, the value 1516925490.087
-    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   The date and time that a framework is created, in ISO 8601
+    #   representation. The value of `CreationTime` is accurate to
+    #   milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents
+    #   the 10th of July 2020 at 3:00 PM 8 hours behind UTC.
     #   @return [Time]
     #
     # @!attribute [rw] deployment_status
@@ -2734,6 +2994,18 @@ module Aws::Backup
     #   3: Delete the recovery points][2] in the *Clean up resources*
     #   section of *Getting started*.
     #
+    #   `STOPPED` status occurs on a continuous backup where a user has
+    #   taken some action that causes the continuous backup to be disabled.
+    #   This can be caused by the removal of permissions, turning off
+    #   versioning, turning off events being sent to EventBridge, or
+    #   disabling the EventBridge rules that are put in place by Backup.
+    #
+    #   To resolve `STOPPED` status, ensure that all requested permissions
+    #   are in place and that versioning is enabled on the S3 bucket. Once
+    #   these conditions are met, the next instance of a backup rule running
+    #   will result in a new continuous recovery point being created. The
+    #   recovery points with STOPPED status do not need to be deleted.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html
@@ -2815,6 +3087,28 @@ module Aws::Backup
     #   12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] parent_recovery_point_arn
+    #   This is an ARN that uniquely identifies a parent (composite)
+    #   recovery point; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    #   @return [String]
+    #
+    # @!attribute [rw] composite_member_identifier
+    #   This is the identifier of a resource within a composite group, such
+    #   as nested (child) recovery point belonging to a composite (parent)
+    #   stack. The ID is transferred from the [ logical ID][1] within a
+    #   stack.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
+    #   @return [String]
+    #
+    # @!attribute [rw] is_parent
+    #   This returns the boolean value that a recovery point is a parent
+    #   (composite) job.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPointOutput AWS API Documentation
     #
     class DescribeRecoveryPointOutput < Struct.new(
@@ -2836,7 +3130,10 @@ module Aws::Backup
       :encryption_key_arn,
       :is_encrypted,
       :storage_class,
-      :last_restore_time)
+      :last_restore_time,
+      :parent_recovery_point_arn,
+      :composite_member_identifier,
+      :is_parent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3057,6 +3354,37 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateRecoveryPointFromParentInput
+    #   data as a hash:
+    #
+    #       {
+    #         backup_vault_name: "BackupVaultName", # required
+    #         recovery_point_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] backup_vault_name
+    #   This is the name of a logical container where the child (nested)
+    #   recovery point is stored. Backup vaults are identified by names that
+    #   are unique to the account used to create them and the Amazon Web
+    #   Services Region where they are created. They consist of lowercase
+    #   letters, numbers, and hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   This is the Amazon Resource Name (ARN) that uniquely identifies the
+    #   child (nested) recovery point; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateRecoveryPointFromParentInput AWS API Documentation
+    #
+    class DisassociateRecoveryPointFromParentInput < Struct.new(
+      :backup_vault_name,
+      :recovery_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateRecoveryPointInput
     #   data as a hash:
     #
@@ -3144,10 +3472,10 @@ module Aws::Backup
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
-    #   The date and time that a framework is created, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationTime` is
-    #   accurate to milliseconds. For example, the value 1516925490.087
-    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   The date and time that a framework is created, in ISO 8601
+    #   representation. The value of `CreationTime` is accurate to
+    #   milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents
+    #   the 10th of July 2020 at 3:00 PM 8 hours behind UTC.
     #   @return [Time]
     #
     # @!attribute [rw] deployment_status
@@ -3549,6 +3877,88 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLegalHoldInput
+    #   data as a hash:
+    #
+    #       {
+    #         legal_hold_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] legal_hold_id
+    #   This is the ID required to use `GetLegalHold`. This unique ID is
+    #   associated with a specific legal hold.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetLegalHoldInput AWS API Documentation
+    #
+    class GetLegalHoldInput < Struct.new(
+      :legal_hold_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] title
+    #   This is the string title of the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   This is the status of the legal hold. Statuses can be `ACTIVE`,
+    #   `CREATING`, `CANCELED`, and `CANCELING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   This is the returned string description of the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancel_description
+    #   String describing the reason for removing the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_hold_id
+    #   This is the returned ID associated with a specified legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_hold_arn
+    #   This is the returned framework ARN for the specified legal hold. An
+    #   Amazon Resource Name (ARN) uniquely identifies a resource. The
+    #   format of the ARN depends on the resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   Time in number format when legal hold was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cancellation_date
+    #   Time in number when legal hold was cancelled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] retain_record_until
+    #   This is the date and time until which the legal hold record will be
+    #   retained.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recovery_point_selection
+    #   This specifies criteria to assign a set of resources, such as
+    #   resource types or backup vaults.
+    #   @return [Types::RecoveryPointSelection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetLegalHoldOutput AWS API Documentation
+    #
+    class GetLegalHoldOutput < Struct.new(
+      :title,
+      :status,
+      :description,
+      :cancel_description,
+      :legal_hold_id,
+      :legal_hold_arn,
+      :creation_date,
+      :cancellation_date,
+      :retain_record_until,
+      :recovery_point_selection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetRecoveryPointRestoreMetadataInput
     #   data as a hash:
     #
@@ -3717,6 +4127,60 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # A legal hold is an administrative tool that helps prevent backups from
+    # being deleted while under a hold. While the hold is in place, backups
+    # under a hold cannot be deleted and lifecycle policies that would alter
+    # the backup status (such as transition to cold storage) are delayed
+    # until the legal hold is removed. A backup can have more than one legal
+    # hold. Legal holds are applied to one or more backups (also known as
+    # recovery points). These backups can be filtered by resource types and
+    # by resource IDs.
+    #
+    # @!attribute [rw] title
+    #   This is the title of a legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   This is the status of the legal hold. Statuses can be `ACTIVE`,
+    #   `CREATING`, `CANCELED`, and `CANCELING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   This is the description of a legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_hold_id
+    #   ID of specific legal hold on one or more recovery points.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_hold_arn
+    #   This is an Amazon Resource Number (ARN) that uniquely identifies the
+    #   legal hold; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   This is the time in number format when legal hold was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cancellation_date
+    #   This is the time in number format when legal hold was cancelled.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/LegalHold AWS API Documentation
+    #
+    class LegalHold < Struct.new(
+      :title,
+      :status,
+      :description,
+      :legal_hold_id,
+      :legal_hold_arn,
+      :creation_date,
+      :cancellation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains an array of `Transition` objects specifying how long in days
     # before a recovery point transitions to cold storage or is deleted.
     #
@@ -3796,7 +4260,7 @@ module Aws::Backup
     #         next_token: "string",
     #         max_results: 1,
     #         by_resource_arn: "ARN",
-    #         by_state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED
+    #         by_state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED, PARTIAL
     #         by_backup_vault_name: "BackupVaultName",
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
@@ -3804,6 +4268,7 @@ module Aws::Backup
     #         by_account_id: "AccountId",
     #         by_complete_after: Time.now,
     #         by_complete_before: Time.now,
+    #         by_parent_job_id: "string",
     #       }
     #
     # @!attribute [rw] next_token
@@ -3889,6 +4354,10 @@ module Aws::Backup
     #   format and Coordinated Universal Time (UTC).
     #   @return [Time]
     #
+    # @!attribute [rw] by_parent_job_id
+    #   This is a filter to list child (nested) jobs based on parent job ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
     #
     class ListBackupJobsInput < Struct.new(
@@ -3902,7 +4371,8 @@ module Aws::Backup
       :by_resource_type,
       :by_account_id,
       :by_complete_after,
-      :by_complete_before)
+      :by_complete_before,
+      :by_parent_job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4201,7 +4671,7 @@ module Aws::Backup
     #         next_token: "string",
     #         max_results: 1,
     #         by_resource_arn: "ARN",
-    #         by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED
+    #         by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED, PARTIAL
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
     #         by_resource_type: "ResourceType",
@@ -4209,6 +4679,7 @@ module Aws::Backup
     #         by_account_id: "AccountId",
     #         by_complete_before: Time.now,
     #         by_complete_after: Time.now,
+    #         by_parent_job_id: "string",
     #       }
     #
     # @!attribute [rw] next_token
@@ -4288,6 +4759,10 @@ module Aws::Backup
     #   format and Coordinated Universal Time (UTC).
     #   @return [Time]
     #
+    # @!attribute [rw] by_parent_job_id
+    #   This is a filter to list child (nested) jobs based on parent job ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
     #
     class ListCopyJobsInput < Struct.new(
@@ -4301,7 +4776,8 @@ module Aws::Backup
       :by_destination_vault_arn,
       :by_account_id,
       :by_complete_before,
-      :by_complete_after)
+      :by_complete_after,
+      :by_parent_job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4376,6 +4852,54 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLegalHoldsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "string",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resource list items to be returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListLegalHoldsInput AWS API Documentation
+    #
+    class ListLegalHoldsInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_holds
+    #   This is an array of returned legal holds, both active and previous.
+    #   @return [Array<Types::LegalHold>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListLegalHoldsOutput AWS API Documentation
+    #
+    class ListLegalHoldsOutput < Struct.new(
+      :next_token,
+      :legal_holds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListProtectedResourcesInput
     #   data as a hash:
     #
@@ -4438,6 +4962,7 @@ module Aws::Backup
     #         by_backup_plan_id: "string",
     #         by_created_before: Time.now,
     #         by_created_after: Time.now,
+    #         by_parent_recovery_point_arn: "ARN",
     #       }
     #
     # @!attribute [rw] backup_vault_name
@@ -4487,6 +5012,11 @@ module Aws::Backup
     #   timestamp.
     #   @return [Time]
     #
+    # @!attribute [rw] by_parent_recovery_point_arn
+    #   This returns only recovery points that match the specified parent
+    #   (composite) recovery point Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVaultInput AWS API Documentation
     #
     class ListRecoveryPointsByBackupVaultInput < Struct.new(
@@ -4497,7 +5027,8 @@ module Aws::Backup
       :by_resource_type,
       :by_backup_plan_id,
       :by_created_before,
-      :by_created_after)
+      :by_created_after,
+      :by_parent_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4519,6 +5050,59 @@ module Aws::Backup
     class ListRecoveryPointsByBackupVaultOutput < Struct.new(
       :next_token,
       :recovery_points)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRecoveryPointsByLegalHoldInput
+    #   data as a hash:
+    #
+    #       {
+    #         legal_hold_id: "string", # required
+    #         next_token: "string",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] legal_hold_id
+    #   This is the ID of the legal hold.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This is the next item following a partial list of returned
+    #   resources. For example, if a request is made to return `maxResults`
+    #   number of resources, `NextToken` allows you to return more items in
+    #   your list starting at the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   This is the maximum number of resource list items to be returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByLegalHoldInput AWS API Documentation
+    #
+    class ListRecoveryPointsByLegalHoldInput < Struct.new(
+      :legal_hold_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recovery_points
+    #   This is a list of the recovery points returned by
+    #   `ListRecoveryPointsByLegalHold`.
+    #   @return [Array<Types::RecoveryPointMember>]
+    #
+    # @!attribute [rw] next_token
+    #   This return is the next item following a partial list of returned
+    #   resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByLegalHoldOutput AWS API Documentation
+    #
+    class ListRecoveryPointsByLegalHoldOutput < Struct.new(
+      :recovery_points,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5082,8 +5666,10 @@ module Aws::Backup
     #
     #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
     #
-    #   <note markdown="1"> Ignore the list below because it includes deprecated events. Refer
-    #   to the list above.
+    #   <note markdown="1"> The list below shows items that are deprecated events (for
+    #   reference) and are no longer in use. They are no longer supported
+    #   and will not return statuses or notifications. Refer to the list
+    #   above for current supported events.
     #
     #    </note>
     #
@@ -5226,6 +5812,27 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] parent_recovery_point_arn
+    #   This is the Amazon Resource Name (ARN) of the parent (composite)
+    #   recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] composite_member_identifier
+    #   This is the identifier of a resource within a composite group, such
+    #   as nested (child) recovery point belonging to a composite (parent)
+    #   stack. The ID is transferred from the [ logical ID][1] within a
+    #   stack.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
+    #   @return [String]
+    #
+    # @!attribute [rw] is_parent
+    #   This is a boolean value indicating this is a parent (composite)
+    #   recovery point.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByBackupVault AWS API Documentation
     #
     class RecoveryPointByBackupVault < Struct.new(
@@ -5246,7 +5853,10 @@ module Aws::Backup
       :lifecycle,
       :encryption_key_arn,
       :is_encrypted,
-      :last_restore_time)
+      :last_restore_time,
+      :parent_recovery_point_arn,
+      :composite_member_identifier,
+      :is_parent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5292,6 +5902,16 @@ module Aws::Backup
     #   created. They consist of lowercase letters, numbers, and hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] is_parent
+    #   This is a boolean value indicating this is a parent (composite)
+    #   recovery point.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_recovery_point_arn
+    #   This is the Amazon Resource Name (ARN) of the parent (composite)
+    #   recovery point.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByResource AWS API Documentation
     #
     class RecoveryPointByResource < Struct.new(
@@ -5301,7 +5921,9 @@ module Aws::Backup
       :status_message,
       :encryption_key_arn,
       :backup_size_bytes,
-      :backup_vault_name)
+      :backup_vault_name,
+      :is_parent,
+      :parent_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5336,6 +5958,70 @@ module Aws::Backup
       :backup_plan_arn,
       :backup_plan_version,
       :backup_rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is a recovery point which is a child (nested) recovery point of a
+    # parent (composite) recovery point. These recovery points can be
+    # disassociated from their parent (composite) recovery point, in which
+    # case they will no longer be a member.
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   This is the Amazon Resource Name (ARN) of the parent (composite)
+    #   recovery point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointMember AWS API Documentation
+    #
+    class RecoveryPointMember < Struct.new(
+      :recovery_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This specifies criteria to assign a set of resources, such as resource
+    # types or backup vaults.
+    #
+    # @note When making an API call, you may pass RecoveryPointSelection
+    #   data as a hash:
+    #
+    #       {
+    #         vault_names: ["string"],
+    #         resource_identifiers: ["string"],
+    #         date_range: {
+    #           from_date: Time.now, # required
+    #           to_date: Time.now, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vault_names
+    #   These are the names of the vaults in which the selected recovery
+    #   points are contained.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_identifiers
+    #   These are the resources included in the resource selection
+    #   (including type of resources and vaults).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] date_range
+    #   This is a resource filter containing FromDate: DateTime and ToDate:
+    #   DateTime. Both values are required. Future DateTime values are not
+    #   permitted.
+    #
+    #   The date and time are in Unix format and Coordinated Universal Time
+    #   (UTC), and it is accurate to milliseconds ((milliseconds are
+    #   optional). For example, the value 1516925490.087 represents Friday,
+    #   January 26, 2018 12:11:30.087 AM.
+    #   @return [Types::DateRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointSelection AWS API Documentation
+    #
+    class RecoveryPointSelection < Struct.new(
+      :vault_names,
+      :resource_identifiers,
+      :date_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5562,6 +6248,9 @@ module Aws::Backup
     #         report_template: "string", # required
     #         framework_arns: ["string"],
     #         number_of_frameworks: 1,
+    #         accounts: ["string"],
+    #         organization_units: ["string"],
+    #         regions: ["string"],
     #       }
     #
     # @!attribute [rw] report_template
@@ -5580,12 +6269,27 @@ module Aws::Backup
     #   The number of frameworks a report covers.
     #   @return [Integer]
     #
+    # @!attribute [rw] accounts
+    #   These are the accounts to be included in the report.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organization_units
+    #   These are the Organizational Units to be included in the report.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   These are the Regions to be included in the report.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ReportSetting AWS API Documentation
     #
     class ReportSetting < Struct.new(
       :report_template,
       :framework_arns,
-      :number_of_frameworks)
+      :number_of_frameworks,
+      :accounts,
+      :organization_units,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5780,7 +6484,8 @@ module Aws::Backup
     # @!attribute [rw] start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
     #   canceled if it doesn't start successfully. This value is optional,
-    #   and the default is 8 hours.
+    #   and the default is 8 hours. If this value is included, it must be at
+    #   least 60 minutes to avoid errors.
     #   @return [Integer]
     #
     # @!attribute [rw] complete_window_minutes
@@ -5860,12 +6565,18 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] is_parent
+    #   This is a returned boolean value indicating this is a parent
+    #   (composite) backup job.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobOutput AWS API Documentation
     #
     class StartBackupJobOutput < Struct.new(
       :backup_job_id,
       :recovery_point_arn,
-      :creation_date)
+      :creation_date,
+      :is_parent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5962,11 +6673,17 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] is_parent
+    #   This is a returned boolean value indicating this is a parent
+    #   (composite) copy job.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJobOutput AWS API Documentation
     #
     class StartCopyJobOutput < Struct.new(
       :copy_job_id,
-      :creation_date)
+      :creation_date,
+      :is_parent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6079,7 +6796,7 @@ module Aws::Backup
     #
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
-    #   create the target recovery point; for example,
+    #   create the target resource; for example:
     #   `arn:aws:iam::123456789012:role/S3Access`.
     #   @return [String]
     #
@@ -6396,10 +7113,10 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date and time that a framework is created, in Unix format and
-    #   Coordinated Universal Time (UTC). The value of `CreationTime` is
-    #   accurate to milliseconds. For example, the value 1516925490.087
-    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   The date and time that a framework is created, in ISO 8601
+    #   representation. The value of `CreationTime` is accurate to
+    #   milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents
+    #   the 10th of July 2020 at 3:00 PM 8 hours behind UTC.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateFrameworkOutput AWS API Documentation
@@ -6583,6 +7300,9 @@ module Aws::Backup
     #           report_template: "string", # required
     #           framework_arns: ["string"],
     #           number_of_frameworks: 1,
+    #           accounts: ["string"],
+    #           organization_units: ["string"],
+    #           regions: ["string"],
     #         },
     #         idempotency_token: "string",
     #       }

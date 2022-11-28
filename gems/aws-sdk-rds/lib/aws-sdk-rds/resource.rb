@@ -1532,7 +1532,7 @@ module Aws::RDS
     #
     #   A custom engine version (CEV) that you have previously created. This
     #   setting is required for RDS Custom for Oracle. The CEV name has the
-    #   following format: `19.customized_string `. An example identifier is
+    #   following format: 19.*customized\_string*. A valid CEV name is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
     #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #

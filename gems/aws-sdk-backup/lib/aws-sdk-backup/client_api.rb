@@ -19,6 +19,7 @@ module Aws::Backup
     AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
+    BackupJobChildJobsInState = Shapes::MapShape.new(name: 'BackupJobChildJobsInState')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
     BackupJobsList = Shapes::ListShape.new(name: 'BackupJobsList')
     BackupOptionKey = Shapes::StringShape.new(name: 'BackupOptionKey')
@@ -48,6 +49,8 @@ module Aws::Backup
     BackupVaultName = Shapes::StringShape.new(name: 'BackupVaultName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CalculatedLifecycle = Shapes::StructureShape.new(name: 'CalculatedLifecycle')
+    CancelLegalHoldInput = Shapes::StructureShape.new(name: 'CancelLegalHoldInput')
+    CancelLegalHoldOutput = Shapes::StructureShape.new(name: 'CancelLegalHoldOutput')
     ComplianceResourceIdList = Shapes::ListShape.new(name: 'ComplianceResourceIdList')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
@@ -64,6 +67,7 @@ module Aws::Backup
     CopyAction = Shapes::StructureShape.new(name: 'CopyAction')
     CopyActions = Shapes::ListShape.new(name: 'CopyActions')
     CopyJob = Shapes::StructureShape.new(name: 'CopyJob')
+    CopyJobChildJobsInState = Shapes::MapShape.new(name: 'CopyJobChildJobsInState')
     CopyJobState = Shapes::StringShape.new(name: 'CopyJobState')
     CopyJobsList = Shapes::ListShape.new(name: 'CopyJobsList')
     CreateBackupPlanInput = Shapes::StructureShape.new(name: 'CreateBackupPlanInput')
@@ -74,9 +78,12 @@ module Aws::Backup
     CreateBackupVaultOutput = Shapes::StructureShape.new(name: 'CreateBackupVaultOutput')
     CreateFrameworkInput = Shapes::StructureShape.new(name: 'CreateFrameworkInput')
     CreateFrameworkOutput = Shapes::StructureShape.new(name: 'CreateFrameworkOutput')
+    CreateLegalHoldInput = Shapes::StructureShape.new(name: 'CreateLegalHoldInput')
+    CreateLegalHoldOutput = Shapes::StructureShape.new(name: 'CreateLegalHoldOutput')
     CreateReportPlanInput = Shapes::StructureShape.new(name: 'CreateReportPlanInput')
     CreateReportPlanOutput = Shapes::StructureShape.new(name: 'CreateReportPlanOutput')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
+    DateRange = Shapes::StructureShape.new(name: 'DateRange')
     DeleteBackupPlanInput = Shapes::StructureShape.new(name: 'DeleteBackupPlanInput')
     DeleteBackupPlanOutput = Shapes::StructureShape.new(name: 'DeleteBackupPlanOutput')
     DeleteBackupSelectionInput = Shapes::StructureShape.new(name: 'DeleteBackupSelectionInput')
@@ -110,6 +117,7 @@ module Aws::Backup
     DescribeReportPlanOutput = Shapes::StructureShape.new(name: 'DescribeReportPlanOutput')
     DescribeRestoreJobInput = Shapes::StructureShape.new(name: 'DescribeRestoreJobInput')
     DescribeRestoreJobOutput = Shapes::StructureShape.new(name: 'DescribeRestoreJobOutput')
+    DisassociateRecoveryPointFromParentInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointFromParentInput')
     DisassociateRecoveryPointInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointInput')
     ExportBackupPlanTemplateInput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateInput')
     ExportBackupPlanTemplateOutput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateOutput')
@@ -132,6 +140,8 @@ module Aws::Backup
     GetBackupVaultAccessPolicyOutput = Shapes::StructureShape.new(name: 'GetBackupVaultAccessPolicyOutput')
     GetBackupVaultNotificationsInput = Shapes::StructureShape.new(name: 'GetBackupVaultNotificationsInput')
     GetBackupVaultNotificationsOutput = Shapes::StructureShape.new(name: 'GetBackupVaultNotificationsOutput')
+    GetLegalHoldInput = Shapes::StructureShape.new(name: 'GetLegalHoldInput')
+    GetLegalHoldOutput = Shapes::StructureShape.new(name: 'GetLegalHoldOutput')
     GetRecoveryPointRestoreMetadataInput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataInput')
     GetRecoveryPointRestoreMetadataOutput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataOutput')
     GetSupportedResourceTypesOutput = Shapes::StructureShape.new(name: 'GetSupportedResourceTypesOutput')
@@ -144,6 +154,9 @@ module Aws::Backup
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
+    LegalHold = Shapes::StructureShape.new(name: 'LegalHold')
+    LegalHoldStatus = Shapes::StringShape.new(name: 'LegalHoldStatus')
+    LegalHoldsList = Shapes::ListShape.new(name: 'LegalHoldsList')
     Lifecycle = Shapes::StructureShape.new(name: 'Lifecycle')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBackupJobsInput = Shapes::StructureShape.new(name: 'ListBackupJobsInput')
@@ -162,11 +175,15 @@ module Aws::Backup
     ListCopyJobsOutput = Shapes::StructureShape.new(name: 'ListCopyJobsOutput')
     ListFrameworksInput = Shapes::StructureShape.new(name: 'ListFrameworksInput')
     ListFrameworksOutput = Shapes::StructureShape.new(name: 'ListFrameworksOutput')
+    ListLegalHoldsInput = Shapes::StructureShape.new(name: 'ListLegalHoldsInput')
+    ListLegalHoldsOutput = Shapes::StructureShape.new(name: 'ListLegalHoldsOutput')
     ListOfTags = Shapes::ListShape.new(name: 'ListOfTags')
     ListProtectedResourcesInput = Shapes::StructureShape.new(name: 'ListProtectedResourcesInput')
     ListProtectedResourcesOutput = Shapes::StructureShape.new(name: 'ListProtectedResourcesOutput')
     ListRecoveryPointsByBackupVaultInput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByBackupVaultInput')
     ListRecoveryPointsByBackupVaultOutput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByBackupVaultOutput')
+    ListRecoveryPointsByLegalHoldInput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByLegalHoldInput')
+    ListRecoveryPointsByLegalHoldOutput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByLegalHoldOutput')
     ListRecoveryPointsByResourceInput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByResourceInput')
     ListRecoveryPointsByResourceOutput = Shapes::StructureShape.new(name: 'ListRecoveryPointsByResourceOutput')
     ListReportJobsInput = Shapes::StructureShape.new(name: 'ListReportJobsInput')
@@ -196,7 +213,10 @@ module Aws::Backup
     RecoveryPointByResource = Shapes::StructureShape.new(name: 'RecoveryPointByResource')
     RecoveryPointByResourceList = Shapes::ListShape.new(name: 'RecoveryPointByResourceList')
     RecoveryPointCreator = Shapes::StructureShape.new(name: 'RecoveryPointCreator')
+    RecoveryPointMember = Shapes::StructureShape.new(name: 'RecoveryPointMember')
+    RecoveryPointSelection = Shapes::StructureShape.new(name: 'RecoveryPointSelection')
     RecoveryPointStatus = Shapes::StringShape.new(name: 'RecoveryPointStatus')
+    RecoveryPointsList = Shapes::ListShape.new(name: 'RecoveryPointsList')
     ReportDeliveryChannel = Shapes::StructureShape.new(name: 'ReportDeliveryChannel')
     ReportDestination = Shapes::StructureShape.new(name: 'ReportDestination')
     ReportJob = Shapes::StructureShape.new(name: 'ReportJob')
@@ -208,6 +228,7 @@ module Aws::Backup
     ReportPlanName = Shapes::StringShape.new(name: 'ReportPlanName')
     ReportSetting = Shapes::StructureShape.new(name: 'ReportSetting')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
+    ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
@@ -245,6 +266,7 @@ module Aws::Backup
     UpdateRegionSettingsInput = Shapes::StructureShape.new(name: 'UpdateRegionSettingsInput')
     UpdateReportPlanInput = Shapes::StructureShape.new(name: 'UpdateReportPlanInput')
     UpdateReportPlanOutput = Shapes::StructureShape.new(name: 'UpdateReportPlanOutput')
+    VaultNames = Shapes::ListShape.new(name: 'VaultNames')
     WindowMinutes = Shapes::IntegerShape.new(name: 'WindowMinutes')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     integer = Shapes::IntegerShape.new(name: 'integer')
@@ -288,7 +310,12 @@ module Aws::Backup
     BackupJob.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred"))
     BackupJob.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
     BackupJob.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
+    BackupJob.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
+    BackupJob.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     BackupJob.struct_class = Types::BackupJob
+
+    BackupJobChildJobsInState.key = Shapes::ShapeRef.new(shape: BackupJobState)
+    BackupJobChildJobsInState.value = Shapes::ShapeRef.new(shape: Long)
 
     BackupJobsList.member = Shapes::ShapeRef.new(shape: BackupJob)
 
@@ -391,6 +418,13 @@ module Aws::Backup
     CalculatedLifecycle.add_member(:delete_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "DeleteAt"))
     CalculatedLifecycle.struct_class = Types::CalculatedLifecycle
 
+    CancelLegalHoldInput.add_member(:legal_hold_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "legalHoldId"))
+    CancelLegalHoldInput.add_member(:cancel_description, Shapes::ShapeRef.new(shape: string, required: true, location: "querystring", location_name: "cancelDescription"))
+    CancelLegalHoldInput.add_member(:retain_record_in_days, Shapes::ShapeRef.new(shape: Long, location: "querystring", location_name: "retainRecordInDays"))
+    CancelLegalHoldInput.struct_class = Types::CancelLegalHoldInput
+
+    CancelLegalHoldOutput.struct_class = Types::CancelLegalHoldOutput
+
     ComplianceResourceIdList.member = Shapes::ShapeRef.new(shape: string)
 
     Condition.add_member(:condition_type, Shapes::ShapeRef.new(shape: ConditionType, required: true, location_name: "ConditionType"))
@@ -448,7 +482,15 @@ module Aws::Backup
     CopyJob.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     CopyJob.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
     CopyJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    CopyJob.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
+    CopyJob.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    CopyJob.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
+    CopyJob.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
+    CopyJob.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: CopyJobChildJobsInState, location_name: "ChildJobsInState"))
     CopyJob.struct_class = Types::CopyJob
+
+    CopyJobChildJobsInState.key = Shapes::ShapeRef.new(shape: CopyJobState)
+    CopyJobChildJobsInState.value = Shapes::ShapeRef.new(shape: Long)
 
     CopyJobsList.member = Shapes::ShapeRef.new(shape: CopyJob)
 
@@ -496,6 +538,22 @@ module Aws::Backup
     CreateFrameworkOutput.add_member(:framework_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FrameworkArn"))
     CreateFrameworkOutput.struct_class = Types::CreateFrameworkOutput
 
+    CreateLegalHoldInput.add_member(:title, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Title"))
+    CreateLegalHoldInput.add_member(:description, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Description"))
+    CreateLegalHoldInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    CreateLegalHoldInput.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RecoveryPointSelection, location_name: "RecoveryPointSelection"))
+    CreateLegalHoldInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateLegalHoldInput.struct_class = Types::CreateLegalHoldInput
+
+    CreateLegalHoldOutput.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "Title"))
+    CreateLegalHoldOutput.add_member(:status, Shapes::ShapeRef.new(shape: LegalHoldStatus, location_name: "Status"))
+    CreateLegalHoldOutput.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "Description"))
+    CreateLegalHoldOutput.add_member(:legal_hold_id, Shapes::ShapeRef.new(shape: string, location_name: "LegalHoldId"))
+    CreateLegalHoldOutput.add_member(:legal_hold_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LegalHoldArn"))
+    CreateLegalHoldOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    CreateLegalHoldOutput.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RecoveryPointSelection, location_name: "RecoveryPointSelection"))
+    CreateLegalHoldOutput.struct_class = Types::CreateLegalHoldOutput
+
     CreateReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location_name: "ReportPlanName"))
     CreateReportPlanInput.add_member(:report_plan_description, Shapes::ShapeRef.new(shape: ReportPlanDescription, location_name: "ReportPlanDescription"))
     CreateReportPlanInput.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, required: true, location_name: "ReportDeliveryChannel"))
@@ -508,6 +566,10 @@ module Aws::Backup
     CreateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
     CreateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     CreateReportPlanOutput.struct_class = Types::CreateReportPlanOutput
+
+    DateRange.add_member(:from_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "FromDate"))
+    DateRange.add_member(:to_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "ToDate"))
+    DateRange.struct_class = Types::DateRange
 
     DeleteBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     DeleteBackupPlanInput.struct_class = Types::DeleteBackupPlanInput
@@ -573,6 +635,10 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:start_by, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartBy"))
     DescribeBackupJobOutput.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
     DescribeBackupJobOutput.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
+    DescribeBackupJobOutput.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
+    DescribeBackupJobOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    DescribeBackupJobOutput.add_member(:number_of_child_jobs, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfChildJobs"))
+    DescribeBackupJobOutput.add_member(:child_jobs_in_state, Shapes::ShapeRef.new(shape: BackupJobChildJobsInState, location_name: "ChildJobsInState"))
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
     DescribeBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
@@ -646,6 +712,9 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:is_encrypted, Shapes::ShapeRef.new(shape: boolean, location_name: "IsEncrypted"))
     DescribeRecoveryPointOutput.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
     DescribeRecoveryPointOutput.add_member(:last_restore_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastRestoreTime"))
+    DescribeRecoveryPointOutput.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
+    DescribeRecoveryPointOutput.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
+    DescribeRecoveryPointOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     DescribeRecoveryPointOutput.struct_class = Types::DescribeRecoveryPointOutput
 
     DescribeRegionSettingsInput.struct_class = Types::DescribeRegionSettingsInput
@@ -683,6 +752,10 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
     DescribeRestoreJobOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeRestoreJobOutput.struct_class = Types::DescribeRestoreJobOutput
+
+    DisassociateRecoveryPointFromParentInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    DisassociateRecoveryPointFromParentInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
+    DisassociateRecoveryPointFromParentInput.struct_class = Types::DisassociateRecoveryPointFromParentInput
 
     DisassociateRecoveryPointInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DisassociateRecoveryPointInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
@@ -768,6 +841,21 @@ module Aws::Backup
     GetBackupVaultNotificationsOutput.add_member(:backup_vault_events, Shapes::ShapeRef.new(shape: BackupVaultEvents, location_name: "BackupVaultEvents"))
     GetBackupVaultNotificationsOutput.struct_class = Types::GetBackupVaultNotificationsOutput
 
+    GetLegalHoldInput.add_member(:legal_hold_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "legalHoldId"))
+    GetLegalHoldInput.struct_class = Types::GetLegalHoldInput
+
+    GetLegalHoldOutput.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "Title"))
+    GetLegalHoldOutput.add_member(:status, Shapes::ShapeRef.new(shape: LegalHoldStatus, location_name: "Status"))
+    GetLegalHoldOutput.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "Description"))
+    GetLegalHoldOutput.add_member(:cancel_description, Shapes::ShapeRef.new(shape: string, location_name: "CancelDescription"))
+    GetLegalHoldOutput.add_member(:legal_hold_id, Shapes::ShapeRef.new(shape: string, location_name: "LegalHoldId"))
+    GetLegalHoldOutput.add_member(:legal_hold_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LegalHoldArn"))
+    GetLegalHoldOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    GetLegalHoldOutput.add_member(:cancellation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CancellationDate"))
+    GetLegalHoldOutput.add_member(:retain_record_until, Shapes::ShapeRef.new(shape: timestamp, location_name: "RetainRecordUntil"))
+    GetLegalHoldOutput.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RecoveryPointSelection, location_name: "RecoveryPointSelection"))
+    GetLegalHoldOutput.struct_class = Types::GetLegalHoldOutput
+
     GetRecoveryPointRestoreMetadataInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     GetRecoveryPointRestoreMetadataInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
     GetRecoveryPointRestoreMetadataInput.struct_class = Types::GetRecoveryPointRestoreMetadataInput
@@ -801,6 +889,17 @@ module Aws::Backup
     InvalidResourceStateException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     InvalidResourceStateException.struct_class = Types::InvalidResourceStateException
 
+    LegalHold.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "Title"))
+    LegalHold.add_member(:status, Shapes::ShapeRef.new(shape: LegalHoldStatus, location_name: "Status"))
+    LegalHold.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "Description"))
+    LegalHold.add_member(:legal_hold_id, Shapes::ShapeRef.new(shape: string, location_name: "LegalHoldId"))
+    LegalHold.add_member(:legal_hold_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LegalHoldArn"))
+    LegalHold.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    LegalHold.add_member(:cancellation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CancellationDate"))
+    LegalHold.struct_class = Types::LegalHold
+
+    LegalHoldsList.member = Shapes::ShapeRef.new(shape: LegalHold)
+
     Lifecycle.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
     Lifecycle.struct_class = Types::Lifecycle
@@ -822,6 +921,7 @@ module Aws::Backup
     ListBackupJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
     ListBackupJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListBackupJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
+    ListBackupJobsInput.add_member(:by_parent_job_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "parentJobId"))
     ListBackupJobsInput.struct_class = Types::ListBackupJobsInput
 
     ListBackupJobsOutput.add_member(:backup_jobs, Shapes::ShapeRef.new(shape: BackupJobsList, location_name: "BackupJobs"))
@@ -882,6 +982,7 @@ module Aws::Backup
     ListCopyJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
     ListCopyJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
     ListCopyJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
+    ListCopyJobsInput.add_member(:by_parent_job_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "parentJobId"))
     ListCopyJobsInput.struct_class = Types::ListCopyJobsInput
 
     ListCopyJobsOutput.add_member(:copy_jobs, Shapes::ShapeRef.new(shape: CopyJobsList, location_name: "CopyJobs"))
@@ -895,6 +996,14 @@ module Aws::Backup
     ListFrameworksOutput.add_member(:frameworks, Shapes::ShapeRef.new(shape: FrameworkList, location_name: "Frameworks"))
     ListFrameworksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListFrameworksOutput.struct_class = Types::ListFrameworksOutput
+
+    ListLegalHoldsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListLegalHoldsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListLegalHoldsInput.struct_class = Types::ListLegalHoldsInput
+
+    ListLegalHoldsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListLegalHoldsOutput.add_member(:legal_holds, Shapes::ShapeRef.new(shape: LegalHoldsList, location_name: "LegalHolds"))
+    ListLegalHoldsOutput.struct_class = Types::ListLegalHoldsOutput
 
     ListOfTags.member = Shapes::ShapeRef.new(shape: Condition)
 
@@ -914,11 +1023,21 @@ module Aws::Backup
     ListRecoveryPointsByBackupVaultInput.add_member(:by_backup_plan_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "backupPlanId"))
     ListRecoveryPointsByBackupVaultInput.add_member(:by_created_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdBefore"))
     ListRecoveryPointsByBackupVaultInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
+    ListRecoveryPointsByBackupVaultInput.add_member(:by_parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "parentRecoveryPointArn"))
     ListRecoveryPointsByBackupVaultInput.struct_class = Types::ListRecoveryPointsByBackupVaultInput
 
     ListRecoveryPointsByBackupVaultOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListRecoveryPointsByBackupVaultOutput.add_member(:recovery_points, Shapes::ShapeRef.new(shape: RecoveryPointByBackupVaultList, location_name: "RecoveryPoints"))
     ListRecoveryPointsByBackupVaultOutput.struct_class = Types::ListRecoveryPointsByBackupVaultOutput
+
+    ListRecoveryPointsByLegalHoldInput.add_member(:legal_hold_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "legalHoldId"))
+    ListRecoveryPointsByLegalHoldInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListRecoveryPointsByLegalHoldInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRecoveryPointsByLegalHoldInput.struct_class = Types::ListRecoveryPointsByLegalHoldInput
+
+    ListRecoveryPointsByLegalHoldOutput.add_member(:recovery_points, Shapes::ShapeRef.new(shape: RecoveryPointsList, location_name: "RecoveryPoints"))
+    ListRecoveryPointsByLegalHoldOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListRecoveryPointsByLegalHoldOutput.struct_class = Types::ListRecoveryPointsByLegalHoldOutput
 
     ListRecoveryPointsByResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListRecoveryPointsByResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
@@ -1021,6 +1140,9 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     RecoveryPointByBackupVault.add_member(:is_encrypted, Shapes::ShapeRef.new(shape: boolean, location_name: "IsEncrypted"))
     RecoveryPointByBackupVault.add_member(:last_restore_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastRestoreTime"))
+    RecoveryPointByBackupVault.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
+    RecoveryPointByBackupVault.add_member(:composite_member_identifier, Shapes::ShapeRef.new(shape: string, location_name: "CompositeMemberIdentifier"))
+    RecoveryPointByBackupVault.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     RecoveryPointByBackupVault.struct_class = Types::RecoveryPointByBackupVault
 
     RecoveryPointByBackupVaultList.member = Shapes::ShapeRef.new(shape: RecoveryPointByBackupVault)
@@ -1032,6 +1154,8 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     RecoveryPointByResource.add_member(:backup_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeBytes"))
     RecoveryPointByResource.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
+    RecoveryPointByResource.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    RecoveryPointByResource.add_member(:parent_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ParentRecoveryPointArn"))
     RecoveryPointByResource.struct_class = Types::RecoveryPointByResource
 
     RecoveryPointByResourceList.member = Shapes::ShapeRef.new(shape: RecoveryPointByResource)
@@ -1041,6 +1165,16 @@ module Aws::Backup
     RecoveryPointCreator.add_member(:backup_plan_version, Shapes::ShapeRef.new(shape: string, location_name: "BackupPlanVersion"))
     RecoveryPointCreator.add_member(:backup_rule_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupRuleId"))
     RecoveryPointCreator.struct_class = Types::RecoveryPointCreator
+
+    RecoveryPointMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    RecoveryPointMember.struct_class = Types::RecoveryPointMember
+
+    RecoveryPointSelection.add_member(:vault_names, Shapes::ShapeRef.new(shape: VaultNames, location_name: "VaultNames"))
+    RecoveryPointSelection.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifiers, location_name: "ResourceIdentifiers"))
+    RecoveryPointSelection.add_member(:date_range, Shapes::ShapeRef.new(shape: DateRange, location_name: "DateRange"))
+    RecoveryPointSelection.struct_class = Types::RecoveryPointSelection
+
+    RecoveryPointsList.member = Shapes::ShapeRef.new(shape: RecoveryPointMember)
 
     ReportDeliveryChannel.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "S3BucketName"))
     ReportDeliveryChannel.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: string, location_name: "S3KeyPrefix"))
@@ -1079,9 +1213,14 @@ module Aws::Backup
     ReportSetting.add_member(:report_template, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ReportTemplate"))
     ReportSetting.add_member(:framework_arns, Shapes::ShapeRef.new(shape: stringList, location_name: "FrameworkArns"))
     ReportSetting.add_member(:number_of_frameworks, Shapes::ShapeRef.new(shape: integer, location_name: "NumberOfFrameworks"))
+    ReportSetting.add_member(:accounts, Shapes::ShapeRef.new(shape: stringList, location_name: "Accounts"))
+    ReportSetting.add_member(:organization_units, Shapes::ShapeRef.new(shape: stringList, location_name: "OrganizationUnits"))
+    ReportSetting.add_member(:regions, Shapes::ShapeRef.new(shape: stringList, location_name: "Regions"))
     ReportSetting.struct_class = Types::ReportSetting
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ARN)
+
+    ResourceIdentifiers.member = Shapes::ShapeRef.new(shape: string)
 
     ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -1136,6 +1275,7 @@ module Aws::Backup
     StartBackupJobOutput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
     StartBackupJobOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     StartBackupJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    StartBackupJobOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     StartBackupJobOutput.struct_class = Types::StartBackupJobOutput
 
     StartCopyJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
@@ -1148,6 +1288,7 @@ module Aws::Backup
 
     StartCopyJobOutput.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, location_name: "CopyJobId"))
     StartCopyJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    StartCopyJobOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
     StartCopyJobOutput.struct_class = Types::StartCopyJobOutput
 
     StartReportJobInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
@@ -1235,6 +1376,8 @@ module Aws::Backup
     UpdateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     UpdateReportPlanOutput.struct_class = Types::UpdateReportPlanOutput
 
+    VaultNames.member = Shapes::ShapeRef.new(shape: string)
+
     stringList.member = Shapes::ShapeRef.new(shape: string)
 
     stringMap.key = Shapes::ShapeRef.new(shape: string)
@@ -1256,6 +1399,19 @@ module Aws::Backup
         "signatureVersion" => "v4",
         "uid" => "backup-2018-11-15",
       }
+
+      api.add_operation(:cancel_legal_hold, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelLegalHold"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/legal-holds/{legalHoldId}"
+        o.input = Shapes::ShapeRef.new(shape: CancelLegalHoldInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelLegalHoldOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
 
       api.add_operation(:create_backup_plan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBackupPlan"
@@ -1307,6 +1463,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_legal_hold, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLegalHold"
+        o.http_method = "POST"
+        o.http_request_uri = "/legal-holds/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLegalHoldInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateLegalHoldOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_report_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -1579,6 +1747,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:disassociate_recovery_point_from_parent, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateRecoveryPointFromParent"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/parentAssociation"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateRecoveryPointFromParentInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:export_backup_plan_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ExportBackupPlanTemplate"
         o.http_method = "GET"
@@ -1662,6 +1843,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_legal_hold, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLegalHold"
+        o.http_method = "GET"
+        o.http_request_uri = "/legal-holds/{legalHoldId}/"
+        o.input = Shapes::ShapeRef.new(shape: GetLegalHoldInput)
+        o.output = Shapes::ShapeRef.new(shape: GetLegalHoldOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_recovery_point_restore_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -1823,6 +2016,22 @@ module Aws::Backup
         )
       end)
 
+      api.add_operation(:list_legal_holds, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLegalHolds"
+        o.http_method = "GET"
+        o.http_request_uri = "/legal-holds/"
+        o.input = Shapes::ShapeRef.new(shape: ListLegalHoldsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListLegalHoldsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_protected_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProtectedResources"
         o.http_method = "GET"
@@ -1846,6 +2055,23 @@ module Aws::Backup
         o.input = Shapes::ShapeRef.new(shape: ListRecoveryPointsByBackupVaultInput)
         o.output = Shapes::ShapeRef.new(shape: ListRecoveryPointsByBackupVaultOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recovery_points_by_legal_hold, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecoveryPointsByLegalHold"
+        o.http_method = "GET"
+        o.http_request_uri = "/legal-holds/{legalHoldId}/recovery-points"
+        o.input = Shapes::ShapeRef.new(shape: ListRecoveryPointsByLegalHoldInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRecoveryPointsByLegalHoldOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1883,6 +2109,7 @@ module Aws::Backup
         o.output = Shapes::ShapeRef.new(shape: ListReportJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

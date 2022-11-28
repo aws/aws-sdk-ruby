@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2022-11-28)
+------------------
+
+* Feature - This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.
+
 1.160.0 (2022-11-16)
 ------------------
 

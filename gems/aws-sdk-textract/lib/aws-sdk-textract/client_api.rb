@@ -31,7 +31,11 @@ module Aws::Textract
     ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
     DetectDocumentTextRequest = Shapes::StructureShape.new(name: 'DetectDocumentTextRequest')
     DetectDocumentTextResponse = Shapes::StructureShape.new(name: 'DetectDocumentTextResponse')
+    DetectedSignature = Shapes::StructureShape.new(name: 'DetectedSignature')
+    DetectedSignatureList = Shapes::ListShape.new(name: 'DetectedSignatureList')
     Document = Shapes::StructureShape.new(name: 'Document')
+    DocumentGroup = Shapes::StructureShape.new(name: 'DocumentGroup')
+    DocumentGroupList = Shapes::ListShape.new(name: 'DocumentGroupList')
     DocumentLocation = Shapes::StructureShape.new(name: 'DocumentLocation')
     DocumentMetadata = Shapes::StructureShape.new(name: 'DocumentMetadata')
     DocumentPages = Shapes::ListShape.new(name: 'DocumentPages')
@@ -48,6 +52,8 @@ module Aws::Textract
     ExpenseGroupProperty = Shapes::StructureShape.new(name: 'ExpenseGroupProperty')
     ExpenseGroupPropertyList = Shapes::ListShape.new(name: 'ExpenseGroupPropertyList')
     ExpenseType = Shapes::StructureShape.new(name: 'ExpenseType')
+    Extraction = Shapes::StructureShape.new(name: 'Extraction')
+    ExtractionList = Shapes::ListShape.new(name: 'ExtractionList')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FeatureTypes = Shapes::ListShape.new(name: 'FeatureTypes')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -59,6 +65,10 @@ module Aws::Textract
     GetDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionResponse')
     GetExpenseAnalysisRequest = Shapes::StructureShape.new(name: 'GetExpenseAnalysisRequest')
     GetExpenseAnalysisResponse = Shapes::StructureShape.new(name: 'GetExpenseAnalysisResponse')
+    GetLendingAnalysisRequest = Shapes::StructureShape.new(name: 'GetLendingAnalysisRequest')
+    GetLendingAnalysisResponse = Shapes::StructureShape.new(name: 'GetLendingAnalysisResponse')
+    GetLendingAnalysisSummaryRequest = Shapes::StructureShape.new(name: 'GetLendingAnalysisSummaryRequest')
+    GetLendingAnalysisSummaryResponse = Shapes::StructureShape.new(name: 'GetLendingAnalysisSummaryResponse')
     HumanLoopActivationConditionsEvaluationResults = Shapes::StringShape.new(name: 'HumanLoopActivationConditionsEvaluationResults')
     HumanLoopActivationOutput = Shapes::StructureShape.new(name: 'HumanLoopActivationOutput')
     HumanLoopActivationReason = Shapes::StringShape.new(name: 'HumanLoopActivationReason')
@@ -84,6 +94,14 @@ module Aws::Textract
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobTag = Shapes::StringShape.new(name: 'JobTag')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
+    LendingDetection = Shapes::StructureShape.new(name: 'LendingDetection')
+    LendingDetectionList = Shapes::ListShape.new(name: 'LendingDetectionList')
+    LendingDocument = Shapes::StructureShape.new(name: 'LendingDocument')
+    LendingField = Shapes::StructureShape.new(name: 'LendingField')
+    LendingFieldList = Shapes::ListShape.new(name: 'LendingFieldList')
+    LendingResult = Shapes::StructureShape.new(name: 'LendingResult')
+    LendingResultList = Shapes::ListShape.new(name: 'LendingResultList')
+    LendingSummary = Shapes::StructureShape.new(name: 'LendingSummary')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LineItemFields = Shapes::StructureShape.new(name: 'LineItemFields')
     LineItemGroup = Shapes::StructureShape.new(name: 'LineItemGroup')
@@ -94,11 +112,15 @@ module Aws::Textract
     NormalizedValue = Shapes::StructureShape.new(name: 'NormalizedValue')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
+    PageClassification = Shapes::StructureShape.new(name: 'PageClassification')
+    PageList = Shapes::ListShape.new(name: 'PageList')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Percent = Shapes::FloatShape.new(name: 'Percent')
     Point = Shapes::StructureShape.new(name: 'Point')
     Polygon = Shapes::ListShape.new(name: 'Polygon')
+    Prediction = Shapes::StructureShape.new(name: 'Prediction')
+    PredictionList = Shapes::ListShape.new(name: 'PredictionList')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
     Queries = Shapes::ListShape.new(name: 'Queries')
     QueriesConfig = Shapes::StructureShape.new(name: 'QueriesConfig')
@@ -116,18 +138,27 @@ module Aws::Textract
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     SNSTopicArn = Shapes::StringShape.new(name: 'SNSTopicArn')
     SelectionStatus = Shapes::StringShape.new(name: 'SelectionStatus')
+    SignatureDetection = Shapes::StructureShape.new(name: 'SignatureDetection')
+    SignatureDetectionList = Shapes::ListShape.new(name: 'SignatureDetectionList')
+    SplitDocument = Shapes::StructureShape.new(name: 'SplitDocument')
+    SplitDocumentList = Shapes::ListShape.new(name: 'SplitDocumentList')
     StartDocumentAnalysisRequest = Shapes::StructureShape.new(name: 'StartDocumentAnalysisRequest')
     StartDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'StartDocumentAnalysisResponse')
     StartDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionRequest')
     StartDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionResponse')
     StartExpenseAnalysisRequest = Shapes::StructureShape.new(name: 'StartExpenseAnalysisRequest')
     StartExpenseAnalysisResponse = Shapes::StructureShape.new(name: 'StartExpenseAnalysisResponse')
+    StartLendingAnalysisRequest = Shapes::StructureShape.new(name: 'StartLendingAnalysisRequest')
+    StartLendingAnalysisResponse = Shapes::StructureShape.new(name: 'StartLendingAnalysisResponse')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     TextType = Shapes::StringShape.new(name: 'TextType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
+    UndetectedDocumentTypeList = Shapes::ListShape.new(name: 'UndetectedDocumentTypeList')
+    UndetectedSignature = Shapes::StructureShape.new(name: 'UndetectedSignature')
+    UndetectedSignatureList = Shapes::ListShape.new(name: 'UndetectedSignatureList')
     UnsupportedDocumentException = Shapes::StructureShape.new(name: 'UnsupportedDocumentException')
     ValueType = Shapes::StringShape.new(name: 'ValueType')
     Warning = Shapes::StructureShape.new(name: 'Warning')
@@ -204,9 +235,22 @@ module Aws::Textract
     DetectDocumentTextResponse.add_member(:detect_document_text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "DetectDocumentTextModelVersion"))
     DetectDocumentTextResponse.struct_class = Types::DetectDocumentTextResponse
 
+    DetectedSignature.add_member(:page, Shapes::ShapeRef.new(shape: UInteger, location_name: "Page"))
+    DetectedSignature.struct_class = Types::DetectedSignature
+
+    DetectedSignatureList.member = Shapes::ShapeRef.new(shape: DetectedSignature)
+
     Document.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageBlob, location_name: "Bytes"))
     Document.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Document.struct_class = Types::Document
+
+    DocumentGroup.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    DocumentGroup.add_member(:split_documents, Shapes::ShapeRef.new(shape: SplitDocumentList, location_name: "SplitDocuments"))
+    DocumentGroup.add_member(:detected_signatures, Shapes::ShapeRef.new(shape: DetectedSignatureList, location_name: "DetectedSignatures"))
+    DocumentGroup.add_member(:undetected_signatures, Shapes::ShapeRef.new(shape: UndetectedSignatureList, location_name: "UndetectedSignatures"))
+    DocumentGroup.struct_class = Types::DocumentGroup
+
+    DocumentGroupList.member = Shapes::ShapeRef.new(shape: DocumentGroup)
 
     DocumentLocation.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     DocumentLocation.struct_class = Types::DocumentLocation
@@ -257,6 +301,13 @@ module Aws::Textract
     ExpenseType.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     ExpenseType.struct_class = Types::ExpenseType
 
+    Extraction.add_member(:lending_document, Shapes::ShapeRef.new(shape: LendingDocument, location_name: "LendingDocument"))
+    Extraction.add_member(:expense_document, Shapes::ShapeRef.new(shape: ExpenseDocument, location_name: "ExpenseDocument"))
+    Extraction.add_member(:identity_document, Shapes::ShapeRef.new(shape: IdentityDocument, location_name: "IdentityDocument"))
+    Extraction.struct_class = Types::Extraction
+
+    ExtractionList.member = Shapes::ShapeRef.new(shape: Extraction)
+
     FeatureTypes.member = Shapes::ShapeRef.new(shape: FeatureType)
 
     Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
@@ -305,6 +356,31 @@ module Aws::Textract
     GetExpenseAnalysisResponse.add_member(:analyze_expense_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeExpenseModelVersion"))
     GetExpenseAnalysisResponse.struct_class = Types::GetExpenseAnalysisResponse
 
+    GetLendingAnalysisRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetLendingAnalysisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetLendingAnalysisRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetLendingAnalysisRequest.struct_class = Types::GetLendingAnalysisRequest
+
+    GetLendingAnalysisResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    GetLendingAnalysisResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    GetLendingAnalysisResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetLendingAnalysisResponse.add_member(:results, Shapes::ShapeRef.new(shape: LendingResultList, location_name: "Results"))
+    GetLendingAnalysisResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
+    GetLendingAnalysisResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetLendingAnalysisResponse.add_member(:analyze_lending_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeLendingModelVersion"))
+    GetLendingAnalysisResponse.struct_class = Types::GetLendingAnalysisResponse
+
+    GetLendingAnalysisSummaryRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetLendingAnalysisSummaryRequest.struct_class = Types::GetLendingAnalysisSummaryRequest
+
+    GetLendingAnalysisSummaryResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    GetLendingAnalysisSummaryResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    GetLendingAnalysisSummaryResponse.add_member(:summary, Shapes::ShapeRef.new(shape: LendingSummary, location_name: "Summary"))
+    GetLendingAnalysisSummaryResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
+    GetLendingAnalysisSummaryResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetLendingAnalysisSummaryResponse.add_member(:analyze_lending_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeLendingModelVersion"))
+    GetLendingAnalysisSummaryResponse.struct_class = Types::GetLendingAnalysisSummaryResponse
+
     HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
@@ -352,6 +428,36 @@ module Aws::Textract
 
     InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
 
+    LendingDetection.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    LendingDetection.add_member(:selection_status, Shapes::ShapeRef.new(shape: SelectionStatus, location_name: "SelectionStatus"))
+    LendingDetection.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
+    LendingDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    LendingDetection.struct_class = Types::LendingDetection
+
+    LendingDetectionList.member = Shapes::ShapeRef.new(shape: LendingDetection)
+
+    LendingDocument.add_member(:lending_fields, Shapes::ShapeRef.new(shape: LendingFieldList, location_name: "LendingFields"))
+    LendingDocument.add_member(:signature_detections, Shapes::ShapeRef.new(shape: SignatureDetectionList, location_name: "SignatureDetections"))
+    LendingDocument.struct_class = Types::LendingDocument
+
+    LendingField.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    LendingField.add_member(:key_detection, Shapes::ShapeRef.new(shape: LendingDetection, location_name: "KeyDetection"))
+    LendingField.add_member(:value_detections, Shapes::ShapeRef.new(shape: LendingDetectionList, location_name: "ValueDetections"))
+    LendingField.struct_class = Types::LendingField
+
+    LendingFieldList.member = Shapes::ShapeRef.new(shape: LendingField)
+
+    LendingResult.add_member(:page, Shapes::ShapeRef.new(shape: UInteger, location_name: "Page"))
+    LendingResult.add_member(:page_classification, Shapes::ShapeRef.new(shape: PageClassification, location_name: "PageClassification"))
+    LendingResult.add_member(:extractions, Shapes::ShapeRef.new(shape: ExtractionList, location_name: "Extractions"))
+    LendingResult.struct_class = Types::LendingResult
+
+    LendingResultList.member = Shapes::ShapeRef.new(shape: LendingResult)
+
+    LendingSummary.add_member(:document_groups, Shapes::ShapeRef.new(shape: DocumentGroupList, location_name: "DocumentGroups"))
+    LendingSummary.add_member(:undetected_document_types, Shapes::ShapeRef.new(shape: UndetectedDocumentTypeList, location_name: "UndetectedDocumentTypes"))
+    LendingSummary.struct_class = Types::LendingSummary
+
     LimitExceededException.struct_class = Types::LimitExceededException
 
     LineItemFields.add_member(:line_item_expense_fields, Shapes::ShapeRef.new(shape: ExpenseFieldList, location_name: "LineItemExpenseFields"))
@@ -377,6 +483,12 @@ module Aws::Textract
     OutputConfig.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "S3Prefix"))
     OutputConfig.struct_class = Types::OutputConfig
 
+    PageClassification.add_member(:page_type, Shapes::ShapeRef.new(shape: PredictionList, required: true, location_name: "PageType"))
+    PageClassification.add_member(:page_number, Shapes::ShapeRef.new(shape: PredictionList, required: true, location_name: "PageNumber"))
+    PageClassification.struct_class = Types::PageClassification
+
+    PageList.member = Shapes::ShapeRef.new(shape: UInteger)
+
     Pages.member = Shapes::ShapeRef.new(shape: UInteger)
 
     Point.add_member(:x, Shapes::ShapeRef.new(shape: Float, location_name: "X"))
@@ -384,6 +496,12 @@ module Aws::Textract
     Point.struct_class = Types::Point
 
     Polygon.member = Shapes::ShapeRef.new(shape: Point)
+
+    Prediction.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    Prediction.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    Prediction.struct_class = Types::Prediction
+
+    PredictionList.member = Shapes::ShapeRef.new(shape: Prediction)
 
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
@@ -409,6 +527,18 @@ module Aws::Textract
     S3Object.add_member(:name, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "Name"))
     S3Object.add_member(:version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "Version"))
     S3Object.struct_class = Types::S3Object
+
+    SignatureDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    SignatureDetection.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
+    SignatureDetection.struct_class = Types::SignatureDetection
+
+    SignatureDetectionList.member = Shapes::ShapeRef.new(shape: SignatureDetection)
+
+    SplitDocument.add_member(:index, Shapes::ShapeRef.new(shape: UInteger, location_name: "Index"))
+    SplitDocument.add_member(:pages, Shapes::ShapeRef.new(shape: PageList, location_name: "Pages"))
+    SplitDocument.struct_class = Types::SplitDocument
+
+    SplitDocumentList.member = Shapes::ShapeRef.new(shape: SplitDocument)
 
     StartDocumentAnalysisRequest.add_member(:document_location, Shapes::ShapeRef.new(shape: DocumentLocation, required: true, location_name: "DocumentLocation"))
     StartDocumentAnalysisRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
@@ -445,9 +575,27 @@ module Aws::Textract
     StartExpenseAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartExpenseAnalysisResponse.struct_class = Types::StartExpenseAnalysisResponse
 
+    StartLendingAnalysisRequest.add_member(:document_location, Shapes::ShapeRef.new(shape: DocumentLocation, required: true, location_name: "DocumentLocation"))
+    StartLendingAnalysisRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    StartLendingAnalysisRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    StartLendingAnalysisRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartLendingAnalysisRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
+    StartLendingAnalysisRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    StartLendingAnalysisRequest.struct_class = Types::StartLendingAnalysisRequest
+
+    StartLendingAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartLendingAnalysisResponse.struct_class = Types::StartLendingAnalysisResponse
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UndetectedDocumentTypeList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    UndetectedSignature.add_member(:page, Shapes::ShapeRef.new(shape: UInteger, location_name: "Page"))
+    UndetectedSignature.struct_class = Types::UndetectedSignature
+
+    UndetectedSignatureList.member = Shapes::ShapeRef.new(shape: UndetectedSignature)
 
     UnsupportedDocumentException.struct_class = Types::UnsupportedDocumentException
 
@@ -592,6 +740,38 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
       end)
 
+      api.add_operation(:get_lending_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLendingAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLendingAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLendingAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+      end)
+
+      api.add_operation(:get_lending_analysis_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLendingAnalysisSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLendingAnalysisSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLendingAnalysisSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+      end)
+
       api.add_operation(:start_document_analysis, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDocumentAnalysis"
         o.http_method = "POST"
@@ -638,6 +818,26 @@ module Aws::Textract
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartExpenseAnalysisRequest)
         o.output = Shapes::ShapeRef.new(shape: StartExpenseAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: DocumentTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: BadDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_lending_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartLendingAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartLendingAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartLendingAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)

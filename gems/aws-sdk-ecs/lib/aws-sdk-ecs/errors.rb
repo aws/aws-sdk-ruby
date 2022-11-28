@@ -38,6 +38,7 @@ module Aws::ECS
   # * {InvalidParameterException}
   # * {LimitExceededException}
   # * {MissingVersionException}
+  # * {NamespaceNotFoundException}
   # * {NoUpdateAvailableException}
   # * {PlatformTaskDefinitionIncompatibilityException}
   # * {PlatformUnknownException}
@@ -168,6 +169,16 @@ module Aws::ECS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECS::Types::MissingVersionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class NamespaceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::NamespaceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

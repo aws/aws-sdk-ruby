@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-11-28)
+------------------
+
+* Feature - This release adds support for MQTT5 properties to AWS IoT HTTP Publish API.
+
 1.40.0 (2022-10-25)
 ------------------
 

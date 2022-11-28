@@ -15,6 +15,7 @@ module Aws::ECS
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AgentUpdateStatus = Shapes::StringShape.new(name: 'AgentUpdateStatus')
+    ApplicationProtocol = Shapes::StringShape.new(name: 'ApplicationProtocol')
     AssignPublicIp = Shapes::StringShape.new(name: 'AssignPublicIp')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
     AttachmentDetails = Shapes::ListShape.new(name: 'AttachmentDetails')
@@ -51,6 +52,8 @@ module Aws::ECS
     ClusterField = Shapes::StringShape.new(name: 'ClusterField')
     ClusterFieldList = Shapes::ListShape.new(name: 'ClusterFieldList')
     ClusterNotFoundException = Shapes::StructureShape.new(name: 'ClusterNotFoundException')
+    ClusterServiceConnectDefaults = Shapes::StructureShape.new(name: 'ClusterServiceConnectDefaults')
+    ClusterServiceConnectDefaultsRequest = Shapes::StructureShape.new(name: 'ClusterServiceConnectDefaultsRequest')
     ClusterSetting = Shapes::StructureShape.new(name: 'ClusterSetting')
     ClusterSettingName = Shapes::StringShape.new(name: 'ClusterSettingName')
     ClusterSettings = Shapes::ListShape.new(name: 'ClusterSettings')
@@ -183,6 +186,8 @@ module Aws::ECS
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
     ListContainerInstancesRequest = Shapes::StructureShape.new(name: 'ListContainerInstancesRequest')
     ListContainerInstancesResponse = Shapes::StructureShape.new(name: 'ListContainerInstancesResponse')
+    ListServicesByNamespaceRequest = Shapes::StructureShape.new(name: 'ListServicesByNamespaceRequest')
+    ListServicesByNamespaceResponse = Shapes::StructureShape.new(name: 'ListServicesByNamespaceResponse')
     ListServicesRequest = Shapes::StructureShape.new(name: 'ListServicesRequest')
     ListServicesResponse = Shapes::StructureShape.new(name: 'ListServicesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -213,6 +218,7 @@ module Aws::ECS
     MissingVersionException = Shapes::StructureShape.new(name: 'MissingVersionException')
     MountPoint = Shapes::StructureShape.new(name: 'MountPoint')
     MountPointList = Shapes::ListShape.new(name: 'MountPointList')
+    NamespaceNotFoundException = Shapes::StructureShape.new(name: 'NamespaceNotFoundException')
     NetworkBinding = Shapes::StructureShape.new(name: 'NetworkBinding')
     NetworkBindings = Shapes::ListShape.new(name: 'NetworkBindings')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
@@ -235,6 +241,7 @@ module Aws::ECS
     PlatformUnknownException = Shapes::StructureShape.new(name: 'PlatformUnknownException')
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
+    PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
     ProtectedTask = Shapes::StructureShape.new(name: 'ProtectedTask')
     ProtectedTasks = Shapes::ListShape.new(name: 'ProtectedTasks')
@@ -274,6 +281,13 @@ module Aws::ECS
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     Service = Shapes::StructureShape.new(name: 'Service')
+    ServiceConnectClientAlias = Shapes::StructureShape.new(name: 'ServiceConnectClientAlias')
+    ServiceConnectClientAliasList = Shapes::ListShape.new(name: 'ServiceConnectClientAliasList')
+    ServiceConnectConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectConfiguration')
+    ServiceConnectService = Shapes::StructureShape.new(name: 'ServiceConnectService')
+    ServiceConnectServiceList = Shapes::ListShape.new(name: 'ServiceConnectServiceList')
+    ServiceConnectServiceResource = Shapes::StructureShape.new(name: 'ServiceConnectServiceResource')
+    ServiceConnectServiceResourceList = Shapes::ListShape.new(name: 'ServiceConnectServiceResourceList')
     ServiceEvent = Shapes::StructureShape.new(name: 'ServiceEvent')
     ServiceEvents = Shapes::ListShape.new(name: 'ServiceEvents')
     ServiceField = Shapes::StringShape.new(name: 'ServiceField')
@@ -451,6 +465,7 @@ module Aws::ECS
     Cluster.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "defaultCapacityProviderStrategy"))
     Cluster.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     Cluster.add_member(:attachments_status, Shapes::ShapeRef.new(shape: String, location_name: "attachmentsStatus"))
+    Cluster.add_member(:service_connect_defaults, Shapes::ShapeRef.new(shape: ClusterServiceConnectDefaults, location_name: "serviceConnectDefaults"))
     Cluster.struct_class = Types::Cluster
 
     ClusterConfiguration.add_member(:execute_command_configuration, Shapes::ShapeRef.new(shape: ExecuteCommandConfiguration, location_name: "executeCommandConfiguration"))
@@ -465,6 +480,12 @@ module Aws::ECS
     ClusterFieldList.member = Shapes::ShapeRef.new(shape: ClusterField)
 
     ClusterNotFoundException.struct_class = Types::ClusterNotFoundException
+
+    ClusterServiceConnectDefaults.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    ClusterServiceConnectDefaults.struct_class = Types::ClusterServiceConnectDefaults
+
+    ClusterServiceConnectDefaultsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespace"))
+    ClusterServiceConnectDefaultsRequest.struct_class = Types::ClusterServiceConnectDefaultsRequest
 
     ClusterSetting.add_member(:name, Shapes::ShapeRef.new(shape: ClusterSettingName, location_name: "name"))
     ClusterSetting.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -611,6 +632,7 @@ module Aws::ECS
     CreateClusterRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "configuration"))
     CreateClusterRequest.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: StringList, location_name: "capacityProviders"))
     CreateClusterRequest.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "defaultCapacityProviderStrategy"))
+    CreateClusterRequest.add_member(:service_connect_defaults, Shapes::ShapeRef.new(shape: ClusterServiceConnectDefaultsRequest, location_name: "serviceConnectDefaults"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -638,6 +660,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
     CreateServiceRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
     CreateServiceRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
+    CreateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -720,6 +743,8 @@ module Aws::ECS
     Deployment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Deployment.add_member(:rollout_state, Shapes::ShapeRef.new(shape: DeploymentRolloutState, location_name: "rolloutState"))
     Deployment.add_member(:rollout_state_reason, Shapes::ShapeRef.new(shape: String, location_name: "rolloutStateReason"))
+    Deployment.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
+    Deployment.add_member(:service_connect_resources, Shapes::ShapeRef.new(shape: ServiceConnectServiceResourceList, location_name: "serviceConnectResources"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentCircuitBreaker.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
@@ -829,6 +854,7 @@ module Aws::ECS
 
     DiscoverPollEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     DiscoverPollEndpointResponse.add_member(:telemetry_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "telemetryEndpoint"))
+    DiscoverPollEndpointResponse.add_member(:service_connect_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "serviceConnectEndpoint"))
     DiscoverPollEndpointResponse.struct_class = Types::DiscoverPollEndpointResponse
 
     DockerLabelsMap.key = Shapes::ShapeRef.new(shape: String)
@@ -1023,6 +1049,15 @@ module Aws::ECS
     ListContainerInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListContainerInstancesResponse.struct_class = Types::ListContainerInstancesResponse
 
+    ListServicesByNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespace"))
+    ListServicesByNamespaceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServicesByNamespaceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    ListServicesByNamespaceRequest.struct_class = Types::ListServicesByNamespaceRequest
+
+    ListServicesByNamespaceResponse.add_member(:service_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "serviceArns"))
+    ListServicesByNamespaceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServicesByNamespaceResponse.struct_class = Types::ListServicesByNamespaceResponse
+
     ListServicesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     ListServicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
@@ -1124,6 +1159,8 @@ module Aws::ECS
 
     MountPointList.member = Shapes::ShapeRef.new(shape: MountPoint)
 
+    NamespaceNotFoundException.struct_class = Types::NamespaceNotFoundException
+
     NetworkBinding.add_member(:bind_ip, Shapes::ShapeRef.new(shape: String, location_name: "bindIP"))
     NetworkBinding.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     NetworkBinding.add_member(:host_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "hostPort"))
@@ -1169,6 +1206,8 @@ module Aws::ECS
     PortMapping.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     PortMapping.add_member(:host_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "hostPort"))
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "protocol"))
+    PortMapping.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    PortMapping.add_member(:app_protocol, Shapes::ShapeRef.new(shape: ApplicationProtocol, location_name: "appProtocol"))
     PortMapping.struct_class = Types::PortMapping
 
     PortMappingList.member = Shapes::ShapeRef.new(shape: PortMapping)
@@ -1351,6 +1390,32 @@ module Aws::ECS
     Service.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
     Service.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     Service.struct_class = Types::Service
+
+    ServiceConnectClientAlias.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "port"))
+    ServiceConnectClientAlias.add_member(:dns_name, Shapes::ShapeRef.new(shape: String, location_name: "dnsName"))
+    ServiceConnectClientAlias.struct_class = Types::ServiceConnectClientAlias
+
+    ServiceConnectClientAliasList.member = Shapes::ShapeRef.new(shape: ServiceConnectClientAlias)
+
+    ServiceConnectConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    ServiceConnectConfiguration.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    ServiceConnectConfiguration.add_member(:services, Shapes::ShapeRef.new(shape: ServiceConnectServiceList, location_name: "services"))
+    ServiceConnectConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
+    ServiceConnectConfiguration.struct_class = Types::ServiceConnectConfiguration
+
+    ServiceConnectService.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
+    ServiceConnectService.add_member(:discovery_name, Shapes::ShapeRef.new(shape: String, location_name: "discoveryName"))
+    ServiceConnectService.add_member(:client_aliases, Shapes::ShapeRef.new(shape: ServiceConnectClientAliasList, location_name: "clientAliases"))
+    ServiceConnectService.add_member(:ingress_port_override, Shapes::ShapeRef.new(shape: PortNumber, location_name: "ingressPortOverride"))
+    ServiceConnectService.struct_class = Types::ServiceConnectService
+
+    ServiceConnectServiceList.member = Shapes::ShapeRef.new(shape: ServiceConnectService)
+
+    ServiceConnectServiceResource.add_member(:discovery_name, Shapes::ShapeRef.new(shape: String, location_name: "discoveryName"))
+    ServiceConnectServiceResource.add_member(:discovery_arn, Shapes::ShapeRef.new(shape: String, location_name: "discoveryArn"))
+    ServiceConnectServiceResource.struct_class = Types::ServiceConnectServiceResource
+
+    ServiceConnectServiceResourceList.member = Shapes::ShapeRef.new(shape: ServiceConnectServiceResource)
 
     ServiceEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ServiceEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
@@ -1628,6 +1693,7 @@ module Aws::ECS
     UpdateClusterRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     UpdateClusterRequest.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, location_name: "settings"))
     UpdateClusterRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "configuration"))
+    UpdateClusterRequest.add_member(:service_connect_defaults, Shapes::ShapeRef.new(shape: ClusterServiceConnectDefaultsRequest, location_name: "serviceConnectDefaults"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
 
     UpdateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -1683,6 +1749,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
     UpdateServiceRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
     UpdateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
+    UpdateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -1784,6 +1851,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
       end)
 
       api.add_operation(:create_task_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1802,6 +1870,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
       end)
 
       api.add_operation(:delete_account_setting, Seahorse::Model::Operation.new.tap do |o|
@@ -2108,6 +2177,24 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_services_by_namespace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServicesByNamespace"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServicesByNamespaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServicesByNamespaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2430,6 +2517,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: PlatformUnknownException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
       end)
 
       api.add_operation(:update_service_primary_task_set, Seahorse::Model::Operation.new.tap do |o|

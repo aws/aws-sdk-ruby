@@ -1676,6 +1676,11 @@ module Aws::Drs
     #   The ID of the Job that created the Recovery Instance.
     #   @return [String]
     #
+    # @!attribute [rw] origin_environment
+    #   Environment (On Premises / AWS) of the instance that the recovery
+    #   instance originated from.
+    #   @return [String]
+    #
     # @!attribute [rw] point_in_time_snapshot_date_time
     #   The date and time of the Point in Time (PIT) snapshot that this
     #   Recovery Instance was launched from.
@@ -1707,6 +1712,7 @@ module Aws::Drs
       :failback,
       :is_drill,
       :job_id,
+      :origin_environment,
       :point_in_time_snapshot_date_time,
       :recovery_instance_id,
       :recovery_instance_properties,
@@ -1904,6 +1910,11 @@ module Aws::Drs
     #   The Job ID of the last failback log for this Recovery Instance.
     #   @return [String]
     #
+    # @!attribute [rw] failback_launch_type
+    #   The launch type (Recovery / Drill) of the last launch for the
+    #   failback replication of this recovery instance.
+    #   @return [String]
+    #
     # @!attribute [rw] failback_to_original_server
     #   Whether we are failing back to the original Source Server for this
     #   Recovery Instance.
@@ -1927,6 +1938,7 @@ module Aws::Drs
       :failback_client_last_seen_by_service_date_time,
       :failback_initiation_time,
       :failback_job_id,
+      :failback_launch_type,
       :failback_to_original_server,
       :first_byte_date_time,
       :state)
@@ -2134,8 +2146,9 @@ module Aws::Drs
     #   @return [Boolean]
     #
     # @!attribute [rw] optimized_staging_disk_type
-    #   The Staging Disk EBS volume type to be used during replication when
-    #   `stagingDiskType` is set to Auto. This is a read-only field.
+    #   When `stagingDiskType` is set to Auto, this field shows the current
+    #   staging disk EBS volume type as it is constantly updated by the
+    #   service. This is a read-only field.
     #   @return [String]
     #
     # @!attribute [rw] staging_disk_type
@@ -2301,6 +2314,38 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ReverseReplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_instance_id: "RecoveryInstanceID", # required
+    #       }
+    #
+    # @!attribute [rw] recovery_instance_id
+    #   The ID of the Recovery Instance that we want to reverse the
+    #   replication for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReverseReplicationRequest AWS API Documentation
+    #
+    class ReverseReplicationRequest < Struct.new(
+      :recovery_instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reversed_direction_source_server_arn
+    #   ARN of created SourceServer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReverseReplicationResponse AWS API Documentation
+    #
+    class ReverseReplicationResponse < Struct.new(
+      :reversed_direction_source_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be completed because its exceeded the service
     # quota.
     #
@@ -2335,6 +2380,31 @@ module Aws::Drs
       :resource_id,
       :resource_type,
       :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties of the cloud environment where this Source Server
+    # originated from.
+    #
+    # @!attribute [rw] origin_account_id
+    #   AWS Account ID for an EC2-originated Source Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_availability_zone
+    #   AWS Availability Zone for an EC2-originated Source Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_region
+    #   AWS Region for an EC2-originated Source Server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceCloudProperties AWS API Documentation
+    #
+    class SourceCloudProperties < Struct.new(
+      :origin_account_id,
+      :origin_availability_zone,
+      :origin_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2409,6 +2479,20 @@ module Aws::Drs
     #   The ID of the Recovery Instance associated with this Source Server.
     #   @return [String]
     #
+    # @!attribute [rw] replication_direction
+    #   Replication direction of the Source Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] reversed_direction_source_server_arn
+    #   For EC2-originated Source Servers which have been failed over and
+    #   then failed back, this value will mean the ARN of the Source Server
+    #   on the opposite replication direction.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cloud_properties
+    #   Source cloud properties of the Source Server.
+    #   @return [Types::SourceCloudProperties]
+    #
     # @!attribute [rw] source_properties
     #   The source properties of the Source Server.
     #   @return [Types::SourceProperties]
@@ -2433,6 +2517,9 @@ module Aws::Drs
       :last_launch_result,
       :life_cycle,
       :recovery_instance_id,
+      :replication_direction,
+      :reversed_direction_source_server_arn,
+      :source_cloud_properties,
       :source_properties,
       :source_server_id,
       :staging_area,
@@ -2625,6 +2712,37 @@ module Aws::Drs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartReplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_server_id: "SourceServerID", # required
+    #       }
+    #
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server to start replication for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartReplicationRequest AWS API Documentation
+    #
+    class StartReplicationRequest < Struct.new(
+      :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server
+    #   The Source Server that this action was targeted on.
+    #   @return [Types::SourceServer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartReplicationResponse AWS API Documentation
+    #
+    class StartReplicationResponse < Struct.new(
+      :source_server)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopFailbackRequest
     #   data as a hash:
     #
@@ -2640,6 +2758,37 @@ module Aws::Drs
     #
     class StopFailbackRequest < Struct.new(
       :recovery_instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopReplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_server_id: "SourceServerID", # required
+    #       }
+    #
+    # @!attribute [rw] source_server_id
+    #   The ID of the Source Server to stop replication for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StopReplicationRequest AWS API Documentation
+    #
+    class StopReplicationRequest < Struct.new(
+      :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server
+    #   The Source Server that this action was targeted on.
+    #   @return [Types::SourceServer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StopReplicationResponse AWS API Documentation
+    #
+    class StopReplicationResponse < Struct.new(
+      :source_server)
       SENSITIVE = []
       include Aws::Structure
     end

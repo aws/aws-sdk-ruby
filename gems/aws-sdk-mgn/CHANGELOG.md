@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-11-28)
+------------------
+
+* Feature - This release adds support for Application and Wave management. We also now support custom post-launch actions.
+
 1.15.0 (2022-10-25)
 ------------------
 

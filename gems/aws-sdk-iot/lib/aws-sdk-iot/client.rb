@@ -666,8 +666,8 @@ module Aws::IoT
     end
 
     # Attaches the specified principal to the specified thing. A principal
-    # can be X.509 certificates, IAM users, groups, and roles, Amazon
-    # Cognito identities or federated identities.
+    # can be X.509 certificates, Amazon Cognito identities or federated
+    # identities.
     #
     # Requires permission to access the [AttachThingPrincipal][1] action.
     #
@@ -1793,6 +1793,11 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [Types::SchedulingConfig] :scheduling_config
+    #   The configuration that allows you to schedule a job for a future date
+    #   and time in addition to specifying the end behavior for each job
+    #   execution.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -1854,6 +1859,11 @@ module Aws::IoT
     #     },
     #     document_parameters: {
     #       "ParameterKey" => "ParameterValue",
+    #     },
+    #     scheduling_config: {
+    #       start_time: "StringDateTime",
+    #       end_time: "StringDateTime",
+    #       end_behavior: "STOP_ROLLOUT", # accepts STOP_ROLLOUT, CANCEL, FORCE_CANCEL
     #     },
     #   })
     #
@@ -3213,6 +3223,19 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
     #             qos: 1,
+    #             headers: {
+    #               payload_format_indicator: "PayloadFormatIndicator",
+    #               content_type: "ContentType",
+    #               response_topic: "ResponseTopic",
+    #               correlation_data: "CorrelationData",
+    #               message_expiry: "MessageExpiry",
+    #               user_properties: [
+    #                 {
+    #                   key: "UserPropertyKey", # required
+    #                   value: "UserPropertyValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required
@@ -3402,6 +3425,19 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
     #           qos: 1,
+    #           headers: {
+    #             payload_format_indicator: "PayloadFormatIndicator",
+    #             content_type: "ContentType",
+    #             response_topic: "ResponseTopic",
+    #             correlation_data: "CorrelationData",
+    #             message_expiry: "MessageExpiry",
+    #             user_properties: [
+    #               {
+    #                 key: "UserPropertyKey", # required
+    #                 value: "UserPropertyValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -5590,7 +5626,7 @@ module Aws::IoT
     #   resp.job.job_arn #=> String
     #   resp.job.job_id #=> String
     #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
+    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS", "SCHEDULED"
     #   resp.job.force_canceled #=> Boolean
     #   resp.job.reason_code #=> String
     #   resp.job.comment #=> String
@@ -5631,6 +5667,9 @@ module Aws::IoT
     #   resp.job.document_parameters #=> Hash
     #   resp.job.document_parameters["ParameterKey"] #=> String
     #   resp.job.is_concurrent #=> Boolean
+    #   resp.job.scheduling_config.start_time #=> String
+    #   resp.job.scheduling_config.end_time #=> String
+    #   resp.job.scheduling_config.end_behavior #=> String, one of "STOP_ROLLOUT", "CANCEL", "FORCE_CANCEL"
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -7225,6 +7264,14 @@ module Aws::IoT
     #   resp.rule.actions[0].republish.role_arn #=> String
     #   resp.rule.actions[0].republish.topic #=> String
     #   resp.rule.actions[0].republish.qos #=> Integer
+    #   resp.rule.actions[0].republish.headers.payload_format_indicator #=> String
+    #   resp.rule.actions[0].republish.headers.content_type #=> String
+    #   resp.rule.actions[0].republish.headers.response_topic #=> String
+    #   resp.rule.actions[0].republish.headers.correlation_data #=> String
+    #   resp.rule.actions[0].republish.headers.message_expiry #=> String
+    #   resp.rule.actions[0].republish.headers.user_properties #=> Array
+    #   resp.rule.actions[0].republish.headers.user_properties[0].key #=> String
+    #   resp.rule.actions[0].republish.headers.user_properties[0].value #=> String
     #   resp.rule.actions[0].s3.role_arn #=> String
     #   resp.rule.actions[0].s3.bucket_name #=> String
     #   resp.rule.actions[0].s3.key #=> String
@@ -7338,6 +7385,14 @@ module Aws::IoT
     #   resp.rule.error_action.republish.role_arn #=> String
     #   resp.rule.error_action.republish.topic #=> String
     #   resp.rule.error_action.republish.qos #=> Integer
+    #   resp.rule.error_action.republish.headers.payload_format_indicator #=> String
+    #   resp.rule.error_action.republish.headers.content_type #=> String
+    #   resp.rule.error_action.republish.headers.response_topic #=> String
+    #   resp.rule.error_action.republish.headers.correlation_data #=> String
+    #   resp.rule.error_action.republish.headers.message_expiry #=> String
+    #   resp.rule.error_action.republish.headers.user_properties #=> Array
+    #   resp.rule.error_action.republish.headers.user_properties[0].key #=> String
+    #   resp.rule.error_action.republish.headers.user_properties[0].value #=> String
     #   resp.rule.error_action.s3.role_arn #=> String
     #   resp.rule.error_action.s3.bucket_name #=> String
     #   resp.rule.error_action.s3.key #=> String
@@ -8964,7 +9019,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS, SCHEDULED
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -8980,7 +9035,7 @@ module Aws::IoT
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].thing_group_id #=> String
     #   resp.jobs[0].target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
+    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS", "SCHEDULED"
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
@@ -11306,6 +11361,19 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
     #             qos: 1,
+    #             headers: {
+    #               payload_format_indicator: "PayloadFormatIndicator",
+    #               content_type: "ContentType",
+    #               response_topic: "ResponseTopic",
+    #               correlation_data: "CorrelationData",
+    #               message_expiry: "MessageExpiry",
+    #               user_properties: [
+    #                 {
+    #                   key: "UserPropertyKey", # required
+    #                   value: "UserPropertyValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required
@@ -11495,6 +11563,19 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
     #           qos: 1,
+    #           headers: {
+    #             payload_format_indicator: "PayloadFormatIndicator",
+    #             content_type: "ContentType",
+    #             response_topic: "ResponseTopic",
+    #             correlation_data: "CorrelationData",
+    #             message_expiry: "MessageExpiry",
+    #             user_properties: [
+    #               {
+    #                 key: "UserPropertyKey", # required
+    #                 value: "UserPropertyValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -13980,7 +14061,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

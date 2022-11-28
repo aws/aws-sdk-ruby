@@ -1818,8 +1818,8 @@ module Aws::CloudWatch
     #   @return [Array<Types::MetricStreamFilter>]
     #
     # @!attribute [rw] firehose_arn
-    #   The ARN of the Amazon Kinesis Firehose delivery stream that is used
-    #   by this metric stream.
+    #   The ARN of the Amazon Kinesis Data Firehose delivery stream that is
+    #   used by this metric stream.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2445,6 +2445,8 @@ module Aws::CloudWatch
     #         ],
     #         next_token: "NextToken",
     #         recently_active: "PT3H", # accepts PT3H
+    #         include_linked_accounts: false,
+    #         owning_account: "AccountId",
     #       }
     #
     # @!attribute [rw] namespace
@@ -2478,6 +2480,20 @@ module Aws::CloudWatch
     #   than the specified time interval.
     #   @return [String]
     #
+    # @!attribute [rw] include_linked_accounts
+    #   If you are using this operation in a monitoring account, specify
+    #   `true` to include metrics from source accounts in the returned data.
+    #
+    #   The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] owning_account
+    #   When you use this operation in a monitoring account, use this field
+    #   to return metrics only from one source account. To do so, specify
+    #   that source account ID in this field, and also specify `true` for
+    #   `IncludeLinkedAccounts`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsInput AWS API Documentation
     #
     class ListMetricsInput < Struct.new(
@@ -2485,7 +2501,9 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :next_token,
-      :recently_active)
+      :recently_active,
+      :include_linked_accounts,
+      :owning_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2499,11 +2517,21 @@ module Aws::CloudWatch
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] owning_accounts
+    #   If you are using this operation in a monitoring account, this array
+    #   contains the account IDs of the source accounts where the metrics in
+    #   the returned data are from.
+    #
+    #   This field is a 1:1 mapping between each metric that is returned and
+    #   the ID of the owning account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsOutput AWS API Documentation
     #
     class ListMetricsOutput < Struct.new(
       :metrics,
-      :next_token)
+      :next_token,
+      :owning_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2914,7 +2942,7 @@ module Aws::CloudWatch
     # structures can include as many as 10 structures that contain a
     # `MetricStat` parameter to retrieve a metric, and as many as 10
     # structures that contain the `Expression` parameter to perform a math
-    # expression. Of those `Expression` structures, one must have `True` as
+    # expression. Of those `Expression` structures, one must have `true` as
     # the value for `ReturnData`. The result of this expression is the value
     # the alarm watches.
     #
@@ -3017,10 +3045,10 @@ module Aws::CloudWatch
     #   When used in `GetMetricData`, this option indicates whether to
     #   return the timestamps and raw data values of this metric. If you are
     #   performing this call just to do math expressions and do not also
-    #   need the raw data returned, you can specify `False`. If you omit
-    #   this, the default of `True` is used.
+    #   need the raw data returned, you can specify `false`. If you omit
+    #   this, the default of `true` is used.
     #
-    #   When used in `PutMetricAlarm`, specify `True` for the one expression
+    #   When used in `PutMetricAlarm`, specify `true` for the one expression
     #   result to use as the alarm. For all other metrics and expressions in
     #   the same `PutMetricAlarm` operation, specify `ReturnData` as False.
     #   @return [Boolean]
@@ -3037,11 +3065,15 @@ module Aws::CloudWatch
     #   @return [Integer]
     #
     # @!attribute [rw] account_id
-    #   The ID of the account where the metrics are located, if this is a
-    #   cross-account alarm.
+    #   The ID of the account where the metrics are located.
     #
-    #   Use this field only for `PutMetricAlarm` operations. It is not used
-    #   in `GetMetricData` operations.
+    #   If you are performing a `GetMetricData` operation in a monitoring
+    #   account, use this to specify which account to retrieve this metric
+    #   from.
+    #
+    #   If you are performing a `PutMetricAlarm` operation, use this to
+    #   specify which account contains the metric that the alarm is
+    #   watching.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery AWS API Documentation
@@ -3272,9 +3304,9 @@ module Aws::CloudWatch
     #   Each item in `MetricDataQueries` gets a metric or performs a math
     #   expression. One item in `MetricDataQueries` is the expression that
     #   provides the time series that the anomaly detector uses as input.
-    #   Designate the expression by setting `ReturnData` to `True` for this
+    #   Designate the expression by setting `ReturnData` to `true` for this
     #   object in the array. For all other expressions and metrics, set
-    #   `ReturnData` to `False`. The designated expression must return a
+    #   `ReturnData` to `false`. The designated expression must return a
     #   single time series.
     #   @return [Array<Types::MetricDataQuery>]
     #
@@ -4567,17 +4599,17 @@ module Aws::CloudWatch
     #   @return [Array<Types::MetricStreamFilter>]
     #
     # @!attribute [rw] firehose_arn
-    #   The ARN of the Amazon Kinesis Firehose delivery stream to use for
-    #   this metric stream. This Amazon Kinesis Firehose delivery stream
-    #   must already exist and must be in the same account as the metric
-    #   stream.
+    #   The ARN of the Amazon Kinesis Data Firehose delivery stream to use
+    #   for this metric stream. This Amazon Kinesis Data Firehose delivery
+    #   stream must already exist and must be in the same account as the
+    #   metric stream.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The ARN of an IAM role that this metric stream will use to access
-    #   Amazon Kinesis Firehose resources. This IAM role must already exist
-    #   and must be in the same account as the metric stream. This IAM role
-    #   must include the following permissions:
+    #   Amazon Kinesis Data Firehose resources. This IAM role must already
+    #   exist and must be in the same account as the metric stream. This IAM
+    #   role must include the following permissions:
     #
     #   * firehose:PutRecord
     #
@@ -4629,7 +4661,7 @@ module Aws::CloudWatch
     #   additional statistic that is supported by CloudWatch, listed in [
     #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
     #   `opentelemetry0.7`, you can stream percentile statistics such as
-    #   p95, p99.9 and so on.
+    #   p95, p99.9, and so on.
     #
     #
     #

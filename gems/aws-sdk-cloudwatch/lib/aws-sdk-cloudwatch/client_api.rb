@@ -122,6 +122,7 @@ module Aws::CloudWatch
     HistoryData = Shapes::StringShape.new(name: 'HistoryData')
     HistoryItemType = Shapes::StringShape.new(name: 'HistoryItemType')
     HistorySummary = Shapes::StringShape.new(name: 'HistorySummary')
+    IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
     InsightRule = Shapes::StructureShape.new(name: 'InsightRule')
     InsightRuleAggregationStatistic = Shapes::StringShape.new(name: 'InsightRuleAggregationStatistic')
     InsightRuleContributor = Shapes::StructureShape.new(name: 'InsightRuleContributor')
@@ -216,6 +217,7 @@ module Aws::CloudWatch
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
+    OwningAccounts = Shapes::ListShape.new(name: 'OwningAccounts')
     PartialFailure = Shapes::StructureShape.new(name: 'PartialFailure')
     Period = Shapes::IntegerShape.new(name: 'Period')
     PutAnomalyDetectorInput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorInput')
@@ -673,10 +675,13 @@ module Aws::CloudWatch
     ListMetricsInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionFilters, location_name: "Dimensions"))
     ListMetricsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMetricsInput.add_member(:recently_active, Shapes::ShapeRef.new(shape: RecentlyActive, location_name: "RecentlyActive"))
+    ListMetricsInput.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: IncludeLinkedAccounts, location_name: "IncludeLinkedAccounts"))
+    ListMetricsInput.add_member(:owning_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwningAccount"))
     ListMetricsInput.struct_class = Types::ListMetricsInput
 
     ListMetricsOutput.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     ListMetricsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMetricsOutput.add_member(:owning_accounts, Shapes::ShapeRef.new(shape: OwningAccounts, location_name: "OwningAccounts"))
     ListMetricsOutput.struct_class = Types::ListMetricsOutput
 
     ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
@@ -824,6 +829,8 @@ module Aws::CloudWatch
 
     MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     MissingRequiredParameterException.struct_class = Types::MissingRequiredParameterException
+
+    OwningAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
     PartialFailure.add_member(:failure_resource, Shapes::ShapeRef.new(shape: FailureResource, location_name: "FailureResource"))
     PartialFailure.add_member(:exception_type, Shapes::ShapeRef.new(shape: ExceptionType, location_name: "ExceptionType"))

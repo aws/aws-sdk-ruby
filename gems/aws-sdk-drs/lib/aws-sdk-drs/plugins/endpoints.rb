@@ -100,12 +100,18 @@ module Aws::Drs
             Aws::Drs::Endpoints::ListTagsForResource.build(context)
           when :retry_data_replication
             Aws::Drs::Endpoints::RetryDataReplication.build(context)
+          when :reverse_replication
+            Aws::Drs::Endpoints::ReverseReplication.build(context)
           when :start_failback_launch
             Aws::Drs::Endpoints::StartFailbackLaunch.build(context)
           when :start_recovery
             Aws::Drs::Endpoints::StartRecovery.build(context)
+          when :start_replication
+            Aws::Drs::Endpoints::StartReplication.build(context)
           when :stop_failback
             Aws::Drs::Endpoints::StopFailback.build(context)
+          when :stop_replication
+            Aws::Drs::Endpoints::StopReplication.build(context)
           when :tag_resource
             Aws::Drs::Endpoints::TagResource.build(context)
           when :terminate_recovery_instances

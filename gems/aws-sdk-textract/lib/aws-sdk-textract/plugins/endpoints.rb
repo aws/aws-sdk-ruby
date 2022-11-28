@@ -70,12 +70,18 @@ module Aws::Textract
             Aws::Textract::Endpoints::GetDocumentTextDetection.build(context)
           when :get_expense_analysis
             Aws::Textract::Endpoints::GetExpenseAnalysis.build(context)
+          when :get_lending_analysis
+            Aws::Textract::Endpoints::GetLendingAnalysis.build(context)
+          when :get_lending_analysis_summary
+            Aws::Textract::Endpoints::GetLendingAnalysisSummary.build(context)
           when :start_document_analysis
             Aws::Textract::Endpoints::StartDocumentAnalysis.build(context)
           when :start_document_text_detection
             Aws::Textract::Endpoints::StartDocumentTextDetection.build(context)
           when :start_expense_analysis
             Aws::Textract::Endpoints::StartExpenseAnalysis.build(context)
+          when :start_lending_analysis
+            Aws::Textract::Endpoints::StartLendingAnalysis.build(context)
           end
         end
       end

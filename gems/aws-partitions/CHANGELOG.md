@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.666.0 (2022-11-28)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::OAM`.
+
 1.665.0 (2022-11-22)
 ------------------
 

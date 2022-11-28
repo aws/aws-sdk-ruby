@@ -232,6 +232,8 @@ module Aws::IoT
     ConnectivityTimestamp = Shapes::IntegerShape.new(name: 'ConnectivityTimestamp')
     ConsecutiveDatapointsToAlarm = Shapes::IntegerShape.new(name: 'ConsecutiveDatapointsToAlarm')
     ConsecutiveDatapointsToClear = Shapes::IntegerShape.new(name: 'ConsecutiveDatapointsToClear')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CorrelationData = Shapes::StringShape.new(name: 'CorrelationData')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateAuditSuppressionRequest = Shapes::StructureShape.new(name: 'CreateAuditSuppressionRequest')
     CreateAuditSuppressionResponse = Shapes::StructureShape.new(name: 'CreateAuditSuppressionResponse')
@@ -625,6 +627,7 @@ module Aws::IoT
     JobDescription = Shapes::StringShape.new(name: 'JobDescription')
     JobDocument = Shapes::StringShape.new(name: 'JobDocument')
     JobDocumentSource = Shapes::StringShape.new(name: 'JobDocumentSource')
+    JobEndBehavior = Shapes::StringShape.new(name: 'JobEndBehavior')
     JobExecution = Shapes::StructureShape.new(name: 'JobExecution')
     JobExecutionFailureType = Shapes::StringShape.new(name: 'JobExecutionFailureType')
     JobExecutionStatus = Shapes::StringShape.new(name: 'JobExecutionStatus')
@@ -797,6 +800,7 @@ module Aws::IoT
     Maximum = Shapes::FloatShape.new(name: 'Maximum')
     MaximumPerMinute = Shapes::IntegerShape.new(name: 'MaximumPerMinute')
     Message = Shapes::StringShape.new(name: 'Message')
+    MessageExpiry = Shapes::StringShape.new(name: 'MessageExpiry')
     MessageFormat = Shapes::StringShape.new(name: 'MessageFormat')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
@@ -824,6 +828,7 @@ module Aws::IoT
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     MqttClientId = Shapes::StringShape.new(name: 'MqttClientId')
     MqttContext = Shapes::StructureShape.new(name: 'MqttContext')
+    MqttHeaders = Shapes::StructureShape.new(name: 'MqttHeaders')
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
     NamedShadowIndexingMode = Shapes::StringShape.new(name: 'NamedShadowIndexingMode')
@@ -864,6 +869,7 @@ module Aws::IoT
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
     PayloadField = Shapes::StringShape.new(name: 'PayloadField')
+    PayloadFormatIndicator = Shapes::StringShape.new(name: 'PayloadFormatIndicator')
     PayloadVersion = Shapes::StringShape.new(name: 'PayloadVersion')
     Percent = Shapes::FloatShape.new(name: 'Percent')
     PercentList = Shapes::ListShape.new(name: 'PercentList')
@@ -971,6 +977,7 @@ module Aws::IoT
     ResourceRegistrationFailureException = Shapes::StructureShape.new(name: 'ResourceRegistrationFailureException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Resources = Shapes::ListShape.new(name: 'Resources')
+    ResponseTopic = Shapes::StringShape.new(name: 'ResponseTopic')
     RetryAttempt = Shapes::IntegerShape.new(name: 'RetryAttempt')
     RetryCriteria = Shapes::StructureShape.new(name: 'RetryCriteria')
     RetryCriteriaList = Shapes::ListShape.new(name: 'RetryCriteriaList')
@@ -999,6 +1006,7 @@ module Aws::IoT
     ScheduledAuditMetadata = Shapes::StructureShape.new(name: 'ScheduledAuditMetadata')
     ScheduledAuditMetadataList = Shapes::ListShape.new(name: 'ScheduledAuditMetadataList')
     ScheduledAuditName = Shapes::StringShape.new(name: 'ScheduledAuditName')
+    SchedulingConfig = Shapes::StructureShape.new(name: 'SchedulingConfig')
     SearchIndexRequest = Shapes::StructureShape.new(name: 'SearchIndexRequest')
     SearchIndexResponse = Shapes::StructureShape.new(name: 'SearchIndexResponse')
     SearchableAttributes = Shapes::ListShape.new(name: 'SearchableAttributes')
@@ -1078,6 +1086,7 @@ module Aws::IoT
     StreamVersion = Shapes::IntegerShape.new(name: 'StreamVersion')
     StreamsSummary = Shapes::ListShape.new(name: 'StreamsSummary')
     String = Shapes::StringShape.new(name: 'String')
+    StringDateTime = Shapes::StringShape.new(name: 'StringDateTime')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -1246,6 +1255,10 @@ module Aws::IoT
     UpdateTopicRuleDestinationResponse = Shapes::StructureShape.new(name: 'UpdateTopicRuleDestinationResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     UseBase64 = Shapes::BooleanShape.new(name: 'UseBase64')
+    UserProperties = Shapes::ListShape.new(name: 'UserProperties')
+    UserProperty = Shapes::StructureShape.new(name: 'UserProperty')
+    UserPropertyKey = Shapes::StringShape.new(name: 'UserPropertyKey')
+    UserPropertyValue = Shapes::StringShape.new(name: 'UserPropertyValue')
     Valid = Shapes::BooleanShape.new(name: 'Valid')
     ValidateSecurityProfileBehaviorsRequest = Shapes::StructureShape.new(name: 'ValidateSecurityProfileBehaviorsRequest')
     ValidateSecurityProfileBehaviorsResponse = Shapes::StructureShape.new(name: 'ValidateSecurityProfileBehaviorsResponse')
@@ -1911,6 +1924,7 @@ module Aws::IoT
     CreateJobRequest.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
     CreateJobRequest.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     CreateJobRequest.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
+    CreateJobRequest.add_member(:scheduling_config, Shapes::ShapeRef.new(shape: SchedulingConfig, location_name: "schedulingConfig"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -3048,6 +3062,7 @@ module Aws::IoT
     Job.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     Job.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
     Job.add_member(:is_concurrent, Shapes::ShapeRef.new(shape: BooleanWrapperObject, location_name: "isConcurrent"))
+    Job.add_member(:scheduling_config, Shapes::ShapeRef.new(shape: SchedulingConfig, location_name: "schedulingConfig"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -3808,6 +3823,14 @@ module Aws::IoT
     MqttContext.add_member(:client_id, Shapes::ShapeRef.new(shape: MqttClientId, location_name: "clientId"))
     MqttContext.struct_class = Types::MqttContext
 
+    MqttHeaders.add_member(:payload_format_indicator, Shapes::ShapeRef.new(shape: PayloadFormatIndicator, location_name: "payloadFormatIndicator"))
+    MqttHeaders.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "contentType"))
+    MqttHeaders.add_member(:response_topic, Shapes::ShapeRef.new(shape: ResponseTopic, location_name: "responseTopic"))
+    MqttHeaders.add_member(:correlation_data, Shapes::ShapeRef.new(shape: CorrelationData, location_name: "correlationData"))
+    MqttHeaders.add_member(:message_expiry, Shapes::ShapeRef.new(shape: MessageExpiry, location_name: "messageExpiry"))
+    MqttHeaders.add_member(:user_properties, Shapes::ShapeRef.new(shape: UserProperties, location_name: "userProperties"))
+    MqttHeaders.struct_class = Types::MqttHeaders
+
     NamedShadowNamesFilter.member = Shapes::ShapeRef.new(shape: ShadowName)
 
     NonCompliantResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
@@ -4060,6 +4083,7 @@ module Aws::IoT
     RepublishAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     RepublishAction.add_member(:topic, Shapes::ShapeRef.new(shape: TopicPattern, required: true, location_name: "topic"))
     RepublishAction.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location_name: "qos"))
+    RepublishAction.add_member(:headers, Shapes::ShapeRef.new(shape: MqttHeaders, location_name: "headers"))
     RepublishAction.struct_class = Types::RepublishAction
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -4136,6 +4160,11 @@ module Aws::IoT
     ScheduledAuditMetadata.struct_class = Types::ScheduledAuditMetadata
 
     ScheduledAuditMetadataList.member = Shapes::ShapeRef.new(shape: ScheduledAuditMetadata)
+
+    SchedulingConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: StringDateTime, location_name: "startTime"))
+    SchedulingConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: StringDateTime, location_name: "endTime"))
+    SchedulingConfig.add_member(:end_behavior, Shapes::ShapeRef.new(shape: JobEndBehavior, location_name: "endBehavior"))
+    SchedulingConfig.struct_class = Types::SchedulingConfig
 
     SearchIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
     SearchIndexRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
@@ -4827,6 +4856,12 @@ module Aws::IoT
     UpdateTopicRuleDestinationRequest.struct_class = Types::UpdateTopicRuleDestinationRequest
 
     UpdateTopicRuleDestinationResponse.struct_class = Types::UpdateTopicRuleDestinationResponse
+
+    UserProperties.member = Shapes::ShapeRef.new(shape: UserProperty)
+
+    UserProperty.add_member(:key, Shapes::ShapeRef.new(shape: UserPropertyKey, required: true, location_name: "key"))
+    UserProperty.add_member(:value, Shapes::ShapeRef.new(shape: UserPropertyValue, required: true, location_name: "value"))
+    UserProperty.struct_class = Types::UserProperty
 
     ValidateSecurityProfileBehaviorsRequest.add_member(:behaviors, Shapes::ShapeRef.new(shape: Behaviors, required: true, location_name: "behaviors"))
     ValidateSecurityProfileBehaviorsRequest.struct_class = Types::ValidateSecurityProfileBehaviorsRequest

@@ -419,6 +419,11 @@ module Aws::Drs
     #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
     #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.source_server.recovery_instance_id #=> String
+    #   resp.source_server.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
+    #   resp.source_server.reversed_direction_source_server_arn #=> String
+    #   resp.source_server.source_cloud_properties.origin_account_id #=> String
+    #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
+    #   resp.source_server.source_cloud_properties.origin_region #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
     #   resp.source_server.source_properties.cpus[0].model_name #=> String
@@ -833,13 +838,13 @@ module Aws::Drs
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "FAILBACK_CLIENT_NOT_SEEN", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT", "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE", "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE", "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+    #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "FAILBACK_CLIENT_NOT_SEEN", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT", "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE", "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE", "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION", "FAILED_GETTING_REPLICATION_STATE", "SNAPSHOTS_FAILURE", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.steps #=> Array
-    #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE", "COMPLETE_VOLUME_MAPPING", "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION", "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT", "CONFIGURE_REPLICATION_SOFTWARE", "PAIR_AGENT_WITH_REPLICATION_SOFTWARE", "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+    #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE", "COMPLETE_VOLUME_MAPPING", "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION", "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT", "CONFIGURE_REPLICATION_SOFTWARE", "PAIR_AGENT_WITH_REPLICATION_SOFTWARE", "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION", "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.items[0].data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.items[0].data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "REPLICATION_STATE_NOT_AVAILABLE", "NOT_STARTED"
     #   resp.items[0].data_replication_info.eta_date_time #=> String
     #   resp.items[0].data_replication_info.lag_duration #=> String
     #   resp.items[0].data_replication_info.replicated_disks #=> Array
@@ -856,11 +861,13 @@ module Aws::Drs
     #   resp.items[0].failback.failback_client_last_seen_by_service_date_time #=> String
     #   resp.items[0].failback.failback_initiation_time #=> String
     #   resp.items[0].failback.failback_job_id #=> String
+    #   resp.items[0].failback.failback_launch_type #=> String, one of "RECOVERY", "DRILL"
     #   resp.items[0].failback.failback_to_original_server #=> Boolean
     #   resp.items[0].failback.first_byte_date_time #=> String
-    #   resp.items[0].failback.state #=> String, one of "FAILBACK_NOT_STARTED", "FAILBACK_IN_PROGRESS", "FAILBACK_READY_FOR_LAUNCH", "FAILBACK_COMPLETED", "FAILBACK_ERROR"
+    #   resp.items[0].failback.state #=> String, one of "FAILBACK_NOT_STARTED", "FAILBACK_IN_PROGRESS", "FAILBACK_READY_FOR_LAUNCH", "FAILBACK_COMPLETED", "FAILBACK_ERROR", "FAILBACK_NOT_READY_FOR_LAUNCH", "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"
     #   resp.items[0].is_drill #=> Boolean
     #   resp.items[0].job_id #=> String
+    #   resp.items[0].origin_environment #=> String, one of "ON_PREMISES", "AWS"
     #   resp.items[0].point_in_time_snapshot_date_time #=> String
     #   resp.items[0].recovery_instance_id #=> String
     #   resp.items[0].recovery_instance_properties.cpus #=> Array
@@ -1078,6 +1085,11 @@ module Aws::Drs
     #   resp.items[0].life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
     #   resp.items[0].life_cycle.last_seen_by_service_date_time #=> String
     #   resp.items[0].recovery_instance_id #=> String
+    #   resp.items[0].replication_direction #=> String, one of "FAILOVER", "FAILBACK"
+    #   resp.items[0].reversed_direction_source_server_arn #=> String
+    #   resp.items[0].source_cloud_properties.origin_account_id #=> String
+    #   resp.items[0].source_cloud_properties.origin_availability_zone #=> String
+    #   resp.items[0].source_cloud_properties.origin_region #=> String
     #   resp.items[0].source_properties.cpus #=> Array
     #   resp.items[0].source_properties.cpus[0].cores #=> Integer
     #   resp.items[0].source_properties.cpus[0].model_name #=> String
@@ -1174,6 +1186,9 @@ module Aws::Drs
     #   * {Types::SourceServer#last_launch_result #last_launch_result} => String
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
     #   * {Types::SourceServer#recovery_instance_id #recovery_instance_id} => String
+    #   * {Types::SourceServer#replication_direction #replication_direction} => String
+    #   * {Types::SourceServer#reversed_direction_source_server_arn #reversed_direction_source_server_arn} => String
+    #   * {Types::SourceServer#source_cloud_properties #source_cloud_properties} => Types::SourceCloudProperties
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#staging_area #staging_area} => Types::StagingArea
@@ -1213,6 +1228,11 @@ module Aws::Drs
     #   resp.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.recovery_instance_id #=> String
+    #   resp.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
+    #   resp.reversed_direction_source_server_arn #=> String
+    #   resp.source_cloud_properties.origin_account_id #=> String
+    #   resp.source_cloud_properties.origin_availability_zone #=> String
+    #   resp.source_cloud_properties.origin_region #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1542,6 +1562,9 @@ module Aws::Drs
     #   * {Types::SourceServer#last_launch_result #last_launch_result} => String
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
     #   * {Types::SourceServer#recovery_instance_id #recovery_instance_id} => String
+    #   * {Types::SourceServer#replication_direction #replication_direction} => String
+    #   * {Types::SourceServer#reversed_direction_source_server_arn #reversed_direction_source_server_arn} => String
+    #   * {Types::SourceServer#source_cloud_properties #source_cloud_properties} => Types::SourceCloudProperties
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#staging_area #staging_area} => Types::StagingArea
@@ -1581,6 +1604,11 @@ module Aws::Drs
     #   resp.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
     #   resp.recovery_instance_id #=> String
+    #   resp.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
+    #   resp.reversed_direction_source_server_arn #=> String
+    #   resp.source_cloud_properties.origin_account_id #=> String
+    #   resp.source_cloud_properties.origin_availability_zone #=> String
+    #   resp.source_cloud_properties.origin_region #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1614,6 +1642,39 @@ module Aws::Drs
     # @param [Hash] params ({})
     def retry_data_replication(params = {}, options = {})
       req = build_request(:retry_data_replication, params)
+      req.send_request(options)
+    end
+
+    # Start replication to origin / target region - applies only to
+    # protected instances that originated in EC2. For recovery instances on
+    # target region - starts replication back to origin region. For failback
+    # instances on origin region - starts replication to target region to
+    # re-protect them.
+    #
+    # @option params [required, String] :recovery_instance_id
+    #   The ID of the Recovery Instance that we want to reverse the
+    #   replication for.
+    #
+    # @return [Types::ReverseReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReverseReplicationResponse#reversed_direction_source_server_arn #reversed_direction_source_server_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reverse_replication({
+    #     recovery_instance_id: "RecoveryInstanceID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reversed_direction_source_server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ReverseReplication AWS API Documentation
+    #
+    # @overload reverse_replication(params = {})
+    # @param [Hash] params ({})
+    def reverse_replication(params = {}, options = {})
+      req = build_request(:reverse_replication, params)
       req.send_request(options)
     end
 
@@ -1724,6 +1785,91 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Starts replication for a stopped Source Server. This action would make
+    # the Source Server protected again and restart billing for it.
+    #
+    # @option params [required, String] :source_server_id
+    #   The ID of the Source Server to start replication for.
+    #
+    # @return [Types::StartReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplicationResponse#source_server #source_server} => Types::SourceServer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replication({
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_server.arn #=> String
+    #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.source_server.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.source_server.data_replication_info.eta_date_time #=> String
+    #   resp.source_server.data_replication_info.lag_duration #=> String
+    #   resp.source_server.data_replication_info.replicated_disks #=> Array
+    #   resp.source_server.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.source_server.life_cycle.added_to_service_date_time #=> String
+    #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
+    #   resp.source_server.life_cycle.first_byte_date_time #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.api_call_date_time #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.job_id #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.source_server.recovery_instance_id #=> String
+    #   resp.source_server.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
+    #   resp.source_server.reversed_direction_source_server_arn #=> String
+    #   resp.source_server.source_cloud_properties.origin_account_id #=> String
+    #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
+    #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_properties.cpus #=> Array
+    #   resp.source_server.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_server.source_properties.cpus[0].model_name #=> String
+    #   resp.source_server.source_properties.disks #=> Array
+    #   resp.source_server.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_server.source_properties.disks[0].device_name #=> String
+    #   resp.source_server.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_server.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_server.source_properties.identification_hints.hostname #=> String
+    #   resp.source_server.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_server.source_properties.last_updated_date_time #=> String
+    #   resp.source_server.source_properties.network_interfaces #=> Array
+    #   resp.source_server.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_server.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_server.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_server.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_server.source_properties.os.full_string #=> String
+    #   resp.source_server.source_properties.ram_bytes #=> Integer
+    #   resp.source_server.source_properties.recommended_instance_type #=> String
+    #   resp.source_server.source_server_id #=> String
+    #   resp.source_server.staging_area.error_message #=> String
+    #   resp.source_server.staging_area.staging_account_id #=> String
+    #   resp.source_server.staging_area.staging_source_server_arn #=> String
+    #   resp.source_server.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
+    #   resp.source_server.tags #=> Hash
+    #   resp.source_server.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartReplication AWS API Documentation
+    #
+    # @overload start_replication(params = {})
+    # @param [Hash] params ({})
+    def start_replication(params = {}, options = {})
+      req = build_request(:start_replication, params)
+      req.send_request(options)
+    end
+
     # Stops the failback process for a specified Recovery Instance. This
     # changes the Failback State of the Recovery Instance back to
     # FAILBACK\_NOT\_STARTED.
@@ -1745,6 +1891,92 @@ module Aws::Drs
     # @param [Hash] params ({})
     def stop_failback(params = {}, options = {})
       req = build_request(:stop_failback, params)
+      req.send_request(options)
+    end
+
+    # Stops replication for a Source Server. This action would make the
+    # Source Server unprotected, delete its existing snapshots and stop
+    # billing for it.
+    #
+    # @option params [required, String] :source_server_id
+    #   The ID of the Source Server to stop replication for.
+    #
+    # @return [Types::StopReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopReplicationResponse#source_server #source_server} => Types::SourceServer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_replication({
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_server.arn #=> String
+    #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.source_server.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.source_server.data_replication_info.eta_date_time #=> String
+    #   resp.source_server.data_replication_info.lag_duration #=> String
+    #   resp.source_server.data_replication_info.replicated_disks #=> Array
+    #   resp.source_server.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.source_server.life_cycle.added_to_service_date_time #=> String
+    #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
+    #   resp.source_server.life_cycle.first_byte_date_time #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.api_call_date_time #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.job_id #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.source_server.recovery_instance_id #=> String
+    #   resp.source_server.replication_direction #=> String, one of "FAILOVER", "FAILBACK"
+    #   resp.source_server.reversed_direction_source_server_arn #=> String
+    #   resp.source_server.source_cloud_properties.origin_account_id #=> String
+    #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
+    #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_properties.cpus #=> Array
+    #   resp.source_server.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_server.source_properties.cpus[0].model_name #=> String
+    #   resp.source_server.source_properties.disks #=> Array
+    #   resp.source_server.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_server.source_properties.disks[0].device_name #=> String
+    #   resp.source_server.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_server.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_server.source_properties.identification_hints.hostname #=> String
+    #   resp.source_server.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_server.source_properties.last_updated_date_time #=> String
+    #   resp.source_server.source_properties.network_interfaces #=> Array
+    #   resp.source_server.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_server.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_server.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_server.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_server.source_properties.os.full_string #=> String
+    #   resp.source_server.source_properties.ram_bytes #=> Integer
+    #   resp.source_server.source_properties.recommended_instance_type #=> String
+    #   resp.source_server.source_server_id #=> String
+    #   resp.source_server.staging_area.error_message #=> String
+    #   resp.source_server.staging_area.staging_account_id #=> String
+    #   resp.source_server.staging_area.staging_source_server_arn #=> String
+    #   resp.source_server.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
+    #   resp.source_server.tags #=> Hash
+    #   resp.source_server.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StopReplication AWS API Documentation
+    #
+    # @overload stop_replication(params = {})
+    # @param [Hash] params ({})
+    def stop_replication(params = {}, options = {})
+      req = build_request(:stop_replication, params)
       req.send_request(options)
     end
 
@@ -2267,7 +2499,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

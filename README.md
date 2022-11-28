@@ -625,6 +625,7 @@ RubyGems.org page under "LINKS" section.
 | Application Migration Service                         | Aws::Mgn                                 | aws-sdk-mgn                                 | 2020-02-26  |
 | Auto Scaling                                          | Aws::AutoScaling                         | aws-sdk-autoscaling                         | 2011-01-01  |
 | Braket                                                | Aws::Braket                              | aws-sdk-braket                              | 2019-09-01  |
+| CloudWatch Observability Access Manager               | Aws::OAM                                 | aws-sdk-oam                                 | 2022-06-10  |
 | CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                        | aws-sdk-imagebuilder                        | 2019-12-02  |

@@ -597,6 +597,168 @@ module Aws::RDS
     #
     class BackupPolicyNotFoundFault < Aws::EmptyStructure; end
 
+    # Contains the details about a blue/green deployment.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @!attribute [rw] blue_green_deployment_identifier
+    #   The system-generated identifier of the blue/green deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] blue_green_deployment_name
+    #   The user-supplied name of the blue/green deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source database for the blue/green deployment.
+    #
+    #   Before switchover, the source database is the production database in
+    #   the blue environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target database for the blue/green deployment.
+    #
+    #   Before switchover, the target database is the clone database in the
+    #   green environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] switchover_details
+    #   The details about each source and target resource in the blue/green
+    #   deployment.
+    #   @return [Array<Types::SwitchoverDetail>]
+    #
+    # @!attribute [rw] tasks
+    #   Either tasks to be performed or tasks that have been completed on
+    #   the target database before switchover.
+    #   @return [Array<Types::BlueGreenDeploymentTask>]
+    #
+    # @!attribute [rw] status
+    #   The status of the blue/green deployment.
+    #
+    #   Values:
+    #
+    #   * `PROVISIONING` - Resources are being created in the green
+    #     environment.
+    #
+    #   * `AVAILABLE` - Resources are available in the green environment.
+    #
+    #   * `SWITCHOVER_IN_PROGRESS` - The deployment is being switched from
+    #     the blue environment to the green environment.
+    #
+    #   * `SWITCHOVER_COMPLETED` - Switchover from the blue environment to
+    #     the green environment is complete.
+    #
+    #   * `INVALID_CONFIGURATION` - Resources in the green environment are
+    #     invalid, so switchover isn't possible.
+    #
+    #   * `SWITCHOVER_FAILED` - Switchover was attempted but failed.
+    #
+    #   * `DELETING` - The blue/green deployment is being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_details
+    #   Additional information about the status of the blue/green
+    #   deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   Specifies the time when the blue/green deployment was created, in
+    #   Universal Coordinated Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] delete_time
+    #   Specifies the time when the blue/green deployment was deleted, in
+    #   Universal Coordinated Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BlueGreenDeployment AWS API Documentation
+    #
+    class BlueGreenDeployment < Struct.new(
+      :blue_green_deployment_identifier,
+      :blue_green_deployment_name,
+      :source,
+      :target,
+      :switchover_details,
+      :tasks,
+      :status,
+      :status_details,
+      :create_time,
+      :delete_time,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A blue/green deployment with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BlueGreenDeploymentAlreadyExistsFault AWS API Documentation
+    #
+    class BlueGreenDeploymentAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # `BlueGreenDeploymentIdentifier` doesn't refer to an existing
+    # blue/green deployment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BlueGreenDeploymentNotFoundFault AWS API Documentation
+    #
+    class BlueGreenDeploymentNotFoundFault < Aws::EmptyStructure; end
+
+    # Contains the details about a task for a blue/green deployment.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @!attribute [rw] name
+    #   The name of the blue/green deployment task.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the blue/green deployment task.
+    #
+    #   Values:
+    #
+    #   * `PENDING` - The resources are being prepared for deployment.
+    #
+    #   * `IN_PROGRESS` - The resource is being deployed.
+    #
+    #   * `COMPLETED` - The resource has been deployed.
+    #
+    #   * `FAILED` - Deployment of the resource failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BlueGreenDeploymentTask AWS API Documentation
+    #
+    class BlueGreenDeploymentTask < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelExportTaskMessage
     #   data as a hash:
     #
@@ -1652,6 +1814,105 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateBlueGreenDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blue_green_deployment_name: "BlueGreenDeploymentName", # required
+    #         source: "DatabaseArn", # required
+    #         target_engine_version: "TargetEngineVersion",
+    #         target_db_parameter_group_name: "TargetDBParameterGroupName",
+    #         target_db_cluster_parameter_group_name: "TargetDBClusterParameterGroupName",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] blue_green_deployment_name
+    #   The name of the blue/green deployment.
+    #
+    #   Constraints:
+    #
+    #   * Can't be the same as an existing blue/green deployment name in
+    #     the same account and Amazon Web Services Region.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon Resource Name (ARN) of the source production database.
+    #
+    #   Specify the database that you want to clone. The blue/green
+    #   deployment creates this database in the green environment. You can
+    #   make updates to the database in the green environment, such as an
+    #   engine version upgrade. When you are ready, you can switch the
+    #   database in the green environment to be the production database.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_engine_version
+    #   The engine version of the database in the green environment.
+    #
+    #   Specify the engine version to upgrade to in the green environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_parameter_group_name
+    #   The DB parameter group associated with the DB instance in the green
+    #   environment.
+    #
+    #   To test parameter changes, specify a DB parameter group that is
+    #   different from the one associated with the source DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_cluster_parameter_group_name
+    #   The DB cluster parameter group associated with the Aurora DB cluster
+    #   in the green environment.
+    #
+    #   To test parameter changes, specify a DB cluster parameter group that
+    #   is different from the one associated with the source DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the blue/green deployment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateBlueGreenDeploymentRequest AWS API Documentation
+    #
+    class CreateBlueGreenDeploymentRequest < Struct.new(
+      :blue_green_deployment_name,
+      :source,
+      :target_engine_version,
+      :target_db_parameter_group_name,
+      :target_db_cluster_parameter_group_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blue_green_deployment
+    #   Contains the details about a blue/green deployment.
+    #
+    #   For more information, see [Using Amazon RDS Blue/Green Deployments
+    #   for database updates][1] in the *Amazon RDS User Guide* and [ Using
+    #   Amazon RDS Blue/Green Deployments for database updates][2] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #   @return [Types::BlueGreenDeployment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateBlueGreenDeploymentResponse AWS API Documentation
+    #
+    class CreateBlueGreenDeploymentResponse < Struct.new(
+      :blue_green_deployment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateCustomDBEngineVersionMessage
     #   data as a hash:
     #
@@ -1677,9 +1938,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The name of your CEV. The name format is `19.customized_string `.
-    #   For example, a valid name is `19.my_cev1`. This setting is required
-    #   for RDS Custom for Oracle, but optional for Amazon RDS. The
+    #   The name of your CEV. The name format is 19.*customized\_string*.
+    #   For example, a valid CEV name is `19.my_cev1`. This setting is
+    #   required for RDS Custom for Oracle, but optional for Amazon RDS. The
     #   combination of `Engine` and `EngineVersion` is unique per customer
     #   per Region.
     #   @return [String]
@@ -3659,7 +3920,7 @@ module Aws::RDS
     #
     #   A custom engine version (CEV) that you have previously created. This
     #   setting is required for RDS Custom for Oracle. The CEV name has the
-    #   following format: `19.customized_string `. An example identifier is
+    #   following format: 19.*customized\_string*. A valid CEV name is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
     #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
@@ -9586,6 +9847,61 @@ module Aws::RDS
     #
     class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteBlueGreenDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier", # required
+    #         delete_target: false,
+    #       }
+    #
+    # @!attribute [rw] blue_green_deployment_identifier
+    #   The blue/green deployment identifier of the deployment to be
+    #   deleted. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match an existing blue/green deployment identifier.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_target
+    #   A value that indicates whether to delete the resources in the green
+    #   environment.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteBlueGreenDeploymentRequest AWS API Documentation
+    #
+    class DeleteBlueGreenDeploymentRequest < Struct.new(
+      :blue_green_deployment_identifier,
+      :delete_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blue_green_deployment
+    #   Contains the details about a blue/green deployment.
+    #
+    #   For more information, see [Using Amazon RDS Blue/Green Deployments
+    #   for database updates][1] in the *Amazon RDS User Guide* and [ Using
+    #   Amazon RDS Blue/Green Deployments for database updates][2] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #   @return [Types::BlueGreenDeployment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteBlueGreenDeploymentResponse AWS API Documentation
+    #
+    class DeleteBlueGreenDeploymentResponse < Struct.new(
+      :blue_green_deployment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCustomDBEngineVersionMessage
     #   data as a hash:
     #
@@ -10274,6 +10590,105 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributesMessage AWS API Documentation
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeBlueGreenDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] blue_green_deployment_identifier
+    #   The blue/green deployment identifier. If this parameter is
+    #   specified, information from only the specific blue/green deployment
+    #   is returned. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing blue/green deployment
+    #     identifier.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more blue/green deployments to
+    #   describe.
+    #
+    #   Supported filters:
+    #
+    #   * `blue-green-deployment-identifier` - Accepts system-generated
+    #     identifiers for blue/green deployments. The results list only
+    #     includes information about the blue/green deployments with the
+    #     specified identifiers.
+    #
+    #   * `blue-green-deployment-name` - Accepts user-supplied names for
+    #     blue/green deployments. The results list only includes information
+    #     about the blue/green deployments with the specified names.
+    #
+    #   * `source` - Accepts source databases for a blue/green deployment.
+    #     The results list only includes information about the blue/green
+    #     deployments with the specified source databases.
+    #
+    #   * `target` - Accepts target databases for a blue/green deployment.
+    #     The results list only includes information about the blue/green
+    #     deployments with the specified target databases.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeBlueGreenDeployments` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeBlueGreenDeploymentsRequest AWS API Documentation
+    #
+    class DescribeBlueGreenDeploymentsRequest < Struct.new(
+      :blue_green_deployment_identifier,
+      :filters,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blue_green_deployments
+    #   Contains a list of blue/green deployments for the user.
+    #   @return [Array<Types::BlueGreenDeployment>]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a later
+    #   DescribeBlueGreenDeployments request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeBlueGreenDeploymentsResponse AWS API Documentation
+    #
+    class DescribeBlueGreenDeploymentsResponse < Struct.new(
+      :blue_green_deployments,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeCertificatesMessage
     #   data as a hash:
@@ -14451,6 +14866,13 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientStorageClusterCapacityFault AWS API Documentation
     #
     class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The blue/green deployment can't be switched over or deleted because
+    # there is an invalid configuration in the green environment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidBlueGreenDeploymentStateFault AWS API Documentation
+    #
+    class InvalidBlueGreenDeploymentStateFault < Aws::EmptyStructure; end
 
     # You can't delete the CEV.
     #
@@ -23532,6 +23954,18 @@ module Aws::RDS
     #
     class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The source DB cluster isn't supported for a blue/green deployment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceClusterNotSupportedFault AWS API Documentation
+    #
+    class SourceClusterNotSupportedFault < Aws::EmptyStructure; end
+
+    # The source DB instance isn't supported for a blue/green deployment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceDatabaseNotSupportedFault AWS API Documentation
+    #
+    class SourceDatabaseNotSupportedFault < Aws::EmptyStructure; end
+
     # The requested source could not be found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceNotFoundFault AWS API Documentation
@@ -24253,6 +24687,114 @@ module Aws::RDS
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass SwitchoverBlueGreenDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier", # required
+    #         switchover_timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] blue_green_deployment_identifier
+    #   The blue/green deployment identifier.
+    #
+    #   Constraints:
+    #
+    #   * Must match an existing blue/green deployment identifier.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] switchover_timeout
+    #   The amount of time, in seconds, for the switchover to complete. The
+    #   default is 300.
+    #
+    #   If the switchover takes longer than the specified duration, then any
+    #   changes are rolled back, and no changes are made to the
+    #   environments.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverBlueGreenDeploymentRequest AWS API Documentation
+    #
+    class SwitchoverBlueGreenDeploymentRequest < Struct.new(
+      :blue_green_deployment_identifier,
+      :switchover_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] blue_green_deployment
+    #   Contains the details about a blue/green deployment.
+    #
+    #   For more information, see [Using Amazon RDS Blue/Green Deployments
+    #   for database updates][1] in the *Amazon RDS User Guide* and [ Using
+    #   Amazon RDS Blue/Green Deployments for database updates][2] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #   @return [Types::BlueGreenDeployment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverBlueGreenDeploymentResponse AWS API Documentation
+    #
+    class SwitchoverBlueGreenDeploymentResponse < Struct.new(
+      :blue_green_deployment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details about a blue/green deployment.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @!attribute [rw] source_member
+    #   The Amazon Resource Name (ARN) of a resource in the blue
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_member
+    #   The Amazon Resource Name (ARN) of a resource in the green
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The switchover status of a resource in a blue/green deployment.
+    #
+    #   Values:
+    #
+    #   * `preparing-for-switchover` - The resource is being prepared to
+    #     switch over.
+    #
+    #   * `ready-for-switchover` - The resource is ready to switch over.
+    #
+    #   * `switchover-in-progress` - The resource is being switched over.
+    #
+    #   * `switchover-completed` - The resource has been switched over.
+    #
+    #   * `switchover-failed` - The resource attempted to switch over but
+    #     failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverDetail AWS API Documentation
+    #
+    class SwitchoverDetail < Struct.new(
+      :source_member,
+      :target_member,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SwitchoverReadReplicaMessage
     #   data as a hash:
     #
@@ -24302,6 +24844,13 @@ module Aws::RDS
 
     # Metadata assigned to an Amazon RDS resource consisting of a key-value
     # pair.
+    #
+    # For more information, see [Tagging Amazon RDS Resources][1] in the
+    # *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:

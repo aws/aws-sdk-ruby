@@ -150,6 +150,19 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           topic: "TopicPattern", # required
     #           qos: 1,
+    #           headers: {
+    #             payload_format_indicator: "PayloadFormatIndicator",
+    #             content_type: "ContentType",
+    #             response_topic: "ResponseTopic",
+    #             correlation_data: "CorrelationData",
+    #             message_expiry: "MessageExpiry",
+    #             user_properties: [
+    #               {
+    #                 key: "UserPropertyKey", # required
+    #                 value: "UserPropertyValue", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         s3: {
     #           role_arn: "AwsArn", # required
@@ -3608,6 +3621,11 @@ module Aws::IoT
     #         document_parameters: {
     #           "ParameterKey" => "ParameterValue",
     #         },
+    #         scheduling_config: {
+    #           start_time: "StringDateTime",
+    #           end_time: "StringDateTime",
+    #           end_behavior: "STOP_ROLLOUT", # accepts STOP_ROLLOUT, CANCEL, FORCE_CANCEL
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -3719,6 +3737,12 @@ module Aws::IoT
     #    </note>
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] scheduling_config
+    #   The configuration that allows you to schedule a job for a future
+    #   date and time in addition to specifying the end behavior for each
+    #   job execution.
+    #   @return [Types::SchedulingConfig]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -3734,7 +3758,8 @@ module Aws::IoT
       :namespace_id,
       :job_template_arn,
       :job_executions_retry_config,
-      :document_parameters)
+      :document_parameters,
+      :scheduling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5245,6 +5270,19 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #                 topic: "TopicPattern", # required
     #                 qos: 1,
+    #                 headers: {
+    #                   payload_format_indicator: "PayloadFormatIndicator",
+    #                   content_type: "ContentType",
+    #                   response_topic: "ResponseTopic",
+    #                   correlation_data: "CorrelationData",
+    #                   message_expiry: "MessageExpiry",
+    #                   user_properties: [
+    #                     {
+    #                       key: "UserPropertyKey", # required
+    #                       value: "UserPropertyValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               s3: {
     #                 role_arn: "AwsArn", # required
@@ -5434,6 +5472,19 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
     #               qos: 1,
+    #               headers: {
+    #                 payload_format_indicator: "PayloadFormatIndicator",
+    #                 content_type: "ContentType",
+    #                 response_topic: "ResponseTopic",
+    #                 correlation_data: "CorrelationData",
+    #                 message_expiry: "MessageExpiry",
+    #                 user_properties: [
+    #                   {
+    #                     key: "UserPropertyKey", # required
+    #                     value: "UserPropertyValue", # required
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -10437,6 +10488,12 @@ module Aws::IoT
     #   executions, otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] scheduling_config
+    #   The configuration that allows you to schedule a job for a future
+    #   date and time in addition to specifying the end behavior for each
+    #   job execution.
+    #   @return [Types::SchedulingConfig]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -10459,7 +10516,8 @@ module Aws::IoT
       :job_template_arn,
       :job_executions_retry_config,
       :document_parameters,
-      :is_concurrent)
+      :is_concurrent,
+      :scheduling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12250,7 +12308,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
+    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS, SCHEDULED
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         max_results: 1,
     #         next_token: "NextToken",
@@ -14566,6 +14624,132 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Specifies MQTT Version 5.0 headers information. For more information,
+    # see [ MQTT][1] from Amazon Web Services IoT Core Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html
+    #
+    # @note When making an API call, you may pass MqttHeaders
+    #   data as a hash:
+    #
+    #       {
+    #         payload_format_indicator: "PayloadFormatIndicator",
+    #         content_type: "ContentType",
+    #         response_topic: "ResponseTopic",
+    #         correlation_data: "CorrelationData",
+    #         message_expiry: "MessageExpiry",
+    #         user_properties: [
+    #           {
+    #             key: "UserPropertyKey", # required
+    #             value: "UserPropertyValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] payload_format_indicator
+    #   An `Enum` string value that indicates whether the payload is
+    #   formatted as UTF-8.
+    #
+    #   Valid values are `UNSPECIFIED_BYTES` and `UTF8_DATA`.
+    #
+    #   For more information, see [ Payload Format Indicator][1] from the
+    #   MQTT Version 5.0 specification.
+    #
+    #   Supports [substitution templates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901111
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A UTF-8 encoded string that describes the content of the publishing
+    #   message.
+    #
+    #   For more information, see [ Content Type][1] from the MQTT Version
+    #   5.0 specification.
+    #
+    #   Supports [substitution templates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901118
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] response_topic
+    #   A UTF-8 encoded string that's used as the topic name for a response
+    #   message. The response topic is used to describe the topic which the
+    #   receiver should publish to as part of the request-response flow. The
+    #   topic must not contain wildcard characters.
+    #
+    #   For more information, see [ Response Topic][1] from the MQTT Version
+    #   5.0 specification.
+    #
+    #   Supports [substitution templates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901114
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] correlation_data
+    #   The base64-encoded binary data used by the sender of the request
+    #   message to identify which request the response message is for when
+    #   it's received.
+    #
+    #   For more information, see [ Correlation Data][1] from the MQTT
+    #   Version 5.0 specification.
+    #
+    #   <note markdown="1"> This binary data must be based64-encoded.
+    #
+    #    </note>
+    #
+    #   Supports [substitution templates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901115
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] message_expiry
+    #   A user-defined integer value that will persist a message at the
+    #   message broker for a specified amount of time to ensure that the
+    #   message will expire if it's no longer relevant to the subscriber.
+    #   The value of `messageExpiry` represents the number of seconds before
+    #   it expires. For more information about the limits of
+    #   `messageExpiry`, see [Amazon Web Services IoT Core message broker
+    #   and protocol limits and quotas ][1] from the Amazon Web Services
+    #   Reference Guide.
+    #
+    #   Supports [substitution templates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html
+    #   [2]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] user_properties
+    #   An array of key-value pairs that you define in the MQTT5 header.
+    #   @return [Array<Types::UserProperty>]
+    #
+    class MqttHeaders < Struct.new(
+      :payload_format_indicator,
+      :content_type,
+      :response_topic,
+      :correlation_data,
+      :message_expiry,
+      :user_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the resource that was noncompliant with the audit
     # check.
     #
@@ -15773,6 +15957,19 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #                 topic: "TopicPattern", # required
     #                 qos: 1,
+    #                 headers: {
+    #                   payload_format_indicator: "PayloadFormatIndicator",
+    #                   content_type: "ContentType",
+    #                   response_topic: "ResponseTopic",
+    #                   correlation_data: "CorrelationData",
+    #                   message_expiry: "MessageExpiry",
+    #                   user_properties: [
+    #                     {
+    #                       key: "UserPropertyKey", # required
+    #                       value: "UserPropertyValue", # required
+    #                     },
+    #                   ],
+    #                 },
     #               },
     #               s3: {
     #                 role_arn: "AwsArn", # required
@@ -15962,6 +16159,19 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
     #               qos: 1,
+    #               headers: {
+    #                 payload_format_indicator: "PayloadFormatIndicator",
+    #                 content_type: "ContentType",
+    #                 response_topic: "ResponseTopic",
+    #                 correlation_data: "CorrelationData",
+    #                 message_expiry: "MessageExpiry",
+    #                 user_properties: [
+    #                   {
+    #                     key: "UserPropertyKey", # required
+    #                     value: "UserPropertyValue", # required
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -16134,6 +16344,19 @@ module Aws::IoT
     #         role_arn: "AwsArn", # required
     #         topic: "TopicPattern", # required
     #         qos: 1,
+    #         headers: {
+    #           payload_format_indicator: "PayloadFormatIndicator",
+    #           content_type: "ContentType",
+    #           response_topic: "ResponseTopic",
+    #           correlation_data: "CorrelationData",
+    #           message_expiry: "MessageExpiry",
+    #           user_properties: [
+    #             {
+    #               key: "UserPropertyKey", # required
+    #               value: "UserPropertyValue", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] role_arn
@@ -16149,10 +16372,20 @@ module Aws::IoT
     #   messages. The default value is 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] headers
+    #   MQTT Version 5.0 headers information. For more information, see [
+    #   MQTT][1] from the Amazon Web Services IoT Core Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html
+    #   @return [Types::MqttHeaders]
+    #
     class RepublishAction < Struct.new(
       :role_arn,
       :topic,
-      :qos)
+      :qos,
+      :headers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16517,6 +16750,50 @@ module Aws::IoT
       :frequency,
       :day_of_month,
       :day_of_week)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the date and time that a job will begin the rollout of the
+    # job document to all devices in the target group. Additionally, you can
+    # specify the end behavior for each job execution when it reaches the
+    # scheduled end time.
+    #
+    # @note When making an API call, you may pass SchedulingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: "StringDateTime",
+    #         end_time: "StringDateTime",
+    #         end_behavior: "STOP_ROLLOUT", # accepts STOP_ROLLOUT, CANCEL, FORCE_CANCEL
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The time a job will begin rollout of the job document to all devices
+    #   in the target group for a job. The `startTime` can be scheduled up
+    #   to a year in advance and must be scheduled a minimum of thirty
+    #   minutes from the current time.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The time a job will stop rollout of the job document to all devices
+    #   in the target group for a job. The `endTime` must take place no
+    #   later than two years from the current time and be scheduled a
+    #   minimum of thirty minutes from the current time. The minimum
+    #   duration between `startTime` and `endTime` is thirty minutes. The
+    #   maximum duration between `startTime` and `endTime` is two years.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_behavior
+    #   Specifies the end behavior for all job executions after a job
+    #   reaches the selected `endTime`. If `endTime` is not selected when
+    #   creating the job, then `endBehavior` does not apply.
+    #   @return [String]
+    #
+    class SchedulingConfig < Struct.new(
+      :start_time,
+      :end_time,
+      :end_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17995,7 +18272,13 @@ module Aws::IoT
     #
     # @!attribute [rw] managed_fields
     #   Contains fields that are indexed and whose types are already known
-    #   by the Fleet Indexing service.
+    #   by the Fleet Indexing service. This is an optional field. For more
+    #   information, see [Managed fields][1] in the *Amazon Web Services IoT
+    #   Core Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
@@ -18760,6 +19043,19 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               topic: "TopicPattern", # required
     #               qos: 1,
+    #               headers: {
+    #                 payload_format_indicator: "PayloadFormatIndicator",
+    #                 content_type: "ContentType",
+    #                 response_topic: "ResponseTopic",
+    #                 correlation_data: "CorrelationData",
+    #                 message_expiry: "MessageExpiry",
+    #                 user_properties: [
+    #                   {
+    #                     key: "UserPropertyKey", # required
+    #                     value: "UserPropertyValue", # required
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             s3: {
     #               role_arn: "AwsArn", # required
@@ -18949,6 +19245,19 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             topic: "TopicPattern", # required
     #             qos: 1,
+    #             headers: {
+    #               payload_format_indicator: "PayloadFormatIndicator",
+    #               content_type: "ContentType",
+    #               response_topic: "ResponseTopic",
+    #               correlation_data: "CorrelationData",
+    #               message_expiry: "MessageExpiry",
+    #               user_properties: [
+    #                 {
+    #                   key: "UserPropertyKey", # required
+    #                   value: "UserPropertyValue", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #           s3: {
     #             role_arn: "AwsArn", # required
@@ -20876,6 +21185,36 @@ module Aws::IoT
     end
 
     class UpdateTopicRuleDestinationResponse < Aws::EmptyStructure; end
+
+    # A key-value pair that you define in the header. Both the key and the
+    # value are either literal strings or valid [substitution templates][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-substitution-templates.html
+    #
+    # @note When making an API call, you may pass UserProperty
+    #   data as a hash:
+    #
+    #       {
+    #         key: "UserPropertyKey", # required
+    #         value: "UserPropertyValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A key to be specified in `UserProperty`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A value to be specified in `UserProperty`.
+    #   @return [String]
+    #
+    class UserProperty < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ValidateSecurityProfileBehaviorsRequest
     #   data as a hash:

@@ -51,6 +51,10 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # You don't have sufficient access to perform this action. Please
+    # ensure you have the required permission policies and user accounts and
+    # try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1043,8 +1047,7 @@ module Aws::Kendra
     # retrieved.
     #
     # @!attribute [rw] document_id
-    #   The unique identifier of the document whose status could not be
-    #   retrieved.
+    #   The identifier of the document whose status could not be retrieved.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -1262,7 +1265,7 @@ module Aws::Kendra
     # Provides information about a document that could not be indexed.
     #
     # @!attribute [rw] id
-    #   The unique identifier of the document.
+    #   The identifier of the document.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -1359,12 +1362,12 @@ module Aws::Kendra
     #   * passphrase—A set of characters that act like a password.
     #
     #   You create an application in Box to generate the keys or credentials
-    #   required for the secret. For more information, see [Authentication
-    #   for a Box data source][1].
+    #   required for the secret. For more information, see [Using a Box data
+    #   source][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html#box-authentication
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html
     #   @return [String]
     #
     # @!attribute [rw] use_change_log
@@ -1569,7 +1572,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] result_id
-    #   The unique identifier of the search result that was clicked.
+    #   The identifier of the search result that was clicked.
     #   @return [String]
     #
     # @!attribute [rw] click_time
@@ -1606,7 +1609,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] document_id_column_name
-    #   The column that provides the document's unique identifier.
+    #   The column that provides the document's identifier.
     #   @return [String]
     #
     # @!attribute [rw] document_data_column_name
@@ -1640,6 +1643,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # A conflict occurred with the request. Please fix any inconsistences
+    # with your resources and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1906,17 +1912,15 @@ module Aws::Kendra
     #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
     #   contains the user name and password required to connect to the
     #   Confluence instance. If you use Confluence Cloud, you use a
-    #   generated API token as the password. For more information, see
-    #   [Using a Confluence data source][1].
+    #   generated API token as the password.
     #
     #   You can also provide authentication credentials in the form of a
-    #   personal access token. For more information, see [Authentication for
-    #   a Confluence data source][2].
+    #   personal access token. For more information, see [Using a Confluence
+    #   data source][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html
-    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html#confluence-authentication
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -3488,7 +3492,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   The unique identifier of the FAQ.
+    #   The identifier of the FAQ.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFaqResponse AWS API Documentation
@@ -3644,8 +3648,8 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   The unique identifier of the index. Use this identifier when you
-    #   query an index, set up a data source, or index a document.
+    #   The identifier of the index. Use this identifier when you query an
+    #   index, set up a data source, or index a document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndexResponse AWS API Documentation
@@ -3749,7 +3753,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   The unique identifier of the created block list.
+    #   The identifier of the created block list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateQuerySuggestionsBlockListResponse AWS API Documentation
@@ -3832,7 +3836,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] id
-    #   The unique identifier of the thesaurus.
+    #   The identifier of the thesaurus.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateThesaurusResponse AWS API Documentation
@@ -4748,15 +4752,14 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Summary information for an Amazon Kendra data source. Returned in a
-    # call to the `DescribeDataSource` API.
+    # Summary information for a Amazon Kendra data source.
     #
     # @!attribute [rw] name
     #   The name of the data source.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the data source.
+    #   The identifier for the data source.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4804,7 +4807,7 @@ module Aws::Kendra
     # Provides information about a data source synchronization job.
     #
     # @!attribute [rw] execution_id
-    #   A unique identifier for the synchronization job.
+    #   A identifier for the synchronization job.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -6395,7 +6398,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] id
-    #   A unique identifier of the document in the index.
+    #   A identifier of the document in the index.
     #
     #   Note, each document ID must be unique per index. You cannot create a
     #   data source to index your documents with their unique IDs and then
@@ -6669,7 +6672,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] string_list_value
-    #   A list of strings.
+    #   A list of strings. The default maximum length or number of strings
+    #   is 10.
     #   @return [Array<String>]
     #
     # @!attribute [rw] long_value
@@ -6754,7 +6758,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] document_id
-    #   The unique identifier of the document.
+    #   The identifier of the document.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -7294,7 +7298,7 @@ module Aws::Kendra
     # included in an index.
     #
     # @!attribute [rw] id
-    #   The unique identifier of the FAQ.
+    #   The identifier of the FAQ.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -7496,7 +7500,7 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] query_suggestions_id
-    #   The unique identifier for a list of query suggestions for an index.
+    #   The identifier for a list of query suggestions for an index.
     #   @return [String]
     #
     # @!attribute [rw] suggestions
@@ -7737,15 +7741,15 @@ module Aws::Kendra
     #   contains the key-value pairs required to connect to your GitHub. The
     #   secret must contain a JSON structure with the following keys:
     #
-    #   * githubToken—The access token created in GitHub. For more
-    #     information on creating a token in GitHub, see [Authentication for
-    #     a GitHub data source][1].
+    #   * personalToken—The access token created in GitHub. For more
+    #     information on creating a token in GitHub, see [Using a GitHub
+    #     data source][1].
     #
     #   ^
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html#github-authentication
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html
     #   @return [String]
     #
     # @!attribute [rw] use_change_log
@@ -8396,18 +8400,18 @@ module Aws::Kendra
     # Summary information on the configuration of an index.
     #
     # @!attribute [rw] name
-    #   The identifier of the index.
+    #   The name of the index.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   A unique identifier for the index. Use this to identify the index
-    #   when you are using APIs such as `Query`, `DescribeIndex`,
-    #   `UpdateIndex`, and `DeleteIndex`.
+    #   A identifier for the index. Use this to identify the index when you
+    #   are using APIs such as `Query`, `DescribeIndex`, `UpdateIndex`, and
+    #   `DeleteIndex`.
     #   @return [String]
     #
     # @!attribute [rw] edition
-    #   Indicates whether the index is a enterprise edition index or a
-    #   developer edition index.
+    #   Indicates whether the index is a Enterprise Edition index or a
+    #   Developer Edition index.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -8524,6 +8528,14 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # An issue occurred with the internal server used for your Amazon Kendra
+    # service. Please wait a few minutes and try again, or contact [
+    # Support][1] for help.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/aws.amazon.com/contact-us
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -8535,7 +8547,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # The input to the request is not valid.
+    # The input to the request is not valid. Please provide the correct
+    # input and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -8620,12 +8633,11 @@ module Aws::Kendra
     #   * jiraId—The Jira username.
     #
     #   * jiraCredentials—The Jira API token. For more information on
-    #     creating an API token in Jira, see [ Authentication for a Jira
-    #     data source][1].
+    #     creating an API token in Jira, see [ Using a Jira data source][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html#jira-authentication
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html
     #   @return [String]
     #
     # @!attribute [rw] use_change_log
@@ -8998,7 +9010,7 @@ module Aws::Kendra
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Kendra returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of data source connectors (`DataSourceSummaryItems`).
+    #   of data source connectors.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9340,11 +9352,11 @@ module Aws::Kendra
     #   If the previous response was incomplete (because there is more data
     #   to retrieve), Amazon Kendra returns a pagination token in the
     #   response. You can use this pagination token to retrieve the next set
-    #   of indexes (`DataSourceSummaryItems`).
+    #   of indexes.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of data sources to return.
+    #   The maximum number of indices to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListIndicesRequest AWS API Documentation
@@ -10149,12 +10161,15 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] index_id
-    #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the `CreateIndex` API.
+    #   The identifier of the index to search. The identifier is returned in
+    #   the response from the `CreateIndex` API.
     #   @return [String]
     #
     # @!attribute [rw] query_text
-    #   The text to search for.
+    #   The input query text for the search. Amazon Kendra truncates queries
+    #   at 30 token words, which excludes punctuation and stop words.
+    #   Truncation still applies if you use Boolean or more advanced,
+    #   complex queries.
     #   @return [String]
     #
     # @!attribute [rw] attribute_filter
@@ -10264,8 +10279,8 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] query_id
-    #   The unique identifier for the search. You use `QueryId` to identify
-    #   the search when using the feedback API.
+    #   The identifier for the search. You use `QueryId` to identify the
+    #   search when using the feedback API.
     #   @return [String]
     #
     # @!attribute [rw] result_items
@@ -10323,11 +10338,19 @@ module Aws::Kendra
     # document that satisfies the query.
     #
     # @!attribute [rw] id
-    #   The unique identifier for the query result.
+    #   The identifier for the query result.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of document.
+    #   The type of document within the response. For example, a response
+    #   could include a question-answer that's relevant to the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   If the `Type` of document within the response is `ANSWER`, then it
+    #   is either a `TABLE` answer or `TEXT` answer. If it's a table
+    #   answer, a table excerpt is returned in `TableExcerpt`. If it's a
+    #   text answer, a text excerpt is returned in `DocumentExcerpt`.
     #   @return [String]
     #
     # @!attribute [rw] additional_attributes
@@ -10335,7 +10358,7 @@ module Aws::Kendra
     #   @return [Array<Types::AdditionalResultAttribute>]
     #
     # @!attribute [rw] document_id
-    #   The unique identifier for the document.
+    #   The identifier for the document.
     #   @return [String]
     #
     # @!attribute [rw] document_title
@@ -10373,18 +10396,23 @@ module Aws::Kendra
     # @!attribute [rw] feedback_token
     #   A token that identifies a particular result from a particular query.
     #   Use this token to provide click-through feedback for the result. For
-    #   more information, see [ Submitting feedback ][1].
+    #   more information, see [Submitting feedback ][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html
     #   @return [String]
     #
+    # @!attribute [rw] table_excerpt
+    #   An excerpt from a table within a document.
+    #   @return [Types::TableExcerpt]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation
     #
     class QueryResultItem < Struct.new(
       :id,
       :type,
+      :format,
       :additional_attributes,
       :document_id,
       :document_title,
@@ -10392,7 +10420,8 @@ module Aws::Kendra
       :document_uri,
       :document_attributes,
       :score_attributes,
-      :feedback_token)
+      :feedback_token,
+      :table_excerpt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10503,13 +10532,13 @@ module Aws::Kendra
     #   keys:
     #
     #   * accessToken—The token created in Quip. For more information, see
-    #     [Authentication for a Quip data source][1].
+    #     [Using a Quip data source][1].
     #
     #   ^
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#quip-authentication
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html
     #   @return [String]
     #
     # @!attribute [rw] crawl_file_comments
@@ -10714,8 +10743,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] result_id
-    #   The unique identifier of the search result that the user provided
-    #   relevance feedback for.
+    #   The identifier of the search result that the user provided relevance
+    #   feedback for.
     #   @return [String]
     #
     # @!attribute [rw] relevance_value
@@ -10731,6 +10760,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The resource you want to use already exists. Please check you have
+    # provided the correct resource and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -10742,6 +10774,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The resource you want to use is currently in use. Please check you
+    # have provided the correct resource and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -10753,6 +10788,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The resource you want to use doesn’t exist. Please check you have
+    # provided the correct resource and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -10764,6 +10802,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The resource you want to use isn't available. Please check you have
+    # provided the correct resource and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -11615,12 +11656,11 @@ module Aws::Kendra
     #   contains the user name and password required to connect to the
     #   ServiceNow instance. You can also provide OAuth authentication
     #   credentials of user name, password, client ID, and client secret.
-    #   For more information, see [Authentication for a ServiceNow data
-    #   source][1].
+    #   For more information, see [Using a ServiceNow data source][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html#servicenow-authentication
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html
     #   @return [String]
     #
     # @!attribute [rw] service_now_build_version
@@ -11851,6 +11891,14 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # You have exceeded the set limits for your Amazon Kendra service.
+    # Please see Quotas\[hyperlink Kendra Quotas pg\] for more information,
+    # or contact [ Support][1] to inquire about an increase of limits.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/aws.amazon.com/contact-us
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -11919,12 +11967,11 @@ module Aws::Kendra
     #
     #   You can also provide OAuth authentication credentials of user name,
     #   password, client ID, and client secret. For more information, see
-    #   [Authentication for a SharePoint data source][2].
+    #   [Using a SharePoint data source][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
-    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html#sharepoint-authentication
     #   @return [String]
     #
     # @!attribute [rw] crawl_attachments
@@ -12450,7 +12497,7 @@ module Aws::Kendra
     # indexing.
     #
     # @!attribute [rw] document_id
-    #   The unique identifier of the document.
+    #   The identifier of the document.
     #   @return [String]
     #
     # @!attribute [rw] document_status
@@ -12561,13 +12608,13 @@ module Aws::Kendra
     # A single query suggestion.
     #
     # @!attribute [rw] id
-    #   The unique UUID (universally unique identifier) of a single query
+    #   The UUID (universally unique identifier) of a single query
     #   suggestion.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for the unique UUID (universally unique identifier) of a
-    #   single query suggestion.
+    #   The value for the UUID (universally unique identifier) of a single
+    #   query suggestion.
     #
     #   The value is the text string of a suggestion.
     #   @return [Types::SuggestionValue]
@@ -12634,6 +12681,79 @@ module Aws::Kendra
     #
     class SuggestionValue < Struct.new(
       :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a table cell in a table excerpt.
+    #
+    # @!attribute [rw] value
+    #   The actual value or content within a table cell. A table cell could
+    #   contain a date value of a year, or a string value of text, for
+    #   example.
+    #   @return [String]
+    #
+    # @!attribute [rw] top_answer
+    #   `TRUE` if the response of the table cell is the top answer. This is
+    #   the cell value or content with the highest confidence score or is
+    #   the most relevant to the query.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] highlighted
+    #   `TRUE` means that the table cell has a high enough confidence and is
+    #   relevant to the query, so the value or content should be
+    #   highlighted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] header
+    #   `TRUE` means that the table cell should be treated as a header.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TableCell AWS API Documentation
+    #
+    class TableCell < Struct.new(
+      :value,
+      :top_answer,
+      :highlighted,
+      :header)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An excerpt from a table within a document. The table excerpt displays
+    # up to five columns and three rows, depending on how many table cells
+    # are relevant to the query and how many columns are available in the
+    # original table. The top most relevant cell is displayed in the table
+    # excerpt, along with the next most relevant cells.
+    #
+    # @!attribute [rw] rows
+    #   A list of rows in the table excerpt.
+    #   @return [Array<Types::TableRow>]
+    #
+    # @!attribute [rw] total_number_of_rows
+    #   A count of the number of rows in the original table within the
+    #   document.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TableExcerpt AWS API Documentation
+    #
+    class TableExcerpt < Struct.new(
+      :rows,
+      :total_number_of_rows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a row in a table excerpt.
+    #
+    # @!attribute [rw] cells
+    #   A list of table cells in a row.
+    #   @return [Array<Types::TableCell>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TableRow AWS API Documentation
+    #
+    class TableRow < Struct.new(
+      :cells)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12808,6 +12928,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling. Please reduce the
+    # number of requests and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -14385,6 +14508,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # The input fails to satisfy the constraints set by the Amazon Kendra
+    # service. Please provide the correct input and try again.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #

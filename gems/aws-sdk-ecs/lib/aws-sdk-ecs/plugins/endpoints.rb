@@ -110,6 +110,8 @@ module Aws::ECS
             Aws::ECS::Endpoints::ListContainerInstances.build(context)
           when :list_services
             Aws::ECS::Endpoints::ListServices.build(context)
+          when :list_services_by_namespace
+            Aws::ECS::Endpoints::ListServicesByNamespace.build(context)
           when :list_tags_for_resource
             Aws::ECS::Endpoints::ListTagsForResource.build(context)
           when :list_task_definition_families

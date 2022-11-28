@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2022-11-28)
+------------------
+
+* Feature - Job scheduling enables the scheduled rollout of a Job with start and end times and a customizable end behavior when end time is reached. This is available for continuous and snapshot jobs. Added support for MQTT5 properties to AWS IoT TopicRule Republish Action.
+
 1.97.0 (2022-11-11)
 ------------------
 

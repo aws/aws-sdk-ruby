@@ -4007,7 +4007,7 @@ module Aws::Kendra
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Kendra returns a pagination token in the response.
     #   You can use this pagination token to retrieve the next set of data
-    #   source connectors (`DataSourceSummaryItems`).
+    #   source connectors.
     #
     # @option params [Integer] :max_results
     #   The maximum number of data source connectors to return.
@@ -4333,11 +4333,10 @@ module Aws::Kendra
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Kendra returns a pagination token in the response.
-    #   You can use this pagination token to retrieve the next set of indexes
-    #   (`DataSourceSummaryItems`).
+    #   You can use this pagination token to retrieve the next set of indexes.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of data sources to return.
+    #   The maximum number of indices to return.
     #
     # @return [Types::ListIndicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4665,11 +4664,14 @@ module Aws::Kendra
     # Each query returns the 100 most relevant results.
     #
     # @option params [required, String] :index_id
-    #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the `CreateIndex` API.
+    #   The identifier of the index to search. The identifier is returned in
+    #   the response from the `CreateIndex` API.
     #
     # @option params [String] :query_text
-    #   The text to search for.
+    #   The input query text for the search. Amazon Kendra truncates queries
+    #   at 30 token words, which excludes punctuation and stop words.
+    #   Truncation still applies if you use Boolean or more advanced, complex
+    #   queries.
     #
     # @option params [Types::AttributeFilter] :attribute_filter
     #   Enables filtered searches based on document attributes. You can only
@@ -4890,6 +4892,7 @@ module Aws::Kendra
     #   resp.result_items #=> Array
     #   resp.result_items[0].id #=> String
     #   resp.result_items[0].type #=> String, one of "DOCUMENT", "QUESTION_ANSWER", "ANSWER"
+    #   resp.result_items[0].format #=> String, one of "TABLE", "TEXT"
     #   resp.result_items[0].additional_attributes #=> Array
     #   resp.result_items[0].additional_attributes[0].key #=> String
     #   resp.result_items[0].additional_attributes[0].value_type #=> String, one of "TEXT_WITH_HIGHLIGHTS_VALUE"
@@ -4922,6 +4925,13 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
     #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW", "NOT_AVAILABLE"
     #   resp.result_items[0].feedback_token #=> String
+    #   resp.result_items[0].table_excerpt.rows #=> Array
+    #   resp.result_items[0].table_excerpt.rows[0].cells #=> Array
+    #   resp.result_items[0].table_excerpt.rows[0].cells[0].value #=> String
+    #   resp.result_items[0].table_excerpt.rows[0].cells[0].top_answer #=> Boolean
+    #   resp.result_items[0].table_excerpt.rows[0].cells[0].highlighted #=> Boolean
+    #   resp.result_items[0].table_excerpt.rows[0].cells[0].header #=> Boolean
+    #   resp.result_items[0].table_excerpt.total_number_of_rows #=> Integer
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
     #   resp.facet_results[0].document_attribute_value_type #=> String, one of "STRING_VALUE", "STRING_LIST_VALUE", "LONG_VALUE", "DATE_VALUE"
@@ -6403,7 +6413,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

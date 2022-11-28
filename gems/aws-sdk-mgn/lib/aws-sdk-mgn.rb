@@ -32,7 +32,7 @@ require_relative 'aws-sdk-mgn/customizations'
 # structure.
 #
 #     mgn = Aws::Mgn::Client.new
-#     resp = mgn.change_server_life_cycle_state(params)
+#     resp = mgn.archive_application(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-mgn/customizations'
 # @!group service
 module Aws::Mgn
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

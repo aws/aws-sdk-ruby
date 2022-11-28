@@ -368,6 +368,39 @@ module Aws::Backup
 
     # @!group API Operations
 
+    # This action removes the specified legal hold on a recovery point. This
+    # action can only be performed by a user with sufficient permissions.
+    #
+    # @option params [required, String] :legal_hold_id
+    #   Legal hold ID required to remove the specified legal hold on a
+    #   recovery point.
+    #
+    # @option params [required, String] :cancel_description
+    #   String describing the reason for removing the legal hold.
+    #
+    # @option params [Integer] :retain_record_in_days
+    #   The integer amount in days specifying amount of days after this API
+    #   operation to remove legal hold.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_legal_hold({
+    #     legal_hold_id: "string", # required
+    #     cancel_description: "string", # required
+    #     retain_record_in_days: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CancelLegalHold AWS API Documentation
+    #
+    # @overload cancel_legal_hold(params = {})
+    # @param [Hash] params ({})
+    def cancel_legal_hold(params = {}, options = {})
+      req = build_request(:cancel_legal_hold, params)
+      req.send_request(options)
+    end
+
     # Creates a backup plan using a backup plan name and backup rules. A
     # backup plan is a document that contains information that Backup uses
     # to schedule tasks that create recovery points for resources.
@@ -702,6 +735,86 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This action creates a legal hold on a recovery point (backup). A legal
+    # hold is a restraint on altering or deleting a backup until an
+    # authorized user cancels the legal hold. Any actions to delete or
+    # disassociate a recovery point will fail with an error if one or more
+    # active legal holds are on the recovery point.
+    #
+    # @option params [required, String] :title
+    #   This is the string title of the legal hold.
+    #
+    # @option params [required, String] :description
+    #   This is the string description of the legal hold.
+    #
+    # @option params [String] :idempotency_token
+    #   This is a user-chosen string used to distinguish between otherwise
+    #   identical calls. Retrying a successful request with the same
+    #   idempotency token results in a success message with no action taken.
+    #
+    # @option params [Types::RecoveryPointSelection] :recovery_point_selection
+    #   This specifies criteria to assign a set of resources, such as resource
+    #   types or backup vaults.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional tags to include. A tag is a key-value pair you can use to
+    #   manage, filter, and search for your resources. Allowed characters
+    #   include UTF-8 letters, numbers, spaces, and the following characters:
+    #   + - = . \_ : /.
+    #
+    # @return [Types::CreateLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLegalHoldOutput#title #title} => String
+    #   * {Types::CreateLegalHoldOutput#status #status} => String
+    #   * {Types::CreateLegalHoldOutput#description #description} => String
+    #   * {Types::CreateLegalHoldOutput#legal_hold_id #legal_hold_id} => String
+    #   * {Types::CreateLegalHoldOutput#legal_hold_arn #legal_hold_arn} => String
+    #   * {Types::CreateLegalHoldOutput#creation_date #creation_date} => Time
+    #   * {Types::CreateLegalHoldOutput#recovery_point_selection #recovery_point_selection} => Types::RecoveryPointSelection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_legal_hold({
+    #     title: "string", # required
+    #     description: "string", # required
+    #     idempotency_token: "string",
+    #     recovery_point_selection: {
+    #       vault_names: ["string"],
+    #       resource_identifiers: ["string"],
+    #       date_range: {
+    #         from_date: Time.now, # required
+    #         to_date: Time.now, # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.title #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "CANCELING", "CANCELED"
+    #   resp.description #=> String
+    #   resp.legal_hold_id #=> String
+    #   resp.legal_hold_arn #=> String
+    #   resp.creation_date #=> Time
+    #   resp.recovery_point_selection.vault_names #=> Array
+    #   resp.recovery_point_selection.vault_names[0] #=> String
+    #   resp.recovery_point_selection.resource_identifiers #=> Array
+    #   resp.recovery_point_selection.resource_identifiers[0] #=> String
+    #   resp.recovery_point_selection.date_range.from_date #=> Time
+    #   resp.recovery_point_selection.date_range.to_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateLegalHold AWS API Documentation
+    #
+    # @overload create_legal_hold(params = {})
+    # @param [Hash] params ({})
+    def create_legal_hold(params = {}, options = {})
+      req = build_request(:create_legal_hold, params)
+      req.send_request(options)
+    end
+
     # Creates a report plan. A report plan is a document that contains
     # information about the contents of the report and where Backup will
     # deliver it.
@@ -767,6 +880,9 @@ module Aws::Backup
     #       report_template: "string", # required
     #       framework_arns: ["string"],
     #       number_of_frameworks: 1,
+    #       accounts: ["string"],
+    #       organization_units: ["string"],
+    #       regions: ["string"],
     #     },
     #     report_plan_tags: {
     #       "string" => "string",
@@ -991,6 +1107,23 @@ module Aws::Backup
     # endpoint deletes the existing continuous backup and stops future
     # continuous backup.
     #
+    # When an IAM role's permissions are insufficient to call this API, the
+    # service sends back an HTTP 200 response with an empty HTTP body, but
+    # the recovery point is not deleted. Instead, it enters an `EXPIRED`
+    # state.
+    #
+    # `EXPIRED` recovery points can be deleted with this API once the IAM
+    # role has the `iam:CreateServiceLinkedRole` action. To learn more about
+    # adding this role, see [ Troubleshooting manual deletions][1].
+    #
+    # If the user or role is deleted or the permission within the role is
+    # removed, the deletion will not be successful and will enter an
+    # `EXPIRED` state.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/deleting-backups.html#deleting-backups-troubleshooting
+    #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
@@ -1069,6 +1202,10 @@ module Aws::Backup
     #   * {Types::DescribeBackupJobOutput#start_by #start_by} => Time
     #   * {Types::DescribeBackupJobOutput#backup_options #backup_options} => Hash&lt;String,String&gt;
     #   * {Types::DescribeBackupJobOutput#backup_type #backup_type} => String
+    #   * {Types::DescribeBackupJobOutput#parent_job_id #parent_job_id} => String
+    #   * {Types::DescribeBackupJobOutput#is_parent #is_parent} => Boolean
+    #   * {Types::DescribeBackupJobOutput#number_of_child_jobs #number_of_child_jobs} => Integer
+    #   * {Types::DescribeBackupJobOutput#child_jobs_in_state #child_jobs_in_state} => Hash&lt;String,Integer&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1086,7 +1223,7 @@ module Aws::Backup
     #   resp.resource_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.completion_date #=> Time
-    #   resp.state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTING", "ABORTED", "COMPLETED", "FAILED", "EXPIRED"
+    #   resp.state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTING", "ABORTED", "COMPLETED", "FAILED", "EXPIRED", "PARTIAL"
     #   resp.status_message #=> String
     #   resp.percent_done #=> String
     #   resp.backup_size_in_bytes #=> Integer
@@ -1102,6 +1239,11 @@ module Aws::Backup
     #   resp.backup_options #=> Hash
     #   resp.backup_options["BackupOptionKey"] #=> String
     #   resp.backup_type #=> String
+    #   resp.parent_job_id #=> String
+    #   resp.is_parent #=> Boolean
+    #   resp.number_of_child_jobs #=> Integer
+    #   resp.child_jobs_in_state #=> Hash
+    #   resp.child_jobs_in_state["BackupJobState"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJob AWS API Documentation
     #
@@ -1187,7 +1329,7 @@ module Aws::Backup
     #   resp.copy_job.resource_arn #=> String
     #   resp.copy_job.creation_date #=> Time
     #   resp.copy_job.completion_date #=> Time
-    #   resp.copy_job.state #=> String, one of "CREATED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.copy_job.state #=> String, one of "CREATED", "RUNNING", "COMPLETED", "FAILED", "PARTIAL"
     #   resp.copy_job.status_message #=> String
     #   resp.copy_job.backup_size_in_bytes #=> Integer
     #   resp.copy_job.iam_role_arn #=> String
@@ -1196,6 +1338,12 @@ module Aws::Backup
     #   resp.copy_job.created_by.backup_plan_version #=> String
     #   resp.copy_job.created_by.backup_rule_id #=> String
     #   resp.copy_job.resource_type #=> String
+    #   resp.copy_job.parent_job_id #=> String
+    #   resp.copy_job.is_parent #=> Boolean
+    #   resp.copy_job.composite_member_identifier #=> String
+    #   resp.copy_job.number_of_child_jobs #=> Integer
+    #   resp.copy_job.child_jobs_in_state #=> Hash
+    #   resp.copy_job.child_jobs_in_state["CopyJobState"] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJob AWS API Documentation
     #
@@ -1353,6 +1501,9 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#is_encrypted #is_encrypted} => Boolean
     #   * {Types::DescribeRecoveryPointOutput#storage_class #storage_class} => String
     #   * {Types::DescribeRecoveryPointOutput#last_restore_time #last_restore_time} => Time
+    #   * {Types::DescribeRecoveryPointOutput#parent_recovery_point_arn #parent_recovery_point_arn} => String
+    #   * {Types::DescribeRecoveryPointOutput#composite_member_identifier #composite_member_identifier} => String
+    #   * {Types::DescribeRecoveryPointOutput#is_parent #is_parent} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1387,6 +1538,9 @@ module Aws::Backup
     #   resp.is_encrypted #=> Boolean
     #   resp.storage_class #=> String, one of "WARM", "COLD", "DELETED"
     #   resp.last_restore_time #=> Time
+    #   resp.parent_recovery_point_arn #=> String
+    #   resp.composite_member_identifier #=> String
+    #   resp.is_parent #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRecoveryPoint AWS API Documentation
     #
@@ -1489,6 +1643,12 @@ module Aws::Backup
     #   resp.report_plan.report_setting.framework_arns #=> Array
     #   resp.report_plan.report_setting.framework_arns[0] #=> String
     #   resp.report_plan.report_setting.number_of_frameworks #=> Integer
+    #   resp.report_plan.report_setting.accounts #=> Array
+    #   resp.report_plan.report_setting.accounts[0] #=> String
+    #   resp.report_plan.report_setting.organization_units #=> Array
+    #   resp.report_plan.report_setting.organization_units[0] #=> String
+    #   resp.report_plan.report_setting.regions #=> Array
+    #   resp.report_plan.report_setting.regions[0] #=> String
     #   resp.report_plan.report_delivery_channel.s3_bucket_name #=> String
     #   resp.report_plan.report_delivery_channel.s3_key_prefix #=> String
     #   resp.report_plan.report_delivery_channel.formats #=> Array
@@ -1590,6 +1750,40 @@ module Aws::Backup
     # @param [Hash] params ({})
     def disassociate_recovery_point(params = {}, options = {})
       req = build_request(:disassociate_recovery_point, params)
+      req.send_request(options)
+    end
+
+    # This action to a specific child (nested) recovery point removes the
+    # relationship between the specified recovery point and its parent
+    # (composite) recovery point.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   This is the name of a logical container where the child (nested)
+    #   recovery point is stored. Backup vaults are identified by names that
+    #   are unique to the account used to create them and the Amazon Web
+    #   Services Region where they are created. They consist of lowercase
+    #   letters, numbers, and hyphens.
+    #
+    # @option params [required, String] :recovery_point_arn
+    #   This is the Amazon Resource Name (ARN) that uniquely identifies the
+    #   child (nested) recovery point; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.`
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_recovery_point_from_parent({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     recovery_point_arn: "ARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateRecoveryPointFromParent AWS API Documentation
+    #
+    # @overload disassociate_recovery_point_from_parent(params = {})
+    # @param [Hash] params ({})
+    def disassociate_recovery_point_from_parent(params = {}, options = {})
+      req = build_request(:disassociate_recovery_point_from_parent, params)
       req.send_request(options)
     end
 
@@ -1929,6 +2123,59 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # This action returns details for a specified legal hold. The details
+    # are the body of a legal hold in JSON format, in addition to metadata.
+    #
+    # @option params [required, String] :legal_hold_id
+    #   This is the ID required to use `GetLegalHold`. This unique ID is
+    #   associated with a specific legal hold.
+    #
+    # @return [Types::GetLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLegalHoldOutput#title #title} => String
+    #   * {Types::GetLegalHoldOutput#status #status} => String
+    #   * {Types::GetLegalHoldOutput#description #description} => String
+    #   * {Types::GetLegalHoldOutput#cancel_description #cancel_description} => String
+    #   * {Types::GetLegalHoldOutput#legal_hold_id #legal_hold_id} => String
+    #   * {Types::GetLegalHoldOutput#legal_hold_arn #legal_hold_arn} => String
+    #   * {Types::GetLegalHoldOutput#creation_date #creation_date} => Time
+    #   * {Types::GetLegalHoldOutput#cancellation_date #cancellation_date} => Time
+    #   * {Types::GetLegalHoldOutput#retain_record_until #retain_record_until} => Time
+    #   * {Types::GetLegalHoldOutput#recovery_point_selection #recovery_point_selection} => Types::RecoveryPointSelection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_legal_hold({
+    #     legal_hold_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.title #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "CANCELING", "CANCELED"
+    #   resp.description #=> String
+    #   resp.cancel_description #=> String
+    #   resp.legal_hold_id #=> String
+    #   resp.legal_hold_arn #=> String
+    #   resp.creation_date #=> Time
+    #   resp.cancellation_date #=> Time
+    #   resp.retain_record_until #=> Time
+    #   resp.recovery_point_selection.vault_names #=> Array
+    #   resp.recovery_point_selection.vault_names[0] #=> String
+    #   resp.recovery_point_selection.resource_identifiers #=> Array
+    #   resp.recovery_point_selection.resource_identifiers[0] #=> String
+    #   resp.recovery_point_selection.date_range.from_date #=> Time
+    #   resp.recovery_point_selection.date_range.to_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetLegalHold AWS API Documentation
+    #
+    # @overload get_legal_hold(params = {})
+    # @param [Hash] params ({})
+    def get_legal_hold(params = {}, options = {})
+      req = build_request(:get_legal_hold, params)
+      req.send_request(options)
+    end
+
     # Returns a set of metadata key-value pairs that were used to create the
     # backup.
     #
@@ -2071,6 +2318,9 @@ module Aws::Backup
     #   Returns only backup jobs completed before a date expressed in Unix
     #   format and Coordinated Universal Time (UTC).
     #
+    # @option params [String] :by_parent_job_id
+    #   This is a filter to list child (nested) jobs based on parent job ID.
+    #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupJobsOutput#backup_jobs #backup_jobs} => Array&lt;Types::BackupJob&gt;
@@ -2084,7 +2334,7 @@ module Aws::Backup
     #     next_token: "string",
     #     max_results: 1,
     #     by_resource_arn: "ARN",
-    #     by_state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED
+    #     by_state: "CREATED", # accepts CREATED, PENDING, RUNNING, ABORTING, ABORTED, COMPLETED, FAILED, EXPIRED, PARTIAL
     #     by_backup_vault_name: "BackupVaultName",
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
@@ -2092,6 +2342,7 @@ module Aws::Backup
     #     by_account_id: "AccountId",
     #     by_complete_after: Time.now,
     #     by_complete_before: Time.now,
+    #     by_parent_job_id: "string",
     #   })
     #
     # @example Response structure
@@ -2105,7 +2356,7 @@ module Aws::Backup
     #   resp.backup_jobs[0].resource_arn #=> String
     #   resp.backup_jobs[0].creation_date #=> Time
     #   resp.backup_jobs[0].completion_date #=> Time
-    #   resp.backup_jobs[0].state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTING", "ABORTED", "COMPLETED", "FAILED", "EXPIRED"
+    #   resp.backup_jobs[0].state #=> String, one of "CREATED", "PENDING", "RUNNING", "ABORTING", "ABORTED", "COMPLETED", "FAILED", "EXPIRED", "PARTIAL"
     #   resp.backup_jobs[0].status_message #=> String
     #   resp.backup_jobs[0].percent_done #=> String
     #   resp.backup_jobs[0].backup_size_in_bytes #=> Integer
@@ -2121,6 +2372,8 @@ module Aws::Backup
     #   resp.backup_jobs[0].backup_options #=> Hash
     #   resp.backup_jobs[0].backup_options["BackupOptionKey"] #=> String
     #   resp.backup_jobs[0].backup_type #=> String
+    #   resp.backup_jobs[0].parent_job_id #=> String
+    #   resp.backup_jobs[0].is_parent #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobs AWS API Documentation
@@ -2458,6 +2711,9 @@ module Aws::Backup
     #   Returns only copy jobs completed after a date expressed in Unix format
     #   and Coordinated Universal Time (UTC).
     #
+    # @option params [String] :by_parent_job_id
+    #   This is a filter to list child (nested) jobs based on parent job ID.
+    #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
@@ -2471,7 +2727,7 @@ module Aws::Backup
     #     next_token: "string",
     #     max_results: 1,
     #     by_resource_arn: "ARN",
-    #     by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED
+    #     by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED, PARTIAL
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
     #     by_resource_type: "ResourceType",
@@ -2479,6 +2735,7 @@ module Aws::Backup
     #     by_account_id: "AccountId",
     #     by_complete_before: Time.now,
     #     by_complete_after: Time.now,
+    #     by_parent_job_id: "string",
     #   })
     #
     # @example Response structure
@@ -2493,7 +2750,7 @@ module Aws::Backup
     #   resp.copy_jobs[0].resource_arn #=> String
     #   resp.copy_jobs[0].creation_date #=> Time
     #   resp.copy_jobs[0].completion_date #=> Time
-    #   resp.copy_jobs[0].state #=> String, one of "CREATED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.copy_jobs[0].state #=> String, one of "CREATED", "RUNNING", "COMPLETED", "FAILED", "PARTIAL"
     #   resp.copy_jobs[0].status_message #=> String
     #   resp.copy_jobs[0].backup_size_in_bytes #=> Integer
     #   resp.copy_jobs[0].iam_role_arn #=> String
@@ -2502,6 +2759,12 @@ module Aws::Backup
     #   resp.copy_jobs[0].created_by.backup_plan_version #=> String
     #   resp.copy_jobs[0].created_by.backup_rule_id #=> String
     #   resp.copy_jobs[0].resource_type #=> String
+    #   resp.copy_jobs[0].parent_job_id #=> String
+    #   resp.copy_jobs[0].is_parent #=> Boolean
+    #   resp.copy_jobs[0].composite_member_identifier #=> String
+    #   resp.copy_jobs[0].number_of_child_jobs #=> Integer
+    #   resp.copy_jobs[0].child_jobs_in_state #=> Hash
+    #   resp.copy_jobs[0].child_jobs_in_state["CopyJobState"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobs AWS API Documentation
@@ -2556,6 +2819,52 @@ module Aws::Backup
     # @param [Hash] params ({})
     def list_frameworks(params = {}, options = {})
       req = build_request(:list_frameworks, params)
+      req.send_request(options)
+    end
+
+    # This action returns metadata about active and previous legal holds.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned resources. For
+    #   example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resource list items to be returned.
+    #
+    # @return [Types::ListLegalHoldsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLegalHoldsOutput#next_token #next_token} => String
+    #   * {Types::ListLegalHoldsOutput#legal_holds #legal_holds} => Array&lt;Types::LegalHold&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_legal_holds({
+    #     next_token: "string",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.legal_holds #=> Array
+    #   resp.legal_holds[0].title #=> String
+    #   resp.legal_holds[0].status #=> String, one of "CREATING", "ACTIVE", "CANCELING", "CANCELED"
+    #   resp.legal_holds[0].description #=> String
+    #   resp.legal_holds[0].legal_hold_id #=> String
+    #   resp.legal_holds[0].legal_hold_arn #=> String
+    #   resp.legal_holds[0].creation_date #=> Time
+    #   resp.legal_holds[0].cancellation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListLegalHolds AWS API Documentation
+    #
+    # @overload list_legal_holds(params = {})
+    # @param [Hash] params ({})
+    def list_legal_holds(params = {}, options = {})
+      req = build_request(:list_legal_holds, params)
       req.send_request(options)
     end
 
@@ -2644,6 +2953,10 @@ module Aws::Backup
     #   Returns only recovery points that were created after the specified
     #   timestamp.
     #
+    # @option params [String] :by_parent_recovery_point_arn
+    #   This returns only recovery points that match the specified parent
+    #   (composite) recovery point Amazon Resource Name (ARN).
+    #
     # @return [Types::ListRecoveryPointsByBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRecoveryPointsByBackupVaultOutput#next_token #next_token} => String
@@ -2662,6 +2975,7 @@ module Aws::Backup
     #     by_backup_plan_id: "string",
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
+    #     by_parent_recovery_point_arn: "ARN",
     #   })
     #
     # @example Response structure
@@ -2691,6 +3005,9 @@ module Aws::Backup
     #   resp.recovery_points[0].encryption_key_arn #=> String
     #   resp.recovery_points[0].is_encrypted #=> Boolean
     #   resp.recovery_points[0].last_restore_time #=> Time
+    #   resp.recovery_points[0].parent_recovery_point_arn #=> String
+    #   resp.recovery_points[0].composite_member_identifier #=> String
+    #   resp.recovery_points[0].is_parent #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByBackupVault AWS API Documentation
     #
@@ -2698,6 +3015,51 @@ module Aws::Backup
     # @param [Hash] params ({})
     def list_recovery_points_by_backup_vault(params = {}, options = {})
       req = build_request(:list_recovery_points_by_backup_vault, params)
+      req.send_request(options)
+    end
+
+    # This action returns recovery point ARNs (Amazon Resource Names) of the
+    # specified legal hold.
+    #
+    # @option params [required, String] :legal_hold_id
+    #   This is the ID of the legal hold.
+    #
+    # @option params [String] :next_token
+    #   This is the next item following a partial list of returned resources.
+    #   For example, if a request is made to return `maxResults` number of
+    #   resources, `NextToken` allows you to return more items in your list
+    #   starting at the location pointed to by the next token.
+    #
+    # @option params [Integer] :max_results
+    #   This is the maximum number of resource list items to be returned.
+    #
+    # @return [Types::ListRecoveryPointsByLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecoveryPointsByLegalHoldOutput#recovery_points #recovery_points} => Array&lt;Types::RecoveryPointMember&gt;
+    #   * {Types::ListRecoveryPointsByLegalHoldOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recovery_points_by_legal_hold({
+    #     legal_hold_id: "string", # required
+    #     next_token: "string",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recovery_points #=> Array
+    #   resp.recovery_points[0].recovery_point_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByLegalHold AWS API Documentation
+    #
+    # @overload list_recovery_points_by_legal_hold(params = {})
+    # @param [Hash] params ({})
+    def list_recovery_points_by_legal_hold(params = {}, options = {})
+      req = build_request(:list_recovery_points_by_legal_hold, params)
       req.send_request(options)
     end
 
@@ -2752,6 +3114,8 @@ module Aws::Backup
     #   resp.recovery_points[0].encryption_key_arn #=> String
     #   resp.recovery_points[0].backup_size_bytes #=> Integer
     #   resp.recovery_points[0].backup_vault_name #=> String
+    #   resp.recovery_points[0].is_parent #=> Boolean
+    #   resp.recovery_points[0].parent_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByResource AWS API Documentation
     #
@@ -2872,6 +3236,12 @@ module Aws::Backup
     #   resp.report_plans[0].report_setting.framework_arns #=> Array
     #   resp.report_plans[0].report_setting.framework_arns[0] #=> String
     #   resp.report_plans[0].report_setting.number_of_frameworks #=> Integer
+    #   resp.report_plans[0].report_setting.accounts #=> Array
+    #   resp.report_plans[0].report_setting.accounts[0] #=> String
+    #   resp.report_plans[0].report_setting.organization_units #=> Array
+    #   resp.report_plans[0].report_setting.organization_units[0] #=> String
+    #   resp.report_plans[0].report_setting.regions #=> Array
+    #   resp.report_plans[0].report_setting.regions[0] #=> String
     #   resp.report_plans[0].report_delivery_channel.s3_bucket_name #=> String
     #   resp.report_plans[0].report_delivery_channel.s3_key_prefix #=> String
     #   resp.report_plans[0].report_delivery_channel.formats #=> Array
@@ -3189,8 +3559,10 @@ module Aws::Backup
     #
     #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
     #
-    #   <note markdown="1"> Ignore the list below because it includes deprecated events. Refer to
-    #   the list above.
+    #   <note markdown="1"> The list below shows items that are deprecated events (for reference)
+    #   and are no longer in use. They are no longer supported and will not
+    #   return statuses or notifications. Refer to the list above for current
+    #   supported events.
     #
     #    </note>
     #
@@ -3242,7 +3614,8 @@ module Aws::Backup
     # @option params [Integer] :start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
     #   canceled if it doesn't start successfully. This value is optional,
-    #   and the default is 8 hours.
+    #   and the default is 8 hours. If this value is included, it must be at
+    #   least 60 minutes to avoid errors.
     #
     # @option params [Integer] :complete_window_minutes
     #   A value in minutes during which a successfully started backup must
@@ -3290,6 +3663,7 @@ module Aws::Backup
     #   * {Types::StartBackupJobOutput#backup_job_id #backup_job_id} => String
     #   * {Types::StartBackupJobOutput#recovery_point_arn #recovery_point_arn} => String
     #   * {Types::StartBackupJobOutput#creation_date #creation_date} => Time
+    #   * {Types::StartBackupJobOutput#is_parent #is_parent} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3317,6 +3691,7 @@ module Aws::Backup
     #   resp.backup_job_id #=> String
     #   resp.recovery_point_arn #=> String
     #   resp.creation_date #=> Time
+    #   resp.is_parent #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJob AWS API Documentation
     #
@@ -3380,6 +3755,7 @@ module Aws::Backup
     #
     #   * {Types::StartCopyJobOutput#copy_job_id #copy_job_id} => String
     #   * {Types::StartCopyJobOutput#creation_date #creation_date} => Time
+    #   * {Types::StartCopyJobOutput#is_parent #is_parent} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3399,6 +3775,7 @@ module Aws::Backup
     #
     #   resp.copy_job_id #=> String
     #   resp.creation_date #=> Time
+    #   resp.is_parent #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJob AWS API Documentation
     #
@@ -3496,7 +3873,7 @@ module Aws::Backup
     #
     # @option params [String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Backup uses to
-    #   create the target recovery point; for example,
+    #   create the target resource; for example:
     #   `arn:aws:iam::123456789012:role/S3Access`.
     #
     # @option params [String] :idempotency_token
@@ -3563,6 +3940,11 @@ module Aws::Backup
     end
 
     # Attempts to cancel a job to create a one-time backup of a resource.
+    #
+    # This action is not supported for the following services: Amazon FSx
+    # for Windows File Server, Amazon FSx for Lustre, FSx for ONTAP , Amazon
+    # FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility),
+    # Amazon RDS, Amazon Aurora, and Amazon Neptune.
     #
     # @option params [required, String] :backup_job_id
     #   Uniquely identifies a request to Backup to back up a resource.
@@ -4012,6 +4394,9 @@ module Aws::Backup
     #       report_template: "string", # required
     #       framework_arns: ["string"],
     #       number_of_frameworks: 1,
+    #       accounts: ["string"],
+    #       organization_units: ["string"],
+    #       regions: ["string"],
     #     },
     #     idempotency_token: "string",
     #   })
@@ -4044,7 +4429,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-11-28)
+------------------
+
+* Feature - This release adds support for 'inputType' for post-call and real-time (streaming) Call Analytics within Amazon Transcribe.
+
 1.77.0 (2022-10-25)
 ------------------
 

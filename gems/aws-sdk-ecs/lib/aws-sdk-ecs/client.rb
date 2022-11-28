@@ -577,6 +577,28 @@ module Aws::ECS
     #   when it was created, it can be defined later with the
     #   PutClusterCapacityProviders API operation.
     #
+    # @option params [Types::ClusterServiceConnectDefaultsRequest] :service_connect_defaults
+    #   Use this parameter to set a default Service Connect namespace. After
+    #   you set a default Service Connect namespace, any new services with
+    #   Service Connect turned on that are created in the cluster are added as
+    #   client services in the namespace. This setting only applies to new
+    #   services that set the `enabled` parameter to `true` in the
+    #   `ServiceConnectConfiguration`. You can set the namespace of each
+    #   service individually in the `ServiceConnectConfiguration` to override
+    #   this default parameter.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all of
+    #   the clusters in the namespace. Tasks connect through a managed proxy
+    #   container that collects logs and metrics for increased visibility.
+    #   Only the tasks that Amazon ECS services create are supported with
+    #   Service Connect. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -640,6 +662,9 @@ module Aws::ECS
     #         base: 1,
     #       },
     #     ],
+    #     service_connect_defaults: {
+    #       namespace: "String", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -681,6 +706,7 @@ module Aws::ECS
     #   resp.cluster.attachments[0].details[0].name #=> String
     #   resp.cluster.attachments[0].details[0].value #=> String
     #   resp.cluster.attachments_status #=> String
+    #   resp.cluster.service_connect_defaults.namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster AWS API Documentation
     #
@@ -1015,8 +1041,8 @@ module Aws::ECS
     #   defined and you don't specify a health check grace period value, the
     #   default value of `0` is used.
     #
-    #   If you do not use an Elastic Load Balancing, we recomend that you use
-    #   the `startPeriod` in the task definition healtch check parameters. For
+    #   If you do not use an Elastic Load Balancing, we recommend that you use
+    #   the `startPeriod` in the task definition health check parameters. For
     #   more information, see [Health check][1].
     #
     #   If your service's tasks take a while to start and respond to Elastic
@@ -1117,6 +1143,23 @@ module Aws::ECS
     #   Determines whether the execute command functionality is enabled for
     #   the service. If `true`, this enables execute command functionality on
     #   all containers in the service tasks.
+    #
+    # @option params [Types::ServiceConnectConfiguration] :service_connect_configuration
+    #   The configuration for this service to discover and connect to
+    #   services, and be discovered by, and connected from, other services
+    #   within a namespace.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all of
+    #   the clusters in the namespace. Tasks connect through a managed proxy
+    #   container that collects logs and metrics for increased visibility.
+    #   Only the tasks that Amazon ECS services create are supported with
+    #   Service Connect. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1315,6 +1358,35 @@ module Aws::ECS
     #     enable_ecs_managed_tags: false,
     #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
     #     enable_execute_command: false,
+    #     service_connect_configuration: {
+    #       enabled: false, # required
+    #       namespace: "String",
+    #       services: [
+    #         {
+    #           port_name: "String", # required
+    #           discovery_name: "String",
+    #           client_aliases: [
+    #             {
+    #               port: 1, # required
+    #               dns_name: "String",
+    #             },
+    #           ],
+    #           ingress_port_override: 1,
+    #         },
+    #       ],
+    #       log_configuration: {
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
+    #         options: {
+    #           "String" => "String",
+    #         },
+    #         secret_options: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1415,6 +1487,24 @@ module Aws::ECS
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
     #   resp.service.deployments[0].rollout_state_reason #=> String
+    #   resp.service.deployments[0].service_connect_configuration.enabled #=> Boolean
+    #   resp.service.deployments[0].service_connect_configuration.namespace #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.services[0].port_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].discovery_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service.deployments[0].service_connect_resources #=> Array
+    #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
+    #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -1968,6 +2058,7 @@ module Aws::ECS
     #   resp.cluster.attachments[0].details[0].name #=> String
     #   resp.cluster.attachments[0].details[0].value #=> String
     #   resp.cluster.attachments_status #=> String
+    #   resp.cluster.service_connect_defaults.namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster AWS API Documentation
     #
@@ -2138,6 +2229,24 @@ module Aws::ECS
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
     #   resp.service.deployments[0].rollout_state_reason #=> String
+    #   resp.service.deployments[0].service_connect_configuration.enabled #=> Boolean
+    #   resp.service.deployments[0].service_connect_configuration.namespace #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.services[0].port_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].discovery_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service.deployments[0].service_connect_resources #=> Array
+    #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
+    #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -2459,6 +2568,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].container_port #=> Integer
     #   resp.task_definition.container_definitions[0].port_mappings[0].host_port #=> Integer
     #   resp.task_definition.container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.task_definition.container_definitions[0].port_mappings[0].name #=> String
+    #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
@@ -2711,7 +2822,8 @@ module Aws::ECS
     #   isn't included.
     #
     #   If `ATTACHMENTS` is specified, the attachments for the container
-    #   instances or tasks within the cluster are included.
+    #   instances or tasks within the cluster are included, for example the
+    #   capacity providers.
     #
     #   If `SETTINGS` is specified, the settings for the cluster are included.
     #
@@ -2800,6 +2912,7 @@ module Aws::ECS
     #   resp.clusters[0].attachments[0].details[0].name #=> String
     #   resp.clusters[0].attachments[0].details[0].value #=> String
     #   resp.clusters[0].attachments_status #=> String
+    #   resp.clusters[0].service_connect_defaults.namespace #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3190,6 +3303,24 @@ module Aws::ECS
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
     #   resp.services[0].deployments[0].rollout_state_reason #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.enabled #=> Boolean
+    #   resp.services[0].deployments[0].service_connect_configuration.namespace #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services #=> Array
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].port_name #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].discovery_name #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.options #=> Hash
+    #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
+    #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.services[0].deployments[0].service_connect_resources #=> Array
+    #   resp.services[0].deployments[0].service_connect_resources[0].discovery_name #=> String
+    #   resp.services[0].deployments[0].service_connect_resources[0].discovery_arn #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -3348,6 +3479,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].container_port #=> Integer
     #   resp.task_definition.container_definitions[0].port_mappings[0].host_port #=> Integer
     #   resp.task_definition.container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.task_definition.container_definitions[0].port_mappings[0].name #=> String
+    #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
@@ -3780,7 +3913,7 @@ module Aws::ECS
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].stopped_reason #=> String
     #   resp.tasks[0].stopping_at #=> Time
@@ -3835,6 +3968,7 @@ module Aws::ECS
     #
     #   * {Types::DiscoverPollEndpointResponse#endpoint #endpoint} => String
     #   * {Types::DiscoverPollEndpointResponse#telemetry_endpoint #telemetry_endpoint} => String
+    #   * {Types::DiscoverPollEndpointResponse#service_connect_endpoint #service_connect_endpoint} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3847,6 +3981,7 @@ module Aws::ECS
     #
     #   resp.endpoint #=> String
     #   resp.telemetry_endpoint #=> String
+    #   resp.service_connect_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint AWS API Documentation
     #
@@ -3861,7 +3996,7 @@ module Aws::ECS
     #
     # If you use a condition key in your IAM policy to refine the conditions
     # for the policy statement, for example limit the actions to a specific
-    # cluster, you recevie an `AccessDeniedException` when there is a
+    # cluster, you receive an `AccessDeniedException` when there is a
     # mismatch between the condition key value and the corresponding
     # parameter value.
     #
@@ -4472,6 +4607,82 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # This operation lists all of the services that are associated with a
+    # Cloud Map namespace. This list might include services in different
+    # clusters. In contrast, `ListServices` can only list services in one
+    # cluster at a time. If you need to filter the list of services in a
+    # single cluster by various parameters, use `ListServices`. For more
+    # information, see [Service Connect][1] in the *Amazon Elastic Container
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @option params [required, String] :namespace
+    #   The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
+    #   namespace to list the services in.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all of
+    #   the clusters in the namespace. Tasks connect through a managed proxy
+    #   container that collects logs and metrics for increased visibility.
+    #   Only the tasks that Amazon ECS services create are supported with
+    #   Service Connect. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value that's returned from a
+    #   `ListServicesByNamespace` request. It indicates that more results are
+    #   available to fulfill the request and further calls are needed. If
+    #   `maxResults` is returned, it is possible the number of results is less
+    #   than `maxResults`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of service results that `ListServicesByNamespace`
+    #   returns in paginated output. When this parameter is used,
+    #   `ListServicesByNamespace` only returns `maxResults` results in a
+    #   single page along with a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListServicesByNamespace` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter isn't used,
+    #   then `ListServicesByNamespace` returns up to 10 results and a
+    #   `nextToken` value if applicable.
+    #
+    # @return [Types::ListServicesByNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServicesByNamespaceResponse#service_arns #service_arns} => Array&lt;String&gt;
+    #   * {Types::ListServicesByNamespaceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_services_by_namespace({
+    #     namespace: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_arns #=> Array
+    #   resp.service_arns[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesByNamespace AWS API Documentation
+    #
+    # @overload list_services_by_namespace(params = {})
+    # @param [Hash] params ({})
+    def list_services_by_namespace(params = {}, options = {})
+      req = build_request(:list_services_by_namespace, params)
+      req.send_request(options)
+    end
+
     # List the tags for an Amazon ECS resource.
     #
     # @option params [required, String] :resource_arn
@@ -4807,6 +5018,9 @@ module Aws::ECS
     #   The `startedBy` value to filter the task results with. Specifying a
     #   `startedBy` value limits the results to tasks that were started with
     #   that value.
+    #
+    #   When you specify `startedBy` as the filter, it must be the only filter
+    #   that you use.
     #
     # @option params [String] :service_name
     #   The name of the service to use when filtering the `ListTasks` results.
@@ -5289,6 +5503,7 @@ module Aws::ECS
     #   resp.cluster.attachments[0].details[0].name #=> String
     #   resp.cluster.attachments[0].details[0].value #=> String
     #   resp.cluster.attachments_status #=> String
+    #   resp.cluster.service_connect_defaults.namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProviders AWS API Documentation
     #
@@ -5930,6 +6145,8 @@ module Aws::ECS
     #             container_port: 1,
     #             host_port: 1,
     #             protocol: "tcp", # accepts tcp, udp
+    #             name: "String",
+    #             app_protocol: "http", # accepts http, http2, grpc
     #           },
     #         ],
     #         essential: false,
@@ -6159,6 +6376,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].port_mappings[0].container_port #=> Integer
     #   resp.task_definition.container_definitions[0].port_mappings[0].host_port #=> Integer
     #   resp.task_definition.container_definitions[0].port_mappings[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.task_definition.container_definitions[0].port_mappings[0].name #=> String
+    #   resp.task_definition.container_definitions[0].port_mappings[0].app_protocol #=> String, one of "http", "http2", "grpc"
     #   resp.task_definition.container_definitions[0].essential #=> Boolean
     #   resp.task_definition.container_definitions[0].entry_point #=> Array
     #   resp.task_definition.container_definitions[0].entry_point[0] #=> String
@@ -6789,7 +7008,7 @@ module Aws::ECS
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].stopped_reason #=> String
     #   resp.tasks[0].stopping_at #=> Time
@@ -7097,7 +7316,7 @@ module Aws::ECS
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].started_by #=> String
-    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.tasks[0].stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
     #   resp.tasks[0].stopped_at #=> Time
     #   resp.tasks[0].stopped_reason #=> String
     #   resp.tasks[0].stopping_at #=> Time
@@ -7263,7 +7482,7 @@ module Aws::ECS
     #   resp.task.pull_stopped_at #=> Time
     #   resp.task.started_at #=> Time
     #   resp.task.started_by #=> String
-    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated"
+    #   resp.task.stop_code #=> String, one of "TaskFailedToStart", "EssentialContainerExited", "UserInitiated", "ServiceSchedulerInitiated", "SpotInterruption", "TerminationNotice"
     #   resp.task.stopped_at #=> Time
     #   resp.task.stopped_reason #=> String
     #   resp.task.stopping_at #=> Time
@@ -7687,6 +7906,28 @@ module Aws::ECS
     # @option params [Types::ClusterConfiguration] :configuration
     #   The execute command configuration for the cluster.
     #
+    # @option params [Types::ClusterServiceConnectDefaultsRequest] :service_connect_defaults
+    #   Use this parameter to set a default Service Connect namespace. After
+    #   you set a default Service Connect namespace, any new services with
+    #   Service Connect turned on that are created in the cluster are added as
+    #   client services in the namespace. This setting only applies to new
+    #   services that set the `enabled` parameter to `true` in the
+    #   `ServiceConnectConfiguration`. You can set the namespace of each
+    #   service individually in the `ServiceConnectConfiguration` to override
+    #   this default parameter.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all of
+    #   the clusters in the namespace. Tasks connect through a managed proxy
+    #   container that collects logs and metrics for increased visibility.
+    #   Only the tasks that Amazon ECS services create are supported with
+    #   Service Connect. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
     # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateClusterResponse#cluster #cluster} => Types::Cluster
@@ -7713,6 +7954,9 @@ module Aws::ECS
     #           s3_key_prefix: "String",
     #         },
     #       },
+    #     },
+    #     service_connect_defaults: {
+    #       namespace: "String", # required
     #     },
     #   })
     #
@@ -7755,6 +7999,7 @@ module Aws::ECS
     #   resp.cluster.attachments[0].details[0].name #=> String
     #   resp.cluster.attachments[0].details[0].value #=> String
     #   resp.cluster.attachments_status #=> String
+    #   resp.cluster.service_connect_defaults.namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCluster AWS API Documentation
     #
@@ -7775,6 +8020,13 @@ module Aws::ECS
     #   turn on CloudWatch Container Insights for a cluster. If this value is
     #   specified, it overrides the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
+    #
+    #   Currently, if you delete an existing cluster that does not have
+    #   Container Insights turned on, and then create a new cluster with the
+    #   same name with Container Insights tuned on, Container Insights will
+    #   not actually be turned on. If you want to preserve the same name for
+    #   your existing cluster and turn on Container Insights, you must wait 7
+    #   days before you can re-create it.
     #
     # @return [Types::UpdateClusterSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7831,6 +8083,7 @@ module Aws::ECS
     #   resp.cluster.attachments[0].details[0].name #=> String
     #   resp.cluster.attachments[0].details[0].value #=> String
     #   resp.cluster.attachments_status #=> String
+    #   resp.cluster.service_connect_defaults.namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettings AWS API Documentation
     #
@@ -7854,6 +8107,13 @@ module Aws::ECS
     # This updates the agent. For more information, see [Updating the Amazon
     # ECS container agent][1] in the *Amazon Elastic Container Service
     # Developer Guide*.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> Agent updates with the `UpdateContainerAgent` API operation do not
+    # apply to Windows container instances. We recommend that you launch new
+    # container instances to update the agent version in your Windows
+    # clusters.
     #
     #  </note>
     #
@@ -8425,6 +8685,23 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #
+    # @option params [Types::ServiceConnectConfiguration] :service_connect_configuration
+    #   The configuration for this service to discover and connect to
+    #   services, and be discovered by, and connected from, other services
+    #   within a namespace.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all of
+    #   the clusters in the namespace. Tasks connect through a managed proxy
+    #   container that collects logs and metrics for increased visibility.
+    #   Only the tasks that Amazon ECS services create are supported with
+    #   Service Connect. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -8519,6 +8796,35 @@ module Aws::ECS
     #         container_port: 1,
     #       },
     #     ],
+    #     service_connect_configuration: {
+    #       enabled: false, # required
+    #       namespace: "String",
+    #       services: [
+    #         {
+    #           port_name: "String", # required
+    #           discovery_name: "String",
+    #           client_aliases: [
+    #             {
+    #               port: 1, # required
+    #               dns_name: "String",
+    #             },
+    #           ],
+    #           ingress_port_override: 1,
+    #         },
+    #       ],
+    #       log_configuration: {
+    #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
+    #         options: {
+    #           "String" => "String",
+    #         },
+    #         secret_options: [
+    #           {
+    #             name: "String", # required
+    #             value_from: "String", # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -8619,6 +8925,24 @@ module Aws::ECS
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.deployments[0].rollout_state #=> String, one of "COMPLETED", "FAILED", "IN_PROGRESS"
     #   resp.service.deployments[0].rollout_state_reason #=> String
+    #   resp.service.deployments[0].service_connect_configuration.enabled #=> Boolean
+    #   resp.service.deployments[0].service_connect_configuration.namespace #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.services[0].port_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].discovery_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
+    #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service.deployments[0].service_connect_resources #=> Array
+    #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
+    #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -8763,8 +9087,8 @@ module Aws::ECS
     # task by invoking this operation repeatedly.
     #
     # To learn more about Amazon ECS task protection, see [Task scale-in
-    # protection][3] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # protection][3] in the <i> <i>Amazon Elastic Container Service
+    # Developer Guide</i> </i>.
     #
     # <note markdown="1"> This operation is only supported for tasks belonging to an Amazon ECS
     # service. Invoking this operation for a standalone task will result in
@@ -8774,15 +9098,15 @@ module Aws::ECS
     #  </note>
     #
     # If you prefer to set task protection from within the container, we
-    # recommend using the [Amazon ECS container agent endpoint][5].
+    # recommend using the [Task scale-in protection endpoint][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html
     # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html.html
-    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-endpoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -9025,7 +9349,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

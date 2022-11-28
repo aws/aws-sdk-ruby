@@ -1790,6 +1790,124 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Creates a blue/green deployment.
+    #
+    # A blue/green deployment creates a staging environment that copies the
+    # production environment. In a blue/green deployment, the blue
+    # environment is the current production environment. The green
+    # environment is the staging environment. The staging environment stays
+    # in sync with the current production environment using logical
+    # replication.
+    #
+    # You can make changes to the databases in the green environment without
+    # affecting production workloads. For example, you can upgrade the major
+    # or minor DB engine version, change database parameters, or make schema
+    # changes in the staging environment. You can thoroughly test changes in
+    # the green environment. When ready, you can switch over the
+    # environments to promote the green environment to be the new production
+    # environment. The switchover typically takes under a minute.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @option params [required, String] :blue_green_deployment_name
+    #   The name of the blue/green deployment.
+    #
+    #   Constraints:
+    #
+    #   * Can't be the same as an existing blue/green deployment name in the
+    #     same account and Amazon Web Services Region.
+    #
+    #   ^
+    #
+    # @option params [required, String] :source
+    #   The Amazon Resource Name (ARN) of the source production database.
+    #
+    #   Specify the database that you want to clone. The blue/green deployment
+    #   creates this database in the green environment. You can make updates
+    #   to the database in the green environment, such as an engine version
+    #   upgrade. When you are ready, you can switch the database in the green
+    #   environment to be the production database.
+    #
+    # @option params [String] :target_engine_version
+    #   The engine version of the database in the green environment.
+    #
+    #   Specify the engine version to upgrade to in the green environment.
+    #
+    # @option params [String] :target_db_parameter_group_name
+    #   The DB parameter group associated with the DB instance in the green
+    #   environment.
+    #
+    #   To test parameter changes, specify a DB parameter group that is
+    #   different from the one associated with the source DB instance.
+    #
+    # @option params [String] :target_db_cluster_parameter_group_name
+    #   The DB cluster parameter group associated with the Aurora DB cluster
+    #   in the green environment.
+    #
+    #   To test parameter changes, specify a DB cluster parameter group that
+    #   is different from the one associated with the source DB cluster.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to assign to the blue/green deployment.
+    #
+    # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_blue_green_deployment({
+    #     blue_green_deployment_name: "BlueGreenDeploymentName", # required
+    #     source: "DatabaseArn", # required
+    #     target_engine_version: "TargetEngineVersion",
+    #     target_db_parameter_group_name: "TargetDBParameterGroupName",
+    #     target_db_cluster_parameter_group_name: "TargetDBClusterParameterGroupName",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blue_green_deployment.blue_green_deployment_identifier #=> String
+    #   resp.blue_green_deployment.blue_green_deployment_name #=> String
+    #   resp.blue_green_deployment.source #=> String
+    #   resp.blue_green_deployment.target #=> String
+    #   resp.blue_green_deployment.switchover_details #=> Array
+    #   resp.blue_green_deployment.switchover_details[0].source_member #=> String
+    #   resp.blue_green_deployment.switchover_details[0].target_member #=> String
+    #   resp.blue_green_deployment.switchover_details[0].status #=> String
+    #   resp.blue_green_deployment.tasks #=> Array
+    #   resp.blue_green_deployment.tasks[0].name #=> String
+    #   resp.blue_green_deployment.tasks[0].status #=> String
+    #   resp.blue_green_deployment.status #=> String
+    #   resp.blue_green_deployment.status_details #=> String
+    #   resp.blue_green_deployment.create_time #=> Time
+    #   resp.blue_green_deployment.delete_time #=> Time
+    #   resp.blue_green_deployment.tag_list #=> Array
+    #   resp.blue_green_deployment.tag_list[0].key #=> String
+    #   resp.blue_green_deployment.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateBlueGreenDeployment AWS API Documentation
+    #
+    # @overload create_blue_green_deployment(params = {})
+    # @param [Hash] params ({})
+    def create_blue_green_deployment(params = {}, options = {})
+      req = build_request(:create_blue_green_deployment, params)
+      req.send_request(options)
+    end
+
     # Creates a custom DB engine version (CEV). A CEV is a binary volume
     # snapshot of a database engine and specific AMI. The supported engines
     # are the following:
@@ -1844,10 +1962,11 @@ module Aws::RDS
     #   only supported value is `custom-oracle-ee`.
     #
     # @option params [required, String] :engine_version
-    #   The name of your CEV. The name format is `19.customized_string `. For
-    #   example, a valid name is `19.my_cev1`. This setting is required for
-    #   RDS Custom for Oracle, but optional for Amazon RDS. The combination of
-    #   `Engine` and `EngineVersion` is unique per customer per Region.
+    #   The name of your CEV. The name format is 19.*customized\_string*. For
+    #   example, a valid CEV name is `19.my_cev1`. This setting is required
+    #   for RDS Custom for Oracle, but optional for Amazon RDS. The
+    #   combination of `Engine` and `EngineVersion` is unique per customer per
+    #   Region.
     #
     # @option params [required, String] :database_installation_files_s3_bucket_name
     #   The name of an Amazon S3 bucket that contains database installation
@@ -3982,7 +4101,7 @@ module Aws::RDS
     #
     #   A custom engine version (CEV) that you have previously created. This
     #   setting is required for RDS Custom for Oracle. The CEV name has the
-    #   following format: `19.customized_string `. An example identifier is
+    #   following format: 19.*customized\_string*. A valid CEV name is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
     #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
@@ -6649,6 +6768,73 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Deletes a blue/green deployment.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @option params [required, String] :blue_green_deployment_identifier
+    #   The blue/green deployment identifier of the deployment to be deleted.
+    #   This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match an existing blue/green deployment identifier.
+    #
+    #   ^
+    #
+    # @option params [Boolean] :delete_target
+    #   A value that indicates whether to delete the resources in the green
+    #   environment.
+    #
+    # @return [Types::DeleteBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_blue_green_deployment({
+    #     blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier", # required
+    #     delete_target: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blue_green_deployment.blue_green_deployment_identifier #=> String
+    #   resp.blue_green_deployment.blue_green_deployment_name #=> String
+    #   resp.blue_green_deployment.source #=> String
+    #   resp.blue_green_deployment.target #=> String
+    #   resp.blue_green_deployment.switchover_details #=> Array
+    #   resp.blue_green_deployment.switchover_details[0].source_member #=> String
+    #   resp.blue_green_deployment.switchover_details[0].target_member #=> String
+    #   resp.blue_green_deployment.switchover_details[0].status #=> String
+    #   resp.blue_green_deployment.tasks #=> Array
+    #   resp.blue_green_deployment.tasks[0].name #=> String
+    #   resp.blue_green_deployment.tasks[0].status #=> String
+    #   resp.blue_green_deployment.status #=> String
+    #   resp.blue_green_deployment.status_details #=> String
+    #   resp.blue_green_deployment.create_time #=> Time
+    #   resp.blue_green_deployment.delete_time #=> Time
+    #   resp.blue_green_deployment.tag_list #=> Array
+    #   resp.blue_green_deployment.tag_list[0].key #=> String
+    #   resp.blue_green_deployment.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteBlueGreenDeployment AWS API Documentation
+    #
+    # @overload delete_blue_green_deployment(params = {})
+    # @param [Hash] params ({})
+    def delete_blue_green_deployment(params = {}, options = {})
+      req = build_request(:delete_blue_green_deployment, params)
+      req.send_request(options)
+    end
+
     # Deletes a custom engine version. To run this command, make sure you
     # meet the following prerequisites:
     #
@@ -8067,6 +8253,122 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_account_attributes(params = {}, options = {})
       req = build_request(:describe_account_attributes, params)
+      req.send_request(options)
+    end
+
+    # Returns information about blue/green deployments.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @option params [String] :blue_green_deployment_identifier
+    #   The blue/green deployment identifier. If this parameter is specified,
+    #   information from only the specific blue/green deployment is returned.
+    #   This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing blue/green deployment
+    #     identifier.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more blue/green deployments to
+    #   describe.
+    #
+    #   Supported filters:
+    #
+    #   * `blue-green-deployment-identifier` - Accepts system-generated
+    #     identifiers for blue/green deployments. The results list only
+    #     includes information about the blue/green deployments with the
+    #     specified identifiers.
+    #
+    #   * `blue-green-deployment-name` - Accepts user-supplied names for
+    #     blue/green deployments. The results list only includes information
+    #     about the blue/green deployments with the specified names.
+    #
+    #   * `source` - Accepts source databases for a blue/green deployment. The
+    #     results list only includes information about the blue/green
+    #     deployments with the specified source databases.
+    #
+    #   * `target` - Accepts target databases for a blue/green deployment. The
+    #     results list only includes information about the blue/green
+    #     deployments with the specified target databases.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeBlueGreenDeployments` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::DescribeBlueGreenDeploymentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBlueGreenDeploymentsResponse#blue_green_deployments #blue_green_deployments} => Array&lt;Types::BlueGreenDeployment&gt;
+    #   * {Types::DescribeBlueGreenDeploymentsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_blue_green_deployments({
+    #     blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blue_green_deployments #=> Array
+    #   resp.blue_green_deployments[0].blue_green_deployment_identifier #=> String
+    #   resp.blue_green_deployments[0].blue_green_deployment_name #=> String
+    #   resp.blue_green_deployments[0].source #=> String
+    #   resp.blue_green_deployments[0].target #=> String
+    #   resp.blue_green_deployments[0].switchover_details #=> Array
+    #   resp.blue_green_deployments[0].switchover_details[0].source_member #=> String
+    #   resp.blue_green_deployments[0].switchover_details[0].target_member #=> String
+    #   resp.blue_green_deployments[0].switchover_details[0].status #=> String
+    #   resp.blue_green_deployments[0].tasks #=> Array
+    #   resp.blue_green_deployments[0].tasks[0].name #=> String
+    #   resp.blue_green_deployments[0].tasks[0].status #=> String
+    #   resp.blue_green_deployments[0].status #=> String
+    #   resp.blue_green_deployments[0].status_details #=> String
+    #   resp.blue_green_deployments[0].create_time #=> Time
+    #   resp.blue_green_deployments[0].delete_time #=> Time
+    #   resp.blue_green_deployments[0].tag_list #=> Array
+    #   resp.blue_green_deployments[0].tag_list[0].key #=> String
+    #   resp.blue_green_deployments[0].tag_list[0].value #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeBlueGreenDeployments AWS API Documentation
+    #
+    # @overload describe_blue_green_deployments(params = {})
+    # @param [Hash] params ({})
+    def describe_blue_green_deployments(params = {}, options = {})
+      req = build_request(:describe_blue_green_deployments, params)
       req.send_request(options)
     end
 
@@ -23072,6 +23374,79 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Switches over a blue/green deployment.
+    #
+    # Before you switch over, production traffic is routed to the databases
+    # in the blue environment. After you switch over, production traffic is
+    # routed to the databases in the green environment.
+    #
+    # For more information, see [Using Amazon RDS Blue/Green Deployments for
+    # database updates][1] in the *Amazon RDS User Guide* and [ Using Amazon
+    # RDS Blue/Green Deployments for database updates][2] in the *Amazon
+    # Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
+    #
+    # @option params [required, String] :blue_green_deployment_identifier
+    #   The blue/green deployment identifier.
+    #
+    #   Constraints:
+    #
+    #   * Must match an existing blue/green deployment identifier.
+    #
+    #   ^
+    #
+    # @option params [Integer] :switchover_timeout
+    #   The amount of time, in seconds, for the switchover to complete. The
+    #   default is 300.
+    #
+    #   If the switchover takes longer than the specified duration, then any
+    #   changes are rolled back, and no changes are made to the environments.
+    #
+    # @return [Types::SwitchoverBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SwitchoverBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.switchover_blue_green_deployment({
+    #     blue_green_deployment_identifier: "BlueGreenDeploymentIdentifier", # required
+    #     switchover_timeout: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.blue_green_deployment.blue_green_deployment_identifier #=> String
+    #   resp.blue_green_deployment.blue_green_deployment_name #=> String
+    #   resp.blue_green_deployment.source #=> String
+    #   resp.blue_green_deployment.target #=> String
+    #   resp.blue_green_deployment.switchover_details #=> Array
+    #   resp.blue_green_deployment.switchover_details[0].source_member #=> String
+    #   resp.blue_green_deployment.switchover_details[0].target_member #=> String
+    #   resp.blue_green_deployment.switchover_details[0].status #=> String
+    #   resp.blue_green_deployment.tasks #=> Array
+    #   resp.blue_green_deployment.tasks[0].name #=> String
+    #   resp.blue_green_deployment.tasks[0].status #=> String
+    #   resp.blue_green_deployment.status #=> String
+    #   resp.blue_green_deployment.status_details #=> String
+    #   resp.blue_green_deployment.create_time #=> Time
+    #   resp.blue_green_deployment.delete_time #=> Time
+    #   resp.blue_green_deployment.tag_list #=> Array
+    #   resp.blue_green_deployment.tag_list[0].key #=> String
+    #   resp.blue_green_deployment.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverBlueGreenDeployment AWS API Documentation
+    #
+    # @overload switchover_blue_green_deployment(params = {})
+    # @param [Hash] params ({})
+    def switchover_blue_green_deployment(params = {}, options = {})
+      req = build_request(:switchover_blue_green_deployment, params)
+      req.send_request(options)
+    end
+
     # Switches over an Oracle standby database in an Oracle Data Guard
     # environment, making it the new primary database. Issue this command in
     # the Region that hosts the current standby database.
@@ -23265,7 +23640,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.160.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

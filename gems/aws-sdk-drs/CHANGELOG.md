@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2022-11-28)
+------------------
+
+* Feature - Non breaking changes to existing APIs, and additional APIs added to support in-AWS failing back using AWS Elastic Disaster Recovery.
+
 1.8.0 (2022-10-25)
 ------------------
 

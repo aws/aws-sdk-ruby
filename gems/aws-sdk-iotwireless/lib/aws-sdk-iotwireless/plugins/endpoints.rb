@@ -150,10 +150,14 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::GetPosition.build(context)
           when :get_position_configuration
             Aws::IoTWireless::Endpoints::GetPositionConfiguration.build(context)
+          when :get_position_estimate
+            Aws::IoTWireless::Endpoints::GetPositionEstimate.build(context)
           when :get_resource_event_configuration
             Aws::IoTWireless::Endpoints::GetResourceEventConfiguration.build(context)
           when :get_resource_log_level
             Aws::IoTWireless::Endpoints::GetResourceLogLevel.build(context)
+          when :get_resource_position
+            Aws::IoTWireless::Endpoints::GetResourcePosition.build(context)
           when :get_service_endpoint
             Aws::IoTWireless::Endpoints::GetServiceEndpoint.build(context)
           when :get_service_profile
@@ -248,6 +252,8 @@ module Aws::IoTWireless
             Aws::IoTWireless::Endpoints::UpdatePosition.build(context)
           when :update_resource_event_configuration
             Aws::IoTWireless::Endpoints::UpdateResourceEventConfiguration.build(context)
+          when :update_resource_position
+            Aws::IoTWireless::Endpoints::UpdateResourcePosition.build(context)
           when :update_wireless_device
             Aws::IoTWireless::Endpoints::UpdateWirelessDevice.build(context)
           when :update_wireless_gateway

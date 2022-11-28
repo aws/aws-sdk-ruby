@@ -368,6 +368,157 @@ module Aws::Mgn
 
     # @!group API Operations
 
+    # Archive application.
+    #
+    # @option params [required, String] :application_id
+    #   Application ID.
+    #
+    # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#application_id #application_id} => String
+    #   * {Types::Application#arn #arn} => String
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#description #description} => String
+    #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Application#name #name} => String
+    #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Application#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.archive_application({
+    #     application_id: "ApplicationID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ArchiveApplication AWS API Documentation
+    #
+    # @overload archive_application(params = {})
+    # @param [Hash] params ({})
+    def archive_application(params = {}, options = {})
+      req = build_request(:archive_application, params)
+      req.send_request(options)
+    end
+
+    # Archive wave.
+    #
+    # @option params [required, String] :wave_id
+    #   Wave ID.
+    #
+    # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Wave#arn #arn} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#description #description} => String
+    #   * {Types::Wave#is_archived #is_archived} => Boolean
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#name #name} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
+    #   * {Types::Wave#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.archive_wave({
+    #     wave_id: "WaveID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ArchiveWave AWS API Documentation
+    #
+    # @overload archive_wave(params = {})
+    # @param [Hash] params ({})
+    def archive_wave(params = {}, options = {})
+      req = build_request(:archive_wave, params)
+      req.send_request(options)
+    end
+
+    # Associate applications to wave.
+    #
+    # @option params [required, Array<String>] :application_i_ds
+    #   Application IDs list.
+    #
+    # @option params [required, String] :wave_id
+    #   Wave ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_applications({
+    #     application_i_ds: ["ApplicationID"], # required
+    #     wave_id: "WaveID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/AssociateApplications AWS API Documentation
+    #
+    # @overload associate_applications(params = {})
+    # @param [Hash] params ({})
+    def associate_applications(params = {}, options = {})
+      req = build_request(:associate_applications, params)
+      req.send_request(options)
+    end
+
+    # Associate source servers to application.
+    #
+    # @option params [required, String] :application_id
+    #   Application ID.
+    #
+    # @option params [required, Array<String>] :source_server_i_ds
+    #   Source server IDs list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_source_servers({
+    #     application_id: "ApplicationID", # required
+    #     source_server_i_ds: ["SourceServerID"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/AssociateSourceServers AWS API Documentation
+    #
+    # @overload associate_source_servers(params = {})
+    # @param [Hash] params ({})
+    def associate_source_servers(params = {}, options = {})
+      req = build_request(:associate_source_servers, params)
+      req.send_request(options)
+    end
+
     # Allows the user to set the SourceServer.LifeCycle.state property for
     # specific Source Server IDs to one of the following: READY\_FOR\_TEST
     # or READY\_FOR\_CUTOVER. This command only works if the Source Server
@@ -382,6 +533,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -404,6 +556,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -474,29 +627,152 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Creates a new ReplicationConfigurationTemplate.
+    # Create application.
     #
-    # @option params [Types::PostLaunchActions] :post_launch_actions
-    #   Request to associate the default Application Migration Service
-    #   Security group with the Replication Settings template.
+    # @option params [String] :description
+    #   Application description.
+    #
+    # @option params [required, String] :name
+    #   Application name.
     #
     # @option params [Hash<String,String>] :tags
-    #   Request to associate the default Application Migration Service
-    #   Security group with the Replication Settings template.
+    #   Application tags.
+    #
+    # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#application_id #application_id} => String
+    #   * {Types::Application#arn #arn} => String
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#description #description} => String
+    #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Application#name #name} => String
+    #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Application#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_application({
+    #     description: "ApplicationDescription",
+    #     name: "ApplicationName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateApplication AWS API Documentation
+    #
+    # @overload create_application(params = {})
+    # @param [Hash] params ({})
+    def create_application(params = {}, options = {})
+      req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Launch Configuration Template.
+    #
+    # @option params [Boolean] :associate_public_ip_address
+    #   Associate public Ip address.
+    #
+    # @option params [String] :boot_mode
+    #   Launch configuration template boot mode.
+    #
+    # @option params [Boolean] :copy_private_ip
+    #   Copy private Ip.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Copy tags.
+    #
+    # @option params [Boolean] :enable_map_auto_tagging
+    #   Enable map auto tagging.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
+    #   Large volume config.
+    #
+    # @option params [String] :launch_disposition
+    #   Launch disposition.
+    #
+    # @option params [Types::Licensing] :licensing
+    #   Configure Licensing.
+    #
+    # @option params [String] :map_auto_tagging_mpe_id
+    #   Launch configuration template map auto tagging MPE ID.
+    #
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Launch configuration template post launch actions.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :small_volume_conf
+    #   Small volume config.
+    #
+    # @option params [Integer] :small_volume_max_size
+    #   Small volume maximum size.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Request to associate tags during creation of a Launch Configuration
+    #   Template.
+    #
+    # @option params [String] :target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
     #
     # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
+    #   * {Types::LaunchConfigurationTemplate#associate_public_ip_address #associate_public_ip_address} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#boot_mode #boot_mode} => String
+    #   * {Types::LaunchConfigurationTemplate#copy_private_ip #copy_private_ip} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#copy_tags #copy_tags} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#large_volume_conf #large_volume_conf} => Types::LaunchTemplateDiskConf
     #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfigurationTemplate#licensing #licensing} => Types::Licensing
+    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
+    #   * {Types::LaunchConfigurationTemplate#small_volume_conf #small_volume_conf} => Types::LaunchTemplateDiskConf
+    #   * {Types::LaunchConfigurationTemplate#small_volume_max_size #small_volume_max_size} => Integer
     #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::LaunchConfigurationTemplate#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_launch_configuration_template({
+    #     associate_public_ip_address: false,
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
+    #     copy_private_ip: false,
+    #     copy_tags: false,
+    #     enable_map_auto_tagging: false,
+    #     large_volume_conf: {
+    #       iops: 1,
+    #       throughput: 1,
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #     },
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     licensing: {
+    #       os_byol: false,
+    #     },
+    #     map_auto_tagging_mpe_id: "TagValue",
     #     post_launch_actions: {
     #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
     #       s3_log_bucket: "S3LogBucketName",
     #       s3_output_key_prefix: "BoundedString",
     #       ssm_documents: [
@@ -516,17 +792,36 @@ module Aws::Mgn
     #         },
     #       ],
     #     },
+    #     small_volume_conf: {
+    #       iops: 1,
+    #       throughput: 1,
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #     },
+    #     small_volume_max_size: 1,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.associate_public_ip_address #=> Boolean
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.copy_private_ip #=> Boolean
+    #   resp.copy_tags #=> Boolean
+    #   resp.ec2_launch_template_id #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
+    #   resp.large_volume_conf.iops #=> Integer
+    #   resp.large_volume_conf.throughput #=> Integer
+    #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.launch_configuration_template_id #=> String
+    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.licensing.os_byol #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
-    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
@@ -538,8 +833,13 @@ module Aws::Mgn
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
     #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
     #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.small_volume_conf.iops #=> Integer
+    #   resp.small_volume_conf.throughput #=> Integer
+    #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.small_volume_max_size #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -674,6 +974,87 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Create wave.
+    #
+    # @option params [String] :description
+    #   Wave description.
+    #
+    # @option params [required, String] :name
+    #   Wave name.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Wave tags.
+    #
+    # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Wave#arn #arn} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#description #description} => String
+    #   * {Types::Wave#is_archived #is_archived} => Boolean
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#name #name} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
+    #   * {Types::Wave#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_wave({
+    #     description: "WaveDescription",
+    #     name: "WaveName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateWave AWS API Documentation
+    #
+    # @overload create_wave(params = {})
+    # @param [Hash] params ({})
+    def create_wave(params = {}, options = {})
+      req = build_request(:create_wave, params)
+      req.send_request(options)
+    end
+
+    # Delete application.
+    #
+    # @option params [required, String] :application_id
+    #   Application ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application({
+    #     application_id: "ApplicationID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteApplication AWS API Documentation
+    #
+    # @overload delete_application(params = {})
+    # @param [Hash] params ({})
+    def delete_application(params = {}, options = {})
+      req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
     # Deletes a single Job by ID.
     #
     # @option params [required, String] :job_id
@@ -696,7 +1077,7 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Creates a new ReplicationConfigurationTemplate.
+    # Deletes a single Launch Configuration Template by ID.
     #
     # @option params [required, String] :launch_configuration_template_id
     #   ID of resource to be deleted.
@@ -782,6 +1163,28 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def delete_vcenter_client(params = {}, options = {})
       req = build_request(:delete_vcenter_client, params)
+      req.send_request(options)
+    end
+
+    # Delete wave.
+    #
+    # @option params [required, String] :wave_id
+    #   Wave ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_wave({
+    #     wave_id: "WaveID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteWave AWS API Documentation
+    #
+    # @overload delete_wave(params = {})
+    # @param [Hash] params ({})
+    def delete_wave(params = {}, options = {})
+      req = build_request(:delete_wave, params)
       req.send_request(options)
     end
 
@@ -908,16 +1311,20 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Creates a new ReplicationConfigurationTemplate.
+    # Lists all Launch Configuration Templates, filtered by Launch
+    # Configuration Template IDs
     #
     # @option params [Array<String>] :launch_configuration_template_i_ds
-    #   Request to disconnect Source Server from service by Server ID.
+    #   Request to filter Launch Configuration Templates list by Launch
+    #   Configuration Template ID.
     #
     # @option params [Integer] :max_results
-    #   Request to disconnect Source Server from service by Server ID.
+    #   Maximum results to be returned in
+    #   DescribeLaunchConfigurationTemplates.
     #
     # @option params [String] :next_token
-    #   Request to disconnect Source Server from service by Server ID.
+    #   Next pagination token returned from
+    #   DescribeLaunchConfigurationTemplates.
     #
     # @return [Types::DescribeLaunchConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -938,9 +1345,21 @@ module Aws::Mgn
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
+    #   resp.items[0].associate_public_ip_address #=> Boolean
+    #   resp.items[0].boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.items[0].copy_private_ip #=> Boolean
+    #   resp.items[0].copy_tags #=> Boolean
+    #   resp.items[0].ec2_launch_template_id #=> String
+    #   resp.items[0].enable_map_auto_tagging #=> Boolean
+    #   resp.items[0].large_volume_conf.iops #=> Integer
+    #   resp.items[0].large_volume_conf.throughput #=> Integer
+    #   resp.items[0].large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.items[0].launch_configuration_template_id #=> String
+    #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.items[0].licensing.os_byol #=> Boolean
+    #   resp.items[0].map_auto_tagging_mpe_id #=> String
     #   resp.items[0].post_launch_actions.cloud_watch_log_group_name #=> String
-    #   resp.items[0].post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.items[0].post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.items[0].post_launch_actions.s3_log_bucket #=> String
     #   resp.items[0].post_launch_actions.s3_output_key_prefix #=> String
     #   resp.items[0].post_launch_actions.ssm_documents #=> Array
@@ -952,8 +1371,13 @@ module Aws::Mgn
     #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
     #   resp.items[0].post_launch_actions.ssm_documents[0].ssm_document_name #=> String
     #   resp.items[0].post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.items[0].small_volume_conf.iops #=> Integer
+    #   resp.items[0].small_volume_conf.throughput #=> Integer
+    #   resp.items[0].small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.items[0].small_volume_max_size #=> Integer
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
@@ -1047,6 +1471,7 @@ module Aws::Mgn
     #
     #   resp = client.describe_source_servers({
     #     filters: {
+    #       application_i_ds: ["ApplicationID"],
     #       is_archived: false,
     #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
     #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
@@ -1059,6 +1484,7 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].application_id #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
@@ -1176,6 +1602,58 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Disassociate applications from wave.
+    #
+    # @option params [required, Array<String>] :application_i_ds
+    #   Application IDs list.
+    #
+    # @option params [required, String] :wave_id
+    #   Wave ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_applications({
+    #     application_i_ds: ["ApplicationID"], # required
+    #     wave_id: "WaveID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisassociateApplications AWS API Documentation
+    #
+    # @overload disassociate_applications(params = {})
+    # @param [Hash] params ({})
+    def disassociate_applications(params = {}, options = {})
+      req = build_request(:disassociate_applications, params)
+      req.send_request(options)
+    end
+
+    # Disassociate source servers from application.
+    #
+    # @option params [required, String] :application_id
+    #   Application ID.
+    #
+    # @option params [required, Array<String>] :source_server_i_ds
+    #   Source server IDs list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_source_servers({
+    #     application_id: "ApplicationID", # required
+    #     source_server_i_ds: ["SourceServerID"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisassociateSourceServers AWS API Documentation
+    #
+    # @overload disassociate_source_servers(params = {})
+    # @param [Hash] params ({})
+    def disassociate_source_servers(params = {}, options = {})
+      req = build_request(:disassociate_source_servers, params)
+      req.send_request(options)
+    end
+
     # Disconnects specific Source Servers from Application Migration
     # Service. Data replication is stopped immediately. All AWS resources
     # created by Application Migration Service for enabling the replication
@@ -1196,6 +1674,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1215,6 +1694,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -1304,6 +1784,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1323,6 +1804,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -1405,8 +1887,10 @@ module Aws::Mgn
     #   * {Types::LaunchConfiguration#copy_private_ip #copy_private_ip} => Boolean
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
+    #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
@@ -1424,11 +1908,13 @@ module Aws::Mgn
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #   resp.name #=> String
     #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
-    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
@@ -1528,6 +2014,125 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Retrieves all applications or multiple applications by ID.
+    #
+    # @option params [Types::ListApplicationsRequestFilters] :filters
+    #   Applications list filters.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum results to return when listing applications.
+    #
+    # @option params [String] :next_token
+    #   Request next token.
+    #
+    # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationsResponse#items #items} => Array&lt;Types::Application&gt;
+    #   * {Types::ListApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_applications({
+    #     filters: {
+    #       application_i_ds: ["ApplicationID"],
+    #       is_archived: false,
+    #       wave_i_ds: ["WaveID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.items[0].application_aggregated_status.last_update_date_time #=> String
+    #   resp.items[0].application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.items[0].application_aggregated_status.total_source_servers #=> Integer
+    #   resp.items[0].application_id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].creation_date_time #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].is_archived #=> Boolean
+    #   resp.items[0].last_modified_date_time #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].wave_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListApplications AWS API Documentation
+    #
+    # @overload list_applications(params = {})
+    # @param [Hash] params ({})
+    def list_applications(params = {}, options = {})
+      req = build_request(:list_applications, params)
+      req.send_request(options)
+    end
+
+    # List source server post migration custom actions.
+    #
+    # @option params [Types::SourceServerActionsRequestFilters] :filters
+    #   Filters to apply when listing source server post migration custom
+    #   actions.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum amount of items to return when listing source server post
+    #   migration custom actions.
+    #
+    # @option params [String] :next_token
+    #   Next token to use when listing source server post migration custom
+    #   actions.
+    #
+    # @option params [required, String] :source_server_id
+    #   Source server ID.
+    #
+    # @return [Types::ListSourceServerActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSourceServerActionsResponse#items #items} => Array&lt;Types::SourceServerActionDocument&gt;
+    #   * {Types::ListSourceServerActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_source_server_actions({
+    #     filters: {
+    #       action_i_ds: ["ActionID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].action_id #=> String
+    #   resp.items[0].action_name #=> String
+    #   resp.items[0].active #=> Boolean
+    #   resp.items[0].document_identifier #=> String
+    #   resp.items[0].document_version #=> String
+    #   resp.items[0].must_succeed_for_cutover #=> Boolean
+    #   resp.items[0].order #=> Integer
+    #   resp.items[0].parameters #=> Hash
+    #   resp.items[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListSourceServerActions AWS API Documentation
+    #
+    # @overload list_source_server_actions(params = {})
+    # @param [Hash] params ({})
+    def list_source_server_actions(params = {}, options = {})
+      req = build_request(:list_source_server_actions, params)
+      req.send_request(options)
+    end
+
     # List all tags for your Application Migration Service resources.
     #
     # @option params [required, String] :resource_arn
@@ -1557,6 +2162,123 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # List template post migration custom actions.
+    #
+    # @option params [Types::TemplateActionsRequestFilters] :filters
+    #   Filters to apply when listing template post migration custom actions.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   Launch configuration template ID.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum amount of items to return when listing template post migration
+    #   custom actions.
+    #
+    # @option params [String] :next_token
+    #   Next token to use when listing template post migration custom actions.
+    #
+    # @return [Types::ListTemplateActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTemplateActionsResponse#items #items} => Array&lt;Types::TemplateActionDocument&gt;
+    #   * {Types::ListTemplateActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_template_actions({
+    #     filters: {
+    #       action_i_ds: ["ActionID"],
+    #     },
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].action_id #=> String
+    #   resp.items[0].action_name #=> String
+    #   resp.items[0].active #=> Boolean
+    #   resp.items[0].document_identifier #=> String
+    #   resp.items[0].document_version #=> String
+    #   resp.items[0].must_succeed_for_cutover #=> Boolean
+    #   resp.items[0].operating_system #=> String
+    #   resp.items[0].order #=> Integer
+    #   resp.items[0].parameters #=> Hash
+    #   resp.items[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListTemplateActions AWS API Documentation
+    #
+    # @overload list_template_actions(params = {})
+    # @param [Hash] params ({})
+    def list_template_actions(params = {}, options = {})
+      req = build_request(:list_template_actions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all waves or multiple waves by ID.
+    #
+    # @option params [Types::ListWavesRequestFilters] :filters
+    #   Waves list filters.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum results to return when listing waves.
+    #
+    # @option params [String] :next_token
+    #   Request next token.
+    #
+    # @return [Types::ListWavesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWavesResponse#items #items} => Array&lt;Types::Wave&gt;
+    #   * {Types::ListWavesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_waves({
+    #     filters: {
+    #       is_archived: false,
+    #       wave_i_ds: ["WaveID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].creation_date_time #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].is_archived #=> Boolean
+    #   resp.items[0].last_modified_date_time #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.items[0].wave_aggregated_status.last_update_date_time #=> String
+    #   resp.items[0].wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.items[0].wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.items[0].wave_aggregated_status.total_applications #=> Integer
+    #   resp.items[0].wave_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListWaves AWS API Documentation
+    #
+    # @overload list_waves(params = {})
+    # @param [Hash] params ({})
+    def list_waves(params = {}, options = {})
+      req = build_request(:list_waves, params)
+      req.send_request(options)
+    end
+
     # Archives specific Source Servers by setting the
     # SourceServer.isArchived property to true for specified SourceServers
     # by ID. This command only works for SourceServers with a lifecycle.
@@ -1567,6 +2289,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1586,6 +2309,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -1656,6 +2380,246 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Put source server post migration custom action.
+    #
+    # @option params [required, String] :action_id
+    #   Source server post migration custom action ID.
+    #
+    # @option params [required, String] :action_name
+    #   Source server post migration custom action name.
+    #
+    # @option params [Boolean] :active
+    #   Source server post migration custom action active status.
+    #
+    # @option params [required, String] :document_identifier
+    #   Source server post migration custom action document identifier.
+    #
+    # @option params [String] :document_version
+    #   Source server post migration custom action document version.
+    #
+    # @option params [Boolean] :must_succeed_for_cutover
+    #   Source server post migration custom action must succeed for cutover.
+    #
+    # @option params [required, Integer] :order
+    #   Source server post migration custom action order.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   Source server post migration custom action parameters.
+    #
+    # @option params [required, String] :source_server_id
+    #   Source server ID.
+    #
+    # @option params [Integer] :timeout_seconds
+    #   Source server post migration custom action timeout in seconds.
+    #
+    # @return [Types::SourceServerActionDocument] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServerActionDocument#action_id #action_id} => String
+    #   * {Types::SourceServerActionDocument#action_name #action_name} => String
+    #   * {Types::SourceServerActionDocument#active #active} => Boolean
+    #   * {Types::SourceServerActionDocument#document_identifier #document_identifier} => String
+    #   * {Types::SourceServerActionDocument#document_version #document_version} => String
+    #   * {Types::SourceServerActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
+    #   * {Types::SourceServerActionDocument#order #order} => Integer
+    #   * {Types::SourceServerActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
+    #   * {Types::SourceServerActionDocument#timeout_seconds #timeout_seconds} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_source_server_action({
+    #     action_id: "ActionID", # required
+    #     action_name: "ActionName", # required
+    #     active: false,
+    #     document_identifier: "BoundedString", # required
+    #     document_version: "DocumentVersion",
+    #     must_succeed_for_cutover: false,
+    #     order: 1, # required
+    #     parameters: {
+    #       "SsmDocumentParameterName" => [
+    #         {
+    #           parameter_name: "SsmParameterStoreParameterName", # required
+    #           parameter_type: "STRING", # required, accepts STRING
+    #         },
+    #       ],
+    #     },
+    #     source_server_id: "SourceServerID", # required
+    #     timeout_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_id #=> String
+    #   resp.action_name #=> String
+    #   resp.active #=> Boolean
+    #   resp.document_identifier #=> String
+    #   resp.document_version #=> String
+    #   resp.must_succeed_for_cutover #=> Boolean
+    #   resp.order #=> Integer
+    #   resp.parameters #=> Hash
+    #   resp.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.timeout_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PutSourceServerAction AWS API Documentation
+    #
+    # @overload put_source_server_action(params = {})
+    # @param [Hash] params ({})
+    def put_source_server_action(params = {}, options = {})
+      req = build_request(:put_source_server_action, params)
+      req.send_request(options)
+    end
+
+    # Put template post migration custom action.
+    #
+    # @option params [required, String] :action_id
+    #   Template post migration custom action ID.
+    #
+    # @option params [required, String] :action_name
+    #   Template post migration custom action name.
+    #
+    # @option params [Boolean] :active
+    #   Template post migration custom action active status.
+    #
+    # @option params [required, String] :document_identifier
+    #   Template post migration custom action document identifier.
+    #
+    # @option params [String] :document_version
+    #   Template post migration custom action document version.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   Launch configuration template ID.
+    #
+    # @option params [Boolean] :must_succeed_for_cutover
+    #   Template post migration custom action must succeed for cutover.
+    #
+    # @option params [String] :operating_system
+    #   Operating system eligible for this template post migration custom
+    #   action.
+    #
+    # @option params [required, Integer] :order
+    #   Template post migration custom action order.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   Template post migration custom action parameters.
+    #
+    # @option params [Integer] :timeout_seconds
+    #   Template post migration custom action timeout in seconds.
+    #
+    # @return [Types::TemplateActionDocument] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TemplateActionDocument#action_id #action_id} => String
+    #   * {Types::TemplateActionDocument#action_name #action_name} => String
+    #   * {Types::TemplateActionDocument#active #active} => Boolean
+    #   * {Types::TemplateActionDocument#document_identifier #document_identifier} => String
+    #   * {Types::TemplateActionDocument#document_version #document_version} => String
+    #   * {Types::TemplateActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
+    #   * {Types::TemplateActionDocument#operating_system #operating_system} => String
+    #   * {Types::TemplateActionDocument#order #order} => Integer
+    #   * {Types::TemplateActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
+    #   * {Types::TemplateActionDocument#timeout_seconds #timeout_seconds} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_template_action({
+    #     action_id: "ActionID", # required
+    #     action_name: "BoundedString", # required
+    #     active: false,
+    #     document_identifier: "BoundedString", # required
+    #     document_version: "DocumentVersion",
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     must_succeed_for_cutover: false,
+    #     operating_system: "OperatingSystemString",
+    #     order: 1, # required
+    #     parameters: {
+    #       "SsmDocumentParameterName" => [
+    #         {
+    #           parameter_name: "SsmParameterStoreParameterName", # required
+    #           parameter_type: "STRING", # required, accepts STRING
+    #         },
+    #       ],
+    #     },
+    #     timeout_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_id #=> String
+    #   resp.action_name #=> String
+    #   resp.active #=> Boolean
+    #   resp.document_identifier #=> String
+    #   resp.document_version #=> String
+    #   resp.must_succeed_for_cutover #=> Boolean
+    #   resp.operating_system #=> String
+    #   resp.order #=> Integer
+    #   resp.parameters #=> Hash
+    #   resp.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
+    #   resp.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
+    #   resp.timeout_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PutTemplateAction AWS API Documentation
+    #
+    # @overload put_template_action(params = {})
+    # @param [Hash] params ({})
+    def put_template_action(params = {}, options = {})
+      req = build_request(:put_template_action, params)
+      req.send_request(options)
+    end
+
+    # Remove source server post migration custom action.
+    #
+    # @option params [required, String] :action_id
+    #   Source server post migration custom action ID to remove.
+    #
+    # @option params [required, String] :source_server_id
+    #   Source server ID of the post migration custom action to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_source_server_action({
+    #     action_id: "ActionID", # required
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoveSourceServerAction AWS API Documentation
+    #
+    # @overload remove_source_server_action(params = {})
+    # @param [Hash] params ({})
+    def remove_source_server_action(params = {}, options = {})
+      req = build_request(:remove_source_server_action, params)
+      req.send_request(options)
+    end
+
+    # Remove template post migration custom action.
+    #
+    # @option params [required, String] :action_id
+    #   Template post migration custom action ID to remove.
+    #
+    # @option params [required, String] :launch_configuration_template_id
+    #   Launch configuration template ID of the post migration custom action
+    #   to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_template_action({
+    #     action_id: "ActionID", # required
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoveTemplateAction AWS API Documentation
+    #
+    # @overload remove_template_action(params = {})
+    # @param [Hash] params ({})
+    def remove_template_action(params = {}, options = {})
+      req = build_request(:remove_template_action, params)
+      req.send_request(options)
+    end
+
     # Causes the data replication initiation sequence to begin immediately
     # upon next Handshake for specified SourceServer IDs, regardless of when
     # the previous initiation started. This command will not work if the
@@ -1666,6 +2630,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1685,6 +2650,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -1824,6 +2790,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -1843,6 +2810,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -2069,6 +3037,105 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Unarchive application.
+    #
+    # @option params [required, String] :application_id
+    #   Application ID.
+    #
+    # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#application_id #application_id} => String
+    #   * {Types::Application#arn #arn} => String
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#description #description} => String
+    #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Application#name #name} => String
+    #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Application#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unarchive_application({
+    #     application_id: "ApplicationID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UnarchiveApplication AWS API Documentation
+    #
+    # @overload unarchive_application(params = {})
+    # @param [Hash] params ({})
+    def unarchive_application(params = {}, options = {})
+      req = build_request(:unarchive_application, params)
+      req.send_request(options)
+    end
+
+    # Unarchive wave.
+    #
+    # @option params [required, String] :wave_id
+    #   Wave ID.
+    #
+    # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Wave#arn #arn} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#description #description} => String
+    #   * {Types::Wave#is_archived #is_archived} => Boolean
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#name #name} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
+    #   * {Types::Wave#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unarchive_wave({
+    #     wave_id: "WaveID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UnarchiveWave AWS API Documentation
+    #
+    # @overload unarchive_wave(params = {})
+    # @param [Hash] params ({})
+    def unarchive_wave(params = {}, options = {})
+      req = build_request(:unarchive_wave, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified set of tags from the specified set of
     # Application Migration Service resources.
     #
@@ -2096,6 +3163,64 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Update application.
+    #
+    # @option params [required, String] :application_id
+    #   Application ID.
+    #
+    # @option params [String] :description
+    #   Application description.
+    #
+    # @option params [String] :name
+    #   Application name.
+    #
+    # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#application_id #application_id} => String
+    #   * {Types::Application#arn #arn} => String
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#description #description} => String
+    #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Application#name #name} => String
+    #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Application#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application({
+    #     application_id: "ApplicationID", # required
+    #     description: "ApplicationDescription",
+    #     name: "ApplicationName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateApplication AWS API Documentation
+    #
+    # @overload update_application(params = {})
+    # @param [Hash] params ({})
+    def update_application(params = {}, options = {})
+      req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
     # Updates multiple LaunchConfigurations by Source Server ID.
     #
     # @option params [String] :boot_mode
@@ -2107,17 +3232,23 @@ module Aws::Mgn
     # @option params [Boolean] :copy_tags
     #   Update Launch configuration copy Tags request.
     #
+    # @option params [Boolean] :enable_map_auto_tagging
+    #   Enable map auto tagging.
+    #
     # @option params [String] :launch_disposition
     #   Update Launch configuration launch disposition request.
     #
     # @option params [Types::Licensing] :licensing
     #   Update Launch configuration licensing request.
     #
+    # @option params [String] :map_auto_tagging_mpe_id
+    #   Launch configuration map auto tagging MPE ID.
+    #
     # @option params [String] :name
     #   Update Launch configuration name request.
     #
     # @option params [Types::PostLaunchActions] :post_launch_actions
-    #   Server participating in Job.
+    #   Post Launch Actions to executed on the Test or Cutover instance.
     #
     # @option params [required, String] :source_server_id
     #   Update Launch configuration by Source Server ID request.
@@ -2131,8 +3262,10 @@ module Aws::Mgn
     #   * {Types::LaunchConfiguration#copy_private_ip #copy_private_ip} => Boolean
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
+    #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
@@ -2144,14 +3277,16 @@ module Aws::Mgn
     #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
     #     copy_private_ip: false,
     #     copy_tags: false,
+    #     enable_map_auto_tagging: false,
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
     #     licensing: {
     #       os_byol: false,
     #     },
+    #     map_auto_tagging_mpe_id: "TagValue",
     #     name: "SmallBoundedString",
     #     post_launch_actions: {
     #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
     #       s3_log_bucket: "S3LogBucketName",
     #       s3_output_key_prefix: "BoundedString",
     #       ssm_documents: [
@@ -2181,11 +3316,13 @@ module Aws::Mgn
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #   resp.name #=> String
     #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
-    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
@@ -2209,28 +3346,92 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Creates a new ReplicationConfigurationTemplate.
+    # Updates an existing Launch Configuration Template by ID.
+    #
+    # @option params [Boolean] :associate_public_ip_address
+    #   Associate public Ip address.
+    #
+    # @option params [String] :boot_mode
+    #   Launch configuration template boot mode.
+    #
+    # @option params [Boolean] :copy_private_ip
+    #   Copy private Ip.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Copy tags.
+    #
+    # @option params [Boolean] :enable_map_auto_tagging
+    #   Enable map auto tagging.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
+    #   Large volume config.
     #
     # @option params [required, String] :launch_configuration_template_id
-    #   Update Launch configuration Target instance right sizing request.
+    #   Launch Configuration Template ID.
+    #
+    # @option params [String] :launch_disposition
+    #   Launch disposition.
+    #
+    # @option params [Types::Licensing] :licensing
+    #   Configure Licensing.
+    #
+    # @option params [String] :map_auto_tagging_mpe_id
+    #   Launch configuration template map auto tagging MPE ID.
     #
     # @option params [Types::PostLaunchActions] :post_launch_actions
-    #   Update Launch configuration Target instance right sizing request.
+    #   Post Launch Action to execute on the Test or Cutover instance.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :small_volume_conf
+    #   Small volume config.
+    #
+    # @option params [Integer] :small_volume_max_size
+    #   Small volume maximum size.
+    #
+    # @option params [String] :target_instance_type_right_sizing_method
+    #   Target instance type right-sizing method.
     #
     # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
+    #   * {Types::LaunchConfigurationTemplate#associate_public_ip_address #associate_public_ip_address} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#boot_mode #boot_mode} => String
+    #   * {Types::LaunchConfigurationTemplate#copy_private_ip #copy_private_ip} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#copy_tags #copy_tags} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#large_volume_conf #large_volume_conf} => Types::LaunchTemplateDiskConf
     #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfigurationTemplate#licensing #licensing} => Types::Licensing
+    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
+    #   * {Types::LaunchConfigurationTemplate#small_volume_conf #small_volume_conf} => Types::LaunchTemplateDiskConf
+    #   * {Types::LaunchConfigurationTemplate#small_volume_max_size #small_volume_max_size} => Integer
     #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::LaunchConfigurationTemplate#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_launch_configuration_template({
+    #     associate_public_ip_address: false,
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
+    #     copy_private_ip: false,
+    #     copy_tags: false,
+    #     enable_map_auto_tagging: false,
+    #     large_volume_conf: {
+    #       iops: 1,
+    #       throughput: 1,
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #     },
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     licensing: {
+    #       os_byol: false,
+    #     },
+    #     map_auto_tagging_mpe_id: "TagValue",
     #     post_launch_actions: {
     #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY
+    #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
     #       s3_log_bucket: "S3LogBucketName",
     #       s3_output_key_prefix: "BoundedString",
     #       ssm_documents: [
@@ -2250,14 +3451,33 @@ module Aws::Mgn
     #         },
     #       ],
     #     },
+    #     small_volume_conf: {
+    #       iops: 1,
+    #       throughput: 1,
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #     },
+    #     small_volume_max_size: 1,
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.associate_public_ip_address #=> Boolean
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.copy_private_ip #=> Boolean
+    #   resp.copy_tags #=> Boolean
+    #   resp.ec2_launch_template_id #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
+    #   resp.large_volume_conf.iops #=> Integer
+    #   resp.large_volume_conf.throughput #=> Integer
+    #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.launch_configuration_template_id #=> String
+    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.licensing.os_byol #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
-    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY"
+    #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
@@ -2269,8 +3489,13 @@ module Aws::Mgn
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
     #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
     #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
+    #   resp.small_volume_conf.iops #=> Integer
+    #   resp.small_volume_conf.throughput #=> Integer
+    #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.small_volume_max_size #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -2548,6 +3773,7 @@ module Aws::Mgn
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#application_id #application_id} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
@@ -2568,6 +3794,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
+    #   resp.application_id #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -2638,6 +3865,63 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Update wave.
+    #
+    # @option params [String] :description
+    #   Wave description.
+    #
+    # @option params [String] :name
+    #   Wave name.
+    #
+    # @option params [required, String] :wave_id
+    #   Wave ID.
+    #
+    # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Wave#arn #arn} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#description #description} => String
+    #   * {Types::Wave#is_archived #is_archived} => Boolean
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#name #name} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
+    #   * {Types::Wave#wave_id #wave_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_wave({
+    #     description: "WaveDescription",
+    #     name: "WaveName",
+    #     wave_id: "WaveID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_date_time #=> String
+    #   resp.description #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.last_modified_date_time #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.wave_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateWave AWS API Documentation
+    #
+    # @overload update_wave(params = {})
+    # @param [Hash] params ({})
+    def update_wave(params = {}, options = {})
+      req = build_request(:update_wave, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2651,7 +3935,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

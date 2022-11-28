@@ -31,6 +31,8 @@ module Aws::RDS
   # * {AuthorizationNotFoundFault}
   # * {AuthorizationQuotaExceededFault}
   # * {BackupPolicyNotFoundFault}
+  # * {BlueGreenDeploymentAlreadyExistsFault}
+  # * {BlueGreenDeploymentNotFoundFault}
   # * {CertificateNotFoundFault}
   # * {CustomAvailabilityZoneNotFoundFault}
   # * {CustomDBEngineVersionAlreadyExistsFault}
@@ -96,6 +98,7 @@ module Aws::RDS
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
   # * {InsufficientStorageClusterCapacityFault}
+  # * {InvalidBlueGreenDeploymentStateFault}
   # * {InvalidCustomDBEngineVersionStateFault}
   # * {InvalidDBClusterCapacityFault}
   # * {InvalidDBClusterEndpointStateFault}
@@ -138,6 +141,8 @@ module Aws::RDS
   # * {SNSTopicArnNotFoundFault}
   # * {SharedSnapshotQuotaExceededFault}
   # * {SnapshotQuotaExceededFault}
+  # * {SourceClusterNotSupportedFault}
+  # * {SourceDatabaseNotSupportedFault}
   # * {SourceNotFoundFault}
   # * {StorageQuotaExceededFault}
   # * {StorageTypeNotSupportedFault}
@@ -187,6 +192,26 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::BackupPolicyNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class BlueGreenDeploymentAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::BlueGreenDeploymentAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class BlueGreenDeploymentNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::BlueGreenDeploymentNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -842,6 +867,16 @@ module Aws::RDS
       end
     end
 
+    class InvalidBlueGreenDeploymentStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidBlueGreenDeploymentStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidCustomDBEngineVersionStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1257,6 +1292,26 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::SnapshotQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SourceClusterNotSupportedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::SourceClusterNotSupportedFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class SourceDatabaseNotSupportedFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::SourceDatabaseNotSupportedFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

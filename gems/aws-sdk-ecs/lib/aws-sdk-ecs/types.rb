@@ -108,7 +108,7 @@ module Aws::ECS
     #   128 characters. It can contain letters (uppercase and lowercase),
     #   numbers, hyphens (-), underscores (\_), periods (.), at signs (@),
     #   forward slashes (/), back slashes (\\), colons (:), or spaces. The
-    #   value can't can't start or end with a space.
+    #   value can't start or end with a space.
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -665,6 +665,30 @@ module Aws::ECS
     #   : The capacity provider updates failed.
     #   @return [String]
     #
+    # @!attribute [rw] service_connect_defaults
+    #   Use this parameter to set a default Service Connect namespace. After
+    #   you set a default Service Connect namespace, any new services with
+    #   Service Connect turned on that are created in the cluster are added
+    #   as client services in the namespace. This setting only applies to
+    #   new services that set the `enabled` parameter to `true` in the
+    #   `ServiceConnectConfiguration`. You can set the namespace of each
+    #   service individually in the `ServiceConnectConfiguration` to
+    #   override this default parameter.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ClusterServiceConnectDefaults]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -682,7 +706,8 @@ module Aws::ECS
       :capacity_providers,
       :default_capacity_provider_strategy,
       :attachments,
-      :attachments_status)
+      :attachments_status,
+      :service_connect_defaults)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -746,6 +771,108 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterNotFoundException AWS API Documentation
     #
     class ClusterNotFoundException < Aws::EmptyStructure; end
+
+    # Use this parameter to set a default Service Connect namespace. After
+    # you set a default Service Connect namespace, any new services with
+    # Service Connect turned on that are created in the cluster are added as
+    # client services in the namespace. This setting only applies to new
+    # services that set the `enabled` parameter to `true` in the
+    # `ServiceConnectConfiguration`. You can set the namespace of each
+    # service individually in the `ServiceConnectConfiguration` to override
+    # this default parameter.
+    #
+    # Tasks that run in a namespace can use short names to connect to
+    # services in the namespace. Tasks can connect to services across all of
+    # the clusters in the namespace. Tasks connect through a managed proxy
+    # container that collects logs and metrics for increased visibility.
+    # Only the tasks that Amazon ECS services create are supported with
+    # Service Connect. For more information, see [Service Connect][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @!attribute [rw] namespace
+    #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
+    #   Map namespace. When you create a service and don't specify a
+    #   Service Connect configuration, this namespace is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterServiceConnectDefaults AWS API Documentation
+    #
+    class ClusterServiceConnectDefaults < Struct.new(
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this parameter to set a default Service Connect namespace. After
+    # you set a default Service Connect namespace, any new services with
+    # Service Connect turned on that are created in the cluster are added as
+    # client services in the namespace. This setting only applies to new
+    # services that set the `enabled` parameter to `true` in the
+    # `ServiceConnectConfiguration`. You can set the namespace of each
+    # service individually in the `ServiceConnectConfiguration` to override
+    # this default parameter.
+    #
+    # Tasks that run in a namespace can use short names to connect to
+    # services in the namespace. Tasks can connect to services across all of
+    # the clusters in the namespace. Tasks connect through a managed proxy
+    # container that collects logs and metrics for increased visibility.
+    # Only the tasks that Amazon ECS services create are supported with
+    # Service Connect. For more information, see [Service Connect][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @note When making an API call, you may pass ClusterServiceConnectDefaultsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "String", # required
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
+    #   Map namespace that's used when you create a service and don't
+    #   specify a Service Connect configuration. Up to 1024 characters are
+    #   allowed. The name is case-sensitive. The characters can't include
+    #   hyphens (-), tilde (~), greater than (&gt;), less than (&lt;), or
+    #   slash (/).
+    #
+    #   If you enter an existing namespace name or ARN, then that namespace
+    #   will be used. Any namespace type is supported. The namespace must be
+    #   in this account and this Amazon Web Services Region.
+    #
+    #   If you enter a new name, a Cloud Map namespace will be created.
+    #   Amazon ECS creates a Cloud Map namespace with the "API calls"
+    #   method of instance discovery only. This instance discovery method is
+    #   the "HTTP" namespace type in the Command Line Interface. Other
+    #   types of instance discovery aren't used by Service Connect.
+    #
+    #   If you update the service with an empty string `""` for the
+    #   namespace name, the cluster configuration for Service Connect is
+    #   removed. Note that the namespace will remain in Cloud Map and must
+    #   be deleted separately.
+    #
+    #   For more information about Cloud Map, see [Working with Services][1]
+    #   in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterServiceConnectDefaultsRequest AWS API Documentation
+    #
+    class ClusterServiceConnectDefaultsRequest < Struct.new(
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The settings to use when creating a cluster. This parameter is used to
     # turn on CloudWatch Container Insights for a cluster.
@@ -908,6 +1035,8 @@ module Aws::ECS
     #             container_port: 1,
     #             host_port: 1,
     #             protocol: "tcp", # accepts tcp, udp
+    #             name: "String",
+    #             app_protocol: "http", # accepts http, http2, grpc
     #           },
     #         ],
     #         essential: false,
@@ -1823,7 +1952,7 @@ module Aws::ECS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] ulimits
-    #   A list of `ulimits` to set in the container. If a ulimit value is
+    #   A list of `ulimits` to set in the container. If a `ulimit` value is
     #   specified in a task definition, it overrides the default values set
     #   by Docker. This parameter maps to `Ulimits` in the [Create a
     #   container][1] section of the [Docker Remote API][2] and the
@@ -2581,6 +2710,9 @@ module Aws::ECS
     #             base: 1,
     #           },
     #         ],
+    #         service_connect_defaults: {
+    #           namespace: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] cluster_name
@@ -2666,6 +2798,30 @@ module Aws::ECS
     #   PutClusterCapacityProviders API operation.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
+    # @!attribute [rw] service_connect_defaults
+    #   Use this parameter to set a default Service Connect namespace. After
+    #   you set a default Service Connect namespace, any new services with
+    #   Service Connect turned on that are created in the cluster are added
+    #   as client services in the namespace. This setting only applies to
+    #   new services that set the `enabled` parameter to `true` in the
+    #   `ServiceConnectConfiguration`. You can set the namespace of each
+    #   service individually in the `ServiceConnectConfiguration` to
+    #   override this default parameter.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ClusterServiceConnectDefaultsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -2674,7 +2830,8 @@ module Aws::ECS
       :settings,
       :configuration,
       :capacity_providers,
-      :default_capacity_provider_strategy)
+      :default_capacity_provider_strategy,
+      :service_connect_defaults)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2767,6 +2924,35 @@ module Aws::ECS
     #         enable_ecs_managed_tags: false,
     #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
     #         enable_execute_command: false,
+    #         service_connect_configuration: {
+    #           enabled: false, # required
+    #           namespace: "String",
+    #           services: [
+    #             {
+    #               port_name: "String", # required
+    #               discovery_name: "String",
+    #               client_aliases: [
+    #                 {
+    #                   port: 1, # required
+    #                   dns_name: "String",
+    #                 },
+    #               ],
+    #               ingress_port_override: 1,
+    #             },
+    #           ],
+    #           log_configuration: {
+    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
+    #             options: {
+    #               "String" => "String",
+    #             },
+    #             secret_options: [
+    #               {
+    #                 name: "String", # required
+    #                 value_from: "String", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -3006,8 +3192,8 @@ module Aws::ECS
     #   load balancer defined and you don't specify a health check grace
     #   period value, the default value of `0` is used.
     #
-    #   If you do not use an Elastic Load Balancing, we recomend that you
-    #   use the `startPeriod` in the task definition healtch check
+    #   If you do not use an Elastic Load Balancing, we recommend that you
+    #   use the `startPeriod` in the task definition health check
     #   parameters. For more information, see [Health check][1].
     #
     #   If your service's tasks take a while to start and respond to
@@ -3118,6 +3304,25 @@ module Aws::ECS
     #   on all containers in the service tasks.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_connect_configuration
+    #   The configuration for this service to discover and connect to
+    #   services, and be discovered by, and connected from, other services
+    #   within a namespace.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ServiceConnectConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -3142,7 +3347,8 @@ module Aws::ECS
       :tags,
       :enable_ecs_managed_tags,
       :propagate_tags,
-      :enable_execute_command)
+      :enable_execute_command,
+      :service_connect_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3784,6 +3990,35 @@ module Aws::ECS
     #   A description of the rollout state of a deployment.
     #   @return [String]
     #
+    # @!attribute [rw] service_connect_configuration
+    #   The details of the Service Connect configuration that's used by
+    #   this deployment. Compare the configuration between multiple
+    #   deployments when troubleshooting issues with new deployments.
+    #
+    #   The configuration for this service to discover and connect to
+    #   services, and be discovered by, and connected from, other services
+    #   within a namespace.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ServiceConnectConfiguration]
+    #
+    # @!attribute [rw] service_connect_resources
+    #   The list of Service Connect resources that are associated with this
+    #   deployment. Each list entry maps a discovery name to a Cloud Map
+    #   service name.
+    #   @return [Array<Types::ServiceConnectServiceResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -3802,7 +4037,9 @@ module Aws::ECS
       :platform_family,
       :network_configuration,
       :rollout_state,
-      :rollout_state_reason)
+      :rollout_state_reason,
+      :service_connect_configuration,
+      :service_connect_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4227,7 +4464,8 @@ module Aws::ECS
     #   isn't included.
     #
     #   If `ATTACHMENTS` is specified, the attachments for the container
-    #   instances or tasks within the cluster are included.
+    #   instances or tasks within the cluster are included, for example the
+    #   capacity providers.
     #
     #   If `SETTINGS` is specified, the settings for the cluster are
     #   included.
@@ -4644,11 +4882,22 @@ module Aws::ECS
     #   The telemetry endpoint for the Amazon ECS agent.
     #   @return [String]
     #
+    # @!attribute [rw] service_connect_endpoint
+    #   The endpoint for the Amazon ECS agent to poll for Service Connect
+    #   configuration. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointResponse AWS API Documentation
     #
     class DiscoverPollEndpointResponse < Struct.new(
       :endpoint,
-      :telemetry_endpoint)
+      :telemetry_endpoint,
+      :service_connect_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5427,8 +5676,9 @@ module Aws::ECS
     #   no container health check defined.
     #
     # The following describes the possible `healthStatus` values for a task.
-    # The container health check status of nonessential containers do not
-    # have an effect on the health status of a task.
+    # The container health check status of nonessential containers only
+    # affects the health status of a task if no essential containers have
+    # health checks defined.
     #
     # * `HEALTHY`-All essential containers within the task have passed their
     #   health checks.
@@ -5437,13 +5687,20 @@ module Aws::ECS
     #   health check.
     #
     # * `UNKNOWN`-The essential containers within the task are still having
-    #   their health checks evaluated or there are no container health
-    #   checks defined.
+    #   their health checks evaluated or there are only nonessential
+    #   containers with health checks defined.
     #
     # If a task is run manually, and not as part of a service, the task will
     # continue its lifecycle regardless of its health status. For tasks that
     # are part of a service, if the task reports as unhealthy then the task
     # will be stopped and the service scheduler will replace it.
+    #
+    # For tasks that are a part of a service and the service uses the `ECS`
+    # rolling deployment type, the deployment is paused while the new tasks
+    # have the `UNKNOWN` task health check status. For example, tasks that
+    # define health checks for nonessential containers when no essential
+    # containers have health checks will have the `UNKNOWN` health check
+    # status indefinitely which prevents the deployment from completing.
     #
     # The following are notes about container health check support:
     #
@@ -6338,6 +6595,85 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListServicesByNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "String", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
+    #   Map namespace to list the services in.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value that's returned from a
+    #   `ListServicesByNamespace` request. It indicates that more results
+    #   are available to fulfill the request and further calls are needed.
+    #   If `maxResults` is returned, it is possible the number of results is
+    #   less than `maxResults`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of service results that `ListServicesByNamespace`
+    #   returns in paginated output. When this parameter is used,
+    #   `ListServicesByNamespace` only returns `maxResults` results in a
+    #   single page along with a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListServicesByNamespace` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListServicesByNamespace` returns up to 10 results and a
+    #   `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesByNamespaceRequest AWS API Documentation
+    #
+    class ListServicesByNamespaceRequest < Struct.new(
+      :namespace,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_arns
+    #   The list of full ARN entries for each service that's associated
+    #   with the specified namespace.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `ListServicesByNamespace` request. When the results of a
+    #   `ListServicesByNamespace` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. When there are no
+    #   more results to return, this value is `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesByNamespaceResponse AWS API Documentation
+    #
+    class ListServicesByNamespaceResponse < Struct.new(
+      :service_arns,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListServicesRequest
     #   data as a hash:
     #
@@ -6700,6 +7036,9 @@ module Aws::ECS
     #   The `startedBy` value to filter the task results with. Specifying a
     #   `startedBy` value limits the results to tasks that were started with
     #   that value.
+    #
+    #   When you specify `startedBy` as the filter, it must be the only
+    #   filter that you use.
     #   @return [String]
     #
     # @!attribute [rw] service_name
@@ -7113,8 +7452,8 @@ module Aws::ECS
     # @!attribute [rw] maximum_scaling_step_size
     #   The maximum number of Amazon EC2 instances that Amazon ECS will
     #   scale out at one time. The scale in process is not affected by this
-    #   parameter. If this parameter is omitted, the default value of
-    #   `10000` is used.
+    #   parameter. If this parameter is omitted, the default value of `1` is
+    #   used.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_warmup_period
@@ -7182,6 +7521,12 @@ module Aws::ECS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The specified namespace wasn't found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NamespaceNotFoundException AWS API Documentation
+    #
+    class NamespaceNotFoundException < Aws::EmptyStructure; end
 
     # Details on the network bindings between a container and its host
     # container instance. After a task reaches the `RUNNING` status, manual
@@ -7455,6 +7800,8 @@ module Aws::ECS
     #         container_port: 1,
     #         host_port: 1,
     #         protocol: "tcp", # accepts tcp, udp
+    #         name: "String",
+    #         app_protocol: "http", # accepts http, http2, grpc
     #       }
     #
     # @!attribute [rw] container_port
@@ -7512,12 +7859,57 @@ module Aws::ECS
     #   `udp`. The default is `tcp`.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name that's used for the port mapping. This parameter only
+    #   applies to Service Connect. This parameter is the name that you use
+    #   in the `serviceConnectConfiguration` of a service. Up to 64
+    #   characters are allowed. The characters can include lowercase
+    #   letters, numbers, underscores (\_), and hyphens (-). A hyphen can't
+    #   be the first character.
+    #
+    #   For more information, see [Service Connect][1] in the *Amazon
+    #   Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [String]
+    #
+    # @!attribute [rw] app_protocol
+    #   The application protocol that's used for the port mapping. This
+    #   parameter only applies to Service Connect. We recommend that you set
+    #   this parameter to be consistent with the protocol that your
+    #   application uses. If you set this parameter, Amazon ECS adds
+    #   protocol-specific connection handling to the Service Connect proxy.
+    #   If you set this parameter, Amazon ECS adds protocol-specific
+    #   telemetry in the Amazon ECS console and CloudWatch.
+    #
+    #   If you don't set a value for this parameter, then TCP is used.
+    #   However, Amazon ECS doesn't add protocol-specific telemetry for
+    #   TCP.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PortMapping AWS API Documentation
     #
     class PortMapping < Struct.new(
       :container_port,
       :host_port,
-      :protocol)
+      :protocol,
+      :name,
+      :app_protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8050,6 +8442,8 @@ module Aws::ECS
     #                 container_port: 1,
     #                 host_port: 1,
     #                 protocol: "tcp", # accepts tcp, udp
+    #                 name: "String",
+    #                 app_protocol: "http", # accepts http, http2, grpc
     #               },
     #             ],
     #             essential: false,
@@ -9182,7 +9576,7 @@ module Aws::ECS
     #   The CPU architecture.
     #
     #   You can run your Linux tasks on an ARM-based platform by setting the
-    #   value to `ARM64`. This option is avaiable for tasks that run on
+    #   value to `ARM64`. This option is available for tasks that run on
     #   Linux Amazon EC2 instance or Linux containers on Fargate.
     #   @return [String]
     #
@@ -9580,6 +9974,339 @@ module Aws::ECS
       :enable_ecs_managed_tags,
       :propagate_tags,
       :enable_execute_command)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Each alias ("endpoint") is a fully-qualified name and port number
+    # that other tasks ("clients") can use to connect to this service.
+    #
+    # Each name and port mapping must be unique within the namespace.
+    #
+    # Tasks that run in a namespace can use short names to connect to
+    # services in the namespace. Tasks can connect to services across all of
+    # the clusters in the namespace. Tasks connect through a managed proxy
+    # container that collects logs and metrics for increased visibility.
+    # Only the tasks that Amazon ECS services create are supported with
+    # Service Connect. For more information, see [Service Connect][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @note When making an API call, you may pass ServiceConnectClientAlias
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1, # required
+    #         dns_name: "String",
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The listening port number for the Service Connect proxy. This port
+    #   is available inside of all of the tasks within the same namespace.
+    #
+    #   To avoid changing your applications in client Amazon ECS services,
+    #   set this to the same port that the client application uses by
+    #   default. For more information, see [Service Connect][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dns_name
+    #   The `dnsName` is the name that you use in the applications of client
+    #   tasks to connect to this service. The name must be a valid DNS name
+    #   but doesn't need to be fully-qualified. Up to 127 characters are
+    #   allowed. The characters can include lowercase letters, numbers,
+    #   underscores (\_), hyphens (-), and periods (.). A hyphen can't be
+    #   the first character.
+    #
+    #   If this parameter isn't specified, the default value of
+    #   `discoveryName.namespace` is used. If the `discoveryName` isn't
+    #   specified, the `portName.namespace` from the task definition is
+    #   used.
+    #
+    #   To avoid changing your applications in client Amazon ECS services,
+    #   set this to the same name that the client application uses by
+    #   default. For example, a few common names are `database`, `db`, or
+    #   the lowercase name of a database, such as `mysql` or `redis`. For
+    #   more information, see [Service Connect][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectClientAlias AWS API Documentation
+    #
+    class ServiceConnectClientAlias < Struct.new(
+      :port,
+      :dns_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Service Connect configuration of your Amazon ECS service. The
+    # configuration for this service to discover and connect to services,
+    # and be discovered by, and connected from, other services within a
+    # namespace.
+    #
+    # Tasks that run in a namespace can use short names to connect to
+    # services in the namespace. Tasks can connect to services across all of
+    # the clusters in the namespace. Tasks connect through a managed proxy
+    # container that collects logs and metrics for increased visibility.
+    # Only the tasks that Amazon ECS services create are supported with
+    # Service Connect. For more information, see [Service Connect][1] in the
+    # *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @note When making an API call, you may pass ServiceConnectConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         namespace: "String",
+    #         services: [
+    #           {
+    #             port_name: "String", # required
+    #             discovery_name: "String",
+    #             client_aliases: [
+    #               {
+    #                 port: 1, # required
+    #                 dns_name: "String",
+    #               },
+    #             ],
+    #             ingress_port_override: 1,
+    #           },
+    #         ],
+    #         log_configuration: {
+    #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
+    #           options: {
+    #             "String" => "String",
+    #           },
+    #           secret_options: [
+    #             {
+    #               name: "String", # required
+    #               value_from: "String", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether to use Service Connect with this service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace name or full Amazon Resource Name (ARN) of the Cloud
+    #   Map namespace for use with Service Connect. The namespace must be in
+    #   the same Amazon Web Services Region as the Amazon ECS service and
+    #   cluster. The type of namespace doesn't affect Service Connect. For
+    #   more information about Cloud Map, see [Working with Services][1] in
+    #   the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/
+    #   @return [String]
+    #
+    # @!attribute [rw] services
+    #   The list of Service Connect service objects. These are names and
+    #   aliases (also known as endpoints) that are used by other Amazon ECS
+    #   services to connect to this service. You can specify up to X (30?)
+    #   objects per Amazon ECS service.
+    #
+    #   This field is not required for a "client" Amazon ECS service
+    #   that's a member of a namespace only to connect to other services
+    #   within the namespace. An example of this would be a frontend
+    #   application that accepts incoming requests from either a load
+    #   balancer that's attached to the service or by other means.
+    #
+    #   An object selects a port from the task definition, assigns a name
+    #   for the Cloud Map service, and a list of aliases (endpoints) and
+    #   ports for client applications to refer to this service.
+    #   @return [Array<Types::ServiceConnectService>]
+    #
+    # @!attribute [rw] log_configuration
+    #   The log configuration for the container. This parameter maps to
+    #   `LogConfig` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--log-driver` option to [ `docker run` ][3].
+    #
+    #   By default, containers use the same logging driver that the Docker
+    #   daemon uses. However, the container might use a different logging
+    #   driver than the Docker daemon by specifying a log driver
+    #   configuration in the container definition. For more information
+    #   about the options for different supported log drivers, see
+    #   [Configure logging drivers][4] in the Docker documentation.
+    #
+    #   Understand the following when specifying a log configuration for
+    #   your containers.
+    #
+    #   * Amazon ECS currently supports a subset of the logging drivers
+    #     available to the Docker daemon (shown in the valid values below).
+    #     Additional log drivers may be available in future releases of the
+    #     Amazon ECS container agent.
+    #
+    #   * This parameter requires version 1.18 of the Docker Remote API or
+    #     greater on your container instance.
+    #
+    #   * For tasks that are hosted on Amazon EC2 instances, the Amazon ECS
+    #     container agent must register the available logging drivers with
+    #     the `ECS_AVAILABLE_LOGGING_DRIVERS` environment variable before
+    #     containers placed on that instance can use these log configuration
+    #     options. For more information, see [Amazon ECS container agent
+    #     configuration][5] in the *Amazon Elastic Container Service
+    #     Developer Guide*.
+    #
+    #   * For tasks that are on Fargate, because you don't have access to
+    #     the underlying infrastructure your tasks are hosted on, any
+    #     additional software needed must be installed outside of the task.
+    #     For example, the Fluentd output aggregators or a remote host
+    #     running Logstash to send Gelf logs to.
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [2]: https://docs.docker.com/engine/api/v1.35/
+    #   [3]: https://docs.docker.com/engine/reference/commandline/run/
+    #   [4]: https://docs.docker.com/engine/admin/logging/overview/
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   @return [Types::LogConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectConfiguration AWS API Documentation
+    #
+    class ServiceConnectConfiguration < Struct.new(
+      :enabled,
+      :namespace,
+      :services,
+      :log_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Service Connect service object configuration. For more
+    # information, see [Service Connect][1] in the *Amazon Elastic Container
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @note When making an API call, you may pass ServiceConnectService
+    #   data as a hash:
+    #
+    #       {
+    #         port_name: "String", # required
+    #         discovery_name: "String",
+    #         client_aliases: [
+    #           {
+    #             port: 1, # required
+    #             dns_name: "String",
+    #           },
+    #         ],
+    #         ingress_port_override: 1,
+    #       }
+    #
+    # @!attribute [rw] port_name
+    #   The `portName` must match the name of one of the `portMappings` from
+    #   all the containers in the task definition of this Amazon ECS
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_name
+    #   The `discoveryName` is the name of the new Cloud Map service that
+    #   Amazon ECS creates for this Amazon ECS service. This must be unique
+    #   within the Cloud Map namespace. Up to 64 characters are allowed. The
+    #   characters can include lowercase letters, numbers, underscores (\_),
+    #   and hyphens (-). A hyphen can't be the first character.
+    #
+    #   If this field isn't specified, `portName` is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_aliases
+    #   The list of client aliases for this Service Connect service. You use
+    #   these to assign names that can be used by client applications. The
+    #   maximum number of client aliases that you can have in this list is
+    #   1.
+    #
+    #   Each alias ("endpoint") is a fully-qualified name and port number
+    #   that other Amazon ECS tasks ("clients") can use to connect to this
+    #   service.
+    #
+    #   Each name and port mapping must be unique within the namespace.
+    #
+    #   For each `ServiceConnectService`, you must provide at least one
+    #   `clientAlias` with one `port`.
+    #   @return [Array<Types::ServiceConnectClientAlias>]
+    #
+    # @!attribute [rw] ingress_port_override
+    #   The port number for the Service Connect proxy to listen on.
+    #
+    #   Use the value of this field to bypass the proxy for traffic on the
+    #   port number specified in the named `portMapping` in the task
+    #   definition of this application, and then use it in your VPC security
+    #   groups to allow traffic into the proxy for this Amazon ECS service.
+    #
+    #   In `awsvpc` mode and Fargate, the default value is the container
+    #   port number. The container port number is in the `portMapping` in
+    #   the task definition. In bridge mode, the default value is the
+    #   ephemeral port of the Service Connect proxy.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectService AWS API Documentation
+    #
+    class ServiceConnectService < Struct.new(
+      :port_name,
+      :discovery_name,
+      :client_aliases,
+      :ingress_port_override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Service Connect resource. Each configuration maps a discovery name
+    # to a Cloud Map service name. The data is stored in Cloud Map as part
+    # of the Service Connect configuration for each discovery name of this
+    # Amazon ECS service.
+    #
+    # A task can resolve the `dnsName` for each of the `clientAliases` of a
+    # service. However a task can't resolve the discovery names. If you
+    # want to connect to a service, refer to the
+    # `ServiceConnectConfiguration` of that service for the list of
+    # `clientAliases` that you can use.
+    #
+    # @!attribute [rw] discovery_name
+    #   The discovery name of this Service Connect resource.
+    #
+    #   The `discoveryName` is the name of the new Cloud Map service that
+    #   Amazon ECS creates for this Amazon ECS service. This must be unique
+    #   within the Cloud Map namespace. Up to 64 characters are allowed. The
+    #   characters can include lowercase letters, numbers, underscores (\_),
+    #   and hyphens (-). A hyphen can't be the first character.
+    #
+    #   If this field isn't specified, `portName` is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_arn
+    #   The Amazon Resource Name (ARN) for the namespace in Cloud Map that
+    #   matches the discovery name for this Service Connect resource. You
+    #   can use this ARN in other integrations with Cloud Map. However,
+    #   Service Connect can't ensure connectivity outside of Amazon ECS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceConnectServiceResource AWS API Documentation
+    #
+    class ServiceConnectServiceResource < Struct.new(
+      :discovery_name,
+      :discovery_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11343,7 +12070,7 @@ module Aws::ECS
     #   @return [Array<Types::ContainerOverride>]
     #
     # @!attribute [rw] cpu
-    #   The cpu override for the task.
+    #   The CPU override for the task.
     #   @return [String]
     #
     # @!attribute [rw] inference_accelerator_overrides
@@ -11431,7 +12158,7 @@ module Aws::ECS
     #   The tag specified when a task set is started. If an CodeDeploy
     #   deployment created the task set, the `startedBy` parameter is
     #   `CODE_DEPLOY`. If an external deployment created the task set, the
-    #   startedBy field isn't used.
+    #   `startedBy` field isn't used.
     #   @return [String]
     #
     # @!attribute [rw] external_id
@@ -11556,7 +12283,7 @@ module Aws::ECS
     # @!attribute [rw] stability_status
     #   The stability status. This indicates whether the task set has
     #   reached a steady state. If the following conditions are met, the
-    #   task set sre in `STEADY_STATE`\:
+    #   task set are in `STEADY_STATE`\:
     #
     #   * The task `runningCount` is equal to the `computedDesiredCount`.
     #
@@ -11711,11 +12438,11 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] soft_limit
-    #   The soft limit for the ulimit type.
+    #   The soft limit for the `ulimit` type.
     #   @return [Integer]
     #
     # @!attribute [rw] hard_limit
-    #   The hard limit for the ulimit type.
+    #   The hard limit for the `ulimit` type.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Ulimit AWS API Documentation
@@ -11837,6 +12564,9 @@ module Aws::ECS
     #             },
     #           },
     #         },
+    #         service_connect_defaults: {
+    #           namespace: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -11851,12 +12581,37 @@ module Aws::ECS
     #   The execute command configuration for the cluster.
     #   @return [Types::ClusterConfiguration]
     #
+    # @!attribute [rw] service_connect_defaults
+    #   Use this parameter to set a default Service Connect namespace. After
+    #   you set a default Service Connect namespace, any new services with
+    #   Service Connect turned on that are created in the cluster are added
+    #   as client services in the namespace. This setting only applies to
+    #   new services that set the `enabled` parameter to `true` in the
+    #   `ServiceConnectConfiguration`. You can set the namespace of each
+    #   service individually in the `ServiceConnectConfiguration` to
+    #   override this default parameter.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ClusterServiceConnectDefaultsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterRequest AWS API Documentation
     #
     class UpdateClusterRequest < Struct.new(
       :cluster,
       :settings,
-      :configuration)
+      :configuration,
+      :service_connect_defaults)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11895,6 +12650,13 @@ module Aws::ECS
     #   to turn on CloudWatch Container Insights for a cluster. If this
     #   value is specified, it overrides the `containerInsights` value set
     #   with PutAccountSetting or PutAccountSettingDefault.
+    #
+    #   Currently, if you delete an existing cluster that does not have
+    #   Container Insights turned on, and then create a new cluster with the
+    #   same name with Container Insights tuned on, Container Insights will
+    #   not actually be turned on. If you want to preserve the same name for
+    #   your existing cluster and turn on Container Insights, you must wait
+    #   7 days before you can re-create it.
     #   @return [Array<Types::ClusterSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettingsRequest AWS API Documentation
@@ -12061,7 +12823,7 @@ module Aws::ECS
     end
 
     # @!attribute [rw] task_set
-    #   etails about the task set.
+    #   The details about the task set.
     #   @return [Types::TaskSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSetResponse AWS API Documentation
@@ -12136,6 +12898,35 @@ module Aws::ECS
     #             container_port: 1,
     #           },
     #         ],
+    #         service_connect_configuration: {
+    #           enabled: false, # required
+    #           namespace: "String",
+    #           services: [
+    #             {
+    #               port_name: "String", # required
+    #               discovery_name: "String",
+    #               client_aliases: [
+    #                 {
+    #                   port: 1, # required
+    #                   dns_name: "String",
+    #                 },
+    #               ],
+    #               ingress_port_override: 1,
+    #             },
+    #           ],
+    #           log_configuration: {
+    #             log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
+    #             options: {
+    #               "String" => "String",
+    #             },
+    #             secret_options: [
+    #               {
+    #                 name: "String", # required
+    #                 value_from: "String", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] cluster
@@ -12353,6 +13144,25 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
+    # @!attribute [rw] service_connect_configuration
+    #   The configuration for this service to discover and connect to
+    #   services, and be discovered by, and connected from, other services
+    #   within a namespace.
+    #
+    #   Tasks that run in a namespace can use short names to connect to
+    #   services in the namespace. Tasks can connect to services across all
+    #   of the clusters in the namespace. Tasks connect through a managed
+    #   proxy container that collects logs and metrics for increased
+    #   visibility. Only the tasks that Amazon ECS services create are
+    #   supported with Service Connect. For more information, see [Service
+    #   Connect][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #   @return [Types::ServiceConnectConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
@@ -12372,7 +13182,8 @@ module Aws::ECS
       :enable_ecs_managed_tags,
       :load_balancers,
       :propagate_tags,
-      :service_registries)
+      :service_registries,
+      :service_connect_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

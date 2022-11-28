@@ -45,6 +45,18 @@ module Aws::RDS
     AwsBackupRecoveryPointArn = Shapes::StringShape.new(name: 'AwsBackupRecoveryPointArn')
     BacktrackDBClusterMessage = Shapes::StructureShape.new(name: 'BacktrackDBClusterMessage')
     BackupPolicyNotFoundFault = Shapes::StructureShape.new(name: 'BackupPolicyNotFoundFault')
+    BlueGreenDeployment = Shapes::StructureShape.new(name: 'BlueGreenDeployment')
+    BlueGreenDeploymentAlreadyExistsFault = Shapes::StructureShape.new(name: 'BlueGreenDeploymentAlreadyExistsFault')
+    BlueGreenDeploymentIdentifier = Shapes::StringShape.new(name: 'BlueGreenDeploymentIdentifier')
+    BlueGreenDeploymentList = Shapes::ListShape.new(name: 'BlueGreenDeploymentList')
+    BlueGreenDeploymentName = Shapes::StringShape.new(name: 'BlueGreenDeploymentName')
+    BlueGreenDeploymentNotFoundFault = Shapes::StructureShape.new(name: 'BlueGreenDeploymentNotFoundFault')
+    BlueGreenDeploymentStatus = Shapes::StringShape.new(name: 'BlueGreenDeploymentStatus')
+    BlueGreenDeploymentStatusDetails = Shapes::StringShape.new(name: 'BlueGreenDeploymentStatusDetails')
+    BlueGreenDeploymentTask = Shapes::StructureShape.new(name: 'BlueGreenDeploymentTask')
+    BlueGreenDeploymentTaskList = Shapes::ListShape.new(name: 'BlueGreenDeploymentTaskList')
+    BlueGreenDeploymentTaskName = Shapes::StringShape.new(name: 'BlueGreenDeploymentTaskName')
+    BlueGreenDeploymentTaskStatus = Shapes::StringShape.new(name: 'BlueGreenDeploymentTaskStatus')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -68,6 +80,8 @@ module Aws::RDS
     CopyDBSnapshotResult = Shapes::StructureShape.new(name: 'CopyDBSnapshotResult')
     CopyOptionGroupMessage = Shapes::StructureShape.new(name: 'CopyOptionGroupMessage')
     CopyOptionGroupResult = Shapes::StructureShape.new(name: 'CopyOptionGroupResult')
+    CreateBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'CreateBlueGreenDeploymentRequest')
+    CreateBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'CreateBlueGreenDeploymentResponse')
     CreateCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionMessage')
     CreateDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'CreateDBClusterEndpointMessage')
     CreateDBClusterMessage = Shapes::StructureShape.new(name: 'CreateDBClusterMessage')
@@ -228,6 +242,9 @@ module Aws::RDS
     DBSubnetGroups = Shapes::ListShape.new(name: 'DBSubnetGroups')
     DBSubnetQuotaExceededFault = Shapes::StructureShape.new(name: 'DBSubnetQuotaExceededFault')
     DBUpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'DBUpgradeDependencyFailureFault')
+    DatabaseArn = Shapes::StringShape.new(name: 'DatabaseArn')
+    DeleteBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteBlueGreenDeploymentRequest')
+    DeleteBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'DeleteBlueGreenDeploymentResponse')
     DeleteCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'DeleteCustomDBEngineVersionMessage')
     DeleteDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterEndpointMessage')
     DeleteDBClusterMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterMessage')
@@ -256,6 +273,8 @@ module Aws::RDS
     DeregisterDBProxyTargetsRequest = Shapes::StructureShape.new(name: 'DeregisterDBProxyTargetsRequest')
     DeregisterDBProxyTargetsResponse = Shapes::StructureShape.new(name: 'DeregisterDBProxyTargetsResponse')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
+    DescribeBlueGreenDeploymentsRequest = Shapes::StructureShape.new(name: 'DescribeBlueGreenDeploymentsRequest')
+    DescribeBlueGreenDeploymentsResponse = Shapes::StructureShape.new(name: 'DescribeBlueGreenDeploymentsResponse')
     DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
     DescribeDBClusterBacktracksMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterBacktracksMessage')
     DescribeDBClusterEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterEndpointsMessage')
@@ -369,6 +388,7 @@ module Aws::RDS
     InsufficientStorageClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientStorageClusterCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    InvalidBlueGreenDeploymentStateFault = Shapes::StructureShape.new(name: 'InvalidBlueGreenDeploymentStateFault')
     InvalidCustomDBEngineVersionStateFault = Shapes::StructureShape.new(name: 'InvalidCustomDBEngineVersionStateFault')
     InvalidDBClusterCapacityFault = Shapes::StructureShape.new(name: 'InvalidDBClusterCapacityFault')
     InvalidDBClusterEndpointStateFault = Shapes::StructureShape.new(name: 'InvalidDBClusterEndpointStateFault')
@@ -545,6 +565,8 @@ module Aws::RDS
     ServerlessV2ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfigurationInfo')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault')
     SnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SnapshotQuotaExceededFault')
+    SourceClusterNotSupportedFault = Shapes::StructureShape.new(name: 'SourceClusterNotSupportedFault')
+    SourceDatabaseNotSupportedFault = Shapes::StructureShape.new(name: 'SourceDatabaseNotSupportedFault')
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceNotFoundFault = Shapes::StructureShape.new(name: 'SourceNotFoundFault')
     SourceRegion = Shapes::StructureShape.new(name: 'SourceRegion')
@@ -582,12 +604,21 @@ module Aws::RDS
     SubscriptionNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionNotFoundFault')
     SupportedCharacterSetsList = Shapes::ListShape.new(name: 'SupportedCharacterSetsList')
     SupportedTimezonesList = Shapes::ListShape.new(name: 'SupportedTimezonesList')
+    SwitchoverBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'SwitchoverBlueGreenDeploymentRequest')
+    SwitchoverBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'SwitchoverBlueGreenDeploymentResponse')
+    SwitchoverDetail = Shapes::StructureShape.new(name: 'SwitchoverDetail')
+    SwitchoverDetailList = Shapes::ListShape.new(name: 'SwitchoverDetailList')
+    SwitchoverDetailStatus = Shapes::StringShape.new(name: 'SwitchoverDetailStatus')
     SwitchoverReadReplicaMessage = Shapes::StructureShape.new(name: 'SwitchoverReadReplicaMessage')
     SwitchoverReadReplicaResult = Shapes::StructureShape.new(name: 'SwitchoverReadReplicaResult')
+    SwitchoverTimeout = Shapes::IntegerShape.new(name: 'SwitchoverTimeout')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
+    TargetDBClusterParameterGroupName = Shapes::StringShape.new(name: 'TargetDBClusterParameterGroupName')
+    TargetDBParameterGroupName = Shapes::StringShape.new(name: 'TargetDBParameterGroupName')
+    TargetEngineVersion = Shapes::StringShape.new(name: 'TargetEngineVersion')
     TargetGroupList = Shapes::ListShape.new(name: 'TargetGroupList')
     TargetHealth = Shapes::StructureShape.new(name: 'TargetHealth')
     TargetHealthReason = Shapes::StringShape.new(name: 'TargetHealthReason')
@@ -690,6 +721,31 @@ module Aws::RDS
     BacktrackDBClusterMessage.struct_class = Types::BacktrackDBClusterMessage
 
     BackupPolicyNotFoundFault.struct_class = Types::BackupPolicyNotFoundFault
+
+    BlueGreenDeployment.add_member(:blue_green_deployment_identifier, Shapes::ShapeRef.new(shape: BlueGreenDeploymentIdentifier, location_name: "BlueGreenDeploymentIdentifier"))
+    BlueGreenDeployment.add_member(:blue_green_deployment_name, Shapes::ShapeRef.new(shape: BlueGreenDeploymentName, location_name: "BlueGreenDeploymentName"))
+    BlueGreenDeployment.add_member(:source, Shapes::ShapeRef.new(shape: DatabaseArn, location_name: "Source"))
+    BlueGreenDeployment.add_member(:target, Shapes::ShapeRef.new(shape: DatabaseArn, location_name: "Target"))
+    BlueGreenDeployment.add_member(:switchover_details, Shapes::ShapeRef.new(shape: SwitchoverDetailList, location_name: "SwitchoverDetails"))
+    BlueGreenDeployment.add_member(:tasks, Shapes::ShapeRef.new(shape: BlueGreenDeploymentTaskList, location_name: "Tasks"))
+    BlueGreenDeployment.add_member(:status, Shapes::ShapeRef.new(shape: BlueGreenDeploymentStatus, location_name: "Status"))
+    BlueGreenDeployment.add_member(:status_details, Shapes::ShapeRef.new(shape: BlueGreenDeploymentStatusDetails, location_name: "StatusDetails"))
+    BlueGreenDeployment.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
+    BlueGreenDeployment.add_member(:delete_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "DeleteTime"))
+    BlueGreenDeployment.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    BlueGreenDeployment.struct_class = Types::BlueGreenDeployment
+
+    BlueGreenDeploymentAlreadyExistsFault.struct_class = Types::BlueGreenDeploymentAlreadyExistsFault
+
+    BlueGreenDeploymentList.member = Shapes::ShapeRef.new(shape: BlueGreenDeployment)
+
+    BlueGreenDeploymentNotFoundFault.struct_class = Types::BlueGreenDeploymentNotFoundFault
+
+    BlueGreenDeploymentTask.add_member(:name, Shapes::ShapeRef.new(shape: BlueGreenDeploymentTaskName, location_name: "Name"))
+    BlueGreenDeploymentTask.add_member(:status, Shapes::ShapeRef.new(shape: BlueGreenDeploymentTaskStatus, location_name: "Status"))
+    BlueGreenDeploymentTask.struct_class = Types::BlueGreenDeploymentTask
+
+    BlueGreenDeploymentTaskList.member = Shapes::ShapeRef.new(shape: BlueGreenDeploymentTask)
 
     CancelExportTaskMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportTaskIdentifier"))
     CancelExportTaskMessage.struct_class = Types::CancelExportTaskMessage
@@ -796,6 +852,17 @@ module Aws::RDS
 
     CopyOptionGroupResult.add_member(:option_group, Shapes::ShapeRef.new(shape: OptionGroup, location_name: "OptionGroup"))
     CopyOptionGroupResult.struct_class = Types::CopyOptionGroupResult
+
+    CreateBlueGreenDeploymentRequest.add_member(:blue_green_deployment_name, Shapes::ShapeRef.new(shape: BlueGreenDeploymentName, required: true, location_name: "BlueGreenDeploymentName"))
+    CreateBlueGreenDeploymentRequest.add_member(:source, Shapes::ShapeRef.new(shape: DatabaseArn, required: true, location_name: "Source"))
+    CreateBlueGreenDeploymentRequest.add_member(:target_engine_version, Shapes::ShapeRef.new(shape: TargetEngineVersion, location_name: "TargetEngineVersion"))
+    CreateBlueGreenDeploymentRequest.add_member(:target_db_parameter_group_name, Shapes::ShapeRef.new(shape: TargetDBParameterGroupName, location_name: "TargetDBParameterGroupName"))
+    CreateBlueGreenDeploymentRequest.add_member(:target_db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: TargetDBClusterParameterGroupName, location_name: "TargetDBClusterParameterGroupName"))
+    CreateBlueGreenDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateBlueGreenDeploymentRequest.struct_class = Types::CreateBlueGreenDeploymentRequest
+
+    CreateBlueGreenDeploymentResponse.add_member(:blue_green_deployment, Shapes::ShapeRef.new(shape: BlueGreenDeployment, location_name: "BlueGreenDeployment"))
+    CreateBlueGreenDeploymentResponse.struct_class = Types::CreateBlueGreenDeploymentResponse
 
     CreateCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
     CreateCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
@@ -1720,6 +1787,13 @@ module Aws::RDS
 
     DBUpgradeDependencyFailureFault.struct_class = Types::DBUpgradeDependencyFailureFault
 
+    DeleteBlueGreenDeploymentRequest.add_member(:blue_green_deployment_identifier, Shapes::ShapeRef.new(shape: BlueGreenDeploymentIdentifier, required: true, location_name: "BlueGreenDeploymentIdentifier"))
+    DeleteBlueGreenDeploymentRequest.add_member(:delete_target, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeleteTarget"))
+    DeleteBlueGreenDeploymentRequest.struct_class = Types::DeleteBlueGreenDeploymentRequest
+
+    DeleteBlueGreenDeploymentResponse.add_member(:blue_green_deployment, Shapes::ShapeRef.new(shape: BlueGreenDeployment, location_name: "BlueGreenDeployment"))
+    DeleteBlueGreenDeploymentResponse.struct_class = Types::DeleteBlueGreenDeploymentResponse
+
     DeleteCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
     DeleteCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
     DeleteCustomDBEngineVersionMessage.struct_class = Types::DeleteCustomDBEngineVersionMessage
@@ -1811,6 +1885,16 @@ module Aws::RDS
     DeregisterDBProxyTargetsResponse.struct_class = Types::DeregisterDBProxyTargetsResponse
 
     DescribeAccountAttributesMessage.struct_class = Types::DescribeAccountAttributesMessage
+
+    DescribeBlueGreenDeploymentsRequest.add_member(:blue_green_deployment_identifier, Shapes::ShapeRef.new(shape: BlueGreenDeploymentIdentifier, location_name: "BlueGreenDeploymentIdentifier"))
+    DescribeBlueGreenDeploymentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeBlueGreenDeploymentsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeBlueGreenDeploymentsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeBlueGreenDeploymentsRequest.struct_class = Types::DescribeBlueGreenDeploymentsRequest
+
+    DescribeBlueGreenDeploymentsResponse.add_member(:blue_green_deployments, Shapes::ShapeRef.new(shape: BlueGreenDeploymentList, location_name: "BlueGreenDeployments"))
+    DescribeBlueGreenDeploymentsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeBlueGreenDeploymentsResponse.struct_class = Types::DescribeBlueGreenDeploymentsResponse
 
     DescribeCertificatesMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     DescribeCertificatesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -2321,6 +2405,8 @@ module Aws::RDS
     InsufficientDBInstanceCapacityFault.struct_class = Types::InsufficientDBInstanceCapacityFault
 
     InsufficientStorageClusterCapacityFault.struct_class = Types::InsufficientStorageClusterCapacityFault
+
+    InvalidBlueGreenDeploymentStateFault.struct_class = Types::InvalidBlueGreenDeploymentStateFault
 
     InvalidCustomDBEngineVersionStateFault.struct_class = Types::InvalidCustomDBEngineVersionStateFault
 
@@ -3293,6 +3379,10 @@ module Aws::RDS
 
     SnapshotQuotaExceededFault.struct_class = Types::SnapshotQuotaExceededFault
 
+    SourceClusterNotSupportedFault.struct_class = Types::SourceClusterNotSupportedFault
+
+    SourceDatabaseNotSupportedFault.struct_class = Types::SourceDatabaseNotSupportedFault
+
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
 
     SourceNotFoundFault.struct_class = Types::SourceNotFoundFault
@@ -3410,6 +3500,20 @@ module Aws::RDS
     SupportedCharacterSetsList.member = Shapes::ShapeRef.new(shape: CharacterSet, location_name: "CharacterSet")
 
     SupportedTimezonesList.member = Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone")
+
+    SwitchoverBlueGreenDeploymentRequest.add_member(:blue_green_deployment_identifier, Shapes::ShapeRef.new(shape: BlueGreenDeploymentIdentifier, required: true, location_name: "BlueGreenDeploymentIdentifier"))
+    SwitchoverBlueGreenDeploymentRequest.add_member(:switchover_timeout, Shapes::ShapeRef.new(shape: SwitchoverTimeout, location_name: "SwitchoverTimeout"))
+    SwitchoverBlueGreenDeploymentRequest.struct_class = Types::SwitchoverBlueGreenDeploymentRequest
+
+    SwitchoverBlueGreenDeploymentResponse.add_member(:blue_green_deployment, Shapes::ShapeRef.new(shape: BlueGreenDeployment, location_name: "BlueGreenDeployment"))
+    SwitchoverBlueGreenDeploymentResponse.struct_class = Types::SwitchoverBlueGreenDeploymentResponse
+
+    SwitchoverDetail.add_member(:source_member, Shapes::ShapeRef.new(shape: DatabaseArn, location_name: "SourceMember"))
+    SwitchoverDetail.add_member(:target_member, Shapes::ShapeRef.new(shape: DatabaseArn, location_name: "TargetMember"))
+    SwitchoverDetail.add_member(:status, Shapes::ShapeRef.new(shape: SwitchoverDetailStatus, location_name: "Status"))
+    SwitchoverDetail.struct_class = Types::SwitchoverDetail
+
+    SwitchoverDetailList.member = Shapes::ShapeRef.new(shape: SwitchoverDetail)
 
     SwitchoverReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     SwitchoverReadReplicaMessage.struct_class = Types::SwitchoverReadReplicaMessage
@@ -3661,6 +3765,25 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
       end)
 
+      api.add_operation(:create_blue_green_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBlueGreenDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBlueGreenDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBlueGreenDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: SourceDatabaseNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: SourceClusterNotSupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+      end)
+
       api.add_operation(:create_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCustomDBEngineVersion"
         o.http_method = "POST"
@@ -3898,6 +4021,16 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
       end)
 
+      api.add_operation(:delete_blue_green_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBlueGreenDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBlueGreenDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBlueGreenDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentStateFault)
+      end)
+
       api.add_operation(:delete_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCustomDBEngineVersion"
         o.http_method = "POST"
@@ -4085,6 +4218,21 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesMessage)
         o.output = Shapes::ShapeRef.new(shape: AccountAttributesMessage)
+      end)
+
+      api.add_operation(:describe_blue_green_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBlueGreenDeployments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBlueGreenDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBlueGreenDeploymentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -5339,6 +5487,16 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: StopDBInstanceAutomatedBackupsReplicationResult)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+      end)
+
+      api.add_operation(:switchover_blue_green_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SwitchoverBlueGreenDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SwitchoverBlueGreenDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: SwitchoverBlueGreenDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BlueGreenDeploymentNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBlueGreenDeploymentStateFault)
       end)
 
       api.add_operation(:switchover_read_replica, Seahorse::Model::Operation.new.tap do |o|

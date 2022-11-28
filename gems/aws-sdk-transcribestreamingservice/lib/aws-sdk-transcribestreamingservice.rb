@@ -34,7 +34,7 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # structure.
 #
 #     transcribe_streaming_service = Aws::TranscribeStreamingService::Client.new
-#     resp = transcribe_streaming_service.start_medical_stream_transcription(params)
+#     resp = transcribe_streaming_service.start_call_analytics_stream_transcription(params)
 #
 # See {Client} for more information.
 #
@@ -54,6 +54,6 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # @!group service
 module Aws::TranscribeStreamingService
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end

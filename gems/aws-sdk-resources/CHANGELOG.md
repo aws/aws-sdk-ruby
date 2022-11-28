@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.148.0 (2022-11-28)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-oam` gem.
+
 3.147.0 (2022-11-18)
 ------------------
 

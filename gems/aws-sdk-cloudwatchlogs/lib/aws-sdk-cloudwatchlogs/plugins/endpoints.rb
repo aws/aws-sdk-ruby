@@ -66,6 +66,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::CreateLogGroup.build(context)
           when :create_log_stream
             Aws::CloudWatchLogs::Endpoints::CreateLogStream.build(context)
+          when :delete_data_protection_policy
+            Aws::CloudWatchLogs::Endpoints::DeleteDataProtectionPolicy.build(context)
           when :delete_destination
             Aws::CloudWatchLogs::Endpoints::DeleteDestination.build(context)
           when :delete_log_group
@@ -104,6 +106,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::DisassociateKmsKey.build(context)
           when :filter_log_events
             Aws::CloudWatchLogs::Endpoints::FilterLogEvents.build(context)
+          when :get_data_protection_policy
+            Aws::CloudWatchLogs::Endpoints::GetDataProtectionPolicy.build(context)
           when :get_log_events
             Aws::CloudWatchLogs::Endpoints::GetLogEvents.build(context)
           when :get_log_group_fields
@@ -116,6 +120,8 @@ module Aws::CloudWatchLogs
             Aws::CloudWatchLogs::Endpoints::ListTagsForResource.build(context)
           when :list_tags_log_group
             Aws::CloudWatchLogs::Endpoints::ListTagsLogGroup.build(context)
+          when :put_data_protection_policy
+            Aws::CloudWatchLogs::Endpoints::PutDataProtectionPolicy.build(context)
           when :put_destination
             Aws::CloudWatchLogs::Endpoints::PutDestination.build(context)
           when :put_destination_policy

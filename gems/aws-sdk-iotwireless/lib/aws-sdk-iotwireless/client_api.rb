@@ -26,6 +26,10 @@ module Aws::IoTWireless
     AppKey = Shapes::StringShape.new(name: 'AppKey')
     AppSKey = Shapes::StringShape.new(name: 'AppSKey')
     AppServerPrivateKey = Shapes::StringShape.new(name: 'AppServerPrivateKey')
+    ApplicationConfig = Shapes::StructureShape.new(name: 'ApplicationConfig')
+    ApplicationConfigType = Shapes::StringShape.new(name: 'ApplicationConfigType')
+    Applications = Shapes::ListShape.new(name: 'Applications')
+    AssistPosition = Shapes::ListShape.new(name: 'AssistPosition')
     AssociateAwsAccountWithPartnerAccountRequest = Shapes::StructureShape.new(name: 'AssociateAwsAccountWithPartnerAccountRequest')
     AssociateAwsAccountWithPartnerAccountResponse = Shapes::StructureShape.new(name: 'AssociateAwsAccountWithPartnerAccountResponse')
     AssociateMulticastGroupWithFuotaTaskRequest = Shapes::StructureShape.new(name: 'AssociateMulticastGroupWithFuotaTaskRequest')
@@ -41,6 +45,11 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingRequest = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingRequest')
     AssociateWirelessGatewayWithThingResponse = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingResponse')
     AutoCreateTasks = Shapes::BooleanShape.new(name: 'AutoCreateTasks')
+    BCCH = Shapes::IntegerShape.new(name: 'BCCH')
+    BSIC = Shapes::IntegerShape.new(name: 'BSIC')
+    BaseLat = Shapes::FloatShape.new(name: 'BaseLat')
+    BaseLng = Shapes::FloatShape.new(name: 'BaseLng')
+    BaseStationId = Shapes::IntegerShape.new(name: 'BaseStationId')
     BatteryLevel = Shapes::StringShape.new(name: 'BatteryLevel')
     Beaconing = Shapes::StructureShape.new(name: 'Beaconing')
     BeaconingDataRate = Shapes::IntegerShape.new(name: 'BeaconingDataRate')
@@ -48,6 +57,15 @@ module Aws::IoTWireless
     BeaconingFrequency = Shapes::IntegerShape.new(name: 'BeaconingFrequency')
     CancelMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'CancelMulticastGroupSessionRequest')
     CancelMulticastGroupSessionResponse = Shapes::StructureShape.new(name: 'CancelMulticastGroupSessionResponse')
+    CaptureTimeAccuracy = Shapes::FloatShape.new(name: 'CaptureTimeAccuracy')
+    CdmaChannel = Shapes::IntegerShape.new(name: 'CdmaChannel')
+    CdmaList = Shapes::ListShape.new(name: 'CdmaList')
+    CdmaLocalId = Shapes::StructureShape.new(name: 'CdmaLocalId')
+    CdmaNmrList = Shapes::ListShape.new(name: 'CdmaNmrList')
+    CdmaNmrObj = Shapes::StructureShape.new(name: 'CdmaNmrObj')
+    CdmaObj = Shapes::StructureShape.new(name: 'CdmaObj')
+    CellParams = Shapes::IntegerShape.new(name: 'CellParams')
+    CellTowers = Shapes::StructureShape.new(name: 'CellTowers')
     CertificateList = Shapes::StructureShape.new(name: 'CertificateList')
     CertificatePEM = Shapes::StringShape.new(name: 'CertificatePEM')
     CertificateValue = Shapes::StringShape.new(name: 'CertificateValue')
@@ -59,6 +77,7 @@ module Aws::IoTWireless
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
     ConnectionStatusEventConfiguration = Shapes::StructureShape.new(name: 'ConnectionStatusEventConfiguration')
     ConnectionStatusResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'ConnectionStatusResourceTypeEventConfiguration')
+    Coordinate = Shapes::FloatShape.new(name: 'Coordinate')
     Crc = Shapes::IntegerShape.new(name: 'Crc')
     CreateDestinationRequest = Shapes::StructureShape.new(name: 'CreateDestinationRequest')
     CreateDestinationResponse = Shapes::StructureShape.new(name: 'CreateDestinationResponse')
@@ -81,6 +100,7 @@ module Aws::IoTWireless
     CreateWirelessGatewayTaskRequest = Shapes::StructureShape.new(name: 'CreateWirelessGatewayTaskRequest')
     CreateWirelessGatewayTaskResponse = Shapes::StructureShape.new(name: 'CreateWirelessGatewayTaskResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
+    CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
     DeleteDestinationResponse = Shapes::StructureShape.new(name: 'DeleteDestinationResponse')
     DeleteDeviceProfileRequest = Shapes::StructureShape.new(name: 'DeleteDeviceProfileRequest')
@@ -149,7 +169,9 @@ module Aws::IoTWireless
     DrMaxBox = Shapes::IntegerShape.new(name: 'DrMaxBox')
     DrMin = Shapes::IntegerShape.new(name: 'DrMin')
     DrMinBox = Shapes::IntegerShape.new(name: 'DrMinBox')
+    EARFCN = Shapes::IntegerShape.new(name: 'EARFCN')
     EndPoint = Shapes::StringShape.new(name: 'EndPoint')
+    EutranCid = Shapes::IntegerShape.new(name: 'EutranCid')
     Event = Shapes::StringShape.new(name: 'Event')
     EventConfigurationItem = Shapes::StructureShape.new(name: 'EventConfigurationItem')
     EventConfigurationsList = Shapes::ListShape.new(name: 'EventConfigurationsList')
@@ -174,10 +196,13 @@ module Aws::IoTWireless
     FuotaTaskList = Shapes::ListShape.new(name: 'FuotaTaskList')
     FuotaTaskName = Shapes::StringShape.new(name: 'FuotaTaskName')
     FuotaTaskStatus = Shapes::StringShape.new(name: 'FuotaTaskStatus')
+    GPST = Shapes::FloatShape.new(name: 'GPST')
     GatewayEui = Shapes::StringShape.new(name: 'GatewayEui')
     GatewayList = Shapes::ListShape.new(name: 'GatewayList')
     GatewayListItem = Shapes::StructureShape.new(name: 'GatewayListItem')
     GenAppKey = Shapes::StringShape.new(name: 'GenAppKey')
+    GeoJsonPayload = Shapes::BlobShape.new(name: 'GeoJsonPayload')
+    GeranCid = Shapes::IntegerShape.new(name: 'GeranCid')
     GetDestinationRequest = Shapes::StructureShape.new(name: 'GetDestinationRequest')
     GetDestinationResponse = Shapes::StructureShape.new(name: 'GetDestinationResponse')
     GetDeviceProfileRequest = Shapes::StructureShape.new(name: 'GetDeviceProfileRequest')
@@ -198,12 +223,16 @@ module Aws::IoTWireless
     GetPartnerAccountResponse = Shapes::StructureShape.new(name: 'GetPartnerAccountResponse')
     GetPositionConfigurationRequest = Shapes::StructureShape.new(name: 'GetPositionConfigurationRequest')
     GetPositionConfigurationResponse = Shapes::StructureShape.new(name: 'GetPositionConfigurationResponse')
+    GetPositionEstimateRequest = Shapes::StructureShape.new(name: 'GetPositionEstimateRequest')
+    GetPositionEstimateResponse = Shapes::StructureShape.new(name: 'GetPositionEstimateResponse')
     GetPositionRequest = Shapes::StructureShape.new(name: 'GetPositionRequest')
     GetPositionResponse = Shapes::StructureShape.new(name: 'GetPositionResponse')
     GetResourceEventConfigurationRequest = Shapes::StructureShape.new(name: 'GetResourceEventConfigurationRequest')
     GetResourceEventConfigurationResponse = Shapes::StructureShape.new(name: 'GetResourceEventConfigurationResponse')
     GetResourceLogLevelRequest = Shapes::StructureShape.new(name: 'GetResourceLogLevelRequest')
     GetResourceLogLevelResponse = Shapes::StructureShape.new(name: 'GetResourceLogLevelResponse')
+    GetResourcePositionRequest = Shapes::StructureShape.new(name: 'GetResourcePositionRequest')
+    GetResourcePositionResponse = Shapes::StructureShape.new(name: 'GetResourcePositionResponse')
     GetServiceEndpointRequest = Shapes::StructureShape.new(name: 'GetServiceEndpointRequest')
     GetServiceEndpointResponse = Shapes::StructureShape.new(name: 'GetServiceEndpointResponse')
     GetServiceProfileRequest = Shapes::StructureShape.new(name: 'GetServiceProfileRequest')
@@ -224,19 +253,31 @@ module Aws::IoTWireless
     GetWirelessGatewayTaskDefinitionResponse = Shapes::StructureShape.new(name: 'GetWirelessGatewayTaskDefinitionResponse')
     GetWirelessGatewayTaskRequest = Shapes::StructureShape.new(name: 'GetWirelessGatewayTaskRequest')
     GetWirelessGatewayTaskResponse = Shapes::StructureShape.new(name: 'GetWirelessGatewayTaskResponse')
+    GlobalIdentity = Shapes::StructureShape.new(name: 'GlobalIdentity')
+    Gnss = Shapes::StructureShape.new(name: 'Gnss')
+    GnssNav = Shapes::StringShape.new(name: 'GnssNav')
+    GsmList = Shapes::ListShape.new(name: 'GsmList')
+    GsmLocalId = Shapes::StructureShape.new(name: 'GsmLocalId')
+    GsmNmrList = Shapes::ListShape.new(name: 'GsmNmrList')
+    GsmNmrObj = Shapes::StructureShape.new(name: 'GsmNmrObj')
+    GsmObj = Shapes::StructureShape.new(name: 'GsmObj')
+    GsmTimingAdvance = Shapes::IntegerShape.new(name: 'GsmTimingAdvance')
     HorizontalAccuracy = Shapes::FloatShape.new(name: 'HorizontalAccuracy')
     HrAllowed = Shapes::BooleanShape.new(name: 'HrAllowed')
+    IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     ISODateTimeString = Shapes::StringShape.new(name: 'ISODateTimeString')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IdentifierType = Shapes::StringShape.new(name: 'IdentifierType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IotCertificateId = Shapes::StringShape.new(name: 'IotCertificateId')
+    Ip = Shapes::StructureShape.new(name: 'Ip')
     JoinEui = Shapes::StringShape.new(name: 'JoinEui')
     JoinEuiFilters = Shapes::ListShape.new(name: 'JoinEuiFilters')
     JoinEuiRange = Shapes::ListShape.new(name: 'JoinEuiRange')
     JoinEventConfiguration = Shapes::StructureShape.new(name: 'JoinEventConfiguration')
     JoinResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'JoinResourceTypeEventConfiguration')
+    LAC = Shapes::IntegerShape.new(name: 'LAC')
     ListDestinationsRequest = Shapes::StructureShape.new(name: 'ListDestinationsRequest')
     ListDestinationsResponse = Shapes::StructureShape.new(name: 'ListDestinationsResponse')
     ListDeviceProfilesRequest = Shapes::StructureShape.new(name: 'ListDeviceProfilesRequest')
@@ -294,6 +335,15 @@ module Aws::IoTWireless
     LoRaWANUpdateGatewayTaskCreate = Shapes::StructureShape.new(name: 'LoRaWANUpdateGatewayTaskCreate')
     LoRaWANUpdateGatewayTaskEntry = Shapes::StructureShape.new(name: 'LoRaWANUpdateGatewayTaskEntry')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
+    LteList = Shapes::ListShape.new(name: 'LteList')
+    LteLocalId = Shapes::StructureShape.new(name: 'LteLocalId')
+    LteNmrList = Shapes::ListShape.new(name: 'LteNmrList')
+    LteNmrObj = Shapes::StructureShape.new(name: 'LteNmrObj')
+    LteObj = Shapes::StructureShape.new(name: 'LteObj')
+    LteTimingAdvance = Shapes::IntegerShape.new(name: 'LteTimingAdvance')
+    MCC = Shapes::IntegerShape.new(name: 'MCC')
+    MNC = Shapes::IntegerShape.new(name: 'MNC')
+    MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     MacVersion = Shapes::StringShape.new(name: 'MacVersion')
     MaxDutyCycle = Shapes::IntegerShape.new(name: 'MaxDutyCycle')
     MaxEirp = Shapes::IntegerShape.new(name: 'MaxEirp')
@@ -317,12 +367,14 @@ module Aws::IoTWireless
     MulticastGroupName = Shapes::StringShape.new(name: 'MulticastGroupName')
     MulticastGroupStatus = Shapes::StringShape.new(name: 'MulticastGroupStatus')
     MulticastWirelessMetadata = Shapes::StructureShape.new(name: 'MulticastWirelessMetadata')
+    NRCapable = Shapes::BooleanShape.new(name: 'NRCapable')
     NetId = Shapes::StringShape.new(name: 'NetId')
     NetIdFilters = Shapes::ListShape.new(name: 'NetIdFilters')
     NetworkAnalyzerConfigurationArn = Shapes::StringShape.new(name: 'NetworkAnalyzerConfigurationArn')
     NetworkAnalyzerConfigurationList = Shapes::ListShape.new(name: 'NetworkAnalyzerConfigurationList')
     NetworkAnalyzerConfigurationName = Shapes::StringShape.new(name: 'NetworkAnalyzerConfigurationName')
     NetworkAnalyzerConfigurations = Shapes::StructureShape.new(name: 'NetworkAnalyzerConfigurations')
+    NetworkId = Shapes::IntegerShape.new(name: 'NetworkId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumberOfDevicesInGroup = Shapes::IntegerShape.new(name: 'NumberOfDevicesInGroup')
     NumberOfDevicesRequested = Shapes::IntegerShape.new(name: 'NumberOfDevicesRequested')
@@ -332,15 +384,20 @@ module Aws::IoTWireless
     NwkSKey = Shapes::StringShape.new(name: 'NwkSKey')
     OtaaV1_0_x = Shapes::StructureShape.new(name: 'OtaaV1_0_x')
     OtaaV1_1 = Shapes::StructureShape.new(name: 'OtaaV1_1')
+    PCI = Shapes::IntegerShape.new(name: 'PCI')
+    PSC = Shapes::IntegerShape.new(name: 'PSC')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     ParticipatingGateways = Shapes::StructureShape.new(name: 'ParticipatingGateways')
     PartnerAccountArn = Shapes::StringShape.new(name: 'PartnerAccountArn')
     PartnerAccountId = Shapes::StringShape.new(name: 'PartnerAccountId')
     PartnerType = Shapes::StringShape.new(name: 'PartnerType')
+    PathLoss = Shapes::IntegerShape.new(name: 'PathLoss')
     PayloadData = Shapes::StringShape.new(name: 'PayloadData')
+    PilotPower = Shapes::IntegerShape.new(name: 'PilotPower')
     PingSlotDr = Shapes::IntegerShape.new(name: 'PingSlotDr')
     PingSlotFreq = Shapes::IntegerShape.new(name: 'PingSlotFreq')
     PingSlotPeriod = Shapes::IntegerShape.new(name: 'PingSlotPeriod')
+    PnOffset = Shapes::IntegerShape.new(name: 'PnOffset')
     PositionConfigurationFec = Shapes::StringShape.new(name: 'PositionConfigurationFec')
     PositionConfigurationItem = Shapes::StructureShape.new(name: 'PositionConfigurationItem')
     PositionConfigurationList = Shapes::ListShape.new(name: 'PositionConfigurationList')
@@ -355,6 +412,7 @@ module Aws::IoTWireless
     PositionSolverType = Shapes::StringShape.new(name: 'PositionSolverType')
     PositionSolverVersion = Shapes::StringShape.new(name: 'PositionSolverVersion')
     Positioning = Shapes::StructureShape.new(name: 'Positioning')
+    PositioningConfigStatus = Shapes::StringShape.new(name: 'PositioningConfigStatus')
     PrAllowed = Shapes::BooleanShape.new(name: 'PrAllowed')
     PresetFreq = Shapes::IntegerShape.new(name: 'PresetFreq')
     ProximityEventConfiguration = Shapes::StructureShape.new(name: 'ProximityEventConfiguration')
@@ -364,8 +422,13 @@ module Aws::IoTWireless
     PutResourceLogLevelRequest = Shapes::StructureShape.new(name: 'PutResourceLogLevelRequest')
     PutResourceLogLevelResponse = Shapes::StructureShape.new(name: 'PutResourceLogLevelResponse')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
+    RSCP = Shapes::IntegerShape.new(name: 'RSCP')
+    RSRP = Shapes::IntegerShape.new(name: 'RSRP')
+    RSRQ = Shapes::FloatShape.new(name: 'RSRQ')
+    RSS = Shapes::IntegerShape.new(name: 'RSS')
     RaAllowed = Shapes::BooleanShape.new(name: 'RaAllowed')
     RegParamsRevision = Shapes::StringShape.new(name: 'RegParamsRevision')
+    RegistrationZone = Shapes::IntegerShape.new(name: 'RegistrationZone')
     ReportDevStatusBattery = Shapes::BooleanShape.new(name: 'ReportDevStatusBattery')
     ReportDevStatusMargin = Shapes::BooleanShape.new(name: 'ReportDevStatusMargin')
     ResetAllResourceLogLevelsRequest = Shapes::StructureShape.new(name: 'ResetAllResourceLogLevelsRequest')
@@ -383,6 +446,7 @@ module Aws::IoTWireless
     RxDelay1 = Shapes::IntegerShape.new(name: 'RxDelay1')
     RxDrOffset1 = Shapes::IntegerShape.new(name: 'RxDrOffset1')
     RxFreq2 = Shapes::IntegerShape.new(name: 'RxFreq2')
+    RxLevel = Shapes::IntegerShape.new(name: 'RxLevel')
     SNwkSIntKey = Shapes::StringShape.new(name: 'SNwkSIntKey')
     SemtechGnssConfiguration = Shapes::StructureShape.new(name: 'SemtechGnssConfiguration')
     SemtechGnssDetail = Shapes::StructureShape.new(name: 'SemtechGnssDetail')
@@ -430,6 +494,8 @@ module Aws::IoTWireless
     SupportsClassB = Shapes::BooleanShape.new(name: 'SupportsClassB')
     SupportsClassC = Shapes::BooleanShape.new(name: 'SupportsClassC')
     SupportsJoin = Shapes::BooleanShape.new(name: 'SupportsJoin')
+    SystemId = Shapes::IntegerShape.new(name: 'SystemId')
+    TAC = Shapes::IntegerShape.new(name: 'TAC')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -438,6 +504,12 @@ module Aws::IoTWireless
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetPer = Shapes::IntegerShape.new(name: 'TargetPer')
+    TdscdmaList = Shapes::ListShape.new(name: 'TdscdmaList')
+    TdscdmaLocalId = Shapes::StructureShape.new(name: 'TdscdmaLocalId')
+    TdscdmaNmrList = Shapes::ListShape.new(name: 'TdscdmaNmrList')
+    TdscdmaNmrObj = Shapes::StructureShape.new(name: 'TdscdmaNmrObj')
+    TdscdmaObj = Shapes::StructureShape.new(name: 'TdscdmaObj')
+    TdscdmaTimingAdvance = Shapes::IntegerShape.new(name: 'TdscdmaTimingAdvance')
     TestWirelessDeviceRequest = Shapes::StructureShape.new(name: 'TestWirelessDeviceRequest')
     TestWirelessDeviceResponse = Shapes::StructureShape.new(name: 'TestWirelessDeviceResponse')
     ThingArn = Shapes::StringShape.new(name: 'ThingArn')
@@ -447,6 +519,8 @@ module Aws::IoTWireless
     TraceContent = Shapes::StructureShape.new(name: 'TraceContent')
     TransmissionInterval = Shapes::IntegerShape.new(name: 'TransmissionInterval')
     TransmitMode = Shapes::IntegerShape.new(name: 'TransmitMode')
+    UARFCN = Shapes::IntegerShape.new(name: 'UARFCN')
+    UARFCNDL = Shapes::IntegerShape.new(name: 'UARFCNDL')
     UlBucketSize = Shapes::IntegerShape.new(name: 'UlBucketSize')
     UlRate = Shapes::IntegerShape.new(name: 'UlRate')
     UlRatePolicy = Shapes::StringShape.new(name: 'UlRatePolicy')
@@ -474,6 +548,8 @@ module Aws::IoTWireless
     UpdatePositionResponse = Shapes::StructureShape.new(name: 'UpdatePositionResponse')
     UpdateResourceEventConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateResourceEventConfigurationRequest')
     UpdateResourceEventConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateResourceEventConfigurationResponse')
+    UpdateResourcePositionRequest = Shapes::StructureShape.new(name: 'UpdateResourcePositionRequest')
+    UpdateResourcePositionResponse = Shapes::StructureShape.new(name: 'UpdateResourcePositionResponse')
     UpdateSignature = Shapes::StringShape.new(name: 'UpdateSignature')
     UpdateWirelessDeviceRequest = Shapes::StructureShape.new(name: 'UpdateWirelessDeviceRequest')
     UpdateWirelessDeviceResponse = Shapes::StructureShape.new(name: 'UpdateWirelessDeviceResponse')
@@ -481,8 +557,17 @@ module Aws::IoTWireless
     UpdateWirelessGatewayResponse = Shapes::StructureShape.new(name: 'UpdateWirelessGatewayResponse')
     UpdateWirelessGatewayTaskCreate = Shapes::StructureShape.new(name: 'UpdateWirelessGatewayTaskCreate')
     UpdateWirelessGatewayTaskEntry = Shapes::StructureShape.new(name: 'UpdateWirelessGatewayTaskEntry')
+    Use2DSolver = Shapes::BooleanShape.new(name: 'Use2DSolver')
+    UtranCid = Shapes::IntegerShape.new(name: 'UtranCid')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VerticalAccuracy = Shapes::FloatShape.new(name: 'VerticalAccuracy')
+    WcdmaList = Shapes::ListShape.new(name: 'WcdmaList')
+    WcdmaLocalId = Shapes::StructureShape.new(name: 'WcdmaLocalId')
+    WcdmaNmrList = Shapes::ListShape.new(name: 'WcdmaNmrList')
+    WcdmaNmrObj = Shapes::StructureShape.new(name: 'WcdmaNmrObj')
+    WcdmaObj = Shapes::StructureShape.new(name: 'WcdmaObj')
+    WiFiAccessPoint = Shapes::StructureShape.new(name: 'WiFiAccessPoint')
+    WiFiAccessPoints = Shapes::ListShape.new(name: 'WiFiAccessPoints')
     WirelessDeviceArn = Shapes::StringShape.new(name: 'WirelessDeviceArn')
     WirelessDeviceEvent = Shapes::StringShape.new(name: 'WirelessDeviceEvent')
     WirelessDeviceEventLogOption = Shapes::StructureShape.new(name: 'WirelessDeviceEventLogOption')
@@ -535,6 +620,15 @@ module Aws::IoTWireless
     Accuracy.add_member(:horizontal_accuracy, Shapes::ShapeRef.new(shape: HorizontalAccuracy, location_name: "HorizontalAccuracy"))
     Accuracy.add_member(:vertical_accuracy, Shapes::ShapeRef.new(shape: VerticalAccuracy, location_name: "VerticalAccuracy"))
     Accuracy.struct_class = Types::Accuracy
+
+    ApplicationConfig.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
+    ApplicationConfig.add_member(:type, Shapes::ShapeRef.new(shape: ApplicationConfigType, location_name: "Type"))
+    ApplicationConfig.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
+    ApplicationConfig.struct_class = Types::ApplicationConfig
+
+    Applications.member = Shapes::ShapeRef.new(shape: ApplicationConfig)
+
+    AssistPosition.member = Shapes::ShapeRef.new(shape: Coordinate)
 
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkAccountInfo, required: true, location_name: "Sidewalk"))
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -592,6 +686,38 @@ module Aws::IoTWireless
     CancelMulticastGroupSessionRequest.struct_class = Types::CancelMulticastGroupSessionRequest
 
     CancelMulticastGroupSessionResponse.struct_class = Types::CancelMulticastGroupSessionResponse
+
+    CdmaList.member = Shapes::ShapeRef.new(shape: CdmaObj)
+
+    CdmaLocalId.add_member(:pn_offset, Shapes::ShapeRef.new(shape: PnOffset, required: true, location_name: "PnOffset"))
+    CdmaLocalId.add_member(:cdma_channel, Shapes::ShapeRef.new(shape: CdmaChannel, required: true, location_name: "CdmaChannel"))
+    CdmaLocalId.struct_class = Types::CdmaLocalId
+
+    CdmaNmrList.member = Shapes::ShapeRef.new(shape: CdmaNmrObj)
+
+    CdmaNmrObj.add_member(:pn_offset, Shapes::ShapeRef.new(shape: PnOffset, required: true, location_name: "PnOffset"))
+    CdmaNmrObj.add_member(:cdma_channel, Shapes::ShapeRef.new(shape: CdmaChannel, required: true, location_name: "CdmaChannel"))
+    CdmaNmrObj.add_member(:pilot_power, Shapes::ShapeRef.new(shape: PilotPower, location_name: "PilotPower"))
+    CdmaNmrObj.add_member(:base_station_id, Shapes::ShapeRef.new(shape: BaseStationId, location_name: "BaseStationId"))
+    CdmaNmrObj.struct_class = Types::CdmaNmrObj
+
+    CdmaObj.add_member(:system_id, Shapes::ShapeRef.new(shape: SystemId, required: true, location_name: "SystemId"))
+    CdmaObj.add_member(:network_id, Shapes::ShapeRef.new(shape: NetworkId, required: true, location_name: "NetworkId"))
+    CdmaObj.add_member(:base_station_id, Shapes::ShapeRef.new(shape: BaseStationId, required: true, location_name: "BaseStationId"))
+    CdmaObj.add_member(:registration_zone, Shapes::ShapeRef.new(shape: RegistrationZone, location_name: "RegistrationZone"))
+    CdmaObj.add_member(:cdma_local_id, Shapes::ShapeRef.new(shape: CdmaLocalId, location_name: "CdmaLocalId"))
+    CdmaObj.add_member(:pilot_power, Shapes::ShapeRef.new(shape: PilotPower, location_name: "PilotPower"))
+    CdmaObj.add_member(:base_lat, Shapes::ShapeRef.new(shape: BaseLat, location_name: "BaseLat"))
+    CdmaObj.add_member(:base_lng, Shapes::ShapeRef.new(shape: BaseLng, location_name: "BaseLng"))
+    CdmaObj.add_member(:cdma_nmr, Shapes::ShapeRef.new(shape: CdmaNmrList, location_name: "CdmaNmr"))
+    CdmaObj.struct_class = Types::CdmaObj
+
+    CellTowers.add_member(:gsm, Shapes::ShapeRef.new(shape: GsmList, location_name: "Gsm"))
+    CellTowers.add_member(:wcdma, Shapes::ShapeRef.new(shape: WcdmaList, location_name: "Wcdma"))
+    CellTowers.add_member(:tdscdma, Shapes::ShapeRef.new(shape: TdscdmaList, location_name: "Tdscdma"))
+    CellTowers.add_member(:lte, Shapes::ShapeRef.new(shape: LteList, location_name: "Lte"))
+    CellTowers.add_member(:cdma, Shapes::ShapeRef.new(shape: CdmaList, location_name: "Cdma"))
+    CellTowers.struct_class = Types::CellTowers
 
     CertificateList.add_member(:signing_alg, Shapes::ShapeRef.new(shape: SigningAlg, required: true, location_name: "SigningAlg"))
     CertificateList.add_member(:value, Shapes::ShapeRef.new(shape: CertificateValue, required: true, location_name: "Value"))
@@ -686,6 +812,7 @@ module Aws::IoTWireless
     CreateWirelessDeviceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateWirelessDeviceRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDevice, location_name: "LoRaWAN"))
     CreateWirelessDeviceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateWirelessDeviceRequest.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     CreateWirelessDeviceRequest.struct_class = Types::CreateWirelessDeviceRequest
 
     CreateWirelessDeviceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WirelessDeviceArn, location_name: "Arn"))
@@ -871,6 +998,7 @@ module Aws::IoTWireless
     FPorts.add_member(:multicast, Shapes::ShapeRef.new(shape: FPort, location_name: "Multicast"))
     FPorts.add_member(:clock_sync, Shapes::ShapeRef.new(shape: FPort, location_name: "ClockSync"))
     FPorts.add_member(:positioning, Shapes::ShapeRef.new(shape: Positioning, location_name: "Positioning"))
+    FPorts.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     FPorts.struct_class = Types::FPorts
 
     FactoryPresetFreqsList.member = Shapes::ShapeRef.new(shape: PresetFreq)
@@ -983,6 +1111,18 @@ module Aws::IoTWireless
     GetPositionConfigurationResponse.add_member(:destination, Shapes::ShapeRef.new(shape: DestinationName, location_name: "Destination"))
     GetPositionConfigurationResponse.struct_class = Types::GetPositionConfigurationResponse
 
+    GetPositionEstimateRequest.add_member(:wi_fi_access_points, Shapes::ShapeRef.new(shape: WiFiAccessPoints, location_name: "WiFiAccessPoints"))
+    GetPositionEstimateRequest.add_member(:cell_towers, Shapes::ShapeRef.new(shape: CellTowers, location_name: "CellTowers"))
+    GetPositionEstimateRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, location_name: "Ip"))
+    GetPositionEstimateRequest.add_member(:gnss, Shapes::ShapeRef.new(shape: Gnss, location_name: "Gnss"))
+    GetPositionEstimateRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: CreationDate, location_name: "Timestamp"))
+    GetPositionEstimateRequest.struct_class = Types::GetPositionEstimateRequest
+
+    GetPositionEstimateResponse.add_member(:geo_json_payload, Shapes::ShapeRef.new(shape: GeoJsonPayload, location_name: "GeoJsonPayload"))
+    GetPositionEstimateResponse.struct_class = Types::GetPositionEstimateResponse
+    GetPositionEstimateResponse[:payload] = :geo_json_payload
+    GetPositionEstimateResponse[:payload_member] = GetPositionEstimateResponse.member(:geo_json_payload)
+
     GetPositionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: PositionResourceIdentifier, required: true, location: "uri", location_name: "ResourceIdentifier"))
     GetPositionRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: PositionResourceType, required: true, location: "querystring", location_name: "resourceType"))
     GetPositionRequest.struct_class = Types::GetPositionRequest
@@ -1013,6 +1153,15 @@ module Aws::IoTWireless
 
     GetResourceLogLevelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
     GetResourceLogLevelResponse.struct_class = Types::GetResourceLogLevelResponse
+
+    GetResourcePositionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: PositionResourceIdentifier, required: true, location: "uri", location_name: "ResourceIdentifier"))
+    GetResourcePositionRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: PositionResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    GetResourcePositionRequest.struct_class = Types::GetResourcePositionRequest
+
+    GetResourcePositionResponse.add_member(:geo_json_payload, Shapes::ShapeRef.new(shape: GeoJsonPayload, location_name: "GeoJsonPayload"))
+    GetResourcePositionResponse.struct_class = Types::GetResourcePositionResponse
+    GetResourcePositionResponse[:payload] = :geo_json_payload
+    GetResourcePositionResponse[:payload_member] = GetResourcePositionResponse.member(:geo_json_payload)
 
     GetServiceEndpointRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: WirelessGatewayServiceType, location: "querystring", location_name: "serviceType"))
     GetServiceEndpointRequest.struct_class = Types::GetServiceEndpointRequest
@@ -1045,6 +1194,7 @@ module Aws::IoTWireless
     GetWirelessDeviceResponse.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, location_name: "ThingArn"))
     GetWirelessDeviceResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDevice, location_name: "LoRaWAN"))
     GetWirelessDeviceResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkDevice, location_name: "Sidewalk"))
+    GetWirelessDeviceResponse.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     GetWirelessDeviceResponse.struct_class = Types::GetWirelessDeviceResponse
 
     GetWirelessDeviceStatisticsRequest.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
@@ -1109,8 +1259,47 @@ module Aws::IoTWireless
     GetWirelessGatewayTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: WirelessGatewayTaskStatus, location_name: "Status"))
     GetWirelessGatewayTaskResponse.struct_class = Types::GetWirelessGatewayTaskResponse
 
+    GlobalIdentity.add_member(:lac, Shapes::ShapeRef.new(shape: LAC, required: true, location_name: "Lac"))
+    GlobalIdentity.add_member(:geran_cid, Shapes::ShapeRef.new(shape: GeranCid, required: true, location_name: "GeranCid"))
+    GlobalIdentity.struct_class = Types::GlobalIdentity
+
+    Gnss.add_member(:payload, Shapes::ShapeRef.new(shape: GnssNav, required: true, location_name: "Payload"))
+    Gnss.add_member(:capture_time, Shapes::ShapeRef.new(shape: GPST, location_name: "CaptureTime"))
+    Gnss.add_member(:capture_time_accuracy, Shapes::ShapeRef.new(shape: CaptureTimeAccuracy, location_name: "CaptureTimeAccuracy"))
+    Gnss.add_member(:assist_position, Shapes::ShapeRef.new(shape: AssistPosition, location_name: "AssistPosition"))
+    Gnss.add_member(:assist_altitude, Shapes::ShapeRef.new(shape: Coordinate, location_name: "AssistAltitude"))
+    Gnss.add_member(:use_2_d_solver, Shapes::ShapeRef.new(shape: Use2DSolver, location_name: "Use2DSolver"))
+    Gnss.struct_class = Types::Gnss
+
+    GsmList.member = Shapes::ShapeRef.new(shape: GsmObj)
+
+    GsmLocalId.add_member(:bsic, Shapes::ShapeRef.new(shape: BSIC, required: true, location_name: "Bsic"))
+    GsmLocalId.add_member(:bcch, Shapes::ShapeRef.new(shape: BCCH, required: true, location_name: "Bcch"))
+    GsmLocalId.struct_class = Types::GsmLocalId
+
+    GsmNmrList.member = Shapes::ShapeRef.new(shape: GsmNmrObj)
+
+    GsmNmrObj.add_member(:bsic, Shapes::ShapeRef.new(shape: BSIC, required: true, location_name: "Bsic"))
+    GsmNmrObj.add_member(:bcch, Shapes::ShapeRef.new(shape: BCCH, required: true, location_name: "Bcch"))
+    GsmNmrObj.add_member(:rx_level, Shapes::ShapeRef.new(shape: RxLevel, location_name: "RxLevel"))
+    GsmNmrObj.add_member(:global_identity, Shapes::ShapeRef.new(shape: GlobalIdentity, location_name: "GlobalIdentity"))
+    GsmNmrObj.struct_class = Types::GsmNmrObj
+
+    GsmObj.add_member(:mcc, Shapes::ShapeRef.new(shape: MCC, required: true, location_name: "Mcc"))
+    GsmObj.add_member(:mnc, Shapes::ShapeRef.new(shape: MNC, required: true, location_name: "Mnc"))
+    GsmObj.add_member(:lac, Shapes::ShapeRef.new(shape: LAC, required: true, location_name: "Lac"))
+    GsmObj.add_member(:geran_cid, Shapes::ShapeRef.new(shape: GeranCid, required: true, location_name: "GeranCid"))
+    GsmObj.add_member(:gsm_local_id, Shapes::ShapeRef.new(shape: GsmLocalId, location_name: "GsmLocalId"))
+    GsmObj.add_member(:gsm_timing_advance, Shapes::ShapeRef.new(shape: GsmTimingAdvance, location_name: "GsmTimingAdvance"))
+    GsmObj.add_member(:rx_level, Shapes::ShapeRef.new(shape: RxLevel, location_name: "RxLevel"))
+    GsmObj.add_member(:gsm_nmr, Shapes::ShapeRef.new(shape: GsmNmrList, location_name: "GsmNmr"))
+    GsmObj.struct_class = Types::GsmObj
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    Ip.add_member(:ip_address, Shapes::ShapeRef.new(shape: IPAddress, required: true, location_name: "IpAddress"))
+    Ip.struct_class = Types::Ip
 
     JoinEuiFilters.member = Shapes::ShapeRef.new(shape: JoinEuiRange)
 
@@ -1406,6 +1595,33 @@ module Aws::IoTWireless
     LoRaWANUpdateGatewayTaskEntry.add_member(:update_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "UpdateVersion"))
     LoRaWANUpdateGatewayTaskEntry.struct_class = Types::LoRaWANUpdateGatewayTaskEntry
 
+    LteList.member = Shapes::ShapeRef.new(shape: LteObj)
+
+    LteLocalId.add_member(:pci, Shapes::ShapeRef.new(shape: PCI, required: true, location_name: "Pci"))
+    LteLocalId.add_member(:earfcn, Shapes::ShapeRef.new(shape: EARFCN, required: true, location_name: "Earfcn"))
+    LteLocalId.struct_class = Types::LteLocalId
+
+    LteNmrList.member = Shapes::ShapeRef.new(shape: LteNmrObj)
+
+    LteNmrObj.add_member(:pci, Shapes::ShapeRef.new(shape: PCI, required: true, location_name: "Pci"))
+    LteNmrObj.add_member(:earfcn, Shapes::ShapeRef.new(shape: EARFCN, required: true, location_name: "Earfcn"))
+    LteNmrObj.add_member(:eutran_cid, Shapes::ShapeRef.new(shape: EutranCid, required: true, location_name: "EutranCid"))
+    LteNmrObj.add_member(:rsrp, Shapes::ShapeRef.new(shape: RSRP, location_name: "Rsrp"))
+    LteNmrObj.add_member(:rsrq, Shapes::ShapeRef.new(shape: RSRQ, location_name: "Rsrq"))
+    LteNmrObj.struct_class = Types::LteNmrObj
+
+    LteObj.add_member(:mcc, Shapes::ShapeRef.new(shape: MCC, required: true, location_name: "Mcc"))
+    LteObj.add_member(:mnc, Shapes::ShapeRef.new(shape: MNC, required: true, location_name: "Mnc"))
+    LteObj.add_member(:eutran_cid, Shapes::ShapeRef.new(shape: EutranCid, required: true, location_name: "EutranCid"))
+    LteObj.add_member(:tac, Shapes::ShapeRef.new(shape: TAC, location_name: "Tac"))
+    LteObj.add_member(:lte_local_id, Shapes::ShapeRef.new(shape: LteLocalId, location_name: "LteLocalId"))
+    LteObj.add_member(:lte_timing_advance, Shapes::ShapeRef.new(shape: LteTimingAdvance, location_name: "LteTimingAdvance"))
+    LteObj.add_member(:rsrp, Shapes::ShapeRef.new(shape: RSRP, location_name: "Rsrp"))
+    LteObj.add_member(:rsrq, Shapes::ShapeRef.new(shape: RSRQ, location_name: "Rsrq"))
+    LteObj.add_member(:nr_capable, Shapes::ShapeRef.new(shape: NRCapable, location_name: "NrCapable"))
+    LteObj.add_member(:lte_nmr, Shapes::ShapeRef.new(shape: LteNmrList, location_name: "LteNmr"))
+    LteObj.struct_class = Types::LteObj
+
     MessageDeliveryStatusEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkEventNotificationConfigurations, location_name: "Sidewalk"))
     MessageDeliveryStatusEventConfiguration.add_member(:wireless_device_id_event_topic, Shapes::ShapeRef.new(shape: EventNotificationTopicStatus, location_name: "WirelessDeviceIdEventTopic"))
     MessageDeliveryStatusEventConfiguration.struct_class = Types::MessageDeliveryStatusEventConfiguration
@@ -1638,6 +1854,32 @@ module Aws::IoTWireless
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TdscdmaList.member = Shapes::ShapeRef.new(shape: TdscdmaObj)
+
+    TdscdmaLocalId.add_member(:uarfcn, Shapes::ShapeRef.new(shape: UARFCN, required: true, location_name: "Uarfcn"))
+    TdscdmaLocalId.add_member(:cell_params, Shapes::ShapeRef.new(shape: CellParams, required: true, location_name: "CellParams"))
+    TdscdmaLocalId.struct_class = Types::TdscdmaLocalId
+
+    TdscdmaNmrList.member = Shapes::ShapeRef.new(shape: TdscdmaNmrObj)
+
+    TdscdmaNmrObj.add_member(:uarfcn, Shapes::ShapeRef.new(shape: UARFCN, required: true, location_name: "Uarfcn"))
+    TdscdmaNmrObj.add_member(:cell_params, Shapes::ShapeRef.new(shape: CellParams, required: true, location_name: "CellParams"))
+    TdscdmaNmrObj.add_member(:utran_cid, Shapes::ShapeRef.new(shape: UtranCid, location_name: "UtranCid"))
+    TdscdmaNmrObj.add_member(:rscp, Shapes::ShapeRef.new(shape: RSCP, location_name: "Rscp"))
+    TdscdmaNmrObj.add_member(:path_loss, Shapes::ShapeRef.new(shape: PathLoss, location_name: "PathLoss"))
+    TdscdmaNmrObj.struct_class = Types::TdscdmaNmrObj
+
+    TdscdmaObj.add_member(:mcc, Shapes::ShapeRef.new(shape: MCC, required: true, location_name: "Mcc"))
+    TdscdmaObj.add_member(:mnc, Shapes::ShapeRef.new(shape: MNC, required: true, location_name: "Mnc"))
+    TdscdmaObj.add_member(:lac, Shapes::ShapeRef.new(shape: LAC, location_name: "Lac"))
+    TdscdmaObj.add_member(:utran_cid, Shapes::ShapeRef.new(shape: UtranCid, required: true, location_name: "UtranCid"))
+    TdscdmaObj.add_member(:tdscdma_local_id, Shapes::ShapeRef.new(shape: TdscdmaLocalId, location_name: "TdscdmaLocalId"))
+    TdscdmaObj.add_member(:tdscdma_timing_advance, Shapes::ShapeRef.new(shape: TdscdmaTimingAdvance, location_name: "TdscdmaTimingAdvance"))
+    TdscdmaObj.add_member(:rscp, Shapes::ShapeRef.new(shape: RSCP, location_name: "Rscp"))
+    TdscdmaObj.add_member(:path_loss, Shapes::ShapeRef.new(shape: PathLoss, location_name: "PathLoss"))
+    TdscdmaObj.add_member(:tdscdma_nmr, Shapes::ShapeRef.new(shape: TdscdmaNmrList, location_name: "TdscdmaNmr"))
+    TdscdmaObj.struct_class = Types::TdscdmaObj
+
     TestWirelessDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
     TestWirelessDeviceRequest.struct_class = Types::TestWirelessDeviceRequest
 
@@ -1686,6 +1928,7 @@ module Aws::IoTWireless
     UpdateEventConfigurationByResourceTypesResponse.struct_class = Types::UpdateEventConfigurationByResourceTypesResponse
 
     UpdateFPorts.add_member(:positioning, Shapes::ShapeRef.new(shape: Positioning, location_name: "Positioning"))
+    UpdateFPorts.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     UpdateFPorts.struct_class = Types::UpdateFPorts
 
     UpdateFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
@@ -1750,11 +1993,21 @@ module Aws::IoTWireless
 
     UpdateResourceEventConfigurationResponse.struct_class = Types::UpdateResourceEventConfigurationResponse
 
+    UpdateResourcePositionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: PositionResourceIdentifier, required: true, location: "uri", location_name: "ResourceIdentifier"))
+    UpdateResourcePositionRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: PositionResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    UpdateResourcePositionRequest.add_member(:geo_json_payload, Shapes::ShapeRef.new(shape: GeoJsonPayload, location_name: "GeoJsonPayload"))
+    UpdateResourcePositionRequest.struct_class = Types::UpdateResourcePositionRequest
+    UpdateResourcePositionRequest[:payload] = :geo_json_payload
+    UpdateResourcePositionRequest[:payload_member] = UpdateResourcePositionRequest.member(:geo_json_payload)
+
+    UpdateResourcePositionResponse.struct_class = Types::UpdateResourcePositionResponse
+
     UpdateWirelessDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
     UpdateWirelessDeviceRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
     UpdateWirelessDeviceRequest.add_member(:name, Shapes::ShapeRef.new(shape: WirelessDeviceName, location_name: "Name"))
     UpdateWirelessDeviceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateWirelessDeviceRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANUpdateDevice, location_name: "LoRaWAN"))
+    UpdateWirelessDeviceRequest.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     UpdateWirelessDeviceRequest.struct_class = Types::UpdateWirelessDeviceRequest
 
     UpdateWirelessDeviceResponse.struct_class = Types::UpdateWirelessDeviceResponse
@@ -1780,6 +2033,37 @@ module Aws::IoTWireless
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
+
+    WcdmaList.member = Shapes::ShapeRef.new(shape: WcdmaObj)
+
+    WcdmaLocalId.add_member(:uarfcndl, Shapes::ShapeRef.new(shape: UARFCNDL, required: true, location_name: "Uarfcndl"))
+    WcdmaLocalId.add_member(:psc, Shapes::ShapeRef.new(shape: PSC, required: true, location_name: "Psc"))
+    WcdmaLocalId.struct_class = Types::WcdmaLocalId
+
+    WcdmaNmrList.member = Shapes::ShapeRef.new(shape: WcdmaNmrObj)
+
+    WcdmaNmrObj.add_member(:uarfcndl, Shapes::ShapeRef.new(shape: UARFCNDL, required: true, location_name: "Uarfcndl"))
+    WcdmaNmrObj.add_member(:psc, Shapes::ShapeRef.new(shape: PSC, required: true, location_name: "Psc"))
+    WcdmaNmrObj.add_member(:utran_cid, Shapes::ShapeRef.new(shape: UtranCid, required: true, location_name: "UtranCid"))
+    WcdmaNmrObj.add_member(:rscp, Shapes::ShapeRef.new(shape: RSCP, location_name: "Rscp"))
+    WcdmaNmrObj.add_member(:path_loss, Shapes::ShapeRef.new(shape: PathLoss, location_name: "PathLoss"))
+    WcdmaNmrObj.struct_class = Types::WcdmaNmrObj
+
+    WcdmaObj.add_member(:mcc, Shapes::ShapeRef.new(shape: MCC, required: true, location_name: "Mcc"))
+    WcdmaObj.add_member(:mnc, Shapes::ShapeRef.new(shape: MNC, required: true, location_name: "Mnc"))
+    WcdmaObj.add_member(:lac, Shapes::ShapeRef.new(shape: LAC, location_name: "Lac"))
+    WcdmaObj.add_member(:utran_cid, Shapes::ShapeRef.new(shape: UtranCid, required: true, location_name: "UtranCid"))
+    WcdmaObj.add_member(:wcdma_local_id, Shapes::ShapeRef.new(shape: WcdmaLocalId, location_name: "WcdmaLocalId"))
+    WcdmaObj.add_member(:rscp, Shapes::ShapeRef.new(shape: RSCP, location_name: "Rscp"))
+    WcdmaObj.add_member(:path_loss, Shapes::ShapeRef.new(shape: PathLoss, location_name: "PathLoss"))
+    WcdmaObj.add_member(:wcdma_nmr, Shapes::ShapeRef.new(shape: WcdmaNmrList, location_name: "WcdmaNmr"))
+    WcdmaObj.struct_class = Types::WcdmaObj
+
+    WiFiAccessPoint.add_member(:mac_address, Shapes::ShapeRef.new(shape: MacAddress, required: true, location_name: "MacAddress"))
+    WiFiAccessPoint.add_member(:rss, Shapes::ShapeRef.new(shape: RSS, required: true, location_name: "Rss"))
+    WiFiAccessPoint.struct_class = Types::WiFiAccessPoint
+
+    WiFiAccessPoints.member = Shapes::ShapeRef.new(shape: WiFiAccessPoint)
 
     WirelessDeviceEventLogOption.add_member(:event, Shapes::ShapeRef.new(shape: WirelessDeviceEvent, required: true, location_name: "Event"))
     WirelessDeviceEventLogOption.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
@@ -2467,6 +2751,7 @@ module Aws::IoTWireless
         o.name = "GetPosition"
         o.http_method = "GET"
         o.http_request_uri = "/positions/{ResourceIdentifier}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetPositionRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPositionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2480,8 +2765,22 @@ module Aws::IoTWireless
         o.name = "GetPositionConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/position-configurations/{ResourceIdentifier}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetPositionConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPositionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_position_estimate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPositionEstimate"
+        o.http_method = "POST"
+        o.http_request_uri = "/position-estimate"
+        o.input = Shapes::ShapeRef.new(shape: GetPositionEstimateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPositionEstimateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2513,6 +2812,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_resource_position, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePosition"
+        o.http_method = "GET"
+        o.http_request_uri = "/resource-positions/{ResourceIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePositionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePositionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_service_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -2781,6 +3093,7 @@ module Aws::IoTWireless
         o.name = "ListPositionConfigurations"
         o.http_method = "GET"
         o.http_request_uri = "/position-configurations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListPositionConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPositionConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2897,6 +3210,7 @@ module Aws::IoTWireless
         o.name = "PutPositionConfiguration"
         o.http_method = "PUT"
         o.http_request_uri = "/position-configurations/{ResourceIdentifier}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutPositionConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutPositionConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3160,6 +3474,7 @@ module Aws::IoTWireless
         o.name = "UpdatePosition"
         o.http_method = "PATCH"
         o.http_request_uri = "/positions/{ResourceIdentifier}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdatePositionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePositionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -3180,6 +3495,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_resource_position, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourcePosition"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/resource-positions/{ResourceIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourcePositionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourcePositionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
