@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Raise ArgumentError when QueuePoller's :max_number_of_messages is nil or less than 1.
+
 1.52.0 (2022-10-25)
 ------------------
 

@@ -410,7 +410,7 @@ module Aws
       end
 
       def yield_messages(config, messages, stats, &block)
-        if config.request_params[:max_number_of_messages].to_i <= 1
+        if config.request_params[:max_number_of_messages] == 1
           messages.each do |msg|
             yield(msg, stats)
           end
@@ -497,6 +497,10 @@ module Aws
             else
               raise ArgumentError, "invalid option #{opt_name.inspect}"
             end
+          end
+          unless @request_params[:max_number_of_messages].to_i >= 1
+            raise ArgumentError,
+                  ':max_number_of_messages must be a positive integer'
           end
           @request_params.freeze
           freeze

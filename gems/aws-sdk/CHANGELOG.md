@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Correct the behavior of QueuePoller for max_number_of_messages less than 1.
-
 3.1.0 (2021-09-01)
 ------------------
 
