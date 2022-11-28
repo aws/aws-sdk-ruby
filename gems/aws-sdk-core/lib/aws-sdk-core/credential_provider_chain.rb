@@ -169,12 +169,14 @@ module Aws
     end
 
     def assume_role_with_profile(options, profile_name)
-      region = (options[:config] && options[:config].region)
-      Aws.shared_config.assume_role_credentials_from_config(
+      assume_opts = {
         profile: profile_name,
-        region: region,
         chain_config: @config
-      )
+      }
+      if options[:config] && options[:config].region
+        assume_opts[:region] = options[:config].region
+      end
+      Aws.shared_config.assume_role_credentials_from_config(assume_opts)
     end
   end
 end

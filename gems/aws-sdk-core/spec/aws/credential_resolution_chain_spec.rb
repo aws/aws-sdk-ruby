@@ -529,6 +529,26 @@ module Aws
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
         end
+
+        it 'allows region to be resolved when unspecified' do
+          assume_role_stub(
+            'arn:aws:iam:123456789012:role/bar',
+            'ACCESS_KEY_ARPC',
+            'AR_AKID',
+            'AR_SECRET',
+            'AR_TOKEN'
+          )
+
+          allow(ENV).to receive(:[])
+          allow(ENV).to receive(:[]).with('AWS_PROFILE').and_return('ar_from_self')
+          allow(ENV).to receive(:values_at).and_return(['us-east-1'])
+
+          credentials = CredentialProviderChain.new.resolve
+
+          expect(
+            credentials.credentials.access_key_id
+          ).to eq('AR_AKID')
+        end
       end
 
       it 'can assume a role with EC2 Instance Metadata as a source' do
