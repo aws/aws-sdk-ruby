@@ -1,6 +1,6 @@
 Unreleased Changes
 ------------------
-* Issue - Allow region resolution in `AssumeRoleCredentials` from `CredentailProviderChain`.
+* Issue - Allow region resolution in `AssumeRoleCredentials` from `CredentialProviderChain`.
 
 3.167.0 (2022-11-09)
 ------------------
