@@ -1,6 +1,6 @@
 Unreleased Changes
 ------------------
-* Issue - Use Aws.shared_config when deciding on region in CredentialProviderChain.
+* Issue - Allow region resolution in `AssumeRoleCredentials` from `CredentailProviderChain`.
 
 3.167.0 (2022-11-09)
 ------------------
