@@ -17,6 +17,37 @@ module Aws
           expect(client.config.compute_checksums).to be(false)
         end
 
+        it 'retries invalid content MD5s' do
+          stub_request(
+            :put,
+            'https://test.s3.us-west-2.amazonaws.com/test'
+          ).to_return(
+            status: 400,
+            headers: {},
+            body: <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+<Code>BadDigest</Code>
+<Message>The Content-MD5 you specified did not match what we received.</Message>
+<ExpectedDigest>123</ExpectedDigest>
+<CalculatedDigest>456==</CalculatedDigest>
+</Error>'
+XML
+          )
+
+          s3 = Client.new(
+            region: 'us-west-2',
+            credentials: Aws::Credentials.new('akid', 'secret'),
+            raise_response_errors: false,
+            retry_backoff: proc {},
+            retry_limit: 5
+          )
+
+          resp = s3.put_object(bucket: 'test', key: 'test', content_md5: '456==')
+          expect(resp.error).to be_a(Aws::S3::Errors::BadDigest)
+          expect(resp.error.context.retries).to eq(5)
+        end
+
         describe '#put_object' do
           it 'computes MD5 of the body and sends it with content-md5 header' do
             client = Client.new(stub_responses: true)
