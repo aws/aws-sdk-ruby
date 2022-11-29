@@ -1,8 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Retry S3's `BadDigest` error
+
 3.168.2 (2022-11-29)
 ------------------
+
 * Issue - Allow region resolution in `AssumeRoleCredentials` from `CredentialProviderChain`.
 
 3.168.1 (2022-11-18)
