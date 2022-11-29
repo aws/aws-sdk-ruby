@@ -110,14 +110,14 @@ module Aws::KMS
     end
 
     # The request was rejected because the specified CloudHSM cluster is
-    # already associated with a custom key store or it shares a backup
-    # history with a cluster that is associated with a custom key store.
-    # Each custom key store must be associated with a different CloudHSM
-    # cluster.
+    # already associated with an CloudHSM key store in the account, or it
+    # shares a backup history with an CloudHSM key store in the account.
+    # Each CloudHSM key store in the account must be associated with a
+    # different CloudHSM cluster.
     #
-    # Clusters that share a backup history have the same cluster
-    # certificate. To view the cluster certificate of a cluster, use the
-    # [DescribeClusters][1] operation.
+    # CloudHSM clusters that share a backup history have the same cluster
+    # certificate. To view the cluster certificate of an CloudHSM cluster,
+    # use the [DescribeClusters][1] operation.
     #
     #
     #
@@ -135,22 +135,23 @@ module Aws::KMS
     end
 
     # The request was rejected because the associated CloudHSM cluster did
-    # not meet the configuration requirements for a custom key store.
+    # not meet the configuration requirements for an CloudHSM key store.
     #
-    # * The cluster must be configured with private subnets in at least two
-    #   different Availability Zones in the Region.
+    # * The CloudHSM cluster must be configured with private subnets in at
+    #   least two different Availability Zones in the Region.
     #
     # * The [security group for the cluster][1]
     #   (cloudhsm-cluster-*&lt;cluster-id&gt;*-sg) must include inbound
     #   rules and outbound rules that allow TCP traffic on ports 2223-2225.
     #   The **Source** in the inbound rules and the **Destination** in the
     #   outbound rules must match the security group ID. These rules are set
-    #   by default when you create the cluster. Do not delete or change
-    #   them. To get information about a particular security group, use the
-    #   [DescribeSecurityGroups][2] operation.
+    #   by default when you create the CloudHSM cluster. Do not delete or
+    #   change them. To get information about a particular security group,
+    #   use the [DescribeSecurityGroups][2] operation.
     #
-    # * The cluster must contain at least as many HSMs as the operation
-    #   requires. To add HSMs, use the CloudHSM [CreateHsm][3] operation.
+    # * The CloudHSM cluster must contain at least as many HSMs as the
+    #   operation requires. To add HSMs, use the CloudHSM [CreateHsm][3]
+    #   operation.
     #
     #   For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
     #   operations, the CloudHSM cluster must have at least two active HSMs,
@@ -158,7 +159,7 @@ module Aws::KMS
     #   operation, the CloudHSM must contain at least one active HSM.
     #
     # For information about the requirements for an CloudHSM cluster that is
-    # associated with a custom key store, see [Assemble the
+    # associated with an CloudHSM key store, see [Assemble the
     # Prerequisites][4] in the *Key Management Service Developer Guide*. For
     # information about creating a private subnet for an CloudHSM cluster,
     # see [Create a Private Subnet][5] in the *CloudHSM User Guide*. For
@@ -184,10 +185,10 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the CloudHSM cluster that is
-    # associated with the custom key store is not active. Initialize and
-    # activate the cluster and try the command again. For detailed
-    # instructions, see [Getting Started][1] in the *CloudHSM User Guide*.
+    # The request was rejected because the CloudHSM cluster associated with
+    # the CloudHSM key store is not active. Initialize and activate the
+    # cluster and try the command again. For detailed instructions, see
+    # [Getting Started][1] in the *CloudHSM User Guide*.
     #
     #
     #
@@ -221,16 +222,17 @@ module Aws::KMS
 
     # The request was rejected because the specified CloudHSM cluster has a
     # different cluster certificate than the original cluster. You cannot
-    # use the operation to specify an unrelated cluster.
+    # use the operation to specify an unrelated cluster for an CloudHSM key
+    # store.
     #
-    # Specify a cluster that shares a backup history with the original
-    # cluster. This includes clusters that were created from a backup of the
-    # current cluster, and clusters that were created from the same backup
-    # that produced the current cluster.
+    # Specify an CloudHSM cluster that shares a backup history with the
+    # original cluster. This includes clusters that were created from a
+    # backup of the current cluster, and clusters that were created from the
+    # same backup that produced the current cluster.
     #
-    # Clusters that share a backup history have the same cluster
-    # certificate. To view the cluster certificate of a cluster, use the
-    # [DescribeClusters][1] operation.
+    # CloudHSM clusters that share a backup history have the same cluster
+    # certificate. To view the cluster certificate of an CloudHSM cluster,
+    # use the [DescribeClusters][1] operation.
     #
     #
     #
@@ -341,18 +343,31 @@ module Aws::KMS
     #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
     #         trust_anchor_certificate: "TrustAnchorCertificateType",
     #         key_store_password: "KeyStorePasswordType",
+    #         custom_key_store_type: "AWS_CLOUDHSM", # accepts AWS_CLOUDHSM, EXTERNAL_KEY_STORE
+    #         xks_proxy_uri_endpoint: "XksProxyUriEndpointType",
+    #         xks_proxy_uri_path: "XksProxyUriPathType",
+    #         xks_proxy_vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
+    #         xks_proxy_authentication_credential: {
+    #           access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
+    #           raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
+    #         },
+    #         xks_proxy_connectivity: "PUBLIC_ENDPOINT", # accepts PUBLIC_ENDPOINT, VPC_ENDPOINT_SERVICE
     #       }
     #
     # @!attribute [rw] custom_key_store_name
     #   Specifies a friendly name for the custom key store. The name must be
-    #   unique in your Amazon Web Services account.
+    #   unique in your Amazon Web Services account and Region. This
+    #   parameter is required for all custom key stores.
     #   @return [String]
     #
     # @!attribute [rw] cloud_hsm_cluster_id
-    #   Identifies the CloudHSM cluster for the custom key store. Enter the
-    #   cluster ID of any active CloudHSM cluster that is not already
-    #   associated with a custom key store. To find the cluster ID, use the
-    #   [DescribeClusters][1] operation.
+    #   Identifies the CloudHSM cluster for an CloudHSM key store. This
+    #   parameter is required for custom key stores with
+    #   `CustomKeyStoreType` of `AWS_CLOUDHSM`.
+    #
+    #   Enter the cluster ID of any active CloudHSM cluster that is not
+    #   already associated with a custom key store. To find the cluster ID,
+    #   use the [DescribeClusters][1] operation.
     #
     #
     #
@@ -360,9 +375,15 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] trust_anchor_certificate
-    #   Enter the content of the trust anchor certificate for the cluster.
-    #   This is the content of the `customerCA.crt` file that you created
-    #   when you [initialized the cluster][1].
+    #   * CreateCustom
+    #
+    #   Specifies the certificate for an CloudHSM key store. This parameter
+    #   is required for custom key stores with a `CustomKeyStoreType` of
+    #   `AWS_CLOUDHSM`.
+    #
+    #   Enter the content of the trust anchor certificate for the CloudHSM
+    #   cluster. This is the content of the `customerCA.crt` file that you
+    #   created when you [initialized the cluster][1].
     #
     #
     #
@@ -370,6 +391,10 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_store_password
+    #   Specifies the `kmsuser` password for an CloudHSM key store. This
+    #   parameter is required for custom key stores with a
+    #   `CustomKeyStoreType` of `AWS_CLOUDHSM`.
+    #
     #   Enter the password of the [ `kmsuser` crypto user (CU) account][1]
     #   in the specified CloudHSM cluster. KMS logs into the cluster as this
     #   user to manage key material on your behalf.
@@ -385,13 +410,167 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser
     #   @return [String]
     #
+    # @!attribute [rw] custom_key_store_type
+    #   Specifies the type of custom key store. The default value is
+    #   `AWS_CLOUDHSM`.
+    #
+    #   For a custom key store backed by an CloudHSM cluster, omit the
+    #   parameter or enter `AWS_CLOUDHSM`. For a custom key store backed by
+    #   an external key manager outside of Amazon Web Services, enter
+    #   `EXTERNAL_KEY_STORE`. You cannot change this property after the key
+    #   store is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_uri_endpoint
+    #   Specifies the endpoint that KMS uses to send requests to the
+    #   external key store proxy (XKS proxy). This parameter is required for
+    #   custom key stores with a `CustomKeyStoreType` of
+    #   `EXTERNAL_KEY_STORE`.
+    #
+    #   The protocol must be HTTPS. KMS communicates on port 443. Do not
+    #   specify the port in the `XksProxyUriEndpoint` value.
+    #
+    #   For external key stores with `XksProxyConnectivity` value of
+    #   `VPC_ENDPOINT_SERVICE`, specify `https://` followed by the private
+    #   DNS name of the VPC endpoint service.
+    #
+    #   For external key stores with `PUBLIC_ENDPOINT` connectivity, this
+    #   endpoint must be reachable before you create the custom key store.
+    #   KMS connects to the external key store proxy while creating the
+    #   custom key store. For external key stores with
+    #   `VPC_ENDPOINT_SERVICE` connectivity, KMS connects when you call the
+    #   ConnectCustomKeyStore operation.
+    #
+    #   The value of this parameter must begin with `https://`. The
+    #   remainder can contain upper and lower case letters (A-Z and a-z),
+    #   numbers (0-9), dots (`.`), and hyphens (`-`). Additional slashes
+    #   (`/` and ``) are not permitted.
+    #
+    #   <b>Uniqueness requirements: </b>
+    #
+    #   * The combined `XksProxyUriEndpoint` and `XksProxyUriPath` values
+    #     must be unique in the Amazon Web Services account and Region.
+    #
+    #   * An external key store with `PUBLIC_ENDPOINT` connectivity cannot
+    #     use the same `XksProxyUriEndpoint` value as an external key store
+    #     with `VPC_ENDPOINT_SERVICE` connectivity in the same Amazon Web
+    #     Services Region.
+    #
+    #   * Each external key store with `VPC_ENDPOINT_SERVICE` connectivity
+    #     must have its own private DNS name. The `XksProxyUriEndpoint`
+    #     value for external key stores with `VPC_ENDPOINT_SERVICE`
+    #     connectivity (private DNS name) must be unique in the Amazon Web
+    #     Services account and Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_uri_path
+    #   Specifies the base path to the proxy APIs for this external key
+    #   store. To find this value, see the documentation for your external
+    #   key store proxy. This parameter is required for all custom key
+    #   stores with a `CustomKeyStoreType` of `EXTERNAL_KEY_STORE`.
+    #
+    #   The value must start with `/` and must end with `/kms/xks/v1` where
+    #   `v1` represents the version of the KMS external key store proxy API.
+    #   This path can include an optional prefix between the required
+    #   elements such as `/prefix/kms/xks/v1`.
+    #
+    #   <b>Uniqueness requirements: </b>
+    #
+    #   * The combined `XksProxyUriEndpoint` and `XksProxyUriPath` values
+    #     must be unique in the Amazon Web Services account and Region.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_vpc_endpoint_service_name
+    #   Specifies the name of the Amazon VPC endpoint service for interface
+    #   endpoints that is used to communicate with your external key store
+    #   proxy (XKS proxy). This parameter is required when the value of
+    #   `CustomKeyStoreType` is `EXTERNAL_KEY_STORE` and the value of
+    #   `XksProxyConnectivity` is `VPC_ENDPOINT_SERVICE`.
+    #
+    #   The Amazon VPC endpoint service must [fulfill all requirements][1]
+    #   for use with an external key store.
+    #
+    #   **Uniqueness requirements:**
+    #
+    #   * External key stores with `VPC_ENDPOINT_SERVICE` connectivity can
+    #     share an Amazon VPC, but each external key store must have its own
+    #     VPC endpoint service and private DNS name.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keystore.html#xks-requirements
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_authentication_credential
+    #   Specifies an authentication credential for the external key store
+    #   proxy (XKS proxy). This parameter is required for all custom key
+    #   stores with a `CustomKeyStoreType` of `EXTERNAL_KEY_STORE`.
+    #
+    #   The `XksProxyAuthenticationCredential` has two required elements:
+    #   `RawSecretAccessKey`, a secret key, and `AccessKeyId`, a unique
+    #   identifier for the `RawSecretAccessKey`. For character requirements,
+    #   see
+    #   [XksProxyAuthenticationCredentialType](kms/latest/APIReference/API_XksProxyAuthenticationCredentialType.html).
+    #
+    #   KMS uses this authentication credential to sign requests to the
+    #   external key store proxy on your behalf. This credential is
+    #   unrelated to Identity and Access Management (IAM) and Amazon Web
+    #   Services credentials.
+    #
+    #   This parameter doesn't set or change the authentication credentials
+    #   on the XKS proxy. It just tells KMS the credential that you
+    #   established on your external key store proxy. If you rotate your
+    #   proxy authentication credential, use the UpdateCustomKeyStore
+    #   operation to provide the new credential to KMS.
+    #   @return [Types::XksProxyAuthenticationCredentialType]
+    #
+    # @!attribute [rw] xks_proxy_connectivity
+    #   Indicates how KMS communicates with the external key store proxy.
+    #   This parameter is required for custom key stores with a
+    #   `CustomKeyStoreType` of `EXTERNAL_KEY_STORE`.
+    #
+    #   If the external key store proxy uses a public endpoint, specify
+    #   `PUBLIC_ENDPOINT`. If the external key store proxy uses a Amazon VPC
+    #   endpoint service for communication with KMS, specify
+    #   `VPC_ENDPOINT_SERVICE`. For help making this choice, see [Choosing a
+    #   connectivity option][1] in the *Key Management Service Developer
+    #   Guide*.
+    #
+    #   An Amazon VPC endpoint service keeps your communication with KMS in
+    #   a private address space entirely within Amazon Web Services, but it
+    #   requires more configuration, including establishing a Amazon VPC
+    #   with multiple subnets, a VPC endpoint service, a network load
+    #   balancer, and a verified private DNS name. A public endpoint is
+    #   simpler to set up, but it might be slower and might not fulfill your
+    #   security requirements. You might consider testing with a public
+    #   endpoint, and then establishing a VPC endpoint service for
+    #   production tasks. Note that this choice does not determine the
+    #   location of the external key store proxy. Even if you choose a VPC
+    #   endpoint service, the proxy can be hosted within the VPC or outside
+    #   of Amazon Web Services such as in your corporate data center.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/plan-xks-keystore.html#choose-xks-connectivity
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateCustomKeyStoreRequest AWS API Documentation
     #
     class CreateCustomKeyStoreRequest < Struct.new(
       :custom_key_store_name,
       :cloud_hsm_cluster_id,
       :trust_anchor_certificate,
-      :key_store_password)
+      :key_store_password,
+      :custom_key_store_type,
+      :xks_proxy_uri_endpoint,
+      :xks_proxy_uri_path,
+      :xks_proxy_vpc_endpoint_service_name,
+      :xks_proxy_authentication_credential,
+      :xks_proxy_connectivity)
       SENSITIVE = [:key_store_password]
       include Aws::Structure
     end
@@ -629,7 +808,7 @@ module Aws::KMS
     #         key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC
     #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
     #         key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
-    #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM
+    #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM, EXTERNAL_KEY_STORE
     #         custom_key_store_id: "CustomKeyStoreIdType",
     #         bypass_policy_lockout_safety_check: false,
     #         tags: [
@@ -639,22 +818,20 @@ module Aws::KMS
     #           },
     #         ],
     #         multi_region: false,
+    #         xks_key_id: "XksKeyIdType",
     #       }
     #
     # @!attribute [rw] policy
-    #   The key policy to attach to the KMS key. If you do not specify a key
-    #   policy, KMS attaches a default key policy to the KMS key. For more
-    #   information, see [Default key policy][1] in the *Key Management
-    #   Service Developer Guide*.
+    #   The key policy to attach to the KMS key.
     #
     #   If you provide a key policy, it must meet the following criteria:
     #
-    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to `True`, the
+    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the
     #     key policy must allow the principal that is making the `CreateKey`
     #     request to make a subsequent PutKeyPolicy request on the KMS key.
     #     This reduces the risk that the KMS key becomes unmanageable. For
     #     more information, refer to the scenario in the [Default Key
-    #     Policy][2] section of the <i> <i>Key Management Service Developer
+    #     Policy][1] section of the <i> <i>Key Management Service Developer
     #     Guide</i> </i>.
     #
     #   * Each statement in the key policy must contain one or more
@@ -664,33 +841,25 @@ module Aws::KMS
     #     enforce a delay before including the new principal in a key policy
     #     because the new principal might not be immediately visible to KMS.
     #     For more information, see [Changes that I make are not always
-    #     immediately visible][3] in the *Amazon Web Services Identity and
+    #     immediately visible][2] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   A key policy document can include only the following characters:
+    #   If you do not provide a key policy, KMS attaches a default key
+    #   policy to the KMS key. For more information, see [Default Key
+    #   Policy][3] in the *Key Management Service Developer Guide*.
     #
-    #   * Printable ASCII characters from the space character (`\u0020`)
-    #     through the end of the ASCII character range.
+    #   The key policy size quota is 32 kilobytes (32768 bytes).
     #
-    #   * Printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through `\u00FF`).
-    #
-    #   * The tab (`\u0009`), line feed (`\u000A`), and carriage return
-    #     (`\u000D`) special characters
-    #
-    #   For information about key policies, see [Key policies in KMS][4] in
-    #   the *Key Management Service Developer Guide*. For help writing and
-    #   formatting a JSON policy document, see the [IAM JSON Policy
-    #   Reference][5] in the <i> <i>Identity and Access Management User
-    #   Guide</i> </i>.
+    #   For help writing and formatting a JSON policy document, see the [IAM
+    #   JSON Policy Reference][4] in the <i> <i>Identity and Access
+    #   Management User Guide</i> </i>.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    #   [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -737,8 +906,8 @@ module Aws::KMS
     #
     #   The `KeySpec` and `CustomerMasterKeySpec` parameters work the same
     #   way. Only the names differ. We recommend that you use `KeySpec`
-    #   parameter in your code. However, to avoid breaking changes, KMS will
-    #   support both parameters.
+    #   parameter in your code. However, to avoid breaking changes, KMS
+    #   supports both parameters.
     #   @return [String]
     #
     # @!attribute [rw] key_spec
@@ -751,14 +920,13 @@ module Aws::KMS
     #   Guide</i> </i>.
     #
     #   The `KeySpec` determines whether the KMS key contains a symmetric
-    #   key or an asymmetric key pair. It also determines the cryptographic
-    #   algorithms that the KMS key supports. You can't change the
-    #   `KeySpec` after the KMS key is created. To further restrict the
-    #   algorithms that can be used with the KMS key, use a condition key in
-    #   its key policy or IAM policy. For more information, see
-    #   [kms:EncryptionAlgorithm][2], [kms:MacAlgorithm][3] or [kms:Signing
-    #   Algorithm][4] in the <i> <i>Key Management Service Developer
-    #   Guide</i> </i>.
+    #   key or an asymmetric key pair. It also determines the algorithms
+    #   that the KMS key supports. You can't change the `KeySpec` after the
+    #   KMS key is created. To further restrict the algorithms that can be
+    #   used with the KMS key, use a condition key in its key policy or IAM
+    #   policy. For more information, see [kms:EncryptionAlgorithm][2],
+    #   [kms:MacAlgorithm][3] or [kms:Signing Algorithm][4] in the <i>
+    #   <i>Key Management Service Developer Guide</i> </i>.
     #
     #   [Amazon Web Services services that are integrated with KMS][5] use
     #   symmetric encryption KMS keys to protect your data. These services
@@ -825,45 +993,48 @@ module Aws::KMS
     #   the origin after you create the KMS key. The default is `AWS_KMS`,
     #   which means that KMS creates the key material.
     #
-    #   To create a KMS key with no key material (for imported key
-    #   material), set the value to `EXTERNAL`. For more information about
-    #   importing key material into KMS, see [Importing Key Material][1] in
-    #   the *Key Management Service Developer Guide*. This value is valid
-    #   only for symmetric encryption KMS keys.
+    #   To [create a KMS key with no key material][1] (for imported key
+    #   material), set this value to `EXTERNAL`. For more information about
+    #   importing key material into KMS, see [Importing Key Material][2] in
+    #   the *Key Management Service Developer Guide*. The `EXTERNAL` origin
+    #   value is valid only for symmetric KMS keys.
     #
-    #   To create a KMS key in an KMS [custom key store][2] and create its
-    #   key material in the associated CloudHSM cluster, set this value to
+    #   To [create a KMS key in an CloudHSM key store][3] and create its key
+    #   material in the associated CloudHSM cluster, set this value to
     #   `AWS_CLOUDHSM`. You must also use the `CustomKeyStoreId` parameter
-    #   to identify the custom key store. This value is valid only for
-    #   symmetric encryption KMS keys.
+    #   to identify the CloudHSM key store. The `KeySpec` value must be
+    #   `SYMMETRIC_DEFAULT`.
+    #
+    #   To [create a KMS key in an external key store][4], set this value to
+    #   `EXTERNAL_KEY_STORE`. You must also use the `CustomKeyStoreId`
+    #   parameter to identify the external key store and the `XksKeyId`
+    #   parameter to identify the associated external key. The `KeySpec`
+    #   value must be `SYMMETRIC_DEFAULT`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-create-cmk.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/create-cmk-keystore.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keys.html
     #   @return [String]
     #
     # @!attribute [rw] custom_key_store_id
-    #   Creates the KMS key in the specified [custom key store][1] and the
-    #   key material in its associated CloudHSM cluster. To create a KMS key
-    #   in a custom key store, you must also specify the `Origin` parameter
-    #   with a value of `AWS_CLOUDHSM`. The CloudHSM cluster that is
-    #   associated with the custom key store must have at least two active
-    #   HSMs, each in a different Availability Zone in the Region.
+    #   Creates the KMS key in the specified [custom key store][1]. The
+    #   `ConnectionState` of the custom key store must be `CONNECTED`. To
+    #   find the CustomKeyStoreID and ConnectionState use the
+    #   DescribeCustomKeyStores operation.
     #
     #   This parameter is valid only for symmetric encryption KMS keys in a
     #   single Region. You cannot create any other type of KMS key in a
     #   custom key store.
     #
-    #   To find the ID of a custom key store, use the
-    #   DescribeCustomKeyStores operation.
-    #
-    #   The response includes the custom key store ID and the ID of the
-    #   CloudHSM cluster.
-    #
-    #   This operation is part of the [custom key store feature][1] feature
-    #   in KMS, which combines the convenience and extensive integration of
-    #   KMS with the isolation and control of a single-tenant key store.
+    #   When you create a KMS key in an CloudHSM key store, KMS generates a
+    #   non-exportable 256-bit symmetric key in its associated CloudHSM
+    #   cluster and associates it with the KMS key. When you create a KMS
+    #   key in an external key store, you must use the `XksKeyId` parameter
+    #   to specify an external key that serves as key material for the KMS
+    #   key.
     #
     #
     #
@@ -899,7 +1070,7 @@ module Aws::KMS
     #   TagResource operation.
     #
     #   <note markdown="1"> Tagging or untagging a KMS key can allow or deny permission to the
-    #   KMS key. For details, see [ABAC in KMS][1] in the *Key Management
+    #   KMS key. For details, see [ABAC for KMS][1] in the *Key Management
     #   Service Developer Guide*.
     #
     #    </note>
@@ -947,15 +1118,51 @@ module Aws::KMS
     #   This value creates a *primary key*, not a replica. To create a
     #   *replica key*, use the ReplicateKey operation.
     #
-    #   You can create a multi-Region version of a symmetric encryption KMS
-    #   key, an HMAC KMS key, an asymmetric KMS key, or a KMS key with
-    #   imported key material. However, you cannot create a multi-Region key
-    #   in a custom key store.
+    #   You can create a symmetric or asymmetric multi-Region key, and you
+    #   can create a multi-Region key with imported key material. However,
+    #   you cannot create a multi-Region key in a custom key store.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] xks_key_id
+    #   Identifies the [external key][1] that serves as key material for the
+    #   KMS key in an [external key store][2]. Specify the ID that the
+    #   [external key store proxy][3] uses to refer to the external key. For
+    #   help, see the documentation for your external key store proxy.
+    #
+    #   This parameter is required for a KMS key with an `Origin` value of
+    #   `EXTERNAL_KEY_STORE`. It is not valid for KMS keys with any other
+    #   `Origin` value.
+    #
+    #   The external key must be an existing 256-bit AES symmetric
+    #   encryption key hosted outside of Amazon Web Services in an external
+    #   key manager associated with the external key store specified by the
+    #   `CustomKeyStoreId` parameter. This key must be enabled and
+    #   configured to perform encryption and decryption. Each KMS key in an
+    #   external key store must use a different external key. For details,
+    #   see [Requirements for a KMS key in an external key store][4] in the
+    #   *Key Management Service Developer Guide*.
+    #
+    #   Each KMS key in an external key store is associated two backing
+    #   keys. One is key material that KMS generates. The other is the
+    #   external key specified by this parameter. When you use the KMS key
+    #   in an external key store to encrypt data, the encryption operation
+    #   is performed first by KMS using the KMS key material, and then by
+    #   the external key manager using the specified external key, a process
+    #   known as *double encryption*. For details, see [Double
+    #   encryption][5] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-xks-proxy
+    #   [4]: https://docs.aws.amazon.com/create-xks-keys.html#xks-key-requirements
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-double-encryption
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyRequest AWS API Documentation
     #
@@ -969,7 +1176,8 @@ module Aws::KMS
       :custom_key_store_id,
       :bypass_policy_lockout_safety_check,
       :tags,
-      :multi_region)
+      :multi_region,
+      :xks_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1008,18 +1216,29 @@ module Aws::KMS
     #
     # This exception is thrown under the following conditions:
     #
-    # * You requested the CreateKey or GenerateRandom operation in a custom
-    #   key store that is not connected. These operations are valid only
-    #   when the custom key store `ConnectionState` is `CONNECTED`.
+    # * You requested the ConnectCustomKeyStore operation on a custom key
+    #   store with a `ConnectionState` of `DISCONNECTING` or `FAILED`. This
+    #   operation is valid for all other `ConnectionState` values. To
+    #   reconnect a custom key store in a `FAILED` state, disconnect it
+    #   (DisconnectCustomKeyStore), then connect it
+    #   (`ConnectCustomKeyStore`).
+    #
+    # * You requested the CreateKey operation in a custom key store that is
+    #   not connected. This operations is valid only when the custom key
+    #   store `ConnectionState` is `CONNECTED`.
+    #
+    # * You requested the DisconnectCustomKeyStore operation on a custom key
+    #   store with a `ConnectionState` of `DISCONNECTING` or `DISCONNECTED`.
+    #   This operation is valid for all other `ConnectionState` values.
     #
     # * You requested the UpdateCustomKeyStore or DeleteCustomKeyStore
     #   operation on a custom key store that is not disconnected. This
     #   operation is valid only when the custom key store `ConnectionState`
     #   is `DISCONNECTED`.
     #
-    # * You requested the ConnectCustomKeyStore operation on a custom key
-    #   store with a `ConnectionState` of `DISCONNECTING` or `FAILED`. This
-    #   operation is valid for all other `ConnectionState` values.
+    # * You requested the GenerateRandom operation in an CloudHSM key store
+    #   that is not connected. This operation is valid only when the
+    #   CloudHSM key store `ConnectionState` is `CONNECTED`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1074,13 +1293,17 @@ module Aws::KMS
     #
     # @!attribute [rw] cloud_hsm_cluster_id
     #   A unique identifier for the CloudHSM cluster that is associated with
-    #   the custom key store.
+    #   an CloudHSM key store. This field appears only when the
+    #   `CustomKeyStoreType` is `AWS_CLOUDHSM`.
     #   @return [String]
     #
     # @!attribute [rw] trust_anchor_certificate
-    #   The trust anchor certificate of the associated CloudHSM cluster.
-    #   When you [initialize the cluster][1], you create this certificate
-    #   and save it in the `customerCA.crt` file.
+    #   The trust anchor certificate of the CloudHSM cluster associated with
+    #   an CloudHSM key store. When you [initialize the cluster][1], you
+    #   create this certificate and save it in the `customerCA.crt` file.
+    #
+    #   This field appears only when the `CustomKeyStoreType` is
+    #   `AWS_CLOUDHSM`.
     #
     #
     #
@@ -1088,22 +1311,30 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] connection_state
-    #   Indicates whether the custom key store is connected to its CloudHSM
-    #   cluster.
+    #   Indicates whether the custom key store is connected to its backing
+    #   key store. For an CloudHSM key store, the `ConnectionState`
+    #   indicates whether it is connected to its CloudHSM cluster. For an
+    #   external key store, the `ConnectionState` indicates whether it is
+    #   connected to the external key store proxy that communicates with
+    #   your external key manager.
     #
     #   You can create and use KMS keys in your custom key stores only when
-    #   its connection state is `CONNECTED`.
+    #   its `ConnectionState` is `CONNECTED`.
     #
-    #   The value is `DISCONNECTED` if the key store has never been
-    #   connected or you use the DisconnectCustomKeyStore operation to
-    #   disconnect it. If the value is `CONNECTED` but you are having
-    #   trouble using the custom key store, make sure that its associated
-    #   CloudHSM cluster is active and contains at least one active HSM.
+    #   The `ConnectionState` value is `DISCONNECTED` only if the key store
+    #   has never been connected or you use the DisconnectCustomKeyStore
+    #   operation to disconnect it. If the value is `CONNECTED` but you are
+    #   having trouble using the custom key store, make sure that the
+    #   backing key store is reachable and active. For an CloudHSM key
+    #   store, verify that its associated CloudHSM cluster is active and
+    #   contains at least one active HSM. For an external key store, verify
+    #   that the external key store proxy and external key manager are
+    #   connected and enabled.
     #
     #   A value of `FAILED` indicates that an attempt to connect was
     #   unsuccessful. The `ConnectionErrorCode` field in the response
     #   indicates the cause of the failure. For help resolving a connection
-    #   failure, see [Troubleshooting a Custom Key Store][1] in the *Key
+    #   failure, see [Troubleshooting a custom key store][1] in the *Key
     #   Management Service Developer Guide*.
     #
     #
@@ -1113,35 +1344,52 @@ module Aws::KMS
     #
     # @!attribute [rw] connection_error_code
     #   Describes the connection error. This field appears in the response
-    #   only when the `ConnectionState` is `FAILED`. For help resolving
-    #   these errors, see [How to Fix a Connection Failure][1] in *Key
-    #   Management Service Developer Guide*.
+    #   only when the `ConnectionState` is `FAILED`.
     #
-    #   Valid values are:
+    #   Many failures can be resolved by updating the properties of the
+    #   custom key store. To update a custom key store, disconnect it
+    #   (DisconnectCustomKeyStore), correct the errors
+    #   (UpdateCustomKeyStore), and try to connect again
+    #   (ConnectCustomKeyStore). For additional help resolving these errors,
+    #   see [How to Fix a Connection Failure][1] in *Key Management Service
+    #   Developer Guide*.
     #
-    #   * `CLUSTER_NOT_FOUND` - KMS cannot find the CloudHSM cluster with
-    #     the specified cluster ID.
+    #   **All custom key stores:**
     #
-    #   * `INSUFFICIENT_CLOUDHSM_HSMS` - The associated CloudHSM cluster
-    #     does not contain any active HSMs. To connect a custom key store to
-    #     its CloudHSM cluster, the cluster must contain at least one active
-    #     HSM.
-    #
-    #   * `INTERNAL_ERROR` - KMS could not complete the request due to an
+    #   * `INTERNAL_ERROR` — KMS could not complete the request due to an
     #     internal error. Retry the request. For `ConnectCustomKeyStore`
     #     requests, disconnect the custom key store before trying to connect
     #     again.
     #
-    #   * `INVALID_CREDENTIALS` - KMS does not have the correct password for
-    #     the `kmsuser` crypto user in the CloudHSM cluster. Before you can
-    #     connect your custom key store to its CloudHSM cluster, you must
-    #     change the `kmsuser` account password and update the key store
-    #     password value for the custom key store.
+    #   * `NETWORK_ERRORS` — Network errors are preventing KMS from
+    #     connecting the custom key store to its backing key store.
     #
-    #   * `NETWORK_ERRORS` - Network errors are preventing KMS from
-    #     connecting to the custom key store.
+    #   **CloudHSM key stores:**
     #
-    #   * `SUBNET_NOT_FOUND` - A subnet in the CloudHSM cluster
+    #   * `CLUSTER_NOT_FOUND` — KMS cannot find the CloudHSM cluster with
+    #     the specified cluster ID.
+    #
+    #   * `INSUFFICIENT_CLOUDHSM_HSMS` — The associated CloudHSM cluster
+    #     does not contain any active HSMs. To connect a custom key store to
+    #     its CloudHSM cluster, the cluster must contain at least one active
+    #     HSM.
+    #
+    #   * `INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET` — At least one private
+    #     subnet associated with the CloudHSM cluster doesn't have any
+    #     available IP addresses. A CloudHSM key store connection requires
+    #     one free IP address in each of the associated private subnets,
+    #     although two are preferable. For details, see [How to Fix a
+    #     Connection Failure][1] in the *Key Management Service Developer
+    #     Guide*.
+    #
+    #   * `INVALID_CREDENTIALS` — The `KeyStorePassword` for the custom key
+    #     store doesn't match the current password of the `kmsuser` crypto
+    #     user in the CloudHSM cluster. Before you can connect your custom
+    #     key store to its CloudHSM cluster, you must change the `kmsuser`
+    #     account password and update the `KeyStorePassword` value for the
+    #     custom key store.
+    #
+    #   * `SUBNET_NOT_FOUND` — A subnet in the CloudHSM cluster
     #     configuration was deleted. If KMS cannot find all of the subnets
     #     in the cluster configuration, attempts to connect the custom key
     #     store to the CloudHSM cluster fail. To fix this error, create a
@@ -1151,13 +1399,13 @@ module Aws::KMS
     #     Connection Failure][1] in the *Key Management Service Developer
     #     Guide*.
     #
-    #   * `USER_LOCKED_OUT` - The `kmsuser` CU account is locked out of the
+    #   * `USER_LOCKED_OUT` — The `kmsuser` CU account is locked out of the
     #     associated CloudHSM cluster due to too many failed password
     #     attempts. Before you can connect your custom key store to its
     #     CloudHSM cluster, you must change the `kmsuser` account password
     #     and update the key store password value for the custom key store.
     #
-    #   * `USER_LOGGED_IN` - The `kmsuser` CU account is logged into the the
+    #   * `USER_LOGGED_IN` — The `kmsuser` CU account is logged into the
     #     associated CloudHSM cluster. This prevents KMS from rotating the
     #     `kmsuser` account password and logging into the cluster. Before
     #     you can connect your custom key store to its CloudHSM cluster, you
@@ -1167,21 +1415,118 @@ module Aws::KMS
     #     help, see [How to Log Out and Reconnect][2] in the *Key Management
     #     Service Developer Guide*.
     #
-    #   * `USER_NOT_FOUND` - KMS cannot find a `kmsuser` CU account in the
+    #   * `USER_NOT_FOUND` — KMS cannot find a `kmsuser` CU account in the
     #     associated CloudHSM cluster. Before you can connect your custom
     #     key store to its CloudHSM cluster, you must create a `kmsuser` CU
     #     account in the cluster, and then update the key store password
     #     value for the custom key store.
     #
+    #   **External key stores:**
+    #
+    #   * `INVALID_CREDENTIALS` — One or both of the
+    #     `XksProxyAuthenticationCredential` values is not valid on the
+    #     specified external key store proxy.
+    #
+    #   * `XKS_PROXY_ACCESS_DENIED` — KMS requests are denied access to the
+    #     external key store proxy. If the external key store proxy has
+    #     authorization rules, verify that they permit KMS to communicate
+    #     with the proxy on your behalf.
+    #
+    #   * `XKS_PROXY_INVALID_CONFIGURATION` — A configuration error is
+    #     preventing the external key store from connecting to its proxy.
+    #     Verify the value of the `XksProxyUriPath`.
+    #
+    #   * `XKS_PROXY_INVALID_RESPONSE` — KMS cannot interpret the response
+    #     from the external key store proxy. If you see this connection
+    #     error code repeatedly, notify your external key store proxy
+    #     vendor.
+    #
+    #   * `XKS_PROXY_INVALID_TLS_CONFIGURATION` — KMS cannot connect to the
+    #     external key store proxy because the TLS configuration is invalid.
+    #     Verify that the XKS proxy supports TLS 1.2 or 1.3. Also, verify
+    #     that the TLS certificate is not expired, and that it matches the
+    #     hostname in the `XksProxyUriEndpoint` value, and that it is signed
+    #     by a certificate authority included in the [Trusted Certificate
+    #     Authorities][3] list.
+    #
+    #   * `XKS_PROXY_NOT_REACHABLE` — KMS can't communicate with your
+    #     external key store proxy. Verify that the `XksProxyUriEndpoint`
+    #     and `XksProxyUriPath` are correct. Use the tools for your external
+    #     key store proxy to verify that the proxy is active and available
+    #     on its network. Also, verify that your external key manager
+    #     instances are operating properly. Connection attempts fail with
+    #     this connection error code if the proxy reports that all external
+    #     key manager instances are unavailable.
+    #
+    #   * `XKS_PROXY_TIMED_OUT` — KMS can connect to the external key store
+    #     proxy, but the proxy does not respond to KMS in the time allotted.
+    #     If you see this connection error code repeatedly, notify your
+    #     external key store proxy vendor.
+    #
+    #   * `XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION` — The Amazon VPC
+    #     endpoint service configuration doesn't conform to the
+    #     requirements for an KMS external key store.
+    #
+    #     * The VPC endpoint service must be an endpoint service for
+    #       interface endpoints in the caller's Amazon Web Services
+    #       account.
+    #
+    #     * It must have a network load balancer (NLB) connected to at least
+    #       two subnets, each in a different Availability Zone.
+    #
+    #     * The `Allow principals` list must include the KMS service
+    #       principal for the Region, `cks.kms.<region>.amazonaws.com`, such
+    #       as `cks.kms.us-east-1.amazonaws.com`.
+    #
+    #     * It must *not* require [acceptance][4] of connection requests.
+    #
+    #     * It must have a private DNS name. The private DNS name for an
+    #       external key store with `VPC_ENDPOINT_SERVICE` connectivity must
+    #       be unique in its Amazon Web Services Region.
+    #
+    #     * The domain of the private DNS name must have a [verification
+    #       status][5] of `verified`.
+    #
+    #     * The [TLS certificate][6] specifies the private DNS hostname at
+    #       which the endpoint is reachable.
+    #
+    #   * `XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND` — KMS can't find the VPC
+    #     endpoint service that it uses to communicate with the external key
+    #     store proxy. Verify that the `XksProxyVpcEndpointServiceName` is
+    #     correct and the KMS service principal has service consumer
+    #     permissions on the Amazon VPC endpoint service.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#login-kmsuser-2
+    #   [3]: https://github.com/aws/aws-kms-xksproxy-api-spec/blob/main/TrustedCertificateAuthorities
+    #   [4]: https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html
+    #   [5]: https://docs.aws.amazon.com/vpc/latest/privatelink/verify-domains.html
+    #   [6]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date
     #   The date and time when the custom key store was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] custom_key_store_type
+    #   Indicates the type of the custom key store. `AWS_CLOUDHSM` indicates
+    #   a custom key store backed by an CloudHSM cluster.
+    #   `EXTERNAL_KEY_STORE` indicates a custom key store backed by an
+    #   external key store proxy and external key manager outside of Amazon
+    #   Web Services.
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_configuration
+    #   Configuration settings for the external key store proxy (XKS proxy).
+    #   The external key store proxy translates KMS requests into a format
+    #   that your external key manager can understand. The proxy
+    #   configuration includes connection information that KMS requires.
+    #
+    #   This field appears only when the `CustomKeyStoreType` is
+    #   `EXTERNAL_KEY_STORE`.
+    #   @return [Types::XksProxyConfigurationType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoresListEntry AWS API Documentation
     #
@@ -1192,7 +1537,9 @@ module Aws::KMS
       :trust_anchor_certificate,
       :connection_state,
       :connection_error_code,
-      :creation_date)
+      :creation_date,
+      :custom_key_store_type,
+      :xks_proxy_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1416,8 +1763,8 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The system timed out while trying to fulfill the request. The request
-    # can be retried.
+    # The system timed out while trying to fulfill the request. You can
+    # retry the request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1446,8 +1793,8 @@ module Aws::KMS
     #
     #   By default, this operation gets information about all custom key
     #   stores in the account and Region. To limit the output to a
-    #   particular custom key store, you can use either the
-    #   `CustomKeyStoreId` or `CustomKeyStoreName` parameter, but not both.
+    #   particular custom key store, provide either the `CustomKeyStoreId`
+    #   or `CustomKeyStoreName` parameter, but not both.
     #   @return [String]
     #
     # @!attribute [rw] custom_key_store_name
@@ -1456,8 +1803,8 @@ module Aws::KMS
     #
     #   By default, this operation gets information about all custom key
     #   stores in the account and Region. To limit the output to a
-    #   particular custom key store, you can use either the
-    #   `CustomKeyStoreId` or `CustomKeyStoreName` parameter, but not both.
+    #   particular custom key store, provide either the `CustomKeyStoreId`
+    #   or `CustomKeyStoreName` parameter, but not both.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1733,11 +2080,10 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   Identifies a symmetric encryption KMS key. You cannot enable or
-    #   disable automatic rotation of [asymmetric KMS keys][1], [HMAC KMS
-    #   keys][2], KMS keys with [imported key material][3], or KMS keys in a
-    #   [custom key store][4]. The key rotation status of these KMS keys is
-    #   always `false`. To enable or disable automatic rotation of a set of
+    #   Identifies a symmetric encryption KMS key. You cannot enable
+    #   automatic rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2],
+    #   KMS keys with [imported key material][3], or KMS keys in a [custom
+    #   key store][4]. To enable or disable automatic rotation of a set of
     #   related [multi-Region keys][5], set the property on the primary key.
     #
     #   Specify the key ID or key ARN of the KMS key.
@@ -1859,6 +2205,8 @@ module Aws::KMS
     #   value, `SYMMETRIC_DEFAULT`, is the algorithm used for symmetric
     #   encryption KMS keys. If you are using an asymmetric KMS key, we
     #   recommend RSAES\_OAEP\_SHA\_256.
+    #
+    #   The SM2PKE algorithm is only available in China Regions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest AWS API Documentation
@@ -1984,8 +2332,7 @@ module Aws::KMS
     #   keys to encrypt and decrypt or to sign and verify (but not both),
     #   and the rule that permits you to use ECC KMS keys only to sign and
     #   verify, are not effective on data key pairs, which are used outside
-    #   of KMS. The SM2 key spec is only available in China Regions. RSA and
-    #   ECC asymmetric key pairs are also available in China Regions.
+    #   of KMS. The SM2 key spec is only available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2122,8 +2469,7 @@ module Aws::KMS
     #   keys to encrypt and decrypt or to sign and verify (but not both),
     #   and the rule that permits you to use ECC KMS keys only to sign and
     #   verify, are not effective on data key pairs, which are used outside
-    #   of KMS. The SM2 key spec is only available in China Regions. RSA and
-    #   ECC asymmetric key pairs are also available in China Regions.
+    #   of KMS. The SM2 key spec is only available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2511,8 +2857,14 @@ module Aws::KMS
     end
 
     # @!attribute [rw] mac
-    #   The hash-based message authentication code (HMAC) for the given
-    #   message, key, and MAC algorithm.
+    #   The hash-based message authentication code (HMAC) that was generated
+    #   for the specified message, HMAC KMS key, and MAC algorithm.
+    #
+    #   This is the standard, raw HMAC defined in [RFC 2104][1].
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc2104
     #   @return [String]
     #
     # @!attribute [rw] mac_algorithm
@@ -2547,12 +2899,12 @@ module Aws::KMS
     #
     # @!attribute [rw] custom_key_store_id
     #   Generates the random byte string in the CloudHSM cluster that is
-    #   associated with the specified [custom key store][1]. To find the ID
-    #   of a custom key store, use the DescribeCustomKeyStores operation.
+    #   associated with the specified CloudHSM key store. To find the ID of
+    #   a custom key store, use the DescribeCustomKeyStores operation.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   External key store IDs are not valid for this parameter. If you
+    #   specify the ID of an external key store, `GenerateRandom` throws an
+    #   `UnsupportedOperationException`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomRequest AWS API Documentation
@@ -2846,7 +3198,7 @@ module Aws::KMS
     #
     #   The `KeySpec` and `CustomerMasterKeySpec` fields have the same
     #   value. We recommend that you use the `KeySpec` field in your code.
-    #   However, to avoid breaking changes, KMS will support both fields.
+    #   However, to avoid breaking changes, KMS supports both fields.
     #   @return [String]
     #
     # @!attribute [rw] key_spec
@@ -2900,11 +3252,10 @@ module Aws::KMS
     #
     # KMS applies the grant constraints only to cryptographic operations
     # that support an encryption context, that is, all cryptographic
-    # operations with a [symmetric encryption KMS key][3]. Grant constraints
-    # are not applied to operations that do not support an encryption
-    # context, such as cryptographic operations with HMAC KMS keys or
-    # asymmetric KMS keys, and management operations, such as DescribeKey or
-    # RetireGrant.
+    # operations with a [symmetric KMS key][3]. Grant constraints are not
+    # applied to operations that do not support an encryption context, such
+    # as cryptographic operations with asymmetric KMS keys and management
+    # operations, such as DescribeKey or RetireGrant.
     #
     # In a cryptographic operation, the encryption context in the decryption
     # operation must be an exact, case-sensitive match for the keys and
@@ -3088,19 +3439,37 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] valid_to
-    #   The time at which the imported key material expires. When the key
-    #   material expires, KMS deletes the key material and the KMS key
-    #   becomes unusable. You must omit this parameter when the
-    #   `ExpirationModel` parameter is set to
-    #   `KEY_MATERIAL_DOES_NOT_EXPIRE`. Otherwise it is required.
+    #   The date and time when the imported key material expires. This
+    #   parameter is required when the value of the `ExpirationModel`
+    #   parameter is `KEY_MATERIAL_EXPIRES`. Otherwise it is not valid.
+    #
+    #   The value of this parameter must be a future date and time. The
+    #   maximum value is 365 days from the request date.
+    #
+    #   When the key material expires, KMS deletes the key material from the
+    #   KMS key. Without its key material, the KMS key is unusable. To use
+    #   the KMS key in cryptographic operations, you must reimport the same
+    #   key material.
+    #
+    #   You cannot change the `ExpirationModel` or `ValidTo` values for the
+    #   current import after the request completes. To change either value,
+    #   you must delete (DeleteImportedKeyMaterial) and reimport the key
+    #   material.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_model
     #   Specifies whether the key material expires. The default is
-    #   `KEY_MATERIAL_EXPIRES`, in which case you must include the `ValidTo`
-    #   parameter. When this parameter is set to
+    #   `KEY_MATERIAL_EXPIRES`.
+    #
+    #   When the value of `ExpirationModel` is `KEY_MATERIAL_EXPIRES`, you
+    #   must specify a value for the `ValidTo` parameter. When value is
     #   `KEY_MATERIAL_DOES_NOT_EXPIRE`, you must omit the `ValidTo`
     #   parameter.
+    #
+    #   You cannot change the `ExpirationModel` or `ValidTo` values for the
+    #   current import after the request completes. To change either value,
+    #   you must delete (DeleteImportedKeyMaterial) and reimport the key
+    #   material.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialRequest AWS API Documentation
@@ -3151,11 +3520,11 @@ module Aws::KMS
     end
 
     # The request was rejected because the trust anchor certificate in the
-    # request is not the trust anchor certificate for the specified CloudHSM
-    # cluster.
+    # request to create an CloudHSM key store is not the trust anchor
+    # certificate for the specified CloudHSM cluster.
     #
-    # When you [initialize the cluster][1], you create the trust anchor
-    # certificate and save it in the `customerCA.crt` file.
+    # When you [initialize the CloudHSM cluster][1], you create the trust
+    # anchor certificate and save it in the `customerCA.crt` file.
     #
     #
     #
@@ -3353,9 +3722,19 @@ module Aws::KMS
     # The request was rejected because the state of the specified resource
     # is not valid for this request.
     #
-    # For more information about how key state affects the use of a KMS key,
-    # see [Key states of KMS keys][1] in the <i> <i>Key Management Service
-    # Developer Guide</i> </i>.
+    # This exceptions means one of the following:
+    #
+    # * The key state of the KMS key is not compatible with the operation.
+    #
+    #   To find the key state, use the DescribeKey operation. For more
+    #   information about which key states are compatible with each KMS
+    #   operation, see [Key states of KMS keys][1] in the <i> <i>Key
+    #   Management Service Developer Guide</i> </i>.
+    #
+    # * For cryptographic operations on KMS keys in custom key stores, this
+    #   exception represents a general failure with many possible causes. To
+    #   identify the cause, see the error message that accompanies the
+    #   exception.
     #
     #
     #
@@ -3393,8 +3772,8 @@ module Aws::KMS
 
     # Contains metadata about a KMS key.
     #
-    # This data type is used as a response element for the CreateKey and
-    # DescribeKey operations.
+    # This data type is used as a response element for the CreateKey,
+    # DescribeKey, and ReplicateKey operations.
     #
     # @!attribute [rw] aws_account_id
     #   The twelve-digit account ID of the Amazon Web Services account that
@@ -3478,7 +3857,7 @@ module Aws::KMS
     #
     # @!attribute [rw] custom_key_store_id
     #   A unique identifier for the [custom key store][1] that contains the
-    #   KMS key. This value is present only when the KMS key is created in a
+    #   KMS key. This field is present only when the KMS key is created in a
     #   custom key store.
     #
     #
@@ -3488,10 +3867,10 @@ module Aws::KMS
     #
     # @!attribute [rw] cloud_hsm_cluster_id
     #   The cluster ID of the CloudHSM cluster that contains the key
-    #   material for the KMS key. When you create a KMS key in a [custom key
-    #   store][1], KMS creates the key material for the KMS key in the
-    #   associated CloudHSM cluster. This value is present only when the KMS
-    #   key is created in a custom key store.
+    #   material for the KMS key. When you create a KMS key in an CloudHSM
+    #   [custom key store][1], KMS creates the key material for the KMS key
+    #   in the associated CloudHSM cluster. This field is present only when
+    #   the KMS key is created in an CloudHSM key store.
     #
     #
     #
@@ -3520,7 +3899,7 @@ module Aws::KMS
     #
     #   The `KeySpec` and `CustomerMasterKeySpec` fields have the same
     #   value. We recommend that you use the `KeySpec` field in your code.
-    #   However, to avoid breaking changes, KMS will support both fields.
+    #   However, to avoid breaking changes, KMS supports both fields.
     #   @return [String]
     #
     # @!attribute [rw] key_spec
@@ -3602,6 +3981,18 @@ module Aws::KMS
     #   `GENERATE_VERIFY_MAC`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] xks_key_configuration
+    #   Information about the external key that is associated with a KMS key
+    #   in an external key store.
+    #
+    #   For more information, see [External key][1] in the *Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key
+    #   @return [Types::XksKeyConfigurationType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
     #
     class KeyMetadata < Struct.new(
@@ -3627,7 +4018,8 @@ module Aws::KMS
       :multi_region,
       :multi_region_configuration,
       :pending_deletion_window_in_days,
-      :mac_algorithms)
+      :mac_algorithms,
+      :xks_key_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4035,7 +4427,7 @@ module Aws::KMS
     #   A list of tags. Each tag consists of a tag key and a tag value.
     #
     #   <note markdown="1"> Tagging or untagging a KMS key can allow or deny permission to the
-    #   KMS key. For details, see [ABAC in KMS][1] in the *Key Management
+    #   KMS key. For details, see [ABAC for KMS][1] in the *Key Management
     #   Service Developer Guide*.
     #
     #    </note>
@@ -4267,7 +4659,7 @@ module Aws::KMS
     #     (`\u000D`) special characters
     #
     #   For information about key policies, see [Key policies in KMS][3] in
-    #   the *Key Management Service Developer Guide*. For help writing and
+    #   the *Key Management Service Developer Guide*.For help writing and
     #   formatting a JSON policy document, see the [IAM JSON Policy
     #   Reference][4] in the <i> <i>Identity and Access Management User
     #   Guide</i> </i>.
@@ -4703,7 +5095,7 @@ module Aws::KMS
     #   the TagResource operation.
     #
     #   <note markdown="1"> Tagging or untagging a KMS key can allow or deny permission to the
-    #   KMS key. For details, see [ABAC in KMS][1] in the *Key Management
+    #   KMS key. For details, see [ABAC for KMS][1] in the *Key Management
     #   Service Developer Guide*.
     #
     #    </note>
@@ -5266,7 +5658,7 @@ module Aws::KMS
     #   The KMS key must be in the same Amazon Web Services account and
     #   Region as the alias. Also, the new target KMS key must be the same
     #   type as the current target KMS key (both symmetric or both
-    #   asymmetric) and they must have the same key usage.
+    #   asymmetric or both HMAC) and they must have the same key usage.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -5306,6 +5698,14 @@ module Aws::KMS
     #         new_custom_key_store_name: "CustomKeyStoreNameType",
     #         key_store_password: "KeyStorePasswordType",
     #         cloud_hsm_cluster_id: "CloudHsmClusterIdType",
+    #         xks_proxy_uri_endpoint: "XksProxyUriEndpointType",
+    #         xks_proxy_uri_path: "XksProxyUriPathType",
+    #         xks_proxy_vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
+    #         xks_proxy_authentication_credential: {
+    #           access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
+    #           raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
+    #         },
+    #         xks_proxy_connectivity: "PUBLIC_ENDPOINT", # accepts PUBLIC_ENDPOINT, VPC_ENDPOINT_SERVICE
     #       }
     #
     # @!attribute [rw] custom_key_store_id
@@ -5318,19 +5718,28 @@ module Aws::KMS
     #   Changes the friendly name of the custom key store to the value that
     #   you specify. The custom key store name must be unique in the Amazon
     #   Web Services account.
+    #
+    #   To change this value, an CloudHSM key store must be disconnected. An
+    #   external key store can be connected or disconnected.
     #   @return [String]
     #
     # @!attribute [rw] key_store_password
     #   Enter the current password of the `kmsuser` crypto user (CU) in the
-    #   CloudHSM cluster that is associated with the custom key store.
+    #   CloudHSM cluster that is associated with the custom key store. This
+    #   parameter is valid only for custom key stores with a
+    #   `CustomKeyStoreType` of `AWS_CLOUDHSM`.
     #
     #   This parameter tells KMS the current password of the `kmsuser`
     #   crypto user (CU). It does not set or change the password of any
     #   users in the CloudHSM cluster.
+    #
+    #   To change this value, the CloudHSM key store must be disconnected.
     #   @return [String]
     #
     # @!attribute [rw] cloud_hsm_cluster_id
     #   Associates the custom key store with a related CloudHSM cluster.
+    #   This parameter is valid only for custom key stores with a
+    #   `CustomKeyStoreType` of `AWS_CLOUDHSM`.
     #
     #   Enter the cluster ID of the cluster that you used to create the
     #   custom key store or a cluster that shares a backup history and has
@@ -5341,10 +5750,97 @@ module Aws::KMS
     #   To view the cluster certificate of a cluster, use the
     #   [DescribeClusters][2] operation.
     #
+    #   To change this value, the CloudHSM key store must be disconnected.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore
     #   [2]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_uri_endpoint
+    #   Changes the URI endpoint that KMS uses to connect to your external
+    #   key store proxy (XKS proxy). This parameter is valid only for custom
+    #   key stores with a `CustomKeyStoreType` of `EXTERNAL_KEY_STORE`.
+    #
+    #   For external key stores with an `XksProxyConnectivity` value of
+    #   `PUBLIC_ENDPOINT`, the protocol must be HTTPS.
+    #
+    #   For external key stores with an `XksProxyConnectivity` value of
+    #   `VPC_ENDPOINT_SERVICE`, specify `https://` followed by the private
+    #   DNS name associated with the VPC endpoint service. Each external key
+    #   store must use a different private DNS name.
+    #
+    #   The combined `XksProxyUriEndpoint` and `XksProxyUriPath` values must
+    #   be unique in the Amazon Web Services account and Region.
+    #
+    #   To change this value, the external key store must be disconnected.
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_uri_path
+    #   Changes the base path to the proxy APIs for this external key store.
+    #   To find this value, see the documentation for your external key
+    #   manager and external key store proxy (XKS proxy). This parameter is
+    #   valid only for custom key stores with a `CustomKeyStoreType` of
+    #   `EXTERNAL_KEY_STORE`.
+    #
+    #   The value must start with `/` and must end with `/kms/xks/v1`, where
+    #   `v1` represents the version of the KMS external key store proxy API.
+    #   You can include an optional prefix between the required elements
+    #   such as `/example/kms/xks/v1`.
+    #
+    #   The combined `XksProxyUriEndpoint` and `XksProxyUriPath` values must
+    #   be unique in the Amazon Web Services account and Region.
+    #
+    #   You can change this value when the external key store is connected
+    #   or disconnected.
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_vpc_endpoint_service_name
+    #   Changes the name that KMS uses to identify the Amazon VPC endpoint
+    #   service for your external key store proxy (XKS proxy). This
+    #   parameter is valid when the `CustomKeyStoreType` is
+    #   `EXTERNAL_KEY_STORE` and the `XksProxyConnectivity` is
+    #   `VPC_ENDPOINT_SERVICE`.
+    #
+    #   To change this value, the external key store must be disconnected.
+    #   @return [String]
+    #
+    # @!attribute [rw] xks_proxy_authentication_credential
+    #   Changes the credentials that KMS uses to sign requests to the
+    #   external key store proxy (XKS proxy). This parameter is valid only
+    #   for custom key stores with a `CustomKeyStoreType` of
+    #   `EXTERNAL_KEY_STORE`.
+    #
+    #   You must specify both the `AccessKeyId` and `SecretAccessKey` value
+    #   in the authentication credential, even if you are only updating one
+    #   value.
+    #
+    #   This parameter doesn't establish or change your authentication
+    #   credentials on the proxy. It just tells KMS the credential that you
+    #   established with your external key store proxy. For example, if you
+    #   rotate the credential on your external key store proxy, you can use
+    #   this parameter to update the credential in KMS.
+    #
+    #   You can change this value when the external key store is connected
+    #   or disconnected.
+    #   @return [Types::XksProxyAuthenticationCredentialType]
+    #
+    # @!attribute [rw] xks_proxy_connectivity
+    #   Changes the connectivity setting for the external key store. To
+    #   indicate that the external key store proxy uses a Amazon VPC
+    #   endpoint service to communicate with KMS, specify
+    #   `VPC_ENDPOINT_SERVICE`. Otherwise, specify `PUBLIC_ENDPOINT`.
+    #
+    #   If you change the `XksProxyConnectivity` to `VPC_ENDPOINT_SERVICE`,
+    #   you must also change the `XksProxyUriEndpoint` and add an
+    #   `XksProxyVpcEndpointServiceName` value.
+    #
+    #   If you change the `XksProxyConnectivity` to `PUBLIC_ENDPOINT`, you
+    #   must also change the `XksProxyUriEndpoint` and specify a null or
+    #   empty string for the `XksProxyVpcEndpointServiceName` value.
+    #
+    #   To change this value, the external key store must be disconnected.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateCustomKeyStoreRequest AWS API Documentation
@@ -5353,7 +5849,12 @@ module Aws::KMS
       :custom_key_store_id,
       :new_custom_key_store_name,
       :key_store_password,
-      :cloud_hsm_cluster_id)
+      :cloud_hsm_cluster_id,
+      :xks_proxy_uri_endpoint,
+      :xks_proxy_uri_path,
+      :xks_proxy_vpc_endpoint_service_name,
+      :xks_proxy_authentication_credential,
+      :xks_proxy_connectivity)
       SENSITIVE = [:key_store_password]
       include Aws::Structure
     end
@@ -5658,6 +6159,333 @@ module Aws::KMS
       :key_id,
       :signature_valid,
       :signing_algorithm)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the (`XksKeyId`) is already
+    # associated with a KMS key in this external key store. Each KMS key in
+    # an external key store must be associated with a different external
+    # key.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksKeyAlreadyInUseException AWS API Documentation
+    #
+    class XksKeyAlreadyInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the [external key ][1]that is associated with a KMS
+    # key in an external key store.
+    #
+    # These fields appear in a CreateKey or DescribeKey response only for a
+    # KMS key in an external key store.
+    #
+    # The *external key* is a symmetric encryption key that is hosted by an
+    # external key manager outside of Amazon Web Services. When you use the
+    # KMS key in an external key store in a cryptographic operation, the
+    # cryptographic operation is performed in the external key manager using
+    # the specified external key. For more information, see [External
+    # key][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key
+    #
+    # @!attribute [rw] id
+    #   The ID of the external key in its external key manager. This is the
+    #   ID that the external key store proxy uses to identify the external
+    #   key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksKeyConfigurationType AWS API Documentation
+    #
+    class XksKeyConfigurationType < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the external key specified by the
+    # `XksKeyId` parameter did not meet the configuration requirements for
+    # an external key store.
+    #
+    # The external key must be an AES-256 symmetric key that is enabled and
+    # performs encryption and decryption.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksKeyInvalidConfigurationException AWS API Documentation
+    #
+    class XksKeyInvalidConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the external key store proxy could
+    # not find the external key. This exception is thrown when the value of
+    # the `XksKeyId` parameter doesn't identify a key in the external key
+    # manager associated with the external key proxy.
+    #
+    # Verify that the `XksKeyId` represents an existing key in the external
+    # key manager. Use the key identifier that the external key store proxy
+    # uses to identify the key. For details, see the documentation provided
+    # with your external key store proxy or key manager.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksKeyNotFoundException AWS API Documentation
+    #
+    class XksKeyNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # KMS uses the authentication credential to sign requests that it sends
+    # to the external key store proxy (XKS proxy) on your behalf. You
+    # establish these credentials on your external key store proxy and
+    # report them to KMS.
+    #
+    # The `XksProxyAuthenticationCredential` includes two required elements.
+    #
+    # @note When making an API call, you may pass XksProxyAuthenticationCredentialType
+    #   data as a hash:
+    #
+    #       {
+    #         access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
+    #         raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
+    #       }
+    #
+    # @!attribute [rw] access_key_id
+    #   A unique identifier for the raw secret access key.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_secret_access_key
+    #   A secret string of 43-64 characters. Valid characters are a-z, A-Z,
+    #   0-9, /, +, and =.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyAuthenticationCredentialType AWS API Documentation
+    #
+    class XksProxyAuthenticationCredentialType < Struct.new(
+      :access_key_id,
+      :raw_secret_access_key)
+      SENSITIVE = [:access_key_id, :raw_secret_access_key]
+      include Aws::Structure
+    end
+
+    # Detailed information about the external key store proxy (XKS proxy).
+    # Your external key store proxy translates KMS requests into a format
+    # that your external key manager can understand. These fields appear in
+    # a DescribeCustomKeyStores response only when the `CustomKeyStoreType`
+    # is `EXTERNAL_KEY_STORE`.
+    #
+    # @!attribute [rw] connectivity
+    #   Indicates whether the external key store proxy uses a public
+    #   endpoint or an Amazon VPC endpoint service to communicate with KMS.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key_id
+    #   The part of the external key store [proxy authentication
+    #   credential][1] that uniquely identifies the secret access key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateCustomKeyStore.html#KMS-CreateCustomKeyStore-request-XksProxyAuthenticationCredential
+    #   @return [String]
+    #
+    # @!attribute [rw] uri_endpoint
+    #   The URI endpoint for the external key store proxy.
+    #
+    #   If the external key store proxy has a public endpoint, it is
+    #   displayed here.
+    #
+    #   If the external key store proxy uses an Amazon VPC endpoint service
+    #   name, this field displays the private DNS name associated with the
+    #   VPC endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri_path
+    #   The path to the external key store proxy APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_service_name
+    #   The Amazon VPC endpoint service used to communicate with the
+    #   external key store proxy. This field appears only when the external
+    #   key store proxy uses an Amazon VPC endpoint service to communicate
+    #   with KMS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyConfigurationType AWS API Documentation
+    #
+    class XksProxyConfigurationType < Struct.new(
+      :connectivity,
+      :access_key_id,
+      :uri_endpoint,
+      :uri_path,
+      :vpc_endpoint_service_name)
+      SENSITIVE = [:access_key_id]
+      include Aws::Structure
+    end
+
+    # The request was rejected because the proxy credentials failed to
+    # authenticate to the specified external key store proxy. The specified
+    # external key store proxy rejected a status request from KMS due to
+    # invalid credentials. This can indicate an error in the credentials or
+    # in the identification of the external key store proxy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyIncorrectAuthenticationCredentialException AWS API Documentation
+    #
+    class XksProxyIncorrectAuthenticationCredentialException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the Amazon VPC endpoint service
+    # configuration does not fulfill the requirements for an external key
+    # store proxy. For details, see the exception message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyInvalidConfigurationException AWS API Documentation
+    #
+    class XksProxyInvalidConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # KMS cannot interpret the response it received from the external key
+    # store proxy. The problem might be a poorly constructed response, but
+    # it could also be a transient network issue. If you see this error
+    # repeatedly, report it to the proxy vendor.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyInvalidResponseException AWS API Documentation
+    #
+    class XksProxyInvalidResponseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the concatenation of the
+    # `XksProxyUriEndpoint` is already associated with an external key store
+    # in the Amazon Web Services account and Region. Each external key store
+    # in an account and Region must use a unique external key store proxy
+    # address.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyUriEndpointInUseException AWS API Documentation
+    #
+    class XksProxyUriEndpointInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the concatenation of the
+    # `XksProxyUriEndpoint` and `XksProxyUriPath` is already associated with
+    # an external key store in the Amazon Web Services account and Region.
+    # Each external key store in an account and Region must use a unique
+    # external key store proxy API address.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyUriInUseException AWS API Documentation
+    #
+    class XksProxyUriInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # KMS was unable to reach the specified `XksProxyUriPath`. The path must
+    # be reachable before you create the external key store or update its
+    # settings.
+    #
+    # This exception is also thrown when the external key store proxy
+    # response to a `GetHealthStatus` request indicates that all external
+    # key manager instances are unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyUriUnreachableException AWS API Documentation
+    #
+    class XksProxyUriUnreachableException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified Amazon VPC endpoint
+    # service is already associated with an external key store in the Amazon
+    # Web Services account and Region. Each external key store in an Amazon
+    # Web Services account and Region must use a different Amazon VPC
+    # endpoint service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyVpcEndpointServiceInUseException AWS API Documentation
+    #
+    class XksProxyVpcEndpointServiceInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the Amazon VPC endpoint service
+    # configuration does not fulfill the requirements for an external key
+    # store proxy. For details, see the exception message and [review the
+    # requirements](kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements)
+    # for Amazon VPC endpoint service connectivity for an external key
+    # store.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyVpcEndpointServiceInvalidConfigurationException AWS API Documentation
+    #
+    class XksProxyVpcEndpointServiceInvalidConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because KMS could not find the specified VPC
+    # endpoint service. Use DescribeCustomKeyStores to verify the VPC
+    # endpoint service name for the external key store. Also, confirm that
+    # the `Allow principals` list for the VPC endpoint service includes the
+    # KMS service principal for the Region, such as
+    # `cks.kms.us-east-1.amazonaws.com`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyVpcEndpointServiceNotFoundException AWS API Documentation
+    #
+    class XksProxyVpcEndpointServiceNotFoundException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

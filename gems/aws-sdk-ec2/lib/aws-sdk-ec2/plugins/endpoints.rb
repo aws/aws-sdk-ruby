@@ -116,6 +116,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::AttachInternetGateway.build(context)
           when :attach_network_interface
             Aws::EC2::Endpoints::AttachNetworkInterface.build(context)
+          when :attach_verified_access_trust_provider
+            Aws::EC2::Endpoints::AttachVerifiedAccessTrustProvider.build(context)
           when :attach_volume
             Aws::EC2::Endpoints::AttachVolume.build(context)
           when :attach_vpn_gateway
@@ -290,6 +292,14 @@ module Aws::EC2
             Aws::EC2::Endpoints::CreateTransitGatewayRouteTableAnnouncement.build(context)
           when :create_transit_gateway_vpc_attachment
             Aws::EC2::Endpoints::CreateTransitGatewayVpcAttachment.build(context)
+          when :create_verified_access_endpoint
+            Aws::EC2::Endpoints::CreateVerifiedAccessEndpoint.build(context)
+          when :create_verified_access_group
+            Aws::EC2::Endpoints::CreateVerifiedAccessGroup.build(context)
+          when :create_verified_access_instance
+            Aws::EC2::Endpoints::CreateVerifiedAccessInstance.build(context)
+          when :create_verified_access_trust_provider
+            Aws::EC2::Endpoints::CreateVerifiedAccessTrustProvider.build(context)
           when :create_volume
             Aws::EC2::Endpoints::CreateVolume.build(context)
           when :create_vpc
@@ -426,6 +436,14 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteTransitGatewayRouteTableAnnouncement.build(context)
           when :delete_transit_gateway_vpc_attachment
             Aws::EC2::Endpoints::DeleteTransitGatewayVpcAttachment.build(context)
+          when :delete_verified_access_endpoint
+            Aws::EC2::Endpoints::DeleteVerifiedAccessEndpoint.build(context)
+          when :delete_verified_access_group
+            Aws::EC2::Endpoints::DeleteVerifiedAccessGroup.build(context)
+          when :delete_verified_access_instance
+            Aws::EC2::Endpoints::DeleteVerifiedAccessInstance.build(context)
+          when :delete_verified_access_trust_provider
+            Aws::EC2::Endpoints::DeleteVerifiedAccessTrustProvider.build(context)
           when :delete_volume
             Aws::EC2::Endpoints::DeleteVolume.build(context)
           when :delete_vpc
@@ -698,6 +716,16 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeTransitGateways.build(context)
           when :describe_trunk_interface_associations
             Aws::EC2::Endpoints::DescribeTrunkInterfaceAssociations.build(context)
+          when :describe_verified_access_endpoints
+            Aws::EC2::Endpoints::DescribeVerifiedAccessEndpoints.build(context)
+          when :describe_verified_access_groups
+            Aws::EC2::Endpoints::DescribeVerifiedAccessGroups.build(context)
+          when :describe_verified_access_instance_logging_configurations
+            Aws::EC2::Endpoints::DescribeVerifiedAccessInstanceLoggingConfigurations.build(context)
+          when :describe_verified_access_instances
+            Aws::EC2::Endpoints::DescribeVerifiedAccessInstances.build(context)
+          when :describe_verified_access_trust_providers
+            Aws::EC2::Endpoints::DescribeVerifiedAccessTrustProviders.build(context)
           when :describe_volume_attribute
             Aws::EC2::Endpoints::DescribeVolumeAttribute.build(context)
           when :describe_volume_status
@@ -738,6 +766,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DetachInternetGateway.build(context)
           when :detach_network_interface
             Aws::EC2::Endpoints::DetachNetworkInterface.build(context)
+          when :detach_verified_access_trust_provider
+            Aws::EC2::Endpoints::DetachVerifiedAccessTrustProvider.build(context)
           when :detach_volume
             Aws::EC2::Endpoints::DetachVolume.build(context)
           when :detach_vpn_gateway
@@ -898,6 +928,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetTransitGatewayRouteTableAssociations.build(context)
           when :get_transit_gateway_route_table_propagations
             Aws::EC2::Endpoints::GetTransitGatewayRouteTablePropagations.build(context)
+          when :get_verified_access_endpoint_policy
+            Aws::EC2::Endpoints::GetVerifiedAccessEndpointPolicy.build(context)
+          when :get_verified_access_group_policy
+            Aws::EC2::Endpoints::GetVerifiedAccessGroupPolicy.build(context)
           when :get_vpn_connection_device_sample_configuration
             Aws::EC2::Endpoints::GetVpnConnectionDeviceSampleConfiguration.build(context)
           when :get_vpn_connection_device_types
@@ -1002,6 +1036,20 @@ module Aws::EC2
             Aws::EC2::Endpoints::ModifyTransitGatewayPrefixListReference.build(context)
           when :modify_transit_gateway_vpc_attachment
             Aws::EC2::Endpoints::ModifyTransitGatewayVpcAttachment.build(context)
+          when :modify_verified_access_endpoint
+            Aws::EC2::Endpoints::ModifyVerifiedAccessEndpoint.build(context)
+          when :modify_verified_access_endpoint_policy
+            Aws::EC2::Endpoints::ModifyVerifiedAccessEndpointPolicy.build(context)
+          when :modify_verified_access_group
+            Aws::EC2::Endpoints::ModifyVerifiedAccessGroup.build(context)
+          when :modify_verified_access_group_policy
+            Aws::EC2::Endpoints::ModifyVerifiedAccessGroupPolicy.build(context)
+          when :modify_verified_access_instance
+            Aws::EC2::Endpoints::ModifyVerifiedAccessInstance.build(context)
+          when :modify_verified_access_instance_logging_configuration
+            Aws::EC2::Endpoints::ModifyVerifiedAccessInstanceLoggingConfiguration.build(context)
+          when :modify_verified_access_trust_provider
+            Aws::EC2::Endpoints::ModifyVerifiedAccessTrustProvider.build(context)
           when :modify_volume
             Aws::EC2::Endpoints::ModifyVolume.build(context)
           when :modify_volume_attribute

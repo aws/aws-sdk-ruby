@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-11-29)
+------------------
+
+* Feature - Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.
+
 1.49.0 (2022-10-25)
 ------------------
 

@@ -47,6 +47,7 @@ module Aws::KMS
     CustomKeyStoreNameInUseException = Shapes::StructureShape.new(name: 'CustomKeyStoreNameInUseException')
     CustomKeyStoreNameType = Shapes::StringShape.new(name: 'CustomKeyStoreNameType')
     CustomKeyStoreNotFoundException = Shapes::StructureShape.new(name: 'CustomKeyStoreNotFoundException')
+    CustomKeyStoreType = Shapes::StringShape.new(name: 'CustomKeyStoreType')
     CustomKeyStoresList = Shapes::ListShape.new(name: 'CustomKeyStoresList')
     CustomKeyStoresListEntry = Shapes::StructureShape.new(name: 'CustomKeyStoresListEntry')
     CustomerMasterKeySpec = Shapes::StringShape.new(name: 'CustomerMasterKeySpec')
@@ -205,6 +206,28 @@ module Aws::KMS
     VerifyRequest = Shapes::StructureShape.new(name: 'VerifyRequest')
     VerifyResponse = Shapes::StructureShape.new(name: 'VerifyResponse')
     WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
+    XksKeyAlreadyInUseException = Shapes::StructureShape.new(name: 'XksKeyAlreadyInUseException')
+    XksKeyConfigurationType = Shapes::StructureShape.new(name: 'XksKeyConfigurationType')
+    XksKeyIdType = Shapes::StringShape.new(name: 'XksKeyIdType')
+    XksKeyInvalidConfigurationException = Shapes::StructureShape.new(name: 'XksKeyInvalidConfigurationException')
+    XksKeyNotFoundException = Shapes::StructureShape.new(name: 'XksKeyNotFoundException')
+    XksProxyAuthenticationAccessKeyIdType = Shapes::StringShape.new(name: 'XksProxyAuthenticationAccessKeyIdType')
+    XksProxyAuthenticationCredentialType = Shapes::StructureShape.new(name: 'XksProxyAuthenticationCredentialType')
+    XksProxyAuthenticationRawSecretAccessKeyType = Shapes::StringShape.new(name: 'XksProxyAuthenticationRawSecretAccessKeyType')
+    XksProxyConfigurationType = Shapes::StructureShape.new(name: 'XksProxyConfigurationType')
+    XksProxyConnectivityType = Shapes::StringShape.new(name: 'XksProxyConnectivityType')
+    XksProxyIncorrectAuthenticationCredentialException = Shapes::StructureShape.new(name: 'XksProxyIncorrectAuthenticationCredentialException')
+    XksProxyInvalidConfigurationException = Shapes::StructureShape.new(name: 'XksProxyInvalidConfigurationException')
+    XksProxyInvalidResponseException = Shapes::StructureShape.new(name: 'XksProxyInvalidResponseException')
+    XksProxyUriEndpointInUseException = Shapes::StructureShape.new(name: 'XksProxyUriEndpointInUseException')
+    XksProxyUriEndpointType = Shapes::StringShape.new(name: 'XksProxyUriEndpointType')
+    XksProxyUriInUseException = Shapes::StructureShape.new(name: 'XksProxyUriInUseException')
+    XksProxyUriPathType = Shapes::StringShape.new(name: 'XksProxyUriPathType')
+    XksProxyUriUnreachableException = Shapes::StructureShape.new(name: 'XksProxyUriUnreachableException')
+    XksProxyVpcEndpointServiceInUseException = Shapes::StructureShape.new(name: 'XksProxyVpcEndpointServiceInUseException')
+    XksProxyVpcEndpointServiceInvalidConfigurationException = Shapes::StructureShape.new(name: 'XksProxyVpcEndpointServiceInvalidConfigurationException')
+    XksProxyVpcEndpointServiceNameType = Shapes::StringShape.new(name: 'XksProxyVpcEndpointServiceNameType')
+    XksProxyVpcEndpointServiceNotFoundException = Shapes::StructureShape.new(name: 'XksProxyVpcEndpointServiceNotFoundException')
 
     AliasList.member = Shapes::ShapeRef.new(shape: AliasListEntry)
 
@@ -252,6 +275,12 @@ module Aws::KMS
     CreateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
     CreateCustomKeyStoreRequest.add_member(:trust_anchor_certificate, Shapes::ShapeRef.new(shape: TrustAnchorCertificateType, location_name: "TrustAnchorCertificate"))
     CreateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, location_name: "KeyStorePassword"))
+    CreateCustomKeyStoreRequest.add_member(:custom_key_store_type, Shapes::ShapeRef.new(shape: CustomKeyStoreType, location_name: "CustomKeyStoreType"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_uri_endpoint, Shapes::ShapeRef.new(shape: XksProxyUriEndpointType, location_name: "XksProxyUriEndpoint"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_uri_path, Shapes::ShapeRef.new(shape: XksProxyUriPathType, location_name: "XksProxyUriPath"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNameType, location_name: "XksProxyVpcEndpointServiceName"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_authentication_credential, Shapes::ShapeRef.new(shape: XksProxyAuthenticationCredentialType, location_name: "XksProxyAuthenticationCredential"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_connectivity, Shapes::ShapeRef.new(shape: XksProxyConnectivityType, location_name: "XksProxyConnectivity"))
     CreateCustomKeyStoreRequest.struct_class = Types::CreateCustomKeyStoreRequest
 
     CreateCustomKeyStoreResponse.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
@@ -280,6 +309,7 @@ module Aws::KMS
     CreateKeyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
     CreateKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateKeyRequest.add_member(:multi_region, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "MultiRegion"))
+    CreateKeyRequest.add_member(:xks_key_id, Shapes::ShapeRef.new(shape: XksKeyIdType, location_name: "XksKeyId"))
     CreateKeyRequest.struct_class = Types::CreateKeyRequest
 
     CreateKeyResponse.add_member(:key_metadata, Shapes::ShapeRef.new(shape: KeyMetadata, location_name: "KeyMetadata"))
@@ -306,6 +336,8 @@ module Aws::KMS
     CustomKeyStoresListEntry.add_member(:connection_state, Shapes::ShapeRef.new(shape: ConnectionStateType, location_name: "ConnectionState"))
     CustomKeyStoresListEntry.add_member(:connection_error_code, Shapes::ShapeRef.new(shape: ConnectionErrorCodeType, location_name: "ConnectionErrorCode"))
     CustomKeyStoresListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    CustomKeyStoresListEntry.add_member(:custom_key_store_type, Shapes::ShapeRef.new(shape: CustomKeyStoreType, location_name: "CustomKeyStoreType"))
+    CustomKeyStoresListEntry.add_member(:xks_proxy_configuration, Shapes::ShapeRef.new(shape: XksProxyConfigurationType, location_name: "XksProxyConfiguration"))
     CustomKeyStoresListEntry.struct_class = Types::CustomKeyStoresListEntry
 
     DecryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "CiphertextBlob"))
@@ -599,6 +631,7 @@ module Aws::KMS
     KeyMetadata.add_member(:multi_region_configuration, Shapes::ShapeRef.new(shape: MultiRegionConfiguration, location_name: "MultiRegionConfiguration"))
     KeyMetadata.add_member(:pending_deletion_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingDeletionWindowInDays"))
     KeyMetadata.add_member(:mac_algorithms, Shapes::ShapeRef.new(shape: MacAlgorithmSpecList, location_name: "MacAlgorithms"))
+    KeyMetadata.add_member(:xks_key_configuration, Shapes::ShapeRef.new(shape: XksKeyConfigurationType, location_name: "XksKeyConfiguration"))
     KeyMetadata.struct_class = Types::KeyMetadata
 
     KeyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
@@ -783,6 +816,11 @@ module Aws::KMS
     UpdateCustomKeyStoreRequest.add_member(:new_custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, location_name: "NewCustomKeyStoreName"))
     UpdateCustomKeyStoreRequest.add_member(:key_store_password, Shapes::ShapeRef.new(shape: KeyStorePasswordType, location_name: "KeyStorePassword"))
     UpdateCustomKeyStoreRequest.add_member(:cloud_hsm_cluster_id, Shapes::ShapeRef.new(shape: CloudHsmClusterIdType, location_name: "CloudHsmClusterId"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_uri_endpoint, Shapes::ShapeRef.new(shape: XksProxyUriEndpointType, location_name: "XksProxyUriEndpoint"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_uri_path, Shapes::ShapeRef.new(shape: XksProxyUriPathType, location_name: "XksProxyUriPath"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNameType, location_name: "XksProxyVpcEndpointServiceName"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_authentication_credential, Shapes::ShapeRef.new(shape: XksProxyAuthenticationCredentialType, location_name: "XksProxyAuthenticationCredential"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_connectivity, Shapes::ShapeRef.new(shape: XksProxyConnectivityType, location_name: "XksProxyConnectivity"))
     UpdateCustomKeyStoreRequest.struct_class = Types::UpdateCustomKeyStoreRequest
 
     UpdateCustomKeyStoreResponse.struct_class = Types::UpdateCustomKeyStoreResponse
@@ -819,6 +857,56 @@ module Aws::KMS
     VerifyResponse.add_member(:signature_valid, Shapes::ShapeRef.new(shape: BooleanType, location_name: "SignatureValid"))
     VerifyResponse.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlgorithmSpec, location_name: "SigningAlgorithm"))
     VerifyResponse.struct_class = Types::VerifyResponse
+
+    XksKeyAlreadyInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksKeyAlreadyInUseException.struct_class = Types::XksKeyAlreadyInUseException
+
+    XksKeyConfigurationType.add_member(:id, Shapes::ShapeRef.new(shape: XksKeyIdType, location_name: "Id"))
+    XksKeyConfigurationType.struct_class = Types::XksKeyConfigurationType
+
+    XksKeyInvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksKeyInvalidConfigurationException.struct_class = Types::XksKeyInvalidConfigurationException
+
+    XksKeyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksKeyNotFoundException.struct_class = Types::XksKeyNotFoundException
+
+    XksProxyAuthenticationCredentialType.add_member(:access_key_id, Shapes::ShapeRef.new(shape: XksProxyAuthenticationAccessKeyIdType, required: true, location_name: "AccessKeyId"))
+    XksProxyAuthenticationCredentialType.add_member(:raw_secret_access_key, Shapes::ShapeRef.new(shape: XksProxyAuthenticationRawSecretAccessKeyType, required: true, location_name: "RawSecretAccessKey"))
+    XksProxyAuthenticationCredentialType.struct_class = Types::XksProxyAuthenticationCredentialType
+
+    XksProxyConfigurationType.add_member(:connectivity, Shapes::ShapeRef.new(shape: XksProxyConnectivityType, location_name: "Connectivity"))
+    XksProxyConfigurationType.add_member(:access_key_id, Shapes::ShapeRef.new(shape: XksProxyAuthenticationAccessKeyIdType, location_name: "AccessKeyId"))
+    XksProxyConfigurationType.add_member(:uri_endpoint, Shapes::ShapeRef.new(shape: XksProxyUriEndpointType, location_name: "UriEndpoint"))
+    XksProxyConfigurationType.add_member(:uri_path, Shapes::ShapeRef.new(shape: XksProxyUriPathType, location_name: "UriPath"))
+    XksProxyConfigurationType.add_member(:vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNameType, location_name: "VpcEndpointServiceName"))
+    XksProxyConfigurationType.struct_class = Types::XksProxyConfigurationType
+
+    XksProxyIncorrectAuthenticationCredentialException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyIncorrectAuthenticationCredentialException.struct_class = Types::XksProxyIncorrectAuthenticationCredentialException
+
+    XksProxyInvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyInvalidConfigurationException.struct_class = Types::XksProxyInvalidConfigurationException
+
+    XksProxyInvalidResponseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyInvalidResponseException.struct_class = Types::XksProxyInvalidResponseException
+
+    XksProxyUriEndpointInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyUriEndpointInUseException.struct_class = Types::XksProxyUriEndpointInUseException
+
+    XksProxyUriInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyUriInUseException.struct_class = Types::XksProxyUriInUseException
+
+    XksProxyUriUnreachableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyUriUnreachableException.struct_class = Types::XksProxyUriUnreachableException
+
+    XksProxyVpcEndpointServiceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyVpcEndpointServiceInUseException.struct_class = Types::XksProxyVpcEndpointServiceInUseException
+
+    XksProxyVpcEndpointServiceInvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyVpcEndpointServiceInvalidConfigurationException.struct_class = Types::XksProxyVpcEndpointServiceInvalidConfigurationException
+
+    XksProxyVpcEndpointServiceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    XksProxyVpcEndpointServiceNotFoundException.struct_class = Types::XksProxyVpcEndpointServiceNotFoundException
 
 
     # @api private
@@ -893,6 +981,16 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: IncorrectTrustAnchorException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyUriInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyUriEndpointInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyUriUnreachableException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyIncorrectAuthenticationCredentialException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyInvalidResponseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyInvalidConfigurationException)
       end)
 
       api.add_operation(:create_grant, Seahorse::Model::Operation.new.tap do |o|
@@ -927,6 +1025,9 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: XksKeyInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: XksKeyAlreadyInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksKeyNotFoundException)
       end)
 
       api.add_operation(:decrypt, Seahorse::Model::Operation.new.tap do |o|
@@ -995,7 +1096,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1188,6 +1288,7 @@ module Aws::KMS
         o.output = Shapes::ShapeRef.new(shape: GenerateRandomResponse)
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CustomKeyStoreInvalidStateException)
       end)
@@ -1281,7 +1382,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1303,7 +1403,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1323,7 +1422,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1341,7 +1439,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1360,7 +1457,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1380,7 +1476,6 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o[:pager] = Aws::Pager.new(
-          more_results: "truncated",
           limit_key: "limit",
           tokens: {
             "next_marker" => "marker"
@@ -1552,6 +1647,15 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmClusterInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyUriInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyUriEndpointInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyUriUnreachableException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyIncorrectAuthenticationCredentialException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceInvalidConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyInvalidResponseException)
+        o.errors << Shapes::ShapeRef.new(shape: XksProxyInvalidConfigurationException)
       end)
 
       api.add_operation(:update_key_description, Seahorse::Model::Operation.new.tap do |o|

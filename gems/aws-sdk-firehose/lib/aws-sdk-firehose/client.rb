@@ -380,7 +380,8 @@ module Aws::Firehose
 
     # Creates a Kinesis Data Firehose delivery stream.
     #
-    # By default, you can create up to 50 delivery streams per AWS Region.
+    # By default, you can create up to 50 delivery streams per Amazon Web
+    # Services Region.
     #
     # This is an asynchronous operation that immediately returns. The
     # initial status of the delivery stream is `CREATING`. After the
@@ -459,10 +460,10 @@ module Aws::Firehose
     # [1]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
     #
     # @option params [required, String] :delivery_stream_name
-    #   The name of the delivery stream. This name must be unique per AWS
-    #   account in the same AWS Region. If the delivery streams are in
-    #   different accounts or different Regions, you can have multiple
-    #   delivery streams with the same name.
+    #   The name of the delivery stream. This name must be unique per Amazon
+    #   Web Services account in the same Amazon Web Services Region. If the
+    #   delivery streams are in different accounts or different Regions, you
+    #   can have multiple delivery streams with the same name.
     #
     # @option params [String] :delivery_stream_type
     #   The delivery stream type. This parameter can be one of the following
@@ -499,6 +500,8 @@ module Aws::Firehose
     #   The destination in Amazon ES. You can specify only one destination.
     #
     # @option params [Types::AmazonopensearchserviceDestinationConfiguration] :amazonopensearchservice_destination_configuration
+    #   The destination in Amazon OpenSearch Service. You can specify only one
+    #   destination.
     #
     # @option params [Types::SplunkDestinationConfiguration] :splunk_destination_configuration
     #   The destination in Splunk. You can specify only one destination.
@@ -509,17 +512,22 @@ module Aws::Firehose
     #
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags to assign to the delivery stream. A tag is a key-value
-    #   pair that you can define and assign to AWS resources. Tags are
-    #   metadata. For example, you can add friendly names and descriptions or
-    #   other types of information that can help you distinguish the delivery
-    #   stream. For more information about tags, see [Using Cost Allocation
-    #   Tags][1] in the AWS Billing and Cost Management User Guide.
+    #   pair that you can define and assign to Amazon Web Services resources.
+    #   Tags are metadata. For example, you can add friendly names and
+    #   descriptions or other types of information that can help you
+    #   distinguish the delivery stream. For more information about tags, see
+    #   [Using Cost Allocation Tags][1] in the Amazon Web Services Billing and
+    #   Cost Management User Guide.
     #
     #   You can specify up to 50 tags when creating a delivery stream.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #
+    # @option params [Types::AmazonOpenSearchServerlessDestinationConfiguration] :amazon_open_search_serverless_destination_configuration
+    #   The destination in the Serverless offering for Amazon OpenSearch
+    #   Service. You can specify only one destination.
     #
     # @return [Types::CreateDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -999,6 +1007,65 @@ module Aws::Firehose
     #         value: "TagValue",
     #       },
     #     ],
+    #     amazon_open_search_serverless_destination_configuration: {
+    #       role_arn: "RoleARN", # required
+    #       collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
+    #       index_name: "AmazonOpenSearchServerlessIndexName", # required
+    #       buffering_hints: {
+    #         interval_in_seconds: 1,
+    #         size_in_m_bs: 1,
+    #       },
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
+    #       s3_configuration: { # required
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #       vpc_configuration: {
+    #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         role_arn: "RoleARN", # required
+    #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1039,8 +1106,8 @@ module Aws::Firehose
     #   customer error, such as when the CMK or the grant are in an invalid
     #   state. If you force deletion, you can then use the [RevokeGrant][1]
     #   operation to revoke the grant you gave to Kinesis Data Firehose. If a
-    #   failure to retire the grant happens due to an AWS KMS issue, Kinesis
-    #   Data Firehose keeps retrying the delete operation.
+    #   failure to retire the grant happens due to an Amazon Web Services KMS
+    #   issue, Kinesis Data Firehose keeps retrying the delete operation.
     #
     #   The default value is false.
     #
@@ -1372,6 +1439,40 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.collection_endpoint #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.index_name #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.retry_options.duration_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_backup_mode #=> String, one of "FailedDocumentsOnly", "AllDocuments"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.bucket_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.error_output_prefix #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors #=> Array
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].type #=> String, one of "RecordDeAggregation", "Lambda", "MetadataExtraction", "AppendDelimiterToRecord"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters #=> Array
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters[0].parameter_name #=> String, one of "LambdaArn", "NumberOfRetries", "MetadataExtractionQuery", "JsonParsingEngine", "RoleArn", "BufferSizeInMBs", "BufferIntervalInSeconds", "SubRecordType", "Delimiter"
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.processing_configuration.processors[0].parameters[0].parameter_value #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.cloud_watch_logging_options.enabled #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.cloud_watch_logging_options.log_group_name #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.subnet_ids #=> Array
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.subnet_ids[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.security_group_ids #=> Array
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.security_group_ids[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.vpc_configuration_description.vpc_id #=> String
     #   resp.delivery_stream_description.has_more_destinations #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream AWS API Documentation
@@ -1811,13 +1912,14 @@ module Aws::Firehose
     end
 
     # Adds or updates tags for the specified delivery stream. A tag is a
-    # key-value pair that you can define and assign to AWS resources. If you
-    # specify a tag that already exists, the tag value is replaced with the
-    # value that you specify in the request. Tags are metadata. For example,
-    # you can add friendly names and descriptions or other types of
-    # information that can help you distinguish the delivery stream. For
-    # more information about tags, see [Using Cost Allocation Tags][1] in
-    # the *AWS Billing and Cost Management User Guide*.
+    # key-value pair that you can define and assign to Amazon Web Services
+    # resources. If you specify a tag that already exists, the tag value is
+    # replaced with the value that you specify in the request. Tags are
+    # metadata. For example, you can add friendly names and descriptions or
+    # other types of information that can help you distinguish the delivery
+    # stream. For more information about tags, see [Using Cost Allocation
+    # Tags][1] in the *Amazon Web Services Billing and Cost Management User
+    # Guide*.
     #
     # Each delivery stream can have up to 50 tags.
     #
@@ -1955,12 +2057,17 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon ES.
     #
     # @option params [Types::AmazonopensearchserviceDestinationUpdate] :amazonopensearchservice_destination_update
+    #   Describes an update for a destination in Amazon OpenSearch Service.
     #
     # @option params [Types::SplunkDestinationUpdate] :splunk_destination_update
     #   Describes an update for a destination in Splunk.
     #
     # @option params [Types::HttpEndpointDestinationUpdate] :http_endpoint_destination_update
     #   Describes an update to the specified HTTP endpoint destination.
+    #
+    # @option params [Types::AmazonOpenSearchServerlessDestinationUpdate] :amazon_open_search_serverless_destination_update
+    #   Describes an update for a destination in the Serverless offering for
+    #   Amazon OpenSearch Service.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2413,6 +2520,59 @@ module Aws::Firehose
     #         },
     #       },
     #     },
+    #     amazon_open_search_serverless_destination_update: {
+    #       role_arn: "RoleARN",
+    #       collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
+    #       index_name: "AmazonOpenSearchServerlessIndexName",
+    #       buffering_hints: {
+    #         interval_in_seconds: 1,
+    #         size_in_m_bs: 1,
+    #       },
+    #       retry_options: {
+    #         duration_in_seconds: 1,
+    #       },
+    #       s3_update: {
+    #         role_arn: "RoleARN",
+    #         bucket_arn: "BucketARN",
+    #         prefix: "Prefix",
+    #         error_output_prefix: "ErrorOutputPrefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       },
+    #       processing_configuration: {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #       cloud_watch_logging_options: {
+    #         enabled: false,
+    #         log_group_name: "LogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination AWS API Documentation
@@ -2437,7 +2597,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

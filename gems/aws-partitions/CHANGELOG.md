@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.668.0 (2022-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SimSpaceWeaver`.
+
+* Feature - Added support for enumerating regions for `Aws::SecurityLake`.
+
+* Feature - Added support for enumerating regions for `Aws::OpenSearchServerless`.
+
+* Feature - Added support for enumerating regions for `Aws::Omics`.
+
 1.667.0 (2022-11-29)
 ------------------
 

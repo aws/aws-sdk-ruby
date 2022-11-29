@@ -728,6 +728,12 @@
   "OAM": {
     "models": "oam/2022-06-10"
   },
+  "Omics": {
+    "models": "omics/2022-11-28"
+  },
+  "OpenSearchServerless": {
+    "models": "opensearchserverless/2021-11-01"
+  },
   "OpenSearchService": {
     "models": "opensearch/2021-01-01"
   },
@@ -983,6 +989,9 @@
   "SecurityHub": {
     "models": "securityhub/2018-10-26"
   },
+  "SecurityLake": {
+    "models": "securitylake/2018-05-10"
+  },
   "ServerlessApplicationRepository": {
     "models": "serverlessrepo/2017-09-08"
   },
@@ -1000,6 +1009,9 @@
   },
   "Signer": {
     "models": "signer/2017-08-25"
+  },
+  "SimSpaceWeaver": {
+    "models": "simspaceweaver/2022-10-28"
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15",

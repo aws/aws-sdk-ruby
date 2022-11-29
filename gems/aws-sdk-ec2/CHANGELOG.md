@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.353.0 (2022-11-29)
+------------------
+
+* Feature - This release adds support for AWS Verified Access and the Hpc6id Amazon EC2 compute optimized instance type, which features 3rd generation Intel Xeon Scalable processors.
+
 1.352.0 (2022-11-29)
 ------------------
 

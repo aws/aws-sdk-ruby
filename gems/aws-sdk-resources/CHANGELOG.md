@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.150.0 (2022-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-simspaceweaver` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-securitylake` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-opensearchserverless` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-omics` gem.
+
 3.149.0 (2022-11-29)
 ------------------
 

@@ -450,6 +450,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Service Catalog App Registry                      | Aws::AppRegistry                         | aws-sdk-appregistry                         | 2020-06-24  |
 | AWS Shield                                            | Aws::Shield                              | aws-sdk-shield                              | 2016-06-02  |
 | AWS Signer                                            | Aws::Signer                              | aws-sdk-signer                              | 2017-08-25  |
+| AWS SimSpace Weaver                                   | Aws::SimSpaceWeaver                      | aws-sdk-simspaceweaver                      | 2022-10-28  |
 | AWS Single Sign-On                                    | Aws::SSO                                 | aws-sdk-core                                | 2019-06-10  |
 | AWS Single Sign-On Admin                              | Aws::SSOAdmin                            | aws-sdk-ssoadmin                            | 2020-07-20  |
 | AWS Snow Device Management                            | Aws::SnowDeviceManagement                | aws-sdk-snowdevicemanagement                | 2021-08-04  |
@@ -569,6 +570,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Mechanical Turk                                | Aws::MTurk                               | aws-sdk-mturk                               | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                            | aws-sdk-memorydb                            | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                             | aws-sdk-neptune                             | 2014-10-31  |
+| Amazon Omics                                          | Aws::Omics                               | aws-sdk-omics                               | 2022-11-28  |
 | Amazon OpenSearch Service                             | Aws::OpenSearchService                   | aws-sdk-opensearchservice                   | 2021-01-01  |
 | Amazon Personalize                                    | Aws::Personalize                         | aws-sdk-personalize                         | 2018-05-22  |
 | Amazon Personalize Events                             | Aws::PersonalizeEvents                   | aws-sdk-personalizeevents                   | 2018-03-22  |
@@ -594,6 +596,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                           | aws-sdk-sagemaker                           | 2017-07-24  |
 | Amazon Sagemaker Edge Manager                         | Aws::SagemakerEdgeManager                | aws-sdk-sagemakeredgemanager                | 2020-09-23  |
+| Amazon Security Lake                                  | Aws::SecurityLake                        | aws-sdk-securitylake                        | 2018-05-10  |
 | Amazon Simple Email Service                           | Aws::SES                                 | aws-sdk-ses                                 | 2010-12-01  |
 | Amazon Simple Email Service                           | Aws::SESV2                               | aws-sdk-sesv2                               | 2019-09-27  |
 | Amazon Simple Notification Service                    | Aws::SNS                                 | aws-sdk-sns                                 | 2010-03-31  |
@@ -643,6 +646,7 @@ RubyGems.org page under "LINKS" section.
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |
+| OpenSearch Service Serverless                         | Aws::OpenSearchServerless                | aws-sdk-opensearchserverless                | 2021-11-01  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService              | aws-sdk-redshiftdataapiservice              | 2019-12-20  |
 | Redshift Serverless                                   | Aws::RedshiftServerless                  | aws-sdk-redshiftserverless                  | 2021-04-21  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster              | aws-sdk-route53recoverycluster              | 2019-12-02  |

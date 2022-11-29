@@ -10,6 +10,385 @@
 module Aws::Firehose
   module Types
 
+    # Describes the buffering to perform before delivering data to the
+    # Serverless offering for Amazon OpenSearch Service destination.
+    #
+    # @note When making an API call, you may pass AmazonOpenSearchServerlessBufferingHints
+    #   data as a hash:
+    #
+    #       {
+    #         interval_in_seconds: 1,
+    #         size_in_m_bs: 1,
+    #       }
+    #
+    # @!attribute [rw] interval_in_seconds
+    #   Buffer incoming data for the specified period of time, in seconds,
+    #   before delivering it to the destination. The default value is 300 (5
+    #   minutes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_in_m_bs
+    #   Buffer incoming data to the specified size, in MBs, before
+    #   delivering it to the destination. The default value is 5.
+    #
+    #   We recommend setting this parameter to a value greater than the
+    #   amount of data you typically ingest into the delivery stream in 10
+    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
+    #   value should be 10 MB or higher.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessBufferingHints AWS API Documentation
+    #
+    class AmazonOpenSearchServerlessBufferingHints < Struct.new(
+      :interval_in_seconds,
+      :size_in_m_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of a destination in the Serverless
+    # offering for Amazon OpenSearch Service.
+    #
+    # @note When making an API call, you may pass AmazonOpenSearchServerlessDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN", # required
+    #         collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
+    #         index_name: "AmazonOpenSearchServerlessIndexName", # required
+    #         buffering_hints: {
+    #           interval_in_seconds: 1,
+    #           size_in_m_bs: 1,
+    #         },
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
+    #         s3_configuration: { # required
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           role_arn: "RoleARN", # required
+    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Kinesis Data Firehose for calling the Serverless offering for Amazon
+    #   OpenSearch Service Configuration API and for indexing documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_endpoint
+    #   The endpoint to use when communicating with the collection in the
+    #   Serverless offering for Amazon OpenSearch Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The Serverless offering for Amazon OpenSearch Service index name.
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified, the default values
+    #   for AmazonopensearchserviceBufferingHints are used.
+    #   @return [Types::AmazonOpenSearchServerlessBufferingHints]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to the Serverless offering for Amazon OpenSearch
+    #   Service. The default value is 300 (5 minutes).
+    #   @return [Types::AmazonOpenSearchServerlessRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Defines how documents should be delivered to Amazon S3. When it is
+    #   set to FailedDocumentsOnly, Kinesis Data Firehose writes any
+    #   documents that could not be indexed to the configured Amazon S3
+    #   destination, with AmazonOpenSearchService-failed/ appended to the
+    #   key prefix. When set to AllDocuments, Kinesis Data Firehose delivers
+    #   all incoming records to Amazon S3, and also writes failed documents
+    #   with AmazonOpenSearchService-failed/ appended to the prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_configuration
+    #   Describes the configuration of a destination in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessDestinationConfiguration AWS API Documentation
+    #
+    class AmazonOpenSearchServerlessDestinationConfiguration < Struct.new(
+      :role_arn,
+      :collection_endpoint,
+      :index_name,
+      :buffering_hints,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_configuration,
+      :processing_configuration,
+      :cloud_watch_logging_options,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The destination description in the Serverless offering for Amazon
+    # OpenSearch Service.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_endpoint
+    #   The endpoint to use when communicating with the collection in the
+    #   Serverless offering for Amazon OpenSearch Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The Serverless offering for Amazon OpenSearch Service index name.
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options.
+    #   @return [Types::AmazonOpenSearchServerlessBufferingHints]
+    #
+    # @!attribute [rw] retry_options
+    #   The Serverless offering for Amazon OpenSearch Service retry options.
+    #   @return [Types::AmazonOpenSearchServerlessRetryOptions]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination_description
+    #   Describes a destination in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] vpc_configuration_description
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfigurationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessDestinationDescription AWS API Documentation
+    #
+    class AmazonOpenSearchServerlessDestinationDescription < Struct.new(
+      :role_arn,
+      :collection_endpoint,
+      :index_name,
+      :buffering_hints,
+      :retry_options,
+      :s3_backup_mode,
+      :s3_destination_description,
+      :processing_configuration,
+      :cloud_watch_logging_options,
+      :vpc_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an update for a destination in the Serverless offering for
+    # Amazon OpenSearch Service.
+    #
+    # @note When making an API call, you may pass AmazonOpenSearchServerlessDestinationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN",
+    #         collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
+    #         index_name: "AmazonOpenSearchServerlessIndexName",
+    #         buffering_hints: {
+    #           interval_in_seconds: 1,
+    #           size_in_m_bs: 1,
+    #         },
+    #         retry_options: {
+    #           duration_in_seconds: 1,
+    #         },
+    #         s3_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           error_output_prefix: "ErrorOutputPrefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Kinesis Data Firehose for calling the Serverless offering for Amazon
+    #   OpenSearch Service Configuration API and for indexing documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_endpoint
+    #   The endpoint to use when communicating with the collection in the
+    #   Serverless offering for Amazon OpenSearch Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The Serverless offering for Amazon OpenSearch Service index name.
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified,
+    #   AmazonopensearchBufferingHints object default values are used.
+    #   @return [Types::AmazonOpenSearchServerlessBufferingHints]
+    #
+    # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to the Serverless offering for Amazon OpenSearch
+    #   Service. The default value is 300 (5 minutes).
+    #   @return [Types::AmazonOpenSearchServerlessRetryOptions]
+    #
+    # @!attribute [rw] s3_update
+    #   Describes an update for a destination in Amazon S3.
+    #   @return [Types::S3DestinationUpdate]
+    #
+    # @!attribute [rw] processing_configuration
+    #   Describes a data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   Describes the Amazon CloudWatch logging options for your delivery
+    #   stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessDestinationUpdate AWS API Documentation
+    #
+    class AmazonOpenSearchServerlessDestinationUpdate < Struct.new(
+      :role_arn,
+      :collection_endpoint,
+      :index_name,
+      :buffering_hints,
+      :retry_options,
+      :s3_update,
+      :processing_configuration,
+      :cloud_watch_logging_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures retry behavior in case Kinesis Data Firehose is unable to
+    # deliver documents to the Serverless offering for Amazon OpenSearch
+    # Service.
+    #
+    # @note When making an API call, you may pass AmazonOpenSearchServerlessRetryOptions
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   After an initial failure to deliver to the Serverless offering for
+    #   Amazon OpenSearch Service, the total amount of time during which
+    #   Kinesis Data Firehose retries delivery (including the first
+    #   attempt). After this time has elapsed, the failed documents are
+    #   written to Amazon S3. Default value is 300 seconds (5 minutes). A
+    #   value of 0 (zero) results in no retries.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonOpenSearchServerlessRetryOptions AWS API Documentation
+    #
+    class AmazonOpenSearchServerlessRetryOptions < Struct.new(
+      :duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the buffering to perform before delivering data to the
+    # Amazon OpenSearch Service destination.
+    #
     # @note When making an API call, you may pass AmazonopensearchserviceBufferingHints
     #   data as a hash:
     #
@@ -19,9 +398,19 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] interval_in_seconds
+    #   Buffer incoming data for the specified period of time, in seconds,
+    #   before delivering it to the destination. The default value is 300 (5
+    #   minutes).
     #   @return [Integer]
     #
     # @!attribute [rw] size_in_m_bs
+    #   Buffer incoming data to the specified size, in MBs, before
+    #   delivering it to the destination. The default value is 5.
+    #
+    #   We recommend setting this parameter to a value greater than the
+    #   amount of data you typically ingest into the delivery stream in 10
+    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
+    #   value should be 10 MB or higher.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceBufferingHints AWS API Documentation
@@ -33,6 +422,9 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Describes the configuration of a destination in Amazon OpenSearch
+    # Service
+    #
     # @note When making an API call, you may pass AmazonopensearchserviceDestinationConfiguration
     #   data as a hash:
     #
@@ -100,30 +492,59 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Kinesis Data Firehose for calling the Amazon OpenSearch Service
+    #   Configuration API and for indexing documents.
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
+    #   The ARN of the Amazon OpenSearch Service domain. The IAM role must
+    #   have permissions for DescribeElasticsearchDomain,
+    #   DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig
+    #   after assuming the role specified in RoleARN.
     #   @return [String]
     #
     # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Specify
+    #   either this ClusterEndpoint or the DomainARN field.
     #   @return [String]
     #
     # @!attribute [rw] index_name
+    #   The ElasticsearAmazon OpenSearch Service index name.
     #   @return [String]
     #
     # @!attribute [rw] type_name
+    #   The Amazon OpenSearch Service type name. For Elasticsearch 6.x,
+    #   there can be only one type per index. If you try to specify a new
+    #   type for an existing index that already has another type, Kinesis
+    #   Data Firehose returns an error during run time.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
+    #   The Amazon OpenSearch Service index rotation period. Index rotation
+    #   appends a timestamp to the IndexName to facilitate the expiration of
+    #   old data.
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified, the default values
+    #   for AmazonopensearchserviceBufferingHints are used.
     #   @return [Types::AmazonopensearchserviceBufferingHints]
     #
     # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon OpenSearch Service. The default value is
+    #   300 (5 minutes).
     #   @return [Types::AmazonopensearchserviceRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
+    #   Defines how documents should be delivered to Amazon S3. When it is
+    #   set to FailedDocumentsOnly, Kinesis Data Firehose writes any
+    #   documents that could not be indexed to the configured Amazon S3
+    #   destination, with AmazonOpenSearchService-failed/ appended to the
+    #   key prefix. When set to AllDocuments, Kinesis Data Firehose delivers
+    #   all incoming records to Amazon S3, and also writes failed documents
+    #   with AmazonOpenSearchService-failed/ appended to the prefix.
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -163,31 +584,47 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The destination description in Amazon OpenSearch Service.
+    #
     # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials.
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
+    #   The ARN of the Amazon OpenSearch Service domain.
     #   @return [String]
     #
     # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Kinesis
+    #   Data Firehose uses either this ClusterEndpoint or the DomainARN
+    #   field to send data to Amazon OpenSearch Service.
     #   @return [String]
     #
     # @!attribute [rw] index_name
+    #   The Amazon OpenSearch Service index name.
     #   @return [String]
     #
     # @!attribute [rw] type_name
+    #   The Amazon OpenSearch Service type name. This applies to
+    #   Elasticsearch 6.x and lower versions. For Elasticsearch 7.x and
+    #   OpenSearch Service 1.x, there's no value for TypeName.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
+    #   The Amazon OpenSearch Service index rotation period
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
+    #   The buffering options.
     #   @return [Types::AmazonopensearchserviceBufferingHints]
     #
     # @!attribute [rw] retry_options
+    #   The Amazon OpenSearch Service retry options.
     #   @return [Types::AmazonopensearchserviceRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_description
@@ -227,6 +664,8 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Describes an update for a destination in Amazon OpenSearch Service.
+    #
     # @note When making an API call, you may pass AmazonopensearchserviceDestinationUpdate
     #   data as a hash:
     #
@@ -288,27 +727,55 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Kinesis Data Firehose for calling the Amazon OpenSearch Service
+    #   Configuration API and for indexing documents.
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
+    #   The ARN of the Amazon OpenSearch Service domain. The IAM role must
+    #   have permissions for DescribeDomain, DescribeDomains, and
+    #   DescribeDomainConfig after assuming the IAM role specified in
+    #   RoleARN.
     #   @return [String]
     #
     # @!attribute [rw] cluster_endpoint
+    #   The endpoint to use when communicating with the cluster. Specify
+    #   either this ClusterEndpoint or the DomainARN field.
     #   @return [String]
     #
     # @!attribute [rw] index_name
+    #   The Amazon OpenSearch Service index name.
     #   @return [String]
     #
     # @!attribute [rw] type_name
+    #   The Amazon OpenSearch Service type name. For Elasticsearch 6.x,
+    #   there can be only one type per index. If you try to specify a new
+    #   type for an existing index that already has another type, Kinesis
+    #   Data Firehose returns an error during runtime.
+    #
+    #   If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
+    #   delivery stream, Kinesis Data Firehose still delivers data to
+    #   Elasticsearch with the old index name and type name. If you want to
+    #   update your delivery stream with a new index name, provide an empty
+    #   string for TypeName.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
+    #   The Amazon OpenSearch Service index rotation period. Index rotation
+    #   appends a timestamp to IndexName to facilitate the expiration of old
+    #   data.
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
+    #   The buffering options. If no value is specified,
+    #   AmazonopensearchBufferingHints object default values are used.
     #   @return [Types::AmazonopensearchserviceBufferingHints]
     #
     # @!attribute [rw] retry_options
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon OpenSearch Service. The default value is
+    #   300 (5 minutes).
     #   @return [Types::AmazonopensearchserviceRetryOptions]
     #
     # @!attribute [rw] s3_update
@@ -342,6 +809,9 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Configures retry behavior in case Kinesis Data Firehose is unable to
+    # deliver documents to Amazon OpenSearch Service.
+    #
     # @note When making an API call, you may pass AmazonopensearchserviceRetryOptions
     #   data as a hash:
     #
@@ -350,6 +820,11 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] duration_in_seconds
+    #   After an initial failure to deliver to Amazon OpenSearch Service,
+    #   the total amount of time during which Kinesis Data Firehose retries
+    #   delivery (including the first attempt). After this time has elapsed,
+    #   the failed documents are written to Amazon S3. Default value is 300
+    #   seconds (5 minutes). A value of 0 (zero) results in no retries.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/AmazonopensearchserviceRetryOptions AWS API Documentation
@@ -989,13 +1464,72 @@ module Aws::Firehose
     #             value: "TagValue",
     #           },
     #         ],
+    #         amazon_open_search_serverless_destination_configuration: {
+    #           role_arn: "RoleARN", # required
+    #           collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
+    #           index_name: "AmazonOpenSearchServerlessIndexName", # required
+    #           buffering_hints: {
+    #             interval_in_seconds: 1,
+    #             size_in_m_bs: 1,
+    #           },
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_backup_mode: "FailedDocumentsOnly", # accepts FailedDocumentsOnly, AllDocuments
+    #           s3_configuration: { # required
+    #             role_arn: "RoleARN", # required
+    #             bucket_arn: "BucketARN", # required
+    #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #             role_arn: "RoleARN", # required
+    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream. This name must be unique per AWS
-    #   account in the same AWS Region. If the delivery streams are in
-    #   different accounts or different Regions, you can have multiple
-    #   delivery streams with the same name.
+    #   The name of the delivery stream. This name must be unique per Amazon
+    #   Web Services account in the same Amazon Web Services Region. If the
+    #   delivery streams are in different accounts or different Regions, you
+    #   can have multiple delivery streams with the same name.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_type
@@ -1040,6 +1574,8 @@ module Aws::Firehose
     #   @return [Types::ElasticsearchDestinationConfiguration]
     #
     # @!attribute [rw] amazonopensearchservice_destination_configuration
+    #   The destination in Amazon OpenSearch Service. You can specify only
+    #   one destination.
     #   @return [Types::AmazonopensearchserviceDestinationConfiguration]
     #
     # @!attribute [rw] splunk_destination_configuration
@@ -1053,12 +1589,12 @@ module Aws::Firehose
     #
     # @!attribute [rw] tags
     #   A set of tags to assign to the delivery stream. A tag is a key-value
-    #   pair that you can define and assign to AWS resources. Tags are
-    #   metadata. For example, you can add friendly names and descriptions
-    #   or other types of information that can help you distinguish the
-    #   delivery stream. For more information about tags, see [Using Cost
-    #   Allocation Tags][1] in the AWS Billing and Cost Management User
-    #   Guide.
+    #   pair that you can define and assign to Amazon Web Services
+    #   resources. Tags are metadata. For example, you can add friendly
+    #   names and descriptions or other types of information that can help
+    #   you distinguish the delivery stream. For more information about
+    #   tags, see [Using Cost Allocation Tags][1] in the Amazon Web Services
+    #   Billing and Cost Management User Guide.
     #
     #   You can specify up to 50 tags when creating a delivery stream.
     #
@@ -1066,6 +1602,11 @@ module Aws::Firehose
     #
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] amazon_open_search_serverless_destination_configuration
+    #   The destination in the Serverless offering for Amazon OpenSearch
+    #   Service. You can specify only one destination.
+    #   @return [Types::AmazonOpenSearchServerlessDestinationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
     #
@@ -1081,7 +1622,8 @@ module Aws::Firehose
       :amazonopensearchservice_destination_configuration,
       :splunk_destination_configuration,
       :http_endpoint_destination_configuration,
-      :tags)
+      :tags,
+      :amazon_open_search_serverless_destination_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1101,10 +1643,10 @@ module Aws::Firehose
     # Specifies that you want Kinesis Data Firehose to convert data from the
     # JSON format to the Parquet or ORC format before writing it to Amazon
     # S3. Kinesis Data Firehose uses the serializer and deserializer that
-    # you specify, in addition to the column information from the AWS Glue
-    # table, to deserialize your input data from JSON and then serialize it
-    # to the Parquet or ORC format. For more information, see [Kinesis Data
-    # Firehose Record Format Conversion][1].
+    # you specify, in addition to the column information from the Amazon Web
+    # Services Glue table, to deserialize your input data from JSON and then
+    # serialize it to the Parquet or ORC format. For more information, see
+    # [Kinesis Data Firehose Record Format Conversion][1].
     #
     #
     #
@@ -1164,8 +1706,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] schema_configuration
-    #   Specifies the AWS Glue Data Catalog table that contains the column
-    #   information. This parameter is required if `Enabled` is set to true.
+    #   Specifies the Amazon Web Services Glue Data Catalog table that
+    #   contains the column information. This parameter is required if
+    #   `Enabled` is set to true.
     #   @return [Types::SchemaConfiguration]
     #
     # @!attribute [rw] input_format_configuration
@@ -1215,8 +1758,9 @@ module Aws::Firehose
     #   customer error, such as when the CMK or the grant are in an invalid
     #   state. If you force deletion, you can then use the [RevokeGrant][1]
     #   operation to revoke the grant you gave to Kinesis Data Firehose. If
-    #   a failure to retire the grant happens due to an AWS KMS issue,
-    #   Kinesis Data Firehose keeps retrying the delete operation.
+    #   a failure to retire the grant happens due to an Amazon Web Services
+    #   KMS issue, Kinesis Data Firehose keeps retrying the delete
+    #   operation.
     #
     #   The default value is false.
     #
@@ -1246,8 +1790,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] delivery_stream_arn
     #   The Amazon Resource Name (ARN) of the delivery stream. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   information, see [Amazon Resource Names (ARNs) and Amazon Web
+    #   Services Service Namespaces][1].
     #
     #
     #
@@ -1338,15 +1882,16 @@ module Aws::Firehose
     #
     # @!attribute [rw] key_arn
     #   If `KeyType` is `CUSTOMER_MANAGED_CMK`, this field contains the ARN
-    #   of the customer managed CMK. If `KeyType` is `AWS_OWNED_CMK`,
-    #   `DeliveryStreamEncryptionConfiguration` doesn't contain a value for
-    #   `KeyARN`.
+    #   of the customer managed CMK. If `KeyType` is `Amazon Web
+    #   Services_OWNED_CMK`, `DeliveryStreamEncryptionConfiguration`
+    #   doesn't contain a value for `KeyARN`.
     #   @return [String]
     #
     # @!attribute [rw] key_type
     #   Indicates the type of customer master key (CMK) that is used for
-    #   encryption. The default setting is `AWS_OWNED_CMK`. For more
-    #   information about CMKs, see [Customer Master Keys (CMKs)][1].
+    #   encryption. The default setting is `Amazon Web Services_OWNED_CMK`.
+    #   For more information about CMKs, see [Customer Master Keys
+    #   (CMKs)][1].
     #
     #
     #
@@ -1394,19 +1939,20 @@ module Aws::Firehose
     # @!attribute [rw] key_arn
     #   If you set `KeyType` to `CUSTOMER_MANAGED_CMK`, you must specify the
     #   Amazon Resource Name (ARN) of the CMK. If you set `KeyType` to
-    #   `AWS_OWNED_CMK`, Kinesis Data Firehose uses a service-account CMK.
+    #   `Amazon Web Services_OWNED_CMK`, Kinesis Data Firehose uses a
+    #   service-account CMK.
     #   @return [String]
     #
     # @!attribute [rw] key_type
     #   Indicates the type of customer master key (CMK) to use for
-    #   encryption. The default setting is `AWS_OWNED_CMK`. For more
-    #   information about CMKs, see [Customer Master Keys (CMKs)][1]. When
-    #   you invoke CreateDeliveryStream or StartDeliveryStreamEncryption
-    #   with `KeyType` set to CUSTOMER\_MANAGED\_CMK, Kinesis Data Firehose
-    #   invokes the Amazon KMS operation [CreateGrant][2] to create a grant
-    #   that allows the Kinesis Data Firehose service to use the customer
-    #   managed CMK to perform encryption and decryption. Kinesis Data
-    #   Firehose manages that grant.
+    #   encryption. The default setting is `Amazon Web Services_OWNED_CMK`.
+    #   For more information about CMKs, see [Customer Master Keys
+    #   (CMKs)][1]. When you invoke CreateDeliveryStream or
+    #   StartDeliveryStreamEncryption with `KeyType` set to
+    #   CUSTOMER\_MANAGED\_CMK, Kinesis Data Firehose invokes the Amazon KMS
+    #   operation [CreateGrant][2] to create a grant that allows the Kinesis
+    #   Data Firehose service to use the customer managed CMK to perform
+    #   encryption and decryption. Kinesis Data Firehose manages that grant.
     #
     #   When you invoke StartDeliveryStreamEncryption to change the CMK for
     #   a delivery stream that is encrypted with a customer managed CMK,
@@ -1421,7 +1967,8 @@ module Aws::Firehose
     #   To encrypt your delivery stream, use symmetric CMKs. Kinesis Data
     #   Firehose doesn't support asymmetric CMKs. For information about
     #   symmetric and asymmetric CMKs, see [About Symmetric and Asymmetric
-    #   CMKs][3] in the AWS Key Management Service developer guide.
+    #   CMKs][3] in the Amazon Web Services Key Management Service developer
+    #   guide.
     #
     #
     #
@@ -1562,6 +2109,7 @@ module Aws::Firehose
     #   @return [Types::ElasticsearchDestinationDescription]
     #
     # @!attribute [rw] amazonopensearchservice_destination_description
+    #   The destination in Amazon OpenSearch Service.
     #   @return [Types::AmazonopensearchserviceDestinationDescription]
     #
     # @!attribute [rw] splunk_destination_description
@@ -1571,6 +2119,11 @@ module Aws::Firehose
     # @!attribute [rw] http_endpoint_destination_description
     #   Describes the specified HTTP endpoint destination.
     #   @return [Types::HttpEndpointDestinationDescription]
+    #
+    # @!attribute [rw] amazon_open_search_serverless_destination_description
+    #   The destination in the Serverless offering for Amazon OpenSearch
+    #   Service.
+    #   @return [Types::AmazonOpenSearchServerlessDestinationDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription AWS API Documentation
     #
@@ -1582,7 +2135,8 @@ module Aws::Firehose
       :elasticsearch_destination_description,
       :amazonopensearchservice_destination_description,
       :splunk_destination_description,
-      :http_endpoint_destination_description)
+      :http_endpoint_destination_description,
+      :amazon_open_search_serverless_destination_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1590,12 +2144,7 @@ module Aws::Firehose
     # The configuration of the dynamic partitioning mechanism that creates
     # smaller data sets from the streaming data by partitioning it based on
     # partition keys. Currently, dynamic partitioning is only supported for
-    # Amazon S3 destinations. For more information, see
-    # [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    # Amazon S3 destinations.
     #
     # @note When making an API call, you may pass DynamicPartitioningConfiguration
     #   data as a hash:
@@ -1735,7 +2284,8 @@ module Aws::Firehose
     #   Kinesis Data Firehose for calling the Amazon ES Configuration API
     #   and for indexing documents. For more information, see [Grant Kinesis
     #   Data Firehose Access to an Amazon S3 Destination][1] and [Amazon
-    #   Resource Names (ARNs) and AWS Service Namespaces][2].
+    #   Resource Names (ARNs) and Amazon Web Services Service
+    #   Namespaces][2].
     #
     #
     #
@@ -1745,10 +2295,10 @@ module Aws::Firehose
     #
     # @!attribute [rw] domain_arn
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
-    #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
-    #   and `DescribeElasticsearchDomainConfig` after assuming the role
-    #   specified in **RoleARN**. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   for `DescribeDomain`, `DescribeDomains`, and
+    #   `DescribeDomainConfig` after assuming the role specified in
+    #   **RoleARN**. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #   Specify either `ClusterEndpoint` or `DomainARN`.
     #
@@ -1801,12 +2351,12 @@ module Aws::Firehose
     #   Defines how documents should be delivered to Amazon S3. When it is
     #   set to `FailedDocumentsOnly`, Kinesis Data Firehose writes any
     #   documents that could not be indexed to the configured Amazon S3
-    #   destination, with `elasticsearch-failed/` appended to the key
-    #   prefix. When set to `AllDocuments`, Kinesis Data Firehose delivers
-    #   all incoming records to Amazon S3, and also writes failed documents
-    #   with `elasticsearch-failed/` appended to the prefix. For more
-    #   information, see [Amazon S3 Backup for the Amazon ES
-    #   Destination][1]. Default value is `FailedDocumentsOnly`.
+    #   destination, with `AmazonOpenSearchService-failed/` appended to the
+    #   key prefix. When set to `AllDocuments`, Kinesis Data Firehose
+    #   delivers all incoming records to Amazon S3, and also writes failed
+    #   documents with `AmazonOpenSearchService-failed/` appended to the
+    #   prefix. For more information, see [Amazon S3 Backup for the Amazon
+    #   ES Destination][1]. Default value is `FailedDocumentsOnly`.
     #
     #   You can't change this backup mode after you create the delivery
     #   stream.
@@ -1855,9 +2405,9 @@ module Aws::Firehose
     # The destination description in Amazon ES.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -1866,7 +2416,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] domain_arn
     #   The ARN of the Amazon ES domain. For more information, see [Amazon
-    #   Resource Names (ARNs) and AWS Service Namespaces][1].
+    #   Resource Names (ARNs) and Amazon Web Services Service
+    #   Namespaces][1].
     #
     #   Kinesis Data Firehose uses either `ClusterEndpoint` or `DomainARN`
     #   to send data to Amazon ES.
@@ -1888,8 +2439,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] type_name
     #   The Elasticsearch type name. This applies to Elasticsearch 6.x and
-    #   lower versions. For Elasticsearch 7.x, there's no value for
-    #   `TypeName`.
+    #   lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x,
+    #   there's no value for `TypeName`.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
@@ -2011,7 +2562,8 @@ module Aws::Firehose
     #   Kinesis Data Firehose for calling the Amazon ES Configuration API
     #   and for indexing documents. For more information, see [Grant Kinesis
     #   Data Firehose Access to an Amazon S3 Destination][1] and [Amazon
-    #   Resource Names (ARNs) and AWS Service Namespaces][2].
+    #   Resource Names (ARNs) and Amazon Web Services Service
+    #   Namespaces][2].
     #
     #
     #
@@ -2021,10 +2573,10 @@ module Aws::Firehose
     #
     # @!attribute [rw] domain_arn
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
-    #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
-    #   and `DescribeElasticsearchDomainConfig` after assuming the IAM role
-    #   specified in `RoleARN`. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   for `DescribeDomain`, `DescribeDomains`, and
+    #   `DescribeDomainConfig` after assuming the IAM role specified in
+    #   `RoleARN`. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #   Specify either `ClusterEndpoint` or `DomainARN`.
     #
@@ -2284,9 +2836,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -2295,7 +2847,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -2366,12 +2918,7 @@ module Aws::Firehose
     #   The configuration of the dynamic partitioning mechanism that creates
     #   smaller data sets from the streaming data by partitioning it based
     #   on partition keys. Currently, dynamic partitioning is only supported
-    #   for Amazon S3 destinations. For more information, see
-    #   [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #   for Amazon S3 destinations.
     #   @return [Types::DynamicPartitioningConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationConfiguration AWS API Documentation
@@ -2397,9 +2944,9 @@ module Aws::Firehose
     # Describes a destination in Amazon S3.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -2408,7 +2955,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -2476,12 +3023,7 @@ module Aws::Firehose
     #   The configuration of the dynamic partitioning mechanism that creates
     #   smaller data sets from the streaming data by partitioning it based
     #   on partition keys. Currently, dynamic partitioning is only supported
-    #   for Amazon S3 destinations. For more information, see
-    #   [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #   for Amazon S3 destinations.
     #   @return [Types::DynamicPartitioningConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationDescription AWS API Documentation
@@ -2625,9 +3167,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -2636,7 +3178,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -2706,12 +3248,7 @@ module Aws::Firehose
     #   The configuration of the dynamic partitioning mechanism that creates
     #   smaller data sets from the streaming data by partitioning it based
     #   on partition keys. Currently, dynamic partitioning is only supported
-    #   for Amazon S3 destinations. For more information, see
-    #   [https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+    #   for Amazon S3 destinations.
     #   @return [Types::DynamicPartitioningConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationUpdate AWS API Documentation
@@ -3418,9 +3955,9 @@ module Aws::Firehose
     #
     # @!attribute [rw] awskms_key_arn
     #   The Amazon Resource Name (ARN) of the encryption key. Must belong to
-    #   the same AWS Region as the destination Amazon S3 bucket. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   the same Amazon Web Services Region as the destination Amazon S3
+    #   bucket. For more information, see [Amazon Resource Names (ARNs) and
+    #   Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -3457,8 +3994,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that provides access to the source Kinesis data
-    #   stream. For more information, see [AWS Identity and Access
-    #   Management (IAM) ARN Format][1].
+    #   stream. For more information, see [Amazon Web Services Identity and
+    #   Access Management (IAM) ARN Format][1].
     #
     #
     #
@@ -3489,8 +4026,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role used by the source Kinesis data stream. For more
-    #   information, see [AWS Identity and Access Management (IAM) ARN
-    #   Format][1].
+    #   information, see [Amazon Web Services Identity and Access Management
+    #   (IAM) ARN Format][1].
     #
     #
     #
@@ -3998,7 +4535,12 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] parameter_name
-    #   The name of the parameter.
+    #   The name of the parameter. Currently the following default values
+    #   are supported: 3 for `NumberOfRetries` and 60 for the
+    #   `BufferIntervalInSeconds`. The `BufferSizeInMBs` ranges between 0.2
+    #   MB and up to 3MB. The default buffering hint is 1MB for all
+    #   destinations, except Splunk. For Splunk, the default buffering hint
+    #   is 256 KB.
     #   @return [String]
     #
     # @!attribute [rw] parameter_value
@@ -4251,9 +4793,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4333,9 +4875,9 @@ module Aws::Firehose
     # Describes a destination in Amazon Redshift.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4482,9 +5024,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4665,9 +5207,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4676,7 +5218,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4745,9 +5287,9 @@ module Aws::Firehose
     # Describes a destination in Amazon S3.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4756,7 +5298,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4847,9 +5389,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
-    #   information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1].
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services
+    #   credentials. For more information, see [Amazon Resource Names (ARNs)
+    #   and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4858,7 +5400,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] bucket_arn
     #   The ARN of the S3 bucket. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -4941,9 +5483,9 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The role that Kinesis Data Firehose can use to access AWS Glue. This
-    #   role must be in the same account you use for Kinesis Data Firehose.
-    #   Cross-account roles aren't allowed.
+    #   The role that Kinesis Data Firehose can use to access Amazon Web
+    #   Services Glue. This role must be in the same account you use for
+    #   Kinesis Data Firehose. Cross-account roles aren't allowed.
     #
     #   If the `SchemaConfiguration` request parameter is used as part of
     #   invoking the `CreateDeliveryStream` API, then the `RoleARN` property
@@ -4951,13 +5493,13 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] catalog_id
-    #   The ID of the AWS Glue Data Catalog. If you don't supply this, the
-    #   AWS account ID is used by default.
+    #   The ID of the Amazon Web Services Glue Data Catalog. If you don't
+    #   supply this, the Amazon Web Services account ID is used by default.
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   Specifies the name of the AWS Glue database that contains the schema
-    #   for the output data.
+    #   Specifies the name of the Amazon Web Services Glue database that
+    #   contains the schema for the output data.
     #
     #   If the `SchemaConfiguration` request parameter is used as part of
     #   invoking the `CreateDeliveryStream` API, then the `DatabaseName`
@@ -4965,8 +5507,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   Specifies the AWS Glue table that contains the column information
-    #   that constitutes your data schema.
+    #   Specifies the Amazon Web Services Glue table that contains the
+    #   column information that constitutes your data schema.
     #
     #   If the `SchemaConfiguration` request parameter is used as part of
     #   invoking the `CreateDeliveryStream` API, then the `TableName`
@@ -4974,8 +5516,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   If you don't specify an AWS Region, the default is the current
-    #   Region.
+    #   If you don't specify an Amazon Web Services Region, the default is
+    #   the current Region.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -6047,6 +6589,59 @@ module Aws::Firehose
     #             },
     #           },
     #         },
+    #         amazon_open_search_serverless_destination_update: {
+    #           role_arn: "RoleARN",
+    #           collection_endpoint: "AmazonOpenSearchServerlessCollectionEndpoint",
+    #           index_name: "AmazonOpenSearchServerlessIndexName",
+    #           buffering_hints: {
+    #             interval_in_seconds: 1,
+    #             size_in_m_bs: 1,
+    #           },
+    #           retry_options: {
+    #             duration_in_seconds: 1,
+    #           },
+    #           s3_update: {
+    #             role_arn: "RoleARN",
+    #             bucket_arn: "BucketARN",
+    #             prefix: "Prefix",
+    #             error_output_prefix: "ErrorOutputPrefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "RecordDeAggregation", # required, accepts RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] delivery_stream_name
@@ -6084,6 +6679,7 @@ module Aws::Firehose
     #   @return [Types::ElasticsearchDestinationUpdate]
     #
     # @!attribute [rw] amazonopensearchservice_destination_update
+    #   Describes an update for a destination in Amazon OpenSearch Service.
     #   @return [Types::AmazonopensearchserviceDestinationUpdate]
     #
     # @!attribute [rw] splunk_destination_update
@@ -6093,6 +6689,11 @@ module Aws::Firehose
     # @!attribute [rw] http_endpoint_destination_update
     #   Describes an update to the specified HTTP endpoint destination.
     #   @return [Types::HttpEndpointDestinationUpdate]
+    #
+    # @!attribute [rw] amazon_open_search_serverless_destination_update
+    #   Describes an update for a destination in the Serverless offering for
+    #   Amazon OpenSearch Service.
+    #   @return [Types::AmazonOpenSearchServerlessDestinationUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
     #
@@ -6106,7 +6707,8 @@ module Aws::Firehose
       :elasticsearch_destination_update,
       :amazonopensearchservice_destination_update,
       :splunk_destination_update,
-      :http_endpoint_destination_update)
+      :http_endpoint_destination_update,
+      :amazon_open_search_serverless_destination_update)
       SENSITIVE = []
       include Aws::Structure
     end
