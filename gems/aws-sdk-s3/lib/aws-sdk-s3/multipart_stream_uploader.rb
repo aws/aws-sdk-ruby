@@ -67,9 +67,13 @@ module Aws
 
       def upload_parts(upload_id, options, &block)
         completed = Queue.new
+        thread_errors = []
         errors = begin
           IO.pipe do |read_pipe, write_pipe|
-            threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
+            threads = upload_in_threads(
+              read_pipe, completed,
+              upload_part_opts(options).merge(upload_id: upload_id),
+              thread_errors)
             begin
               block.call(write_pipe)
             ensure
@@ -79,7 +83,7 @@ module Aws
             threads.map(&:value).compact
           end
         rescue => e
-          [e]
+          thread_errors + [e]
         end
 
         if errors.empty?
@@ -142,7 +146,7 @@ module Aws
         end
       end
 
-      def upload_in_threads(read_pipe, completed, options)
+      def upload_in_threads(read_pipe, completed, options, thread_errors)
         mutex = Mutex.new
         part_number = 0
         @thread_count.times.map do
@@ -179,7 +183,10 @@ module Aws
               nil
             rescue => error
               # keep other threads from uploading other parts
-              mutex.synchronize { read_pipe.close_read unless read_pipe.closed? }
+              mutex.synchronize do
+                thread_errors.push(error)
+                read_pipe.close_read unless read_pipe.closed?
+              end
               error
             end
           end
