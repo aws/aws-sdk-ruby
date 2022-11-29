@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2022-11-29)
+------------------
+
+* Feature - Adds support for a new recommendation preference that makes it possible for customers to optimize their EC2 recommendations by utilizing an external metrics ingestion service to provide metrics.
+
 1.34.0 (2022-10-25)
 ------------------
 

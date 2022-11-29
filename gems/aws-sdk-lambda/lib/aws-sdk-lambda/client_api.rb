@@ -286,6 +286,13 @@ module Aws::Lambda
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     SigningProfileVersionArns = Shapes::ListShape.new(name: 'SigningProfileVersionArns')
+    SnapStart = Shapes::StructureShape.new(name: 'SnapStart')
+    SnapStartApplyOn = Shapes::StringShape.new(name: 'SnapStartApplyOn')
+    SnapStartException = Shapes::StructureShape.new(name: 'SnapStartException')
+    SnapStartNotReadyException = Shapes::StructureShape.new(name: 'SnapStartNotReadyException')
+    SnapStartOptimizationStatus = Shapes::StringShape.new(name: 'SnapStartOptimizationStatus')
+    SnapStartResponse = Shapes::StructureShape.new(name: 'SnapStartResponse')
+    SnapStartTimeoutException = Shapes::StructureShape.new(name: 'SnapStartTimeoutException')
     SourceAccessConfiguration = Shapes::StructureShape.new(name: 'SourceAccessConfiguration')
     SourceAccessConfigurations = Shapes::ListShape.new(name: 'SourceAccessConfigurations')
     SourceAccessType = Shapes::StringShape.new(name: 'SourceAccessType')
@@ -502,6 +509,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, location_name: "CodeSigningConfigArn"))
     CreateFunctionRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     CreateFunctionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
+    CreateFunctionRequest.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStart, location_name: "SnapStart"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -708,6 +716,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
     FunctionConfiguration.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     FunctionConfiguration.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
+    FunctionConfiguration.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStartResponse, location_name: "SnapStart"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -1213,6 +1222,25 @@ module Aws::Lambda
 
     SigningProfileVersionArns.member = Shapes::ShapeRef.new(shape: Arn)
 
+    SnapStart.add_member(:apply_on, Shapes::ShapeRef.new(shape: SnapStartApplyOn, location_name: "ApplyOn"))
+    SnapStart.struct_class = Types::SnapStart
+
+    SnapStartException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    SnapStartException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    SnapStartException.struct_class = Types::SnapStartException
+
+    SnapStartNotReadyException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    SnapStartNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    SnapStartNotReadyException.struct_class = Types::SnapStartNotReadyException
+
+    SnapStartResponse.add_member(:apply_on, Shapes::ShapeRef.new(shape: SnapStartApplyOn, location_name: "ApplyOn"))
+    SnapStartResponse.add_member(:optimization_status, Shapes::ShapeRef.new(shape: SnapStartOptimizationStatus, location_name: "OptimizationStatus"))
+    SnapStartResponse.struct_class = Types::SnapStartResponse
+
+    SnapStartTimeoutException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    SnapStartTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    SnapStartTimeoutException.struct_class = Types::SnapStartTimeoutException
+
     SourceAccessConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: SourceAccessType, location_name: "Type"))
     SourceAccessConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: URI, location_name: "URI"))
     SourceAccessConfiguration.struct_class = Types::SourceAccessConfiguration
@@ -1320,6 +1348,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
     UpdateFunctionConfigurationRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     UpdateFunctionConfigurationRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
+    UpdateFunctionConfigurationRequest.add_member(:snap_start, Shapes::ShapeRef.new(shape: SnapStart, location_name: "SnapStart"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1787,6 +1816,9 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: EFSMountFailureException)
         o.errors << Shapes::ShapeRef.new(shape: EFSMountTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: EC2ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)

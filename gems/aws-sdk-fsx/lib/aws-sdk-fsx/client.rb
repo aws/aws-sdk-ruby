@@ -732,7 +732,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -753,6 +753,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -780,6 +782,9 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -813,7 +818,7 @@ module Aws::FSx
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backup.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -841,6 +846,8 @@ module Aws::FSx
     #   resp.backup.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.backup.volume.ontap_configuration.uuid #=> String
     #   resp.backup.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.volume.ontap_configuration.snapshot_policy #=> String
+    #   resp.backup.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.volume.resource_arn #=> String
     #   resp.backup.volume.tags #=> Array
     #   resp.backup.volume.tags[0].key #=> String
@@ -849,7 +856,7 @@ module Aws::FSx
     #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
     #   resp.backup.volume.administrative_actions #=> Array
-    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
     #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -939,7 +946,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -977,6 +984,9 @@ module Aws::FSx
     #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.backup.volume.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.backup.volume.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackup AWS API Documentation
     #
@@ -1208,7 +1218,7 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1229,6 +1239,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -1256,6 +1268,9 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -1289,7 +1304,7 @@ module Aws::FSx
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backup.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -1317,6 +1332,8 @@ module Aws::FSx
     #   resp.backup.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.backup.volume.ontap_configuration.uuid #=> String
     #   resp.backup.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backup.volume.ontap_configuration.snapshot_policy #=> String
+    #   resp.backup.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.volume.resource_arn #=> String
     #   resp.backup.volume.tags #=> Array
     #   resp.backup.volume.tags[0].key #=> String
@@ -1325,7 +1342,7 @@ module Aws::FSx
     #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
     #   resp.backup.volume.administrative_actions #=> Array
-    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.volume.administrative_actions[0].request_time #=> Time
     #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1415,7 +1432,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -1453,6 +1470,9 @@ module Aws::FSx
     #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.backup.volume.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.backup.volume.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -2315,7 +2335,7 @@ module Aws::FSx
     #       copy_tags_to_backups: false,
     #       copy_tags_to_volumes: false,
     #       daily_automatic_backup_start_time: "DailyTime",
-    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       disk_iops_configuration: {
@@ -2414,7 +2434,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -2435,6 +2455,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -2462,6 +2484,9 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -2495,7 +2520,7 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -2808,7 +2833,7 @@ module Aws::FSx
     #       copy_tags_to_backups: false,
     #       copy_tags_to_volumes: false,
     #       daily_automatic_backup_start_time: "DailyTime",
-    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       disk_iops_configuration: {
@@ -2908,7 +2933,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -2929,6 +2954,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -2956,6 +2983,9 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -2989,7 +3019,7 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -3086,7 +3116,7 @@ module Aws::FSx
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
     #   resp.snapshot.administrative_actions #=> Array
-    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
     #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3176,7 +3206,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -3198,6 +3228,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -3225,6 +3257,9 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshot AWS API Documentation
@@ -3341,7 +3376,6 @@ module Aws::FSx
     #   resp.storage_virtual_machine.name #=> String
     #   resp.storage_virtual_machine.resource_arn #=> String
     #   resp.storage_virtual_machine.storage_virtual_machine_id #=> String
-    #   resp.storage_virtual_machine.subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
     #   resp.storage_virtual_machine.uuid #=> String
     #   resp.storage_virtual_machine.tags #=> Array
     #   resp.storage_virtual_machine.tags[0].key #=> String
@@ -3396,15 +3430,18 @@ module Aws::FSx
     #     volume_type: "ONTAP", # required, accepts ONTAP, OPENZFS
     #     name: "VolumeName", # required
     #     ontap_configuration: {
-    #       junction_path: "JunctionPath", # required
+    #       junction_path: "JunctionPath",
     #       security_style: "UNIX", # accepts UNIX, NTFS, MIXED
     #       size_in_megabytes: 1, # required
-    #       storage_efficiency_enabled: false, # required
+    #       storage_efficiency_enabled: false,
     #       storage_virtual_machine_id: "StorageVirtualMachineId", # required
     #       tiering_policy: {
     #         cooling_period: 1,
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
+    #       ontap_volume_type: "RW", # accepts RW, DP
+    #       snapshot_policy: "SnapshotPolicy",
+    #       copy_tags_to_backups: false,
     #     },
     #     tags: [
     #       {
@@ -3461,6 +3498,8 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.volume.ontap_configuration.uuid #=> String
     #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volume.ontap_configuration.snapshot_policy #=> String
+    #   resp.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -3469,7 +3508,7 @@ module Aws::FSx
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3559,7 +3598,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -3597,6 +3636,9 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.volume.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.volume.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolume AWS API Documentation
     #
@@ -3643,15 +3685,18 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     name: "VolumeName", # required
     #     ontap_configuration: {
-    #       junction_path: "JunctionPath", # required
+    #       junction_path: "JunctionPath",
     #       security_style: "UNIX", # accepts UNIX, NTFS, MIXED
     #       size_in_megabytes: 1, # required
-    #       storage_efficiency_enabled: false, # required
+    #       storage_efficiency_enabled: false,
     #       storage_virtual_machine_id: "StorageVirtualMachineId", # required
     #       tiering_policy: {
     #         cooling_period: 1,
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
+    #       ontap_volume_type: "RW", # accepts RW, DP
+    #       snapshot_policy: "SnapshotPolicy",
+    #       copy_tags_to_backups: false,
     #     },
     #     tags: [
     #       {
@@ -3678,6 +3723,8 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.volume.ontap_configuration.uuid #=> String
     #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volume.ontap_configuration.snapshot_policy #=> String
+    #   resp.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -3686,7 +3733,7 @@ module Aws::FSx
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3776,7 +3823,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -3814,6 +3861,9 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.volume.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.volume.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeFromBackup AWS API Documentation
     #
@@ -4472,7 +4522,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backups[0].file_system.administrative_actions #=> Array
-    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -4493,6 +4543,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -4520,6 +4572,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -4553,7 +4608,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backups[0].file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backups[0].file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backups[0].file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backups[0].file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -4581,6 +4636,8 @@ module Aws::FSx
     #   resp.backups[0].volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.backups[0].volume.ontap_configuration.uuid #=> String
     #   resp.backups[0].volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.backups[0].volume.ontap_configuration.snapshot_policy #=> String
+    #   resp.backups[0].volume.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].volume.resource_arn #=> String
     #   resp.backups[0].volume.tags #=> Array
     #   resp.backups[0].volume.tags[0].key #=> String
@@ -4589,7 +4646,7 @@ module Aws::FSx
     #   resp.backups[0].volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].volume.lifecycle_transition_reason.message #=> String
     #   resp.backups[0].volume.administrative_actions #=> Array
-    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.backups[0].volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -4679,7 +4736,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -4717,6 +4774,9 @@ module Aws::FSx
     #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backups[0].volume.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.backups[0].volume.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -5255,7 +5315,7 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_systems[0].lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_systems[0].administrative_actions #=> Array
-    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -5276,6 +5336,8 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -5303,6 +5365,9 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.name #=> String
@@ -5336,7 +5401,7 @@ module Aws::FSx
     #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_systems[0].open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_systems[0].open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_systems[0].open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_systems[0].open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -5434,7 +5499,7 @@ module Aws::FSx
     #   resp.snapshots[0].tags[0].key #=> String
     #   resp.snapshots[0].tags[0].value #=> String
     #   resp.snapshots[0].administrative_actions #=> Array
-    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.snapshots[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshots[0].administrative_actions[0].request_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -5524,7 +5589,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -5546,6 +5611,8 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -5573,6 +5640,9 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #   resp.next_token #=> String
     #
@@ -5653,7 +5723,6 @@ module Aws::FSx
     #   resp.storage_virtual_machines[0].name #=> String
     #   resp.storage_virtual_machines[0].resource_arn #=> String
     #   resp.storage_virtual_machines[0].storage_virtual_machine_id #=> String
-    #   resp.storage_virtual_machines[0].subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
     #   resp.storage_virtual_machines[0].uuid #=> String
     #   resp.storage_virtual_machines[0].tags #=> Array
     #   resp.storage_virtual_machines[0].tags[0].key #=> String
@@ -5730,6 +5799,8 @@ module Aws::FSx
     #   resp.volumes[0].ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.volumes[0].ontap_configuration.uuid #=> String
     #   resp.volumes[0].ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volumes[0].ontap_configuration.snapshot_policy #=> String
+    #   resp.volumes[0].ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volumes[0].resource_arn #=> String
     #   resp.volumes[0].tags #=> Array
     #   resp.volumes[0].tags[0].key #=> String
@@ -5738,7 +5809,7 @@ module Aws::FSx
     #   resp.volumes[0].volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volumes[0].lifecycle_transition_reason.message #=> String
     #   resp.volumes[0].administrative_actions #=> Array
-    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.volumes[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.volumes[0].administrative_actions[0].request_time #=> Time
     #   resp.volumes[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -5828,7 +5899,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -5866,6 +5937,9 @@ module Aws::FSx
     #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.volumes[0].open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.volumes[0].open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.volumes[0].open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeVolumes AWS API Documentation
@@ -6115,7 +6189,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -6136,6 +6210,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -6163,6 +6239,9 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -6196,7 +6275,7 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -6248,6 +6327,7 @@ module Aws::FSx
     #
     #   * {Types::RestoreVolumeFromSnapshotResponse#volume_id #volume_id} => String
     #   * {Types::RestoreVolumeFromSnapshotResponse#lifecycle #lifecycle} => String
+    #   * {Types::RestoreVolumeFromSnapshotResponse#administrative_actions #administrative_actions} => Array&lt;Types::AdministrativeAction&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6262,6 +6342,162 @@ module Aws::FSx
     #
     #   resp.volume_id #=> String
     #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #   resp.administrative_actions #=> Array
+    #   resp.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
+    #   resp.administrative_actions[0].progress_percent #=> Integer
+    #   resp.administrative_actions[0].request_time #=> Time
+    #   resp.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
+    #   resp.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.administrative_actions[0].failure_details.message #=> String
+    #   resp.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #   resp.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
+    #   resp.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
+    #   resp.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RestoreVolumeFromSnapshot AWS API Documentation
     #
@@ -6760,6 +6996,8 @@ module Aws::FSx
     #         iops: 1,
     #       },
     #       throughput_capacity: 1,
+    #       add_route_table_ids: ["RouteTableId"],
+    #       remove_route_table_ids: ["RouteTableId"],
     #     },
     #     open_zfs_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -6841,7 +7079,7 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
     #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -6862,6 +7100,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -6889,6 +7129,9 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
@@ -6922,7 +7165,7 @@ module Aws::FSx
     #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -6981,7 +7224,7 @@ module Aws::FSx
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
     #   resp.snapshot.administrative_actions #=> Array
-    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
     #   resp.snapshot.administrative_actions[0].request_time #=> Time
     #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -7071,7 +7314,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -7093,6 +7336,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.snapshot_policy #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
     #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
@@ -7120,6 +7365,9 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshot AWS API Documentation
@@ -7199,7 +7447,6 @@ module Aws::FSx
     #   resp.storage_virtual_machine.name #=> String
     #   resp.storage_virtual_machine.resource_arn #=> String
     #   resp.storage_virtual_machine.storage_virtual_machine_id #=> String
-    #   resp.storage_virtual_machine.subtype #=> String, one of "DEFAULT", "DP_DESTINATION", "SYNC_DESTINATION", "SYNC_SOURCE"
     #   resp.storage_virtual_machine.uuid #=> String
     #   resp.storage_virtual_machine.tags #=> Array
     #   resp.storage_virtual_machine.tags[0].key #=> String
@@ -7262,6 +7509,8 @@ module Aws::FSx
     #         cooling_period: 1,
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
+    #       snapshot_policy: "SnapshotPolicy",
+    #       copy_tags_to_backups: false,
     #     },
     #     name: "VolumeName",
     #     open_zfs_configuration: {
@@ -7307,6 +7556,8 @@ module Aws::FSx
     #   resp.volume.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
     #   resp.volume.ontap_configuration.uuid #=> String
     #   resp.volume.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.volume.ontap_configuration.snapshot_policy #=> String
+    #   resp.volume.ontap_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.resource_arn #=> String
     #   resp.volume.tags #=> Array
     #   resp.volume.tags[0].key #=> String
@@ -7315,7 +7566,7 @@ module Aws::FSx
     #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions #=> Array
-    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS", "VOLUME_RESTORE"
     #   resp.volume.administrative_actions[0].progress_percent #=> Integer
     #   resp.volume.administrative_actions[0].request_time #=> Time
     #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -7405,7 +7656,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
@@ -7443,6 +7694,9 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
     #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.restore_to_snapshot #=> String
+    #   resp.volume.open_zfs_configuration.delete_intermediate_snaphots #=> Boolean
+    #   resp.volume.open_zfs_configuration.delete_cloned_volumes #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateVolume AWS API Documentation
     #
@@ -7466,7 +7720,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -56,7 +56,7 @@ module Aws::Inspector2
     #
     #       {
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #       }
@@ -108,7 +108,7 @@ module Aws::Inspector2
     end
 
     # An object with details the status of an Amazon Web Services account
-    # within your Amazon Inspector environment
+    # within your Amazon Inspector environment.
     #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID.
@@ -167,6 +167,14 @@ module Aws::Inspector2
     #   on container image layers.
     #   @return [Types::ImageLayerAggregation]
     #
+    # @!attribute [rw] lambda_function_aggregation
+    #   Returns an object with findings aggregated by AWS Lambda function.
+    #   @return [Types::LambdaFunctionAggregation]
+    #
+    # @!attribute [rw] lambda_layer_aggregation
+    #   Returns an object with findings aggregated by AWS Lambda layer.
+    #   @return [Types::LambdaLayerAggregation]
+    #
     # @!attribute [rw] package_aggregation
     #   An object that contains details about an aggregation request based
     #   on operating system package type.
@@ -191,6 +199,8 @@ module Aws::Inspector2
       :ec2_instance_aggregation,
       :finding_type_aggregation,
       :image_layer_aggregation,
+      :lambda_function_aggregation,
+      :lambda_layer_aggregation,
       :package_aggregation,
       :repository_aggregation,
       :title_aggregation,
@@ -205,6 +215,8 @@ module Aws::Inspector2
       class Ec2InstanceAggregation < AggregationRequest; end
       class FindingTypeAggregation < AggregationRequest; end
       class ImageLayerAggregation < AggregationRequest; end
+      class LambdaFunctionAggregation < AggregationRequest; end
+      class LambdaLayerAggregation < AggregationRequest; end
       class PackageAggregation < AggregationRequest; end
       class RepositoryAggregation < AggregationRequest; end
       class TitleAggregation < AggregationRequest; end
@@ -246,6 +258,14 @@ module Aws::Inspector2
     #   on container image layers.
     #   @return [Types::ImageLayerAggregationResponse]
     #
+    # @!attribute [rw] lambda_function_aggregation
+    #   An aggregation of findings by AWS Lambda function.
+    #   @return [Types::LambdaFunctionAggregationResponse]
+    #
+    # @!attribute [rw] lambda_layer_aggregation
+    #   An aggregation of findings by AWS Lambda layer.
+    #   @return [Types::LambdaLayerAggregationResponse]
+    #
     # @!attribute [rw] package_aggregation
     #   An object that contains details about an aggregation response based
     #   on operating system package type.
@@ -270,6 +290,8 @@ module Aws::Inspector2
       :ec2_instance_aggregation,
       :finding_type_aggregation,
       :image_layer_aggregation,
+      :lambda_function_aggregation,
+      :lambda_layer_aggregation,
       :package_aggregation,
       :repository_aggregation,
       :title_aggregation,
@@ -284,6 +306,8 @@ module Aws::Inspector2
       class Ec2InstanceAggregation < AggregationResponse; end
       class FindingTypeAggregation < AggregationResponse; end
       class ImageLayerAggregation < AggregationResponse; end
+      class LambdaFunctionAggregation < AggregationResponse; end
+      class LambdaLayerAggregation < AggregationResponse; end
       class PackageAggregation < AggregationResponse; end
       class RepositoryAggregation < AggregationResponse; end
       class TitleAggregation < AggregationResponse; end
@@ -332,7 +356,7 @@ module Aws::Inspector2
     # A response that contains the results of a finding aggregation by AMI.
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID that the AMI belongs.
+    #   The Amazon Web Services account ID for the AMI.
     #   @return [String]
     #
     # @!attribute [rw] affected_instances
@@ -400,6 +424,7 @@ module Aws::Inspector2
     #       {
     #         ec2: false, # required
     #         ecr: false, # required
+    #         lambda: false,
     #       }
     #
     # @!attribute [rw] ec2
@@ -412,11 +437,17 @@ module Aws::Inspector2
     #   new members of your Amazon Inspector organization.
     #   @return [Boolean]
     #
+    # @!attribute [rw] lambda
+    #   Represents whether AWS Lambda scans are automatically enabled for
+    #   new members of your Amazon Inspector organization.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
     #
     class AutoEnable < Struct.new(
       :ec2,
-      :ecr)
+      :ecr,
+      :lambda)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -634,7 +665,7 @@ module Aws::Inspector2
     #   @return [Time]
     #
     # @!attribute [rw] registry
-    #   The registry the Amazon ECR container image belongs to.
+    #   The registry for the Amazon ECR container image.
     #   @return [String]
     #
     # @!attribute [rw] repository_name
@@ -653,6 +684,78 @@ module Aws::Inspector2
       :pushed_at,
       :registry,
       :repository_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about the AWS Lambda function.
+    #
+    # @!attribute [rw] architectures
+    #   The instruction set architecture that the AWS Lambda function
+    #   supports. Architecture is a string array with one of the valid
+    #   values. The default architecture value is `x86_64`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] code_sha_256
+    #   The SHA256 hash of the AWS Lambda function's deployment package.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The AWS Lambda function's execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_name
+    #   The name of the AWS Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time that a user last updated the configuration, in
+    #   [ISO 8601 format][1]
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] layers
+    #   The AWS Lambda function's [ layers][1]. A Lambda function can have
+    #   up to five layers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] package_type
+    #   The type of deployment package. Set to `Image` for container image
+    #   and set `Zip` for .zip file archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The runtime environment for the AWS Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the AWS Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   The AWS Lambda function's networking configuration.
+    #   @return [Types::LambdaVpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsLambdaFunctionDetails AWS API Documentation
+    #
+    class AwsLambdaFunctionDetails < Struct.new(
+      :architectures,
+      :code_sha_256,
+      :execution_role_arn,
+      :function_name,
+      :last_modified_at,
+      :layers,
+      :package_type,
+      :runtime,
+      :version,
+      :vpc_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -853,6 +956,25 @@ module Aws::Inspector2
     #             value: "CoverageStringInput", # required
     #           },
     #         ],
+    #         lambda_function_name: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "CoverageStringInput", # required
+    #           },
+    #         ],
+    #         lambda_function_runtime: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "CoverageStringInput", # required
+    #           },
+    #         ],
+    #         lambda_function_tags: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "NonEmptyString", # required
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
     #         resource_id: [
     #           {
     #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
@@ -902,6 +1024,21 @@ module Aws::Inspector2
     #   The Amazon ECR repository name to filter on.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] lambda_function_name
+    #   Returns coverage statistics for AWS Lambda functions filtered by
+    #   function names.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] lambda_function_runtime
+    #   Returns coverage statistics for AWS Lambda functions filtered by
+    #   runtime.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] lambda_function_tags
+    #   Returns coverage statistics for AWS Lambda functions filtered by
+    #   tag.
+    #   @return [Array<Types::CoverageMapFilter>]
+    #
     # @!attribute [rw] resource_id
     #   An array of Amazon Web Services resource IDs to return coverage
     #   statistics for.
@@ -933,6 +1070,9 @@ module Aws::Inspector2
       :ec2_instance_tags,
       :ecr_image_tags,
       :ecr_repository_name,
+      :lambda_function_name,
+      :lambda_function_runtime,
+      :lambda_function_tags,
       :resource_id,
       :resource_type,
       :scan_status_code,
@@ -1121,6 +1261,12 @@ module Aws::Inspector2
     #               value: "StringInput", # required
     #             },
     #           ],
+    #           exploit_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
     #           finding_arn: [
     #             {
     #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -1155,6 +1301,36 @@ module Aws::Inspector2
     #             {
     #               lower_inclusive: 1.0,
     #               upper_inclusive: 1.0,
+    #             },
+    #           ],
+    #           lambda_function_execution_role_arn: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_last_modified_at: [
+    #             {
+    #               end_inclusive: Time.now,
+    #               start_inclusive: Time.now,
+    #             },
+    #           ],
+    #           lambda_function_layers: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_name: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_runtime: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
     #             },
     #           ],
     #           last_observed_at: [
@@ -1251,6 +1427,10 @@ module Aws::Inspector2
     #                 value: "StringInput", # required
     #               },
     #               release: {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #               source_lambda_layer_arn: {
     #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #                 value: "StringInput", # required
     #               },
@@ -1401,6 +1581,12 @@ module Aws::Inspector2
     #               value: "StringInput", # required
     #             },
     #           ],
+    #           exploit_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
     #           finding_arn: [
     #             {
     #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -1435,6 +1621,36 @@ module Aws::Inspector2
     #             {
     #               lower_inclusive: 1.0,
     #               upper_inclusive: 1.0,
+    #             },
+    #           ],
+    #           lambda_function_execution_role_arn: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_last_modified_at: [
+    #             {
+    #               end_inclusive: Time.now,
+    #               start_inclusive: Time.now,
+    #             },
+    #           ],
+    #           lambda_function_layers: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_name: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_runtime: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
     #             },
     #           ],
     #           last_observed_at: [
@@ -1531,6 +1747,10 @@ module Aws::Inspector2
     #                 value: "StringInput", # required
     #               },
     #               release: {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #               source_lambda_layer_arn: {
     #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #                 value: "StringInput", # required
     #               },
@@ -1874,7 +2094,7 @@ module Aws::Inspector2
     #
     #       {
     #         account_ids: ["AccountId"],
-    #         resource_types: ["EC2"], # accepts EC2, ECR
+    #         resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA
     #       }
     #
     # @!attribute [rw] account_ids
@@ -2026,7 +2246,7 @@ module Aws::Inspector2
     # Amazon EC2 instance.
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account the Amazon EC2 instance belongs to.
+    #   The Amazon Web Services account for the Amazon EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] ami
@@ -2093,7 +2313,7 @@ module Aws::Inspector2
     end
 
     # Details about the ECR automated re-scan duration setting for your
-    # environment
+    # environment.
     #
     # @note When making an API call, you may pass EcrConfiguration
     #   data as a hash:
@@ -2246,7 +2466,7 @@ module Aws::Inspector2
     #       {
     #         account_ids: ["AccountId"],
     #         client_token: "ClientToken",
-    #         resource_types: ["EC2"], # required, accepts EC2, ECR
+    #         resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA
     #       }
     #
     # @!attribute [rw] account_ids
@@ -2289,6 +2509,22 @@ module Aws::Inspector2
     class EnableResponse < Struct.new(
       :accounts,
       :failed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of an exploit available for a finding discovered in your
+    # environment.
+    #
+    # @!attribute [rw] last_known_exploit_at
+    #   The date and time of the last exploit associated with a finding
+    #   discovered in your environment.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ExploitabilityDetails AWS API Documentation
+    #
+    class ExploitabilityDetails < Struct.new(
+      :last_known_exploit_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2470,6 +2706,12 @@ module Aws::Inspector2
     #             value: "StringInput", # required
     #           },
     #         ],
+    #         exploit_available: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
     #         finding_arn: [
     #           {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2504,6 +2746,36 @@ module Aws::Inspector2
     #           {
     #             lower_inclusive: 1.0,
     #             upper_inclusive: 1.0,
+    #           },
+    #         ],
+    #         lambda_function_execution_role_arn: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         lambda_function_last_modified_at: [
+    #           {
+    #             end_inclusive: Time.now,
+    #             start_inclusive: Time.now,
+    #           },
+    #         ],
+    #         lambda_function_layers: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         lambda_function_name: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         lambda_function_runtime: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
     #           },
     #         ],
     #         last_observed_at: [
@@ -2603,6 +2875,10 @@ module Aws::Inspector2
     #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #               value: "StringInput", # required
     #             },
+    #             source_lambda_layer_arn: {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
     #             source_layer_hash: {
     #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #               value: "StringInput", # required
@@ -2669,6 +2945,11 @@ module Aws::Inspector2
     #   The tags attached to the Amazon ECR container image.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] exploit_available
+    #   Filters the list of AWS Lambda findings by the availability of
+    #   exploits.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] finding_arn
     #   Details on the finding ARNs used to filter findings.
     #   @return [Array<Types::StringFilter>]
@@ -2696,6 +2977,38 @@ module Aws::Inspector2
     # @!attribute [rw] inspector_score
     #   The Amazon Inspector score to filter on.
     #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] lambda_function_execution_role_arn
+    #   Filters the list of AWS Lambda functions by execution role.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] lambda_function_last_modified_at
+    #   Filters the list of AWS Lambda functions by the date and time that a
+    #   user last updated the configuration, in [ISO 8601 format][1]
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Array<Types::DateFilter>]
+    #
+    # @!attribute [rw] lambda_function_layers
+    #   Filters the list of AWS Lambda functions by the function's [
+    #   layers][1]. A Lambda function can have up to five layers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] lambda_function_name
+    #   Filters the list of AWS Lambda functions by the name of the
+    #   function.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] lambda_function_runtime
+    #   Filters the list of AWS Lambda functions by the runtime environment
+    #   for the Lambda function.
+    #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] last_observed_at
     #   Details on the date and time a finding was last seen used to filter
@@ -2770,12 +3083,18 @@ module Aws::Inspector2
       :ecr_image_registry,
       :ecr_image_repository_name,
       :ecr_image_tags,
+      :exploit_available,
       :finding_arn,
       :finding_status,
       :finding_type,
       :first_observed_at,
       :fix_available,
       :inspector_score,
+      :lambda_function_execution_role_arn,
+      :lambda_function_last_modified_at,
+      :lambda_function_layers,
+      :lambda_function_name,
+      :lambda_function_runtime,
       :last_observed_at,
       :network_protocol,
       :port_range,
@@ -2803,6 +3122,16 @@ module Aws::Inspector2
     # @!attribute [rw] description
     #   The description of the finding.
     #   @return [String]
+    #
+    # @!attribute [rw] exploit_available
+    #   If a finding discovered in your environment has an exploit
+    #   available.
+    #   @return [String]
+    #
+    # @!attribute [rw] exploitability_details
+    #   The details of an exploit available for a finding discovered in your
+    #   environment.
+    #   @return [Types::ExploitabilityDetails]
     #
     # @!attribute [rw] finding_arn
     #   The Amazon Resource Number (ARN) of the finding.
@@ -2875,6 +3204,8 @@ module Aws::Inspector2
     class Finding < Struct.new(
       :aws_account_id,
       :description,
+      :exploit_available,
+      :exploitability_details,
       :finding_arn,
       :first_observed_at,
       :fix_available,
@@ -2901,7 +3232,7 @@ module Aws::Inspector2
     #
     #       {
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #       }
@@ -3291,13 +3622,295 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The details that define a findings aggregation based on AWS Lambda
+    # functions.
+    #
+    # @note When making an API call, you may pass LambdaFunctionAggregation
+    #   data as a hash:
+    #
+    #       {
+    #         function_names: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         function_tags: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "MapKey", # required
+    #             value: "MapValue",
+    #           },
+    #         ],
+    #         resource_ids: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         runtimes: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       }
+    #
+    # @!attribute [rw] function_names
+    #   The AWS Lambda function names to include in the aggregation results.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] function_tags
+    #   The tags to include in the aggregation results.
+    #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs to include in the aggregation results.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] runtimes
+    #   Returns findings aggregated by AWS Lambda function runtime
+    #   environments.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] sort_by
+    #   The finding severity to use for sorting the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order to use for sorting the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaFunctionAggregation AWS API Documentation
+    #
+    class LambdaFunctionAggregation < Struct.new(
+      :function_names,
+      :function_tags,
+      :resource_ids,
+      :runtimes,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A response that contains the results of an AWS Lambda function finding
+    # aggregation.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the AWS account that owns the AWS Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_name
+    #   The AWS Lambda function names included in the aggregation results.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_tags
+    #   The tags included in the aggregation results.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date that the AWS Lambda function included in the aggregation
+    #   results was last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource IDs included in the aggregation results.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The runtimes included in the aggregation results.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   An object that contains the counts of aggregated finding per
+    #   severity.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaFunctionAggregationResponse AWS API Documentation
+    #
+    class LambdaFunctionAggregationResponse < Struct.new(
+      :account_id,
+      :function_name,
+      :lambda_tags,
+      :last_modified_at,
+      :resource_id,
+      :runtime,
+      :severity_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The AWS Lambda function metadata.
+    #
+    # @!attribute [rw] function_name
+    #   The name of a function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_tags
+    #   The resource tags on an AWS Lambda function.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] layers
+    #   The layers for an AWS Lambda function. A Lambda function can have up
+    #   to five layers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] runtime
+    #   An AWS Lambda function's runtime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaFunctionMetadata AWS API Documentation
+    #
+    class LambdaFunctionMetadata < Struct.new(
+      :function_name,
+      :function_tags,
+      :layers,
+      :runtime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details that define a findings aggregation based on an AWS Lambda
+    # function's layers.
+    #
+    # @note When making an API call, you may pass LambdaLayerAggregation
+    #   data as a hash:
+    #
+    #       {
+    #         function_names: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         layer_arns: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         resource_ids: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       }
+    #
+    # @!attribute [rw] function_names
+    #   The names of the AWS Lambda functions associated with the layers.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] layer_arns
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs for the AWS Lambda function layers.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] sort_by
+    #   The finding severity to use for sorting the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order to use for sorting the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaLayerAggregation AWS API Documentation
+    #
+    class LambdaLayerAggregation < Struct.new(
+      :function_names,
+      :layer_arns,
+      :resource_ids,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A response that contains the results of an AWS Lambda function layer
+    # finding aggregation.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the AWS Lambda function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_name
+    #   The names of the AWS Lambda functions associated with the layers.
+    #   @return [String]
+    #
+    # @!attribute [rw] layer_arn
+    #   The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The Resource ID of the AWS Lambda function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   An object that contains the counts of aggregated finding per
+    #   severity.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaLayerAggregationResponse AWS API Documentation
+    #
+    class LambdaLayerAggregationResponse < Struct.new(
+      :account_id,
+      :function_name,
+      :layer_arn,
+      :resource_id,
+      :severity_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The VPC security groups and subnets that are attached to an AWS Lambda
+    # function. For more information, see [VPC Settings][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security groups and subnets that are attached to an AWS
+    #   Lambda function. For more information, see [VPC Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of VPC subnet IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaVpcConfig AWS API Documentation
+    #
+    class LambdaVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnet_ids,
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAccountPermissionsRequest
     #   data as a hash:
     #
     #       {
     #         max_results: 1,
     #         next_token: "NextToken",
-    #         service: "EC2", # accepts EC2, ECR
+    #         service: "EC2", # accepts EC2, ECR, LAMBDA
     #       }
     #
     # @!attribute [rw] max_results
@@ -3376,6 +3989,25 @@ module Aws::Inspector2
     #             {
     #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #               value: "CoverageStringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_name: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               value: "CoverageStringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_runtime: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               value: "CoverageStringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_tags: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS
+    #               key: "NonEmptyString", # required
+    #               value: "NonEmptyString",
     #             },
     #           ],
     #           resource_id: [
@@ -3490,6 +4122,25 @@ module Aws::Inspector2
     #             {
     #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #               value: "CoverageStringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_name: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               value: "CoverageStringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_runtime: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #               value: "CoverageStringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_tags: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS
+    #               key: "NonEmptyString", # required
+    #               value: "NonEmptyString",
     #             },
     #           ],
     #           resource_id: [
@@ -3706,7 +4357,7 @@ module Aws::Inspector2
     #         aggregation_request: {
     #           account_aggregation: {
     #             finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #             sort_order: "ASC", # accepts ASC, DESC
     #           },
@@ -3785,7 +4436,7 @@ module Aws::Inspector2
     #           },
     #           finding_type_aggregation: {
     #             finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #             sort_order: "ASC", # accepts ASC, DESC
     #           },
@@ -3797,6 +4448,57 @@ module Aws::Inspector2
     #               },
     #             ],
     #             repositories: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #             ],
+    #             resource_ids: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #             ],
+    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #             sort_order: "ASC", # accepts ASC, DESC
+    #           },
+    #           lambda_function_aggregation: {
+    #             function_names: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #             ],
+    #             function_tags: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS
+    #                 key: "MapKey", # required
+    #                 value: "MapValue",
+    #               },
+    #             ],
+    #             resource_ids: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #             ],
+    #             runtimes: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #             ],
+    #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #             sort_order: "ASC", # accepts ASC, DESC
+    #           },
+    #           lambda_layer_aggregation: {
+    #             function_names: [
+    #               {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #             ],
+    #             layer_arns: [
     #               {
     #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #                 value: "StringInput", # required
@@ -3832,7 +4534,7 @@ module Aws::Inspector2
     #             sort_order: "ASC", # accepts ASC, DESC
     #           },
     #           title_aggregation: {
-    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #             resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #             sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #             sort_order: "ASC", # accepts ASC, DESC
     #             titles: [
@@ -3849,7 +4551,7 @@ module Aws::Inspector2
     #             ],
     #           },
     #         },
-    #         aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT
+    #         aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT, AWS_LAMBDA_FUNCTION, LAMBDA_LAYER
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -3995,6 +4697,12 @@ module Aws::Inspector2
     #               value: "StringInput", # required
     #             },
     #           ],
+    #           exploit_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
     #           finding_arn: [
     #             {
     #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -4029,6 +4737,36 @@ module Aws::Inspector2
     #             {
     #               lower_inclusive: 1.0,
     #               upper_inclusive: 1.0,
+    #             },
+    #           ],
+    #           lambda_function_execution_role_arn: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_last_modified_at: [
+    #             {
+    #               end_inclusive: Time.now,
+    #               start_inclusive: Time.now,
+    #             },
+    #           ],
+    #           lambda_function_layers: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_name: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_runtime: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
     #             },
     #           ],
     #           last_observed_at: [
@@ -4125,6 +4863,10 @@ module Aws::Inspector2
     #                 value: "StringInput", # required
     #               },
     #               release: {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
+    #               source_lambda_layer_arn: {
     #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #                 value: "StringInput", # required
     #               },
@@ -4554,6 +5296,10 @@ module Aws::Inspector2
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
     #         },
+    #         source_lambda_layer_arn: {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
     #         source_layer_hash: {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -4582,6 +5328,10 @@ module Aws::Inspector2
     #   An object that contains details on the package release to filter on.
     #   @return [Types::StringFilter]
     #
+    # @!attribute [rw] source_lambda_layer_arn
+    #   An object that describes the details of a string filter.
+    #   @return [Types::StringFilter]
+    #
     # @!attribute [rw] source_layer_hash
     #   An object that contains details on the source layer hash to filter
     #   on.
@@ -4598,6 +5348,7 @@ module Aws::Inspector2
       :epoch,
       :name,
       :release,
+      :source_lambda_layer_arn,
       :source_layer_hash,
       :version)
       SENSITIVE = []
@@ -4889,11 +5640,17 @@ module Aws::Inspector2
     #   involved in the finding.
     #   @return [Types::AwsEcrContainerImageDetails]
     #
+    # @!attribute [rw] aws_lambda_function
+    #   A summary of the information about an AWS Lambda function affected
+    #   by a finding.
+    #   @return [Types::AwsLambdaFunctionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
       :aws_ec2_instance,
-      :aws_ecr_container_image)
+      :aws_ecr_container_image,
+      :aws_lambda_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4929,12 +5686,17 @@ module Aws::Inspector2
     #   image resides in.
     #   @return [Types::EcrRepositoryMetadata]
     #
+    # @!attribute [rw] lambda_function
+    #   An object that contains metadata details for an AWS Lambda function.
+    #   @return [Types::LambdaFunctionMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceScanMetadata AWS API Documentation
     #
     class ResourceScanMetadata < Struct.new(
       :ec2,
       :ecr_image,
-      :ecr_repository)
+      :ecr_repository,
+      :lambda_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4952,11 +5714,17 @@ module Aws::Inspector2
     #   Amazon ECR resources.
     #   @return [Types::State]
     #
+    # @!attribute [rw] lambda
+    #   An object that described the state of Amazon Inspector scans for an
+    #   account.
+    #   @return [Types::State]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceState AWS API Documentation
     #
     class ResourceState < Struct.new(
       :ec2,
-      :ecr)
+      :ecr,
+      :lambda)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4972,11 +5740,17 @@ module Aws::Inspector2
     #   The status of Amazon Inspector scanning for Amazon ECR resources.
     #   @return [String]
     #
+    # @!attribute [rw] lambda
+    #   The status of Amazon Inspector scanning for AWS Lambda function
+    #   resources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStatus AWS API Documentation
     #
     class ResourceStatus < Struct.new(
       :ec2,
-      :ecr)
+      :ecr,
+      :lambda)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5133,7 +5907,7 @@ module Aws::Inspector2
     #       }
     #
     # @!attribute [rw] comparison
-    #   The operator to use when comparing values in the filter
+    #   The operator to use when comparing values in the filter.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -5185,10 +5959,15 @@ module Aws::Inspector2
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds to wait before retrying the request.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5199,7 +5978,7 @@ module Aws::Inspector2
     #   data as a hash:
     #
     #       {
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #         titles: [
@@ -5414,6 +6193,12 @@ module Aws::Inspector2
     #               value: "StringInput", # required
     #             },
     #           ],
+    #           exploit_available: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
     #           finding_arn: [
     #             {
     #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -5448,6 +6233,36 @@ module Aws::Inspector2
     #             {
     #               lower_inclusive: 1.0,
     #               upper_inclusive: 1.0,
+    #             },
+    #           ],
+    #           lambda_function_execution_role_arn: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_last_modified_at: [
+    #             {
+    #               end_inclusive: Time.now,
+    #               start_inclusive: Time.now,
+    #             },
+    #           ],
+    #           lambda_function_layers: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_name: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
+    #             },
+    #           ],
+    #           lambda_function_runtime: [
+    #             {
+    #               comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #               value: "StringInput", # required
     #             },
     #           ],
     #           last_observed_at: [
@@ -5547,6 +6362,10 @@ module Aws::Inspector2
     #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #                 value: "StringInput", # required
     #               },
+    #               source_lambda_layer_arn: {
+    #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #                 value: "StringInput", # required
+    #               },
     #               source_layer_hash: {
     #                 comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #                 value: "StringInput", # required
@@ -5619,6 +6438,7 @@ module Aws::Inspector2
     #         auto_enable: { # required
     #           ec2: false, # required
     #           ecr: false, # required
+    #           lambda: false,
     #         },
     #       }
     #
@@ -5775,6 +6595,11 @@ module Aws::Inspector2
     #   available.
     #   @return [String]
     #
+    # @!attribute [rw] source_lambda_layer_arn
+    #   The Amazon Resource Number (ARN) of the AWS Lambda function affected
+    #   by a finding.
+    #   @return [String]
+    #
     # @!attribute [rw] source_layer_hash
     #   The source layer hash of the vulnerable package.
     #   @return [String]
@@ -5794,6 +6619,7 @@ module Aws::Inspector2
       :package_manager,
       :release,
       :remediation,
+      :source_lambda_layer_arn,
       :source_layer_hash,
       :version)
       SENSITIVE = []

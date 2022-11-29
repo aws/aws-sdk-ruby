@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2022-11-29)
+------------------
+
+* Feature - This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.
+
 1.124.0 (2022-11-18)
 ------------------
 

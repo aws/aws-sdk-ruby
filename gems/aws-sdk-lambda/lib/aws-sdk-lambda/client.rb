@@ -441,27 +441,28 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Grants an Amazon Web Services service, account, or organization
-    # permission to use a function. You can apply the policy at the function
-    # level, or specify a qualifier to restrict access to a single version
-    # or alias. If you use a qualifier, the invoker must use the full Amazon
-    # Resource Name (ARN) of that version or alias to invoke the function.
-    # Note: Lambda does not support adding policies to version $LATEST.
+    # Grants an Amazon Web Service, Amazon Web Services account, or Amazon
+    # Web Services organization permission to use a function. You can apply
+    # the policy at the function level, or specify a qualifier to restrict
+    # access to a single version or alias. If you use a qualifier, the
+    # invoker must use the full Amazon Resource Name (ARN) of that version
+    # or alias to invoke the function. Note: Lambda does not support adding
+    # policies to version $LATEST.
     #
     # To grant permission to another account, specify the account ID as the
     # `Principal`. To grant permission to an organization defined in
     # Organizations, specify the organization ID as the `PrincipalOrgID`.
-    # For Amazon Web Services services, the principal is a domain-style
-    # identifier defined by the service, like `s3.amazonaws.com` or
-    # `sns.amazonaws.com`. For Amazon Web Services services, you can also
-    # specify the ARN of the associated resource as the `SourceArn`. If you
-    # grant permission to a service principal without specifying the source,
-    # other accounts could potentially configure resources in their account
-    # to invoke your Lambda function.
+    # For Amazon Web Services, the principal is a domain-style identifier
+    # that the service defines, such as `s3.amazonaws.com` or
+    # `sns.amazonaws.com`. For Amazon Web Services, you can also specify the
+    # ARN of the associated resource as the `SourceArn`. If you grant
+    # permission to a service principal without specifying the source, other
+    # accounts could potentially configure resources in their account to
+    # invoke your Lambda function.
     #
-    # This action adds a statement to a resource-based permissions policy
+    # This operation adds a statement to a resource-based permissions policy
     # for the function. For more information about function policies, see
-    # [Lambda Function Policies][1].
+    # [Using resource-based policies for Lambda][1].
     #
     #
     #
@@ -472,13 +473,13 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #   * **Function name** – `my-function` (name-only), `my-function:v1`
     #     (with alias).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
@@ -493,34 +494,33 @@ module Aws::Lambda
     #   `lambda:InvokeFunction` or `lambda:GetFunction`.
     #
     # @option params [required, String] :principal
-    #   The Amazon Web Services service or account that invokes the function.
-    #   If you specify a service, use `SourceArn` or `SourceAccount` to limit
-    #   who can invoke the function through that service.
+    #   The Amazon Web Service or Amazon Web Services account that invokes the
+    #   function. If you specify a service, use `SourceArn` or `SourceAccount`
+    #   to limit who can invoke the function through that service.
     #
     # @option params [String] :source_arn
-    #   For Amazon Web Services services, the ARN of the Amazon Web Services
-    #   resource that invokes the function. For example, an Amazon S3 bucket
-    #   or Amazon SNS topic.
+    #   For Amazon Web Services, the ARN of the Amazon Web Services resource
+    #   that invokes the function. For example, an Amazon S3 bucket or Amazon
+    #   SNS topic.
     #
     #   Note that Lambda configures the comparison using the `StringLike`
     #   operator.
     #
     # @option params [String] :source_account
-    #   For Amazon S3, the ID of the account that owns the resource. Use this
-    #   together with `SourceArn` to ensure that the resource is owned by the
-    #   specified account. It is possible for an Amazon S3 bucket to be
-    #   deleted by its owner and recreated by another account.
+    #   For Amazon Web Service, the ID of the Amazon Web Services account that
+    #   owns the resource. Use this together with `SourceArn` to ensure that
+    #   the specified account owns the resource. It is possible for an Amazon
+    #   S3 bucket to be deleted by its owner and recreated by another account.
     #
     # @option params [String] :event_source_token
-    #   For Alexa Smart Home functions, a token that must be supplied by the
-    #   invoker.
+    #   For Alexa Smart Home functions, a token that the invoker must supply.
     #
     # @option params [String] :qualifier
     #   Specify a version or alias to add permissions to a published version
     #   of the function.
     #
     # @option params [String] :revision_id
-    #   Only update the policy if the revision ID matches the ID that's
+    #   Update the policy only if the revision ID matches the ID that's
     #   specified. Use this option to avoid modifying a policy that has
     #   changed since you last read it.
     #
@@ -531,9 +531,9 @@ module Aws::Lambda
     #
     # @option params [String] :function_url_auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
     #   only. Set to `NONE` if you want to bypass IAM authentication to create
-    #   a public endpoint. For more information, see [ Security and auth model
+    #   a public endpoint. For more information, see [Security and auth model
     #   for Lambda function URLs][1].
     #
     #
@@ -793,6 +793,8 @@ module Aws::Lambda
     #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
     #     cluster.
     #
+    #   * **Amazon MQ** - The ARN of the broker.
+    #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
     #
@@ -838,9 +840,9 @@ module Aws::Lambda
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #
     # @option params [Types::FilterCriteria] :filter_criteria
-    #   (Streams and Amazon SQS) An object that defines the filter criteria
-    #   that determine whether Lambda should process an event. For more
-    #   information, see [Lambda event filtering][1].
+    #   An object that defines the filter criteria that determine whether
+    #   Lambda should process an event. For more information, see [Lambda
+    #   event filtering][1].
     #
     #
     #
@@ -1053,21 +1055,21 @@ module Aws::Lambda
     # [deployment package][1] and an [execution role][2]. The deployment
     # package is a .zip file archive or container image that contains your
     # function code. The execution role grants the function permission to
-    # use Amazon Web Services services, such as Amazon CloudWatch Logs for
-    # log streaming and X-Ray for request tracing.
+    # use Amazon Web Services, such as Amazon CloudWatch Logs for log
+    # streaming and X-Ray for request tracing.
     #
-    # You set the package type to `Image` if the deployment package is a
-    # [container image][3]. For a container image, the code property must
+    # If the deployment package is a [container image][3], then you set the
+    # package type to `Image`. For a container image, the code property must
     # include the URI of a container image in the Amazon ECR registry. You
     # do not need to specify the handler and runtime properties.
     #
-    # You set the package type to `Zip` if the deployment package is a [.zip
-    # file archive][4]. For a .zip file archive, the code property specifies
-    # the location of the .zip file. You must also specify the handler and
-    # runtime properties. The code in the deployment package must be
-    # compatible with the target instruction set architecture of the
+    # If the deployment package is a [.zip file archive][4], then you set
+    # the package type to `Zip`. For a .zip file archive, the code property
+    # specifies the location of the .zip file. You must also specify the
+    # handler and runtime properties. The code in the deployment package
+    # must be compatible with the target instruction set architecture of the
     # function (`x86-64` or `arm64`). If you do not specify the
-    # architecture, the default value is `x86-64`.
+    # architecture, then the default value is `x86-64`.
     #
     # When you create a function, Lambda provisions an instance of the
     # function and its supporting resources. If your function connects to a
@@ -1075,7 +1077,7 @@ module Aws::Lambda
     # can't invoke or modify the function. The `State`, `StateReason`, and
     # `StateReasonCode` fields in the response from GetFunctionConfiguration
     # indicate when the function is ready to invoke. For more information,
-    # see [Function States][5].
+    # see [Lambda function states][5].
     #
     # A function has an unpublished version, and can have published versions
     # and aliases. The unpublished version changes when you update your
@@ -1097,19 +1099,20 @@ module Aws::Lambda
     # a code-signing configuration. When a user attempts to deploy a code
     # package with UpdateFunctionCode, Lambda checks that the code package
     # has a valid signature from a trusted publisher. The code-signing
-    # configuration includes set set of signing profiles, which define the
+    # configuration includes set of signing profiles, which define the
     # trusted publishers for this function.
     #
-    # If another account or an Amazon Web Services service invokes your
-    # function, use AddPermission to grant permission by creating a
-    # resource-based IAM policy. You can grant permissions at the function
-    # level, on a version, or on an alias.
+    # If another Amazon Web Services account or an Amazon Web Service
+    # invokes your function, use AddPermission to grant permission by
+    # creating a resource-based Identity and Access Management (IAM) policy.
+    # You can grant permissions at the function level, on a version, or on
+    # an alias.
     #
     # To invoke your function directly, use Invoke. To invoke your function
-    # in response to events in other Amazon Web Services services, create an
-    # event source mapping (CreateEventSourceMapping), or configure a
-    # function trigger in the other service. For more information, see
-    # [Invoking Functions][6].
+    # in response to events in other Amazon Web Services, create an event
+    # source mapping (CreateEventSourceMapping), or configure a function
+    # trigger in the other service. For more information, see [Invoking
+    # Lambda functions][6].
     #
     #
     #
@@ -1125,12 +1128,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -1147,15 +1150,15 @@ module Aws::Lambda
     #   The Amazon Resource Name (ARN) of the function's execution role.
     #
     # @option params [String] :handler
-    #   The name of the method within your code that Lambda calls to execute
-    #   your function. Handler is required if the deployment package is a .zip
-    #   file archive. The format includes the file name. It can also include
+    #   The name of the method within your code that Lambda calls to run your
+    #   function. Handler is required if the deployment package is a .zip file
+    #   archive. The format includes the file name. It can also include
     #   namespaces and other qualifiers, depending on the runtime. For more
-    #   information, see [Programming Model][1].
+    #   information, see [Lambda programming model][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html
     #
     # @option params [required, Types::FunctionCode] :code
     #   The code for the function.
@@ -1166,8 +1169,8 @@ module Aws::Lambda
     # @option params [Integer] :timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds. The maximum allowed
-    #   value is 900 seconds. For additional information, see [Lambda
-    #   execution environment][1].
+    #   value is 900 seconds. For more information, see [Lambda execution
+    #   environment][1].
     #
     #
     #
@@ -1180,7 +1183,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console
     #
     # @option params [Boolean] :publish
     #   Set to true to publish the first version of the function during
@@ -1189,9 +1192,9 @@ module Aws::Lambda
     # @option params [Types::VpcConfig] :vpc_config
     #   For network connectivity to Amazon Web Services resources in a VPC,
     #   specify a list of security groups and subnets in the VPC. When you
-    #   connect a function to a VPC, it can only access resources and the
-    #   internet through that VPC. For more information, see [VPC
-    #   Settings][1].
+    #   connect a function to a VPC, it can access resources and the internet
+    #   only through that VPC. For more information, see [Configuring a Lambda
+    #   function to access resources in a VPC][1].
     #
     #
     #
@@ -1199,25 +1202,25 @@ module Aws::Lambda
     #
     # @option params [String] :package_type
     #   The type of deployment package. Set to `Image` for container image and
-    #   set `Zip` for ZIP archive.
+    #   set to `Zip` for .zip file archive.
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
-    #   A dead letter queue configuration that specifies the queue or topic
+    #   A dead-letter queue configuration that specifies the queue or topic
     #   where Lambda sends asynchronous events when they fail processing. For
-    #   more information, see [Dead Letter Queues][1].
+    #   more information, see [Dead-letter queues][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq
     #
     # @option params [Types::Environment] :environment
     #   Environment variables that are accessible from function code during
     #   execution.
     #
     # @option params [String] :kms_key_arn
-    #   The ARN of the Amazon Web Services Key Management Service (KMS) key
-    #   that's used to encrypt your function's environment variables. If
-    #   it's not provided, Lambda uses a default service key.
+    #   The ARN of the Key Management Service (KMS) key that's used to
+    #   encrypt your function's environment variables. If it's not provided,
+    #   Lambda uses a default service key.
     #
     # @option params [Types::TracingConfig] :tracing_config
     #   Set `Mode` to `Active` to sample and trace a subset of incoming
@@ -1265,8 +1268,15 @@ module Aws::Lambda
     #   default value is `x86_64`.
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
-    #   The size of the function’s /tmp directory in MB. The default value is
-    #   512, but can be any whole number between 512 and 10240 MB.
+    #   The size of the function's `/tmp` directory in MB. The default value
+    #   is 512, but can be any whole number between 512 and 10,240 MB.
+    #
+    # @option params [Types::SnapStart] :snap_start
+    #   The function's [SnapStart][1] setting.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1303,6 +1313,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
+    #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -1359,6 +1370,9 @@ module Aws::Lambda
     #     ephemeral_storage: {
     #       size: 1, # required
     #     },
+    #     snap_start: {
+    #       apply_on: "PublishedVersions", # accepts PublishedVersions, None
+    #     },
     #   })
     #
     # @example Response structure
@@ -1396,10 +1410,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -1416,6 +1430,8 @@ module Aws::Lambda
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.ephemeral_storage.size #=> Integer
+    #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1435,12 +1451,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -1450,9 +1466,9 @@ module Aws::Lambda
     #
     # @option params [required, String] :auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
     #   only. Set to `NONE` if you want to bypass IAM authentication to create
-    #   a public endpoint. For more information, see [ Security and auth model
+    #   a public endpoint. For more information, see [Security and auth model
     #   for Lambda function URLs][1].
     #
     #
@@ -1680,30 +1696,30 @@ module Aws::Lambda
     # deleted.
     #
     # To delete Lambda event source mappings that invoke a function, use
-    # DeleteEventSourceMapping. For Amazon Web Services services and
-    # resources that invoke your function directly, delete the trigger in
-    # the service where you originally configured it.
+    # DeleteEventSourceMapping. For Amazon Web Services and resources that
+    # invoke your function directly, delete the trigger in the service where
+    # you originally configured it.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function or version.
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:1` (with
+    #   * **Function name** – `my-function` (name-only), `my-function:1` (with
     #     version).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
     #   the function name, it is limited to 64 characters in length.
     #
     # @option params [String] :qualifier
-    #   Specify a version to delete. You can't delete a version that's
-    #   referenced by an alias.
+    #   Specify a version to delete. You can't delete a version that an alias
+    #   references.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1764,12 +1780,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -1844,12 +1860,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -1914,12 +1930,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -2165,13 +2181,13 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #   * **Function name** – `my-function` (name-only), `my-function:v1`
     #     (with alias).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
@@ -2230,10 +2246,10 @@ module Aws::Lambda
     #   resp.configuration.layers[0].signing_job_arn #=> String
     #   resp.configuration.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.configuration.state_reason #=> String
-    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.configuration.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.configuration.last_update_status_reason #=> String
-    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.configuration.file_system_configs #=> Array
     #   resp.configuration.file_system_configs[0].arn #=> String
     #   resp.configuration.file_system_configs[0].local_mount_path #=> String
@@ -2250,6 +2266,8 @@ module Aws::Lambda
     #   resp.configuration.architectures #=> Array
     #   resp.configuration.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.configuration.ephemeral_storage.size #=> Integer
+    #   resp.configuration.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.configuration.snap_start.optimization_status #=> String, one of "On", "Off"
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2325,12 +2343,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -2370,13 +2388,13 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #   * **Function name** – `my-function` (name-only), `my-function:v1`
     #     (with alias).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
@@ -2421,6 +2439,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
+    #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -2464,10 +2483,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -2484,12 +2503,15 @@ module Aws::Lambda
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.ephemeral_storage.size #=> Integer
+    #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * function_active
     #   * function_updated
+    #   * published_version_active
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -2566,12 +2588,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -2787,13 +2809,13 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #   * **Function name** – `my-function` (name-only), `my-function:v1`
     #     (with alias).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
@@ -2836,12 +2858,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -2896,7 +2918,8 @@ module Aws::Lambda
     # Retry behavior varies by error type, client, event source, and
     # invocation type. For example, if you invoke a function asynchronously
     # and it returns an error, Lambda executes the function up to two more
-    # times. For more information, see [Retry Behavior][4].
+    # times. For more information, see [Error handling and automatic retries
+    # in Lambda][4].
     #
     # For [asynchronous invocation][5], Lambda adds events to a queue before
     # sending them to your function. If your function does not have enough
@@ -2907,17 +2930,17 @@ module Aws::Lambda
     #
     # The status code in the API response doesn't reflect function errors.
     # Error codes are reserved for errors that prevent your function from
-    # executing, such as permissions errors, [limit errors][7], or issues
+    # executing, such as permissions errors, [quota][7] errors, or issues
     # with your function's code and configuration. For example, Lambda
-    # returns `TooManyRequestsException` if executing the function would
-    # cause you to exceed a concurrency limit at either the account level
+    # returns `TooManyRequestsException` if running the function would cause
+    # you to exceed a concurrency limit at either the account level
     # (`ConcurrentInvocationLimitExceeded`) or function level
     # (`ReservedFunctionConcurrentInvocationLimitExceeded`).
     #
-    # For functions with a long timeout, your client might be disconnected
-    # during synchronous invocation while it waits for a response. Configure
-    # your HTTP client, SDK, firewall, proxy, or operating system to allow
-    # for long connections with timeout or keep-alive settings.
+    # For functions with a long timeout, your client might disconnect during
+    # synchronous invocation while it waits for a response. Configure your
+    # HTTP client, SDK, firewall, proxy, or operating system to allow for
+    # long connections with timeout or keep-alive settings.
     #
     # This operation requires permission for the [lambda:InvokeFunction][8]
     # action. For details on how to set up permissions for cross-account
@@ -2928,10 +2951,10 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
-    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html
-    # [6]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
-    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    # [6]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq
+    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
     # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html
     # [9]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
@@ -2940,13 +2963,13 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #   * **Function name** – `my-function` (name-only), `my-function:v1`
     #     (with alias).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
@@ -2955,16 +2978,16 @@ module Aws::Lambda
     # @option params [String] :invocation_type
     #   Choose from the following options.
     #
-    #   * `RequestResponse` (default) - Invoke the function synchronously.
+    #   * `RequestResponse` (default) – Invoke the function synchronously.
     #     Keep the connection open until the function returns a response or
     #     times out. The API response includes the function response and
     #     additional data.
     #
-    #   * `Event` - Invoke the function asynchronously. Send events that fail
-    #     multiple times to the function's dead-letter queue (if it's
+    #   * `Event` – Invoke the function asynchronously. Send events that fail
+    #     multiple times to the function's dead-letter queue (if one is
     #     configured). The API response only includes a status code.
     #
-    #   * `DryRun` - Validate parameter values and verify that the user or
+    #   * `DryRun` – Validate parameter values and verify that the user or
     #     role has permission to invoke the function.
     #
     # @option params [String] :log_type
@@ -2972,7 +2995,7 @@ module Aws::Lambda
     #   synchronously invoked functions only.
     #
     # @option params [String] :client_context
-    #   Up to 3583 bytes of base64-encoded data about the invoking client to
+    #   Up to 3,583 bytes of base64-encoded data about the invoking client to
     #   pass to the function in the context object.
     #
     # @option params [String, StringIO, File] :payload
@@ -3031,12 +3054,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -3203,6 +3226,8 @@ module Aws::Lambda
     #   * **Amazon Managed Streaming for Apache Kafka** - The ARN of the
     #     cluster.
     #
+    #   * **Amazon MQ** - The ARN of the broker.
+    #
     # @option params [String] :function_name
     #   The name of the Lambda function.
     #
@@ -3363,12 +3388,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -3432,7 +3457,7 @@ module Aws::Lambda
     # Set `FunctionVersion` to `ALL` to include all published versions of
     # each function in addition to the unpublished version.
     #
-    # <note markdown="1"> The `ListFunctions` action returns a subset of the
+    # <note markdown="1"> The `ListFunctions` operation returns a subset of the
     # FunctionConfiguration fields. To get the additional fields (State,
     # StateReasonCode, StateReason, LastUpdateStatus,
     # LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or
@@ -3443,7 +3468,7 @@ module Aws::Lambda
     # @option params [String] :master_region
     #   For Lambda@Edge functions, the Amazon Web Services Region of the
     #   master function. For example, `us-east-1` filters the list of
-    #   functions to only include Lambda@Edge functions replicated from a
+    #   functions to include only Lambda@Edge functions replicated from a
     #   master function in US East (N. Virginia). If specified, you must set
     #   `FunctionVersion` to `ALL`.
     #
@@ -3513,10 +3538,10 @@ module Aws::Lambda
     #   resp.functions[0].layers[0].signing_job_arn #=> String
     #   resp.functions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.functions[0].state_reason #=> String
-    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.functions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.functions[0].last_update_status_reason #=> String
-    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.functions[0].file_system_configs #=> Array
     #   resp.functions[0].file_system_configs[0].arn #=> String
     #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
@@ -3533,6 +3558,8 @@ module Aws::Lambda
     #   resp.functions[0].architectures #=> Array
     #   resp.functions[0].architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.functions[0].ephemeral_storage.size #=> Integer
+    #   resp.functions[0].snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.functions[0].snap_start.optimization_status #=> String, one of "On", "Off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3734,12 +3761,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -3905,10 +3932,10 @@ module Aws::Lambda
     #   resp.versions[0].layers[0].signing_job_arn #=> String
     #   resp.versions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.versions[0].state_reason #=> String
-    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.versions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.versions[0].last_update_status_reason #=> String
-    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.versions[0].file_system_configs #=> Array
     #   resp.versions[0].file_system_configs[0].arn #=> String
     #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
@@ -3925,6 +3952,8 @@ module Aws::Lambda
     #   resp.versions[0].architectures #=> Array
     #   resp.versions[0].architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.versions[0].ephemeral_storage.size #=> Integer
+    #   resp.versions[0].snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.versions[0].snap_start.optimization_status #=> String, one of "On", "Off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -4121,6 +4150,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
+    #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -4166,10 +4196,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -4186,6 +4216,8 @@ module Aws::Lambda
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.ephemeral_storage.size #=> Integer
+    #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4257,23 +4289,23 @@ module Aws::Lambda
     # reserve concurrency for as many functions as you like, as long as you
     # leave at least 100 simultaneous executions unreserved for functions
     # that aren't configured with a per-function limit. For more
-    # information, see [Managing Concurrency][1].
+    # information, see [Lambda function scaling][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -4423,12 +4455,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -4517,22 +4549,22 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Revokes function-use permission from an Amazon Web Services service or
-    # another account. You can get the ID of the statement from the output
-    # of GetPolicy.
+    # Revokes function-use permission from an Amazon Web Service or another
+    # Amazon Web Services account. You can get the ID of the statement from
+    # the output of GetPolicy.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #   * **Function name** – `my-function` (name-only), `my-function:v1`
     #     (with alias).
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   You can append a version number or alias to any of the formats. The
     #   length constraint applies only to the full ARN. If you specify only
@@ -4546,7 +4578,7 @@ module Aws::Lambda
     #   version of the function.
     #
     # @option params [String] :revision_id
-    #   Only update the policy if the revision ID matches the ID that's
+    #   Update the policy only if the revision ID matches the ID that's
     #   specified. Use this option to avoid modifying a policy that has
     #   changed since you last read it.
     #
@@ -4886,9 +4918,9 @@ module Aws::Lambda
     #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #
     # @option params [Types::FilterCriteria] :filter_criteria
-    #   (Streams and Amazon SQS) An object that defines the filter criteria
-    #   that determine whether Lambda should process an event. For more
-    #   information, see [Lambda event filtering][1].
+    #   An object that defines the filter criteria that determine whether
+    #   Lambda should process an event. For more information, see [Lambda
+    #   event filtering][1].
     #
     #
     #
@@ -5058,13 +5090,13 @@ module Aws::Lambda
 
     # Updates a Lambda function's code. If code signing is enabled for the
     # function, the code package must be signed by a trusted publisher. For
-    # more information, see [Configuring code signing][1].
+    # more information, see [Configuring code signing for Lambda][1].
     #
-    # If the function's package type is `Image`, you must specify the code
-    # package in `ImageUri` as the URI of a [container image][2] in the
+    # If the function's package type is `Image`, then you must specify the
+    # code package in `ImageUri` as the URI of a [container image][2] in the
     # Amazon ECR registry.
     #
-    # If the function's package type is `Zip`, you must specify the
+    # If the function's package type is `Zip`, then you must specify the
     # deployment package as a [.zip file archive][3]. Enter the Amazon S3
     # bucket and key of the code .zip file location. You can also provide
     # the function code inline using the `ZipFile` field.
@@ -5083,7 +5115,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip
     #
@@ -5092,21 +5124,20 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
     # @option params [String, StringIO, File] :zip_file
     #   The base64-encoded contents of the deployment package. Amazon Web
-    #   Services SDK and Amazon Web Services CLI clients handle the encoding
-    #   for you. Use only with a function defined with a .zip file archive
-    #   deployment package.
+    #   Services SDK and CLI clients handle the encoding for you. Use only
+    #   with a function defined with a .zip file archive deployment package.
     #
     # @option params [String] :s3_bucket
     #   An Amazon S3 bucket in the same Amazon Web Services Region as your
@@ -5136,7 +5167,7 @@ module Aws::Lambda
     #   without modifying the function code.
     #
     # @option params [String] :revision_id
-    #   Only update the function if the revision ID matches the ID that's
+    #   Update the function only if the revision ID matches the ID that's
     #   specified. Use this option to avoid modifying a function that has
     #   changed since you last read it.
     #
@@ -5180,6 +5211,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
+    #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -5231,10 +5263,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -5251,6 +5283,8 @@ module Aws::Lambda
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.ephemeral_storage.size #=> Integer
+    #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5271,15 +5305,15 @@ module Aws::Lambda
     # `LastUpdateStatusReasonCode` fields in the response from
     # GetFunctionConfiguration indicate when the update is complete and the
     # function is processing events with the new configuration. For more
-    # information, see [Function States][1].
+    # information, see [Lambda function states][1].
     #
     # These settings can vary between versions of a function and are locked
     # when you publish a version. You can't modify the configuration of a
     # published version, only the unpublished version.
     #
     # To configure function concurrency, use PutFunctionConcurrency. To
-    # grant invoke permissions to an account or Amazon Web Services service,
-    # use AddPermission.
+    # grant invoke permissions to an Amazon Web Services account or Amazon
+    # Web Service, use AddPermission.
     #
     #
     #
@@ -5290,12 +5324,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -5304,15 +5338,15 @@ module Aws::Lambda
     #   The Amazon Resource Name (ARN) of the function's execution role.
     #
     # @option params [String] :handler
-    #   The name of the method within your code that Lambda calls to execute
-    #   your function. Handler is required if the deployment package is a .zip
-    #   file archive. The format includes the file name. It can also include
+    #   The name of the method within your code that Lambda calls to run your
+    #   function. Handler is required if the deployment package is a .zip file
+    #   archive. The format includes the file name. It can also include
     #   namespaces and other qualifiers, depending on the runtime. For more
-    #   information, see [Programming Model][1].
+    #   information, see [Lambda programming model][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html
     #
     # @option params [String] :description
     #   A description of the function.
@@ -5320,8 +5354,8 @@ module Aws::Lambda
     # @option params [Integer] :timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds. The maximum allowed
-    #   value is 900 seconds. For additional information, see [Lambda
-    #   execution environment][1].
+    #   value is 900 seconds. For more information, see [Lambda execution
+    #   environment][1].
     #
     #
     #
@@ -5334,14 +5368,14 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   For network connectivity to Amazon Web Services resources in a VPC,
     #   specify a list of security groups and subnets in the VPC. When you
-    #   connect a function to a VPC, it can only access resources and the
-    #   internet through that VPC. For more information, see [VPC
-    #   Settings][1].
+    #   connect a function to a VPC, it can access resources and the internet
+    #   only through that VPC. For more information, see [Configuring a Lambda
+    #   function to access resources in a VPC][1].
     #
     #
     #
@@ -5360,18 +5394,18 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
-    #   A dead letter queue configuration that specifies the queue or topic
+    #   A dead-letter queue configuration that specifies the queue or topic
     #   where Lambda sends asynchronous events when they fail processing. For
-    #   more information, see [Dead Letter Queues][1].
+    #   more information, see [Dead-letter queues][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq
     #
     # @option params [String] :kms_key_arn
-    #   The ARN of the Amazon Web Services Key Management Service (KMS) key
-    #   that's used to encrypt your function's environment variables. If
-    #   it's not provided, Lambda uses a default service key.
+    #   The ARN of the Key Management Service (KMS) key that's used to
+    #   encrypt your function's environment variables. If it's not provided,
+    #   Lambda uses a default service key.
     #
     # @option params [Types::TracingConfig] :tracing_config
     #   Set `Mode` to `Active` to sample and trace a subset of incoming
@@ -5382,7 +5416,7 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html
     #
     # @option params [String] :revision_id
-    #   Only update the function if the revision ID matches the ID that's
+    #   Update the function only if the revision ID matches the ID that's
     #   specified. Use this option to avoid modifying a function that has
     #   changed since you last read it.
     #
@@ -5406,8 +5440,15 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
-    #   The size of the function’s /tmp directory in MB. The default value is
-    #   512, but can be any whole number between 512 and 10240 MB.
+    #   The size of the function's `/tmp` directory in MB. The default value
+    #   is 512, but can be any whole number between 512 and 10,240 MB.
+    #
+    # @option params [Types::SnapStart] :snap_start
+    #   The function's [SnapStart][1] setting.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5444,6 +5485,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
+    #   * {Types::FunctionConfiguration#snap_start #snap_start} => Types::SnapStartResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -5487,6 +5529,9 @@ module Aws::Lambda
     #     ephemeral_storage: {
     #       size: 1, # required
     #     },
+    #     snap_start: {
+    #       apply_on: "PublishedVersions", # accepts PublishedVersions, None
+    #     },
     #   })
     #
     # @example Response structure
@@ -5524,10 +5569,10 @@ module Aws::Lambda
     #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied", "InvalidImage", "KMSKeyAccessDenied", "KMSKeyNotFound", "InvalidStateKMSKey", "DisabledKMSKey", "EFSIOError", "EFSMountConnectivityError", "EFSMountFailure", "EFSMountTimeout", "InvalidRuntime", "InvalidZipFileException", "FunctionError"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
@@ -5544,6 +5589,8 @@ module Aws::Lambda
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.ephemeral_storage.size #=> Integer
+    #   resp.snap_start.apply_on #=> String, one of "PublishedVersions", "None"
+    #   resp.snap_start.optimization_status #=> String, one of "On", "Off"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5652,12 +5699,12 @@ module Aws::Lambda
     #
     #   **Name formats**
     #
-    #   * **Function name** - `my-function`.
+    #   * **Function name** – `my-function`.
     #
-    #   * **Function ARN** -
+    #   * **Function ARN** –
     #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
     #
-    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #   * **Partial ARN** – `123456789012:function:my-function`.
     #
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
@@ -5667,9 +5714,9 @@ module Aws::Lambda
     #
     # @option params [String] :auth_type
     #   The type of authentication that your function URL uses. Set to
-    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   `AWS_IAM` if you want to restrict access to authenticated IAM users
     #   only. Set to `NONE` if you want to bypass IAM authentication to create
-    #   a public endpoint. For more information, see [ Security and auth model
+    #   a public endpoint. For more information, see [Security and auth model
     #   for Lambda function URLs][1].
     #
     #
@@ -5749,7 +5796,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5815,13 +5862,14 @@ module Aws::Lambda
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name         | params                              | :delay   | :max_attempts |
-    # | ------------------- | ----------------------------------- | -------- | ------------- |
-    # | function_active     | {Client#get_function_configuration} | 5        | 60            |
-    # | function_active_v2  | {Client#get_function}               | 1        | 300           |
-    # | function_exists     | {Client#get_function}               | 1        | 20            |
-    # | function_updated    | {Client#get_function_configuration} | 5        | 60            |
-    # | function_updated_v2 | {Client#get_function}               | 1        | 300           |
+    # | waiter_name              | params                              | :delay   | :max_attempts |
+    # | ------------------------ | ----------------------------------- | -------- | ------------- |
+    # | function_active          | {Client#get_function_configuration} | 5        | 60            |
+    # | function_active_v2       | {Client#get_function}               | 1        | 300           |
+    # | function_exists          | {Client#get_function}               | 1        | 20            |
+    # | function_updated         | {Client#get_function_configuration} | 5        | 60            |
+    # | function_updated_v2      | {Client#get_function}               | 1        | 300           |
+    # | published_version_active | {Client#get_function_configuration} | 5        | 312           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -5876,7 +5924,8 @@ module Aws::Lambda
         function_active_v2: Waiters::FunctionActiveV2,
         function_exists: Waiters::FunctionExists,
         function_updated: Waiters::FunctionUpdated,
-        function_updated_v2: Waiters::FunctionUpdatedV2
+        function_updated_v2: Waiters::FunctionUpdatedV2,
+        published_version_active: Waiters::PublishedVersionActive
       }
     end
 

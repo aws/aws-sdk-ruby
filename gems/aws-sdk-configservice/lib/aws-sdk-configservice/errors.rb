@@ -28,6 +28,7 @@ module Aws::ConfigService
   #
   # ## Error Classes
   # * {ConformancePackTemplateValidationException}
+  # * {IdempotentParameterMismatch}
   # * {InsufficientDeliveryPolicyException}
   # * {InsufficientPermissionsException}
   # * {InvalidConfigurationRecorderNameException}
@@ -94,6 +95,21 @@ module Aws::ConfigService
       # @param [Aws::ConfigService::Types::ConformancePackTemplateValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class IdempotentParameterMismatch < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConfigService::Types::IdempotentParameterMismatch] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

@@ -806,6 +806,7 @@ module Aws::SecurityHub
     StandardsControl = Shapes::StructureShape.new(name: 'StandardsControl')
     StandardsControls = Shapes::ListShape.new(name: 'StandardsControls')
     StandardsInputParameterMap = Shapes::MapShape.new(name: 'StandardsInputParameterMap')
+    StandardsManagedBy = Shapes::StructureShape.new(name: 'StandardsManagedBy')
     StandardsStatus = Shapes::StringShape.new(name: 'StandardsStatus')
     StandardsStatusReason = Shapes::StructureShape.new(name: 'StandardsStatusReason')
     StandardsSubscription = Shapes::StructureShape.new(name: 'StandardsSubscription')
@@ -4856,6 +4857,7 @@ module Aws::SecurityHub
     Standard.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     Standard.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     Standard.add_member(:enabled_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnabledByDefault"))
+    Standard.add_member(:standards_managed_by, Shapes::ShapeRef.new(shape: StandardsManagedBy, location_name: "StandardsManagedBy"))
     Standard.struct_class = Types::Standard
 
     Standards.member = Shapes::ShapeRef.new(shape: Standard)
@@ -4876,6 +4878,10 @@ module Aws::SecurityHub
 
     StandardsInputParameterMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StandardsInputParameterMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    StandardsManagedBy.add_member(:company, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Company"))
+    StandardsManagedBy.add_member(:product, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Product"))
+    StandardsManagedBy.struct_class = Types::StandardsManagedBy
 
     StandardsStatusReason.add_member(:status_reason_code, Shapes::ShapeRef.new(shape: StatusReasonCode, required: true, location_name: "StatusReasonCode"))
     StandardsStatusReason.struct_class = Types::StandardsStatusReason

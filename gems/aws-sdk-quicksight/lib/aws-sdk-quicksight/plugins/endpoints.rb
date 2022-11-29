@@ -136,10 +136,14 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeAccountSubscription.build(context)
           when :describe_analysis
             Aws::QuickSight::Endpoints::DescribeAnalysis.build(context)
+          when :describe_analysis_definition
+            Aws::QuickSight::Endpoints::DescribeAnalysisDefinition.build(context)
           when :describe_analysis_permissions
             Aws::QuickSight::Endpoints::DescribeAnalysisPermissions.build(context)
           when :describe_dashboard
             Aws::QuickSight::Endpoints::DescribeDashboard.build(context)
+          when :describe_dashboard_definition
+            Aws::QuickSight::Endpoints::DescribeDashboardDefinition.build(context)
           when :describe_dashboard_permissions
             Aws::QuickSight::Endpoints::DescribeDashboardPermissions.build(context)
           when :describe_data_set
@@ -172,6 +176,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeTemplate.build(context)
           when :describe_template_alias
             Aws::QuickSight::Endpoints::DescribeTemplateAlias.build(context)
+          when :describe_template_definition
+            Aws::QuickSight::Endpoints::DescribeTemplateDefinition.build(context)
           when :describe_template_permissions
             Aws::QuickSight::Endpoints::DescribeTemplatePermissions.build(context)
           when :describe_theme

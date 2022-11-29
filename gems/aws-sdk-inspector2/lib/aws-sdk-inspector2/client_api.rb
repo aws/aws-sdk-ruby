@@ -34,6 +34,8 @@ module Aws::Inspector2
     AmiAggregationResponse = Shapes::StructureShape.new(name: 'AmiAggregationResponse')
     AmiId = Shapes::StringShape.new(name: 'AmiId')
     AmiSortBy = Shapes::StringShape.new(name: 'AmiSortBy')
+    Architecture = Shapes::StringShape.new(name: 'Architecture')
+    ArchitectureList = Shapes::ListShape.new(name: 'ArchitectureList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateMemberRequest = Shapes::StructureShape.new(name: 'AssociateMemberRequest')
     AssociateMemberResponse = Shapes::StructureShape.new(name: 'AssociateMemberResponse')
@@ -43,6 +45,7 @@ module Aws::Inspector2
     AwsEcrContainerAggregationResponse = Shapes::StructureShape.new(name: 'AwsEcrContainerAggregationResponse')
     AwsEcrContainerImageDetails = Shapes::StructureShape.new(name: 'AwsEcrContainerImageDetails')
     AwsEcrContainerSortBy = Shapes::StringShape.new(name: 'AwsEcrContainerSortBy')
+    AwsLambdaFunctionDetails = Shapes::StructureShape.new(name: 'AwsLambdaFunctionDetails')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchGetAccountStatusRequest = Shapes::StructureShape.new(name: 'BatchGetAccountStatusRequest')
     BatchGetAccountStatusResponse = Shapes::StructureShape.new(name: 'BatchGetAccountStatusResponse')
@@ -119,6 +122,9 @@ module Aws::Inspector2
     EnableResponse = Shapes::StructureShape.new(name: 'EnableResponse')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExecutionRoleArn = Shapes::StringShape.new(name: 'ExecutionRoleArn')
+    ExploitAvailable = Shapes::StringShape.new(name: 'ExploitAvailable')
+    ExploitabilityDetails = Shapes::StructureShape.new(name: 'ExploitabilityDetails')
     ExternalReportStatus = Shapes::StringShape.new(name: 'ExternalReportStatus')
     FailedAccount = Shapes::StructureShape.new(name: 'FailedAccount')
     FailedAccountList = Shapes::ListShape.new(name: 'FailedAccountList')
@@ -152,6 +158,7 @@ module Aws::Inspector2
     FreeTrialInfoList = Shapes::ListShape.new(name: 'FreeTrialInfoList')
     FreeTrialStatus = Shapes::StringShape.new(name: 'FreeTrialStatus')
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
+    FunctionName = Shapes::StringShape.new(name: 'FunctionName')
     GetConfigurationRequest = Shapes::StructureShape.new(name: 'GetConfigurationRequest')
     GetConfigurationResponse = Shapes::StructureShape.new(name: 'GetConfigurationResponse')
     GetDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountRequest')
@@ -173,6 +180,17 @@ module Aws::Inspector2
     IpV4AddressList = Shapes::ListShape.new(name: 'IpV4AddressList')
     IpV6Address = Shapes::StringShape.new(name: 'IpV6Address')
     IpV6AddressList = Shapes::ListShape.new(name: 'IpV6AddressList')
+    LambdaFunctionAggregation = Shapes::StructureShape.new(name: 'LambdaFunctionAggregation')
+    LambdaFunctionAggregationResponse = Shapes::StructureShape.new(name: 'LambdaFunctionAggregationResponse')
+    LambdaFunctionMetadata = Shapes::StructureShape.new(name: 'LambdaFunctionMetadata')
+    LambdaFunctionSortBy = Shapes::StringShape.new(name: 'LambdaFunctionSortBy')
+    LambdaLayerAggregation = Shapes::StructureShape.new(name: 'LambdaLayerAggregation')
+    LambdaLayerAggregationResponse = Shapes::StructureShape.new(name: 'LambdaLayerAggregationResponse')
+    LambdaLayerArn = Shapes::StringShape.new(name: 'LambdaLayerArn')
+    LambdaLayerList = Shapes::ListShape.new(name: 'LambdaLayerList')
+    LambdaLayerSortBy = Shapes::StringShape.new(name: 'LambdaLayerSortBy')
+    LambdaVpcConfig = Shapes::StructureShape.new(name: 'LambdaVpcConfig')
+    LayerList = Shapes::ListShape.new(name: 'LayerList')
     ListAccountPermissionsMaxResults = Shapes::IntegerShape.new(name: 'ListAccountPermissionsMaxResults')
     ListAccountPermissionsRequest = Shapes::StructureShape.new(name: 'ListAccountPermissionsRequest')
     ListAccountPermissionsResponse = Shapes::StructureShape.new(name: 'ListAccountPermissionsResponse')
@@ -232,6 +250,7 @@ module Aws::Inspector2
     PackageName = Shapes::StringShape.new(name: 'PackageName')
     PackageRelease = Shapes::StringShape.new(name: 'PackageRelease')
     PackageSortBy = Shapes::StringShape.new(name: 'PackageSortBy')
+    PackageType = Shapes::StringShape.new(name: 'PackageType')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     Permission = Shapes::StructureShape.new(name: 'Permission')
@@ -260,10 +279,13 @@ module Aws::Inspector2
     ResourceState = Shapes::StructureShape.new(name: 'ResourceState')
     ResourceStatus = Shapes::StructureShape.new(name: 'ResourceStatus')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    Runtime = Shapes::StringShape.new(name: 'Runtime')
     ScanStatus = Shapes::StructureShape.new(name: 'ScanStatus')
     ScanStatusCode = Shapes::StringShape.new(name: 'ScanStatusCode')
     ScanStatusReason = Shapes::StringShape.new(name: 'ScanStatusReason')
     ScanType = Shapes::StringShape.new(name: 'ScanType')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Service = Shapes::StringShape.new(name: 'Service')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Severity = Shapes::StringShape.new(name: 'Severity')
@@ -282,6 +304,8 @@ module Aws::Inspector2
     StringFilterList = Shapes::ListShape.new(name: 'StringFilterList')
     StringInput = Shapes::StringShape.new(name: 'StringInput')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -313,6 +337,8 @@ module Aws::Inspector2
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFields = Shapes::ListShape.new(name: 'ValidationExceptionFields')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    Version = Shapes::StringShape.new(name: 'Version')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
     VulnerabilityId = Shapes::StringShape.new(name: 'VulnerabilityId')
     VulnerabilityIdList = Shapes::ListShape.new(name: 'VulnerabilityIdList')
     VulnerablePackage = Shapes::StructureShape.new(name: 'VulnerablePackage')
@@ -354,6 +380,8 @@ module Aws::Inspector2
     AggregationRequest.add_member(:ec2_instance_aggregation, Shapes::ShapeRef.new(shape: Ec2InstanceAggregation, location_name: "ec2InstanceAggregation"))
     AggregationRequest.add_member(:finding_type_aggregation, Shapes::ShapeRef.new(shape: FindingTypeAggregation, location_name: "findingTypeAggregation"))
     AggregationRequest.add_member(:image_layer_aggregation, Shapes::ShapeRef.new(shape: ImageLayerAggregation, location_name: "imageLayerAggregation"))
+    AggregationRequest.add_member(:lambda_function_aggregation, Shapes::ShapeRef.new(shape: LambdaFunctionAggregation, location_name: "lambdaFunctionAggregation"))
+    AggregationRequest.add_member(:lambda_layer_aggregation, Shapes::ShapeRef.new(shape: LambdaLayerAggregation, location_name: "lambdaLayerAggregation"))
     AggregationRequest.add_member(:package_aggregation, Shapes::ShapeRef.new(shape: PackageAggregation, location_name: "packageAggregation"))
     AggregationRequest.add_member(:repository_aggregation, Shapes::ShapeRef.new(shape: RepositoryAggregation, location_name: "repositoryAggregation"))
     AggregationRequest.add_member(:title_aggregation, Shapes::ShapeRef.new(shape: TitleAggregation, location_name: "titleAggregation"))
@@ -364,6 +392,8 @@ module Aws::Inspector2
     AggregationRequest.add_member_subclass(:ec2_instance_aggregation, Types::AggregationRequest::Ec2InstanceAggregation)
     AggregationRequest.add_member_subclass(:finding_type_aggregation, Types::AggregationRequest::FindingTypeAggregation)
     AggregationRequest.add_member_subclass(:image_layer_aggregation, Types::AggregationRequest::ImageLayerAggregation)
+    AggregationRequest.add_member_subclass(:lambda_function_aggregation, Types::AggregationRequest::LambdaFunctionAggregation)
+    AggregationRequest.add_member_subclass(:lambda_layer_aggregation, Types::AggregationRequest::LambdaLayerAggregation)
     AggregationRequest.add_member_subclass(:package_aggregation, Types::AggregationRequest::PackageAggregation)
     AggregationRequest.add_member_subclass(:repository_aggregation, Types::AggregationRequest::RepositoryAggregation)
     AggregationRequest.add_member_subclass(:title_aggregation, Types::AggregationRequest::TitleAggregation)
@@ -376,6 +406,8 @@ module Aws::Inspector2
     AggregationResponse.add_member(:ec2_instance_aggregation, Shapes::ShapeRef.new(shape: Ec2InstanceAggregationResponse, location_name: "ec2InstanceAggregation"))
     AggregationResponse.add_member(:finding_type_aggregation, Shapes::ShapeRef.new(shape: FindingTypeAggregationResponse, location_name: "findingTypeAggregation"))
     AggregationResponse.add_member(:image_layer_aggregation, Shapes::ShapeRef.new(shape: ImageLayerAggregationResponse, location_name: "imageLayerAggregation"))
+    AggregationResponse.add_member(:lambda_function_aggregation, Shapes::ShapeRef.new(shape: LambdaFunctionAggregationResponse, location_name: "lambdaFunctionAggregation"))
+    AggregationResponse.add_member(:lambda_layer_aggregation, Shapes::ShapeRef.new(shape: LambdaLayerAggregationResponse, location_name: "lambdaLayerAggregation"))
     AggregationResponse.add_member(:package_aggregation, Shapes::ShapeRef.new(shape: PackageAggregationResponse, location_name: "packageAggregation"))
     AggregationResponse.add_member(:repository_aggregation, Shapes::ShapeRef.new(shape: RepositoryAggregationResponse, location_name: "repositoryAggregation"))
     AggregationResponse.add_member(:title_aggregation, Shapes::ShapeRef.new(shape: TitleAggregationResponse, location_name: "titleAggregation"))
@@ -386,6 +418,8 @@ module Aws::Inspector2
     AggregationResponse.add_member_subclass(:ec2_instance_aggregation, Types::AggregationResponse::Ec2InstanceAggregation)
     AggregationResponse.add_member_subclass(:finding_type_aggregation, Types::AggregationResponse::FindingTypeAggregation)
     AggregationResponse.add_member_subclass(:image_layer_aggregation, Types::AggregationResponse::ImageLayerAggregation)
+    AggregationResponse.add_member_subclass(:lambda_function_aggregation, Types::AggregationResponse::LambdaFunctionAggregation)
+    AggregationResponse.add_member_subclass(:lambda_layer_aggregation, Types::AggregationResponse::LambdaLayerAggregation)
     AggregationResponse.add_member_subclass(:package_aggregation, Types::AggregationResponse::PackageAggregation)
     AggregationResponse.add_member_subclass(:repository_aggregation, Types::AggregationResponse::RepositoryAggregation)
     AggregationResponse.add_member_subclass(:title_aggregation, Types::AggregationResponse::TitleAggregation)
@@ -400,10 +434,12 @@ module Aws::Inspector2
     AmiAggregation.struct_class = Types::AmiAggregation
 
     AmiAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    AmiAggregationResponse.add_member(:affected_instances, Shapes::ShapeRef.new(shape: Long, location_name: "affectedInstances", metadata: {"box"=>true}))
+    AmiAggregationResponse.add_member(:affected_instances, Shapes::ShapeRef.new(shape: Long, location_name: "affectedInstances"))
     AmiAggregationResponse.add_member(:ami, Shapes::ShapeRef.new(shape: AmiId, required: true, location_name: "ami"))
     AmiAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     AmiAggregationResponse.struct_class = Types::AmiAggregationResponse
+
+    ArchitectureList.member = Shapes::ShapeRef.new(shape: Architecture)
 
     AssociateMemberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     AssociateMemberRequest.struct_class = Types::AssociateMemberRequest
@@ -411,8 +447,9 @@ module Aws::Inspector2
     AssociateMemberResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     AssociateMemberResponse.struct_class = Types::AssociateMemberResponse
 
-    AutoEnable.add_member(:ec2, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ec2", metadata: {"box"=>true}))
-    AutoEnable.add_member(:ecr, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ecr", metadata: {"box"=>true}))
+    AutoEnable.add_member(:ec2, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ec2"))
+    AutoEnable.add_member(:ecr, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ecr"))
+    AutoEnable.add_member(:lambda, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambda"))
     AutoEnable.struct_class = Types::AutoEnable
 
     AwsEc2InstanceDetails.add_member(:iam_instance_profile_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "iamInstanceProfileArn"))
@@ -455,6 +492,18 @@ module Aws::Inspector2
     AwsEcrContainerImageDetails.add_member(:repository_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "repositoryName"))
     AwsEcrContainerImageDetails.struct_class = Types::AwsEcrContainerImageDetails
 
+    AwsLambdaFunctionDetails.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitectureList, location_name: "architectures"))
+    AwsLambdaFunctionDetails.add_member(:code_sha_256, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "codeSha256"))
+    AwsLambdaFunctionDetails.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ExecutionRoleArn, required: true, location_name: "executionRoleArn"))
+    AwsLambdaFunctionDetails.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "functionName"))
+    AwsLambdaFunctionDetails.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedAt"))
+    AwsLambdaFunctionDetails.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "layers"))
+    AwsLambdaFunctionDetails.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "packageType"))
+    AwsLambdaFunctionDetails.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, required: true, location_name: "runtime"))
+    AwsLambdaFunctionDetails.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
+    AwsLambdaFunctionDetails.add_member(:vpc_config, Shapes::ShapeRef.new(shape: LambdaVpcConfig, location_name: "vpcConfig"))
+    AwsLambdaFunctionDetails.struct_class = Types::AwsLambdaFunctionDetails
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
 
@@ -485,7 +534,7 @@ module Aws::Inspector2
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    Counts.add_member(:count, Shapes::ShapeRef.new(shape: AggCounts, location_name: "count", metadata: {"default"=>0}))
+    Counts.add_member(:count, Shapes::ShapeRef.new(shape: AggCounts, location_name: "count"))
     Counts.add_member(:group_key, Shapes::ShapeRef.new(shape: GroupKey, location_name: "groupKey"))
     Counts.struct_class = Types::Counts
 
@@ -495,6 +544,9 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "ec2InstanceTags"))
     CoverageFilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrImageTags"))
     CoverageFilterCriteria.add_member(:ecr_repository_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrRepositoryName"))
+    CoverageFilterCriteria.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionName"))
+    CoverageFilterCriteria.add_member(:lambda_function_runtime, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionRuntime"))
+    CoverageFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "lambdaFunctionTags"))
     CoverageFilterCriteria.add_member(:resource_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceId"))
     CoverageFilterCriteria.add_member(:resource_type, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceType"))
     CoverageFilterCriteria.add_member(:scan_status_code, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanStatusCode"))
@@ -544,7 +596,7 @@ module Aws::Inspector2
     CreateFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     CreateFindingsReportResponse.struct_class = Types::CreateFindingsReportResponse
 
-    CvssScore.add_member(:base_score, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "baseScore", metadata: {"box"=>true}))
+    CvssScore.add_member(:base_score, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "baseScore"))
     CvssScore.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "scoringVector"))
     CvssScore.add_member(:source, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "source"))
     CvssScore.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "version"))
@@ -558,7 +610,7 @@ module Aws::Inspector2
 
     CvssScoreDetails.add_member(:adjustments, Shapes::ShapeRef.new(shape: CvssScoreAdjustmentList, location_name: "adjustments"))
     CvssScoreDetails.add_member(:cvss_source, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "cvssSource"))
-    CvssScoreDetails.add_member(:score, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "score", metadata: {"box"=>true}))
+    CvssScoreDetails.add_member(:score, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "score"))
     CvssScoreDetails.add_member(:score_source, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "scoreSource"))
     CvssScoreDetails.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "scoringVector"))
     CvssScoreDetails.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "version"))
@@ -591,7 +643,7 @@ module Aws::Inspector2
     DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
 
     DescribeOrganizationConfigurationResponse.add_member(:auto_enable, Shapes::ShapeRef.new(shape: AutoEnable, location_name: "autoEnable"))
-    DescribeOrganizationConfigurationResponse.add_member(:max_account_limit_reached, Shapes::ShapeRef.new(shape: Boolean, location_name: "maxAccountLimitReached", metadata: {"box"=>true}))
+    DescribeOrganizationConfigurationResponse.add_member(:max_account_limit_reached, Shapes::ShapeRef.new(shape: Boolean, location_name: "maxAccountLimitReached"))
     DescribeOrganizationConfigurationResponse.struct_class = Types::DescribeOrganizationConfigurationResponse
 
     Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "bucketName"))
@@ -633,7 +685,7 @@ module Aws::Inspector2
     Ec2InstanceAggregationResponse.add_member(:ami, Shapes::ShapeRef.new(shape: AmiId, location_name: "ami"))
     Ec2InstanceAggregationResponse.add_member(:instance_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "instanceId"))
     Ec2InstanceAggregationResponse.add_member(:instance_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "instanceTags"))
-    Ec2InstanceAggregationResponse.add_member(:network_findings, Shapes::ShapeRef.new(shape: Long, location_name: "networkFindings", metadata: {"box"=>true}))
+    Ec2InstanceAggregationResponse.add_member(:network_findings, Shapes::ShapeRef.new(shape: Long, location_name: "networkFindings"))
     Ec2InstanceAggregationResponse.add_member(:operating_system, Shapes::ShapeRef.new(shape: String, location_name: "operatingSystem"))
     Ec2InstanceAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     Ec2InstanceAggregationResponse.struct_class = Types::Ec2InstanceAggregationResponse
@@ -679,6 +731,9 @@ module Aws::Inspector2
     EnableResponse.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: FailedAccountList, location_name: "failedAccounts"))
     EnableResponse.struct_class = Types::EnableResponse
 
+    ExploitabilityDetails.add_member(:last_known_exploit_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastKnownExploitAt"))
+    ExploitabilityDetails.struct_class = Types::ExploitabilityDetails
+
     FailedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     FailedAccount.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "errorCode"))
     FailedAccount.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
@@ -714,12 +769,18 @@ module Aws::Inspector2
     FilterCriteria.add_member(:ecr_image_registry, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageRegistry"))
     FilterCriteria.add_member(:ecr_image_repository_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageRepositoryName"))
     FilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageTags"))
+    FilterCriteria.add_member(:exploit_available, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "exploitAvailable"))
     FilterCriteria.add_member(:finding_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "findingArn"))
     FilterCriteria.add_member(:finding_status, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "findingStatus"))
     FilterCriteria.add_member(:finding_type, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "findingType"))
     FilterCriteria.add_member(:first_observed_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "firstObservedAt"))
     FilterCriteria.add_member(:fix_available, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "fixAvailable"))
     FilterCriteria.add_member(:inspector_score, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "inspectorScore"))
+    FilterCriteria.add_member(:lambda_function_execution_role_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "lambdaFunctionExecutionRoleArn"))
+    FilterCriteria.add_member(:lambda_function_last_modified_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "lambdaFunctionLastModifiedAt"))
+    FilterCriteria.add_member(:lambda_function_layers, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "lambdaFunctionLayers"))
+    FilterCriteria.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "lambdaFunctionName"))
+    FilterCriteria.add_member(:lambda_function_runtime, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "lambdaFunctionRuntime"))
     FilterCriteria.add_member(:last_observed_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "lastObservedAt"))
     FilterCriteria.add_member(:network_protocol, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "networkProtocol"))
     FilterCriteria.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRangeFilterList, location_name: "portRange"))
@@ -740,10 +801,12 @@ module Aws::Inspector2
 
     Finding.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "awsAccountId"))
     Finding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, required: true, location_name: "description"))
+    Finding.add_member(:exploit_available, Shapes::ShapeRef.new(shape: ExploitAvailable, location_name: "exploitAvailable"))
+    Finding.add_member(:exploitability_details, Shapes::ShapeRef.new(shape: ExploitabilityDetails, location_name: "exploitabilityDetails"))
     Finding.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, required: true, location_name: "findingArn"))
     Finding.add_member(:first_observed_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, required: true, location_name: "firstObservedAt"))
     Finding.add_member(:fix_available, Shapes::ShapeRef.new(shape: FixAvailable, location_name: "fixAvailable"))
-    Finding.add_member(:inspector_score, Shapes::ShapeRef.new(shape: Double, location_name: "inspectorScore", metadata: {"box"=>true}))
+    Finding.add_member(:inspector_score, Shapes::ShapeRef.new(shape: Double, location_name: "inspectorScore"))
     Finding.add_member(:inspector_score_details, Shapes::ShapeRef.new(shape: InspectorScoreDetails, location_name: "inspectorScoreDetails"))
     Finding.add_member(:last_observed_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, required: true, location_name: "lastObservedAt"))
     Finding.add_member(:network_reachability_details, Shapes::ShapeRef.new(shape: NetworkReachabilityDetails, location_name: "networkReachabilityDetails"))
@@ -837,14 +900,60 @@ module Aws::Inspector2
     InspectorScoreDetails.struct_class = Types::InspectorScoreDetails
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After", metadata: {"box"=>true}))
+    InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
     IpV4AddressList.member = Shapes::ShapeRef.new(shape: IpV4Address)
 
     IpV6AddressList.member = Shapes::ShapeRef.new(shape: IpV6Address)
 
-    ListAccountPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAccountPermissionsMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    LambdaFunctionAggregation.add_member(:function_names, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "functionNames"))
+    LambdaFunctionAggregation.add_member(:function_tags, Shapes::ShapeRef.new(shape: MapFilterList, location_name: "functionTags"))
+    LambdaFunctionAggregation.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "resourceIds"))
+    LambdaFunctionAggregation.add_member(:runtimes, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "runtimes"))
+    LambdaFunctionAggregation.add_member(:sort_by, Shapes::ShapeRef.new(shape: LambdaFunctionSortBy, location_name: "sortBy"))
+    LambdaFunctionAggregation.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
+    LambdaFunctionAggregation.struct_class = Types::LambdaFunctionAggregation
+
+    LambdaFunctionAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    LambdaFunctionAggregationResponse.add_member(:function_name, Shapes::ShapeRef.new(shape: String, location_name: "functionName"))
+    LambdaFunctionAggregationResponse.add_member(:lambda_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "lambdaTags"))
+    LambdaFunctionAggregationResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastModifiedAt"))
+    LambdaFunctionAggregationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceId"))
+    LambdaFunctionAggregationResponse.add_member(:runtime, Shapes::ShapeRef.new(shape: String, location_name: "runtime"))
+    LambdaFunctionAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
+    LambdaFunctionAggregationResponse.struct_class = Types::LambdaFunctionAggregationResponse
+
+    LambdaFunctionMetadata.add_member(:function_name, Shapes::ShapeRef.new(shape: String, location_name: "functionName"))
+    LambdaFunctionMetadata.add_member(:function_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "functionTags"))
+    LambdaFunctionMetadata.add_member(:layers, Shapes::ShapeRef.new(shape: LambdaLayerList, location_name: "layers"))
+    LambdaFunctionMetadata.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "runtime"))
+    LambdaFunctionMetadata.struct_class = Types::LambdaFunctionMetadata
+
+    LambdaLayerAggregation.add_member(:function_names, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "functionNames"))
+    LambdaLayerAggregation.add_member(:layer_arns, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "layerArns"))
+    LambdaLayerAggregation.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "resourceIds"))
+    LambdaLayerAggregation.add_member(:sort_by, Shapes::ShapeRef.new(shape: LambdaLayerSortBy, location_name: "sortBy"))
+    LambdaLayerAggregation.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
+    LambdaLayerAggregation.struct_class = Types::LambdaLayerAggregation
+
+    LambdaLayerAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    LambdaLayerAggregationResponse.add_member(:function_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "functionName"))
+    LambdaLayerAggregationResponse.add_member(:layer_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "layerArn"))
+    LambdaLayerAggregationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceId"))
+    LambdaLayerAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
+    LambdaLayerAggregationResponse.struct_class = Types::LambdaLayerAggregationResponse
+
+    LambdaLayerList.member = Shapes::ShapeRef.new(shape: String)
+
+    LambdaVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    LambdaVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    LambdaVpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    LambdaVpcConfig.struct_class = Types::LambdaVpcConfig
+
+    LayerList.member = Shapes::ShapeRef.new(shape: LambdaLayerArn)
+
+    ListAccountPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAccountPermissionsMaxResults, location_name: "maxResults"))
     ListAccountPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAccountPermissionsRequest.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     ListAccountPermissionsRequest.struct_class = Types::ListAccountPermissionsRequest
@@ -854,7 +963,7 @@ module Aws::Inspector2
     ListAccountPermissionsResponse.struct_class = Types::ListAccountPermissionsResponse
 
     ListCoverageRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: CoverageFilterCriteria, location_name: "filterCriteria"))
-    ListCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCoverageMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCoverageMaxResults, location_name: "maxResults"))
     ListCoverageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCoverageRequest.struct_class = Types::ListCoverageRequest
 
@@ -869,10 +978,10 @@ module Aws::Inspector2
 
     ListCoverageStatisticsResponse.add_member(:counts_by_group, Shapes::ShapeRef.new(shape: CountsList, location_name: "countsByGroup"))
     ListCoverageStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListCoverageStatisticsResponse.add_member(:total_counts, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "totalCounts", metadata: {"box"=>true}))
+    ListCoverageStatisticsResponse.add_member(:total_counts, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "totalCounts"))
     ListCoverageStatisticsResponse.struct_class = Types::ListCoverageStatisticsResponse
 
-    ListDelegatedAdminAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDelegatedAdminMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListDelegatedAdminAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDelegatedAdminMaxResults, location_name: "maxResults"))
     ListDelegatedAdminAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDelegatedAdminAccountsRequest.struct_class = Types::ListDelegatedAdminAccountsRequest
 
@@ -882,7 +991,7 @@ module Aws::Inspector2
 
     ListFiltersRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
     ListFiltersRequest.add_member(:arns, Shapes::ShapeRef.new(shape: FilterArnList, location_name: "arns"))
-    ListFiltersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFilterMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListFiltersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFilterMaxResults, location_name: "maxResults"))
     ListFiltersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFiltersRequest.struct_class = Types::ListFiltersRequest
 
@@ -893,7 +1002,7 @@ module Aws::Inspector2
     ListFindingAggregationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "accountIds"))
     ListFindingAggregationsRequest.add_member(:aggregation_request, Shapes::ShapeRef.new(shape: AggregationRequest, location_name: "aggregationRequest"))
     ListFindingAggregationsRequest.add_member(:aggregation_type, Shapes::ShapeRef.new(shape: AggregationType, required: true, location_name: "aggregationType"))
-    ListFindingAggregationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFindingAggregationsMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListFindingAggregationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFindingAggregationsMaxResults, location_name: "maxResults"))
     ListFindingAggregationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFindingAggregationsRequest.struct_class = Types::ListFindingAggregationsRequest
 
@@ -903,7 +1012,7 @@ module Aws::Inspector2
     ListFindingAggregationsResponse.struct_class = Types::ListFindingAggregationsResponse
 
     ListFindingsRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "filterCriteria"))
-    ListFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFindingsMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFindingsMaxResults, location_name: "maxResults"))
     ListFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFindingsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "sortCriteria"))
     ListFindingsRequest.struct_class = Types::ListFindingsRequest
@@ -912,9 +1021,9 @@ module Aws::Inspector2
     ListFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFindingsResponse.struct_class = Types::ListFindingsResponse
 
-    ListMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMembersMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMembersMaxResults, location_name: "maxResults"))
     ListMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    ListMembersRequest.add_member(:only_associated, Shapes::ShapeRef.new(shape: Boolean, location_name: "onlyAssociated", metadata: {"box"=>true}))
+    ListMembersRequest.add_member(:only_associated, Shapes::ShapeRef.new(shape: Boolean, location_name: "onlyAssociated"))
     ListMembersRequest.struct_class = Types::ListMembersRequest
 
     ListMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: MemberList, location_name: "members"))
@@ -928,7 +1037,7 @@ module Aws::Inspector2
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListUsageTotalsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: UsageAccountIdList, location_name: "accountIds"))
-    ListUsageTotalsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListUsageTotalsMaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListUsageTotalsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListUsageTotalsMaxResults, location_name: "maxResults"))
     ListUsageTotalsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListUsageTotalsNextToken, location_name: "nextToken"))
     ListUsageTotalsRequest.struct_class = Types::ListUsageTotalsRequest
 
@@ -961,8 +1070,8 @@ module Aws::Inspector2
 
     NonEmptyStringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
-    NumberFilter.add_member(:lower_inclusive, Shapes::ShapeRef.new(shape: Double, location_name: "lowerInclusive", metadata: {"box"=>true}))
-    NumberFilter.add_member(:upper_inclusive, Shapes::ShapeRef.new(shape: Double, location_name: "upperInclusive", metadata: {"box"=>true}))
+    NumberFilter.add_member(:lower_inclusive, Shapes::ShapeRef.new(shape: Double, location_name: "lowerInclusive"))
+    NumberFilter.add_member(:upper_inclusive, Shapes::ShapeRef.new(shape: Double, location_name: "upperInclusive"))
     NumberFilter.struct_class = Types::NumberFilter
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)
@@ -981,6 +1090,7 @@ module Aws::Inspector2
     PackageFilter.add_member(:epoch, Shapes::ShapeRef.new(shape: NumberFilter, location_name: "epoch"))
     PackageFilter.add_member(:name, Shapes::ShapeRef.new(shape: StringFilter, location_name: "name"))
     PackageFilter.add_member(:release, Shapes::ShapeRef.new(shape: StringFilter, location_name: "release"))
+    PackageFilter.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLambdaLayerArn"))
     PackageFilter.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLayerHash"))
     PackageFilter.add_member(:version, Shapes::ShapeRef.new(shape: StringFilter, location_name: "version"))
     PackageFilter.struct_class = Types::PackageFilter
@@ -1005,12 +1115,12 @@ module Aws::Inspector2
 
     Permissions.member = Shapes::ShapeRef.new(shape: Permission)
 
-    PortRange.add_member(:begin, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "begin", metadata: {"box"=>true}))
-    PortRange.add_member(:end, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "end", metadata: {"box"=>true}))
+    PortRange.add_member(:begin, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "begin"))
+    PortRange.add_member(:end, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "end"))
     PortRange.struct_class = Types::PortRange
 
-    PortRangeFilter.add_member(:begin_inclusive, Shapes::ShapeRef.new(shape: Port, location_name: "beginInclusive", metadata: {"box"=>true}))
-    PortRangeFilter.add_member(:end_inclusive, Shapes::ShapeRef.new(shape: Port, location_name: "endInclusive", metadata: {"box"=>true}))
+    PortRangeFilter.add_member(:begin_inclusive, Shapes::ShapeRef.new(shape: Port, location_name: "beginInclusive"))
+    PortRangeFilter.add_member(:end_inclusive, Shapes::ShapeRef.new(shape: Port, location_name: "endInclusive"))
     PortRangeFilter.struct_class = Types::PortRangeFilter
 
     PortRangeFilterList.member = Shapes::ShapeRef.new(shape: PortRangeFilter)
@@ -1028,7 +1138,7 @@ module Aws::Inspector2
     RepositoryAggregation.struct_class = Types::RepositoryAggregation
 
     RepositoryAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    RepositoryAggregationResponse.add_member(:affected_images, Shapes::ShapeRef.new(shape: Long, location_name: "affectedImages", metadata: {"box"=>true}))
+    RepositoryAggregationResponse.add_member(:affected_images, Shapes::ShapeRef.new(shape: Long, location_name: "affectedImages"))
     RepositoryAggregationResponse.add_member(:repository, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "repository"))
     RepositoryAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     RepositoryAggregationResponse.struct_class = Types::RepositoryAggregationResponse
@@ -1043,6 +1153,7 @@ module Aws::Inspector2
 
     ResourceDetails.add_member(:aws_ec2_instance, Shapes::ShapeRef.new(shape: AwsEc2InstanceDetails, location_name: "awsEc2Instance"))
     ResourceDetails.add_member(:aws_ecr_container_image, Shapes::ShapeRef.new(shape: AwsEcrContainerImageDetails, location_name: "awsEcrContainerImage"))
+    ResourceDetails.add_member(:aws_lambda_function, Shapes::ShapeRef.new(shape: AwsLambdaFunctionDetails, location_name: "awsLambdaFunction"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
@@ -1053,28 +1164,33 @@ module Aws::Inspector2
     ResourceScanMetadata.add_member(:ec2, Shapes::ShapeRef.new(shape: Ec2Metadata, location_name: "ec2"))
     ResourceScanMetadata.add_member(:ecr_image, Shapes::ShapeRef.new(shape: EcrContainerImageMetadata, location_name: "ecrImage"))
     ResourceScanMetadata.add_member(:ecr_repository, Shapes::ShapeRef.new(shape: EcrRepositoryMetadata, location_name: "ecrRepository"))
+    ResourceScanMetadata.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunctionMetadata, location_name: "lambdaFunction"))
     ResourceScanMetadata.struct_class = Types::ResourceScanMetadata
 
     ResourceState.add_member(:ec2, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ec2"))
     ResourceState.add_member(:ecr, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ecr"))
+    ResourceState.add_member(:lambda, Shapes::ShapeRef.new(shape: State, location_name: "lambda"))
     ResourceState.struct_class = Types::ResourceState
 
     ResourceStatus.add_member(:ec2, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ec2"))
     ResourceStatus.add_member(:ecr, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ecr"))
+    ResourceStatus.add_member(:lambda, Shapes::ShapeRef.new(shape: Status, location_name: "lambda"))
     ResourceStatus.struct_class = Types::ResourceStatus
 
     ScanStatus.add_member(:reason, Shapes::ShapeRef.new(shape: ScanStatusReason, required: true, location_name: "reason"))
     ScanStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScanStatusCode, required: true, location_name: "statusCode"))
     ScanStatus.struct_class = Types::ScanStatus
 
+    SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    SeverityCounts.add_member(:all, Shapes::ShapeRef.new(shape: Long, location_name: "all", metadata: {"box"=>true}))
-    SeverityCounts.add_member(:critical, Shapes::ShapeRef.new(shape: Long, location_name: "critical", metadata: {"box"=>true}))
-    SeverityCounts.add_member(:high, Shapes::ShapeRef.new(shape: Long, location_name: "high", metadata: {"box"=>true}))
-    SeverityCounts.add_member(:medium, Shapes::ShapeRef.new(shape: Long, location_name: "medium", metadata: {"box"=>true}))
+    SeverityCounts.add_member(:all, Shapes::ShapeRef.new(shape: Long, location_name: "all"))
+    SeverityCounts.add_member(:critical, Shapes::ShapeRef.new(shape: Long, location_name: "critical"))
+    SeverityCounts.add_member(:high, Shapes::ShapeRef.new(shape: Long, location_name: "high"))
+    SeverityCounts.add_member(:medium, Shapes::ShapeRef.new(shape: Long, location_name: "medium"))
     SeverityCounts.struct_class = Types::SeverityCounts
 
     SortCriteria.add_member(:field, Shapes::ShapeRef.new(shape: SortField, required: true, location_name: "field"))
@@ -1100,6 +1216,8 @@ module Aws::Inspector2
 
     StringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagList.member = Shapes::ShapeRef.new(shape: String)
@@ -1114,6 +1232,7 @@ module Aws::Inspector2
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     TitleAggregation.add_member(:resource_type, Shapes::ShapeRef.new(shape: AggregationResourceType, location_name: "resourceType"))
@@ -1158,8 +1277,8 @@ module Aws::Inspector2
     UpdateOrganizationConfigurationResponse.struct_class = Types::UpdateOrganizationConfigurationResponse
 
     Usage.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
-    Usage.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: MonthlyCostEstimate, location_name: "estimatedMonthlyCost", metadata: {"default"=>0}))
-    Usage.add_member(:total, Shapes::ShapeRef.new(shape: UsageValue, location_name: "total", metadata: {"default"=>0}))
+    Usage.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: MonthlyCostEstimate, location_name: "estimatedMonthlyCost"))
+    Usage.add_member(:total, Shapes::ShapeRef.new(shape: UsageValue, location_name: "total"))
     Usage.add_member(:type, Shapes::ShapeRef.new(shape: UsageType, location_name: "type"))
     Usage.struct_class = Types::Usage
 
@@ -1187,13 +1306,14 @@ module Aws::Inspector2
     VulnerabilityIdList.member = Shapes::ShapeRef.new(shape: VulnerabilityId)
 
     VulnerablePackage.add_member(:arch, Shapes::ShapeRef.new(shape: PackageArchitecture, location_name: "arch"))
-    VulnerablePackage.add_member(:epoch, Shapes::ShapeRef.new(shape: PackageEpoch, location_name: "epoch", metadata: {"default"=>0}))
+    VulnerablePackage.add_member(:epoch, Shapes::ShapeRef.new(shape: PackageEpoch, location_name: "epoch"))
     VulnerablePackage.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "filePath"))
     VulnerablePackage.add_member(:fixed_in_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "fixedInVersion"))
     VulnerablePackage.add_member(:name, Shapes::ShapeRef.new(shape: PackageName, required: true, location_name: "name"))
     VulnerablePackage.add_member(:package_manager, Shapes::ShapeRef.new(shape: PackageManager, location_name: "packageManager"))
     VulnerablePackage.add_member(:release, Shapes::ShapeRef.new(shape: PackageRelease, location_name: "release"))
     VulnerablePackage.add_member(:remediation, Shapes::ShapeRef.new(shape: VulnerablePackageRemediation, location_name: "remediation"))
+    VulnerablePackage.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: LambdaLayerArn, location_name: "sourceLambdaLayerArn"))
     VulnerablePackage.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: SourceLayerHash, location_name: "sourceLayerHash"))
     VulnerablePackage.add_member(:version, Shapes::ShapeRef.new(shape: PackageVersion, required: true, location_name: "version"))
     VulnerablePackage.struct_class = Types::VulnerablePackage

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-11-29)
+------------------
+
+* Feature - This release adds support for 4GB/s / 160K PIOPS FSx for ONTAP file systems and 10GB/s / 350K PIOPS FSx for OpenZFS file systems (Single_AZ_2). For FSx for ONTAP, this also adds support for DP volumes, snapshot policy, copy tags to backups, and Multi-AZ route table updates.
+
 1.61.0 (2022-10-25)
 ------------------
 

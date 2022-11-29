@@ -944,6 +944,11 @@ module Aws::ConfigService
     #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
     #         created_by: "StringWithCharLimit256",
+    #         evaluation_modes: [
+    #           {
+    #             mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] config_rule_name
@@ -1036,6 +1041,12 @@ module Aws::ConfigService
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_modes
+    #   The modes the Config rule can be evaluated in. The valid values are
+    #   distinct objects. By default, the value is Detective evaluation mode
+    #   only.
+    #   @return [Array<Types::EvaluationModeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRule AWS API Documentation
     #
     class ConfigRule < Struct.new(
@@ -1048,7 +1059,8 @@ module Aws::ConfigService
       :input_parameters,
       :maximum_execution_frequency,
       :config_rule_state,
-      :created_by)
+      :created_by,
+      :evaluation_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2925,12 +2937,39 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Returns a filtered list of Detective or Proactive Config rules. By
+    # default, if the filter is not defined, this API returns an unfiltered
+    # list.
+    #
+    # @note When making an API call, you may pass DescribeConfigRulesFilters
+    #   data as a hash:
+    #
+    #       {
+    #         evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #       }
+    #
+    # @!attribute [rw] evaluation_mode
+    #   The mode of an evaluation. The valid values are Detective or
+    #   Proactive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesFilters AWS API Documentation
+    #
+    class DescribeConfigRulesFilters < Struct.new(
+      :evaluation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeConfigRulesRequest
     #   data as a hash:
     #
     #       {
     #         config_rule_names: ["ConfigRuleName"],
     #         next_token: "String",
+    #         filters: {
+    #           evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #         },
     #       }
     #
     # @!attribute [rw] config_rule_names
@@ -2943,11 +2982,17 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   Returns a list of Detecive or Proactive Config rules. By default,
+    #   this API returns an unfiltered list.
+    #   @return [Types::DescribeConfigRulesFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesRequest AWS API Documentation
     #
     class DescribeConfigRulesRequest < Struct.new(
       :config_rule_names,
-      :next_token)
+      :next_token,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3931,6 +3976,53 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Use EvaluationContext to group independently initiated proactive
+    # resource evaluations. For example, CFN Stack. If you want to check
+    # just a resource definition, you do not need to provide evaluation
+    # context.
+    #
+    # @note When making an API call, you may pass EvaluationContext
+    #   data as a hash:
+    #
+    #       {
+    #         evaluation_context_identifier: "EvaluationContextIdentifier",
+    #       }
+    #
+    # @!attribute [rw] evaluation_context_identifier
+    #   A unique EvaluationContextIdentifier ID for an EvaluationContext.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationContext AWS API Documentation
+    #
+    class EvaluationContext < Struct.new(
+      :evaluation_context_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration object for Config rule evaluation mode. The
+    # Supported valid values are Detective or Proactive.
+    #
+    # @note When making an API call, you may pass EvaluationModeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   The mode of an evaluation. The valid values are Detective or
+    #   Proactive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationModeConfiguration AWS API Documentation
+    #
+    class EvaluationModeConfiguration < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Config evaluation. Provides the Amazon Web Services
     # resource that was evaluated, the compliance of the resource, related
     # time stamps, and supplementary information.
@@ -3998,11 +4090,16 @@ module Aws::ConfigService
     #   event triggered the evaluation.
     #   @return [Time]
     #
+    # @!attribute [rw] resource_evaluation_id
+    #   A Unique ID for an evaluation result.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultIdentifier AWS API Documentation
     #
     class EvaluationResultIdentifier < Struct.new(
       :evaluation_result_qualifier,
-      :ordering_timestamp)
+      :ordering_timestamp,
+      :resource_evaluation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4023,12 +4120,38 @@ module Aws::ConfigService
     #   The ID of the evaluated Amazon Web Services resource.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_mode
+    #   The mode of an evaluation. The valid values are Detective or
+    #   Proactive.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultQualifier AWS API Documentation
     #
     class EvaluationResultQualifier < Struct.new(
       :config_rule_name,
       :resource_type,
-      :resource_id)
+      :resource_id,
+      :evaluation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns status details of an evaluation.
+    #
+    # @!attribute [rw] status
+    #   The status of an execution. The valid values are In\_Progress,
+    #   Succeeded or Failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   An explanation for failed execution status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationStatus AWS API Documentation
+    #
+    class EvaluationStatus < Struct.new(
+      :status,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4607,10 +4730,11 @@ module Aws::ConfigService
     #   data as a hash:
     #
     #       {
-    #         resource_type: "StringWithCharLimit256", # required
-    #         resource_id: "BaseResourceId", # required
+    #         resource_type: "StringWithCharLimit256",
+    #         resource_id: "BaseResourceId",
     #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #         next_token: "String",
+    #         resource_evaluation_id: "ResourceEvaluationId",
     #       }
     #
     # @!attribute [rw] resource_type
@@ -4635,13 +4759,24 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @!attribute [rw] resource_evaluation_id
+    #   The unique ID of Amazon Web Services resource execution for which
+    #   you want to retrieve evaluation results.
+    #
+    #   <note markdown="1"> You need to only provide either a `ResourceEvaluationID` or a
+    #   `ResourceID `and `ResourceType`.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResourceRequest AWS API Documentation
     #
     class GetComplianceDetailsByResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
       :compliance_types,
-      :next_token)
+      :next_token,
+      :resource_evaluation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5196,6 +5331,72 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourceEvaluationSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_evaluation_id: "ResourceEvaluationId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_evaluation_id
+    #   The unique `ResourceEvaluationId` of Amazon Web Services resource
+    #   execution for which you want to retrieve the evaluation summary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceEvaluationSummaryRequest AWS API Documentation
+    #
+    class GetResourceEvaluationSummaryRequest < Struct.new(
+      :resource_evaluation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_evaluation_id
+    #   The unique `ResourceEvaluationId` of Amazon Web Services resource
+    #   execution for which you want to retrieve the evaluation summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_mode
+    #   Lists results of the mode that you requested to retrieve the
+    #   resource evaluation summary. The valid values are Detective or
+    #   Proactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_status
+    #   Returns an `EvaluationStatus` object.
+    #   @return [Types::EvaluationStatus]
+    #
+    # @!attribute [rw] evaluation_start_timestamp
+    #   The start timestamp when Config rule starts evaluating compliance
+    #   for the provided resource details.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compliance
+    #   The compliance status of the resource evaluation summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_context
+    #   Returns an `EvaluationContext` object.
+    #   @return [Types::EvaluationContext]
+    #
+    # @!attribute [rw] resource_details
+    #   Returns a `ResourceDetails` object.
+    #   @return [Types::ResourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceEvaluationSummaryResponse AWS API Documentation
+    #
+    class GetResourceEvaluationSummaryResponse < Struct.new(
+      :resource_evaluation_id,
+      :evaluation_mode,
+      :evaluation_status,
+      :evaluation_start_timestamp,
+      :compliance,
+      :evaluation_context,
+      :resource_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetStoredQueryRequest
     #   data as a hash:
     #
@@ -5244,6 +5445,20 @@ module Aws::ConfigService
     class GroupedResourceCount < Struct.new(
       :group_name,
       :resource_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Using the same client token with one or more different parameters.
+    # Specify a new client token with the parameter changes and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/IdempotentParameterMismatch AWS API Documentation
+    #
+    class IdempotentParameterMismatch < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5610,6 +5825,65 @@ module Aws::ConfigService
     #
     class ListDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourceEvaluationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: {
+    #           evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #           time_window: {
+    #             start_time: Time.now,
+    #             end_time: Time.now,
+    #           },
+    #           evaluation_context_identifier: "EvaluationContextIdentifier",
+    #         },
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Returns a `ResourceEvaluationFilters` object.
+    #   @return [Types::ResourceEvaluationFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluations returned on each page. The default
+    #   is 10. You cannot specify a number greater than 100. If you specify
+    #   0, Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListResourceEvaluationsRequest AWS API Documentation
+    #
+    class ListResourceEvaluationsRequest < Struct.new(
+      :filters,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_evaluations
+    #   Returns a `ResourceEvaluations` object.
+    #   @return [Array<Types::ResourceEvaluation>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListResourceEvaluationsResponse AWS API Documentation
+    #
+    class ListResourceEvaluationsResponse < Struct.new(
+      :resource_evaluations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6960,6 +7234,11 @@ module Aws::ConfigService
     #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
     #           created_by: "StringWithCharLimit256",
+    #           evaluation_modes: [
+    #             {
+    #               mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #             },
+    #           ],
     #         },
     #         tags: [
     #           {
@@ -7801,31 +8080,40 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # Specifies the types of Amazon Web Services resource for which Config
-    # records configuration changes.
+    # Specifies which Amazon Web Services resource types Config records for
+    # configuration changes. In the recording group, you specify whether you
+    # want to record all supported resource types or only specific types of
+    # resources.
     #
-    # In the recording group, you specify whether all supported types or
-    # specific types of resources are recorded.
-    #
-    # By default, Config records configuration changes for all supported
-    # types of regional resources that Config discovers in the region in
+    # By default, Config records the configuration changes for all supported
+    # types of *regional resources* that Config discovers in the region in
     # which it is running. Regional resources are tied to a region and can
     # be used only in that region. Examples of regional resources are EC2
     # instances and EBS volumes.
     #
-    # You can also have Config record configuration changes for supported
-    # types of global resources (for example, IAM resources). Global
-    # resources are not tied to an individual region and can be used in all
-    # regions.
+    # You can also have Config record supported types of *global resources*.
+    # Global resources are not tied to a specific region and can be used in
+    # all regions. The global resource types that Config supports include
+    # IAM users, groups, roles, and customer managed policies.
     #
-    # The configuration details for any global resource are the same in all
-    # regions. If you customize Config in multiple regions to record global
-    # resources, it will create multiple configuration items each time a
-    # global resource changes: one configuration item for each region. These
-    # configuration items will contain identical data. To prevent duplicate
-    # configuration items, you should consider customizing Config in only
-    # one region to record global resources, unless you want the
-    # configuration items to be available in multiple regions.
+    # Global resource types onboarded to Config recording after February
+    # 2022 will only be recorded in the service's home region for the
+    # commercial partition and Amazon Web Services GovCloud (US) West for
+    # the GovCloud partition. You can view the Configuration Items for these
+    # new global resource types only in their home region and Amazon Web
+    # Services GovCloud (US) West.
+    #
+    #  Supported global resource types onboarded before February 2022 such
+    # as
+    # `AWS::IAM::Group`, `AWS::IAM::Policy`, `AWS::IAM::Role`,
+    # `AWS::IAM::User` remain unchanged, and they will continue to deliver
+    # Configuration Items in all supported regions in Config. The change
+    # will only affect new global resource types onboarded after February
+    # 2022.
+    #
+    #  To record global resource types onboarded after February 2022, enable
+    # All Supported Resource Types in the home region of the global resource
+    # type you want to record.
     #
     # If you don't want Config to record all resources, you can specify
     # which types of resources it will record with the `resourceTypes`
@@ -7834,8 +8122,9 @@ module Aws::ConfigService
     # For a list of supported resource types, see [Supported Resource
     # Types][1].
     #
-    # For more information, see [Selecting Which Resources Config
-    # Records][2].
+    # For more information and a table of the Home Regions for Global
+    # Resource Types Onboarded after February 2022, see [Selecting Which
+    # Resources Config Records][2].
     #
     #
     #
@@ -8299,6 +8588,109 @@ module Aws::ConfigService
       :resource_type,
       :account_id,
       :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the resource being evaluated.
+    #
+    # @note When making an API call, you may pass ResourceDetails
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "BaseResourceId", # required
+    #         resource_type: "StringWithCharLimit256", # required
+    #         resource_configuration: "ResourceConfiguration", # required
+    #         resource_configuration_schema_type: "CFN_RESOURCE_SCHEMA", # accepts CFN_RESOURCE_SCHEMA
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   A unique resource ID for an evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource being evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_configuration
+    #   The resource definition to be evaluated as per the resource
+    #   configuration schema type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_configuration_schema_type
+    #   The schema type of the resource configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceDetails AWS API Documentation
+    #
+    class ResourceDetails < Struct.new(
+      :resource_id,
+      :resource_type,
+      :resource_configuration,
+      :resource_configuration_schema_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns details of a resource evaluation.
+    #
+    # @!attribute [rw] resource_evaluation_id
+    #   The ResourceEvaluationId of a evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_mode
+    #   The mode of an evaluation. The valid values are Detective or
+    #   Proactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_start_timestamp
+    #   The starting time of an execution.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceEvaluation AWS API Documentation
+    #
+    class ResourceEvaluation < Struct.new(
+      :resource_evaluation_id,
+      :evaluation_mode,
+      :evaluation_start_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns details of a resource evaluation based on the selected filter.
+    #
+    # @note When making an API call, you may pass ResourceEvaluationFilters
+    #   data as a hash:
+    #
+    #       {
+    #         evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #         time_window: {
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #         },
+    #         evaluation_context_identifier: "EvaluationContextIdentifier",
+    #       }
+    #
+    # @!attribute [rw] evaluation_mode
+    #   Filters all resource evaluations results based on an evaluation
+    #   mode. the valid value for this API is `Proactive`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_window
+    #   Returns a `TimeWindow` object.
+    #   @return [Types::TimeWindow]
+    #
+    # @!attribute [rw] evaluation_context_identifier
+    #   Filters evaluations for a given infrastructure deployment. For
+    #   example: CFN Stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceEvaluationFilters AWS API Documentation
+    #
+    class ResourceEvaluationFilters < Struct.new(
+      :evaluation_mode,
+      :time_window,
+      :evaluation_context_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8964,6 +9356,84 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartResourceEvaluationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_details: { # required
+    #           resource_id: "BaseResourceId", # required
+    #           resource_type: "StringWithCharLimit256", # required
+    #           resource_configuration: "ResourceConfiguration", # required
+    #           resource_configuration_schema_type: "CFN_RESOURCE_SCHEMA", # accepts CFN_RESOURCE_SCHEMA
+    #         },
+    #         evaluation_context: {
+    #           evaluation_context_identifier: "EvaluationContextIdentifier",
+    #         },
+    #         evaluation_mode: "DETECTIVE", # required, accepts DETECTIVE, PROACTIVE
+    #         evaluation_timeout: 1,
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] resource_details
+    #   Returns a `ResourceDetails` object.
+    #   @return [Types::ResourceDetails]
+    #
+    # @!attribute [rw] evaluation_context
+    #   Returns an `EvaluationContext` object.
+    #   @return [Types::EvaluationContext]
+    #
+    # @!attribute [rw] evaluation_mode
+    #   The mode of an evaluation. The valid value for this API is
+    #   `Proactive`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_timeout
+    #   The timeout for an evaluation. The default is 900 seconds. You
+    #   cannot specify a number greater than 3600. If you specify 0, Config
+    #   uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   A client token is a unique, case-sensitive string of up to 64 ASCII
+    #   characters. To make an idempotent API request using one of these
+    #   actions, specify a client token in the request.
+    #
+    #   <note markdown="1"> Avoid reusing the same client token for other API requests. If you
+    #   retry a request that completed successfully using the same client
+    #   token and the same parameters, the retry succeeds without performing
+    #   any further actions. If you retry a successful request using the
+    #   same client token, but one or more of the parameters are different,
+    #   other than the Region or Availability Zone, the retry fails with an
+    #   IdempotentParameterMismatch error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartResourceEvaluationRequest AWS API Documentation
+    #
+    class StartResourceEvaluationRequest < Struct.new(
+      :resource_details,
+      :evaluation_context,
+      :evaluation_mode,
+      :evaluation_timeout,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_evaluation_id
+    #   A unique ResourceEvaluationId that is associated with a single
+    #   execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartResourceEvaluationResponse AWS API Documentation
+    #
+    class StartResourceEvaluationResponse < Struct.new(
+      :resource_evaluation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The static value of the resource.
     #
     # @note When making an API call, you may pass StaticValue
@@ -9263,6 +9733,34 @@ module Aws::ConfigService
     class TemplateSSMDocumentDetails < Struct.new(
       :document_name,
       :document_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters evaluation results based on start and end times.
+    #
+    # @note When making an API call, you may pass TimeWindow
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start time of an execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of an execution. The end time must be after the start
+    #   date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/TimeWindow AWS API Documentation
+    #
+    class TimeWindow < Struct.new(
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end

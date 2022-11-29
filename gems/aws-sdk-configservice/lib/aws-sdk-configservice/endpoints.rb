@@ -851,6 +851,20 @@ module Aws::ConfigService
       end
     end
 
+    class GetResourceEvaluationSummary
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ConfigService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetStoredQuery
       def self.build(context)
         unless context.config.regional_endpoint
@@ -894,6 +908,20 @@ module Aws::ConfigService
     end
 
     class ListDiscoveredResources
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ConfigService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListResourceEvaluations
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1202,6 +1230,20 @@ module Aws::ConfigService
     end
 
     class StartRemediationExecution
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ConfigService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StartResourceEvaluation
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

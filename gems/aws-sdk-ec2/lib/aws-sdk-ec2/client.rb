@@ -710,7 +710,7 @@ module Aws::EC2
     #
     #   resp = client.accept_vpc_peering_connection({
     #     dry_run: false,
-    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionIdWithResolver",
     #   })
     #
     # @example Response structure
@@ -2576,6 +2576,10 @@ module Aws::EC2
     #   network cards. The primary network interface must be assigned to
     #   network card index 0. The default is network card index 0.
     #
+    # @option params [Types::EnaSrdSpecification] :ena_srd_specification
+    #   Configures ENA Express for the network interface that this action
+    #   attaches to the instance.
+    #
     # @return [Types::AttachNetworkInterfaceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AttachNetworkInterfaceResult#attachment_id #attachment_id} => String
@@ -2605,6 +2609,12 @@ module Aws::EC2
     #     instance_id: "InstanceId", # required
     #     network_interface_id: "NetworkInterfaceId", # required
     #     network_card_index: 1,
+    #     ena_srd_specification: {
+    #       ena_srd_enabled: false,
+    #       ena_srd_udp_specification: {
+    #         ena_srd_udp_enabled: false,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -9411,6 +9421,8 @@ module Aws::EC2
     #   resp.network_insights_path.created_date #=> Time
     #   resp.network_insights_path.source #=> String
     #   resp.network_insights_path.destination #=> String
+    #   resp.network_insights_path.source_arn #=> String
+    #   resp.network_insights_path.destination_arn #=> String
     #   resp.network_insights_path.source_ip #=> String
     #   resp.network_insights_path.destination_ip #=> String
     #   resp.network_insights_path.protocol #=> String, one of "tcp", "udp"
@@ -9667,6 +9679,8 @@ module Aws::EC2
     #   resp.network_interface.attachment.instance_id #=> String
     #   resp.network_interface.attachment.instance_owner_id #=> String
     #   resp.network_interface.attachment.status #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.network_interface.attachment.ena_srd_specification.ena_srd_enabled #=> Boolean
+    #   resp.network_interface.attachment.ena_srd_specification.ena_srd_udp_specification.ena_srd_udp_enabled #=> Boolean
     #   resp.network_interface.availability_zone #=> String
     #   resp.network_interface.description #=> String
     #   resp.network_interface.groups #=> Array
@@ -9952,7 +9966,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance for which to replace the root volume.
@@ -18245,6 +18259,65 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the curent Infrastructure Performance metric subscriptions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeAwsNetworkPerformanceMetricSubscriptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAwsNetworkPerformanceMetricSubscriptionsResult#next_token #next_token} => String
+    #   * {Types::DescribeAwsNetworkPerformanceMetricSubscriptionsResult#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_aws_network_performance_metric_subscriptions({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.subscriptions #=> Array
+    #   resp.subscriptions[0].source #=> String
+    #   resp.subscriptions[0].destination #=> String
+    #   resp.subscriptions[0].metric #=> String, one of "aggregate-latency"
+    #   resp.subscriptions[0].statistic #=> String, one of "p50"
+    #   resp.subscriptions[0].period #=> String, one of "five-minutes", "fifteen-minutes", "one-hour", "three-hours", "one-day", "one-week"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAwsNetworkPerformanceMetricSubscriptions AWS API Documentation
+    #
+    # @overload describe_aws_network_performance_metric_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def describe_aws_network_performance_metric_subscriptions(params = {}, options = {})
+      req = build_request(:describe_aws_network_performance_metric_subscriptions, params)
+      req.send_request(options)
+    end
+
     # Describes the specified bundle tasks or all of your bundle tasks.
     #
     # <note markdown="1"> Completed bundle tasks are listed for only a limited time. If your
@@ -22850,6 +22923,7 @@ module Aws::EC2
     #   resp.instance_types[0].network_info.efa_supported #=> Boolean
     #   resp.instance_types[0].network_info.efa_info.maximum_efa_interfaces #=> Integer
     #   resp.instance_types[0].network_info.encryption_in_transit_supported #=> Boolean
+    #   resp.instance_types[0].network_info.ena_srd_supported #=> Boolean
     #   resp.instance_types[0].gpu_info.gpus #=> Array
     #   resp.instance_types[0].gpu_info.gpus[0].name #=> String
     #   resp.instance_types[0].gpu_info.gpus[0].manufacturer #=> String
@@ -25701,6 +25775,8 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].network_insights_analysis_id #=> String
     #   resp.network_insights_analyses[0].network_insights_analysis_arn #=> String
     #   resp.network_insights_analyses[0].network_insights_path_id #=> String
+    #   resp.network_insights_analyses[0].additional_accounts #=> Array
+    #   resp.network_insights_analyses[0].additional_accounts[0] #=> String
     #   resp.network_insights_analyses[0].filter_in_arns #=> Array
     #   resp.network_insights_analyses[0].filter_in_arns[0] #=> String
     #   resp.network_insights_analyses[0].start_date #=> Time
@@ -26331,6 +26407,8 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].alternate_path_hints #=> Array
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_arn #=> String
+    #   resp.network_insights_analyses[0].suggested_accounts #=> Array
+    #   resp.network_insights_analyses[0].suggested_accounts[0] #=> String
     #   resp.network_insights_analyses[0].tags #=> Array
     #   resp.network_insights_analyses[0].tags[0].key #=> String
     #   resp.network_insights_analyses[0].tags[0].value #=> String
@@ -26405,6 +26483,8 @@ module Aws::EC2
     #   resp.network_insights_paths[0].created_date #=> Time
     #   resp.network_insights_paths[0].source #=> String
     #   resp.network_insights_paths[0].destination #=> String
+    #   resp.network_insights_paths[0].source_arn #=> String
+    #   resp.network_insights_paths[0].destination_arn #=> String
     #   resp.network_insights_paths[0].source_ip #=> String
     #   resp.network_insights_paths[0].destination_ip #=> String
     #   resp.network_insights_paths[0].protocol #=> String, one of "tcp", "udp"
@@ -26542,6 +26622,8 @@ module Aws::EC2
     #   resp.attachment.instance_id #=> String
     #   resp.attachment.instance_owner_id #=> String
     #   resp.attachment.status #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.attachment.ena_srd_specification.ena_srd_enabled #=> Boolean
+    #   resp.attachment.ena_srd_specification.ena_srd_udp_specification.ena_srd_udp_enabled #=> Boolean
     #   resp.description #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.groups #=> Array
     #   resp.groups[0].group_name #=> String
@@ -26876,6 +26958,8 @@ module Aws::EC2
     #   resp.network_interfaces[0].attachment.instance_id #=> String
     #   resp.network_interfaces[0].attachment.instance_owner_id #=> String
     #   resp.network_interfaces[0].attachment.status #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.network_interfaces[0].attachment.ena_srd_specification.ena_srd_enabled #=> Boolean
+    #   resp.network_interfaces[0].attachment.ena_srd_specification.ena_srd_udp_specification.ena_srd_udp_enabled #=> Boolean
     #   resp.network_interfaces[0].availability_zone #=> String
     #   resp.network_interfaces[0].description #=> String
     #   resp.network_interfaces[0].groups #=> Array
@@ -27387,7 +27471,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html
     #
     # @option params [Array<String>] :replace_root_volume_task_ids
     #   The ID of the root volume replacement task to view.
@@ -33398,9 +33482,13 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `owner` - The ID or alias of the Amazon Web Services account that
+    #     owns the service.
+    #
     #   * `service-name` - The name of the service.
     #
-    #   * `service-type` - The type of service (`Interface` \| `Gateway`).
+    #   * `service-type` - The type of service (`Interface` \| `Gateway` \|
+    #     `GatewayLoadBalancer`).
     #
     #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
     #     `ipv6`).
@@ -33504,6 +33592,16 @@ module Aws::EC2
     #
     #   * `service-name` - The name of the service.
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
     #   * `vpc-id` - The ID of the VPC in which the endpoint resides.
     #
     #   * `vpc-endpoint-id` - The ID of the endpoint.
@@ -33514,16 +33612,6 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
     #     `Gateway` \| `GatewayLoadBalancer`).
-    #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
-    #     the resource. Use the tag key in the filter name and the tag value
-    #     as the filter value. For example, to find all resources that have a
-    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
-    #     for the filter name and `TeamA` for the filter value.
-    #
-    #   * `tag-key` - The key of a tag assigned to the resource. Use this
-    #     filter to find all resources assigned a tag with a specific key,
-    #     regardless of the tag value.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. The request
@@ -34503,6 +34591,55 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disable_address_transfer(params = {}, options = {})
       req = build_request(:disable_address_transfer, params)
+      req.send_request(options)
+    end
+
+    # Disables Infrastructure Performance metric subscriptions.
+    #
+    # @option params [String] :source
+    #   The source Region or Availability Zone that the metric subscription is
+    #   disabled for. For example, `us-east-1`.
+    #
+    # @option params [String] :destination
+    #   The target Region or Availability Zone that the metric subscription is
+    #   disabled for. For example, `eu-north-1`.
+    #
+    # @option params [String] :metric
+    #   The metric used for the disabled subscription.
+    #
+    # @option params [String] :statistic
+    #   The statistic used for the disabled subscription.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableAwsNetworkPerformanceMetricSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableAwsNetworkPerformanceMetricSubscriptionResult#output #output} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_aws_network_performance_metric_subscription({
+    #     source: "String",
+    #     destination: "String",
+    #     metric: "aggregate-latency", # accepts aggregate-latency
+    #     statistic: "p50", # accepts p50
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.output #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAwsNetworkPerformanceMetricSubscription AWS API Documentation
+    #
+    # @overload disable_aws_network_performance_metric_subscription(params = {})
+    # @param [Hash] params ({})
+    def disable_aws_network_performance_metric_subscription(params = {}, options = {})
+      req = build_request(:disable_aws_network_performance_metric_subscription, params)
       req.send_request(options)
     end
 
@@ -35663,6 +35800,55 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Enables Infrastructure Performance subscriptions.
+    #
+    # @option params [String] :source
+    #   The source Region or Availability Zone that the metric subscription is
+    #   enabled for. For example, `us-east-1`.
+    #
+    # @option params [String] :destination
+    #   The target Region or Availability Zone that the metric subscription is
+    #   enabled for. For example, `eu-west-1`.
+    #
+    # @option params [String] :metric
+    #   The metric used for the enabled subscription.
+    #
+    # @option params [String] :statistic
+    #   The statistic used for the enabled subscription.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableAwsNetworkPerformanceMetricSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableAwsNetworkPerformanceMetricSubscriptionResult#output #output} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_aws_network_performance_metric_subscription({
+    #     source: "String",
+    #     destination: "String",
+    #     metric: "aggregate-latency", # accepts aggregate-latency
+    #     statistic: "p50", # accepts p50
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.output #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAwsNetworkPerformanceMetricSubscription AWS API Documentation
+    #
+    # @overload enable_aws_network_performance_metric_subscription(params = {})
+    # @param [Hash] params ({})
+    def enable_aws_network_performance_metric_subscription(params = {}, options = {})
+      req = build_request(:enable_aws_network_performance_metric_subscription, params)
+      req.send_request(options)
+    end
+
     # Enables EBS encryption by default for your account in the current
     # Region.
     #
@@ -35973,6 +36159,31 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_ipam_organization_admin_account(params = {}, options = {})
       req = build_request(:enable_ipam_organization_admin_account, params)
+      req.send_request(options)
+    end
+
+    # @option params [Boolean] :dry_run
+    #
+    # @return [Types::EnableReachabilityAnalyzerOrganizationSharingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableReachabilityAnalyzerOrganizationSharingResult#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_reachability_analyzer_organization_sharing({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableReachabilityAnalyzerOrganizationSharing AWS API Documentation
+    #
+    # @overload enable_reachability_analyzer_organization_sharing(params = {})
+    # @param [Hash] params ({})
+    def enable_reachability_analyzer_organization_sharing(params = {}, options = {})
+      req = build_request(:enable_reachability_analyzer_organization_sharing, params)
       req.send_request(options)
     end
 
@@ -36613,6 +36824,87 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_associated_ipv_6_pool_cidrs(params = {}, options = {})
       req = build_request(:get_associated_ipv_6_pool_cidrs, params)
+      req.send_request(options)
+    end
+
+    # Gets network performance data.
+    #
+    # @option params [Array<Types::DataQuery>] :data_queries
+    #   A list of network performance data queries.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The starting time for the performance data request. The starting time
+    #   must be formatted as `yyyy-mm-ddThh:mm:ss`. For example,
+    #   `2022-06-10T12:00:00.000Z`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The ending time for the performance data request. The end time must be
+    #   formatted as `yyyy-mm-ddThh:mm:ss`. For example,
+    #   `2022-06-12T12:00:00.000Z`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetAwsNetworkPerformanceDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAwsNetworkPerformanceDataResult#data_responses #data_responses} => Array&lt;Types::DataResponse&gt;
+    #   * {Types::GetAwsNetworkPerformanceDataResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_aws_network_performance_data({
+    #     data_queries: [
+    #       {
+    #         id: "String",
+    #         source: "String",
+    #         destination: "String",
+    #         metric: "aggregate-latency", # accepts aggregate-latency
+    #         statistic: "p50", # accepts p50
+    #         period: "five-minutes", # accepts five-minutes, fifteen-minutes, one-hour, three-hours, one-day, one-week
+    #       },
+    #     ],
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_responses #=> Array
+    #   resp.data_responses[0].id #=> String
+    #   resp.data_responses[0].source #=> String
+    #   resp.data_responses[0].destination #=> String
+    #   resp.data_responses[0].metric #=> String, one of "aggregate-latency"
+    #   resp.data_responses[0].statistic #=> String, one of "p50"
+    #   resp.data_responses[0].period #=> String, one of "five-minutes", "fifteen-minutes", "one-hour", "three-hours", "one-day", "one-week"
+    #   resp.data_responses[0].metric_points #=> Array
+    #   resp.data_responses[0].metric_points[0].start_date #=> Time
+    #   resp.data_responses[0].metric_points[0].end_date #=> Time
+    #   resp.data_responses[0].metric_points[0].value #=> Float
+    #   resp.data_responses[0].metric_points[0].status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAwsNetworkPerformanceData AWS API Documentation
+    #
+    # @overload get_aws_network_performance_data(params = {})
+    # @param [Hash] params ({})
+    def get_aws_network_performance_data(params = {}, options = {})
+      req = build_request(:get_aws_network_performance_data, params)
       req.send_request(options)
     end
 
@@ -42934,8 +43226,8 @@ module Aws::EC2
     # detach security groups from an existing EC2 instance.
     #
     # @option params [Types::NetworkInterfaceAttachmentChanges] :attachment
-    #   Information about the interface attachment. If modifying the 'delete
-    #   on termination' attribute, you must specify the ID of the interface
+    #   Information about the interface attachment. If modifying the `delete
+    #   on termination` attribute, you must specify the ID of the interface
     #   attachment.
     #
     # @option params [Types::AttributeValue] :description
@@ -42963,6 +43255,10 @@ module Aws::EC2
     #   enabled; otherwise, they are disabled. The default value is `true`.
     #   You must disable source/destination checks if the instance runs
     #   services such as network address translation, routing, or firewalls.
+    #
+    # @option params [Types::EnaSrdSpecification] :ena_srd_specification
+    #   Updates the ENA Express configuration for the network interface that’s
+    #   attached to the instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -43026,6 +43322,12 @@ module Aws::EC2
     #     network_interface_id: "NetworkInterfaceId", # required
     #     source_dest_check: {
     #       value: false,
+    #     },
+    #     ena_srd_specification: {
+    #       ena_srd_enabled: false,
+    #       ena_srd_udp_specification: {
+    #         ena_srd_udp_enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -51097,6 +51399,8 @@ module Aws::EC2
     # @option params [required, String] :network_insights_path_id
     #   The ID of the path.
     #
+    # @option params [Array<String>] :additional_accounts
+    #
     # @option params [Array<String>] :filter_in_arns
     #   The Amazon Resource Names (ARN) of the resources that the path must
     #   traverse.
@@ -51130,6 +51434,7 @@ module Aws::EC2
     #
     #   resp = client.start_network_insights_analysis({
     #     network_insights_path_id: "NetworkInsightsPathId", # required
+    #     additional_accounts: ["String"],
     #     filter_in_arns: ["ResourceArn"],
     #     dry_run: false,
     #     tag_specifications: [
@@ -51151,6 +51456,8 @@ module Aws::EC2
     #   resp.network_insights_analysis.network_insights_analysis_id #=> String
     #   resp.network_insights_analysis.network_insights_analysis_arn #=> String
     #   resp.network_insights_analysis.network_insights_path_id #=> String
+    #   resp.network_insights_analysis.additional_accounts #=> Array
+    #   resp.network_insights_analysis.additional_accounts[0] #=> String
     #   resp.network_insights_analysis.filter_in_arns #=> Array
     #   resp.network_insights_analysis.filter_in_arns[0] #=> String
     #   resp.network_insights_analysis.start_date #=> Time
@@ -51781,6 +52088,8 @@ module Aws::EC2
     #   resp.network_insights_analysis.alternate_path_hints #=> Array
     #   resp.network_insights_analysis.alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analysis.alternate_path_hints[0].component_arn #=> String
+    #   resp.network_insights_analysis.suggested_accounts #=> Array
+    #   resp.network_insights_analysis.suggested_accounts[0] #=> String
     #   resp.network_insights_analysis.tags #=> Array
     #   resp.network_insights_analysis.tags[0].key #=> String
     #   resp.network_insights_analysis.tags[0].value #=> String
@@ -52603,7 +52912,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.351.0'
+      context[:gem_version] = '1.352.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

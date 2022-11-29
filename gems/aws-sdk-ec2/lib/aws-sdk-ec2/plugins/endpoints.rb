@@ -470,6 +470,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeAggregateIdFormat.build(context)
           when :describe_availability_zones
             Aws::EC2::Endpoints::DescribeAvailabilityZones.build(context)
+          when :describe_aws_network_performance_metric_subscriptions
+            Aws::EC2::Endpoints::DescribeAwsNetworkPerformanceMetricSubscriptions.build(context)
           when :describe_bundle_tasks
             Aws::EC2::Endpoints::DescribeBundleTasks.build(context)
           when :describe_byoip_cidrs
@@ -742,6 +744,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DetachVpnGateway.build(context)
           when :disable_address_transfer
             Aws::EC2::Endpoints::DisableAddressTransfer.build(context)
+          when :disable_aws_network_performance_metric_subscription
+            Aws::EC2::Endpoints::DisableAwsNetworkPerformanceMetricSubscription.build(context)
           when :disable_ebs_encryption_by_default
             Aws::EC2::Endpoints::DisableEbsEncryptionByDefault.build(context)
           when :disable_fast_launch
@@ -788,6 +792,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisassociateVpcCidrBlock.build(context)
           when :enable_address_transfer
             Aws::EC2::Endpoints::EnableAddressTransfer.build(context)
+          when :enable_aws_network_performance_metric_subscription
+            Aws::EC2::Endpoints::EnableAwsNetworkPerformanceMetricSubscription.build(context)
           when :enable_ebs_encryption_by_default
             Aws::EC2::Endpoints::EnableEbsEncryptionByDefault.build(context)
           when :enable_fast_launch
@@ -798,6 +804,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableImageDeprecation.build(context)
           when :enable_ipam_organization_admin_account
             Aws::EC2::Endpoints::EnableIpamOrganizationAdminAccount.build(context)
+          when :enable_reachability_analyzer_organization_sharing
+            Aws::EC2::Endpoints::EnableReachabilityAnalyzerOrganizationSharing.build(context)
           when :enable_serial_console_access
             Aws::EC2::Endpoints::EnableSerialConsoleAccess.build(context)
           when :enable_transit_gateway_route_table_propagation
@@ -822,6 +830,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetAssociatedEnclaveCertificateIamRoles.build(context)
           when :get_associated_ipv_6_pool_cidrs
             Aws::EC2::Endpoints::GetAssociatedIpv6PoolCidrs.build(context)
+          when :get_aws_network_performance_data
+            Aws::EC2::Endpoints::GetAwsNetworkPerformanceData.build(context)
           when :get_capacity_reservation_usage
             Aws::EC2::Endpoints::GetCapacityReservationUsage.build(context)
           when :get_coip_pool_usage

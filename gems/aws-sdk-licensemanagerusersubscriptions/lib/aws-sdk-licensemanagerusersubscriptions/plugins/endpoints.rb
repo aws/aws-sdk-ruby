@@ -76,6 +76,8 @@ module Aws::LicenseManagerUserSubscriptions
             Aws::LicenseManagerUserSubscriptions::Endpoints::StartProductSubscription.build(context)
           when :stop_product_subscription
             Aws::LicenseManagerUserSubscriptions::Endpoints::StopProductSubscription.build(context)
+          when :update_identity_provider_settings
+            Aws::LicenseManagerUserSubscriptions::Endpoints::UpdateIdentityProviderSettings.build(context)
           end
         end
       end

@@ -371,6 +371,18 @@ module Aws::LicenseManagerUserSubscriptions
     # Associates the user to an EC2 instance to utilize user-based
     # subscriptions.
     #
+    # <note markdown="1"> Your estimated bill for charges on the number of users and related
+    # costs will take 48 hours to appear for billing periods that haven't
+    # closed (marked as **Pending** billing status) in Amazon Web Services
+    # Billing. For more information, see [Viewing your monthly charges][1]
+    # in the *Amazon Web Services Billing User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html
+    #
     # @option params [String] :domain
     #   The domain name of the user.
     #
@@ -449,6 +461,9 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summary.failure_message #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.directory_id #=> String
     #   resp.identity_provider_summary.product #=> String
+    #   resp.identity_provider_summary.settings.security_group_id #=> String
+    #   resp.identity_provider_summary.settings.subnets #=> Array
+    #   resp.identity_provider_summary.settings.subnets[0] #=> String
     #   resp.identity_provider_summary.status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/DeregisterIdentityProvider AWS API Documentation
@@ -540,6 +555,9 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summaries[0].failure_message #=> String
     #   resp.identity_provider_summaries[0].identity_provider.active_directory_identity_provider.directory_id #=> String
     #   resp.identity_provider_summaries[0].product #=> String
+    #   resp.identity_provider_summaries[0].settings.security_group_id #=> String
+    #   resp.identity_provider_summaries[0].settings.subnets #=> Array
+    #   resp.identity_provider_summaries[0].settings.subnets[0] #=> String
     #   resp.identity_provider_summaries[0].status #=> String
     #   resp.next_token #=> String
     #
@@ -748,6 +766,10 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [required, String] :product
     #   The name of the user-based subscription product.
     #
+    # @option params [Types::Settings] :settings
+    #   The registered identity provider’s product related configuration
+    #   settings such as the subnets to provision VPC endpoints.
+    #
     # @return [Types::RegisterIdentityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterIdentityProviderResponse#identity_provider_summary #identity_provider_summary} => Types::IdentityProviderSummary
@@ -761,6 +783,10 @@ module Aws::LicenseManagerUserSubscriptions
     #       },
     #     },
     #     product: "String", # required
+    #     settings: {
+    #       security_group_id: "SecurityGroup", # required
+    #       subnets: ["Subnet"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -768,6 +794,9 @@ module Aws::LicenseManagerUserSubscriptions
     #   resp.identity_provider_summary.failure_message #=> String
     #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.directory_id #=> String
     #   resp.identity_provider_summary.product #=> String
+    #   resp.identity_provider_summary.settings.security_group_id #=> String
+    #   resp.identity_provider_summary.settings.subnets #=> Array
+    #   resp.identity_provider_summary.settings.subnets[0] #=> String
     #   resp.identity_provider_summary.status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/RegisterIdentityProvider AWS API Documentation
@@ -781,6 +810,18 @@ module Aws::LicenseManagerUserSubscriptions
 
     # Starts a product subscription for a user with the specified identity
     # provider.
+    #
+    # <note markdown="1"> Your estimated bill for charges on the number of users and related
+    # costs will take 48 hours to appear for billing periods that haven't
+    # closed (marked as **Pending** billing status) in Amazon Web Services
+    # Billing. For more information, see [Viewing your monthly charges][1]
+    # in the *Amazon Web Services Billing User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html
     #
     # @option params [String] :domain
     #   The domain name of the user.
@@ -883,6 +924,65 @@ module Aws::LicenseManagerUserSubscriptions
       req.send_request(options)
     end
 
+    # Updates additional product configuration settings for the registered
+    # identity provider.
+    #
+    # @option params [required, Types::IdentityProvider] :identity_provider
+    #   Details about an identity provider.
+    #
+    # @option params [required, String] :product
+    #   The name of the user-based subscription product.
+    #
+    # @option params [required, Types::UpdateSettings] :update_settings
+    #   Updates the registered identity provider’s product related
+    #   configuration settings. You can update any combination of settings in
+    #   a single operation such as the:
+    #
+    #   * Subnets which you want to add to provision VPC endpoints.
+    #
+    #   * Subnets which you want to remove the VPC endpoints from.
+    #
+    #   * Security group ID which permits traffic to the VPC endpoints.
+    #
+    # @return [Types::UpdateIdentityProviderSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIdentityProviderSettingsResponse#identity_provider_summary #identity_provider_summary} => Types::IdentityProviderSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_identity_provider_settings({
+    #     identity_provider: { # required
+    #       active_directory_identity_provider: {
+    #         directory_id: "String",
+    #       },
+    #     },
+    #     product: "String", # required
+    #     update_settings: { # required
+    #       add_subnets: ["Subnet"], # required
+    #       remove_subnets: ["Subnet"], # required
+    #       security_group_id: "SecurityGroup",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_provider_summary.failure_message #=> String
+    #   resp.identity_provider_summary.identity_provider.active_directory_identity_provider.directory_id #=> String
+    #   resp.identity_provider_summary.product #=> String
+    #   resp.identity_provider_summary.settings.security_group_id #=> String
+    #   resp.identity_provider_summary.settings.subnets #=> Array
+    #   resp.identity_provider_summary.settings.subnets[0] #=> String
+    #   resp.identity_provider_summary.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/UpdateIdentityProviderSettings AWS API Documentation
+    #
+    # @overload update_identity_provider_settings(params = {})
+    # @param [Hash] params ({})
+    def update_identity_provider_settings(params = {}, options = {})
+      req = build_request(:update_identity_provider_settings, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -896,7 +996,7 @@ module Aws::LicenseManagerUserSubscriptions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanagerusersubscriptions'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

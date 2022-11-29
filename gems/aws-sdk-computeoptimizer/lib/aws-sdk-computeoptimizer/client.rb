@@ -418,10 +418,6 @@ module Aws::ComputeOptimizer
     # @option params [required, Array<String>] :recommendation_preference_names
     #   The name of the recommendation preference to delete.
     #
-    #   Enhanced infrastructure metrics (`EnhancedInfrastructureMetrics`) is
-    #   the only feature that can be activated through preferences. Therefore,
-    #   it is also the only recommendation preference that can be deleted.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -432,7 +428,7 @@ module Aws::ComputeOptimizer
     #       name: "Organization", # accepts Organization, AccountId, ResourceArn
     #       value: "ScopeValue",
     #     },
-    #     recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics, InferredWorkloadTypes
+    #     recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics, InferredWorkloadTypes, ExternalMetricsPreference
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DeleteRecommendationPreferences AWS API Documentation
@@ -892,7 +888,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"],
     #       },
     #     ],
-    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort
+    #     fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix",
@@ -1157,6 +1153,7 @@ module Aws::ComputeOptimizer
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.cpu_vendor_architectures[0] #=> String, one of "AWS_ARM64", "CURRENT"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.enhanced_infrastructure_metrics #=> String, one of "Active", "Inactive"
     #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.inferred_workload_types #=> String, one of "Active", "Inactive"
+    #   resp.auto_scaling_group_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.auto_scaling_group_recommendations[0].inferred_workload_types #=> Array
     #   resp.auto_scaling_group_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis"
     #   resp.errors #=> Array
@@ -1386,6 +1383,7 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].effective_recommendation_preferences.cpu_vendor_architectures[0] #=> String, one of "AWS_ARM64", "CURRENT"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.enhanced_infrastructure_metrics #=> String, one of "Active", "Inactive"
     #   resp.instance_recommendations[0].effective_recommendation_preferences.inferred_workload_types #=> String, one of "Active", "Inactive"
+    #   resp.instance_recommendations[0].effective_recommendation_preferences.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #   resp.instance_recommendations[0].inferred_workload_types #=> Array
     #   resp.instance_recommendations[0].inferred_workload_types[0] #=> String, one of "AmazonEmr", "ApacheCassandra", "ApacheHadoop", "Memcached", "Nginx", "PostgreSql", "Redis"
     #   resp.errors #=> Array
@@ -1492,6 +1490,7 @@ module Aws::ComputeOptimizer
     # @return [Types::GetEffectiveRecommendationPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetEffectiveRecommendationPreferencesResponse#enhanced_infrastructure_metrics #enhanced_infrastructure_metrics} => String
+    #   * {Types::GetEffectiveRecommendationPreferencesResponse#external_metrics_preference #external_metrics_preference} => Types::ExternalMetricsPreference
     #
     # @example Request syntax with placeholder values
     #
@@ -1502,6 +1501,7 @@ module Aws::ComputeOptimizer
     # @example Response structure
     #
     #   resp.enhanced_infrastructure_metrics #=> String, one of "Active", "Inactive"
+    #   resp.external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferences AWS API Documentation
     #
@@ -1792,6 +1792,7 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_preferences_details[0].resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "NotApplicable"
     #   resp.recommendation_preferences_details[0].enhanced_infrastructure_metrics #=> String, one of "Active", "Inactive"
     #   resp.recommendation_preferences_details[0].inferred_workload_types #=> String, one of "Active", "Inactive"
+    #   resp.recommendation_preferences_details[0].external_metrics_preference.source #=> String, one of "Datadog", "Dynatrace", "NewRelic", "Instana"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationPreferences AWS API Documentation
     #
@@ -1962,6 +1963,23 @@ module Aws::ComputeOptimizer
     #
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html
     #
+    # @option params [Types::ExternalMetricsPreference] :external_metrics_preference
+    #   The provider of the external metrics recommendation preference to
+    #   create or update.
+    #
+    #   Specify a valid provider in the `source` field to activate the
+    #   preference. To delete this preference, see the
+    #   DeleteRecommendationPreferences action.
+    #
+    #   This preference can only be set for the `Ec2Instance` resource type.
+    #
+    #   For more information, see [External metrics ingestion][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1974,6 +1992,9 @@ module Aws::ComputeOptimizer
     #     },
     #     enhanced_infrastructure_metrics: "Active", # accepts Active, Inactive
     #     inferred_workload_types: "Active", # accepts Active, Inactive
+    #     external_metrics_preference: {
+    #       source: "Datadog", # accepts Datadog, Dynatrace, NewRelic, Instana
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferences AWS API Documentation
@@ -2074,7 +2095,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

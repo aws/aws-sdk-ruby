@@ -128,6 +128,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::GetMultiRegionAccessPointPolicy.build(context)
           when :get_multi_region_access_point_policy_status
             Aws::S3Control::Endpoints::GetMultiRegionAccessPointPolicyStatus.build(context)
+          when :get_multi_region_access_point_routes
+            Aws::S3Control::Endpoints::GetMultiRegionAccessPointRoutes.build(context)
           when :get_public_access_block
             Aws::S3Control::Endpoints::GetPublicAccessBlock.build(context)
           when :get_storage_lens_configuration
@@ -170,6 +172,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::PutStorageLensConfiguration.build(context)
           when :put_storage_lens_configuration_tagging
             Aws::S3Control::Endpoints::PutStorageLensConfigurationTagging.build(context)
+          when :submit_multi_region_access_point_routes
+            Aws::S3Control::Endpoints::SubmitMultiRegionAccessPointRoutes.build(context)
           when :update_job_priority
             Aws::S3Control::Endpoints::UpdateJobPriority.build(context)
           when :update_job_status

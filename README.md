@@ -322,6 +322,7 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                          | Service Module                           | gem_name                                    | API Version |
 | ----------------------------------------------------- | ---------------------------------------- | ------------------------------------------- | ----------- |
+| AWS ARC - Zonal Shift                                 | Aws::ARCZonalShift                       | aws-sdk-arczonalshift                       | 2022-10-30  |
 | AWS Account                                           | Aws::Account                             | aws-sdk-account                             | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                             | aws-sdk-amplify                             | 2017-07-25  |
 | AWS Amplify UI Builder                                | Aws::AmplifyUIBuilder                    | aws-sdk-amplifyuibuilder                    | 2021-08-11  |

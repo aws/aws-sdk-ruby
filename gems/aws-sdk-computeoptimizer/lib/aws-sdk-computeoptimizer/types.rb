@@ -332,7 +332,7 @@ module Aws::ComputeOptimizer
     #           name: "Organization", # accepts Organization, AccountId, ResourceArn
     #           value: "ScopeValue",
     #         },
-    #         recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics, InferredWorkloadTypes
+    #         recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics, InferredWorkloadTypes, ExternalMetricsPreference
     #       }
     #
     # @!attribute [rw] resource_type
@@ -366,11 +366,6 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] recommendation_preference_names
     #   The name of the recommendation preference to delete.
-    #
-    #   Enhanced infrastructure metrics (`EnhancedInfrastructureMetrics`) is
-    #   the only feature that can be activated through preferences.
-    #   Therefore, it is also the only recommendation preference that can be
-    #   deleted.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DeleteRecommendationPreferencesRequest AWS API Documentation
@@ -616,12 +611,23 @@ module Aws::ComputeOptimizer
     #   it's not yet applied to recommendations.
     #   @return [String]
     #
+    # @!attribute [rw] external_metrics_preference
+    #   An object that describes the external metrics recommendation
+    #   preference.
+    #
+    #   If the preference is applied in the latest recommendation refresh,
+    #   an object with a valid `source` value appears in the response. If
+    #   the preference isn't applied to the recommendations already, then
+    #   this object doesn't appear in the response.
+    #   @return [Types::ExternalMetricsPreference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EffectiveRecommendationPreferences AWS API Documentation
     #
     class EffectiveRecommendationPreferences < Struct.new(
       :cpu_vendor_architectures,
       :enhanced_infrastructure_metrics,
-      :inferred_workload_types)
+      :inferred_workload_types,
+      :external_metrics_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1000,7 +1006,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort
+    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort, EffectiveRecommendationPreferencesExternalMetricsSource
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -1266,6 +1272,28 @@ module Aws::ComputeOptimizer
     class ExportLambdaFunctionRecommendationsResponse < Struct.new(
       :job_id,
       :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the external metrics preferences for EC2 rightsizing
+    # recommendations.
+    #
+    # @note When making an API call, you may pass ExternalMetricsPreference
+    #   data as a hash:
+    #
+    #       {
+    #         source: "Datadog", # accepts Datadog, Dynatrace, NewRelic, Instana
+    #       }
+    #
+    # @!attribute [rw] source
+    #   Contains the source options for external metrics preferences.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExternalMetricsPreference AWS API Documentation
+    #
+    class ExternalMetricsPreference < Struct.new(
+      :source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1810,10 +1838,34 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
     #   @return [String]
     #
+    # @!attribute [rw] external_metrics_preference
+    #   The provider of the external metrics recommendation preference.
+    #   Considers all applicable preferences that you might have set at the
+    #   account and organization level.
+    #
+    #   If the preference is applied in the latest recommendation refresh,
+    #   an object with a valid `source` value appears in the response. If
+    #   the preference isn't applied to the recommendations already, then
+    #   this object doesn't appear in the response.
+    #
+    #   To validate whether the preference is applied to your last generated
+    #   set of recommendations, review the
+    #   `effectiveRecommendationPreferences` value in the response of the
+    #   GetEC2InstanceRecommendations actions.
+    #
+    #   For more information, see [Enhanced infrastructure metrics][1] in
+    #   the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [Types::ExternalMetricsPreference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesResponse AWS API Documentation
     #
     class GetEffectiveRecommendationPreferencesResponse < Struct.new(
-      :enhanced_infrastructure_metrics)
+      :enhanced_infrastructure_metrics,
+      :external_metrics_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3160,6 +3212,9 @@ module Aws::ComputeOptimizer
     #         },
     #         enhanced_infrastructure_metrics: "Active", # accepts Active, Inactive
     #         inferred_workload_types: "Active", # accepts Active, Inactive
+    #         external_metrics_preference: {
+    #           source: "Datadog", # accepts Datadog, Dynatrace, NewRelic, Instana
+    #         },
     #       }
     #
     # @!attribute [rw] resource_type
@@ -3238,13 +3293,32 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html
     #   @return [String]
     #
+    # @!attribute [rw] external_metrics_preference
+    #   The provider of the external metrics recommendation preference to
+    #   create or update.
+    #
+    #   Specify a valid provider in the `source` field to activate the
+    #   preference. To delete this preference, see the
+    #   DeleteRecommendationPreferences action.
+    #
+    #   This preference can only be set for the `Ec2Instance` resource type.
+    #
+    #   For more information, see [External metrics ingestion][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
+    #   @return [Types::ExternalMetricsPreference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferencesRequest AWS API Documentation
     #
     class PutRecommendationPreferencesRequest < Struct.new(
       :resource_type,
       :scope,
       :enhanced_infrastructure_metrics,
-      :inferred_workload_types)
+      :inferred_workload_types,
+      :external_metrics_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3391,9 +3465,10 @@ module Aws::ComputeOptimizer
     #   The status of the enhanced infrastructure metrics recommendation
     #   preference.
     #
-    #   A status of `Active` confirms that the preference is applied in the
-    #   latest recommendation refresh, and a status of `Inactive` confirms
-    #   that it's not yet applied to recommendations.
+    #   When the recommendations page is refreshed, a status of `Active`
+    #   confirms that the preference is applied to the recommendations, and
+    #   a status of `Inactive` confirms that the preference isn't yet
+    #   applied to recommendations.
     #
     #   For more information, see [Enhanced infrastructure metrics][1] in
     #   the *Compute Optimizer User Guide*.
@@ -3406,10 +3481,21 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] inferred_workload_types
     #   The status of the inferred workload types recommendation preference.
     #
-    #   A status of `Active` confirms that the preference is applied in the
-    #   latest recommendation refresh. A status of `Inactive` confirms that
-    #   it's not yet applied to recommendations.
+    #   When the recommendations page is refreshed, a status of `Active`
+    #   confirms that the preference is applied to the recommendations, and
+    #   a status of `Inactive` confirms that the preference isn't yet
+    #   applied to recommendations.
     #   @return [String]
+    #
+    # @!attribute [rw] external_metrics_preference
+    #   An object that describes the external metrics recommendation
+    #   preference.
+    #
+    #   If the preference is applied in the latest recommendation refresh,
+    #   an object with a valid `source` value appears in the response. If
+    #   the preference isn't applied to the recommendations already, then
+    #   this object doesn't appear in the response.
+    #   @return [Types::ExternalMetricsPreference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationPreferencesDetail AWS API Documentation
     #
@@ -3417,7 +3503,8 @@ module Aws::ComputeOptimizer
       :scope,
       :resource_type,
       :enhanced_infrastructure_metrics,
-      :inferred_workload_types)
+      :inferred_workload_types,
+      :external_metrics_preference)
       SENSITIVE = []
       include Aws::Structure
     end

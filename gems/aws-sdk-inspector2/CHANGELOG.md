@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-11-29)
+------------------
+
+* Feature - This release adds support for Inspector to scan AWS Lambda.
+
 1.7.0 (2022-10-25)
 ------------------
 

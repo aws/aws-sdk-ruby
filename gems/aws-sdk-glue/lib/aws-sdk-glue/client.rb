@@ -1465,6 +1465,22 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.transform_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].type #=> String, one of "str", "int", "float", "complex", "bool", "list", "null"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].validation_rule #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].validation_message #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].value #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].value[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].list_type #=> String, one of "str", "int", "float", "complex", "bool", "list", "null"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].is_optional #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -3603,6 +3619,25 @@ module Aws::Glue
     #           inputs: ["NodeId"], # required
     #           database: "EnclosedInStringProperty", # required
     #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         dynamic_transform: {
+    #           name: "EnclosedInStringProperty", # required
+    #           transform_name: "EnclosedInStringProperty", # required
+    #           inputs: ["NodeId"], # required
+    #           parameters: [
+    #             {
+    #               name: "EnclosedInStringProperty", # required
+    #               type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #               validation_rule: "EnclosedInStringProperty",
+    #               validation_message: "EnclosedInStringProperty",
+    #               value: ["EnclosedInStringProperty"],
+    #               list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #               is_optional: false,
+    #             },
+    #           ],
+    #           function_name: "EnclosedInStringProperty", # required
+    #           path: "EnclosedInStringProperty", # required
+    #           version: "EnclosedInStringProperty",
     #         },
     #       },
     #     },
@@ -7269,6 +7304,22 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.transform_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].type #=> String, one of "str", "int", "float", "complex", "bool", "list", "null"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].validation_rule #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].validation_message #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].value #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].value[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].list_type #=> String, one of "str", "int", "float", "complex", "bool", "list", "null"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].is_optional #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
@@ -7999,6 +8050,22 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].postgre_sql_catalog_target.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.transform_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].type #=> String, one of "str", "int", "float", "complex", "bool", "list", "null"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].validation_rule #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].validation_message #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].value #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].value[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].list_type #=> String, one of "str", "int", "float", "complex", "bool", "list", "null"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.parameters[0].is_optional #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.function_name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].dynamic_transform.version #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
     #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
@@ -14573,6 +14640,25 @@ module Aws::Glue
     #             database: "EnclosedInStringProperty", # required
     #             table: "EnclosedInStringProperty", # required
     #           },
+    #           dynamic_transform: {
+    #             name: "EnclosedInStringProperty", # required
+    #             transform_name: "EnclosedInStringProperty", # required
+    #             inputs: ["NodeId"], # required
+    #             parameters: [
+    #               {
+    #                 name: "EnclosedInStringProperty", # required
+    #                 type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #                 validation_rule: "EnclosedInStringProperty",
+    #                 validation_message: "EnclosedInStringProperty",
+    #                 value: ["EnclosedInStringProperty"],
+    #                 list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #                 is_optional: false,
+    #               },
+    #             ],
+    #             function_name: "EnclosedInStringProperty", # required
+    #             path: "EnclosedInStringProperty", # required
+    #             version: "EnclosedInStringProperty",
+    #           },
     #         },
     #       },
     #       execution_class: "FLEX", # accepts FLEX, STANDARD
@@ -15398,7 +15484,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

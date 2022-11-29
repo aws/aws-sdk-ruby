@@ -46,14 +46,22 @@ module Aws::LicenseManagerUserSubscriptions
     RegisterIdentityProviderRequest = Shapes::StructureShape.new(name: 'RegisterIdentityProviderRequest')
     RegisterIdentityProviderResponse = Shapes::StructureShape.new(name: 'RegisterIdentityProviderResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Settings = Shapes::StructureShape.new(name: 'Settings')
+    SettingsSubnetsList = Shapes::ListShape.new(name: 'SettingsSubnetsList')
     StartProductSubscriptionRequest = Shapes::StructureShape.new(name: 'StartProductSubscriptionRequest')
     StartProductSubscriptionResponse = Shapes::StructureShape.new(name: 'StartProductSubscriptionResponse')
     StopProductSubscriptionRequest = Shapes::StructureShape.new(name: 'StopProductSubscriptionRequest')
     StopProductSubscriptionResponse = Shapes::StructureShape.new(name: 'StopProductSubscriptionResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    Subnet = Shapes::StringShape.new(name: 'Subnet')
+    Subnets = Shapes::ListShape.new(name: 'Subnets')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UpdateIdentityProviderSettingsRequest = Shapes::StructureShape.new(name: 'UpdateIdentityProviderSettingsRequest')
+    UpdateIdentityProviderSettingsResponse = Shapes::StructureShape.new(name: 'UpdateIdentityProviderSettingsResponse')
+    UpdateSettings = Shapes::StructureShape.new(name: 'UpdateSettings')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -106,6 +114,7 @@ module Aws::LicenseManagerUserSubscriptions
     IdentityProviderSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     IdentityProviderSummary.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
     IdentityProviderSummary.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
+    IdentityProviderSummary.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, required: true, location_name: "Settings"))
     IdentityProviderSummary.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Status"))
     IdentityProviderSummary.struct_class = Types::IdentityProviderSummary
 
@@ -188,6 +197,7 @@ module Aws::LicenseManagerUserSubscriptions
 
     RegisterIdentityProviderRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
     RegisterIdentityProviderRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
+    RegisterIdentityProviderRequest.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "Settings"))
     RegisterIdentityProviderRequest.struct_class = Types::RegisterIdentityProviderRequest
 
     RegisterIdentityProviderResponse.add_member(:identity_provider_summary, Shapes::ShapeRef.new(shape: IdentityProviderSummary, required: true, location_name: "IdentityProviderSummary"))
@@ -198,6 +208,12 @@ module Aws::LicenseManagerUserSubscriptions
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    Settings.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroup, required: true, location_name: "SecurityGroupId"))
+    Settings.add_member(:subnets, Shapes::ShapeRef.new(shape: SettingsSubnetsList, required: true, location_name: "Subnets"))
+    Settings.struct_class = Types::Settings
+
+    SettingsSubnetsList.member = Shapes::ShapeRef.new(shape: Subnet)
 
     StartProductSubscriptionRequest.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     StartProductSubscriptionRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
@@ -219,8 +235,23 @@ module Aws::LicenseManagerUserSubscriptions
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
+    Subnets.member = Shapes::ShapeRef.new(shape: Subnet)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UpdateIdentityProviderSettingsRequest.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "IdentityProvider"))
+    UpdateIdentityProviderSettingsRequest.add_member(:product, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Product"))
+    UpdateIdentityProviderSettingsRequest.add_member(:update_settings, Shapes::ShapeRef.new(shape: UpdateSettings, required: true, location_name: "UpdateSettings"))
+    UpdateIdentityProviderSettingsRequest.struct_class = Types::UpdateIdentityProviderSettingsRequest
+
+    UpdateIdentityProviderSettingsResponse.add_member(:identity_provider_summary, Shapes::ShapeRef.new(shape: IdentityProviderSummary, required: true, location_name: "IdentityProviderSummary"))
+    UpdateIdentityProviderSettingsResponse.struct_class = Types::UpdateIdentityProviderSettingsResponse
+
+    UpdateSettings.add_member(:add_subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "AddSubnets"))
+    UpdateSettings.add_member(:remove_subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "RemoveSubnets"))
+    UpdateSettings.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroup, location_name: "SecurityGroupId"))
+    UpdateSettings.struct_class = Types::UpdateSettings
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -414,6 +445,18 @@ module Aws::LicenseManagerUserSubscriptions
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_identity_provider_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIdentityProviderSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/identity-provider/UpdateIdentityProviderSettings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIdentityProviderSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIdentityProviderSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
     end

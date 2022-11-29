@@ -278,6 +278,12 @@ module Aws::LicenseManagerUserSubscriptions
     #   The name of the user-based subscription product.
     #   @return [String]
     #
+    # @!attribute [rw] settings
+    #   An object that details the registered identity provider’s product
+    #   related configuration settings such as the subnets to provision VPC
+    #   endpoints.
+    #   @return [Types::Settings]
+    #
     # @!attribute [rw] status
     #   The status of an identity provider.
     #   @return [String]
@@ -288,6 +294,7 @@ module Aws::LicenseManagerUserSubscriptions
       :failure_message,
       :identity_provider,
       :product,
+      :settings,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -690,6 +697,10 @@ module Aws::LicenseManagerUserSubscriptions
     #           },
     #         },
     #         product: "String", # required
+    #         settings: {
+    #           security_group_id: "SecurityGroup", # required
+    #           subnets: ["Subnet"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] identity_provider
@@ -700,11 +711,17 @@ module Aws::LicenseManagerUserSubscriptions
     #   The name of the user-based subscription product.
     #   @return [String]
     #
+    # @!attribute [rw] settings
+    #   The registered identity provider’s product related configuration
+    #   settings such as the subnets to provision VPC endpoints.
+    #   @return [Types::Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/RegisterIdentityProviderRequest AWS API Documentation
     #
     class RegisterIdentityProviderRequest < Struct.new(
       :identity_provider,
-      :product)
+      :product,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -744,6 +761,39 @@ module Aws::LicenseManagerUserSubscriptions
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The registered identity provider’s product related configuration
+    # settings such as the subnets to provision VPC endpoints, and the
+    # security group ID that is associated with the VPC endpoints. The
+    # security group should permit inbound TCP port 1688 communication from
+    # resources in the VPC.
+    #
+    # @note When making an API call, you may pass Settings
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_id: "SecurityGroup", # required
+    #         subnets: ["Subnet"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_id
+    #   A security group ID that allows inbound TCP port 1688 communication
+    #   between resources in your VPC and the VPC endpoint for activation
+    #   servers.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   The subnets defined for the registered identity provider.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/Settings AWS API Documentation
+    #
+    class Settings < Struct.new(
+      :security_group_id,
+      :subnets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -864,6 +914,103 @@ module Aws::LicenseManagerUserSubscriptions
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateIdentityProviderSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_provider: { # required
+    #           active_directory_identity_provider: {
+    #             directory_id: "String",
+    #           },
+    #         },
+    #         product: "String", # required
+    #         update_settings: { # required
+    #           add_subnets: ["Subnet"], # required
+    #           remove_subnets: ["Subnet"], # required
+    #           security_group_id: "SecurityGroup",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_provider
+    #   Details about an identity provider.
+    #   @return [Types::IdentityProvider]
+    #
+    # @!attribute [rw] product
+    #   The name of the user-based subscription product.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_settings
+    #   Updates the registered identity provider’s product related
+    #   configuration settings. You can update any combination of settings
+    #   in a single operation such as the:
+    #
+    #   * Subnets which you want to add to provision VPC endpoints.
+    #
+    #   * Subnets which you want to remove the VPC endpoints from.
+    #
+    #   * Security group ID which permits traffic to the VPC endpoints.
+    #   @return [Types::UpdateSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/UpdateIdentityProviderSettingsRequest AWS API Documentation
+    #
+    class UpdateIdentityProviderSettingsRequest < Struct.new(
+      :identity_provider,
+      :product,
+      :update_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_provider_summary
+    #   Describes an identity provider.
+    #   @return [Types::IdentityProviderSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/UpdateIdentityProviderSettingsResponse AWS API Documentation
+    #
+    class UpdateIdentityProviderSettingsResponse < Struct.new(
+      :identity_provider_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the registered identity provider’s product related
+    # configuration settings such as the subnets to provision VPC endpoints.
+    #
+    # @note When making an API call, you may pass UpdateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         add_subnets: ["Subnet"], # required
+    #         remove_subnets: ["Subnet"], # required
+    #         security_group_id: "SecurityGroup",
+    #       }
+    #
+    # @!attribute [rw] add_subnets
+    #   The ID of one or more subnets in which License Manager will create a
+    #   VPC endpoint for products that require connectivity to activation
+    #   servers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_subnets
+    #   The ID of one or more subnets to remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_id
+    #   A security group ID that allows inbound TCP port 1688 communication
+    #   between resources in your VPC and the VPC endpoints for activation
+    #   servers.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/UpdateSettings AWS API Documentation
+    #
+    class UpdateSettings < Struct.new(
+      :add_subnets,
+      :remove_subnets,
+      :security_group_id)
       SENSITIVE = []
       include Aws::Structure
     end

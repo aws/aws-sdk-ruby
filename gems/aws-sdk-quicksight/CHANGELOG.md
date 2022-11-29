@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-11-29)
+------------------
+
+* Feature - This release adds new Describe APIs and updates Create and Update APIs to support the data model for Dashboards, Analyses, and Templates.
+
 1.71.0 (2022-11-18)
 ------------------
 

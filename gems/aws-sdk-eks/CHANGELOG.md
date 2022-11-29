@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2022-11-29)
+------------------
+
+* Feature - Adds support for additional EKS add-ons metadata and filtering fields
+
 1.79.0 (2022-11-16)
 ------------------
 

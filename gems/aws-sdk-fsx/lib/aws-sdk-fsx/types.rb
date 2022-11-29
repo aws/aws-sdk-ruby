@@ -112,6 +112,11 @@ module Aws::FSx
     #     ONTAP or Amazon FSx for OpenZFS volume initiated from the Amazon
     #     FSx console, API (`UpdateVolume`), or CLI (`update-volume`).
     #
+    #   * `VOLUME_RESTORE` - An Amazon FSx for OpenZFS volume is returned to
+    #     the state saved by the specified snapshot, initiated from an API
+    #     (`RestoreVolumeFromSnapshot`) or CLI
+    #     (`restore-volume-from-snapshot`).
+    #
     #   * `SNAPSHOT_UPDATE` - A snapshot update to an Amazon FSx for OpenZFS
     #     volume initiated from the Amazon FSx console, API
     #     (`UpdateSnapshot`), or CLI (`update-snapshot`).
@@ -1452,7 +1457,7 @@ module Aws::FSx
     #           copy_tags_to_backups: false,
     #           copy_tags_to_volumes: false,
     #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #           deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           disk_iops_configuration: {
@@ -2029,13 +2034,13 @@ module Aws::FSx
     #
     # @!attribute [rw] endpoint_ip_address_range
     #   (Multi-AZ only) Specifies the IP address range in which the
-    #   endpoints to access your file system will be created. By default,
-    #   Amazon FSx selects an unused IP address range for you from the
-    #   198.19.* range.
-    #
-    #   The Endpoint IP address range you select for your file system must
-    #   exist outside the VPC's CIDR range and must be at least /30 or
-    #   larger.
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API, Amazon FSx selects an unused IP address range
+    #   for you from the 198.19.* range. By default in the Amazon FSx
+    #   console, Amazon FSx chooses the last 64 IP addresses from the VPC’s
+    #   primary CIDR range to use as the endpoint IP address range for the
+    #   file system. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables.
     #   @return [String]
     #
     # @!attribute [rw] fsx_admin_password
@@ -2064,7 +2069,7 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   Sets the throughput capacity for the file system that you're
-    #   creating. Valid values are 128, 256, 512, 1024, and 2048 MBps.
+    #   creating. Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -2112,7 +2117,7 @@ module Aws::FSx
     #         copy_tags_to_backups: false,
     #         copy_tags_to_volumes: false,
     #         daily_automatic_backup_start_time: "DailyTime",
-    #         deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #         deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
     #         throughput_capacity: 1, # required
     #         weekly_maintenance_start_time: "WeeklyTime",
     #         disk_iops_configuration: {
@@ -2178,16 +2183,43 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   Specifies the file system deployment type. Amazon FSx for OpenZFS
-    #   supports `SINGLE_AZ_1`. `SINGLE_AZ_1` deployment type is configured
-    #   for redundancy within a single Availability Zone.
+    #   Specifies the file system deployment type. Single AZ deployment
+    #   types are configured for redundancy within a single Availability
+    #   Zone in an Amazon Web Services Region . Valid values are the
+    #   following:
+    #
+    #   * `SINGLE_AZ_1`- (Default) Creates file systems with throughput
+    #     capacities of 64 - 4,096 MB/s. `Single_AZ_1` is available in all
+    #     Amazon Web Services Regions where Amazon FSx for OpenZFS is
+    #     available, except US West (Oregon).
+    #
+    #   * `SINGLE_AZ_2`- Creates file systems with throughput capacities of
+    #     160 - 10,240 MB/s using an NVMe L2ARC cache. `Single_AZ_2` is
+    #     available only in the US East (N. Virginia), US East (Ohio), US
+    #     West (Oregon), and Europe (Ireland) Amazon Web Services Regions.
+    #
+    #   For more information, see: [Deployment type availability][1] and [
+    #   File system performance][2]in the*Amazon FSx for OpenZFS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/available-aws-regions.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/zfs-fs-performance.html
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
     #   Specifies the throughput of an Amazon FSx for OpenZFS file system,
-    #   measured in megabytes per second (MB/s). Valid values are 64, 128,
-    #   256, 512, 1024, 2048, 3072, or 4096 MB/s. You pay for additional
-    #   throughput capacity that you provision.
+    #   measured in megabytes per second (MB/s). Valid values depend on the
+    #   DeploymentType you choose, as follows:
+    #
+    #   * For `SINGLE_AZ_1`, valid values are 64, 128, 256, 512, 1024, 2048,
+    #     3072, or 4096 MB/s.
+    #
+    #   * For `SINGLE_AZ_2`, valid values are 160, 320, 640, 1280, 2560,
+    #     3840, 5120, 7680, or 10240 MB/s.
+    #
+    #   You pay for additional throughput capacity that you provision.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -2324,7 +2356,7 @@ module Aws::FSx
     #           copy_tags_to_backups: false,
     #           copy_tags_to_volumes: false,
     #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #           deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1, SINGLE_AZ_2
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #           disk_iops_configuration: {
@@ -2765,15 +2797,18 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         junction_path: "JunctionPath", # required
+    #         junction_path: "JunctionPath",
     #         security_style: "UNIX", # accepts UNIX, NTFS, MIXED
     #         size_in_megabytes: 1, # required
-    #         storage_efficiency_enabled: false, # required
+    #         storage_efficiency_enabled: false,
     #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
     #         tiering_policy: {
     #           cooling_period: 1,
     #           name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #         },
+    #         ontap_volume_type: "RW", # accepts RW, DP
+    #         snapshot_policy: "SnapshotPolicy",
+    #         copy_tags_to_backups: false,
     #       }
     #
     # @!attribute [rw] junction_path
@@ -2852,6 +2887,64 @@ module Aws::FSx
     #   ^
     #   @return [Types::TieringPolicy]
     #
+    # @!attribute [rw] ontap_volume_type
+    #   Specifies the type of volume you are creating. Valid values are the
+    #   following:
+    #
+    #   * `RW` specifies a read/write volume. `RW` is the default.
+    #
+    #   * `DP` specifies a data-protection volume. A `DP` volume is
+    #     read-only and can be used as the destination of a NetApp
+    #     SnapMirror relationship.
+    #
+    #   For more information, see [Volume types][1] in the *Amazon FSx for
+    #   NetApp ONTAP User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_policy
+    #   Specifies the snapshot policy for the volume. There are three
+    #   built-in snapshot policies:
+    #
+    #   * `default`\: This is the default policy. A maximum of six hourly
+    #     snapshots taken five minutes past the hour. A maximum of two daily
+    #     snapshots taken Monday through Saturday at 10 minutes after
+    #     midnight. A maximum of two weekly snapshots taken every Sunday at
+    #     15 minutes after midnight.
+    #
+    #   * `default-1weekly`\: This policy is the same as the `default`
+    #     policy except that it only retains one snapshot from the weekly
+    #     schedule.
+    #
+    #   * `none`\: This policy does not take any snapshots. This policy can
+    #     be assigned to volumes to prevent automatic snapshots from being
+    #     taken.
+    #
+    #   You can also provide the name of a custom policy that you created
+    #   with the ONTAP CLI or REST API.
+    #
+    #   For more information, see [Snapshot policies][1] in the *Amazon FSx
+    #   for NetApp ONTAP User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_backups
+    #   A boolean flag indicating whether tags for the volume should be
+    #   copied to backups. This value defaults to false. If it's set to
+    #   true, all tags for the volume are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the
+    #   volume, regardless of this value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
     #
     class CreateOntapVolumeConfiguration < Struct.new(
@@ -2860,7 +2953,10 @@ module Aws::FSx
       :size_in_megabytes,
       :storage_efficiency_enabled,
       :storage_virtual_machine_id,
-      :tiering_policy)
+      :tiering_policy,
+      :ontap_volume_type,
+      :snapshot_policy,
+      :copy_tags_to_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3294,15 +3390,18 @@ module Aws::FSx
     #         client_request_token: "ClientRequestToken",
     #         name: "VolumeName", # required
     #         ontap_configuration: {
-    #           junction_path: "JunctionPath", # required
+    #           junction_path: "JunctionPath",
     #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
     #           size_in_megabytes: 1, # required
-    #           storage_efficiency_enabled: false, # required
+    #           storage_efficiency_enabled: false,
     #           storage_virtual_machine_id: "StorageVirtualMachineId", # required
     #           tiering_policy: {
     #             cooling_period: 1,
     #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #           },
+    #           ontap_volume_type: "RW", # accepts RW, DP
+    #           snapshot_policy: "SnapshotPolicy",
+    #           copy_tags_to_backups: false,
     #         },
     #         tags: [
     #           {
@@ -3373,15 +3472,18 @@ module Aws::FSx
     #         volume_type: "ONTAP", # required, accepts ONTAP, OPENZFS
     #         name: "VolumeName", # required
     #         ontap_configuration: {
-    #           junction_path: "JunctionPath", # required
+    #           junction_path: "JunctionPath",
     #           security_style: "UNIX", # accepts UNIX, NTFS, MIXED
     #           size_in_megabytes: 1, # required
-    #           storage_efficiency_enabled: false, # required
+    #           storage_efficiency_enabled: false,
     #           storage_virtual_machine_id: "StorageVirtualMachineId", # required
     #           tiering_policy: {
     #             cooling_period: 1,
     #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #           },
+    #           ontap_volume_type: "RW", # accepts RW, DP
+    #           snapshot_policy: "SnapshotPolicy",
+    #           copy_tags_to_backups: false,
     #         },
     #         tags: [
     #           {
@@ -3541,7 +3643,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] failure_details
-    #   Provides detailed information about the data respository if its
+    #   Provides detailed information about the data repository if its
     #   `Lifecycle` is set to `MISCONFIGURED` or `FAILED`.
     #   @return [Types::DataRepositoryFailureDetails]
     #
@@ -3800,7 +3902,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] failure_details
-    #   Provides detailed information about the data respository if its
+    #   Provides detailed information about the data repository if its
     #   `Lifecycle` is set to `MISCONFIGURED` or `FAILED`.
     #   @return [Types::DataRepositoryFailureDetails]
     #
@@ -3817,7 +3919,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Provides detailed information about the data respository if its
+    # Provides detailed information about the data repository if its
     # `Lifecycle` is set to `MISCONFIGURED` or `FAILED`.
     #
     # @!attribute [rw] message
@@ -7196,6 +7298,46 @@ module Aws::FSx
     #     additional read-only access to clients.
     #   @return [String]
     #
+    # @!attribute [rw] snapshot_policy
+    #   Specifies the snapshot policy for the volume. There are three
+    #   built-in snapshot policies:
+    #
+    #   * `default`\: This is the default policy. A maximum of six hourly
+    #     snapshots taken five minutes past the hour. A maximum of two daily
+    #     snapshots taken Monday through Saturday at 10 minutes after
+    #     midnight. A maximum of two weekly snapshots taken every Sunday at
+    #     15 minutes after midnight.
+    #
+    #   * `default-1weekly`\: This policy is the same as the `default`
+    #     policy except that it only retains one snapshot from the weekly
+    #     schedule.
+    #
+    #   * `none`\: This policy does not take any snapshots. This policy can
+    #     be assigned to volumes to prevent automatic snapshots from being
+    #     taken.
+    #
+    #   You can also provide the name of a custom policy that you created
+    #   with the ONTAP CLI or REST API.
+    #
+    #   For more information, see [Snapshot policies][1] in the *Amazon FSx
+    #   for NetApp ONTAP User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_backups
+    #   A boolean flag indicating whether tags for the volume should be
+    #   copied to backups. This value defaults to false. If it's set to
+    #   true, all tags for the volume are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the
+    #   volume, regardless of this value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapVolumeConfiguration AWS API Documentation
     #
     class OntapVolumeConfiguration < Struct.new(
@@ -7208,7 +7350,9 @@ module Aws::FSx
       :storage_virtual_machine_root,
       :tiering_policy,
       :uuid,
-      :ontap_volume_type)
+      :ontap_volume_type,
+      :snapshot_policy,
+      :copy_tags_to_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7397,14 +7541,12 @@ module Aws::FSx
     #
     # @!attribute [rw] deployment_type
     #   Specifies the file-system deployment type. Amazon FSx for OpenZFS
-    #   supports `SINGLE_AZ_1`. `SINGLE_AZ_1` is a file system configured
-    #   for a single Availability Zone (AZ) of redundancy.
+    #   supports  `SINGLE_AZ_1` and `SINGLE_AZ_2`.
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
-    #   3072, or 4096 MB/s.
+    #   per second (MBps).
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7630,6 +7772,22 @@ module Aws::FSx
     #   volume.
     #   @return [Array<Types::OpenZFSUserOrGroupQuota>]
     #
+    # @!attribute [rw] restore_to_snapshot
+    #   Specifies the ID of the snapshot to which the volume was restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_intermediate_snaphots
+    #   A Boolean value indicating whether snapshots between the current
+    #   state and the specified snapshot should be deleted when a volume is
+    #   restored from snapshot.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_cloned_volumes
+    #   A Boolean value indicating whether dependent clone volumes created
+    #   from intermediate snapshots should be deleted when a volume is
+    #   restored from snapshot.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSVolumeConfiguration AWS API Documentation
     #
     class OpenZFSVolumeConfiguration < Struct.new(
@@ -7643,7 +7801,10 @@ module Aws::FSx
       :origin_snapshot,
       :read_only,
       :nfs_exports,
-      :user_and_group_quotas)
+      :user_and_group_quotas,
+      :restore_to_snapshot,
+      :delete_intermediate_snaphots,
+      :delete_cloned_volumes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7793,11 +7954,18 @@ module Aws::FSx
     #   The lifecycle state of the volume being restored.
     #   @return [String]
     #
+    # @!attribute [rw] administrative_actions
+    #   A list of administrative actions for the file system that are in
+    #   process or waiting to be processed. Administrative actions describe
+    #   changes to the Amazon FSx system.
+    #   @return [Array<Types::AdministrativeAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RestoreVolumeFromSnapshotResponse AWS API Documentation
     #
     class RestoreVolumeFromSnapshotResponse < Struct.new(
       :volume_id,
-      :lifecycle)
+      :lifecycle,
+      :administrative_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8235,10 +8403,6 @@ module Aws::FSx
     #   The SVM's system generated unique ID.
     #   @return [String]
     #
-    # @!attribute [rw] subtype
-    #   Describes the SVM's subtype.
-    #   @return [String]
-    #
     # @!attribute [rw] uuid
     #   The SVM's UUID (universally unique identifier).
     #   @return [String]
@@ -8266,7 +8430,6 @@ module Aws::FSx
       :name,
       :resource_arn,
       :storage_virtual_machine_id,
-      :subtype,
       :uuid,
       :tags,
       :lifecycle_transition_reason,
@@ -8889,6 +9052,8 @@ module Aws::FSx
     #           iops: 1,
     #         },
     #         throughput_capacity: 1,
+    #         add_route_table_ids: ["RouteTableId"],
+    #         remove_route_table_ids: ["RouteTableId"],
     #       }
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -8936,8 +9101,21 @@ module Aws::FSx
     # @!attribute [rw] throughput_capacity
     #   Specifies the throughput of an FSx for NetApp ONTAP file system,
     #   measured in megabytes per second (MBps). Valid values are 128, 256,
-    #   512, 1024, or 2048 MB/s.
+    #   512, 1024, 2048, and 4096 MBps.
     #   @return [Integer]
+    #
+    # @!attribute [rw] add_route_table_ids
+    #   (Multi-AZ only) A list of IDs of new virtual private cloud (VPC)
+    #   route tables to associate (add) with your Amazon FSx for NetApp
+    #   ONTAP file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_route_table_ids
+    #   (Multi-AZ only) A list of IDs of existing virtual private cloud
+    #   (VPC) route tables to disassociate (remove) from your Amazon FSx for
+    #   NetApp ONTAP file system. You can use the API operation to retrieve
+    #   the list of VPC route table IDs for a file system.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
@@ -8947,7 +9125,9 @@ module Aws::FSx
       :fsx_admin_password,
       :weekly_maintenance_start_time,
       :disk_iops_configuration,
-      :throughput_capacity)
+      :throughput_capacity,
+      :add_route_table_ids,
+      :remove_route_table_ids)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -9004,9 +9184,15 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
-    #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
-    #   3072, or 4096 MB/s.
+    #   The throughput of an Amazon FSx for OpenZFS file system, measured in
+    #   megabytes per second  (MB/s). Valid values depend on the
+    #   DeploymentType you choose, as follows:
+    #
+    #   * For `SINGLE_AZ_1`, valid values are 64, 128, 256, 512, 1024, 2048,
+    #     3072, or 4096 MB/s.
+    #
+    #   * For `SINGLE_AZ_2`, valid values are 160, 320, 640, 1280, 2560,
+    #     3840, 5120, 7680, or 10240 MB/s.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -9099,6 +9285,8 @@ module Aws::FSx
     #             iops: 1,
     #           },
     #           throughput_capacity: 1,
+    #           add_route_table_ids: ["RouteTableId"],
+    #           remove_route_table_ids: ["RouteTableId"],
     #         },
     #         open_zfs_configuration: {
     #           automatic_backup_retention_days: 1,
@@ -9324,6 +9512,8 @@ module Aws::FSx
     #           cooling_period: 1,
     #           name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #         },
+    #         snapshot_policy: "SnapshotPolicy",
+    #         copy_tags_to_backups: false,
     #       }
     #
     # @!attribute [rw] junction_path
@@ -9351,6 +9541,46 @@ module Aws::FSx
     #   Update the volume's data tiering policy.
     #   @return [Types::TieringPolicy]
     #
+    # @!attribute [rw] snapshot_policy
+    #   Specifies the snapshot policy for the volume. There are three
+    #   built-in snapshot policies:
+    #
+    #   * `default`\: This is the default policy. A maximum of six hourly
+    #     snapshots taken five minutes past the hour. A maximum of two daily
+    #     snapshots taken Monday through Saturday at 10 minutes after
+    #     midnight. A maximum of two weekly snapshots taken every Sunday at
+    #     15 minutes after midnight.
+    #
+    #   * `default-1weekly`\: This policy is the same as the `default`
+    #     policy except that it only retains one snapshot from the weekly
+    #     schedule.
+    #
+    #   * `none`\: This policy does not take any snapshots. This policy can
+    #     be assigned to volumes to prevent automatic snapshots from being
+    #     taken.
+    #
+    #   You can also provide the name of a custom policy that you created
+    #   with the ONTAP CLI or REST API.
+    #
+    #   For more information, see [Snapshot policies][1] in the *Amazon FSx
+    #   for NetApp ONTAP User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_backups
+    #   A boolean flag indicating whether tags for the volume should be
+    #   copied to backups. This value defaults to false. If it's set to
+    #   true, all tags for the volume are copied to all automatic and
+    #   user-initiated backups where the user doesn't specify tags. If this
+    #   value is true, and you specify one or more tags, only the specified
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the
+    #   volume, regardless of this value.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateOntapVolumeConfiguration AWS API Documentation
     #
     class UpdateOntapVolumeConfiguration < Struct.new(
@@ -9358,7 +9588,9 @@ module Aws::FSx
       :security_style,
       :size_in_megabytes,
       :storage_efficiency_enabled,
-      :tiering_policy)
+      :tiering_policy,
+      :snapshot_policy,
+      :copy_tags_to_backups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9627,6 +9859,8 @@ module Aws::FSx
     #             cooling_period: 1,
     #             name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #           },
+    #           snapshot_policy: "SnapshotPolicy",
+    #           copy_tags_to_backups: false,
     #         },
     #         name: "VolumeName",
     #         open_zfs_configuration: {
@@ -9777,9 +10011,10 @@ module Aws::FSx
     #   @return [Types::LifecycleTransitionReason]
     #
     # @!attribute [rw] administrative_actions
-    #   A list of administrative actions for the file system that are in
-    #   process or waiting to be processed. Administrative actions describe
-    #   changes to the Amazon FSx system that you initiated.
+    #   A list of administrative actions for the volume that are in process
+    #   or waiting to be processed. Administrative actions describe changes
+    #   to the volume that you have initiated using the `UpdateVolume`
+    #   action.
     #   @return [Array<Types::AdministrativeAction>]
     #
     # @!attribute [rw] open_zfs_configuration

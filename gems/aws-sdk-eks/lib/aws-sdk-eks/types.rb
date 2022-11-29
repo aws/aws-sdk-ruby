@@ -81,6 +81,19 @@ module Aws::EKS
     #   other resources associated with the cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] publisher
+    #   The publisher of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_information
+    #   Information about an Amazon EKS add-on from the Amazon Web Services
+    #   Marketplace.
+    #   @return [Types::MarketplaceInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Addon AWS API Documentation
     #
     class Addon < Struct.new(
@@ -93,7 +106,10 @@ module Aws::EKS
       :created_at,
       :modified_at,
       :service_account_role_arn,
-      :tags)
+      :tags,
+      :publisher,
+      :owner,
+      :marketplace_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -127,12 +143,28 @@ module Aws::EKS
     #   and compatible Kubernetes versions.
     #   @return [Array<Types::AddonVersionInfo>]
     #
+    # @!attribute [rw] publisher
+    #   The publisher of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_information
+    #   Information about the add-on from the Amazon Web Services
+    #   Marketplace.
+    #   @return [Types::MarketplaceInformation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonInfo AWS API Documentation
     #
     class AddonInfo < Struct.new(
       :addon_name,
       :type,
-      :addon_versions)
+      :addon_versions,
+      :publisher,
+      :owner,
+      :marketplace_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -176,12 +208,17 @@ module Aws::EKS
     #   An object representing the compatibilities of a version.
     #   @return [Array<Types::Compatibility>]
     #
+    # @!attribute [rw] requires_configuration
+    #   Whether the add-on requires configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonVersionInfo AWS API Documentation
     #
     class AddonVersionInfo < Struct.new(
       :addon_version,
       :architecture,
-      :compatibilities)
+      :compatibilities,
+      :requires_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -661,10 +698,10 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # The placement configuration for all the control plane instance of your
-    # local Amazon EKS cluster on an Amazon Web Services Outpost. For more
-    # information, see [Capacity considerations][1] in the *Amazon EKS User
-    # Guide*
+    # The placement configuration for all the control plane instances of
+    # your local Amazon EKS cluster on an Amazon Web Services Outpost. For
+    # more information, see [Capacity considerations][1] in the *Amazon EKS
+    # User Guide*
     #
     #
     #
@@ -690,10 +727,10 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # The placement configuration for all the control plane instance of your
-    # local Amazon EKS cluster on an Amazon Web Services Outpost. For more
-    # information, see [Capacity considerations][1] in the *Amazon EKS User
-    # Guide*.
+    # The placement configuration for all the control plane instances of
+    # your local Amazon EKS cluster on an Amazon Web Services Outpost. For
+    # more information, see [Capacity considerations][1] in the *Amazon EKS
+    # User Guide*.
     #
     #
     #
@@ -1410,7 +1447,7 @@ module Aws::EKS
     # @!attribute [rw] preserve
     #   Specifying this option preserves the add-on software on your cluster
     #   but Amazon EKS stops managing any settings for the add-on. If an IAM
-    #   account is associated with the add-on, it is not removed.
+    #   account is associated with the add-on, it isn't removed.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddonRequest AWS API Documentation
@@ -1633,10 +1670,13 @@ module Aws::EKS
     #         max_results: 1,
     #         next_token: "String",
     #         addon_name: "String",
+    #         types: ["String"],
+    #         publishers: ["String"],
+    #         owners: ["String"],
     #       }
     #
     # @!attribute [rw] kubernetes_version
-    #   The Kubernetes versions that the add-on can be used with.
+    #   The Kubernetes versions that you can use the add-on with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1666,20 +1706,38 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The type of the add-on. For valid `types`, don't specify a value
+    #   for this property.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publishers
+    #   The publisher of the add-on. For valid `publishers`, don't specify
+    #   a value for this property.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] owners
+    #   The owner of the add-on. For valid `owners`, don't specify a value
+    #   for this property.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonVersionsRequest AWS API Documentation
     #
     class DescribeAddonVersionsRequest < Struct.new(
       :kubernetes_version,
       :max_results,
       :next_token,
-      :addon_name)
+      :addon_name,
+      :types,
+      :publishers,
+      :owners)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] addons
-    #   The list of available versions with Kubernetes version
-    #   compatibility.
+    #   The list of available versions with Kubernetes version compatibility
+    #   and other properties.
     #   @return [Array<Types::AddonInfo>]
     #
     # @!attribute [rw] next_token
@@ -2366,13 +2424,13 @@ module Aws::EKS
     #   Don't specify a value if you select `ipv6` for **ipFamily**. The
     #   CIDR block to assign Kubernetes service IP addresses from. If you
     #   don't specify a block, Kubernetes assigns addresses from either the
-    #   10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you
-    #   specify a block that does not overlap with resources in other
+    #   `10.100.0.0/16` or `172.20.0.0/16` CIDR blocks. We recommend that
+    #   you specify a block that does not overlap with resources in other
     #   networks that are peered or connected to your VPC. The block must
     #   meet the following requirements:
     #
-    #   * Within one of the following private IP address blocks: 10.0.0.0/8,
-    #     172.16.0.0/12, or 192.168.0.0/16.
+    #   * Within one of the following private IP address blocks:
+    #     `10.0.0.0/8`, `172.16.0.0/12`, or `192.168.0.0/16`.
     #
     #   * Doesn't overlap with any CIDR block assigned to the VPC that you
     #     selected for VPC.
@@ -2389,17 +2447,17 @@ module Aws::EKS
     #   default. You can only specify an IP family when you create a cluster
     #   and can't change this value once the cluster is created. If you
     #   specify `ipv6`, the VPC and subnets that you specify for cluster
-    #   creation must have both IPv4 and IPv6 CIDR blocks assigned to them.
-    #   You can't specify `ipv6` for clusters in China Regions.
+    #   creation must have both `IPv4` and `IPv6` CIDR blocks assigned to
+    #   them. You can't specify `ipv6` for clusters in China Regions.
     #
-    #   You can only specify `ipv6` for 1.21 and later clusters that use
-    #   version 1.10.1 or later of the Amazon VPC CNI add-on. If you specify
-    #   `ipv6`, then ensure that your VPC meets the requirements listed in
-    #   the considerations listed in [Assigning IPv6 addresses to pods and
-    #   services][1] in the Amazon EKS User Guide. Kubernetes assigns
-    #   services IPv6 addresses from the unique local address range
-    #   (fc00::/7). You can't specify a custom IPv6 CIDR block. Pod
-    #   addresses are assigned from the subnet's IPv6 CIDR.
+    #   You can only specify `ipv6` for `1.21` and later clusters that use
+    #   version `1.10.1` or later of the Amazon VPC CNI add-on. If you
+    #   specify `ipv6`, then ensure that your VPC meets the requirements
+    #   listed in the considerations listed in [Assigning IPv6 addresses to
+    #   pods and services][1] in the Amazon EKS User Guide. Kubernetes
+    #   assigns services `IPv6` addresses from the unique local address
+    #   range `(fc00::/7)`. You can't specify a custom `IPv6` CIDR block.
+    #   Pod addresses are assigned from the subnet's `IPv6` CIDR.
     #
     #
     #
@@ -3022,6 +3080,26 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Information about an Amazon EKS add-on from the Amazon Web Services
+    # Marketplace.
+    #
+    # @!attribute [rw] product_id
+    #   The product ID from the Amazon Web Services Marketplace.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_url
+    #   The product URL from the Amazon Web Services Marketplace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/MarketplaceInformation AWS API Documentation
+    #
+    class MarketplaceInformation < Struct.new(
+      :product_id,
+      :product_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon EKS managed node group.
     #
     # @!attribute [rw] nodegroup_name
@@ -3583,8 +3661,8 @@ module Aws::EKS
     #
     # @!attribute [rw] control_plane_placement
     #   An object representing the placement configuration for all the
-    #   control plane instance of your local Amazon EKS cluster on an Amazon
-    #   Web Services Outpost. For more information, see [Capacity
+    #   control plane instances of your local Amazon EKS cluster on an
+    #   Amazon Web Services Outpost. For more information, see [Capacity
     #   considerations][1] in the *Amazon EKS User Guide*.
     #
     #
@@ -3618,8 +3696,8 @@ module Aws::EKS
     #
     # @!attribute [rw] control_plane_placement
     #   An object representing the placement configuration for all the
-    #   control plane instance of your local Amazon EKS cluster on an Amazon
-    #   Web Services Outpost. For more information, see [Capacity
+    #   control plane instances of your local Amazon EKS cluster on an
+    #   Amazon Web Services Outpost. For more information, see [Capacity
     #   considerations][1] in the *Amazon EKS User Guide*.
     #
     #
@@ -4618,7 +4696,7 @@ module Aws::EKS
     #   @return [Array<Types::Taint>]
     #
     # @!attribute [rw] remove_taints
-    #   Kubernetes taints to be removed.
+    #   Kubernetes taints to remove.
     #   @return [Array<Types::Taint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateTaintsPayload AWS API Documentation

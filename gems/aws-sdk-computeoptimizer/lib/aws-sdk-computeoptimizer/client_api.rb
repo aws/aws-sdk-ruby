@@ -73,6 +73,8 @@ module Aws::ComputeOptimizer
     ExportableLambdaFunctionFields = Shapes::ListShape.new(name: 'ExportableLambdaFunctionFields')
     ExportableVolumeField = Shapes::StringShape.new(name: 'ExportableVolumeField')
     ExportableVolumeFields = Shapes::ListShape.new(name: 'ExportableVolumeFields')
+    ExternalMetricsPreference = Shapes::StructureShape.new(name: 'ExternalMetricsPreference')
+    ExternalMetricsSource = Shapes::StringShape.new(name: 'ExternalMetricsSource')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -327,6 +329,7 @@ module Aws::ComputeOptimizer
     EffectiveRecommendationPreferences.add_member(:cpu_vendor_architectures, Shapes::ShapeRef.new(shape: CpuVendorArchitectures, location_name: "cpuVendorArchitectures"))
     EffectiveRecommendationPreferences.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     EffectiveRecommendationPreferences.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
+    EffectiveRecommendationPreferences.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
     EffectiveRecommendationPreferences.struct_class = Types::EffectiveRecommendationPreferences
 
     EnrollmentFilter.add_member(:name, Shapes::ShapeRef.new(shape: EnrollmentFilterName, location_name: "name"))
@@ -400,6 +403,9 @@ module Aws::ComputeOptimizer
 
     ExportableVolumeFields.member = Shapes::ShapeRef.new(shape: ExportableVolumeField)
 
+    ExternalMetricsPreference.add_member(:source, Shapes::ShapeRef.new(shape: ExternalMetricsSource, location_name: "source"))
+    ExternalMetricsPreference.struct_class = Types::ExternalMetricsPreference
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
     Filter.struct_class = Types::Filter
@@ -463,6 +469,7 @@ module Aws::ComputeOptimizer
     GetEffectiveRecommendationPreferencesRequest.struct_class = Types::GetEffectiveRecommendationPreferencesRequest
 
     GetEffectiveRecommendationPreferencesResponse.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
+    GetEffectiveRecommendationPreferencesResponse.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
     GetEffectiveRecommendationPreferencesResponse.struct_class = Types::GetEffectiveRecommendationPreferencesResponse
 
     GetEnrollmentStatusRequest.struct_class = Types::GetEnrollmentStatusRequest
@@ -639,6 +646,7 @@ module Aws::ComputeOptimizer
     PutRecommendationPreferencesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     PutRecommendationPreferencesRequest.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     PutRecommendationPreferencesRequest.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
+    PutRecommendationPreferencesRequest.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
     PutRecommendationPreferencesRequest.struct_class = Types::PutRecommendationPreferencesRequest
 
     PutRecommendationPreferencesResponse.struct_class = Types::PutRecommendationPreferencesResponse
@@ -671,6 +679,7 @@ module Aws::ComputeOptimizer
     RecommendationPreferencesDetail.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     RecommendationPreferencesDetail.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
     RecommendationPreferencesDetail.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
+    RecommendationPreferencesDetail.add_member(:external_metrics_preference, Shapes::ShapeRef.new(shape: ExternalMetricsPreference, location_name: "externalMetricsPreference"))
     RecommendationPreferencesDetail.struct_class = Types::RecommendationPreferencesDetail
 
     RecommendationPreferencesDetails.member = Shapes::ShapeRef.new(shape: RecommendationPreferencesDetail)

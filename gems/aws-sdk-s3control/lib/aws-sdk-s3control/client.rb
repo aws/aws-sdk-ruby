@@ -3163,6 +3163,63 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns the routing configuration for a Multi-Region Access Point,
+    # indicating which Regions are active or passive.
+    #
+    # To obtain routing control changes and failover requests, use the
+    # Amazon S3 failover control infrastructure endpoints in these five
+    # Amazon Web Services Regions:
+    #
+    # * `us-east-1`
+    #
+    # * `us-west-2`
+    #
+    # * `ap-southeast-2`
+    #
+    # * `ap-northeast-1`
+    #
+    # * `eu-west-1`
+    #
+    # <note markdown="1"> Your Amazon S3 bucket does not need to be in these five Regions.
+    #
+    #  </note>
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :mrap
+    #   The Multi-Region Access Point ARN.
+    #
+    # @return [Types::GetMultiRegionAccessPointRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMultiRegionAccessPointRoutesResult#mrap #mrap} => String
+    #   * {Types::GetMultiRegionAccessPointRoutesResult#routes #routes} => Array&lt;Types::MultiRegionAccessPointRoute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_multi_region_access_point_routes({
+    #     account_id: "AccountId",
+    #     mrap: "MultiRegionAccessPointId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mrap #=> String
+    #   resp.routes #=> Array
+    #   resp.routes[0].bucket #=> String
+    #   resp.routes[0].region #=> String
+    #   resp.routes[0].traffic_dial_percentage #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetMultiRegionAccessPointRoutes AWS API Documentation
+    #
+    # @overload get_multi_region_access_point_routes(params = {})
+    # @param [Hash] params ({})
+    def get_multi_region_access_point_routes(params = {}, options = {})
+      req = build_request(:get_multi_region_access_point_routes, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
     # Services account. For more information, see [ Using Amazon S3 block
     # public access][1].
@@ -4820,6 +4877,80 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Submits an updated route configuration for a Multi-Region Access
+    # Point. This API operation updates the routing status for the specified
+    # Regions from active to passive, or from passive to active. A value of
+    # `0` indicates a passive status, which means that traffic won't be
+    # routed to the specified Region. A value of `100` indicates an active
+    # status, which means that traffic will be routed to the specified
+    # Region. At least one Region must be active at all times.
+    #
+    # When the routing configuration is changed, any in-progress operations
+    # (uploads, copies, deletes, and so on) to formerly active Regions will
+    # continue to run to their final completion state (success or failure).
+    # The routing configurations of any Regions that aren’t specified remain
+    # unchanged.
+    #
+    # <note markdown="1"> Updated routing configurations might not be immediately applied. It
+    # can take up to 2 minutes for your changes to take effect.
+    #
+    #  </note>
+    #
+    # To submit routing control changes and failover requests, use the
+    # Amazon S3 failover control infrastructure endpoints in these five
+    # Amazon Web Services Regions:
+    #
+    # * `us-east-1`
+    #
+    # * `us-west-2`
+    #
+    # * `ap-southeast-2`
+    #
+    # * `ap-northeast-1`
+    #
+    # * `eu-west-1`
+    #
+    # <note markdown="1"> Your Amazon S3 bucket does not need to be in these five Regions.
+    #
+    #  </note>
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID for the owner of the Multi-Region
+    #   Access Point.
+    #
+    # @option params [required, String] :mrap
+    #   The Multi-Region Access Point ARN.
+    #
+    # @option params [required, Array<Types::MultiRegionAccessPointRoute>] :route_updates
+    #   The different routes that make up the new route configuration. Active
+    #   routes return a value of `100`, and passive routes return a value of
+    #   `0`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_multi_region_access_point_routes({
+    #     account_id: "AccountId",
+    #     mrap: "MultiRegionAccessPointId", # required
+    #     route_updates: [ # required
+    #       {
+    #         bucket: "BucketName",
+    #         region: "RegionName",
+    #         traffic_dial_percentage: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SubmitMultiRegionAccessPointRoutes AWS API Documentation
+    #
+    # @overload submit_multi_region_access_point_routes(params = {})
+    # @param [Hash] params ({})
+    def submit_multi_region_access_point_routes(params = {}, options = {})
+      req = build_request(:submit_multi_region_access_point_routes, params)
+      req.send_request(options)
+    end
+
     # Updates an existing S3 Batch Operations job's priority. For more
     # information, see [S3 Batch Operations][1] in the *Amazon S3 User
     # Guide*.
@@ -4963,7 +5094,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

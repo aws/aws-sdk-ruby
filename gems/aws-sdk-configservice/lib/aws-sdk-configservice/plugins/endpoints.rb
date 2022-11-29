@@ -176,6 +176,8 @@ module Aws::ConfigService
             Aws::ConfigService::Endpoints::GetOrganizationCustomRulePolicy.build(context)
           when :get_resource_config_history
             Aws::ConfigService::Endpoints::GetResourceConfigHistory.build(context)
+          when :get_resource_evaluation_summary
+            Aws::ConfigService::Endpoints::GetResourceEvaluationSummary.build(context)
           when :get_stored_query
             Aws::ConfigService::Endpoints::GetStoredQuery.build(context)
           when :list_aggregate_discovered_resources
@@ -184,6 +186,8 @@ module Aws::ConfigService
             Aws::ConfigService::Endpoints::ListConformancePackComplianceScores.build(context)
           when :list_discovered_resources
             Aws::ConfigService::Endpoints::ListDiscoveredResources.build(context)
+          when :list_resource_evaluations
+            Aws::ConfigService::Endpoints::ListResourceEvaluations.build(context)
           when :list_stored_queries
             Aws::ConfigService::Endpoints::ListStoredQueries.build(context)
           when :list_tags_for_resource
@@ -228,6 +232,8 @@ module Aws::ConfigService
             Aws::ConfigService::Endpoints::StartConfigurationRecorder.build(context)
           when :start_remediation_execution
             Aws::ConfigService::Endpoints::StartRemediationExecution.build(context)
+          when :start_resource_evaluation
+            Aws::ConfigService::Endpoints::StartResourceEvaluation.build(context)
           when :stop_configuration_recorder
             Aws::ConfigService::Endpoints::StopConfigurationRecorder.build(context)
           when :tag_resource

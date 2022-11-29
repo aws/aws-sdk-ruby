@@ -5402,6 +5402,8 @@ module Aws::SecurityHub
     #   resp.standards[0].name #=> String
     #   resp.standards[0].description #=> String
     #   resp.standards[0].enabled_by_default #=> Boolean
+    #   resp.standards[0].standards_managed_by.company #=> String
+    #   resp.standards[0].standards_managed_by.product #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandards AWS API Documentation
@@ -11142,7 +11144,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

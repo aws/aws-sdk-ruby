@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-11-29)
+------------------
+
+* Feature - Adding StandardsManagedBy field to DescribeStandards API response
+
 1.72.0 (2022-11-17)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-11-29)
+------------------
+
+* Feature - Added support for configuring Macie to continually sample objects from S3 buckets and inspect them for sensitive data. Results appear in statistics, findings, and other data that Macie provides.
+
 1.48.0 (2022-10-25)
 ------------------
 

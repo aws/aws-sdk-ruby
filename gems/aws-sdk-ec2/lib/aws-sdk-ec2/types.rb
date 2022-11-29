@@ -289,7 +289,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] associations
-    #   Describes the multicast domain associations.
+    #   Information about the multicast domain associations.
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptTransitGatewayMulticastDomainAssociationsResult AWS API Documentation
@@ -432,7 +432,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #         vpc_peering_connection_id: "VpcPeeringConnectionIdWithResolver",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -2936,6 +2936,12 @@ module Aws::EC2
     #         instance_id: "InstanceId", # required
     #         network_interface_id: "NetworkInterfaceId", # required
     #         network_card_index: 1,
+    #         ena_srd_specification: {
+    #           ena_srd_enabled: false,
+    #           ena_srd_udp_specification: {
+    #             ena_srd_udp_enabled: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] device_index
@@ -2963,6 +2969,11 @@ module Aws::EC2
     #   network card index 0. The default is network card index 0.
     #   @return [Integer]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Configures ENA Express for the network interface that this action
+    #   attaches to the instance.
+    #   @return [Types::EnaSrdSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceRequest AWS API Documentation
     #
     class AttachNetworkInterfaceRequest < Struct.new(
@@ -2970,7 +2981,8 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :network_interface_id,
-      :network_card_index)
+      :network_card_index,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3081,6 +3093,43 @@ module Aws::EC2
     #
     class AttachVpnGatewayResult < Struct.new(
       :vpc_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the ENA Express configuration for the network interface
+    # that's attached to the instance.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Indicates whether ENA Express is enabled for the network interface
+    #   that's attached to the instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   ENA Express configuration for UDP network traffic.
+    #   @return [Types::AttachmentEnaSrdUdpSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachmentEnaSrdSpecification AWS API Documentation
+    #
+    class AttachmentEnaSrdSpecification < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the ENA Express configuration for UDP traffic on the network
+    # interface that's attached to the instance.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachmentEnaSrdUdpSpecification AWS API Documentation
+    #
+    class AttachmentEnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7793,7 +7842,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] coip_pool
-    #   Describes a customer-owned address pool.
+    #   Information about the CoIP address pool.
     #   @return [Types::CoipPool]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCoipPoolResult AWS API Documentation
@@ -10322,7 +10371,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] local_gateway_route_table
-    #   Describes a local gateway route table.
+    #   Information about the local gateway route table.
     #   @return [Types::LocalGatewayRouteTable]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteTableResult AWS API Documentation
@@ -10386,8 +10435,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] local_gateway_route_table_virtual_interface_group_association
-    #   Describes an association between a local gateway route table and a
-    #   virtual interface group.
+    #   Information about the local gateway route table virtual interface
+    #   group association.
     #   @return [Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult AWS API Documentation
@@ -15123,6 +15172,118 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # A query used for retrieving network health data.
+    #
+    # @note When making an API call, you may pass DataQuery
+    #   data as a hash:
+    #
+    #       {
+    #         id: "String",
+    #         source: "String",
+    #         destination: "String",
+    #         metric: "aggregate-latency", # accepts aggregate-latency
+    #         statistic: "p50", # accepts p50
+    #         period: "five-minutes", # accepts five-minutes, fifteen-minutes, one-hour, three-hours, one-day, one-week
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A user-defined ID associated with a data query that's returned in
+    #   the `dataResponse` identifying the query. For example, if you set
+    #   the Id to `MyQuery01`in the query, the `dataResponse` identifies the
+    #   query as `MyQuery01`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Region or Availability Zone that's the source for the data
+    #   query. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The Region or Availability Zone that's the target for the data
+    #   query. For example, `eu-north-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The aggregation metric used for the data query. Currently only
+    #   `aggregation-latency` is supported, indicating network latency.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   Metric data aggregations over specified periods of time. The
+    #   following are the supported Infrastructure Performance statistics:
+    #
+    #   * `p50` - The median value of the metric aggregated over a specified
+    #     start and end time. For example, a metric of `five_minutes` is the
+    #     median of all the data points gathered within those five minutes.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The aggregation period used for the data query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DataQuery AWS API Documentation
+    #
+    class DataQuery < Struct.new(
+      :id,
+      :source,
+      :destination,
+      :metric,
+      :statistic,
+      :period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response to a `DataQuery`.
+    #
+    # @!attribute [rw] id
+    #   The ID passed in the `DataQuery`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Region or Availability Zone that's the source for the data
+    #   query. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The Region or Availability Zone that's the destination for the data
+    #   query. For example, `eu-west-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The metric used for the network performance request. Currently only
+    #   `aggregate-latency` is supported, showing network latency during a
+    #   specified period.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic used for the network performance request.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period used for the network performance request.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_points
+    #   A list of `MetricPoint` objects.
+    #   @return [Array<Types::MetricPoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DataResponse AWS API Documentation
+    #
+    class DataResponse < Struct.new(
+      :id,
+      :source,
+      :destination,
+      :metric,
+      :statistic,
+      :period,
+      :metric_points)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCarrierGatewayRequest
     #   data as a hash:
     #
@@ -15332,7 +15493,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] coip_pool
-    #   Describes a customer-owned address pool.
+    #   Information about the CoIP address pool.
     #   @return [Types::CoipPool]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCoipPoolResult AWS API Documentation
@@ -16150,7 +16311,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] local_gateway_route_table
-    #   Describes a local gateway route table.
+    #   Information about the local gateway route table.
     #   @return [Types::LocalGatewayRouteTable]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRouteTableResult AWS API Documentation
@@ -16191,8 +16352,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] local_gateway_route_table_virtual_interface_group_association
-    #   Describes an association between a local gateway route table and a
-    #   virtual interface group.
+    #   Information about the association.
     #   @return [Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult AWS API Documentation
@@ -18726,6 +18886,71 @@ module Aws::EC2
     #
     class DescribeAvailabilityZonesResult < Struct.new(
       :availability_zones)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAwsNetworkPerformanceMetricSubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "String",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAwsNetworkPerformanceMetricSubscriptionsRequest AWS API Documentation
+    #
+    class DescribeAwsNetworkPerformanceMetricSubscriptionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscriptions
+    #   Describes the current Infrastructure Performance subscriptions.
+    #   @return [Array<Types::Subscription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAwsNetworkPerformanceMetricSubscriptionsResult AWS API Documentation
+    #
+    class DescribeAwsNetworkPerformanceMetricSubscriptionsResult < Struct.new(
+      :next_token,
+      :subscriptions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30296,9 +30521,13 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
+    #   * `owner` - The ID or alias of the Amazon Web Services account that
+    #     owns the service.
+    #
     #   * `service-name` - The name of the service.
     #
-    #   * `service-type` - The type of service (`Interface` \| `Gateway`).
+    #   * `service-type` - The type of service (`Interface` \| `Gateway` \|
+    #     `GatewayLoadBalancer`).
     #
     #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
     #     `ipv6`).
@@ -30401,6 +30630,16 @@ module Aws::EC2
     #
     #   * `service-name` - The name of the service.
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
     #   * `vpc-id` - The ID of the VPC in which the endpoint resides.
     #
     #   * `vpc-endpoint-id` - The ID of the endpoint.
@@ -30411,16 +30650,6 @@ module Aws::EC2
     #
     #   * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` \|
     #     `Gateway` \| `GatewayLoadBalancer`).
-    #
-    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
-    #     to the resource. Use the tag key in the filter name and the tag
-    #     value as the filter value. For example, to find all resources that
-    #     have a tag with the key `Owner` and the value `TeamA`, specify
-    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
-    #
-    #   * `tag-key` - The key of a tag assigned to the resource. Use this
-    #     filter to find all resources assigned a tag with a specific key,
-    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -31292,6 +31521,66 @@ module Aws::EC2
     #
     class DisableAddressTransferResult < Struct.new(
       :address_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisableAwsNetworkPerformanceMetricSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source: "String",
+    #         destination: "String",
+    #         metric: "aggregate-latency", # accepts aggregate-latency
+    #         statistic: "p50", # accepts p50
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The source Region or Availability Zone that the metric subscription
+    #   is disabled for. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The target Region or Availability Zone that the metric subscription
+    #   is disabled for. For example, `eu-north-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The metric used for the disabled subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic used for the disabled subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAwsNetworkPerformanceMetricSubscriptionRequest AWS API Documentation
+    #
+    class DisableAwsNetworkPerformanceMetricSubscriptionRequest < Struct.new(
+      :source,
+      :destination,
+      :metric,
+      :statistic,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] output
+    #   Indicates whether the unsubscribe action was successful.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAwsNetworkPerformanceMetricSubscriptionResult AWS API Documentation
+    #
+    class DisableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
+      :output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33226,6 +33515,75 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
+    #
+    # @note When making an API call, you may pass EnaSrdSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         ena_srd_enabled: false,
+    #         ena_srd_udp_specification: {
+    #           ena_srd_udp_enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Indicates whether ENA Express is enabled for the network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Configures ENA Express for UDP network traffic.
+    #   @return [Types::EnaSrdUdpSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdSpecification AWS API Documentation
+    #
+    class EnaSrdSpecification < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it’s enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
+    #
+    # @note When making an API call, you may pass EnaSrdUdpSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         ena_srd_udp_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic uses ENA Express. To specify this
+    #   setting, you must first enable ENA Express.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdUdpSpecification AWS API Documentation
+    #
+    class EnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableAddressTransferRequest
     #   data as a hash:
     #
@@ -33269,6 +33627,66 @@ module Aws::EC2
     #
     class EnableAddressTransferResult < Struct.new(
       :address_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableAwsNetworkPerformanceMetricSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source: "String",
+    #         destination: "String",
+    #         metric: "aggregate-latency", # accepts aggregate-latency
+    #         statistic: "p50", # accepts p50
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The source Region or Availability Zone that the metric subscription
+    #   is enabled for. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The target Region or Availability Zone that the metric subscription
+    #   is enabled for. For example, `eu-west-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The metric used for the enabled subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic used for the enabled subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAwsNetworkPerformanceMetricSubscriptionRequest AWS API Documentation
+    #
+    class EnableAwsNetworkPerformanceMetricSubscriptionRequest < Struct.new(
+      :source,
+      :destination,
+      :metric,
+      :statistic,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] output
+    #   Indicates whether the subscribe action was successful.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAwsNetworkPerformanceMetricSubscriptionResult AWS API Documentation
+    #
+    class EnableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
+      :output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33717,6 +34135,35 @@ module Aws::EC2
     #
     class EnableIpamOrganizationAdminAccountResult < Struct.new(
       :success)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableReachabilityAnalyzerOrganizationSharingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableReachabilityAnalyzerOrganizationSharingRequest AWS API Documentation
+    #
+    class EnableReachabilityAnalyzerOrganizationSharingRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableReachabilityAnalyzerOrganizationSharingResult AWS API Documentation
+    #
+    class EnableReachabilityAnalyzerOrganizationSharingResult < Struct.new(
+      :return_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36455,6 +36902,91 @@ module Aws::EC2
     #
     class GetAssociatedIpv6PoolCidrsResult < Struct.new(
       :ipv_6_cidr_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAwsNetworkPerformanceDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         data_queries: [
+    #           {
+    #             id: "String",
+    #             source: "String",
+    #             destination: "String",
+    #             metric: "aggregate-latency", # accepts aggregate-latency
+    #             statistic: "p50", # accepts p50
+    #             period: "five-minutes", # accepts five-minutes, fifteen-minutes, one-hour, three-hours, one-day, one-week
+    #           },
+    #         ],
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         max_results: 1,
+    #         next_token: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] data_queries
+    #   A list of network performance data queries.
+    #   @return [Array<Types::DataQuery>]
+    #
+    # @!attribute [rw] start_time
+    #   The starting time for the performance data request. The starting
+    #   time must be formatted as `yyyy-mm-ddThh:mm:ss`. For example,
+    #   `2022-06-10T12:00:00.000Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ending time for the performance data request. The end time must
+    #   be formatted as `yyyy-mm-ddThh:mm:ss`. For example,
+    #   `2022-06-12T12:00:00.000Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAwsNetworkPerformanceDataRequest AWS API Documentation
+    #
+    class GetAwsNetworkPerformanceDataRequest < Struct.new(
+      :data_queries,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_responses
+    #   The list of data responses.
+    #   @return [Array<Types::DataResponse>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAwsNetworkPerformanceDataResult AWS API Documentation
+    #
+    class GetAwsNetworkPerformanceDataResult < Struct.new(
+      :data_responses,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -48274,7 +48806,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state_reason
-    #   Describes a state change.
+    #   Information about the state change.
     #   @return [Types::StateReason]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRouteTable AWS API Documentation
@@ -48673,6 +49205,39 @@ module Aws::EC2
     class MemoryMiBRequest < Struct.new(
       :min,
       :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates whether the network was healthy or unhealthy at a particular
+    # point. The value is aggregated from the `startDate` to the `endDate`.
+    # Currently only `five_minutes` is supported.
+    #
+    # @!attribute [rw] start_date
+    #   The start date for the metric point. The starting date for the
+    #   metric point. The starting time must be formatted as
+    #   `yyyy-mm-ddThh:mm:ss`. For example, `2022-06-10T12:00:00.000Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date for the metric point. The ending time must be formatted
+    #   as `yyyy-mm-ddThh:mm:ss`. For example, `2022-06-12T12:00:00.000Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] value
+    #   @return [Float]
+    #
+    # @!attribute [rw] status
+    #   The status of the metric point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MetricPoint AWS API Documentation
+    #
+    class MetricPoint < Struct.new(
+      :start_date,
+      :end_date,
+      :value,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50941,7 +51506,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] route
-    #   Describes a route for a local gateway route table.
+    #   Information about the local gateway route table.
     #   @return [Types::LocalGatewayRoute]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLocalGatewayRouteResult AWS API Documentation
@@ -51055,12 +51620,18 @@ module Aws::EC2
     #         source_dest_check: {
     #           value: false,
     #         },
+    #         ena_srd_specification: {
+    #           ena_srd_enabled: false,
+    #           ena_srd_udp_specification: {
+    #             ena_srd_udp_enabled: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] attachment
-    #   Information about the interface attachment. If modifying the
-    #   'delete on termination' attribute, you must specify the ID of the
-    #   interface attachment.
+    #   Information about the interface attachment. If modifying the `delete
+    #   on termination` attribute, you must specify the ID of the interface
+    #   attachment.
     #   @return [Types::NetworkInterfaceAttachmentChanges]
     #
     # @!attribute [rw] description
@@ -51095,6 +51666,11 @@ module Aws::EC2
     #   services such as network address translation, routing, or firewalls.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Updates the ENA Express configuration for the network interface
+    #   that’s attached to the instance.
+    #   @return [Types::EnaSrdSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
@@ -51103,7 +51679,8 @@ module Aws::EC2
       :dry_run,
       :groups,
       :network_interface_id,
-      :source_dest_check)
+      :source_dest_check,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52141,7 +52718,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] transit_gateway
-    #   Describes a transit gateway.
+    #   Information about the transit gateway.
     #   @return [Types::TransitGateway]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayResult AWS API Documentation
@@ -53031,7 +53608,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpn_connection
-    #   Describes a VPN connection.
+    #   Information about the VPN connection.
     #   @return [Types::VpnConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionOptionsResult AWS API Documentation
@@ -53090,7 +53667,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpn_connection
-    #   Describes a VPN connection.
+    #   Information about the VPN connection.
     #   @return [Types::VpnConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnConnectionResult AWS API Documentation
@@ -53136,7 +53713,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpn_connection
-    #   Describes a VPN connection.
+    #   Information about the VPN connection.
     #   @return [Types::VpnConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelCertificateResult AWS API Documentation
@@ -53242,7 +53819,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpn_connection
-    #   Describes a VPN connection.
+    #   Information about the VPN connection.
     #   @return [Types::VpnConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsResult AWS API Documentation
@@ -54124,6 +54701,13 @@ module Aws::EC2
     #   in-transit traffic between instances.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_supported
+    #   Indicates whether the instance type supports ENA Express. ENA
+    #   Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    #   technology to increase the maximum bandwidth used per stream and
+    #   minimize tail latency of network traffic between EC2 instances.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInfo AWS API Documentation
     #
     class NetworkInfo < Struct.new(
@@ -54138,7 +54722,8 @@ module Aws::EC2
       :ena_support,
       :efa_supported,
       :efa_info,
-      :encryption_in_transit_supported)
+      :encryption_in_transit_supported,
+      :ena_srd_supported)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54279,6 +54864,9 @@ module Aws::EC2
     #   The ID of the path.
     #   @return [String]
     #
+    # @!attribute [rw] additional_accounts
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] filter_in_arns
     #   The Amazon Resource Names (ARN) of the Amazon Web Services resources
     #   that the path must traverse.
@@ -54325,6 +54913,9 @@ module Aws::EC2
     #   Potential intermediate components.
     #   @return [Array<Types::AlternatePathHint>]
     #
+    # @!attribute [rw] suggested_accounts
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
     #   The tags.
     #   @return [Array<Types::Tag>]
@@ -54335,6 +54926,7 @@ module Aws::EC2
       :network_insights_analysis_id,
       :network_insights_analysis_arn,
       :network_insights_path_id,
+      :additional_accounts,
       :filter_in_arns,
       :start_date,
       :status,
@@ -54345,6 +54937,7 @@ module Aws::EC2
       :return_path_components,
       :explanations,
       :alternate_path_hints,
+      :suggested_accounts,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -54371,6 +54964,12 @@ module Aws::EC2
     # @!attribute [rw] destination
     #   The Amazon Web Services resource that is the destination of the
     #   path.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
     #   @return [String]
     #
     # @!attribute [rw] source_ip
@@ -54403,6 +55002,8 @@ module Aws::EC2
       :created_date,
       :source,
       :destination,
+      :source_arn,
+      :destination_arn,
       :source_ip,
       :destination_ip,
       :protocol,
@@ -54647,6 +55248,11 @@ module Aws::EC2
     #   The attachment state.
     #   @return [String]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Configures ENA Express for the network interface that this action
+    #   attaches to the instance.
+    #   @return [Types::AttachmentEnaSrdSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachment AWS API Documentation
     #
     class NetworkInterfaceAttachment < Struct.new(
@@ -54657,7 +55263,8 @@ module Aws::EC2
       :network_card_index,
       :instance_id,
       :instance_owner_id,
-      :status)
+      :status,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -55679,7 +56286,7 @@ module Aws::EC2
     #   If not specified, an Availability Zone will be automatically chosen
     #   for you based on the load balancing criteria for the Region.
     #
-    #   This parameter is not supported by [CreateFleet][1].
+    #   This parameter is not supported for [CreateFleet][1].
     #
     #
     #
@@ -55687,26 +56294,27 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] affinity
-    #   The affinity setting for the instance on the Dedicated Host. This
-    #   parameter is not supported for the [ImportInstance][1] command.
+    #   The affinity setting for the instance on the Dedicated Host.
     #
-    #   This parameter is not supported by [CreateFleet][2].
+    #   This parameter is not supported for [CreateFleet][1] or
+    #   [ImportInstance][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   The name of the placement group the instance is in.
+    #   The name of the placement group that the instance is in. If you
+    #   specify `GroupName`, you can't specify `GroupId`.
     #   @return [String]
     #
     # @!attribute [rw] partition_number
     #   The number of the partition that the instance is in. Valid only if
     #   the placement group strategy is set to `partition`.
     #
-    #   This parameter is not supported by [CreateFleet][1].
+    #   This parameter is not supported for [CreateFleet][1].
     #
     #
     #
@@ -55714,50 +56322,43 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] host_id
-    #   The ID of the Dedicated Host on which the instance resides. This
-    #   parameter is not supported for the [ImportInstance][1] command.
+    #   The ID of the Dedicated Host on which the instance resides.
     #
-    #   This parameter is not supported by [CreateFleet][2].
+    #   This parameter is not supported for [CreateFleet][1] or
+    #   [ImportInstance][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
     #   @return [String]
     #
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the
-    #   [ImportInstance][1] command.
+    #   hardware.
     #
-    #   This parameter is not supported by [CreateFleet][2].
-    #
-    #   T3 instances that use the `unlimited` CPU credit option do not
-    #   support `host` tenancy.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
-    #   @return [String]
-    #
-    # @!attribute [rw] spread_domain
-    #   Reserved for future use.
-    #
-    #   This parameter is not supported by [CreateFleet][1].
+    #   This parameter is not supported for [CreateFleet][1]. The `host`
+    #   tenancy is not supported for [ImportInstance][2] or for T3 instances
+    #   that are configured for the `unlimited` CPU credit option.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spread_domain
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] host_resource_group_arn
     #   The ARN of the host resource group in which to launch the instances.
-    #   If you specify a host resource group ARN, omit the **Tenancy**
-    #   parameter or set it to `host`.
     #
-    #   This parameter is not supported by [CreateFleet][1].
+    #   If you specify this parameter, either omit the **Tenancy** parameter
+    #   or set it to `host`.
+    #
+    #   This parameter is not supported for [CreateFleet][1].
     #
     #
     #
@@ -55765,7 +56366,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_id
-    #   The Group Id of the placement group.
+    #   The ID of the placement group that the instance is in. If you
+    #   specify `GroupId`, you can't specify `GroupName`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
@@ -57606,7 +58208,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] associations
-    #   Describes the multicast domain associations.
+    #   Information about the multicast domain associations.
     #   @return [Types::TransitGatewayMulticastDomainAssociations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectTransitGatewayMulticastDomainAssociationsResult AWS API Documentation
@@ -65741,31 +66343,49 @@ module Aws::EC2
     #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
     #   User Guide*.
     #
-    #   `lowestPrice` - Spot Fleet launches instances from the lowest-price
-    #   Spot Instance pool that has available capacity. If the cheapest pool
-    #   doesn't have available capacity, the Spot Instances come from the
-    #   next cheapest pool that has available capacity. If a pool runs out
-    #   of capacity before fulfilling your desired capacity, Spot Fleet will
-    #   continue to fulfill your request by drawing from the next cheapest
-    #   pool. To ensure that your desired capacity is met, you might receive
-    #   Spot Instances from several pools.
+    #   priceCapacityOptimized (recommended)
     #
-    #   `diversified` - Spot Fleet launches instances from all of the Spot
-    #   Instance pools that you specify.
+    #   : Spot Fleet identifies the pools with the highest capacity
+    #     availability for the number of instances that are launching. This
+    #     means that we will request Spot Instances from the pools that we
+    #     believe have the lowest chance of interruption in the near term.
+    #     Spot Fleet then requests Spot Instances from the lowest priced of
+    #     these pools.
     #
-    #   `capacityOptimized` (recommended) - Spot Fleet launches instances
-    #   from Spot Instance pools with optimal capacity for the number of
-    #   instances that are launching. To give certain instance types a
-    #   higher chance of launching first, use
-    #   `capacityOptimizedPrioritized`. Set a priority for each instance
-    #   type by using the `Priority` parameter for
-    #   `LaunchTemplateOverrides`. You can assign the same priority to
-    #   different `LaunchTemplateOverrides`. EC2 implements the priorities
-    #   on a best-effort basis, but optimizes for capacity first.
-    #   `capacityOptimizedPrioritized` is supported only if your Spot Fleet
-    #   uses a launch template. Note that if the
-    #   `OnDemandAllocationStrategy` is set to `prioritized`, the same
-    #   priority is applied when fulfilling On-Demand capacity.
+    #   capacityOptimized
+    #
+    #   : Spot Fleet identifies the pools with the highest capacity
+    #     availability for the number of instances that are launching. This
+    #     means that we will request Spot Instances from the pools that we
+    #     believe have the lowest chance of interruption in the near term.
+    #     To give certain instance types a higher chance of launching first,
+    #     use `capacityOptimizedPrioritized`. Set a priority for each
+    #     instance type by using the `Priority` parameter for
+    #     `LaunchTemplateOverrides`. You can assign the same priority to
+    #     different `LaunchTemplateOverrides`. EC2 implements the priorities
+    #     on a best-effort basis, but optimizes for capacity first.
+    #     `capacityOptimizedPrioritized` is supported only if your Spot
+    #     Fleet uses a launch template. Note that if the
+    #     `OnDemandAllocationStrategy` is set to `prioritized`, the same
+    #     priority is applied when fulfilling On-Demand capacity.
+    #
+    #   diversified
+    #
+    #   : Spot Fleet requests instances from all of the Spot Instance pools
+    #     that you specify.
+    #
+    #   lowestPrice
+    #
+    #   : Spot Fleet requests instances from the lowest priced Spot Instance
+    #     pool that has available capacity. If the lowest priced pool
+    #     doesn't have available capacity, the Spot Instances come from the
+    #     next lowest priced pool that has available capacity. If a pool
+    #     runs out of capacity before fulfilling your desired capacity, Spot
+    #     Fleet will continue to fulfill your request by drawing from the
+    #     next lowest priced pool. To ensure that your desired capacity is
+    #     met, you might receive Spot Instances from several pools. Because
+    #     this strategy only considers instance price and not capacity
+    #     availability, it might lead to high interruption rates.
     #
     #   Default: `lowestPrice`
     #
@@ -66352,31 +66972,49 @@ module Aws::EC2
     #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
     #   User Guide*.
     #
-    #   `lowest-price` - EC2 Fleet launches instances from the lowest-price
-    #   Spot Instance pool that has available capacity. If the cheapest pool
-    #   doesn't have available capacity, the Spot Instances come from the
-    #   next cheapest pool that has available capacity. If a pool runs out
-    #   of capacity before fulfilling your desired capacity, EC2 Fleet will
-    #   continue to fulfill your request by drawing from the next cheapest
-    #   pool. To ensure that your desired capacity is met, you might receive
-    #   Spot Instances from several pools.
+    #   price-capacity-optimized (recommended)
     #
-    #   `diversified` - EC2 Fleet launches instances from all of the Spot
-    #   Instance pools that you specify.
+    #   : EC2 Fleet identifies the pools with the highest capacity
+    #     availability for the number of instances that are launching. This
+    #     means that we will request Spot Instances from the pools that we
+    #     believe have the lowest chance of interruption in the near term.
+    #     EC2 Fleet then requests Spot Instances from the lowest priced of
+    #     these pools.
     #
-    #   `capacity-optimized` (recommended) - EC2 Fleet launches instances
-    #   from Spot Instance pools with optimal capacity for the number of
-    #   instances that are launching. To give certain instance types a
-    #   higher chance of launching first, use
-    #   `capacity-optimized-prioritized`. Set a priority for each instance
-    #   type by using the `Priority` parameter for
-    #   `LaunchTemplateOverrides`. You can assign the same priority to
-    #   different `LaunchTemplateOverrides`. EC2 implements the priorities
-    #   on a best-effort basis, but optimizes for capacity first.
-    #   `capacity-optimized-prioritized` is supported only if your fleet
-    #   uses a launch template. Note that if the On-Demand
-    #   `AllocationStrategy` is set to `prioritized`, the same priority is
-    #   applied when fulfilling On-Demand capacity.
+    #   capacity-optimized
+    #
+    #   : EC2 Fleet identifies the pools with the highest capacity
+    #     availability for the number of instances that are launching. This
+    #     means that we will request Spot Instances from the pools that we
+    #     believe have the lowest chance of interruption in the near term.
+    #     To give certain instance types a higher chance of launching first,
+    #     use `capacity-optimized-prioritized`. Set a priority for each
+    #     instance type by using the `Priority` parameter for
+    #     `LaunchTemplateOverrides`. You can assign the same priority to
+    #     different `LaunchTemplateOverrides`. EC2 implements the priorities
+    #     on a best-effort basis, but optimizes for capacity first.
+    #     `capacity-optimized-prioritized` is supported only if your EC2
+    #     Fleet uses a launch template. Note that if the On-Demand
+    #     `AllocationStrategy` is set to `prioritized`, the same priority is
+    #     applied when fulfilling On-Demand capacity.
+    #
+    #   diversified
+    #
+    #   : EC2 Fleet requests instances from all of the Spot Instance pools
+    #     that you specify.
+    #
+    #   lowest-price
+    #
+    #   : EC2 Fleet requests instances from the lowest priced Spot Instance
+    #     pool that has available capacity. If the lowest priced pool
+    #     doesn't have available capacity, the Spot Instances come from the
+    #     next lowest priced pool that has available capacity. If a pool
+    #     runs out of capacity before fulfilling your desired capacity, EC2
+    #     Fleet will continue to fulfill your request by drawing from the
+    #     next lowest priced pool. To ensure that your desired capacity is
+    #     met, you might receive Spot Instances from several pools. Because
+    #     this strategy only considers instance price and not capacity
+    #     availability, it might lead to high interruption rates.
     #
     #   Default: `lowest-price`
     #
@@ -66494,31 +67132,49 @@ module Aws::EC2
     #   [Allocation strategies for Spot Instances][1] in the *Amazon EC2
     #   User Guide*.
     #
-    #   `lowest-price` - EC2 Fleet launches instances from the lowest-price
-    #   Spot Instance pool that has available capacity. If the cheapest pool
-    #   doesn't have available capacity, the Spot Instances come from the
-    #   next cheapest pool that has available capacity. If a pool runs out
-    #   of capacity before fulfilling your desired capacity, EC2 Fleet will
-    #   continue to fulfill your request by drawing from the next cheapest
-    #   pool. To ensure that your desired capacity is met, you might receive
-    #   Spot Instances from several pools.
+    #   price-capacity-optimized (recommended)
     #
-    #   `diversified` - EC2 Fleet launches instances from all of the Spot
-    #   Instance pools that you specify.
+    #   : EC2 Fleet identifies the pools with the highest capacity
+    #     availability for the number of instances that are launching. This
+    #     means that we will request Spot Instances from the pools that we
+    #     believe have the lowest chance of interruption in the near term.
+    #     EC2 Fleet then requests Spot Instances from the lowest priced of
+    #     these pools.
     #
-    #   `capacity-optimized` (recommended) - EC2 Fleet launches instances
-    #   from Spot Instance pools with optimal capacity for the number of
-    #   instances that are launching. To give certain instance types a
-    #   higher chance of launching first, use
-    #   `capacity-optimized-prioritized`. Set a priority for each instance
-    #   type by using the `Priority` parameter for
-    #   `LaunchTemplateOverrides`. You can assign the same priority to
-    #   different `LaunchTemplateOverrides`. EC2 implements the priorities
-    #   on a best-effort basis, but optimizes for capacity first.
-    #   `capacity-optimized-prioritized` is supported only if your fleet
-    #   uses a launch template. Note that if the On-Demand
-    #   `AllocationStrategy` is set to `prioritized`, the same priority is
-    #   applied when fulfilling On-Demand capacity.
+    #   capacity-optimized
+    #
+    #   : EC2 Fleet identifies the pools with the highest capacity
+    #     availability for the number of instances that are launching. This
+    #     means that we will request Spot Instances from the pools that we
+    #     believe have the lowest chance of interruption in the near term.
+    #     To give certain instance types a higher chance of launching first,
+    #     use `capacity-optimized-prioritized`. Set a priority for each
+    #     instance type by using the `Priority` parameter for
+    #     `LaunchTemplateOverrides`. You can assign the same priority to
+    #     different `LaunchTemplateOverrides`. EC2 implements the priorities
+    #     on a best-effort basis, but optimizes for capacity first.
+    #     `capacity-optimized-prioritized` is supported only if your EC2
+    #     Fleet uses a launch template. Note that if the On-Demand
+    #     `AllocationStrategy` is set to `prioritized`, the same priority is
+    #     applied when fulfilling On-Demand capacity.
+    #
+    #   diversified
+    #
+    #   : EC2 Fleet requests instances from all of the Spot Instance pools
+    #     that you specify.
+    #
+    #   lowest-price
+    #
+    #   : EC2 Fleet requests instances from the lowest priced Spot Instance
+    #     pool that has available capacity. If the lowest priced pool
+    #     doesn't have available capacity, the Spot Instances come from the
+    #     next lowest priced pool that has available capacity. If a pool
+    #     runs out of capacity before fulfilling your desired capacity, EC2
+    #     Fleet will continue to fulfill your request by drawing from the
+    #     next lowest priced pool. To ensure that your desired capacity is
+    #     met, you might receive Spot Instances from several pools. Because
+    #     this strategy only considers instance price and not capacity
+    #     availability, it might lead to high interruption rates.
     #
     #   Default: `lowest-price`
     #
@@ -66931,6 +67587,7 @@ module Aws::EC2
     #
     #       {
     #         network_insights_path_id: "NetworkInsightsPathId", # required
+    #         additional_accounts: ["String"],
     #         filter_in_arns: ["ResourceArn"],
     #         dry_run: false,
     #         tag_specifications: [
@@ -66950,6 +67607,9 @@ module Aws::EC2
     # @!attribute [rw] network_insights_path_id
     #   The ID of the path.
     #   @return [String]
+    #
+    # @!attribute [rw] additional_accounts
+    #   @return [Array<String>]
     #
     # @!attribute [rw] filter_in_arns
     #   The Amazon Resource Names (ARN) of the resources that the path must
@@ -66984,6 +67644,7 @@ module Aws::EC2
     #
     class StartNetworkInsightsAnalysisRequest < Struct.new(
       :network_insights_path_id,
+      :additional_accounts,
       :filter_in_arns,
       :dry_run,
       :tag_specifications,
@@ -67503,6 +68164,42 @@ module Aws::EC2
       :association_id,
       :ipv_6_cidr_block,
       :ipv_6_cidr_block_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Infrastructure Performance subscription.
+    #
+    # @!attribute [rw] source
+    #   The Region or Availability Zone that's the source for the
+    #   subscription. For example, `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The Region or Availability Zone that's the target for the
+    #   subscription. For example, `eu-west-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric
+    #   The metric used for the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic used for the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The data aggregation time for the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subscription AWS API Documentation
+    #
+    class Subscription < Struct.new(
+      :source,
+      :destination,
+      :metric,
+      :statistic,
+      :period)
       SENSITIVE = []
       include Aws::Structure
     end

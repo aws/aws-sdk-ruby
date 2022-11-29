@@ -549,6 +549,48 @@ module Aws::Macie2
     #     managed_data_identifier_selector: "ALL", # accepts ALL, EXCLUDE, INCLUDE, NONE
     #     name: "__string", # required
     #     s3_job_definition: { # required
+    #       bucket_criteria: {
+    #         excludes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         includes: {
+    #           and: [
+    #             {
+    #               simple_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #                 values: ["__string"],
+    #               },
+    #               tag_criterion: {
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 tag_values: [
+    #                   {
+    #                     key: "__string",
+    #                     value: "__string",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
     #       bucket_definitions: [
     #         {
     #           account_id: "__string", # required
@@ -596,48 +638,6 @@ module Aws::Macie2
     #                   },
     #                 ],
     #                 target: "S3_OBJECT", # accepts S3_OBJECT
-    #               },
-    #             },
-    #           ],
-    #         },
-    #       },
-    #       bucket_criteria: {
-    #         excludes: {
-    #           and: [
-    #             {
-    #               simple_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                 values: ["__string"],
-    #               },
-    #               tag_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
-    #               },
-    #             },
-    #           ],
-    #         },
-    #         includes: {
-    #           and: [
-    #             {
-    #               simple_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
-    #                 values: ["__string"],
-    #               },
-    #               tag_criterion: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
-    #                 tag_values: [
-    #                   {
-    #                     key: "__string",
-    #                     value: "__string",
-    #                   },
-    #                 ],
     #               },
     #             },
     #           ],
@@ -755,8 +755,8 @@ module Aws::Macie2
     # filter.
     #
     # @option params [required, String] :action
-    #   The action to perform on findings that meet the filter criteria. To
-    #   suppress (automatically archive) findings that meet the criteria, set
+    #   The action to perform on findings that match the filter criteria. To
+    #   suppress (automatically archive) findings that match the criteria, set
     #   this value to ARCHIVE. Valid values are:
     #
     # @option params [String] :client_token
@@ -1069,7 +1069,8 @@ module Aws::Macie2
     end
 
     # Retrieves (queries) statistical data and other information about one
-    # or more S3 buckets that Amazon Macie monitors and analyzes.
+    # or more S3 buckets that Amazon Macie monitors and analyzes for an
+    # account.
     #
     # @option params [Hash<String,Types::BucketCriteriaAdditionalProperties>] :criteria
     #   Specifies, as a map, one or more property-based conditions that filter
@@ -1128,6 +1129,7 @@ module Aws::Macie2
     #   resp.buckets[0].job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.buckets[0].job_details.last_job_id #=> String
     #   resp.buckets[0].job_details.last_job_run_time #=> Time
+    #   resp.buckets[0].last_automated_discovery_time #=> Time
     #   resp.buckets[0].last_updated #=> Time
     #   resp.buckets[0].object_count #=> Integer
     #   resp.buckets[0].object_count_by_encryption_type.customer_managed #=> Integer
@@ -1153,6 +1155,7 @@ module Aws::Macie2
     #   resp.buckets[0].replication_details.replicated_externally #=> Boolean
     #   resp.buckets[0].replication_details.replication_accounts #=> Array
     #   resp.buckets[0].replication_details.replication_accounts[0] #=> String
+    #   resp.buckets[0].sensitivity_score #=> Integer
     #   resp.buckets[0].server_side_encryption.kms_master_key_id #=> String
     #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms"
     #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED", "UNKNOWN"
@@ -1233,6 +1236,24 @@ module Aws::Macie2
     #   resp.managed_data_identifier_ids[0] #=> String
     #   resp.managed_data_identifier_selector #=> String, one of "ALL", "EXCLUDE", "INCLUDE", "NONE"
     #   resp.name #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values[0] #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].value #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values[0] #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
+    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
     #   resp.s3_job_definition.bucket_definitions #=> Array
     #   resp.s3_job_definition.bucket_definitions[0].account_id #=> String
     #   resp.s3_job_definition.bucket_definitions[0].buckets #=> Array
@@ -1259,24 +1280,6 @@ module Aws::Macie2
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].key #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].value #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
-    #   resp.s3_job_definition.bucket_criteria.excludes.and #=> Array
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values #=> Array
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].simple_criterion.values[0] #=> String
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values #=> Array
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].key #=> String
-    #   resp.s3_job_definition.bucket_criteria.excludes.and[0].tag_criterion.tag_values[0].value #=> String
-    #   resp.s3_job_definition.bucket_criteria.includes.and #=> Array
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values #=> Array
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].simple_criterion.values[0] #=> String
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
-    #   resp.s3_job_definition.bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
     #   resp.sampling_percentage #=> Integer
     #   resp.schedule_frequency.monthly_schedule.day_of_month #=> Integer
     #   resp.schedule_frequency.weekly_schedule.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
@@ -1545,8 +1548,38 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves (queries) aggregated statistical data about S3 buckets that
-    # Amazon Macie monitors and analyzes.
+    # Retrieves the configuration settings and status of automated sensitive
+    # data discovery for an account.
+    #
+    # @return [Types::GetAutomatedDiscoveryConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#classification_scope_id #classification_scope_id} => String
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#disabled_at #disabled_at} => Time
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#first_enabled_at #first_enabled_at} => Time
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#sensitivity_inspection_template_id #sensitivity_inspection_template_id} => String
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.classification_scope_id #=> String
+    #   resp.disabled_at #=> Time
+    #   resp.first_enabled_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.sensitivity_inspection_template_id #=> String
+    #   resp.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAutomatedDiscoveryConfiguration AWS API Documentation
+    #
+    # @overload get_automated_discovery_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_automated_discovery_configuration(params = {}, options = {})
+      req = build_request(:get_automated_discovery_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves (queries) aggregated statistical data about all the S3
+    # buckets that Amazon Macie monitors and analyzes for an account.
     #
     # @option params [String] :account_id
     #
@@ -1557,6 +1590,7 @@ module Aws::Macie2
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_encryption_type #bucket_count_by_encryption_type} => Types::BucketCountByEncryptionType
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_object_encryption_requirement #bucket_count_by_object_encryption_requirement} => Types::BucketCountPolicyAllowsUnencryptedObjectUploads
     #   * {Types::GetBucketStatisticsResponse#bucket_count_by_shared_access_type #bucket_count_by_shared_access_type} => Types::BucketCountBySharedAccessType
+    #   * {Types::GetBucketStatisticsResponse#bucket_statistics_by_sensitivity #bucket_statistics_by_sensitivity} => Types::BucketStatisticsBySensitivity
     #   * {Types::GetBucketStatisticsResponse#classifiable_object_count #classifiable_object_count} => Integer
     #   * {Types::GetBucketStatisticsResponse#classifiable_size_in_bytes #classifiable_size_in_bytes} => Integer
     #   * {Types::GetBucketStatisticsResponse#last_updated #last_updated} => Time
@@ -1590,6 +1624,22 @@ module Aws::Macie2
     #   resp.bucket_count_by_shared_access_type.internal #=> Integer
     #   resp.bucket_count_by_shared_access_type.not_shared #=> Integer
     #   resp.bucket_count_by_shared_access_type.unknown #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.classification_error.classifiable_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.classification_error.publicly_accessible_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.classification_error.total_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.classification_error.total_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_classified.classifiable_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_classified.publicly_accessible_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_classified.total_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_classified.total_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_sensitive.classifiable_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_sensitive.publicly_accessible_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_sensitive.total_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.not_sensitive.total_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.sensitive.classifiable_size_in_bytes #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.sensitive.publicly_accessible_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.sensitive.total_count #=> Integer
+    #   resp.bucket_statistics_by_sensitivity.sensitive.total_size_in_bytes #=> Integer
     #   resp.classifiable_object_count #=> Integer
     #   resp.classifiable_size_in_bytes #=> Integer
     #   resp.last_updated #=> Time
@@ -1631,6 +1681,38 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def get_classification_export_configuration(params = {}, options = {})
       req = build_request(:get_classification_export_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the classification scope settings for an account.
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::GetClassificationScopeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClassificationScopeResponse#id #id} => String
+    #   * {Types::GetClassificationScopeResponse#name #name} => String
+    #   * {Types::GetClassificationScopeResponse#s3 #s3} => Types::S3ClassificationScope
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_classification_scope({
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.s3.excludes.bucket_names #=> Array
+    #   resp.s3.excludes.bucket_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetClassificationScope AWS API Documentation
+    #
+    # @overload get_classification_scope(params = {})
+    # @param [Hash] params ({})
+    def get_classification_scope(params = {}, options = {})
+      req = build_request(:get_classification_scope, params)
       req.send_request(options)
     end
 
@@ -1776,7 +1858,7 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.detailed_results_location #=> String
     #   resp.findings[0].classification_details.job_arn #=> String
     #   resp.findings[0].classification_details.job_id #=> String
-    #   resp.findings[0].classification_details.origin_type #=> String, one of "SENSITIVE_DATA_DISCOVERY_JOB"
+    #   resp.findings[0].classification_details.origin_type #=> String, one of "SENSITIVE_DATA_DISCOVERY_JOB", "AUTOMATED_SENSITIVE_DATA_DISCOVERY"
     #   resp.findings[0].classification_details.result.additional_occurrences #=> Boolean
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections #=> Array
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].arn #=> String
@@ -2045,8 +2127,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the current status and configuration settings for an Amazon
-    # Macie account.
+    # Retrieves the status and configuration settings for an Amazon Macie
+    # account.
     #
     # @return [Types::GetMacieSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2144,6 +2226,48 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Retrieves (queries) sensitive data discovery statistics and the
+    # sensitivity score for an S3 bucket.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::GetResourceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceProfileResponse#profile_updated_at #profile_updated_at} => Time
+    #   * {Types::GetResourceProfileResponse#sensitivity_score #sensitivity_score} => Integer
+    #   * {Types::GetResourceProfileResponse#sensitivity_score_overridden #sensitivity_score_overridden} => Boolean
+    #   * {Types::GetResourceProfileResponse#statistics #statistics} => Types::ResourceStatistics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_profile({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_updated_at #=> Time
+    #   resp.sensitivity_score #=> Integer
+    #   resp.sensitivity_score_overridden #=> Boolean
+    #   resp.statistics.total_bytes_classified #=> Integer
+    #   resp.statistics.total_detections #=> Integer
+    #   resp.statistics.total_detections_suppressed #=> Integer
+    #   resp.statistics.total_items_classified #=> Integer
+    #   resp.statistics.total_items_sensitive #=> Integer
+    #   resp.statistics.total_items_skipped #=> Integer
+    #   resp.statistics.total_items_skipped_invalid_encryption #=> Integer
+    #   resp.statistics.total_items_skipped_invalid_kms #=> Integer
+    #   resp.statistics.total_items_skipped_permission_denied #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetResourceProfile AWS API Documentation
+    #
+    # @overload get_resource_profile(params = {})
+    # @param [Hash] params ({})
+    def get_resource_profile(params = {}, options = {})
+      req = build_request(:get_resource_profile, params)
+      req.send_request(options)
+    end
+
     # Retrieves the status and configuration settings for retrieving
     # occurrences of sensitive data reported by findings.
     #
@@ -2234,6 +2358,48 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Retrieves the settings for the sensitivity inspection template for an
+    # account.
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::GetSensitivityInspectionTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSensitivityInspectionTemplateResponse#description #description} => String
+    #   * {Types::GetSensitivityInspectionTemplateResponse#excludes #excludes} => Types::SensitivityInspectionTemplateExcludes
+    #   * {Types::GetSensitivityInspectionTemplateResponse#includes #includes} => Types::SensitivityInspectionTemplateIncludes
+    #   * {Types::GetSensitivityInspectionTemplateResponse#name #name} => String
+    #   * {Types::GetSensitivityInspectionTemplateResponse#sensitivity_inspection_template_id #sensitivity_inspection_template_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sensitivity_inspection_template({
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.excludes.managed_data_identifier_ids #=> Array
+    #   resp.excludes.managed_data_identifier_ids[0] #=> String
+    #   resp.includes.allow_list_ids #=> Array
+    #   resp.includes.allow_list_ids[0] #=> String
+    #   resp.includes.custom_data_identifier_ids #=> Array
+    #   resp.includes.custom_data_identifier_ids[0] #=> String
+    #   resp.includes.managed_data_identifier_ids #=> Array
+    #   resp.includes.managed_data_identifier_ids[0] #=> String
+    #   resp.name #=> String
+    #   resp.sensitivity_inspection_template_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitivityInspectionTemplate AWS API Documentation
+    #
+    # @overload get_sensitivity_inspection_template(params = {})
+    # @param [Hash] params ({})
+    def get_sensitivity_inspection_template(params = {}, options = {})
+      req = build_request(:get_sensitivity_inspection_template, params)
+      req.send_request(options)
+    end
+
     # Retrieves (queries) quotas and aggregated usage data for one or more
     # accounts.
     #
@@ -2283,6 +2449,7 @@ module Aws::Macie2
     #   resp.next_token #=> String
     #   resp.records #=> Array
     #   resp.records[0].account_id #=> String
+    #   resp.records[0].automated_discovery_free_trial_start_date #=> Time
     #   resp.records[0].free_trial_start_date #=> Time
     #   resp.records[0].usage #=> Array
     #   resp.records[0].usage[0].currency #=> String, one of "USD"
@@ -2290,7 +2457,7 @@ module Aws::Macie2
     #   resp.records[0].usage[0].service_limit.is_service_limited #=> Boolean
     #   resp.records[0].usage[0].service_limit.unit #=> String, one of "TERABYTES"
     #   resp.records[0].usage[0].service_limit.value #=> Integer
-    #   resp.records[0].usage[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY"
+    #   resp.records[0].usage[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY", "AUTOMATED_SENSITIVE_DATA_DISCOVERY", "AUTOMATED_OBJECT_MONITORING"
     #   resp.time_range #=> String, one of "MONTH_TO_DATE", "PAST_30_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatistics AWS API Documentation
@@ -2323,7 +2490,7 @@ module Aws::Macie2
     #   resp.usage_totals #=> Array
     #   resp.usage_totals[0].currency #=> String, one of "USD"
     #   resp.usage_totals[0].estimated_cost #=> String
-    #   resp.usage_totals[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY"
+    #   resp.usage_totals[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY", "AUTOMATED_SENSITIVE_DATA_DISCOVERY", "AUTOMATED_OBJECT_MONITORING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageTotals AWS API Documentation
     #
@@ -2345,6 +2512,8 @@ module Aws::Macie2
     #
     #   * {Types::ListAllowListsResponse#allow_lists #allow_lists} => Array&lt;Types::AllowListSummary&gt;
     #   * {Types::ListAllowListsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2425,19 +2594,6 @@ module Aws::Macie2
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].bucket_definitions #=> Array
-    #   resp.items[0].bucket_definitions[0].account_id #=> String
-    #   resp.items[0].bucket_definitions[0].buckets #=> Array
-    #   resp.items[0].bucket_definitions[0].buckets[0] #=> String
-    #   resp.items[0].created_at #=> Time
-    #   resp.items[0].job_id #=> String
-    #   resp.items[0].job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
-    #   resp.items[0].job_type #=> String, one of "ONE_TIME", "SCHEDULED"
-    #   resp.items[0].last_run_error_status.code #=> String, one of "NONE", "ERROR"
-    #   resp.items[0].name #=> String
-    #   resp.items[0].user_paused_details.job_expires_at #=> Time
-    #   resp.items[0].user_paused_details.job_imminent_expiration_health_event_arn #=> String
-    #   resp.items[0].user_paused_details.job_paused_at #=> Time
     #   resp.items[0].bucket_criteria.excludes.and #=> Array
     #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
     #   resp.items[0].bucket_criteria.excludes.and[0].simple_criterion.key #=> String, one of "ACCOUNT_ID", "S3_BUCKET_NAME", "S3_BUCKET_EFFECTIVE_PERMISSION", "S3_BUCKET_SHARED_ACCESS"
@@ -2456,6 +2612,19 @@ module Aws::Macie2
     #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values #=> Array
     #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values[0].key #=> String
     #   resp.items[0].bucket_criteria.includes.and[0].tag_criterion.tag_values[0].value #=> String
+    #   resp.items[0].bucket_definitions #=> Array
+    #   resp.items[0].bucket_definitions[0].account_id #=> String
+    #   resp.items[0].bucket_definitions[0].buckets #=> Array
+    #   resp.items[0].bucket_definitions[0].buckets[0] #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].job_id #=> String
+    #   resp.items[0].job_status #=> String, one of "RUNNING", "PAUSED", "CANCELLED", "COMPLETE", "IDLE", "USER_PAUSED"
+    #   resp.items[0].job_type #=> String, one of "ONE_TIME", "SCHEDULED"
+    #   resp.items[0].last_run_error_status.code #=> String, one of "NONE", "ERROR"
+    #   resp.items[0].name #=> String
+    #   resp.items[0].user_paused_details.job_expires_at #=> Time
+    #   resp.items[0].user_paused_details.job_imminent_expiration_health_event_arn #=> String
+    #   resp.items[0].user_paused_details.job_paused_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationJobs AWS API Documentation
@@ -2464,6 +2633,43 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def list_classification_jobs(params = {}, options = {})
       req = build_request(:list_classification_jobs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a subset of information about the classification scope for
+    # an account.
+    #
+    # @option params [String] :name
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListClassificationScopesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClassificationScopesResponse#classification_scopes #classification_scopes} => Array&lt;Types::ClassificationScopeSummary&gt;
+    #   * {Types::ListClassificationScopesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_classification_scopes({
+    #     name: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.classification_scopes #=> Array
+    #   resp.classification_scopes[0].id #=> String
+    #   resp.classification_scopes[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListClassificationScopes AWS API Documentation
+    #
+    # @overload list_classification_scopes(params = {})
+    # @param [Hash] params ({})
+    def list_classification_scopes(params = {}, options = {})
+      req = build_request(:list_classification_scopes, params)
       req.send_request(options)
     end
 
@@ -2656,6 +2862,8 @@ module Aws::Macie2
     #   * {Types::ListManagedDataIdentifiersResponse#items #items} => Array&lt;Types::ManagedDataIdentifierSummary&gt;
     #   * {Types::ListManagedDataIdentifiersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_managed_data_identifiers({
@@ -2763,6 +2971,125 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Retrieves information about objects that were selected from an S3
+    # bucket for automated sensitive data discovery.
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListResourceProfileArtifactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceProfileArtifactsResponse#artifacts #artifacts} => Array&lt;Types::ResourceProfileArtifact&gt;
+    #   * {Types::ListResourceProfileArtifactsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_profile_artifacts({
+    #     next_token: "__string",
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.artifacts #=> Array
+    #   resp.artifacts[0].arn #=> String
+    #   resp.artifacts[0].classification_result_status #=> String
+    #   resp.artifacts[0].sensitive #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListResourceProfileArtifacts AWS API Documentation
+    #
+    # @overload list_resource_profile_artifacts(params = {})
+    # @param [Hash] params ({})
+    def list_resource_profile_artifacts(params = {}, options = {})
+      req = build_request(:list_resource_profile_artifacts, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the types and amount of sensitive data
+    # that Amazon Macie found in an S3 bucket.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListResourceProfileDetectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceProfileDetectionsResponse#detections #detections} => Array&lt;Types::Detection&gt;
+    #   * {Types::ListResourceProfileDetectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_profile_detections({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.detections #=> Array
+    #   resp.detections[0].arn #=> String
+    #   resp.detections[0].count #=> Integer
+    #   resp.detections[0].id #=> String
+    #   resp.detections[0].name #=> String
+    #   resp.detections[0].suppressed #=> Boolean
+    #   resp.detections[0].type #=> String, one of "CUSTOM", "MANAGED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListResourceProfileDetections AWS API Documentation
+    #
+    # @overload list_resource_profile_detections(params = {})
+    # @param [Hash] params ({})
+    def list_resource_profile_detections(params = {}, options = {})
+      req = build_request(:list_resource_profile_detections, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a subset of information about the sensitivity inspection
+    # template for an account.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListSensitivityInspectionTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSensitivityInspectionTemplatesResponse#next_token #next_token} => String
+    #   * {Types::ListSensitivityInspectionTemplatesResponse#sensitivity_inspection_templates #sensitivity_inspection_templates} => Array&lt;Types::SensitivityInspectionTemplatesEntry&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sensitivity_inspection_templates({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.sensitivity_inspection_templates #=> Array
+    #   resp.sensitivity_inspection_templates[0].id #=> String
+    #   resp.sensitivity_inspection_templates[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListSensitivityInspectionTemplates AWS API Documentation
+    #
+    # @overload list_sensitivity_inspection_templates(params = {})
+    # @param [Hash] params ({})
+    def list_sensitivity_inspection_templates(params = {}, options = {})
+      req = build_request(:list_sensitivity_inspection_templates, params)
+      req.send_request(options)
+    end
+
     # Retrieves the tags (keys and values) that are associated with an
     # Amazon Macie resource.
     #
@@ -2797,8 +3124,8 @@ module Aws::Macie2
     #
     # @option params [required, Types::ClassificationExportConfiguration] :configuration
     #   Specifies where to store data classification results, and the
-    #   encryption settings to use when storing results in that location.
-    #   Currently, you can store classification results only in an S3 bucket.
+    #   encryption settings to use when storing results in that location. The
+    #   location must be an S3 bucket.
     #
     # @return [Types::PutClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2959,12 +3286,14 @@ module Aws::Macie2
     #   resp.matching_resources[0].matching_bucket.job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.matching_resources[0].matching_bucket.job_details.last_job_id #=> String
     #   resp.matching_resources[0].matching_bucket.job_details.last_job_run_time #=> Time
+    #   resp.matching_resources[0].matching_bucket.last_automated_discovery_time #=> Time
     #   resp.matching_resources[0].matching_bucket.object_count #=> Integer
     #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.customer_managed #=> Integer
     #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.kms_managed #=> Integer
     #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.s3_managed #=> Integer
     #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.unencrypted #=> Integer
     #   resp.matching_resources[0].matching_bucket.object_count_by_encryption_type.unknown #=> Integer
+    #   resp.matching_resources[0].matching_bucket.sensitivity_score #=> Integer
     #   resp.matching_resources[0].matching_bucket.size_in_bytes #=> Integer
     #   resp.matching_resources[0].matching_bucket.size_in_bytes_compressed #=> Integer
     #   resp.matching_resources[0].matching_bucket.unclassifiable_object_count.file_type #=> Integer
@@ -3124,6 +3453,29 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Enables or disables automated sensitive data discovery for an account.
+    #
+    # @option params [required, String] :status
+    #   The status of the automated sensitive data discovery configuration for
+    #   an Amazon Macie account. Valid values are:
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_automated_discovery_configuration({
+    #     status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateAutomatedDiscoveryConfiguration AWS API Documentation
+    #
+    # @overload update_automated_discovery_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_automated_discovery_configuration(params = {}, options = {})
+      req = build_request(:update_automated_discovery_configuration, params)
+      req.send_request(options)
+    end
+
     # Changes the status of a classification job.
     #
     # @option params [required, String] :job_id
@@ -3149,12 +3501,47 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Updates the classification scope settings for an account.
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [Types::S3ClassificationScopeUpdate] :s3
+    #   Specifies changes to the list of S3 buckets that are excluded from
+    #   automated sensitive data discovery for an Amazon Macie account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_classification_scope({
+    #     id: "__string", # required
+    #     s3: {
+    #       excludes: { # required
+    #         bucket_names: ["S3BucketName"], # required
+    #         operation: "ADD", # required, accepts ADD, REPLACE, REMOVE
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationScope AWS API Documentation
+    #
+    # @overload update_classification_scope(params = {})
+    # @param [Hash] params ({})
+    def update_classification_scope(params = {}, options = {})
+      req = build_request(:update_classification_scope, params)
+      req.send_request(options)
+    end
+
     # Updates the criteria and other settings for a findings filter.
     #
     # @option params [String] :action
-    #   The action to perform on findings that meet the filter criteria. To
-    #   suppress (automatically archive) findings that meet the criteria, set
+    #   The action to perform on findings that match the filter criteria. To
+    #   suppress (automatically archive) findings that match the criteria, set
     #   this value to ARCHIVE. Valid values are:
+    #
+    # @option params [String] :client_token
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [String] :description
     #
@@ -3168,10 +3555,6 @@ module Aws::Macie2
     #
     # @option params [Integer] :position
     #
-    # @option params [String] :client_token
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
     # @return [Types::UpdateFindingsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFindingsFilterResponse#arn #arn} => String
@@ -3181,6 +3564,7 @@ module Aws::Macie2
     #
     #   resp = client.update_findings_filter({
     #     action: "ARCHIVE", # accepts ARCHIVE, NOOP
+    #     client_token: "__string",
     #     description: "__string",
     #     finding_criteria: {
     #       criterion: {
@@ -3198,7 +3582,6 @@ module Aws::Macie2
     #     id: "__string", # required
     #     name: "__string",
     #     position: 1,
-    #     client_token: "__string",
     #   })
     #
     # @example Response structure
@@ -3298,6 +3681,59 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Updates the sensitivity score for an S3 bucket.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Integer] :sensitivity_score_override
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_profile({
+    #     resource_arn: "__string", # required
+    #     sensitivity_score_override: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateResourceProfile AWS API Documentation
+    #
+    # @overload update_resource_profile(params = {})
+    # @param [Hash] params ({})
+    def update_resource_profile(params = {}, options = {})
+      req = build_request(:update_resource_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates the sensitivity scoring settings for an S3 bucket.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [Array<Types::SuppressDataIdentifier>] :suppress_data_identifiers
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_profile_detections({
+    #     resource_arn: "__string", # required
+    #     suppress_data_identifiers: [
+    #       {
+    #         id: "__string",
+    #         type: "CUSTOM", # accepts CUSTOM, MANAGED
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateResourceProfileDetections AWS API Documentation
+    #
+    # @overload update_resource_profile_detections(params = {})
+    # @param [Hash] params ({})
+    def update_resource_profile_detections(params = {}, options = {})
+      req = build_request(:update_resource_profile_detections, params)
+      req.send_request(options)
+    end
+
     # Updates the status and configuration settings for retrieving
     # occurrences of sensitive data reported by findings.
     #
@@ -3336,6 +3772,63 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Updates the settings for the sensitivity inspection template for an
+    # account.
+    #
+    # @option params [String] :description
+    #
+    # @option params [Types::SensitivityInspectionTemplateExcludes] :excludes
+    #   Specifies managed data identifiers to exclude (not use) when
+    #   performing automated sensitive data discovery for an Amazon Macie
+    #   account. For information about the managed data identifiers that
+    #   Amazon Macie currently provides, see [Using managed data
+    #   identifiers][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
+    #
+    # @option params [required, String] :id
+    #
+    # @option params [Types::SensitivityInspectionTemplateIncludes] :includes
+    #   Specifies the allow lists, custom data identifiers, and managed data
+    #   identifiers to include (use) when performing automated sensitive data
+    #   discovery for an Amazon Macie account. The configuration must specify
+    #   at least one custom data identifier or managed data identifier. For
+    #   information about the managed data identifiers that Amazon Macie
+    #   currently provides, see [Using managed data identifiers][1] in the
+    #   *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sensitivity_inspection_template({
+    #     description: "__string",
+    #     excludes: {
+    #       managed_data_identifier_ids: ["__string"],
+    #     },
+    #     id: "__string", # required
+    #     includes: {
+    #       allow_list_ids: ["__string"],
+    #       custom_data_identifier_ids: ["__string"],
+    #       managed_data_identifier_ids: ["__string"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateSensitivityInspectionTemplate AWS API Documentation
+    #
+    # @overload update_sensitivity_inspection_template(params = {})
+    # @param [Hash] params ({})
+    def update_sensitivity_inspection_template(params = {}, options = {})
+      req = build_request(:update_sensitivity_inspection_template, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3349,7 +3842,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

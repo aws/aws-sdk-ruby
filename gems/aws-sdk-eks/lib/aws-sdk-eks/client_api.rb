@@ -136,6 +136,7 @@ module Aws::EKS
     LogType = Shapes::StringShape.new(name: 'LogType')
     LogTypes = Shapes::ListShape.new(name: 'LogTypes')
     Logging = Shapes::StructureShape.new(name: 'Logging')
+    MarketplaceInformation = Shapes::StructureShape.new(name: 'MarketplaceInformation')
     Nodegroup = Shapes::StructureShape.new(name: 'Nodegroup')
     NodegroupHealth = Shapes::StructureShape.new(name: 'NodegroupHealth')
     NodegroupIssueCode = Shapes::StringShape.new(name: 'NodegroupIssueCode')
@@ -223,6 +224,9 @@ module Aws::EKS
     Addon.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
     Addon.add_member(:service_account_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountRoleArn"))
     Addon.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Addon.add_member(:publisher, Shapes::ShapeRef.new(shape: String, location_name: "publisher"))
+    Addon.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
+    Addon.add_member(:marketplace_information, Shapes::ShapeRef.new(shape: MarketplaceInformation, location_name: "marketplaceInformation"))
     Addon.struct_class = Types::Addon
 
     AddonHealth.add_member(:issues, Shapes::ShapeRef.new(shape: AddonIssueList, location_name: "issues"))
@@ -231,6 +235,9 @@ module Aws::EKS
     AddonInfo.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
     AddonInfo.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     AddonInfo.add_member(:addon_versions, Shapes::ShapeRef.new(shape: AddonVersionInfoList, location_name: "addonVersions"))
+    AddonInfo.add_member(:publisher, Shapes::ShapeRef.new(shape: String, location_name: "publisher"))
+    AddonInfo.add_member(:owner, Shapes::ShapeRef.new(shape: String, location_name: "owner"))
+    AddonInfo.add_member(:marketplace_information, Shapes::ShapeRef.new(shape: MarketplaceInformation, location_name: "marketplaceInformation"))
     AddonInfo.struct_class = Types::AddonInfo
 
     AddonIssue.add_member(:code, Shapes::ShapeRef.new(shape: AddonIssueCode, location_name: "code"))
@@ -243,6 +250,7 @@ module Aws::EKS
     AddonVersionInfo.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
     AddonVersionInfo.add_member(:architecture, Shapes::ShapeRef.new(shape: StringList, location_name: "architecture"))
     AddonVersionInfo.add_member(:compatibilities, Shapes::ShapeRef.new(shape: Compatibilities, location_name: "compatibilities"))
+    AddonVersionInfo.add_member(:requires_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "requiresConfiguration"))
     AddonVersionInfo.struct_class = Types::AddonVersionInfo
 
     AddonVersionInfoList.member = Shapes::ShapeRef.new(shape: AddonVersionInfo)
@@ -447,6 +455,9 @@ module Aws::EKS
     DescribeAddonVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeAddonVersionsRequestMaxResults, location: "querystring", location_name: "maxResults"))
     DescribeAddonVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     DescribeAddonVersionsRequest.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "addonName"))
+    DescribeAddonVersionsRequest.add_member(:types, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "types"))
+    DescribeAddonVersionsRequest.add_member(:publishers, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "publishers"))
+    DescribeAddonVersionsRequest.add_member(:owners, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "owners"))
     DescribeAddonVersionsRequest.struct_class = Types::DescribeAddonVersionsRequest
 
     DescribeAddonVersionsResponse.add_member(:addons, Shapes::ShapeRef.new(shape: Addons, location_name: "addons"))
@@ -650,6 +661,10 @@ module Aws::EKS
 
     Logging.add_member(:cluster_logging, Shapes::ShapeRef.new(shape: LogSetups, location_name: "clusterLogging"))
     Logging.struct_class = Types::Logging
+
+    MarketplaceInformation.add_member(:product_id, Shapes::ShapeRef.new(shape: String, location_name: "productId"))
+    MarketplaceInformation.add_member(:product_url, Shapes::ShapeRef.new(shape: String, location_name: "productUrl"))
+    MarketplaceInformation.struct_class = Types::MarketplaceInformation
 
     Nodegroup.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
     Nodegroup.add_member(:nodegroup_arn, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupArn"))

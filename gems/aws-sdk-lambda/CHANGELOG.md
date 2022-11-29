@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2022-11-29)
+------------------
+
+* Feature - Adds support for Lambda SnapStart, which helps improve the startup performance of functions. Customers can now manage SnapStart based functions via CreateFunction and UpdateFunctionConfiguration APIs
+
 1.87.0 (2022-11-17)
 ------------------
 

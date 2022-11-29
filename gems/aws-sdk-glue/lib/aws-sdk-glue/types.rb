@@ -2819,6 +2819,25 @@ module Aws::Glue
     #           database: "EnclosedInStringProperty", # required
     #           table: "EnclosedInStringProperty", # required
     #         },
+    #         dynamic_transform: {
+    #           name: "EnclosedInStringProperty", # required
+    #           transform_name: "EnclosedInStringProperty", # required
+    #           inputs: ["NodeId"], # required
+    #           parameters: [
+    #             {
+    #               name: "EnclosedInStringProperty", # required
+    #               type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #               validation_rule: "EnclosedInStringProperty",
+    #               validation_message: "EnclosedInStringProperty",
+    #               value: ["EnclosedInStringProperty"],
+    #               list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #               is_optional: false,
+    #             },
+    #           ],
+    #           function_name: "EnclosedInStringProperty", # required
+    #           path: "EnclosedInStringProperty", # required
+    #           version: "EnclosedInStringProperty",
+    #         },
     #       }
     #
     # @!attribute [rw] athena_connector_source
@@ -3057,6 +3076,10 @@ module Aws::Glue
     #   Specifies a target that uses Postgres SQL.
     #   @return [Types::PostgreSQLCatalogTarget]
     #
+    # @!attribute [rw] dynamic_transform
+    #   Specifies a custom visual transform created by a user.
+    #   @return [Types::DynamicTransform]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
     #
     class CodeGenConfigurationNode < Struct.new(
@@ -3109,7 +3132,8 @@ module Aws::Glue
       :microsoft_sql_server_catalog_target,
       :my_sql_catalog_target,
       :oracle_sql_catalog_target,
-      :postgre_sql_catalog_target)
+      :postgre_sql_catalog_target,
+      :dynamic_transform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6121,6 +6145,25 @@ module Aws::Glue
     #               inputs: ["NodeId"], # required
     #               database: "EnclosedInStringProperty", # required
     #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             dynamic_transform: {
+    #               name: "EnclosedInStringProperty", # required
+    #               transform_name: "EnclosedInStringProperty", # required
+    #               inputs: ["NodeId"], # required
+    #               parameters: [
+    #                 {
+    #                   name: "EnclosedInStringProperty", # required
+    #                   type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #                   validation_rule: "EnclosedInStringProperty",
+    #                   validation_message: "EnclosedInStringProperty",
+    #                   value: ["EnclosedInStringProperty"],
+    #                   list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #                   is_optional: false,
+    #                 },
+    #               ],
+    #               function_name: "EnclosedInStringProperty", # required
+    #               path: "EnclosedInStringProperty", # required
+    #               version: "EnclosedInStringProperty",
     #             },
     #           },
     #         },
@@ -9746,6 +9789,75 @@ module Aws::Glue
       :inputs,
       :null_check_box_list,
       :null_text_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the set of parameters needed to perform the dynamic
+    # transform.
+    #
+    # @note When making an API call, you may pass DynamicTransform
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EnclosedInStringProperty", # required
+    #         transform_name: "EnclosedInStringProperty", # required
+    #         inputs: ["NodeId"], # required
+    #         parameters: [
+    #           {
+    #             name: "EnclosedInStringProperty", # required
+    #             type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #             validation_rule: "EnclosedInStringProperty",
+    #             validation_message: "EnclosedInStringProperty",
+    #             value: ["EnclosedInStringProperty"],
+    #             list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #             is_optional: false,
+    #           },
+    #         ],
+    #         function_name: "EnclosedInStringProperty", # required
+    #         path: "EnclosedInStringProperty", # required
+    #         version: "EnclosedInStringProperty",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the dynamic transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] transform_name
+    #   Specifies the name of the dynamic transform as it appears in the
+    #   Glue Studio visual editor.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Specifies the inputs for the dynamic transform that are required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the parameters of the dynamic transform.
+    #   @return [Array<Types::TransformConfigParameter>]
+    #
+    # @!attribute [rw] function_name
+    #   Specifies the name of the function of the dynamic transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   Specifies the path of the dynamic transform source and config files.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   This field is not used and will be deprecated in future release.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamicTransform AWS API Documentation
+    #
+    class DynamicTransform < Struct.new(
+      :name,
+      :transform_name,
+      :inputs,
+      :parameters,
+      :function_name,
+      :path,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13965,7 +14077,7 @@ module Aws::Glue
     end
 
     # Specifies a user-defined schema when a schema cannot be determined by
-    # AWS Glue.
+    # Glue.
     #
     # @note When making an API call, you may pass GlueSchema
     #   data as a hash:
@@ -15964,6 +16076,25 @@ module Aws::Glue
     #               inputs: ["NodeId"], # required
     #               database: "EnclosedInStringProperty", # required
     #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             dynamic_transform: {
+    #               name: "EnclosedInStringProperty", # required
+    #               transform_name: "EnclosedInStringProperty", # required
+    #               inputs: ["NodeId"], # required
+    #               parameters: [
+    #                 {
+    #                   name: "EnclosedInStringProperty", # required
+    #                   type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #                   validation_rule: "EnclosedInStringProperty",
+    #                   validation_message: "EnclosedInStringProperty",
+    #                   value: ["EnclosedInStringProperty"],
+    #                   list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #                   is_optional: false,
+    #                 },
+    #               ],
+    #               function_name: "EnclosedInStringProperty", # required
+    #               path: "EnclosedInStringProperty", # required
+    #               version: "EnclosedInStringProperty",
     #             },
     #           },
     #         },
@@ -23614,6 +23745,70 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies the parameters in the config file of the dynamic transform.
+    #
+    # @note When making an API call, you may pass TransformConfigParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EnclosedInStringProperty", # required
+    #         type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #         validation_rule: "EnclosedInStringProperty",
+    #         validation_message: "EnclosedInStringProperty",
+    #         value: ["EnclosedInStringProperty"],
+    #         list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #         is_optional: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the parameter in the config file of the
+    #   dynamic transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the parameter type in the config file of the dynamic
+    #   transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_rule
+    #   Specifies the validation rule in the config file of the dynamic
+    #   transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_message
+    #   Specifies the validation message in the config file of the dynamic
+    #   transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the value of the parameter in the config file of the
+    #   dynamic transform.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] list_type
+    #   Specifies the list type of the parameter in the config file of the
+    #   dynamic transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_optional
+    #   Specifies whether the parameter is optional or not in the config
+    #   file of the dynamic transform.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformConfigParameter AWS API Documentation
+    #
+    class TransformConfigParameter < Struct.new(
+      :name,
+      :type,
+      :validation_rule,
+      :validation_message,
+      :value,
+      :list_type,
+      :is_optional)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The encryption-at-rest settings of the transform that apply to
     # accessing user data. Machine learning transforms can access user data
     # encrypted in Amazon S3 using KMS.
@@ -25697,6 +25892,25 @@ module Aws::Glue
     #                 inputs: ["NodeId"], # required
     #                 database: "EnclosedInStringProperty", # required
     #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               dynamic_transform: {
+    #                 name: "EnclosedInStringProperty", # required
+    #                 transform_name: "EnclosedInStringProperty", # required
+    #                 inputs: ["NodeId"], # required
+    #                 parameters: [
+    #                   {
+    #                     name: "EnclosedInStringProperty", # required
+    #                     type: "str", # required, accepts str, int, float, complex, bool, list, null
+    #                     validation_rule: "EnclosedInStringProperty",
+    #                     validation_message: "EnclosedInStringProperty",
+    #                     value: ["EnclosedInStringProperty"],
+    #                     list_type: "str", # accepts str, int, float, complex, bool, list, null
+    #                     is_optional: false,
+    #                   },
+    #                 ],
+    #                 function_name: "EnclosedInStringProperty", # required
+    #                 path: "EnclosedInStringProperty", # required
+    #                 version: "EnclosedInStringProperty",
     #               },
     #             },
     #           },

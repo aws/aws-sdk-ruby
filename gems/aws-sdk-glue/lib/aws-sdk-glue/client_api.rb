@@ -343,6 +343,7 @@ module Aws::Glue
     DropDuplicates = Shapes::StructureShape.new(name: 'DropDuplicates')
     DropFields = Shapes::StructureShape.new(name: 'DropFields')
     DropNullFields = Shapes::StructureShape.new(name: 'DropNullFields')
+    DynamicTransform = Shapes::StructureShape.new(name: 'DynamicTransform')
     DynamoDBCatalogSource = Shapes::StructureShape.new(name: 'DynamoDBCatalogSource')
     DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
@@ -710,6 +711,7 @@ module Aws::Glue
     PIIDetection = Shapes::StructureShape.new(name: 'PIIDetection')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    ParamType = Shapes::StringShape.new(name: 'ParamType')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     ParametersMapValue = Shapes::StringShape.new(name: 'ParametersMapValue')
     ParquetCompressionType = Shapes::StringShape.new(name: 'ParquetCompressionType')
@@ -946,6 +948,8 @@ module Aws::Glue
     Topk = Shapes::IntegerShape.new(name: 'Topk')
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
     TransactionIdString = Shapes::StringShape.new(name: 'TransactionIdString')
+    TransformConfigParameter = Shapes::StructureShape.new(name: 'TransformConfigParameter')
+    TransformConfigParameterList = Shapes::ListShape.new(name: 'TransformConfigParameterList')
     TransformEncryption = Shapes::StructureShape.new(name: 'TransformEncryption')
     TransformFilterCriteria = Shapes::StructureShape.new(name: 'TransformFilterCriteria')
     TransformIdList = Shapes::ListShape.new(name: 'TransformIdList')
@@ -1458,6 +1462,7 @@ module Aws::Glue
     CodeGenConfigurationNode.add_member(:my_sql_catalog_target, Shapes::ShapeRef.new(shape: MySQLCatalogTarget, location_name: "MySQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:oracle_sql_catalog_target, Shapes::ShapeRef.new(shape: OracleSQLCatalogTarget, location_name: "OracleSQLCatalogTarget"))
     CodeGenConfigurationNode.add_member(:postgre_sql_catalog_target, Shapes::ShapeRef.new(shape: PostgreSQLCatalogTarget, location_name: "PostgreSQLCatalogTarget"))
+    CodeGenConfigurationNode.add_member(:dynamic_transform, Shapes::ShapeRef.new(shape: DynamicTransform, location_name: "DynamicTransform"))
     CodeGenConfigurationNode.struct_class = Types::CodeGenConfigurationNode
 
     CodeGenConfigurationNodes.key = Shapes::ShapeRef.new(shape: NodeId)
@@ -2315,6 +2320,15 @@ module Aws::Glue
     DropNullFields.add_member(:null_check_box_list, Shapes::ShapeRef.new(shape: NullCheckBoxList, location_name: "NullCheckBoxList"))
     DropNullFields.add_member(:null_text_list, Shapes::ShapeRef.new(shape: NullValueFields, location_name: "NullTextList"))
     DropNullFields.struct_class = Types::DropNullFields
+
+    DynamicTransform.add_member(:name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Name"))
+    DynamicTransform.add_member(:transform_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "TransformName"))
+    DynamicTransform.add_member(:inputs, Shapes::ShapeRef.new(shape: OneInput, required: true, location_name: "Inputs"))
+    DynamicTransform.add_member(:parameters, Shapes::ShapeRef.new(shape: TransformConfigParameterList, location_name: "Parameters"))
+    DynamicTransform.add_member(:function_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "FunctionName"))
+    DynamicTransform.add_member(:path, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Path"))
+    DynamicTransform.add_member(:version, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "Version"))
+    DynamicTransform.struct_class = Types::DynamicTransform
 
     DynamoDBCatalogSource.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     DynamoDBCatalogSource.add_member(:database, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Database"))
@@ -4463,6 +4477,17 @@ module Aws::Glue
     TaskRunSortCriteria.add_member(:column, Shapes::ShapeRef.new(shape: TaskRunSortColumnType, required: true, location_name: "Column"))
     TaskRunSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
     TaskRunSortCriteria.struct_class = Types::TaskRunSortCriteria
+
+    TransformConfigParameter.add_member(:name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Name"))
+    TransformConfigParameter.add_member(:type, Shapes::ShapeRef.new(shape: ParamType, required: true, location_name: "Type"))
+    TransformConfigParameter.add_member(:validation_rule, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "ValidationRule"))
+    TransformConfigParameter.add_member(:validation_message, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "ValidationMessage"))
+    TransformConfigParameter.add_member(:value, Shapes::ShapeRef.new(shape: EnclosedInStringProperties, location_name: "Value"))
+    TransformConfigParameter.add_member(:list_type, Shapes::ShapeRef.new(shape: ParamType, location_name: "ListType"))
+    TransformConfigParameter.add_member(:is_optional, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "IsOptional"))
+    TransformConfigParameter.struct_class = Types::TransformConfigParameter
+
+    TransformConfigParameterList.member = Shapes::ShapeRef.new(shape: TransformConfigParameter)
 
     TransformEncryption.add_member(:ml_user_data_encryption, Shapes::ShapeRef.new(shape: MLUserDataEncryption, location_name: "MlUserDataEncryption"))
     TransformEncryption.add_member(:task_run_security_configuration_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TaskRunSecurityConfigurationName"))

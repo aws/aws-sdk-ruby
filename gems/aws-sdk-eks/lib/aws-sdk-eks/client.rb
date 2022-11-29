@@ -640,6 +640,10 @@ module Aws::EKS
     #   resp.addon.service_account_role_arn #=> String
     #   resp.addon.tags #=> Hash
     #   resp.addon.tags["TagKey"] #=> String
+    #   resp.addon.publisher #=> String
+    #   resp.addon.owner #=> String
+    #   resp.addon.marketplace_information.product_id #=> String
+    #   resp.addon.marketplace_information.product_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddon AWS API Documentation
     #
@@ -1349,7 +1353,7 @@ module Aws::EKS
     # @option params [Boolean] :preserve
     #   Specifying this option preserves the add-on software on your cluster
     #   but Amazon EKS stops managing any settings for the add-on. If an IAM
-    #   account is associated with the add-on, it is not removed.
+    #   account is associated with the add-on, it isn't removed.
     #
     # @return [Types::DeleteAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1380,6 +1384,10 @@ module Aws::EKS
     #   resp.addon.service_account_role_arn #=> String
     #   resp.addon.tags #=> Hash
     #   resp.addon.tags["TagKey"] #=> String
+    #   resp.addon.publisher #=> String
+    #   resp.addon.owner #=> String
+    #   resp.addon.marketplace_information.product_id #=> String
+    #   resp.addon.marketplace_information.product_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddon AWS API Documentation
     #
@@ -1743,6 +1751,10 @@ module Aws::EKS
     #   resp.addon.service_account_role_arn #=> String
     #   resp.addon.tags #=> Hash
     #   resp.addon.tags["TagKey"] #=> String
+    #   resp.addon.publisher #=> String
+    #   resp.addon.owner #=> String
+    #   resp.addon.marketplace_information.product_id #=> String
+    #   resp.addon.marketplace_information.product_url #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1759,10 +1771,12 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Describes the Kubernetes versions that the add-on can be used with.
+    # Describes the versions for an add-on. Information such as the
+    # Kubernetes versions that you can use the add-on with, the `owner`,
+    # `publisher`, and the `type` of the add-on are returned.
     #
     # @option params [String] :kubernetes_version
-    #   The Kubernetes versions that the add-on can be used with.
+    #   The Kubernetes versions that you can use the add-on with.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1788,6 +1802,18 @@ module Aws::EKS
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
     #
+    # @option params [Array<String>] :types
+    #   The type of the add-on. For valid `types`, don't specify a value for
+    #   this property.
+    #
+    # @option params [Array<String>] :publishers
+    #   The publisher of the add-on. For valid `publishers`, don't specify a
+    #   value for this property.
+    #
+    # @option params [Array<String>] :owners
+    #   The owner of the add-on. For valid `owners`, don't specify a value
+    #   for this property.
+    #
     # @return [Types::DescribeAddonVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAddonVersionsResponse#addons #addons} => Array&lt;Types::AddonInfo&gt;
@@ -1802,6 +1828,9 @@ module Aws::EKS
     #     max_results: 1,
     #     next_token: "String",
     #     addon_name: "String",
+    #     types: ["String"],
+    #     publishers: ["String"],
+    #     owners: ["String"],
     #   })
     #
     # @example Response structure
@@ -1818,6 +1847,11 @@ module Aws::EKS
     #   resp.addons[0].addon_versions[0].compatibilities[0].platform_versions #=> Array
     #   resp.addons[0].addon_versions[0].compatibilities[0].platform_versions[0] #=> String
     #   resp.addons[0].addon_versions[0].compatibilities[0].default_version #=> Boolean
+    #   resp.addons[0].addon_versions[0].requires_configuration #=> Boolean
+    #   resp.addons[0].publisher #=> String
+    #   resp.addons[0].owner #=> String
+    #   resp.addons[0].marketplace_information.product_id #=> String
+    #   resp.addons[0].marketplace_information.product_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonVersions AWS API Documentation
@@ -3392,7 +3426,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

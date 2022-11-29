@@ -110,10 +110,14 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::GetAdministratorAccount.build(context)
           when :get_allow_list
             Aws::Macie2::Endpoints::GetAllowList.build(context)
+          when :get_automated_discovery_configuration
+            Aws::Macie2::Endpoints::GetAutomatedDiscoveryConfiguration.build(context)
           when :get_bucket_statistics
             Aws::Macie2::Endpoints::GetBucketStatistics.build(context)
           when :get_classification_export_configuration
             Aws::Macie2::Endpoints::GetClassificationExportConfiguration.build(context)
+          when :get_classification_scope
+            Aws::Macie2::Endpoints::GetClassificationScope.build(context)
           when :get_custom_data_identifier
             Aws::Macie2::Endpoints::GetCustomDataIdentifier.build(context)
           when :get_finding_statistics
@@ -132,12 +136,16 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::GetMasterAccount.build(context)
           when :get_member
             Aws::Macie2::Endpoints::GetMember.build(context)
+          when :get_resource_profile
+            Aws::Macie2::Endpoints::GetResourceProfile.build(context)
           when :get_reveal_configuration
             Aws::Macie2::Endpoints::GetRevealConfiguration.build(context)
           when :get_sensitive_data_occurrences
             Aws::Macie2::Endpoints::GetSensitiveDataOccurrences.build(context)
           when :get_sensitive_data_occurrences_availability
             Aws::Macie2::Endpoints::GetSensitiveDataOccurrencesAvailability.build(context)
+          when :get_sensitivity_inspection_template
+            Aws::Macie2::Endpoints::GetSensitivityInspectionTemplate.build(context)
           when :get_usage_statistics
             Aws::Macie2::Endpoints::GetUsageStatistics.build(context)
           when :get_usage_totals
@@ -146,6 +154,8 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::ListAllowLists.build(context)
           when :list_classification_jobs
             Aws::Macie2::Endpoints::ListClassificationJobs.build(context)
+          when :list_classification_scopes
+            Aws::Macie2::Endpoints::ListClassificationScopes.build(context)
           when :list_custom_data_identifiers
             Aws::Macie2::Endpoints::ListCustomDataIdentifiers.build(context)
           when :list_findings
@@ -160,6 +170,12 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::ListMembers.build(context)
           when :list_organization_admin_accounts
             Aws::Macie2::Endpoints::ListOrganizationAdminAccounts.build(context)
+          when :list_resource_profile_artifacts
+            Aws::Macie2::Endpoints::ListResourceProfileArtifacts.build(context)
+          when :list_resource_profile_detections
+            Aws::Macie2::Endpoints::ListResourceProfileDetections.build(context)
+          when :list_sensitivity_inspection_templates
+            Aws::Macie2::Endpoints::ListSensitivityInspectionTemplates.build(context)
           when :list_tags_for_resource
             Aws::Macie2::Endpoints::ListTagsForResource.build(context)
           when :put_classification_export_configuration
@@ -176,8 +192,12 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::UntagResource.build(context)
           when :update_allow_list
             Aws::Macie2::Endpoints::UpdateAllowList.build(context)
+          when :update_automated_discovery_configuration
+            Aws::Macie2::Endpoints::UpdateAutomatedDiscoveryConfiguration.build(context)
           when :update_classification_job
             Aws::Macie2::Endpoints::UpdateClassificationJob.build(context)
+          when :update_classification_scope
+            Aws::Macie2::Endpoints::UpdateClassificationScope.build(context)
           when :update_findings_filter
             Aws::Macie2::Endpoints::UpdateFindingsFilter.build(context)
           when :update_macie_session
@@ -186,8 +206,14 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::UpdateMemberSession.build(context)
           when :update_organization_configuration
             Aws::Macie2::Endpoints::UpdateOrganizationConfiguration.build(context)
+          when :update_resource_profile
+            Aws::Macie2::Endpoints::UpdateResourceProfile.build(context)
+          when :update_resource_profile_detections
+            Aws::Macie2::Endpoints::UpdateResourceProfileDetections.build(context)
           when :update_reveal_configuration
             Aws::Macie2::Endpoints::UpdateRevealConfiguration.build(context)
+          when :update_sensitivity_inspection_template
+            Aws::Macie2::Endpoints::UpdateSensitivityInspectionTemplate.build(context)
           end
         end
       end

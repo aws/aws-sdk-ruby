@@ -1409,6 +1409,10 @@ module Aws::ConfigService
     #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
+    # @option params [Types::DescribeConfigRulesFilters] :filters
+    #   Returns a list of Detecive or Proactive Config rules. By default, this
+    #   API returns an unfiltered list.
+    #
     # @return [Types::DescribeConfigRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeConfigRulesResponse#config_rules #config_rules} => Array&lt;Types::ConfigRule&gt;
@@ -1421,6 +1425,9 @@ module Aws::ConfigService
     #   resp = client.describe_config_rules({
     #     config_rule_names: ["ConfigRuleName"],
     #     next_token: "String",
+    #     filters: {
+    #       evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #     },
     #   })
     #
     # @example Response structure
@@ -1448,6 +1455,8 @@ module Aws::ConfigService
     #   resp.config_rules[0].maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
     #   resp.config_rules[0].config_rule_state #=> String, one of "ACTIVE", "DELETING", "DELETING_RESULTS", "EVALUATING"
     #   resp.config_rules[0].created_by #=> String
+    #   resp.config_rules[0].evaluation_modes #=> Array
+    #   resp.config_rules[0].evaluation_modes[0].mode #=> String, one of "DETECTIVE", "PROACTIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules AWS API Documentation
@@ -2581,7 +2590,9 @@ module Aws::ConfigService
     #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
     #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
     #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
+    #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.evaluation_mode #=> String, one of "DETECTIVE", "PROACTIVE"
     #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.ordering_timestamp #=> Time
+    #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.resource_evaluation_id #=> String
     #   resp.aggregate_evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
     #   resp.aggregate_evaluation_results[0].result_recorded_time #=> Time
     #   resp.aggregate_evaluation_results[0].config_rule_invoked_time #=> Time
@@ -2913,7 +2924,9 @@ module Aws::ConfigService
     #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
     #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
     #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
+    #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.evaluation_mode #=> String, one of "DETECTIVE", "PROACTIVE"
     #   resp.evaluation_results[0].evaluation_result_identifier.ordering_timestamp #=> Time
+    #   resp.evaluation_results[0].evaluation_result_identifier.resource_evaluation_id #=> String
     #   resp.evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
     #   resp.evaluation_results[0].result_recorded_time #=> Time
     #   resp.evaluation_results[0].config_rule_invoked_time #=> Time
@@ -2932,14 +2945,14 @@ module Aws::ConfigService
 
     # Returns the evaluation results for the specified Amazon Web Services
     # resource. The results indicate which Config rules were used to
-    # evaluate the resource, when each rule was last used, and whether the
-    # resource complies with each rule.
+    # evaluate the resource, when each rule was last invoked, and whether
+    # the resource complies with each rule.
     #
-    # @option params [required, String] :resource_type
+    # @option params [String] :resource_type
     #   The type of the Amazon Web Services resource for which you want
     #   compliance information.
     #
-    # @option params [required, String] :resource_id
+    # @option params [String] :resource_id
     #   The ID of the Amazon Web Services resource for which you want
     #   compliance information.
     #
@@ -2953,6 +2966,15 @@ module Aws::ConfigService
     #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
+    # @option params [String] :resource_evaluation_id
+    #   The unique ID of Amazon Web Services resource execution for which you
+    #   want to retrieve evaluation results.
+    #
+    #   <note markdown="1"> You need to only provide either a `ResourceEvaluationID` or a
+    #   `ResourceID `and `ResourceType`.
+    #
+    #    </note>
+    #
     # @return [Types::GetComplianceDetailsByResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetComplianceDetailsByResourceResponse#evaluation_results #evaluation_results} => Array&lt;Types::EvaluationResult&gt;
@@ -2963,10 +2985,11 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_compliance_details_by_resource({
-    #     resource_type: "StringWithCharLimit256", # required
-    #     resource_id: "BaseResourceId", # required
+    #     resource_type: "StringWithCharLimit256",
+    #     resource_id: "BaseResourceId",
     #     compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
     #     next_token: "String",
+    #     resource_evaluation_id: "ResourceEvaluationId",
     #   })
     #
     # @example Response structure
@@ -2975,7 +2998,9 @@ module Aws::ConfigService
     #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
     #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
     #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
+    #   resp.evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.evaluation_mode #=> String, one of "DETECTIVE", "PROACTIVE"
     #   resp.evaluation_results[0].evaluation_result_identifier.ordering_timestamp #=> Time
+    #   resp.evaluation_results[0].evaluation_result_identifier.resource_evaluation_id #=> String
     #   resp.evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
     #   resp.evaluation_results[0].result_recorded_time #=> Time
     #   resp.evaluation_results[0].config_rule_invoked_time #=> Time
@@ -3106,7 +3131,9 @@ module Aws::ConfigService
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
+    #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.evaluation_mode #=> String, one of "DETECTIVE", "PROACTIVE"
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.ordering_timestamp #=> Time
+    #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.resource_evaluation_id #=> String
     #   resp.conformance_pack_rule_evaluation_results[0].config_rule_invoked_time #=> Time
     #   resp.conformance_pack_rule_evaluation_results[0].result_recorded_time #=> Time
     #   resp.conformance_pack_rule_evaluation_results[0].annotation #=> String
@@ -3545,6 +3572,56 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns a summary of resource evaluation for the specified resource
+    # evaluation ID from the proactive rules that were run. The results
+    # indicate which evaluation context was used to evaluate the rules,
+    # which resource details were evaluated, the evaluation mode that was
+    # run, and whether the resource details comply with the configuration of
+    # the proactive rules.
+    #
+    # @option params [required, String] :resource_evaluation_id
+    #   The unique `ResourceEvaluationId` of Amazon Web Services resource
+    #   execution for which you want to retrieve the evaluation summary.
+    #
+    # @return [Types::GetResourceEvaluationSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceEvaluationSummaryResponse#resource_evaluation_id #resource_evaluation_id} => String
+    #   * {Types::GetResourceEvaluationSummaryResponse#evaluation_mode #evaluation_mode} => String
+    #   * {Types::GetResourceEvaluationSummaryResponse#evaluation_status #evaluation_status} => Types::EvaluationStatus
+    #   * {Types::GetResourceEvaluationSummaryResponse#evaluation_start_timestamp #evaluation_start_timestamp} => Time
+    #   * {Types::GetResourceEvaluationSummaryResponse#compliance #compliance} => String
+    #   * {Types::GetResourceEvaluationSummaryResponse#evaluation_context #evaluation_context} => Types::EvaluationContext
+    #   * {Types::GetResourceEvaluationSummaryResponse#resource_details #resource_details} => Types::ResourceDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_evaluation_summary({
+    #     resource_evaluation_id: "ResourceEvaluationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_evaluation_id #=> String
+    #   resp.evaluation_mode #=> String, one of "DETECTIVE", "PROACTIVE"
+    #   resp.evaluation_status.status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.evaluation_status.failure_reason #=> String
+    #   resp.evaluation_start_timestamp #=> Time
+    #   resp.compliance #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
+    #   resp.evaluation_context.evaluation_context_identifier #=> String
+    #   resp.resource_details.resource_id #=> String
+    #   resp.resource_details.resource_type #=> String
+    #   resp.resource_details.resource_configuration #=> String
+    #   resp.resource_details.resource_configuration_schema_type #=> String, one of "CFN_RESOURCE_SCHEMA"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceEvaluationSummary AWS API Documentation
+    #
+    # @overload get_resource_evaluation_summary(params = {})
+    # @param [Hash] params ({})
+    def get_resource_evaluation_summary(params = {}, options = {})
+      req = build_request(:get_resource_evaluation_summary, params)
+      req.send_request(options)
+    end
+
     # Returns the details of a specific stored query.
     #
     # @option params [required, String] :query_name
@@ -3815,6 +3892,59 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns a list of proactive resource evaluations.
+    #
+    # @option params [Types::ResourceEvaluationFilters] :filters
+    #   Returns a `ResourceEvaluationFilters` object.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of evaluations returned on each page. The default
+    #   is 10. You cannot specify a number greater than 100. If you specify 0,
+    #   Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::ListResourceEvaluationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceEvaluationsResponse#resource_evaluations #resource_evaluations} => Array&lt;Types::ResourceEvaluation&gt;
+    #   * {Types::ListResourceEvaluationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_evaluations({
+    #     filters: {
+    #       evaluation_mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #       time_window: {
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #       },
+    #       evaluation_context_identifier: "EvaluationContextIdentifier",
+    #     },
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_evaluations #=> Array
+    #   resp.resource_evaluations[0].resource_evaluation_id #=> String
+    #   resp.resource_evaluations[0].evaluation_mode #=> String, one of "DETECTIVE", "PROACTIVE"
+    #   resp.resource_evaluations[0].evaluation_start_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListResourceEvaluations AWS API Documentation
+    #
+    # @overload list_resource_evaluations(params = {})
+    # @param [Hash] params ({})
+    def list_resource_evaluations(params = {}, options = {})
+      req = build_request(:list_resource_evaluations, params)
+      req.send_request(options)
+    end
+
     # Lists the stored queries for a single Amazon Web Services account and
     # a single Amazon Web Services Region. The default is 100.
     #
@@ -4036,6 +4166,11 @@ module Aws::ConfigService
     #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #       config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
     #       created_by: "StringWithCharLimit256",
+    #       evaluation_modes: [
+    #         {
+    #           mode: "DETECTIVE", # accepts DETECTIVE, PROACTIVE
+    #         },
+    #       ],
     #     },
     #     tags: [
     #       {
@@ -4822,6 +4957,11 @@ module Aws::ConfigService
     #
     #  </note>
     #
+    # <note markdown="1"> To place an exception on an Amazon Web Services resource, ensure
+    # remediation is set as manual remediation.
+    #
+    #  </note>
+    #
     # @option params [required, String] :config_rule_name
     #   The name of the Config rule for which you want to create remediation
     #   exception.
@@ -5320,6 +5460,82 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Runs an on-demand evaluation for the specified resource to determine
+    # whether the resource details will comply with configured Config rules.
+    # You can also use it for evaluation purposes. Config recommends using
+    # an evaluation context. It runs an execution against the resource
+    # details with all of the Config rules in your account that match with
+    # the specified proactive mode and resource type.
+    #
+    # <note markdown="1"> Ensure you have the `cloudformation:DescribeType` role setup to
+    # validate the resource type schema.
+    #
+    #  </note>
+    #
+    # @option params [required, Types::ResourceDetails] :resource_details
+    #   Returns a `ResourceDetails` object.
+    #
+    # @option params [Types::EvaluationContext] :evaluation_context
+    #   Returns an `EvaluationContext` object.
+    #
+    # @option params [required, String] :evaluation_mode
+    #   The mode of an evaluation. The valid value for this API is
+    #   `Proactive`.
+    #
+    # @option params [Integer] :evaluation_timeout
+    #   The timeout for an evaluation. The default is 900 seconds. You cannot
+    #   specify a number greater than 3600. If you specify 0, Config uses the
+    #   default.
+    #
+    # @option params [String] :client_token
+    #   A client token is a unique, case-sensitive string of up to 64 ASCII
+    #   characters. To make an idempotent API request using one of these
+    #   actions, specify a client token in the request.
+    #
+    #   <note markdown="1"> Avoid reusing the same client token for other API requests. If you
+    #   retry a request that completed successfully using the same client
+    #   token and the same parameters, the retry succeeds without performing
+    #   any further actions. If you retry a successful request using the same
+    #   client token, but one or more of the parameters are different, other
+    #   than the Region or Availability Zone, the retry fails with an
+    #   IdempotentParameterMismatch error.
+    #
+    #    </note>
+    #
+    # @return [Types::StartResourceEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartResourceEvaluationResponse#resource_evaluation_id #resource_evaluation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_resource_evaluation({
+    #     resource_details: { # required
+    #       resource_id: "BaseResourceId", # required
+    #       resource_type: "StringWithCharLimit256", # required
+    #       resource_configuration: "ResourceConfiguration", # required
+    #       resource_configuration_schema_type: "CFN_RESOURCE_SCHEMA", # accepts CFN_RESOURCE_SCHEMA
+    #     },
+    #     evaluation_context: {
+    #       evaluation_context_identifier: "EvaluationContextIdentifier",
+    #     },
+    #     evaluation_mode: "DETECTIVE", # required, accepts DETECTIVE, PROACTIVE
+    #     evaluation_timeout: 1,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_evaluation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartResourceEvaluation AWS API Documentation
+    #
+    # @overload start_resource_evaluation(params = {})
+    # @param [Hash] params ({})
+    def start_resource_evaluation(params = {}, options = {})
+      req = build_request(:start_resource_evaluation, params)
+      req.send_request(options)
+    end
+
     # Stops recording configurations of the Amazon Web Services resources
     # you have selected to record in your Amazon Web Services account.
     #
@@ -5421,7 +5637,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

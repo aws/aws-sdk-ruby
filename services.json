@@ -11,6 +11,9 @@
       "Aws::APIGateway::Plugins::ApplyContentTypeHeader"
     ]
   },
+  "ARCZonalShift": {
+    "models": "arc-zonal-shift/2022-10-30"
+  },
   "AccessAnalyzer": {
     "models": "accessanalyzer/2019-11-01"
   },

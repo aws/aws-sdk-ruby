@@ -2909,6 +2909,20 @@ module Aws::EC2
       end
     end
 
+    class DescribeAwsNetworkPerformanceMetricSubscriptions
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeBundleTasks
       def self.build(context)
         unless context.config.regional_endpoint
@@ -4813,6 +4827,20 @@ module Aws::EC2
       end
     end
 
+    class DisableAwsNetworkPerformanceMetricSubscription
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DisableEbsEncryptionByDefault
       def self.build(context)
         unless context.config.regional_endpoint
@@ -5135,6 +5163,20 @@ module Aws::EC2
       end
     end
 
+    class EnableAwsNetworkPerformanceMetricSubscription
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class EnableEbsEncryptionByDefault
       def self.build(context)
         unless context.config.regional_endpoint
@@ -5192,6 +5234,20 @@ module Aws::EC2
     end
 
     class EnableIpamOrganizationAdminAccount
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class EnableReachabilityAnalyzerOrganizationSharing
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -5360,6 +5416,20 @@ module Aws::EC2
     end
 
     class GetAssociatedIpv6PoolCidrs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EC2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetAwsNetworkPerformanceData
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

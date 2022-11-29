@@ -169,6 +169,19 @@ module Aws::Inspector2
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
+      end
     end
 
     class ValidationException < ServiceError

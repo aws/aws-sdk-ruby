@@ -368,6 +368,12 @@ module Aws::EC2
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #     network_card_index: 1,
+    #     ena_srd_specification: {
+    #       ena_srd_enabled: false,
+    #       ena_srd_udp_specification: {
+    #         ena_srd_udp_enabled: false,
+    #       },
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :device_index
@@ -383,6 +389,9 @@ module Aws::EC2
     #   The index of the network card. Some instance types support multiple
     #   network cards. The primary network interface must be assigned to
     #   network card index 0. The default is network card index 0.
+    # @option options [Types::EnaSrdSpecification] :ena_srd_specification
+    #   Configures ENA Express for the network interface that this action
+    #   attaches to the instance.
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)
@@ -565,11 +574,17 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
+    #     ena_srd_specification: {
+    #       ena_srd_enabled: false,
+    #       ena_srd_udp_specification: {
+    #         ena_srd_udp_enabled: false,
+    #       },
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
-    #   Information about the interface attachment. If modifying the 'delete
-    #   on termination' attribute, you must specify the ID of the interface
+    #   Information about the interface attachment. If modifying the `delete
+    #   on termination` attribute, you must specify the ID of the interface
     #   attachment.
     # @option options [Types::AttributeValue] :description
     #   A description for the network interface.
@@ -590,6 +605,9 @@ module Aws::EC2
     #   enabled; otherwise, they are disabled. The default value is `true`.
     #   You must disable source/destination checks if the instance runs
     #   services such as network address translation, routing, or firewalls.
+    # @option options [Types::EnaSrdSpecification] :ena_srd_specification
+    #   Updates the ENA Express configuration for the network interface that’s
+    #   attached to the instance.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

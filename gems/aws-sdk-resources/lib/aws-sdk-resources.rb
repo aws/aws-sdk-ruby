@@ -8,6 +8,7 @@ module Aws
   autoload :ACM, 'aws-sdk-acm'
   autoload :ACMPCA, 'aws-sdk-acmpca'
   autoload :APIGateway, 'aws-sdk-apigateway'
+  autoload :ARCZonalShift, 'aws-sdk-arczonalshift'
   autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
   autoload :Account, 'aws-sdk-account'
   autoload :AlexaForBusiness, 'aws-sdk-alexaforbusiness'

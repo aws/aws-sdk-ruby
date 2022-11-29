@@ -158,6 +158,8 @@ module Aws::EC2
     AttachVolumeRequest = Shapes::StructureShape.new(name: 'AttachVolumeRequest')
     AttachVpnGatewayRequest = Shapes::StructureShape.new(name: 'AttachVpnGatewayRequest')
     AttachVpnGatewayResult = Shapes::StructureShape.new(name: 'AttachVpnGatewayResult')
+    AttachmentEnaSrdSpecification = Shapes::StructureShape.new(name: 'AttachmentEnaSrdSpecification')
+    AttachmentEnaSrdUdpSpecification = Shapes::StructureShape.new(name: 'AttachmentEnaSrdUdpSpecification')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AttributeBooleanValue = Shapes::StructureShape.new(name: 'AttributeBooleanValue')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
@@ -529,6 +531,10 @@ module Aws::EC2
     CustomerGatewayList = Shapes::ListShape.new(name: 'CustomerGatewayList')
     DITMaxResults = Shapes::IntegerShape.new(name: 'DITMaxResults')
     DITOMaxResults = Shapes::IntegerShape.new(name: 'DITOMaxResults')
+    DataQueries = Shapes::ListShape.new(name: 'DataQueries')
+    DataQuery = Shapes::StructureShape.new(name: 'DataQuery')
+    DataResponse = Shapes::StructureShape.new(name: 'DataResponse')
+    DataResponses = Shapes::ListShape.new(name: 'DataResponses')
     DatafeedSubscriptionState = Shapes::StringShape.new(name: 'DatafeedSubscriptionState')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
@@ -696,6 +702,8 @@ module Aws::EC2
     DescribeAggregateIdFormatResult = Shapes::StructureShape.new(name: 'DescribeAggregateIdFormatResult')
     DescribeAvailabilityZonesRequest = Shapes::StructureShape.new(name: 'DescribeAvailabilityZonesRequest')
     DescribeAvailabilityZonesResult = Shapes::StructureShape.new(name: 'DescribeAvailabilityZonesResult')
+    DescribeAwsNetworkPerformanceMetricSubscriptionsRequest = Shapes::StructureShape.new(name: 'DescribeAwsNetworkPerformanceMetricSubscriptionsRequest')
+    DescribeAwsNetworkPerformanceMetricSubscriptionsResult = Shapes::StructureShape.new(name: 'DescribeAwsNetworkPerformanceMetricSubscriptionsResult')
     DescribeBundleTasksRequest = Shapes::StructureShape.new(name: 'DescribeBundleTasksRequest')
     DescribeBundleTasksResult = Shapes::StructureShape.new(name: 'DescribeBundleTasksResult')
     DescribeByoipCidrsMaxResults = Shapes::IntegerShape.new(name: 'DescribeByoipCidrsMaxResults')
@@ -1028,6 +1036,8 @@ module Aws::EC2
     DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
     DisableAddressTransferRequest = Shapes::StructureShape.new(name: 'DisableAddressTransferRequest')
     DisableAddressTransferResult = Shapes::StructureShape.new(name: 'DisableAddressTransferResult')
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest = Shapes::StructureShape.new(name: 'DisableAwsNetworkPerformanceMetricSubscriptionRequest')
+    DisableAwsNetworkPerformanceMetricSubscriptionResult = Shapes::StructureShape.new(name: 'DisableAwsNetworkPerformanceMetricSubscriptionResult')
     DisableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultRequest')
     DisableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultResult')
     DisableFastLaunchRequest = Shapes::StructureShape.new(name: 'DisableFastLaunchRequest')
@@ -1133,9 +1143,14 @@ module Aws::EC2
     ElasticInferenceAcceleratorCount = Shapes::IntegerShape.new(name: 'ElasticInferenceAcceleratorCount')
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
     ElasticIpAssociationId = Shapes::StringShape.new(name: 'ElasticIpAssociationId')
+    EnaSrdSpecification = Shapes::StructureShape.new(name: 'EnaSrdSpecification')
+    EnaSrdSupported = Shapes::BooleanShape.new(name: 'EnaSrdSupported')
+    EnaSrdUdpSpecification = Shapes::StructureShape.new(name: 'EnaSrdUdpSpecification')
     EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
     EnableAddressTransferRequest = Shapes::StructureShape.new(name: 'EnableAddressTransferRequest')
     EnableAddressTransferResult = Shapes::StructureShape.new(name: 'EnableAddressTransferResult')
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest = Shapes::StructureShape.new(name: 'EnableAwsNetworkPerformanceMetricSubscriptionRequest')
+    EnableAwsNetworkPerformanceMetricSubscriptionResult = Shapes::StructureShape.new(name: 'EnableAwsNetworkPerformanceMetricSubscriptionResult')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
     EnableFastLaunchRequest = Shapes::StructureShape.new(name: 'EnableFastLaunchRequest')
@@ -1153,6 +1168,8 @@ module Aws::EC2
     EnableImageDeprecationResult = Shapes::StructureShape.new(name: 'EnableImageDeprecationResult')
     EnableIpamOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountRequest')
     EnableIpamOrganizationAdminAccountResult = Shapes::StructureShape.new(name: 'EnableIpamOrganizationAdminAccountResult')
+    EnableReachabilityAnalyzerOrganizationSharingRequest = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingRequest')
+    EnableReachabilityAnalyzerOrganizationSharingResult = Shapes::StructureShape.new(name: 'EnableReachabilityAnalyzerOrganizationSharingResult')
     EnableSerialConsoleAccessRequest = Shapes::StructureShape.new(name: 'EnableSerialConsoleAccessRequest')
     EnableSerialConsoleAccessResult = Shapes::StructureShape.new(name: 'EnableSerialConsoleAccessResult')
     EnableTransitGatewayRouteTablePropagationRequest = Shapes::StructureShape.new(name: 'EnableTransitGatewayRouteTablePropagationRequest')
@@ -1280,6 +1297,8 @@ module Aws::EC2
     GetAssociatedEnclaveCertificateIamRolesResult = Shapes::StructureShape.new(name: 'GetAssociatedEnclaveCertificateIamRolesResult')
     GetAssociatedIpv6PoolCidrsRequest = Shapes::StructureShape.new(name: 'GetAssociatedIpv6PoolCidrsRequest')
     GetAssociatedIpv6PoolCidrsResult = Shapes::StructureShape.new(name: 'GetAssociatedIpv6PoolCidrsResult')
+    GetAwsNetworkPerformanceDataRequest = Shapes::StructureShape.new(name: 'GetAwsNetworkPerformanceDataRequest')
+    GetAwsNetworkPerformanceDataResult = Shapes::StructureShape.new(name: 'GetAwsNetworkPerformanceDataResult')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
     GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
@@ -1799,6 +1818,7 @@ module Aws::EC2
     MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
     MaxNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaxNetworkInterfaces')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxResultsParam = Shapes::IntegerShape.new(name: 'MaxResultsParam')
     MaximumBandwidthInMbps = Shapes::IntegerShape.new(name: 'MaximumBandwidthInMbps')
     MaximumEfaInterfaces = Shapes::IntegerShape.new(name: 'MaximumEfaInterfaces')
     MaximumIops = Shapes::IntegerShape.new(name: 'MaximumIops')
@@ -1811,6 +1831,9 @@ module Aws::EC2
     MemoryMiB = Shapes::StructureShape.new(name: 'MemoryMiB')
     MemoryMiBRequest = Shapes::StructureShape.new(name: 'MemoryMiBRequest')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
+    MetricPoint = Shapes::StructureShape.new(name: 'MetricPoint')
+    MetricPoints = Shapes::ListShape.new(name: 'MetricPoints')
+    MetricType = Shapes::StringShape.new(name: 'MetricType')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
     ModifyAddressAttributeRequest = Shapes::StructureShape.new(name: 'ModifyAddressAttributeRequest')
     ModifyAddressAttributeResult = Shapes::StructureShape.new(name: 'ModifyAddressAttributeResult')
@@ -2028,6 +2051,7 @@ module Aws::EC2
     PeeringConnectionOptions = Shapes::StructureShape.new(name: 'PeeringConnectionOptions')
     PeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'PeeringConnectionOptionsRequest')
     PeeringTgwInfo = Shapes::StructureShape.new(name: 'PeeringTgwInfo')
+    PeriodType = Shapes::StringShape.new(name: 'PeriodType')
     PermissionGroup = Shapes::StringShape.new(name: 'PermissionGroup')
     Phase1DHGroupNumbersList = Shapes::ListShape.new(name: 'Phase1DHGroupNumbersList')
     Phase1DHGroupNumbersListValue = Shapes::StructureShape.new(name: 'Phase1DHGroupNumbersListValue')
@@ -2437,6 +2461,7 @@ module Aws::EC2
     State = Shapes::StringShape.new(name: 'State')
     StateReason = Shapes::StructureShape.new(name: 'StateReason')
     StaticSourcesSupportValue = Shapes::StringShape.new(name: 'StaticSourcesSupportValue')
+    StatisticType = Shapes::StringShape.new(name: 'StatisticType')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusName = Shapes::StringShape.new(name: 'StatusName')
     StatusType = Shapes::StringShape.new(name: 'StatusType')
@@ -2466,6 +2491,8 @@ module Aws::EC2
     SubnetIpv6CidrBlockAssociationSet = Shapes::ListShape.new(name: 'SubnetIpv6CidrBlockAssociationSet')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
     SubnetState = Shapes::StringShape.new(name: 'SubnetState')
+    Subscription = Shapes::StructureShape.new(name: 'Subscription')
+    SubscriptionList = Shapes::ListShape.new(name: 'SubscriptionList')
     SuccessfulInstanceCreditSpecificationItem = Shapes::StructureShape.new(name: 'SuccessfulInstanceCreditSpecificationItem')
     SuccessfulInstanceCreditSpecificationSet = Shapes::ListShape.new(name: 'SuccessfulInstanceCreditSpecificationSet')
     SuccessfulQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'SuccessfulQueuedPurchaseDeletion')
@@ -2745,6 +2772,7 @@ module Aws::EC2
     VpcPeeringConnection = Shapes::StructureShape.new(name: 'VpcPeeringConnection')
     VpcPeeringConnectionId = Shapes::StringShape.new(name: 'VpcPeeringConnectionId')
     VpcPeeringConnectionIdList = Shapes::ListShape.new(name: 'VpcPeeringConnectionIdList')
+    VpcPeeringConnectionIdWithResolver = Shapes::StringShape.new(name: 'VpcPeeringConnectionIdWithResolver')
     VpcPeeringConnectionList = Shapes::ListShape.new(name: 'VpcPeeringConnectionList')
     VpcPeeringConnectionOptionsDescription = Shapes::StructureShape.new(name: 'VpcPeeringConnectionOptionsDescription')
     VpcPeeringConnectionStateReason = Shapes::StructureShape.new(name: 'VpcPeeringConnectionStateReason')
@@ -2856,7 +2884,7 @@ module Aws::EC2
     AcceptVpcEndpointConnectionsResult.struct_class = Types::AcceptVpcEndpointConnectionsResult
 
     AcceptVpcPeeringConnectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    AcceptVpcPeeringConnectionRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: VpcPeeringConnectionId, location_name: "vpcPeeringConnectionId"))
+    AcceptVpcPeeringConnectionRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: VpcPeeringConnectionIdWithResolver, location_name: "vpcPeeringConnectionId"))
     AcceptVpcPeeringConnectionRequest.struct_class = Types::AcceptVpcPeeringConnectionRequest
 
     AcceptVpcPeeringConnectionResult.add_member(:vpc_peering_connection, Shapes::ShapeRef.new(shape: VpcPeeringConnection, location_name: "vpcPeeringConnection"))
@@ -3309,6 +3337,7 @@ module Aws::EC2
     AttachNetworkInterfaceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     AttachNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     AttachNetworkInterfaceRequest.add_member(:network_card_index, Shapes::ShapeRef.new(shape: Integer, location_name: "NetworkCardIndex"))
+    AttachNetworkInterfaceRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecification, location_name: "EnaSrdSpecification"))
     AttachNetworkInterfaceRequest.struct_class = Types::AttachNetworkInterfaceRequest
 
     AttachNetworkInterfaceResult.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
@@ -3328,6 +3357,13 @@ module Aws::EC2
 
     AttachVpnGatewayResult.add_member(:vpc_attachment, Shapes::ShapeRef.new(shape: VpcAttachment, location_name: "attachment"))
     AttachVpnGatewayResult.struct_class = Types::AttachVpnGatewayResult
+
+    AttachmentEnaSrdSpecification.add_member(:ena_srd_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSrdEnabled"))
+    AttachmentEnaSrdSpecification.add_member(:ena_srd_udp_specification, Shapes::ShapeRef.new(shape: AttachmentEnaSrdUdpSpecification, location_name: "enaSrdUdpSpecification"))
+    AttachmentEnaSrdSpecification.struct_class = Types::AttachmentEnaSrdSpecification
+
+    AttachmentEnaSrdUdpSpecification.add_member(:ena_srd_udp_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSrdUdpEnabled"))
+    AttachmentEnaSrdUdpSpecification.struct_class = Types::AttachmentEnaSrdUdpSpecification
 
     AttributeBooleanValue.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "value"))
     AttributeBooleanValue.struct_class = Types::AttributeBooleanValue
@@ -4912,6 +4948,27 @@ module Aws::EC2
 
     CustomerGatewayList.member = Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "item")
 
+    DataQueries.member = Shapes::ShapeRef.new(shape: DataQuery)
+
+    DataQuery.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    DataQuery.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "Source"))
+    DataQuery.add_member(:destination, Shapes::ShapeRef.new(shape: String, location_name: "Destination"))
+    DataQuery.add_member(:metric, Shapes::ShapeRef.new(shape: MetricType, location_name: "Metric"))
+    DataQuery.add_member(:statistic, Shapes::ShapeRef.new(shape: StatisticType, location_name: "Statistic"))
+    DataQuery.add_member(:period, Shapes::ShapeRef.new(shape: PeriodType, location_name: "Period"))
+    DataQuery.struct_class = Types::DataQuery
+
+    DataResponse.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    DataResponse.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "source"))
+    DataResponse.add_member(:destination, Shapes::ShapeRef.new(shape: String, location_name: "destination"))
+    DataResponse.add_member(:metric, Shapes::ShapeRef.new(shape: MetricType, location_name: "metric"))
+    DataResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: StatisticType, location_name: "statistic"))
+    DataResponse.add_member(:period, Shapes::ShapeRef.new(shape: PeriodType, location_name: "period"))
+    DataResponse.add_member(:metric_points, Shapes::ShapeRef.new(shape: MetricPoints, location_name: "metricPointSet"))
+    DataResponse.struct_class = Types::DataResponse
+
+    DataResponses.member = Shapes::ShapeRef.new(shape: DataResponse, location_name: "item")
+
     DedicatedHostIdList.member = Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "item")
 
     DeleteCarrierGatewayRequest.add_member(:carrier_gateway_id, Shapes::ShapeRef.new(shape: CarrierGatewayId, required: true, location_name: "CarrierGatewayId"))
@@ -5503,6 +5560,16 @@ module Aws::EC2
 
     DescribeAvailabilityZonesResult.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, location_name: "availabilityZoneInfo"))
     DescribeAvailabilityZonesResult.struct_class = Types::DescribeAvailabilityZonesResult
+
+    DescribeAwsNetworkPerformanceMetricSubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsParam, location_name: "MaxResults"))
+    DescribeAwsNetworkPerformanceMetricSubscriptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAwsNetworkPerformanceMetricSubscriptionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeAwsNetworkPerformanceMetricSubscriptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeAwsNetworkPerformanceMetricSubscriptionsRequest.struct_class = Types::DescribeAwsNetworkPerformanceMetricSubscriptionsRequest
+
+    DescribeAwsNetworkPerformanceMetricSubscriptionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeAwsNetworkPerformanceMetricSubscriptionsResult.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "subscriptionSet"))
+    DescribeAwsNetworkPerformanceMetricSubscriptionsResult.struct_class = Types::DescribeAwsNetworkPerformanceMetricSubscriptionsResult
 
     DescribeBundleTasksRequest.add_member(:bundle_ids, Shapes::ShapeRef.new(shape: BundleIdStringList, location_name: "BundleId"))
     DescribeBundleTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -7010,6 +7077,16 @@ module Aws::EC2
     DisableAddressTransferResult.add_member(:address_transfer, Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "addressTransfer"))
     DisableAddressTransferResult.struct_class = Types::DisableAddressTransferResult
 
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "Source"))
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:destination, Shapes::ShapeRef.new(shape: String, location_name: "Destination"))
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:metric, Shapes::ShapeRef.new(shape: MetricType, location_name: "Metric"))
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:statistic, Shapes::ShapeRef.new(shape: StatisticType, location_name: "Statistic"))
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableAwsNetworkPerformanceMetricSubscriptionRequest.struct_class = Types::DisableAwsNetworkPerformanceMetricSubscriptionRequest
+
+    DisableAwsNetworkPerformanceMetricSubscriptionResult.add_member(:output, Shapes::ShapeRef.new(shape: Boolean, location_name: "output"))
+    DisableAwsNetworkPerformanceMetricSubscriptionResult.struct_class = Types::DisableAwsNetworkPerformanceMetricSubscriptionResult
+
     DisableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DisableEbsEncryptionByDefaultRequest.struct_class = Types::DisableEbsEncryptionByDefaultRequest
 
@@ -7350,6 +7427,13 @@ module Aws::EC2
 
     ElasticInferenceAccelerators.member = Shapes::ShapeRef.new(shape: ElasticInferenceAccelerator, location_name: "item")
 
+    EnaSrdSpecification.add_member(:ena_srd_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnaSrdEnabled"))
+    EnaSrdSpecification.add_member(:ena_srd_udp_specification, Shapes::ShapeRef.new(shape: EnaSrdUdpSpecification, location_name: "EnaSrdUdpSpecification"))
+    EnaSrdSpecification.struct_class = Types::EnaSrdSpecification
+
+    EnaSrdUdpSpecification.add_member(:ena_srd_udp_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnaSrdUdpEnabled"))
+    EnaSrdUdpSpecification.struct_class = Types::EnaSrdUdpSpecification
+
     EnableAddressTransferRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     EnableAddressTransferRequest.add_member(:transfer_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransferAccountId"))
     EnableAddressTransferRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -7357,6 +7441,16 @@ module Aws::EC2
 
     EnableAddressTransferResult.add_member(:address_transfer, Shapes::ShapeRef.new(shape: AddressTransfer, location_name: "addressTransfer"))
     EnableAddressTransferResult.struct_class = Types::EnableAddressTransferResult
+
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "Source"))
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:destination, Shapes::ShapeRef.new(shape: String, location_name: "Destination"))
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:metric, Shapes::ShapeRef.new(shape: MetricType, location_name: "Metric"))
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:statistic, Shapes::ShapeRef.new(shape: StatisticType, location_name: "Statistic"))
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableAwsNetworkPerformanceMetricSubscriptionRequest.struct_class = Types::EnableAwsNetworkPerformanceMetricSubscriptionRequest
+
+    EnableAwsNetworkPerformanceMetricSubscriptionResult.add_member(:output, Shapes::ShapeRef.new(shape: Boolean, location_name: "output"))
+    EnableAwsNetworkPerformanceMetricSubscriptionResult.struct_class = Types::EnableAwsNetworkPerformanceMetricSubscriptionResult
 
     EnableEbsEncryptionByDefaultRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableEbsEncryptionByDefaultRequest.struct_class = Types::EnableEbsEncryptionByDefaultRequest
@@ -7437,6 +7531,12 @@ module Aws::EC2
 
     EnableIpamOrganizationAdminAccountResult.add_member(:success, Shapes::ShapeRef.new(shape: Boolean, location_name: "success"))
     EnableIpamOrganizationAdminAccountResult.struct_class = Types::EnableIpamOrganizationAdminAccountResult
+
+    EnableReachabilityAnalyzerOrganizationSharingRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableReachabilityAnalyzerOrganizationSharingRequest.struct_class = Types::EnableReachabilityAnalyzerOrganizationSharingRequest
+
+    EnableReachabilityAnalyzerOrganizationSharingResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnValue"))
+    EnableReachabilityAnalyzerOrganizationSharingResult.struct_class = Types::EnableReachabilityAnalyzerOrganizationSharingResult
 
     EnableSerialConsoleAccessRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     EnableSerialConsoleAccessRequest.struct_class = Types::EnableSerialConsoleAccessRequest
@@ -7877,6 +7977,18 @@ module Aws::EC2
     GetAssociatedIpv6PoolCidrsResult.add_member(:ipv_6_cidr_associations, Shapes::ShapeRef.new(shape: Ipv6CidrAssociationSet, location_name: "ipv6CidrAssociationSet"))
     GetAssociatedIpv6PoolCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetAssociatedIpv6PoolCidrsResult.struct_class = Types::GetAssociatedIpv6PoolCidrsResult
+
+    GetAwsNetworkPerformanceDataRequest.add_member(:data_queries, Shapes::ShapeRef.new(shape: DataQueries, location_name: "DataQuery"))
+    GetAwsNetworkPerformanceDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "StartTime"))
+    GetAwsNetworkPerformanceDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndTime"))
+    GetAwsNetworkPerformanceDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    GetAwsNetworkPerformanceDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetAwsNetworkPerformanceDataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetAwsNetworkPerformanceDataRequest.struct_class = Types::GetAwsNetworkPerformanceDataRequest
+
+    GetAwsNetworkPerformanceDataResult.add_member(:data_responses, Shapes::ShapeRef.new(shape: DataResponses, location_name: "dataResponseSet"))
+    GetAwsNetworkPerformanceDataResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetAwsNetworkPerformanceDataResult.struct_class = Types::GetAwsNetworkPerformanceDataResult
 
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -9873,6 +9985,14 @@ module Aws::EC2
     MemoryMiBRequest.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
     MemoryMiBRequest.struct_class = Types::MemoryMiBRequest
 
+    MetricPoint.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
+    MetricPoint.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
+    MetricPoint.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "value"))
+    MetricPoint.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    MetricPoint.struct_class = Types::MetricPoint
+
+    MetricPoints.member = Shapes::ShapeRef.new(shape: MetricPoint, location_name: "item")
+
     ModifyAddressAttributeRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     ModifyAddressAttributeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainName"))
     ModifyAddressAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -10178,6 +10298,7 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:groups, Shapes::ShapeRef.new(shape: SecurityGroupIdStringList, location_name: "SecurityGroupId"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
+    ModifyNetworkInterfaceAttributeRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecification, location_name: "EnaSrdSpecification"))
     ModifyNetworkInterfaceAttributeRequest.struct_class = Types::ModifyNetworkInterfaceAttributeRequest
 
     ModifyPrivateDnsNameOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -10613,6 +10734,7 @@ module Aws::EC2
     NetworkInfo.add_member(:efa_supported, Shapes::ShapeRef.new(shape: EfaSupportedFlag, location_name: "efaSupported"))
     NetworkInfo.add_member(:efa_info, Shapes::ShapeRef.new(shape: EfaInfo, location_name: "efaInfo"))
     NetworkInfo.add_member(:encryption_in_transit_supported, Shapes::ShapeRef.new(shape: EncryptionInTransitSupported, location_name: "encryptionInTransitSupported"))
+    NetworkInfo.add_member(:ena_srd_supported, Shapes::ShapeRef.new(shape: EnaSrdSupported, location_name: "enaSrdSupported"))
     NetworkInfo.struct_class = Types::NetworkInfo
 
     NetworkInsightsAccessScope.add_member(:network_insights_access_scope_id, Shapes::ShapeRef.new(shape: NetworkInsightsAccessScopeId, location_name: "networkInsightsAccessScopeId"))
@@ -10651,6 +10773,7 @@ module Aws::EC2
     NetworkInsightsAnalysis.add_member(:network_insights_analysis_id, Shapes::ShapeRef.new(shape: NetworkInsightsAnalysisId, location_name: "networkInsightsAnalysisId"))
     NetworkInsightsAnalysis.add_member(:network_insights_analysis_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "networkInsightsAnalysisArn"))
     NetworkInsightsAnalysis.add_member(:network_insights_path_id, Shapes::ShapeRef.new(shape: NetworkInsightsPathId, location_name: "networkInsightsPathId"))
+    NetworkInsightsAnalysis.add_member(:additional_accounts, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "additionalAccountSet"))
     NetworkInsightsAnalysis.add_member(:filter_in_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "filterInArnSet"))
     NetworkInsightsAnalysis.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
     NetworkInsightsAnalysis.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisStatus, location_name: "status"))
@@ -10661,6 +10784,7 @@ module Aws::EC2
     NetworkInsightsAnalysis.add_member(:return_path_components, Shapes::ShapeRef.new(shape: PathComponentList, location_name: "returnPathComponentSet"))
     NetworkInsightsAnalysis.add_member(:explanations, Shapes::ShapeRef.new(shape: ExplanationList, location_name: "explanationSet"))
     NetworkInsightsAnalysis.add_member(:alternate_path_hints, Shapes::ShapeRef.new(shape: AlternatePathHintList, location_name: "alternatePathHintSet"))
+    NetworkInsightsAnalysis.add_member(:suggested_accounts, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "suggestedAccountSet"))
     NetworkInsightsAnalysis.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     NetworkInsightsAnalysis.struct_class = Types::NetworkInsightsAnalysis
 
@@ -10673,6 +10797,8 @@ module Aws::EC2
     NetworkInsightsPath.add_member(:created_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createdDate"))
     NetworkInsightsPath.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "source"))
     NetworkInsightsPath.add_member(:destination, Shapes::ShapeRef.new(shape: String, location_name: "destination"))
+    NetworkInsightsPath.add_member(:source_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "sourceArn"))
+    NetworkInsightsPath.add_member(:destination_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "destinationArn"))
     NetworkInsightsPath.add_member(:source_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "sourceIp"))
     NetworkInsightsPath.add_member(:destination_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "destinationIp"))
     NetworkInsightsPath.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
@@ -10729,6 +10855,7 @@ module Aws::EC2
     NetworkInterfaceAttachment.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     NetworkInterfaceAttachment.add_member(:instance_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceOwnerId"))
     NetworkInterfaceAttachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "status"))
+    NetworkInterfaceAttachment.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: AttachmentEnaSrdSpecification, location_name: "enaSrdSpecification"))
     NetworkInterfaceAttachment.struct_class = Types::NetworkInterfaceAttachment
 
     NetworkInterfaceAttachmentChanges.add_member(:attachment_id, Shapes::ShapeRef.new(shape: NetworkInterfaceAttachmentId, location_name: "attachmentId"))
@@ -12566,6 +12693,7 @@ module Aws::EC2
     StartNetworkInsightsAccessScopeAnalysisResult.struct_class = Types::StartNetworkInsightsAccessScopeAnalysisResult
 
     StartNetworkInsightsAnalysisRequest.add_member(:network_insights_path_id, Shapes::ShapeRef.new(shape: NetworkInsightsPathId, required: true, location_name: "NetworkInsightsPathId"))
+    StartNetworkInsightsAnalysisRequest.add_member(:additional_accounts, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AdditionalAccount"))
     StartNetworkInsightsAnalysisRequest.add_member(:filter_in_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "FilterInArn"))
     StartNetworkInsightsAnalysisRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     StartNetworkInsightsAnalysisRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -12669,6 +12797,15 @@ module Aws::EC2
     SubnetIpv6CidrBlockAssociationSet.member = Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "item")
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "item")
+
+    Subscription.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "source"))
+    Subscription.add_member(:destination, Shapes::ShapeRef.new(shape: String, location_name: "destination"))
+    Subscription.add_member(:metric, Shapes::ShapeRef.new(shape: MetricType, location_name: "metric"))
+    Subscription.add_member(:statistic, Shapes::ShapeRef.new(shape: StatisticType, location_name: "statistic"))
+    Subscription.add_member(:period, Shapes::ShapeRef.new(shape: PeriodType, location_name: "period"))
+    Subscription.struct_class = Types::Subscription
+
+    SubscriptionList.member = Shapes::ShapeRef.new(shape: Subscription, location_name: "item")
 
     SuccessfulInstanceCreditSpecificationItem.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     SuccessfulInstanceCreditSpecificationItem.struct_class = Types::SuccessfulInstanceCreditSpecificationItem
@@ -15427,6 +15564,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeAvailabilityZonesResult)
       end)
 
+      api.add_operation(:describe_aws_network_performance_metric_subscriptions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAwsNetworkPerformanceMetricSubscriptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAwsNetworkPerformanceMetricSubscriptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAwsNetworkPerformanceMetricSubscriptionsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_bundle_tasks, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBundleTasks"
         o.http_method = "POST"
@@ -17108,6 +17259,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableAddressTransferResult)
       end)
 
+      api.add_operation(:disable_aws_network_performance_metric_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableAwsNetworkPerformanceMetricSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableAwsNetworkPerformanceMetricSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableAwsNetworkPerformanceMetricSubscriptionResult)
+      end)
+
       api.add_operation(:disable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableEbsEncryptionByDefault"
         o.http_method = "POST"
@@ -17292,6 +17451,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: EnableAddressTransferResult)
       end)
 
+      api.add_operation(:enable_aws_network_performance_metric_subscription, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableAwsNetworkPerformanceMetricSubscription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableAwsNetworkPerformanceMetricSubscriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableAwsNetworkPerformanceMetricSubscriptionResult)
+      end)
+
       api.add_operation(:enable_ebs_encryption_by_default, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableEbsEncryptionByDefault"
         o.http_method = "POST"
@@ -17330,6 +17497,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableIpamOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableIpamOrganizationAdminAccountResult)
+      end)
+
+      api.add_operation(:enable_reachability_analyzer_organization_sharing, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableReachabilityAnalyzerOrganizationSharing"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableReachabilityAnalyzerOrganizationSharingRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableReachabilityAnalyzerOrganizationSharingResult)
       end)
 
       api.add_operation(:enable_serial_console_access, Seahorse::Model::Operation.new.tap do |o|
@@ -17426,6 +17601,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetAssociatedIpv6PoolCidrsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAssociatedIpv6PoolCidrsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_aws_network_performance_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAwsNetworkPerformanceData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAwsNetworkPerformanceDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAwsNetworkPerformanceDataResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

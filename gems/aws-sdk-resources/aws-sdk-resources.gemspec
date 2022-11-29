@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-acm', '~> 1')
   spec.add_dependency('aws-sdk-acmpca', '~> 1')
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
+  spec.add_dependency('aws-sdk-arczonalshift', '~> 1')
   spec.add_dependency('aws-sdk-accessanalyzer', '~> 1')
   spec.add_dependency('aws-sdk-account', '~> 1')
   spec.add_dependency('aws-sdk-alexaforbusiness', '~> 1')

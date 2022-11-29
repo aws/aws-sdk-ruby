@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.667.0 (2022-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ARCZonalShift`.
+
 1.666.0 (2022-11-28)
 ------------------
 

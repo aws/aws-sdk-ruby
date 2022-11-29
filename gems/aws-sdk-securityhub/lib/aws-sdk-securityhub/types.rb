@@ -44068,7 +44068,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provides information about a specific standard.
+    # Provides information about a specific security standard.
     #
     # @!attribute [rw] standards_arn
     #   The ARN of a standard.
@@ -44092,13 +44092,18 @@ module Aws::SecurityHub
     #   `EnableDefaultStandards` is set to `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] standards_managed_by
+    #   Provides details about the management of a standard.
+    #   @return [Types::StandardsManagedBy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Standard AWS API Documentation
     #
     class Standard < Struct.new(
       :standards_arn,
       :name,
       :description,
-      :enabled_by_default)
+      :enabled_by_default,
+      :standards_managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44169,6 +44174,29 @@ module Aws::SecurityHub
       :remediation_url,
       :severity_rating,
       :related_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the management of a security standard.
+    #
+    # @!attribute [rw] company
+    #   An identifier for the company that manages a specific security
+    #   standard. For existing standards, the value is equal to `Amazon Web
+    #   Services`.
+    #   @return [String]
+    #
+    # @!attribute [rw] product
+    #   An identifier for the product that manages a specific security
+    #   standard. For existing standards, the value is equal to the Amazon
+    #   Web Services service that manages the standard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsManagedBy AWS API Documentation
+    #
+    class StandardsManagedBy < Struct.new(
+      :company,
+      :product)
       SENSITIVE = []
       include Aws::Structure
     end

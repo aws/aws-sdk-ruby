@@ -151,5 +151,19 @@ module Aws::LicenseManagerUserSubscriptions
       end
     end
 
+    class UpdateIdentityProviderSettings
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LicenseManagerUserSubscriptions::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
   end
 end

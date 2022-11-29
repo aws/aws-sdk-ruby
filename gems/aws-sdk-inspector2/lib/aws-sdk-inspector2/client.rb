@@ -426,6 +426,9 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_state.ecr.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].resource_state.ecr.error_message #=> String
     #   resp.accounts[0].resource_state.ecr.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_state.lambda.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
+    #   resp.accounts[0].resource_state.lambda.error_message #=> String
+    #   resp.accounts[0].resource_state.lambda.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].state.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED"
     #   resp.accounts[0].state.error_message #=> String
     #   resp.accounts[0].state.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -435,6 +438,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetAccountStatus AWS API Documentation
@@ -470,7 +474,7 @@ module Aws::Inspector2
     #   resp.accounts[0].free_trial_info[0].end #=> Time
     #   resp.accounts[0].free_trial_info[0].start #=> Time
     #   resp.accounts[0].free_trial_info[0].status #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR"
+    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].code #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR"
@@ -618,6 +622,12 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       exploit_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       finding_arn: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -652,6 +662,36 @@ module Aws::Inspector2
     #         {
     #           lower_inclusive: 1.0,
     #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       lambda_function_execution_role_arn: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_last_modified_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       lambda_function_layers: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
     #         },
     #       ],
     #       last_observed_at: [
@@ -748,6 +788,10 @@ module Aws::Inspector2
     #             value: "StringInput", # required
     #           },
     #           release: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #           source_lambda_layer_arn: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
@@ -873,6 +917,12 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       exploit_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       finding_arn: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -907,6 +957,36 @@ module Aws::Inspector2
     #         {
     #           lower_inclusive: 1.0,
     #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       lambda_function_execution_role_arn: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_last_modified_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       lambda_function_layers: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
     #         },
     #       ],
     #       last_observed_at: [
@@ -1006,6 +1086,10 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           source_lambda_layer_arn: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
     #           source_layer_hash: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -1067,7 +1151,7 @@ module Aws::Inspector2
     end
 
     # Describe Amazon Inspector configuration settings for an Amazon Web
-    # Services organization
+    # Services organization.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1078,6 +1162,7 @@ module Aws::Inspector2
     #
     #   resp.auto_enable.ec2 #=> Boolean
     #   resp.auto_enable.ecr #=> Boolean
+    #   resp.auto_enable.lambda #=> Boolean
     #   resp.max_account_limit_reached #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DescribeOrganizationConfiguration AWS API Documentation
@@ -1109,7 +1194,7 @@ module Aws::Inspector2
     #
     #   resp = client.disable({
     #     account_ids: ["AccountId"],
-    #     resource_types: ["EC2"], # accepts EC2, ECR
+    #     resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA
     #   })
     #
     # @example Response structure
@@ -1118,6 +1203,7 @@ module Aws::Inspector2
     #   resp.accounts[0].account_id #=> String
     #   resp.accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
@@ -1125,6 +1211,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Disable AWS API Documentation
@@ -1221,7 +1308,7 @@ module Aws::Inspector2
     #   resp = client.enable({
     #     account_ids: ["AccountId"],
     #     client_token: "ClientToken",
-    #     resource_types: ["EC2"], # required, accepts EC2, ECR
+    #     resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA
     #   })
     #
     # @example Response structure
@@ -1230,6 +1317,7 @@ module Aws::Inspector2
     #   resp.accounts[0].account_id #=> String
     #   resp.accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
@@ -1237,6 +1325,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].error_message #=> String
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Enable AWS API Documentation
@@ -1390,6 +1479,9 @@ module Aws::Inspector2
     #   resp.filter_criteria.ecr_image_tags #=> Array
     #   resp.filter_criteria.ecr_image_tags[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.ecr_image_tags[0].value #=> String
+    #   resp.filter_criteria.exploit_available #=> Array
+    #   resp.filter_criteria.exploit_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.exploit_available[0].value #=> String
     #   resp.filter_criteria.finding_arn #=> Array
     #   resp.filter_criteria.finding_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.finding_arn[0].value #=> String
@@ -1408,6 +1500,21 @@ module Aws::Inspector2
     #   resp.filter_criteria.inspector_score #=> Array
     #   resp.filter_criteria.inspector_score[0].lower_inclusive #=> Float
     #   resp.filter_criteria.inspector_score[0].upper_inclusive #=> Float
+    #   resp.filter_criteria.lambda_function_execution_role_arn #=> Array
+    #   resp.filter_criteria.lambda_function_execution_role_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.lambda_function_execution_role_arn[0].value #=> String
+    #   resp.filter_criteria.lambda_function_last_modified_at #=> Array
+    #   resp.filter_criteria.lambda_function_last_modified_at[0].end_inclusive #=> Time
+    #   resp.filter_criteria.lambda_function_last_modified_at[0].start_inclusive #=> Time
+    #   resp.filter_criteria.lambda_function_layers #=> Array
+    #   resp.filter_criteria.lambda_function_layers[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.lambda_function_layers[0].value #=> String
+    #   resp.filter_criteria.lambda_function_name #=> Array
+    #   resp.filter_criteria.lambda_function_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.lambda_function_name[0].value #=> String
+    #   resp.filter_criteria.lambda_function_runtime #=> Array
+    #   resp.filter_criteria.lambda_function_runtime[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.lambda_function_runtime[0].value #=> String
     #   resp.filter_criteria.last_observed_at #=> Array
     #   resp.filter_criteria.last_observed_at[0].end_inclusive #=> Time
     #   resp.filter_criteria.last_observed_at[0].start_inclusive #=> Time
@@ -1457,6 +1564,8 @@ module Aws::Inspector2
     #   resp.filter_criteria.vulnerable_packages[0].name.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].release.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.vulnerable_packages[0].release.value #=> String
+    #   resp.filter_criteria.vulnerable_packages[0].source_lambda_layer_arn.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].source_lambda_layer_arn.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].source_layer_hash.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.vulnerable_packages[0].source_layer_hash.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].version.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
@@ -1532,7 +1641,7 @@ module Aws::Inspector2
     #   resp = client.list_account_permissions({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     service: "EC2", # accepts EC2, ECR
+    #     service: "EC2", # accepts EC2, ECR, LAMBDA
     #   })
     #
     # @example Response structure
@@ -1540,7 +1649,7 @@ module Aws::Inspector2
     #   resp.next_token #=> String
     #   resp.permissions #=> Array
     #   resp.permissions[0].operation #=> String, one of "ENABLE_SCANNING", "DISABLE_SCANNING", "ENABLE_REPOSITORY", "DISABLE_REPOSITORY"
-    #   resp.permissions[0].service #=> String, one of "EC2", "ECR"
+    #   resp.permissions[0].service #=> String, one of "EC2", "ECR", "LAMBDA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListAccountPermissions AWS API Documentation
     #
@@ -1603,6 +1712,25 @@ module Aws::Inspector2
     #           value: "CoverageStringInput", # required
     #         },
     #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
+    #         },
+    #       ],
     #       resource_id: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
@@ -1651,8 +1779,14 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags[0] #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.scan_frequency #=> String, one of "MANUAL", "SCAN_ON_PUSH", "CONTINUOUS_SCAN"
-    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY"
+    #   resp.covered_resources[0].resource_metadata.lambda_function.function_name #=> String
+    #   resp.covered_resources[0].resource_metadata.lambda_function.function_tags #=> Hash
+    #   resp.covered_resources[0].resource_metadata.lambda_function.function_tags["MapKey"] #=> String
+    #   resp.covered_resources[0].resource_metadata.lambda_function.layers #=> Array
+    #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
+    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED"
+    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE"
     #   resp.next_token #=> String
@@ -1717,6 +1851,25 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
     #         },
     #       ],
     #       resource_id: [
@@ -1890,6 +2043,9 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.ecr_image_tags #=> Array
     #   resp.filters[0].criteria.ecr_image_tags[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.ecr_image_tags[0].value #=> String
+    #   resp.filters[0].criteria.exploit_available #=> Array
+    #   resp.filters[0].criteria.exploit_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.exploit_available[0].value #=> String
     #   resp.filters[0].criteria.finding_arn #=> Array
     #   resp.filters[0].criteria.finding_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.finding_arn[0].value #=> String
@@ -1908,6 +2064,21 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.inspector_score #=> Array
     #   resp.filters[0].criteria.inspector_score[0].lower_inclusive #=> Float
     #   resp.filters[0].criteria.inspector_score[0].upper_inclusive #=> Float
+    #   resp.filters[0].criteria.lambda_function_execution_role_arn #=> Array
+    #   resp.filters[0].criteria.lambda_function_execution_role_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.lambda_function_execution_role_arn[0].value #=> String
+    #   resp.filters[0].criteria.lambda_function_last_modified_at #=> Array
+    #   resp.filters[0].criteria.lambda_function_last_modified_at[0].end_inclusive #=> Time
+    #   resp.filters[0].criteria.lambda_function_last_modified_at[0].start_inclusive #=> Time
+    #   resp.filters[0].criteria.lambda_function_layers #=> Array
+    #   resp.filters[0].criteria.lambda_function_layers[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.lambda_function_layers[0].value #=> String
+    #   resp.filters[0].criteria.lambda_function_name #=> Array
+    #   resp.filters[0].criteria.lambda_function_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.lambda_function_name[0].value #=> String
+    #   resp.filters[0].criteria.lambda_function_runtime #=> Array
+    #   resp.filters[0].criteria.lambda_function_runtime[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.lambda_function_runtime[0].value #=> String
     #   resp.filters[0].criteria.last_observed_at #=> Array
     #   resp.filters[0].criteria.last_observed_at[0].end_inclusive #=> Time
     #   resp.filters[0].criteria.last_observed_at[0].start_inclusive #=> Time
@@ -1957,6 +2128,8 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.vulnerable_packages[0].name.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].release.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.vulnerable_packages[0].release.value #=> String
+    #   resp.filters[0].criteria.vulnerable_packages[0].source_lambda_layer_arn.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].source_lambda_layer_arn.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].source_layer_hash.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.vulnerable_packages[0].source_layer_hash.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].version.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
@@ -2023,7 +2196,7 @@ module Aws::Inspector2
     #     aggregation_request: {
     #       account_aggregation: {
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
@@ -2102,7 +2275,7 @@ module Aws::Inspector2
     #       },
     #       finding_type_aggregation: {
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
@@ -2114,6 +2287,57 @@ module Aws::Inspector2
     #           },
     #         ],
     #         repositories: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         resource_ids: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       },
+    #       lambda_function_aggregation: {
+    #         function_names: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         function_tags: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "MapKey", # required
+    #             value: "MapValue",
+    #           },
+    #         ],
+    #         resource_ids: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         runtimes: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       },
+    #       lambda_layer_aggregation: {
+    #         function_names: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         layer_arns: [
     #           {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -2149,7 +2373,7 @@ module Aws::Inspector2
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
     #       title_aggregation: {
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #         titles: [
@@ -2166,14 +2390,14 @@ module Aws::Inspector2
     #         ],
     #       },
     #     },
-    #     aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT
+    #     aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT, AWS_LAMBDA_FUNCTION, LAMBDA_LAYER
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.aggregation_type #=> String, one of "FINDING_TYPE", "PACKAGE", "TITLE", "REPOSITORY", "AMI", "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER", "IMAGE_LAYER", "ACCOUNT"
+    #   resp.aggregation_type #=> String, one of "FINDING_TYPE", "PACKAGE", "TITLE", "REPOSITORY", "AMI", "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER", "IMAGE_LAYER", "ACCOUNT", "AWS_LAMBDA_FUNCTION", "LAMBDA_LAYER"
     #   resp.next_token #=> String
     #   resp.responses #=> Array
     #   resp.responses[0].account_aggregation.account_id #=> String
@@ -2223,6 +2447,25 @@ module Aws::Inspector2
     #   resp.responses[0].image_layer_aggregation.severity_counts.critical #=> Integer
     #   resp.responses[0].image_layer_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].image_layer_aggregation.severity_counts.medium #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.account_id #=> String
+    #   resp.responses[0].lambda_function_aggregation.function_name #=> String
+    #   resp.responses[0].lambda_function_aggregation.lambda_tags #=> Hash
+    #   resp.responses[0].lambda_function_aggregation.lambda_tags["MapKey"] #=> String
+    #   resp.responses[0].lambda_function_aggregation.last_modified_at #=> Time
+    #   resp.responses[0].lambda_function_aggregation.resource_id #=> String
+    #   resp.responses[0].lambda_function_aggregation.runtime #=> String
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.medium #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.account_id #=> String
+    #   resp.responses[0].lambda_layer_aggregation.function_name #=> String
+    #   resp.responses[0].lambda_layer_aggregation.layer_arn #=> String
+    #   resp.responses[0].lambda_layer_aggregation.resource_id #=> String
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].package_aggregation.account_id #=> String
     #   resp.responses[0].package_aggregation.package_name #=> String
     #   resp.responses[0].package_aggregation.severity_counts.all #=> Integer
@@ -2354,6 +2597,12 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       exploit_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       finding_arn: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2388,6 +2637,36 @@ module Aws::Inspector2
     #         {
     #           lower_inclusive: 1.0,
     #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       lambda_function_execution_role_arn: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_last_modified_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       lambda_function_layers: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
     #         },
     #       ],
     #       last_observed_at: [
@@ -2487,6 +2766,10 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           source_lambda_layer_arn: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
     #           source_layer_hash: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -2511,6 +2794,8 @@ module Aws::Inspector2
     #   resp.findings #=> Array
     #   resp.findings[0].aws_account_id #=> String
     #   resp.findings[0].description #=> String
+    #   resp.findings[0].exploit_available #=> String, one of "YES", "NO"
+    #   resp.findings[0].exploitability_details.last_known_exploit_at #=> Time
     #   resp.findings[0].finding_arn #=> String
     #   resp.findings[0].first_observed_at #=> Time
     #   resp.findings[0].fix_available #=> String, one of "YES", "NO", "PARTIAL"
@@ -2554,6 +2839,7 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String, one of "BUNDLER", "CARGO", "COMPOSER", "NPM", "NUGET", "PIPENV", "POETRY", "YARN", "GOBINARY", "GOMOD", "JAR", "OS", "PIP", "PYTHONPKG", "NODEPKG", "POM"
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_lambda_layer_arn #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_layer_hash #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].version #=> String
     #   resp.findings[0].remediation.recommendation.url #=> String
@@ -2580,12 +2866,28 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.pushed_at #=> Time
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.registry #=> String
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.repository_name #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.architectures #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.architectures[0] #=> String, one of "X86_64", "ARM64"
+    #   resp.findings[0].resources[0].details.aws_lambda_function.code_sha_256 #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.execution_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.function_name #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.last_modified_at #=> Time
+    #   resp.findings[0].resources[0].details.aws_lambda_function.layers #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.layers[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.package_type #=> String, one of "IMAGE", "ZIP"
+    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED"
+    #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.vpc_id #=> String
     #   resp.findings[0].resources[0].id #=> String
     #   resp.findings[0].resources[0].partition #=> String
     #   resp.findings[0].resources[0].region #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["MapKey"] #=> String
-    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY"
+    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
     #   resp.findings[0].severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL", "UNTRIAGED"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "SUPPRESSED", "CLOSED"
     #   resp.findings[0].title #=> String
@@ -2720,7 +3022,7 @@ module Aws::Inspector2
     #   resp.totals[0].usage[0].currency #=> String, one of "USD"
     #   resp.totals[0].usage[0].estimated_monthly_cost #=> Float
     #   resp.totals[0].usage[0].total #=> Float
-    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN"
+    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListUsageTotals AWS API Documentation
     #
@@ -2918,6 +3220,12 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       exploit_available: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       finding_arn: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2952,6 +3260,36 @@ module Aws::Inspector2
     #         {
     #           lower_inclusive: 1.0,
     #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       lambda_function_execution_role_arn: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_last_modified_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       lambda_function_layers: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       lambda_function_runtime: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
     #         },
     #       ],
     #       last_observed_at: [
@@ -3051,6 +3389,10 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           source_lambda_layer_arn: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
     #           source_layer_hash: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
@@ -3095,6 +3437,7 @@ module Aws::Inspector2
     #     auto_enable: { # required
     #       ec2: false, # required
     #       ecr: false, # required
+    #       lambda: false,
     #     },
     #   })
     #
@@ -3102,6 +3445,7 @@ module Aws::Inspector2
     #
     #   resp.auto_enable.ec2 #=> Boolean
     #   resp.auto_enable.ecr #=> Boolean
+    #   resp.auto_enable.lambda #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateOrganizationConfiguration AWS API Documentation
     #
@@ -3125,7 +3469,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

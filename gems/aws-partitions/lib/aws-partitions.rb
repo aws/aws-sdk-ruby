@@ -247,6 +247,7 @@ module Aws
             'ACM' => 'acm',
             'ACMPCA' => 'acm-pca',
             'APIGateway' => 'apigateway',
+            'ARCZonalShift' => 'arc-zonal-shift',
             'AccessAnalyzer' => 'access-analyzer',
             'Account' => 'account',
             'AlexaForBusiness' => 'a4b',

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.149.0 (2022-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-arczonalshift` gem.
+
 3.148.0 (2022-11-28)
 ------------------
 
