@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Return error messages from failures in threads in `MultipartStreamUploader` (#2793).
+
 1.117.1 (2022-10-26)
 ------------------
 
