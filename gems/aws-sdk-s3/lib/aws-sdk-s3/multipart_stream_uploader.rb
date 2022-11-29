@@ -148,7 +148,6 @@ module Aws
 
       def upload_in_threads(read_pipe, completed, options, thread_errors)
         mutex = Mutex.new
-        part_number = 9990
         @thread_count.times.map do
           thread = Thread.new do
             begin
