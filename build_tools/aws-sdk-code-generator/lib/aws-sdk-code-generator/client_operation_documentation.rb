@@ -239,7 +239,7 @@ module AwsSdkCodeGenerator
         receiver: 'client',
         resp_var: 'resp',
       ).format
-      example if example.lines.count < 1000
+      example if example && example.lines.count < 1000
     end
 
     def async_request_syntax_example(method_name, operation, api)
@@ -251,7 +251,7 @@ module AwsSdkCodeGenerator
         resp_var: 'async_resp',
         async: true
       ).format
-      example if example.lines.count < 1000
+      example if example && example.lines.count < 1000
     end
 
     def response_structure_example(operation, api)
@@ -261,7 +261,7 @@ module AwsSdkCodeGenerator
           shape_ref: operation['output'],
           api: api
         ).to_s)
-        docstring if docstring.lines.count < 1000
+        docstring if docstring && docstring.lines.count < 1000
       end
     end
 
