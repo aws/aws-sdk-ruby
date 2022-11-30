@@ -232,17 +232,19 @@ module AwsSdkCodeGenerator
     end
 
     def request_syntax_example(method_name, operation, api)
-      SyntaxExample.new(
+      example = SyntaxExample.new(
         api: api,
         shape: Api.shape(operation['input'], api),
         method_name: method_name,
         receiver: 'client',
         resp_var: 'resp',
       ).format
+      # TODO - QuickSight is breaking this
+      example if example && example.lines.count < 1000
     end
 
     def async_request_syntax_example(method_name, operation, api)
-      SyntaxExample.new(
+      example = SyntaxExample.new(
         api: api,
         shape: Api.shape(operation['input'], api),
         method_name: method_name,
@@ -250,15 +252,19 @@ module AwsSdkCodeGenerator
         resp_var: 'async_resp',
         async: true
       ).format
+      # TODO - QuickSight is breaking this
+      example if example && example.lines.count < 1000
     end
 
     def response_structure_example(operation, api)
       output = Api.shape(operation['output'], api) if operation['output']
       if output && output['members'] && output['members'].size > 0
-        Docstring.block_comment(ClientResponseStructureExample.new(
+        docstring = Docstring.block_comment(ClientResponseStructureExample.new(
           shape_ref: operation['output'],
           api: api
         ).to_s)
+        # TODO - QuickSight is breaking this
+        docstring if docstring && docstring.lines.count < 1000
       end
     end
 
